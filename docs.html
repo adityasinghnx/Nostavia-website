@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation | Nostavia</title>
+    <meta name="description" content="Nostavia API Documentation">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.cdnfonts.com/css/google-sans" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .docs-page {
+            padding-top: 80px;
+            min-height: 100vh;
+            display: flex;
+            background-color: var(--bg-primary);
+        }
+        .docs-sidebar {
+            width: 280px;
+            padding: 2rem;
+            border-right: 1px solid var(--border-slate);
+            height: calc(100vh - 80px);
+            position: sticky;
+            top: 80px;
+            overflow-y: auto;
+            background-color: var(--surface-paper);
+        }
+        .docs-sidebar h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-slate);
+            margin-bottom: 1rem;
+            margin-top: 2rem;
+        }
+        .docs-sidebar h4:first-child { margin-top: 0; }
+        .docs-sidebar ul { list-style: none; padding: 0; }
+        .docs-sidebar li { margin-bottom: 0.5rem; }
+        .docs-sidebar a {
+            color: var(--text-ink);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            display: block;
+            padding: 0.35rem 0;
+        }
+        .docs-sidebar a:hover, .docs-sidebar a.active {
+            color: var(--brand-blue);
+            font-weight: 500;
+        }
+        .docs-content {
+            flex: 1;
+            padding: 4rem;
+            max-width: 900px;
+        }
+        .docs-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        .docs-content p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            color: var(--text-slate);
+        }
+        .docs-content h2 {
+            font-size: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-slate);
+            letter-spacing: -0.01em;
+        }
+        .docs-content h3 {
+            font-size: 1.25rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .docs-code-block {
+            background-color: var(--text-ink);
+            color: var(--surface-paper);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-family: monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            box-shadow: var(--shadow-sm);
+        }
+        .method-badge {
+            display: inline-block;
+            background-color: var(--accent-cyan);
+            color: var(--text-ink);
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-right: 0.75rem;
+            vertical-align: middle;
+        }
+        .endpoint-url {
+            font-family: monospace;
+            font-size: 1.1rem;
+            vertical-align: middle;
+            color: var(--text-ink);
+            background: var(--surface-soft-blue);
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+        }
+        @media (max-width: 768px) {
+            .docs-page {
+                flex-direction: column;
+            }
+            .docs-sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+                border-right: none;
+                border-bottom: 1px solid var(--border-slate);
+            }
+            .docs-content {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav id="navbar" class="scrolled">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 1.25em; width: auto; object-fit: contain; filter: invert(1) brightness(0);"></a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html#solutions">Solutions</a>
+                <a href="index.html#integrations">Integrations</a>
+                <a href="index.html#pricing">Pricing</a>
+                <a href="docs.html">Docs</a>
+                <a href="index.html" class="btn btn-primary btn-sm mobile-only-btn" style="display: none;">Back to Home</a>
+            </div>
+            <div class="nav-actions">
+                <a href="index.html" class="btn btn-primary btn-sm">Back to Home</a>
+            </div>
+        <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <div class="docs-page">
+        <aside class="docs-sidebar">
+            <h4>Getting Started</h4>
+            <ul>
+                <li><a href="javascript:void(0)" class="active">Introduction</a></li>
+                <li><a href="javascript:void(0)">Authentication</a></li>
+                <li><a href="javascript:void(0)">Quickstart</a></li>
+            </ul>
+            <h4>API Reference</h4>
+            <ul>
+                <li><a href="#sync">Metabolic Sync</a></li>
+                <li><a href="javascript:void(0)">Users</a></li>
+                <li><a href="javascript:void(0)">Providers</a></li>
+                <li><a href="javascript:void(0)">Webhooks</a></li>
+            </ul>
+        </aside>
+        
+        <main class="docs-content">
+            <h1>API Documentation</h1>
+            <p>Welcome to the Nostavia API. Our RESTful API allows you to programmatically access normalized wearable, lab, and EMR data from dozens of providers through a single integration.</p>
+
+            <h2 id="sync">Metabolic Sync</h2>
+            <p>The <code>/v1/metabolic/sync</code> endpoint is the core of Nostavia. It pulls data from all connected providers for a given user, normalizes it, and returns a unified metabolic payload and score.</p>
+            
+            <div style="margin-bottom: 2rem; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                <span class="method-badge">POST</span>
+                <span class="endpoint-url">https://api.nostaviahealth.com/v1/metabolic/sync</span>
+            </div>
+
+            <h3>Request Body</h3>
+            <p>Pass the user ID, the data sources you want to poll, the date range, and the specific metrics you require.</p>
+            <div class="docs-code-block">
+<pre><code>{
+  "user_id": "usr_9a8b7c6d",
+  "data_sources": ["oura", "cgm", "labcorp"],
+  "date_range": {
+    "start": "2023-10-01",
+    "end": "2023-10-07"
+  },
+  "metrics": [
+    "glucose_variability",
+    "resting_hr",
+    "hba1c"
+  ]
+}</code></pre>
+            </div>
+
+            <h3>Response</h3>
+            <p>The response includes the normalization status, the calculated metabolic score, and any AI-generated clinical insights.</p>
+            <div class="docs-code-block">
+<pre><code>{
+  "status": "normalized",
+  "metabolic_score": 84,
+  "insights": [
+    "Glucose variability improved by 12%.",
+    "Resting HR is 5% lower than baseline."
+  ]
+}</code></pre>
+            </div>
+        </main>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

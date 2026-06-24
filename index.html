@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nostavia | The Metabolic Intelligence Layer</title>
+    <meta name="description" content="Nostavia is the Stripe for metabolic health. A white-label SDK connecting wearables, CGM, and labs into a unified AI-ready data layer for health businesses.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.cdnfonts.com/css/google-sans" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- 1. Sticky minimal nav -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 28px; width: auto; object-fit: contain; filter: invert(1) brightness(0);"></a>
+            </div>
+            <div class="nav-links">
+                <a href="#solutions">Solutions</a>
+                <a href="#integrations">Integrations</a>
+                <a href="#pricing">Pricing</a>
+                <a href="javascript:void(0)" class="btn btn-primary btn-sm open-demo-modal mobile-only-btn" style="display: none;">Book a demo</a>
+            </div>
+            <div class="nav-actions">
+                <a href="javascript:void(0)" class="btn btn-primary btn-sm open-demo-modal">Book a demo</a>
+            </div>
+        <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <!-- 2. Hero Section -->
+    <header class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-pill">✨ The new standard for metabolic data</div>
+                <h1 class="gradient-text">The metabolic intelligence layer for every health business.</h1>
+                <p class="hero-subtitle">Embed a full metabolic, wearable, and lab intelligence layer into your product in days. We handle the integration hell. You get normalized, AI-ready data and clinical-grade insights under your own brand.</p>
+                <div class="hero-ctas">
+                    <a href="javascript:void(0)" class="btn btn-primary open-demo-modal">Book a demo</a>
+                </div>
+            </div>
+            <div class="hero-diagram">
+                <div class="diagram-inputs">
+                    <div class="diagram-node input-node">
+                        <i data-lucide="watch"></i>
+                        <span>Smartwatches & Rings</span>
+                        <small>Whoop, Oura, Ultrahuman, Garmin, Apple, Fitbit</small>
+                    </div>
+                    <div class="diagram-node input-node">
+                        <i data-lucide="activity-square"></i>
+                        <span>CGM & Glucose</span>
+                        <small>Continuous monitors</small>
+                    </div>
+                    <div class="diagram-node input-node">
+                        <i data-lucide="flask-conical"></i>
+                        <span>Labs & Blood</span>
+                        <small>PDF & API reports</small>
+                    </div>
+                    <div class="diagram-node input-node">
+                        <i data-lucide="file-text"></i>
+                        <span>EMR / EHR</span>
+                        <small>Clinical records</small>
+                    </div>
+                </div>
+
+                <div class="diagram-engine">
+                    <svg class="connection-lines connection-left" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <path d="M 0 12.5 C 50 12.5, 50 50, 100 50" />
+                        <path d="M 0 37.5 C 50 37.5, 50 50, 100 50" />
+                        <path d="M 0 62.5 C 50 62.5, 50 50, 100 50" />
+                        <path d="M 0 87.5 C 50 87.5, 50 50, 100 50" />
+                    </svg>
+                    
+                    <div class="engine-core">
+                        <i data-lucide="cpu" class="engine-icon"></i>
+                        <h3>Nostavia Engine</h3>
+                        <p>One unified API & SDK</p>
+                    </div>
+
+                    <svg class="connection-lines connection-right" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <path d="M 0 50 C 50 50, 50 16.6, 100 16.6" />
+                        <path d="M 0 50 C 50 50, 50 50, 100 50" />
+                        <path d="M 0 50 C 50 50, 50 83.3, 100 83.3" />
+                    </svg>
+                </div>
+
+                <div class="diagram-outputs">
+                    <div class="diagram-node output-node">
+                        <i data-lucide="database"></i>
+                        <span>AI-Ready Data Layer</span>
+                        <small>Normalized & Encrypted</small>
+                    </div>
+                    <div class="diagram-node output-node">
+                        <i data-lucide="target"></i>
+                        <span>Risk Scoring</span>
+                        <small>Clinical intelligence</small>
+                    </div>
+                    <div class="diagram-node output-node">
+                        <i data-lucide="layout-template"></i>
+                        <span>White-Label Protocols</span>
+                        <small>Inside your app</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. Trust Strip -->
+    <section class="trust-strip">
+        <div class="container">
+            <p class="trust-label">Trusted by diagnostic labs, insurers, and top wellness platforms</p>
+            <div class="trust-stats">
+                <div class="stat-item">
+                    <span class="stat-value">100+</span>
+                    <span class="stat-label">Biomarkers Tracked</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">7+</span>
+                    <span class="stat-label">Wearables Connected</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">HIPAA</span>
+                    <span class="stat-label">Aligned Security</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">&lt; 3</span>
+                    <span class="stat-label">Days to Deploy</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Complete Health 360 -->
+    <section id="integrations" class="health-360-section">
+        <div class="container text-center" style="margin-bottom: 4rem;">
+            <h2 class="gradient-text" style="font-size: 2.5rem; margin-bottom: 0.5rem;">Complete Health 360&deg;</h2>
+            <p style="font-size: 1.1rem; color: var(--text-slate); max-width: 700px; margin: 0 auto;">Implement normalized, ingestion-ready data from wearables, EMRs, lab tests, IoT devices, and more without complex data processing.</p>
+        </div>
+
+        <div class="container health-360-grid">
+            <!-- Left Column: Scrolling Content -->
+            <div class="health-360-content">
+                <!-- Step 1: Wearables -->
+                <div class="scroll-step is-active" data-tab="wearables">
+                    <div class="h360-badge"><i data-lucide="activity"></i> Wearables</div>
+                    <h3>Access data from wearables via single API</h3>
+                    <p>Access all the major wearables in both raw and structured/normalized formats. We handle provider API upgrades and monitor new releases, eliminating integration overhead for your team.</p>
+                    <ul class="h360-benefits">
+                        <li><i data-lucide="corner-down-right"></i> <span>Enable personalized health insights and recommendations using data from all wearable devices.</span></li>
+                        <li><i data-lucide="corner-down-right"></i> <span>Boost user engagement and increase retention through tailored, data-driven experiences.</span></li>
+                    </ul>
+                    <a href="wearables.html" class="btn-step">Start with Wearables</a>
+                </div>
+
+                <!-- Step 2: IoT -->
+                <div class="scroll-step" data-tab="iot">
+                    <div class="h360-badge"><i data-lucide="cpu"></i> Medical IoT Devices</div>
+                    <h3>Pull real-time data from leading medical devices</h3>
+                    <p>Integrate data from a wide range of medical IoT devices - like glucose monitors, ECGs, blood pressure cuffs, and more.</p>
+                    <a href="iot.html" class="btn-step">Start with Medical IoT</a>
+                </div>
+
+                <!-- Step 3: Photos -->
+                <div class="scroll-step" data-tab="photos">
+                    <div class="h360-badge"><i data-lucide="image"></i> Photos</div>
+                    <h3>Bring instant nutritional scanning to your app</h3>
+                    <p>Convert any food image into complete nutritional data. Boost user engagement with effortless food logging that supports their health goals.</p>
+                    <a href="nutrition.html" class="btn-step">Start with Nutrition AI</a>
+                </div>
+
+                <!-- Step 4: Labs -->
+                <div class="scroll-step" data-tab="labs">
+                    <div class="h360-badge"><i data-lucide="file-text"></i> Lab Reports</div>
+                    <h3>Integrate lab reports results directly into your app</h3>
+                    <p>Capture test results and diagnostic data to enhance patient monitoring and deliver more personalized health insights.</p>
+                    <a href="labs.html" class="btn-step">Start with Lab Reports</a>
+                </div>
+            </div>
+
+            <!-- Right Column: Interactive Diagram -->
+            <div class="health-360-diagram">
+                <!-- Inputs (Left) -->
+                <div class="diagram-list">
+                    <button class="d-input active" data-tab="wearables">
+                        <span class="d-tag">API</span> <span class="d-label">Wearables</span>
+                    </button>
+                    <button class="d-input" data-tab="iot">
+                        <span class="d-tag" style="background: #eef2ff; color: #4f46e5;">BLE</span> <span class="d-label">Medical IoT</span>
+                    </button>
+                    <button class="d-input" data-tab="photos">
+                        <span class="d-tag" style="background: #fdf4ff; color: #c026d3;">AI</span> <span class="d-label">Photos</span>
+                    </button>
+                    <button class="d-input" data-tab="labs">
+                        <span class="d-tag" style="background: #fff7ed; color: #ea580c;">OCR/AI</span> <span class="d-label">Lab Reports</span>
+                    </button>
+                </div>
+
+                <!-- SVG Lines Connecting Inputs to Center -->
+                <div class="diagram-lines">
+                    <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="rgba(226, 232, 240, 0.2)" />
+                                <stop offset="100%" stop-color="rgba(148, 163, 184, 0.8)" />
+                            </linearGradient>
+                            <linearGradient id="activeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="rgba(2, 37, 75, 0)" />
+                                <stop offset="100%" stop-color="rgba(2, 37, 75, 1)" />
+                            </linearGradient>
+                            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="1.5" result="blur" />
+                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                            </filter>
+                        </defs>
+                        <path id="path-wearables" class="d-line active" d="M0,12 C50,12 50,50 100,50" />
+                        <path id="path-iot" class="d-line" d="M0,37 C50,37 50,50 100,50" />
+                        <path id="path-photos" class="d-line" d="M0,63 C50,63 50,50 100,50" />
+                        <path id="path-labs" class="d-line" d="M0,88 C50,88 50,50 100,50" />
+                    </svg>
+                </div>
+
+                <!-- Central Hub -->
+                <div class="diagram-center-wrapper">
+                    <div class="hub-title">Ingestion Ready Data</div>
+                    <div class="diagram-center">
+                        <div class="hub-radiating-bg"></div>
+                        <div class="hub-icon-box">
+                            <i data-lucide="network" style="color: var(--text-ink); width: 32px; height: 32px;"></i>
+                        </div>
+                        <div class="hub-data-tags">
+                            <span>Normalized</span>
+                            <span>Standardized</span>
+                            <span>Encrypted</span>
+                            <span>AI-Ready</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Output Line -->
+                <div class="diagram-lines-out">
+                    <svg viewBox="0 0 50 100" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="outGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="rgba(2, 37, 75, 1)" />
+                                <stop offset="100%" stop-color="rgba(2, 37, 75, 0)" />
+                            </linearGradient>
+                        </defs>
+                        <path class="d-line-dashed active" d="M0,50 L50,50" />
+                    </svg>
+                </div>
+
+                <!-- Dashboard/Phone Mockup -->
+                <div class="diagram-output">
+                    <!-- Note: Save the user's provided UI screenshot as mobile-mockup.png in an assets folder -->
+                    <img id="dynamic-mockup" src="assets/wearable.png" alt="Nostavia Health App" class="mockup-img" onerror="this.src='https://images.unsplash.com/photo-1601972599720-36938d4ecd31?auto=format&fit=crop&w=400&q=80'" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. What you can build / Segment Cards -->
+    <section id="solutions" class="segments-section">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Built for modern health infrastructure</h2>
+                <p>The metabolic engine powering the next generation of digital health.</p>
+            </div>
+            <div class="segments-grid">
+                <div class="segment-card">
+                    <div class="card-icon-wrapper"><i data-lucide="microscope"></i></div>
+                    <h3>Diagnostic Labs</h3>
+                    <p class="segment-value">Turn static PDF reports into a living health OS.</p>
+                    <p class="segment-use-case">Combine episodic blood draws with continuous wearable data to offer patients real-time metabolic coaching between lab visits.</p>
+                </div>
+                <div class="segment-card mt-offset">
+                    <div class="card-icon-wrapper"><i class="accent-icon" data-lucide="building-2"></i></div>
+                    <h3>Corporate Wellness</h3>
+                    <p class="segment-value">Metabolic dashboards for your entire workforce.</p>
+                    <p class="segment-use-case">Deploy white-labeled wellness apps that sync employee wearables and provide aggregate, anonymized health risk assessments.</p>
+                </div>
+                <div class="segment-card">
+                    <div class="card-icon-wrapper"><i data-lucide="dumbbell"></i></div>
+                    <h3>Fitness & Sports Apps</h3>
+                    <p class="segment-value">Add clinical context to your wearable data.</p>
+                    <p class="segment-use-case">Overlay lab results and CGM trends onto your existing workout data to provide elite-level recovery and fueling protocols.</p>
+                </div>
+                <div class="segment-card mt-offset">
+                    <div class="card-icon-wrapper"><i data-lucide="shield-check"></i></div>
+                    <h3>Health Insurers</h3>
+                    <p class="segment-value">Risk scoring from real, continuous biomarkers.</p>
+                    <p class="segment-use-case">Move beyond demographic risk models by utilizing opt-in metabolic data streams to dynamically price premiums and incentivize health.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Developer Section -->
+    <section id="docs" class="dev-section">
+        <div class="container dev-grid">
+            <div class="dev-content">
+                <h2>Ship in days, not months.</h2>
+                <p>Our white-label SDK and robust API handles the complexity of auth, data normalization, and continuous syncing. You focus on the user experience.</p>
+                <ul class="dev-features">
+                    <li><i data-lucide="code-2"></i> Pre-built UI components</li>
+                    <li><i data-lucide="refresh-cw"></i> Real-time webhooks</li>
+                    <li><i data-lucide="wrench"></i> We maintain all provider APIs</li>
+                </ul>
+            </div>
+            <div class="dev-code">
+                <div class="code-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                    <span class="filename">POST /v1/metabolic/sync</span>
+                </div>
+                <pre><code>{
+  "user_id": "usr_9a8b7c6d",
+  "data_sources": ["oura", "cgm", "labcorp"],
+  "date_range": {
+    "start": "2023-10-01",
+    "end": "2023-10-07"
+  },
+  "metrics": [
+    "glucose_variability",
+    "resting_hr",
+    "hba1c"
+  ]
+}
+
+// Response
+{
+  "status": "normalized",
+  "metabolic_score": 84,
+  "insights": [
+    "Glucose variability improved by 12%."
+  ]
+}</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Security & Compliance Wall -->
+    <section class="security-section">
+        <div class="container">
+            <div class="security-wall">
+                <div class="security-header">
+                    <h2>Enterprise-grade compliance, globally.</h2>
+                    <p>Your users' health data is sensitive. We treat it that way.</p>
+                </div>
+                <div class="security-badges">
+                    <div class="badge">
+                        <i data-lucide="lock"></i>
+                        <span>HIPAA Aligned</span>
+                    </div>
+                    <div class="badge">
+                        <i data-lucide="key"></i>
+                        <span>AES-256 Encryption</span>
+                        <small>At rest & in transit</small>
+                    </div>
+                    <div class="badge">
+                        <i data-lucide="globe"></i>
+                        <span>Local Data Residency</span>
+                        <small>India & UAE infrastructure</small>
+                    </div>
+                    <div class="badge">
+                        <i data-lucide="user-check"></i>
+                        <span>Strict Privacy</span>
+                        <small>Opt-in consent architecture</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Pricing Teaser -->
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Predictable pricing for scale</h2>
+                <p>Start building for free. Scale when your users do.</p>
+            </div>
+            <div class="pricing-grid">
+                <!-- Card 1 -->
+                <div class="pricing-card">
+                    <h3 class="card-tier">STARTER</h3>
+                    <p class="price"><span class="dynamic-price" data-inr="30000">₹30K</span><span class="price-period">/mo</span></p>
+                    <div class="price-pill">+ <span class="dynamic-price" data-inr="5000">₹5K</span> per extra module</div>
+                    <p class="user-count">Up to 5,000 active users</p>
+                    <ul>
+                        <li>Core infrastructure</li>
+                        <li>Any 4 intelligence modules</li>
+                        <li>Basic API documentation</li>
+                        <li>48-hour email support</li>
+                    </ul>
+                    <a href="javascript:void(0)" class="btn btn-secondary full-width mt-auto open-demo-modal">Get Started</a>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="pricing-card popular">
+                    <div class="badge-popular">MOST POPULAR</div>
+                    <h3 class="card-tier">GROWTH</h3>
+                    <p class="price"><span class="dynamic-price" data-inr="125000">₹1.25L</span><span class="price-period">/mo</span></p>
+                    <p class="user-count mt-pill">Up to 50,000 active users</p>
+                    <ul>
+                        <li>All 8 intelligence modules</li>
+                        <li>Population analytics dashboard</li>
+                        <li>Advanced cohort insights</li>
+                        <li>Custom protocol templates</li>
+                        <li>Co-branding customization</li>
+                        <li>4-hour priority support</li>
+                        <li>Dedicated integration engineer</li>
+                    </ul>
+                    <a href="javascript:void(0)" class="btn btn-black full-width mt-auto open-demo-modal">Get Started</a>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="pricing-card">
+                    <h3 class="card-tier">WHITE LABEL PRO</h3>
+                    <p class="price"><span class="dynamic-price" data-inr="200000">₹2L</span><span class="price-period">/mo</span></p>
+                    <div class="price-pill">+ <span class="dynamic-price" data-inr="90000">₹90K</span> setup fee</div>
+                    <p class="user-count">Unlimited active users</p>
+                    <ul>
+                        <li>Full custom white-label branding</li>
+                        <li>All 8 intelligence modules</li>
+                        <li>Dedicated app shell experience</li>
+                        <li>Priority 24/7 technical support</li>
+                        <li>Direct API & SDK access</li>
+                    </ul>
+                    <a href="javascript:void(0)" class="btn btn-secondary full-width mt-auto open-demo-modal">Get Started</a>
+                </div>
+
+                <!-- Wide Card 4 -->
+                <div class="pricing-card enterprise">
+                    <div class="enterprise-left">
+                        <h3 class="card-tier">ENTERPRISE</h3>
+                        <h2 class="enterprise-title">Custom tailored scaling & intelligence</h2>
+                        <p class="enterprise-desc">For large-scale deployments, custom biomarker algorithms, or specialized integrations requiring high security and dedicated support pipelines.</p>
+                    </div>
+                    <div class="enterprise-right">
+                        <p class="price"><span class="dynamic-price" data-inr="500000" data-inr-max="800000">₹5-8L</span><span class="price-period">/mo (custom)</span></p>
+                        <ul class="enterprise-list">
+                            <li>Custom AI model training on private data</li>
+                            <li>Enterprise SLA guarantees (99.99%)</li>
+                            <li>On-site custom onboarding</li>
+                            <li>Quarterly medical business reviews</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn btn-secondary mt-4">Contact Partnerships</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- 10. Final CTA Band -->
+    <section class="cta-band">
+        <div class="container cta-content">
+            <h2>Bring metabolic intelligence to your product.</h2>
+            <p>Join the leading health platforms building on Nostavia.</p>
+            <div class="hero-ctas justify-center">
+                <a href="javascript:void(0)" class="btn btn-white open-demo-modal">Book a demo</a>
+                <a href="javascript:void(0)" class="btn btn-secondary on-dark open-demo-modal">Contact Sales</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div class="logo">
+                    <a href="index.html" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 32px; width: auto; object-fit: contain; margin-bottom: 1rem;"></a>
+                </div>
+                <p>The metabolic intelligence layer for every health business.</p>
+                <p class="hq">Headquartered in Lucknow, India</p>
+                <div class="app-downloads" style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+                    <a href="https://play.google.com/store/apps/details?id=com.nostavia.nostavia_health" target="_blank" style="transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" style="height: 40px; width: auto;">
+                    </a>
+                    <a href="https://apps.apple.com/us/app/nostavia-health/id6760108353" target="_blank" style="transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store" style="height: 40px; width: auto;">
+                    </a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Solutions</h4>
+                <a href="javascript:void(0)">Diagnostic Labs</a>
+                <a href="javascript:void(0)">Corporate Wellness</a>
+                <a href="javascript:void(0)">Fitness & Sports</a>
+                <a href="javascript:void(0)">Insurers</a>
+            </div>
+            <div class="footer-links">
+                <h4>Developers</h4>
+                <a href="javascript:void(0)">Documentation</a>
+                <a href="javascript:void(0)">API Reference</a>
+                <a href="javascript:void(0)">SDK Setup</a>
+                <a href="javascript:void(0)">Status</a>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <a href="javascript:void(0)">About Us</a>
+                <a href="javascript:void(0)">Careers</a>
+                <a href="javascript:void(0)">Blog</a>
+                <a href="javascript:void(0)">Contact</a>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <a href="javascript:void(0)">Privacy Policy</a>
+                <a href="javascript:void(0)">Terms of Service</a>
+                <a href="javascript:void(0)">HIPAA Compliance</a>
+                <a href="javascript:void(0)">Security</a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nostavia Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Form -->
+    <div id="demo-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" id="close-modal"><i data-lucide="x"></i></button>
+            <div class="modal-header">
+                <h2>Book a Demo</h2>
+                <p>See how Nostavia can power your metabolic data infrastructure.</p>
+            </div>
+            <form action="https://formsubmit.co/contact@nostaviahealth.com" method="POST" class="demo-form">
+                <input type="hidden" name="_subject" value="New Demo Request: Nostavia">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" id="next-url" value="">
+
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Your full name">
+                </div>
+                <div class="form-group">
+                    <label for="mobile">Mobile Number</label>
+                    <input type="tel" id="mobile" name="mobile" required placeholder="+1 (555) 000-0000">
+                </div>
+                <div class="form-group">
+                    <label for="email">Work Email</label>
+                    <input type="email" id="email" name="email" required placeholder="you@company.com">
+                </div>
+                <div class="form-group">
+                    <label for="company">Company Name</label>
+                    <input type="text" id="company" name="company" required placeholder="Company Inc.">
+                </div>
+                <div class="form-group">
+                    <label for="employees">Number of Employees</label>
+                    <select id="employees" name="employees" required>
+                        <option value="" disabled selected>Select company size</option>
+                        <option value="1-10">1-10</option>
+                        <option value="11-50">11-50</option>
+                        <option value="51-200">51-200</option>
+                        <option value="201-500">201-500</option>
+                        <option value="500+">500+</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary full-width">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal-overlay">
+        <div class="modal-content text-center" style="text-align: center;">
+            <button class="modal-close" id="close-success-modal"><i data-lucide="x"></i></button>
+            <div class="modal-header">
+                <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: var(--surface-mint); color: var(--brand-blue); border-radius: 50%; margin-bottom: 1.5rem;">
+                    <i data-lucide="check-circle" style="width: 32px; height: 32px;"></i>
+                </div>
+                <h2>Thank you for your interest!</h2>
+                <p>Our team will contact you in 1-3 business days.</p>
+            </div>
+            <button class="btn btn-primary" id="close-success-modal-btn" style="min-width: 150px;">Done</button>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        lucide.createIcons();
+        
+        // Health 360 Scroll Logic
+        const steps = document.querySelectorAll('.scroll-step');
+        const tabs = document.querySelectorAll('.d-input');
+        const lines = document.querySelectorAll('.diagram-lines .d-line');
+        // Map of tab IDs to their respective mockup images
+        const mockupImages = {
+            'wearables': 'assets/wearable.png',
+            'iot': 'assets/medical.png',
+            'photos': 'assets/food.png',
+            'labs': 'assets/lab.png'
+        };
+
+        // Preload images to prevent network delay glitches
+        Object.values(mockupImages).forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+
+        const mockupImg = document.getElementById('dynamic-mockup');
+        let imageSwapTimeout;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    // Get the tab id from the active scroll step
+                    const tabId = entry.target.getAttribute('data-tab');
+                    
+                    // Highlight the text block
+                    steps.forEach(s => s.classList.remove('is-active'));
+                    entry.target.classList.add('is-active');
+                    
+                    // Update the mockup image smoothly without glitches
+                    if (mockupImg && mockupImages[tabId] && mockupImg.getAttribute('data-current-tab') !== tabId) {
+                        mockupImg.setAttribute('data-current-tab', tabId);
+                        mockupImg.style.opacity = 0;
+                        
+                        clearTimeout(imageSwapTimeout);
+                        imageSwapTimeout = setTimeout(() => {
+                            // Only swap and fade in if the user hasn't scrolled to a new tab already
+                            if (mockupImg.getAttribute('data-current-tab') === tabId) {
+                                mockupImg.src = mockupImages[tabId];
+                                mockupImg.style.opacity = 1;
+                            }
+                        }, 250); // Slightly longer than the CSS transition to ensure a clean fade
+                    }
+                    
+                    // Highlight the diagram inputs and lines
+                    tabs.forEach(t => {
+                        if (t.getAttribute('data-tab') === tabId) {
+                            t.classList.add('active');
+                        } else {
+                            t.classList.remove('active');
+                        }
+                    });
+                    
+                    lines.forEach(l => l.classList.remove('active'));
+                    document.getElementById('path-' + tabId).classList.add('active');
+                }
+            });
+        }, { 
+            // Trigger when the item is roughly in the middle 50% of the viewport
+            rootMargin: '-30% 0px -30% 0px',
+            threshold: 0
+        });
+
+        steps.forEach(step => observer.observe(step));
+    </script>
+</body>
+</html>

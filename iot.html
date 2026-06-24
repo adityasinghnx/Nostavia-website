@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical IoT API | Nostavia</title>
+    <meta name="description" content="Connect your app to real-time data from medical IoT devices via a single API with Nostavia.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.cdnfonts.com/css/google-sans" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- 1. Sticky minimal nav -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 28px; width: auto; object-fit: contain; filter: invert(1) brightness(0);"></a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html#solutions">Solutions</a>
+                <a href="index.html#integrations">Integrations</a>
+                <a href="index.html#pricing">Pricing</a>
+                <a href="javascript:void(0)" class="btn btn-primary btn-sm open-demo-modal mobile-only-btn" style="display: none;">Book a demo</a>
+            </div>
+            <div class="nav-actions">
+                <a href="javascript:void(0)" class="btn btn-primary btn-sm open-demo-modal">Book a demo</a>
+            </div>
+        <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="wearables-hero">
+        <div class="container">
+            <div class="hero-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; overflow: visible;">
+                <div class="hero-text-col" style="text-align: left; z-index: 10;">
+                    <h1 class="gradient-text hero-title">Medical IoT API for<br>clinical health data</h1>
+                    <p class="hero-subtitle" style="margin: 0;">Pull real-time data from leading medical devices. Integrate data from a wide range of medical IoT devices - like glucose monitors, ECGs, blood pressure cuffs, and more via a single secure API layer.</p>
+                    <div style="margin-top: 2rem; margin-bottom: 3rem;">
+                        <a href="javascript:void(0)" class="btn btn-primary open-demo-modal">Book a demo</a>
+                    </div>
+                    <div class="compliance-badges" style="justify-content: flex-start;">
+                        <div class="badge-item"><i data-lucide="shield-check"></i> CCPA Compliant</div>
+                        <div class="badge-item"><i data-lucide="shield-check"></i> GDPR Compliant</div>
+                        <div class="badge-item"><i data-lucide="shield-check"></i> HIPAA Compliant</div>
+                    </div>
+                </div>
+            <div class="hero-diagram-col" style="position: relative; width: 100%; height: 600px; display: flex; align-items: center; justify-content: flex-start;">
+                    <!-- Diagram Container Scaled Down to fit the right column -->
+                    <div class="custom-diagram-container" style="transform: scale(0.6); transform-origin: left center; width: 1200px; height: 600px; position: absolute; left: 0;">
+                        <!-- Background SVG for lines -->
+                        <svg class="cd-svg-lines" viewBox="0 0 1200 600" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="cdGradLeft" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="rgba(2, 37, 75, 0.1)" />
+                                    <stop offset="100%" stop-color="rgba(2, 37, 75, 0.8)" />
+                                </linearGradient>
+                                <linearGradient id="cdGradRight" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="rgba(2, 37, 75, 0.8)" />
+                                    <stop offset="100%" stop-color="rgba(2, 37, 75, 0.1)" />
+                                </linearGradient>
+                            </defs>
+                            
+                            <!-- Paths from left (sources) to center (hub) -->
+                            <!-- Wearables -->
+                            <path d="M 280,100 C 450,100 450,300 550,300" class="cd-bg-path" stroke="url(#cdGradLeft)" />
+                            <path d="M 280,100 C 450,100 450,300 550,300" class="cd-fg-path" />
+                            
+                            <!-- IoT -->
+                            <path d="M 280,300 L 550,300" class="cd-bg-path" stroke="url(#cdGradLeft)" />
+                            <path d="M 280,300 L 550,300" class="cd-fg-path" />
+
+                            <!-- Apps -->
+                            <path d="M 280,500 C 450,500 450,300 550,300" class="cd-bg-path" stroke="url(#cdGradLeft)" />
+                            <path d="M 280,500 C 450,500 450,300 550,300" class="cd-fg-path" />
+
+                            <!-- Path from Hub to Destinations -->
+                            <path d="M 650,300 L 820,300" class="cd-bg-path" stroke="url(#cdGradRight)" />
+                            <path d="M 650,300 L 820,300" class="cd-fg-path" />
+                        </svg>
+
+                        <!-- CSS Grid to overlay HTML -->
+                        <div class="cd-content-grid">
+                            <!-- Left Column -->
+                            <div class="cd-left-col">
+                                <div class="cd-source-group" style="margin-top: 40px;">
+                                    <span class="cd-source-title">VITALS</span>
+                                    <div class="cd-pill">
+                                        <div class="cd-icon-box"><i data-lucide="activity"></i></div>
+                                        <div class="cd-icon-box"><i data-lucide="thermometer"></i></div>
+                                        <div class="cd-icon-box"><i data-lucide="heart-pulse"></i></div>
+                                    </div>
+                                </div>
+                                <div class="cd-source-group" style="margin-top: 100px;">
+                                    <span class="cd-source-title">GLUCOSE</span>
+                                    <div class="cd-pill">
+                                        <div class="cd-icon-box"><i data-lucide="droplet"></i></div>
+                                        <div class="cd-icon-box"><i data-lucide="scan"></i></div>
+                                        <div class="cd-icon-box"><i data-lucide="bar-chart-2"></i></div>
+                                    </div>
+                                </div>
+                                <div class="cd-source-group" style="margin-top: 100px;">
+                                    <span class="cd-source-title">CARDIAC</span>
+                                    <div class="cd-pill">
+                                        <div class="cd-icon-box"><i data-lucide="heart"></i></div>
+                                        <div class="cd-icon-box"><i data-lucide="activity"></i></div>
+                                        <div class="cd-icon-box"><i data-lucide="zap"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Center Column -->
+                            <div class="cd-center-col">
+                                <div class="cd-hub-node">
+                                    <span class="cd-hub-title">NOSTAVIA</span>
+                                    <div class="cd-hub-box">
+                                        <i data-lucide="share-2" style="width: 48px; height: 48px; color: var(--text-ink);"></i>
+                                    </div>
+                                    <span class="cd-hub-subtitle">API</span>
+                                </div>
+                            </div>
+
+                            <!-- Right Column -->
+                            <div class="cd-right-col" style="display: flex; align-items: center; justify-content: flex-start;">
+                                <div class="cd-dest-group cd-dest-mobile" style="position: relative; top: 0; left: 20px;">
+                                    <span class="cd-dest-title">Your App</span>
+                                    <img src="assets/medical.png" alt="App Mockup" class="cd-dest-img cd-mobile" onerror="this.src='https://via.placeholder.com/140x280/ffffff/02254b?text=App'">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="wearables-features bg-slate-light">
+        <div class="container">
+            <h2 class="text-center" style="margin-bottom: 3rem;">A Unified Medical Device API</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon-box"><i data-lucide="stethoscope"></i></div>
+                    <h3>Clinical Connectivity</h3>
+                    <p>Integrate securely with leading medical device manufacturers, capturing hospital-grade data directly to your app.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box"><i data-lucide="shield-alert"></i></div>
+                    <h3>FDA & HIPAA Compliant</h3>
+                    <p>Built from the ground up following rigorous Medical Device Data System (MDDS) compliance and security protocols.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box"><i data-lucide="bell-ring"></i></div>
+                    <h3>Real-Time Alerts</h3>
+                    <p>Configure advanced webhook events to instantly notify care teams when patient vitals go out of healthy bounds.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box"><i data-lucide="file-json"></i></div>
+                    <h3>Standardized Formats</h3>
+                    <p>Receive perfectly structured, FHIR-ready medical data converted instantly from proprietary device formats.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="wearables-faq">
+        <div class="container">
+            <h2 class="text-center" style="margin-bottom: 3rem;">Frequently Asked Questions</h2>
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button class="faq-question">What is the Medical IoT API? <i data-lucide="chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>The Nostavia Medical IoT API is a specialized connectivity layer designed to securely extract and normalize data from clinical devices like glucose monitors, ECGs, and smart blood pressure cuffs.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">How does Nostavia handle clinical data security? <i data-lucide="chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>We use end-to-end military-grade encryption and full HIPAA, CCPA, and GDPR compliance to ensure patient data is entirely secure at rest and in transit.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Are the alerts real-time? <i data-lucide="chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Yes, through our webhook infrastructure, your care teams can receive sub-second alerts whenever a patient's device registers metrics outside of their personalized safety thresholds.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Does it support FHIR formats? <i data-lucide="chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Absolutely. We standardize all incoming proprietary device payloads into FHIR-ready formats, allowing for instant, seamless integration directly into your EMR systems.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div class="logo">
+                    <a href="index.html" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 32px; width: auto; object-fit: contain; margin-bottom: 1rem;"></a>
+                </div>
+                <p>The metabolic intelligence layer for every health business.</p>
+                <p class="hq">Headquartered in Lucknow, India</p>
+                <div class="app-downloads" style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+                    <a href="https://play.google.com/store/apps/details?id=com.nostavia.nostavia_health" target="_blank" style="transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" style="height: 40px; width: auto;">
+                    </a>
+                    <a href="https://apps.apple.com/us/app/nostavia-health/id6760108353" target="_blank" style="transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store" style="height: 40px; width: auto;">
+                    </a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Solutions</h4>
+                <a href="javascript:void(0)">Diagnostic Labs</a>
+                <a href="javascript:void(0)">Corporate Wellness</a>
+                <a href="javascript:void(0)">Fitness & Sports</a>
+                <a href="javascript:void(0)">Insurers</a>
+            </div>
+            <div class="footer-links">
+                <h4>Developers</h4>
+                <a href="javascript:void(0)">Documentation</a>
+                <a href="javascript:void(0)">API Reference</a>
+                <a href="javascript:void(0)">SDK Setup</a>
+                <a href="javascript:void(0)">Status</a>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <a href="javascript:void(0)">About Us</a>
+                <a href="javascript:void(0)">Careers</a>
+                <a href="javascript:void(0)">Blog</a>
+                <a href="javascript:void(0)">Contact</a>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <a href="javascript:void(0)">Privacy Policy</a>
+                <a href="javascript:void(0)">Terms of Service</a>
+                <a href="javascript:void(0)">HIPAA Compliance</a>
+                <a href="javascript:void(0)">Security</a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nostavia Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Form -->
+    <div id="demo-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" id="close-modal"><i data-lucide="x"></i></button>
+            <div class="modal-header">
+                <h2>Book a Demo</h2>
+                <p>See how Nostavia can power your metabolic data infrastructure.</p>
+            </div>
+            <form action="https://formsubmit.co/contact@nostaviahealth.com" method="POST" class="demo-form">
+                <input type="hidden" name="_subject" value="New Demo Request: Nostavia">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" id="next-url" value="">
+
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Your full name">
+                </div>
+                <div class="form-group">
+                    <label for="mobile">Mobile Number</label>
+                    <input type="tel" id="mobile" name="mobile" required placeholder="+1 (555) 000-0000">
+                </div>
+                <div class="form-group">
+                    <label for="email">Work Email</label>
+                    <input type="email" id="email" name="email" required placeholder="you@company.com">
+                </div>
+                <div class="form-group">
+                    <label for="company">Company Name</label>
+                    <input type="text" id="company" name="company" required placeholder="Company Inc.">
+                </div>
+                <div class="form-group">
+                    <label for="employees">Number of Employees</label>
+                    <select id="employees" name="employees" required>
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="1-10">1 - 10</option>
+                        <option value="11-50">11 - 50</option>
+                        <option value="51-200">51 - 200</option>
+                        <option value="201-1000">201 - 1000</option>
+                        <option value="1000+">1000+</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary full-width">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal-overlay">
+        <div class="modal-content text-center" style="text-align: center;">
+            <button class="modal-close" id="close-success-modal"><i data-lucide="x"></i></button>
+            <div class="modal-header">
+                <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: var(--surface-mint); color: var(--brand-blue); border-radius: 50%; margin-bottom: 1.5rem;">
+                    <i data-lucide="check-circle" style="width: 32px; height: 32px;"></i>
+                </div>
+                <h2>Thank you for your interest!</h2>
+                <p>Our team will contact you in 1-3 business days.</p>
+            </div>
+            <button class="btn btn-primary" id="close-success-modal-btn" style="min-width: 150px;">Done</button>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        lucide.createIcons();
+        
+        // FAQ Accordion Logic
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                const isOpen = answer.style.maxHeight;
+
+                // Close all others
+                document.querySelectorAll('.faq-answer').forEach(ans => ans.style.maxHeight = null);
+                document.querySelectorAll('.faq-question i').forEach(ic => ic.setAttribute('data-lucide', 'chevron-down'));
+
+                if (!isOpen) {
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                    icon.setAttribute('data-lucide', 'chevron-up');
+                }
+                
+                lucide.createIcons();
+            });
+        });
+    </script>
+</body>
+</html>

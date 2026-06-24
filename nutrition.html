@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition AI API | Nostavia</title>
+    <meta name="description" content="Connect your app to powerful AI food scanning and nutritional data via a single API with Nostavia.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.cdnfonts.com/css/google-sans" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- 1. Sticky minimal nav -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 28px; width: auto; object-fit: contain; filter: invert(1) brightness(0);"></a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html#solutions">Solutions</a>
+                <a href="index.html#integrations">Integrations</a>
+                <a href="index.html#pricing">Pricing</a>
+                <a href="javascript:void(0)" class="btn btn-primary btn-sm open-demo-modal mobile-only-btn" style="display: none;">Book a demo</a>
+            </div>
+            <div class="nav-actions">
+                <a href="javascript:void(0)" class="btn btn-primary btn-sm open-demo-modal">Book a demo</a>
+            </div>
+        <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="wearables-hero">
+        <div class="container">
+            <div class="hero-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; overflow: visible;">
+                <div class="hero-text-col" style="text-align: left; z-index: 10;">
+                    <h1 class="gradient-text hero-title">Nutrition AI API for<br>instant food logging</h1>
+                    <p class="hero-subtitle" style="margin: 0;">Convert any food image, voice note, or text description into complete nutritional data. Boost user engagement with effortless food logging that supports their health and metabolic goals, all via a single API.</p>
+                    <div style="margin-top: 2rem; margin-bottom: 3rem;">
+                        <a href="javascript:void(0)" class="btn btn-primary open-demo-modal">Book a demo</a>
+                    </div>
+                    <div class="compliance-badges" style="justify-content: flex-start;">
+                        <div class="badge-item"><i data-lucide="shield-check"></i> CCPA Compliant</div>
+                        <div class="badge-item"><i data-lucide="shield-check"></i> GDPR Compliant</div>
+                        <div class="badge-item"><i data-lucide="shield-check"></i> HIPAA Compliant</div>
+                    </div>
+                </div>
+            <div class="hero-diagram-col" style="position: relative; width: 100%; height: 600px; display: flex; align-items: center; justify-content: flex-start;">
+                    <!-- Diagram Container Scaled Down to fit the right column -->
+                    <div class="custom-diagram-container" style="transform: scale(0.6); transform-origin: left center; width: 1200px; height: 600px; position: absolute; left: 0;">
+                        <!-- Background SVG for lines -->
+                        <svg class="cd-svg-lines" viewBox="0 0 1200 600" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="cdGradLeft" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="rgba(2, 37, 75, 0.1)" />
+                                    <stop offset="100%" stop-color="rgba(2, 37, 75, 0.8)" />
+                                </linearGradient>
+                                <linearGradient id="cdGradRight" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="rgba(2, 37, 75, 0.8)" />
+                                    <stop offset="100%" stop-color="rgba(2, 37, 75, 0.1)" />
+                                </linearGradient>
+                            </defs>
+                            
+                            <!-- Paths from left (sources) to center (hub) -->
+                            <!-- Wearables -->
+                            <path d="M 280,100 C 450,100 450,300 550,300" class="cd-bg-path" stroke="url(#cdGradLeft)" />
+                            <path d="M 280,100 C 450,100 450,300 550,300" class="cd-fg-path" />
+                            
+                            <!-- IoT -->
+                            <path d="M 280,300 L 550,300" class="cd-bg-path" stroke="url(#cdGradLeft)" />
+                            <path d="M 280,300 L 550,300" class="cd-fg-path" />
+
+                            <!-- Apps -->
+                            <path d="M 280,500 C 450,500 450,300 550,300" class="cd-bg-path" stroke="url(#cdGradLeft)" />
+                            <path d="M 280,500 C 450,500 450,300 550,300" class="cd-fg-path" />
+
+                            <!-- Path from Hub to Destinations -->
+                            <path d="M 650,300 L 820,300" class="cd-bg-path" stroke="url(#cdGradRight)" />
+                            <path d="M 650,300 L 820,300" class="cd-fg-path" />
+                        </svg>
+
+                        <!-- CSS Grid to overlay HTML -->
+                        <div class="cd-content-grid">
+                            <!-- Left Column -->
+                            <div class="cd-left-col">
+                                <div class="cd-source-group" style="margin-top: 40px;">
+                                    <span class="cd-source-title">CAMERA</span>
+                                    <div class="cd-pill">
+                                        <div class="cd-icon-box"><i data-lucide="camera"></i></div>
+                                        <div class="cd-icon-box"><i data-lucide="image"></i></div>
+                                        <div class="cd-icon-box"><i data-lucide="focus"></i></div>
+                                    </div>
+                                </div>
+                                <div class="cd-source-group" style="margin-top: 100px;">
+                                    <span class="cd-source-title">VOICE</span>
+                                    <div class="cd-pill">
+                                        <div class="cd-icon-box"><i data-lucide="mic"></i></div>
+                                        <div class="cd-icon-box"><i data-lucide="radio"></i></div>
+                                        <div class="cd-icon-box"><i data-lucide="volume-2"></i></div>
+                                    </div>
+                                </div>
+                                <div class="cd-source-group" style="margin-top: 100px;">
+                                    <span class="cd-source-title">MANUAL</span>
+                                    <div class="cd-pill">
+                                        <div class="cd-icon-box"><i data-lucide="pen-tool"></i></div>
+                                        <div class="cd-icon-box"><i data-lucide="search"></i></div>
+                                        <div class="cd-icon-box"><i data-lucide="type"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Center Column -->
+                            <div class="cd-center-col">
+                                <div class="cd-hub-node">
+                                    <span class="cd-hub-title">NOSTAVIA</span>
+                                    <div class="cd-hub-box">
+                                        <i data-lucide="share-2" style="width: 48px; height: 48px; color: var(--text-ink);"></i>
+                                    </div>
+                                    <span class="cd-hub-subtitle">API</span>
+                                </div>
+                            </div>
+
+                            <!-- Right Column -->
+                            <div class="cd-right-col" style="display: flex; align-items: center; justify-content: flex-start;">
+                                <div class="cd-dest-group cd-dest-mobile" style="position: relative; top: 0; left: 20px;">
+                                    <span class="cd-dest-title">Your App</span>
+                                    <img src="assets/food.png" alt="App Mockup" class="cd-dest-img cd-mobile" onerror="this.src='https://via.placeholder.com/140x280/ffffff/02254b?text=App'">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- How it works Section -->
+    <section class="how-it-works-section" style="padding: 6rem 0; text-align: center; background: #f8fafc; overflow: hidden;">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: #000; font-weight: 600;">How it works</h2>
+            <p style="font-size: 1.125rem; color: var(--text-slate); max-width: 800px; margin: 0 auto 2rem auto; line-height: 1.6;">
+                Deliver real-time nutrition analysis from food images with minimal integration effort. <a href="javascript:void(0)" class="open-demo-modal" style="color: var(--brand-blue); text-decoration: none;">Book a demo</a> to receive an access code and test the Nutrition Scanning AI on your phone.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 4rem;">
+                <a href="https://play.google.com/store/apps/details?id=com.nostavia.nostavia_health" target="_blank" style="display: inline-block; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" style="height: 40px; width: auto;">
+                </a>
+                <a href="https://apps.apple.com/us/app/nostavia-health/id6760108353" target="_blank" style="display: inline-block; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store" style="height: 40px; width: auto;">
+                </a>
+            </div>
+            
+            <div class="how-it-works-visual" style="position: relative; display: flex; justify-content: space-between; align-items: center; max-width: 800px; margin: 4rem auto 0; width: 100%;">
+                <!-- Straight Dotted Line Background -->
+                <svg width="100%" height="100%" style="position: absolute; top: 0; left: 0; z-index: 0; pointer-events: none; overflow: visible;" viewBox="0 0 1000 500" preserveAspectRatio="none">
+                    <g stroke-linejoin="round">
+                        <!-- Straight line passing through all phones -->
+                        <line x1="-50" y1="250" x2="1050" y2="250" stroke="#94a3b8" stroke-width="4" stroke-dasharray="8,8" />
+                        
+                        <!-- Small chevron indicators between phones -->
+                        <g transform="translate(210, 240)">
+                            <path d="M 0 0 L 10 10 L 0 20" fill="none" stroke="#02254B" stroke-width="3"/>
+                            <path d="M 10 0 L 20 10 L 10 20" fill="none" stroke="#02254B" stroke-width="3"/>
+                        </g>
+                        <g transform="translate(480, 240)">
+                            <path d="M 0 0 L 10 10 L 0 20" fill="none" stroke="#02254B" stroke-width="3"/>
+                            <path d="M 10 0 L 20 10 L 10 20" fill="none" stroke="#02254B" stroke-width="3"/>
+                        </g>
+                        <g transform="translate(750, 240)">
+                            <path d="M 0 0 L 10 10 L 0 20" fill="none" stroke="#02254B" stroke-width="3"/>
+                            <path d="M 10 0 L 20 10 L 10 20" fill="none" stroke="#02254B" stroke-width="3"/>
+                        </g>
+                    </g>
+                </svg>
+
+                <!-- Phone 1 -->
+                <div style="z-index: 1; position: relative; width: 20%; aspect-ratio: 9/19;">
+                    <div style="width: 100%; height: 100%; position: relative; border: 2px solid #000; border-radius: 16px; overflow: hidden; box-shadow: -15px 20px 30px rgba(0,0,0,0.15); background: #000;">
+                        <img src="assets/1.png" alt="App Mockup 1" style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
+                    </div>
+                </div>
+                
+                <!-- Phone 2 -->
+                <div style="z-index: 1; position: relative; width: 20%; aspect-ratio: 9/19;">
+                    <!-- Blue glow -->
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 140%; height: 140%; background: radial-gradient(circle, rgba(14, 165, 233, 0.4) 0%, rgba(14, 165, 233, 0) 60%); z-index: -1;"></div>
+                    <div style="width: 100%; height: 100%; position: relative; border: 2px solid #000; border-radius: 16px; overflow: hidden; box-shadow: -15px 20px 30px rgba(0,0,0,0.15); background: #000;">
+                        <img src="assets/2.jpg" alt="App Mockup 2" style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
+                    </div>
+                </div>
+                
+                <!-- Phone 3 -->
+                <div style="z-index: 1; position: relative; width: 20%; aspect-ratio: 9/19;">
+                    <div style="width: 100%; height: 100%; position: relative; border: 2px solid #000; border-radius: 16px; overflow: hidden; box-shadow: -15px 20px 30px rgba(0,0,0,0.15); background: #000;">
+                        <img src="assets/3.png" alt="App Mockup 3" style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
+                    </div>
+                </div>
+                
+                <!-- Phone 4 -->
+                <div style="z-index: 1; position: relative; width: 20%; aspect-ratio: 9/19;">
+                    <!-- Blue glow -->
+                    <div style="position: absolute; top: 0%; left: 0%; transform: translate(-30%, -30%); width: 120%; height: 120%; background: radial-gradient(circle, rgba(14, 165, 233, 0.3) 0%, rgba(14, 165, 233, 0) 60%); z-index: -1;"></div>
+                    <div style="width: 100%; height: 100%; position: relative; border: 2px solid #000; border-radius: 16px; overflow: hidden; box-shadow: -15px 20px 30px rgba(0,0,0,0.15); background: #000;">
+                        <img src="assets/4.png" alt="App Mockup 4" style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="wearables-features bg-slate-light">
+        <div class="container">
+            <h2 class="text-center" style="margin-bottom: 3rem;">Effortless Dietary Tracking</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon-box"><i data-lucide="camera"></i></div>
+                    <h3>AI Image Recognition</h3>
+                    <p>Instantly identify thousands of foods, cuisines, and estimated portion sizes from a single smartphone photo.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box"><i data-lucide="database"></i></div>
+                    <h3>Vast Food Database</h3>
+                    <p>Access verified nutritional information for over 1.5 million grocery items, generic foods, and restaurant meals.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box"><i data-lucide="pie-chart"></i></div>
+                    <h3>Macro Breakdown</h3>
+                    <p>Automatically calculate and return exact calories, proteins, fats, carbs, and 30+ micronutrients.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box"><i data-lucide="mic"></i></div>
+                    <h3>Voice & Text Logging</h3>
+                    <p>Support seamless natural language inputs, allowing users to simply speak or type what they ate for perfectly accurate packaged and prepared food logging.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="wearables-faq">
+        <div class="container">
+            <h2 class="text-center" style="margin-bottom: 3rem;">Frequently Asked Questions</h2>
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button class="faq-question">What is the Nostavia Nutrition AI API? <i data-lucide="chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>It's an advanced computer vision and data API that allows your application to convert food images, voice inputs, and text searches into precise nutritional profiles.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">How accurate is the image recognition? <i data-lucide="chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Our AI models have been trained on millions of meals and boast a 94%+ accuracy rate for identifying single and multi-item dishes, adjusting dynamically for portion size.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Do you support international foods? <i data-lucide="chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Yes, our database spans a massive array of global food products, covering grocery items and restaurant meals across North America, Europe, Asia, and beyond.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Can I access micronutrient data? <i data-lucide="chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Absolutely. Beyond standard macros (protein, carbs, fat), the API returns over 30 micronutrients including vitamins, minerals, sodium, and specific sugar breakdowns.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div class="logo">
+                    <a href="index.html" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 32px; width: auto; object-fit: contain; margin-bottom: 1rem;"></a>
+                </div>
+                <p>The metabolic intelligence layer for every health business.</p>
+                <p class="hq">Headquartered in Lucknow, India</p>
+                <div class="app-downloads" style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+                    <a href="https://play.google.com/store/apps/details?id=com.nostavia.nostavia_health" target="_blank" style="transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" style="height: 40px; width: auto;">
+                    </a>
+                    <a href="https://apps.apple.com/us/app/nostavia-health/id6760108353" target="_blank" style="transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store" style="height: 40px; width: auto;">
+                    </a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Solutions</h4>
+                <a href="javascript:void(0)">Diagnostic Labs</a>
+                <a href="javascript:void(0)">Corporate Wellness</a>
+                <a href="javascript:void(0)">Fitness & Sports</a>
+                <a href="javascript:void(0)">Insurers</a>
+            </div>
+            <div class="footer-links">
+                <h4>Developers</h4>
+                <a href="javascript:void(0)">Documentation</a>
+                <a href="javascript:void(0)">API Reference</a>
+                <a href="javascript:void(0)">SDK Setup</a>
+                <a href="javascript:void(0)">Status</a>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <a href="javascript:void(0)">About Us</a>
+                <a href="javascript:void(0)">Careers</a>
+                <a href="javascript:void(0)">Blog</a>
+                <a href="javascript:void(0)">Contact</a>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <a href="javascript:void(0)">Privacy Policy</a>
+                <a href="javascript:void(0)">Terms of Service</a>
+                <a href="javascript:void(0)">HIPAA Compliance</a>
+                <a href="javascript:void(0)">Security</a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nostavia Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Form -->
+    <div id="demo-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" id="close-modal"><i data-lucide="x"></i></button>
+            <div class="modal-header">
+                <h2>Book a Demo</h2>
+                <p>See how Nostavia can power your metabolic data infrastructure.</p>
+            </div>
+            <form action="https://formsubmit.co/contact@nostaviahealth.com" method="POST" class="demo-form">
+                <input type="hidden" name="_subject" value="New Demo Request: Nostavia">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" id="next-url" value="">
+
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Your full name">
+                </div>
+                <div class="form-group">
+                    <label for="mobile">Mobile Number</label>
+                    <input type="tel" id="mobile" name="mobile" required placeholder="+1 (555) 000-0000">
+                </div>
+                <div class="form-group">
+                    <label for="email">Work Email</label>
+                    <input type="email" id="email" name="email" required placeholder="you@company.com">
+                </div>
+                <div class="form-group">
+                    <label for="company">Company Name</label>
+                    <input type="text" id="company" name="company" required placeholder="Company Inc.">
+                </div>
+                <div class="form-group">
+                    <label for="employees">Number of Employees</label>
+                    <select id="employees" name="employees" required>
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="1-10">1 - 10</option>
+                        <option value="11-50">11 - 50</option>
+                        <option value="51-200">51 - 200</option>
+                        <option value="201-1000">201 - 1000</option>
+                        <option value="1000+">1000+</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary full-width">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal-overlay">
+        <div class="modal-content text-center" style="text-align: center;">
+            <button class="modal-close" id="close-success-modal"><i data-lucide="x"></i></button>
+            <div class="modal-header">
+                <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: var(--surface-mint); color: var(--brand-blue); border-radius: 50%; margin-bottom: 1.5rem;">
+                    <i data-lucide="check-circle" style="width: 32px; height: 32px;"></i>
+                </div>
+                <h2>Thank you for your interest!</h2>
+                <p>Our team will contact you in 1-3 business days.</p>
+            </div>
+            <button class="btn btn-primary" id="close-success-modal-btn" style="min-width: 150px;">Done</button>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        lucide.createIcons();
+        
+        // FAQ Accordion Logic
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                const isOpen = answer.style.maxHeight;
+
+                // Close all others
+                document.querySelectorAll('.faq-answer').forEach(ans => ans.style.maxHeight = null);
+                document.querySelectorAll('.faq-question i').forEach(ic => ic.setAttribute('data-lucide', 'chevron-down'));
+
+                if (!isOpen) {
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                    icon.setAttribute('data-lucide', 'chevron-up');
+                }
+                
+                lucide.createIcons();
+            });
+        });
+    </script>
+</body>
+</html>
