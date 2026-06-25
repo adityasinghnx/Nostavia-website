@@ -33,76 +33,50 @@
 
     <!-- 2. Hero Section -->
     <header class="hero">
+        <!-- Floating decorative elements -->
+        <div class="hero-float hero-float-card hero-float-1" aria-hidden="true">
+            <i data-lucide="watch"></i>
+            <span>Wearables</span>
+        </div>
+        <div class="hero-float hero-float-card hero-float-2" aria-hidden="true">
+            <i data-lucide="activity-square"></i>
+            <span>CGM</span>
+        </div>
+        <div class="hero-float hero-float-card hero-float-3" aria-hidden="true">
+            <i data-lucide="flask-conical"></i>
+            <span>Labs</span>
+        </div>
+        <div class="hero-float hero-float-card hero-float-4" aria-hidden="true">
+            <i data-lucide="shield-check"></i>
+            <span>HIPAA</span>
+        </div>
+        <div class="hero-float hero-float-card hero-float-5" aria-hidden="true">
+            <i data-lucide="cpu"></i>
+            <span>AI Engine</span>
+        </div>
+        <div class="hero-float hero-float-card hero-float-6" aria-hidden="true">
+            <i data-lucide="heart-pulse"></i>
+            <span>Vitals</span>
+        </div>
+        <div class="hero-float hero-float-icon-only hero-float-7" aria-hidden="true">
+            <i data-lucide="dna"></i>
+        </div>
+        <div class="hero-float hero-float-icon-only hero-float-8" aria-hidden="true">
+            <i data-lucide="zap"></i>
+        </div>
+
         <div class="hero-container">
             <div class="hero-content">
-                <div class="hero-pill">✨ The new standard for metabolic data</div>
-                <h1 class="gradient-text">The metabolic intelligence layer for every health business.</h1>
-                <p class="hero-subtitle">Embed a full metabolic, wearable, and lab intelligence layer into your product in days. We handle the integration hell. You get normalized, AI-ready data and clinical-grade insights under your own brand.</p>
+                <div class="hero-pill">The new standard for metabolic data</div>
+                <h1 class="hero-headline">
+                    The metabolic<br>
+                    intelligence layer<br>
+                    for every<br>
+                    <span class="hero-accent">health business.</span>
+                </h1>
+                <p class="hero-subtitle">Designed for modern health platforms that feel seamless from the first API call to clinical-grade insights under your own brand.</p>
                 <div class="hero-ctas">
-                    <a href="javascript:void(0)" class="btn btn-primary open-demo-modal">Book a demo</a>
-                </div>
-            </div>
-            <div class="hero-diagram">
-                <div class="diagram-inputs">
-                    <div class="diagram-node input-node">
-                        <i data-lucide="watch"></i>
-                        <span>Smartwatches & Rings</span>
-                        <small>Whoop, Oura, Ultrahuman, Garmin, Apple, Fitbit</small>
-                    </div>
-                    <div class="diagram-node input-node">
-                        <i data-lucide="activity-square"></i>
-                        <span>CGM & Glucose</span>
-                        <small>Continuous monitors</small>
-                    </div>
-                    <div class="diagram-node input-node">
-                        <i data-lucide="flask-conical"></i>
-                        <span>Labs & Blood</span>
-                        <small>PDF & API reports</small>
-                    </div>
-                    <div class="diagram-node input-node">
-                        <i data-lucide="file-text"></i>
-                        <span>EMR / EHR</span>
-                        <small>Clinical records</small>
-                    </div>
-                </div>
-
-                <div class="diagram-engine">
-                    <svg class="connection-lines connection-left" viewBox="0 0 100 100" preserveAspectRatio="none">
-                        <path d="M 0 12.5 C 50 12.5, 50 50, 100 50" />
-                        <path d="M 0 37.5 C 50 37.5, 50 50, 100 50" />
-                        <path d="M 0 62.5 C 50 62.5, 50 50, 100 50" />
-                        <path d="M 0 87.5 C 50 87.5, 50 50, 100 50" />
-                    </svg>
-                    
-                    <div class="engine-core">
-                        <i data-lucide="cpu" class="engine-icon"></i>
-                        <h3>Nostavia Engine</h3>
-                        <p>One unified API & SDK</p>
-                    </div>
-
-                    <svg class="connection-lines connection-right" viewBox="0 0 100 100" preserveAspectRatio="none">
-                        <path d="M 0 50 C 50 50, 50 16.6, 100 16.6" />
-                        <path d="M 0 50 C 50 50, 50 50, 100 50" />
-                        <path d="M 0 50 C 50 50, 50 83.3, 100 83.3" />
-                    </svg>
-                </div>
-
-                <div class="diagram-outputs">
-                    <div class="diagram-node output-node">
-                        <i data-lucide="database"></i>
-                        <span>AI-Ready Data Layer</span>
-                        <small>Normalized & Encrypted</small>
-                    </div>
-                    <div class="diagram-node output-node">
-                        <i data-lucide="target"></i>
-                        <span>Risk Scoring</span>
-                        <small>Clinical intelligence</small>
-                    </div>
-                    <div class="diagram-node output-node">
-                        <i data-lucide="layout-template"></i>
-                        <span>White-Label Protocols</span>
-                        <small>Inside your app</small>
-                    </div>
+                    <a href="javascript:void(0)" class="btn btn-hero open-demo-modal">Book a demo</a>
                 </div>
             </div>
         </div>
@@ -188,13 +162,13 @@
                         <span class="d-tag">API</span> <span class="d-label">Wearables</span>
                     </button>
                     <button class="d-input" data-tab="iot">
-                        <span class="d-tag" style="background: #eef2ff; color: #4f46e5;">BLE</span> <span class="d-label">Medical IoT</span>
+                        <span class="d-tag">BLE</span> <span class="d-label">Medical IoT</span>
                     </button>
                     <button class="d-input" data-tab="photos">
-                        <span class="d-tag" style="background: #fdf4ff; color: #c026d3;">AI</span> <span class="d-label">Photos</span>
+                        <span class="d-tag">AI</span> <span class="d-label">Photos</span>
                     </button>
                     <button class="d-input" data-tab="labs">
-                        <span class="d-tag" style="background: #fff7ed; color: #ea580c;">OCR/AI</span> <span class="d-label">Lab Reports</span>
+                        <span class="d-tag">OCR/AI</span> <span class="d-label">Lab Reports</span>
                     </button>
                 </div>
 
@@ -228,7 +202,7 @@
                     <div class="diagram-center">
                         <div class="hub-radiating-bg"></div>
                         <div class="hub-icon-box">
-                            <i data-lucide="network" style="color: var(--text-ink); width: 32px; height: 32px;"></i>
+                            <img src="assets/nostavia_logo_11.png" alt="Nostavia Engine" style="width: 65px; height: auto; object-fit: contain;">
                         </div>
                         <div class="hub-data-tags">
                             <span>Normalized</span>
