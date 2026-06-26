@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Documentation | Nostavia</title>
-    <meta name="description" content="Nostavia API Documentation">
+    <meta name="description" content="Nostavia SDK & API Documentation">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -160,7 +160,7 @@
             </ul>
             <h4>API Reference</h4>
             <ul>
-                <li><a href="#sync">Metabolic Sync</a></li>
+                <li><a href="#sync">Intelligence Sync</a></li>
                 <li><a href="javascript:void(0)">Users</a></li>
                 <li><a href="javascript:void(0)">Providers</a></li>
                 <li><a href="javascript:void(0)">Webhooks</a></li>
@@ -168,19 +168,19 @@
         </aside>
         
         <main class="docs-content">
-            <h1>API Documentation</h1>
-            <p>Welcome to the Nostavia API. Our RESTful API allows you to programmatically access normalized wearable, lab, and EMR data from dozens of providers through a single integration.</p>
+            <h1>SDK & API Documentation</h1>
+            <p>Welcome to the Nostavia developer platform. Our SDK and API allow you to integrate the Whole-Body Intelligence System — lab decoding, food bio-impact analysis, wearable connectivity, adaptive protocols, and the AI health concierge — into your product through a single integration.</p>
 
-            <h2 id="sync">Metabolic Sync</h2>
-            <p>The <code>/v1/metabolic/sync</code> endpoint is the core of Nostavia. It pulls data from all connected providers for a given user, normalizes it, and returns a unified metabolic payload and score.</p>
+            <h2 id="sync">Intelligence Sync</h2>
+            <p>The <code>/v1/intelligence/sync</code> endpoint is the core of Nostavia. It pulls data from all connected sources for a given user, runs it through the SOMA intelligence layer, and returns a unified health intelligence payload.</p>
             
             <div style="margin-bottom: 2rem; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
                 <span class="method-badge">POST</span>
-                <span class="endpoint-url">https://api.nostaviahealth.com/v1/metabolic/sync</span>
+                <span class="endpoint-url">https://api.nostaviahealth.com/v1/intelligence/sync</span>
             </div>
 
             <h3>Request Body</h3>
-            <p>Pass the user ID, the data sources you want to poll, the date range, and the specific metrics you require.</p>
+            <p>Pass the user ID, the intelligence modules you want to activate, the data sources, and the date range.</p>
             <div class="docs-code-block">
 <pre><code>{
   "user_id": "usr_9a8b7c6d",
@@ -198,14 +198,14 @@
             </div>
 
             <h3>Response</h3>
-            <p>The response includes the normalization status, the calculated metabolic score, and any AI-generated clinical insights.</p>
+            <p>The response includes the processing status, the calculated health intelligence score, and AI-generated clinical insights.</p>
             <div class="docs-code-block">
 <pre><code>{
   "status": "normalized",
-  "metabolic_score": 84,
+  "health_intelligence_score": 84,
   "insights": [
     "Glucose variability improved by 12%.",
-    "Resting HR is 5% lower than baseline."
+    "Biomarker drift detected: Vitamin D trending below optimal range."
   ]
 }</code></pre>
             </div>
