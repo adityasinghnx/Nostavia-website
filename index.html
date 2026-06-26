@@ -69,10 +69,8 @@
             <div class="hero-content">
                 <div class="hero-pill">Supported by Google · Nvidia · Microsoft · ElevenLabs</div>
                 <h1 class="hero-headline">
-                    The intelligence<br>
-                    layer the health<br>
-                    economy is<br>
-                    <span class="hero-accent">missing.</span>
+                    Health's missing<br>
+                    <span class="hero-accent">intelligence layer.</span>
                 </h1>
                 <p class="hero-subtitle">Labs, clinics, and health platforms integrate our SDK or launch our white-label app to give their users lab decoding, food bio-impact analysis, wearable integration, adaptive protocols, and an AI health concierge — all under their own brand.</p>
                 <div class="hero-ctas">
@@ -120,7 +118,7 @@
                 <!-- Step 1: Wearables -->
                 <div class="scroll-step is-active" data-tab="wearables">
                     <div class="h360-badge"><i data-lucide="flask-conical"></i> Lab Intelligence</div>
-                    <h3>Upload any lab report. Decode 100+ biomarkers instantly.</h3>
+                    <h3>Decode biomarkers instantly.</h3>
                     <p>A user uploads a blood report from any lab, anywhere in the world. Nostavia parses native PDFs, decodes 100+ biomarkers, and classifies each as Optimal, In-range, or Outlier — with historical trend lines that flag deterioration early.</p>
                     <ul class="h360-benefits">
                         <li><i data-lucide="corner-down-right"></i> <span>Go beyond "normal" — show users whether their values are optimal for long-term health.</span></li>
@@ -132,7 +130,7 @@
                 <!-- Step 2: IoT -->
                 <div class="scroll-step" data-tab="iot">
                     <div class="h360-badge"><i data-lucide="utensils"></i> AI Food Scan</div>
-                    <h3>Scan any meal. See the biological impact, not just calories.</h3>
+                    <h3>See your food's biological impact.</h3>
                     <p>Every scan returns hormonal response, circadian alignment, metabolic simulation, toxin radar, longevity score, and an optimization tip. Calibrated for Indian cuisine.</p>
                     <a href="nutrition.html" class="btn-step">Explore AI Food Scan</a>
                 </div>
@@ -140,7 +138,7 @@
                 <!-- Step 3: Photos -->
                 <div class="scroll-step" data-tab="photos">
                     <div class="h360-badge"><i data-lucide="watch"></i> Wearables SDK</div>
-                    <h3>One integration. Every major wearable. Intelligence included.</h3>
+                    <h3>One integration for every wearable.</h3>
                     <p>Sync HRV, sleep, recovery, stress, SpO2, and resting heart rate from Apple Watch, Oura, WHOOP, and Fitbit. Partners get connectivity and the intelligence that makes the data mean something.</p>
                     <a href="wearables.html" class="btn-step">Explore Wearables SDK</a>
                 </div>
@@ -148,7 +146,7 @@
                 <!-- Step 4: Labs -->
                 <div class="scroll-step" data-tab="labs">
                     <div class="h360-badge"><i data-lucide="message-circle"></i> AI Health Concierge</div>
-                    <h3>A 24/7 AI companion trained on each user's own biology.</h3>
+                    <h3>Your personalized AI companion.</h3>
                     <p>Not a generic chatbot. Ask it "should I swim today?" and it answers from that user's actual recovery, HRV, and biomarker data. A biological analyst that knows the individual.</p>
                     <a href="iot.html" class="btn-step">Explore AI Concierge</a>
                 </div>
@@ -229,7 +227,7 @@
                 <!-- Dashboard/Phone Mockup -->
                 <div class="diagram-output">
                     <!-- Note: Save the user's provided UI screenshot as mobile-mockup.png in an assets folder -->
-                    <img id="dynamic-mockup" src="assets/wearable.png" alt="Nostavia Health App" class="mockup-img" onerror="this.src='https://images.unsplash.com/photo-1601972599720-36938d4ecd31?auto=format&fit=crop&w=400&q=80'" />
+                    <img id="dynamic-mockup" src="assets/lab.png" alt="Nostavia Health App" class="mockup-img" onerror="this.src='https://images.unsplash.com/photo-1601972599720-36938d4ecd31?auto=format&fit=crop&w=400&q=80'" />
                 </div>
             </div>
         </div>
@@ -566,10 +564,10 @@
         const lines = document.querySelectorAll('.diagram-lines .d-line');
         // Map of tab IDs to their respective mockup images
         const mockupImages = {
-            'wearables': 'assets/wearable.png',
-            'iot': 'assets/medical.png',
-            'photos': 'assets/food.png',
-            'labs': 'assets/lab.png'
+            'wearables': 'assets/lab.png',
+            'iot': 'assets/food.png',
+            'photos': 'assets/wearable.png',
+            'labs': 'assets/Intelligence.png'
         };
 
         // Preload images to prevent network delay glitches
