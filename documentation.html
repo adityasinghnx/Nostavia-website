@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +14,7 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Security & Privacy | Nostavia</title>
+    <title>Nostavia | Health Intelligence Infrastructure</title>
     <meta name="description" content="Nostavia Technologies builds the intelligence layer for the health economy. Its whole-body health-intelligence system, delivered as an SDK, a white-label application or AI-native services, lets diagnostic laboratories, clinics, wellness platforms and insurers turn fragmented lab, wearable and lifestyle data into continuous, personalised intelligence — entirely under their own brand.">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -181,187 +182,94 @@
     </nav>
 
     
-    <!-- Homepage-Parity Hero -->
-    <header class="hero">
-        <div class="hero-petals">
-            <div class="petal petal-1"></div>
-            <div class="petal petal-2"></div>
-            <div class="petal petal-3"></div>
-            <div class="petal petal-4"></div>
-        </div>
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-pill">
-                    <span class="hero-pill-badge">Overview</span>
-                    <span class="hero-pill-text">Security & Privacy</span>
-                </div>
-                <h1 class="hero-headline">
-                    Private by<br>
-                    <span class="hero-accent">Design.</span>
-                </h1>
-                <p class="hero-subtitle">Built from the ground up for the world's most sensitive health data. Zero compromise on security.</p>
-                <div class="hero-ctas">
-                    <a href="javascript:void(0)" class="btn btn-hero open-demo-modal">Book a demo</a>
-                </div>
-            </div>
-        </div>
-    </header>
 
-    <!-- Homepage-Parity Trust Strip -->
-    <section class="trust-strip">
-        <div class="container">
-            <div class="trust-stats" style="justify-content: center; gap: 4rem;">
+<div class="docs-layout">
+    
+    <div class="docs-sidebar">
+        <h4>Getting Started</h4>
+        <ul>
+            <li><a href="documentation.html" class="active">Overview & Quickstart</a></li>
+            <li><a href="documentation.html#authentication">Authentication</a></li>
+            <li><a href="documentation.html#environments">Environments</a></li>
+            <li><a href="documentation.html#webhooks">Webhooks & Events</a></li>
+        </ul>
+        <h4>SDKs</h4>
+        <ul>
+            <li><a href="docs-wearables.html">Wearables SDK</a></li>
+        </ul>
+        <h4>API Reference</h4>
+        <ul>
+            <li><a href="api-reference.html">Endpoints Overview</a></li>
+            <li><a href="api-reference.html#parse">Intelligence Parse</a></li>
+            <li><a href="api-reference.html#wearables">Wearables Sync</a></li>
+            <li><a href="api-reference.html#errors">Errors & Rate Limits</a></li>
+        </ul>
+        <h4>Resources</h4>
+        <ul>
+            <li><a href="github-examples.html">GitHub Boilerplates</a></li>
+            <li><a href="github-examples.html#nextjs">Next.js Dashboard</a></li>
+            <li><a href="github-examples.html#python">Python LIS Node</a></li>
+            <li><a href="#">Postman Collection</a></li>
+        </ul>
+    </div>
+    
+    <div class="docs-main">
+        
+            <h1>Developer Documentation</h1>
+            <p>Welcome to the Nostavia API. Our infrastructure provides a unified, typed GraphQL and REST interface for ingesting raw clinical data (PDFs, LIS HL7 feeds, wearable telemetry) and extracting structured clinical intelligence via the SOMA Dual-Brain architecture.</p>
+            
+            <h2 id="authentication">Authentication</h2>
+            <p>The Nostavia API uses API keys to authenticate requests. You can view and manage your API keys in the Nostavia Dashboard.</p>
+            <p>Your API keys carry many privileges, so be sure to keep them secure! Do not share your secret API keys in publicly accessible areas such as GitHub, client-side code, and so forth.</p>
+            
+            <h3>Bearer Token Auth</h3>
+            <p>Authentication to the API is performed via HTTP Bearer Auth. Provide your API key as the bearer token value in the <code>Authorization</code> header.</p>
+            
+            <pre><code>curl -X GET https://api.nostavia.com/v1/users \
+  -H "Authorization: Bearer nostavia_sk_test_51Mz..."</code></pre>
 
-                <div class="stat-item">
-                    <span class="stat-value">DPDP</span>
-                    <span class="stat-label">Aligned</span>
-                </div>
-        
-                <div class="stat-item">
-                    <span class="stat-value">Zero</span>
-                    <span class="stat-label">PII on Cloud</span>
-                </div>
-        
-                <div class="stat-item">
-                    <span class="stat-value">Law No. 17</span>
-                    <span class="stat-label">UAE Ready</span>
-                </div>
-        
-            </div>
-        </div>
-    </section>
+            <h2 id="environments">Environments</h2>
+            <p>We provide two distinct environments to ensure safe development without risking PHI exposure.</p>
+            <ul>
+                <li><strong>Sandbox (<code>api.sandbox.nostavia.com</code>)</strong>: Uses synthetic data models. Any PDFs uploaded here are piped to a deterministic mock engine that returns predictable dummy data. Keys start with <code>nostavia_sk_test_</code>.</li>
+                <li><strong>Production (<code>api.nostavia.com</code>)</strong>: The live SOMA engine. Requires signed BAAs (Business Associate Agreements). Keys start with <code>nostavia_sk_prod_</code>.</li>
+            </ul>
 
-    <!-- Problem Statement (Light Premium Box) -->
-    <section class="security-section" style="padding-bottom: 4rem;">
-        <div class="container">
-            <div class="security-wall" style="display: block; max-width: 1000px; margin: 0 auto; text-align: center;">
-                <div class="security-header" style="max-width: none;">
-                    <h2>Privacy at the Edge</h2>
-                    <p style="font-size: 1.25rem; margin: 0 auto; max-width: 800px; color: var(--text-slate); line-height: 1.8;">The biggest barrier to AI in healthcare is data sovereignty and privacy. Nostavia solves this architecturally. Personally identifiable information (PII) is stripped on-device before any cloud inference ever occurs. Our SOMA-1B domain brain is designed to operate on anonymous biological payloads, keeping personal identity completely segregated from biological processing.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            <h2 id="webhooks">Webhooks & Events</h2>
+            <p>Because clinical interpretation of large 50-page PDF lab reports can take up to 2.5 seconds, we highly recommend using asynchronous processing with Webhooks rather than holding HTTP connections open.</p>
 
-    <!-- Bento Features using Homepage Component -->
-    <section class="segments-section" style="background: transparent; padding-top: 4rem;">
-        <div class="container">
-            <div class="section-header text-center">
-                <h2>Capabilities</h2>
-                <p style="color: var(--text-slate);">Everything you need to build the next generation of health products.</p>
-            </div>
-            <div class="ent-bento-grid">
-                
-            <div class="segment-card span-6">
-                <div class="card-icon-wrapper"><i data-lucide="lock"></i></div>
-                <h3 style="font-size: 1.6rem; margin-bottom: 1rem;">DPDP-Aligned by Design</h3>
-                <p class="segment-use-case" style="font-size: 1.1rem; line-height: 1.7;">We are fully aligned with India's Digital Personal Data Protection (DPDP) Act, 2023. Principles of explicit user consent, strict purpose limitation, and absolute data minimisation are hardcoded into our data pipeline. We process only what is necessary, for exactly the purpose consented to.</p>
-            </div>
+            <h3>Verifying Webhook Signatures</h3>
+            <p>Nostavia signs the webhook events it sends to your endpoints by including a signature in each event's <code>Nostavia-Signature</code> header. This allows you to verify that the events were sent by Nostavia, not by a third party.</p>
+            <p>We use HMAC SHA-256 for the signature. Here is a complete Node.js example to verify the incoming payload:</p>
+
+            <pre><code>import crypto from 'crypto';
+import express from 'express';
+
+const app = express();
+const endpointSecret = 'whsec_9b83b...';
+
+app.post('/webhook', express.raw({type: 'application/json'}), (request, response) => {
+  const sig = request.headers['nostavia-signature'];
+  const timestamp = request.headers['nostavia-timestamp'];
+  
+  // 1. Recreate the signed payload
+  const signedPayload = `${timestamp}.${request.body.toString()}`;
+  
+  // 2. Compute HMAC
+  const hmac = crypto.createHmac('sha256', endpointSecret);
+  const expectedSig = hmac.update(signedPayload).digest('hex');
+  
+  // 3. Compare securely to prevent timing attacks
+  if (crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expectedSig))) {
+    console.log("Webhook verified!", JSON.parse(request.body));
+    response.send();
+  } else {
+    response.status(400).send('Webhook Error: Invalid Signature');
+  }
+});</code></pre>
         
-            <div class="segment-card span-6">
-                <div class="card-icon-wrapper"><i data-lucide="globe"></i></div>
-                <h3 style="font-size: 1.6rem; margin-bottom: 1rem;">UAE Law No. 17 Readiness</h3>
-                <p class="segment-use-case" style="font-size: 1.1rem; line-height: 1.7;">For our partners in the Middle East, Nostavia aligns strictly to Dubai health-data rules and the overarching Law No. 17 of 2026 framework. We offer localized, in-region data handling and processing instances to ensure health data never crosses restricted borders.</p>
-            </div>
-        
-            <div class="segment-card span-12">
-                <div class="card-icon-wrapper"><i data-lucide="shield-check"></i></div>
-                <h3 style="font-size: 1.6rem; margin-bottom: 1rem;">Clinical Governance & Auditability</h3>
-                <p class="segment-use-case" style="font-size: 1.1rem; line-height: 1.7;">AI in healthcare cannot be a black box. Protocol outputs are constantly validated against a licensed clinical advisory bench. We operate as clinician-supervised decision support infrastructure. Every inference, classification, and protocol generation step is logged and fully auditable, allowing your compliance teams total transparency into how the engine reached a specific conclusion.</p>
-            </div>
-        
-            </div>
-        </div>
-    </section>
-    
-    
-    <!-- Architecture Flow Section -->
-    <section class="flow-section">
-        <div class="container" style="max-width: 900px;">
-            <div class="section-header text-center">
-                <h2>How it Works</h2>
-                <p style="color: var(--text-slate); font-size: 1.2rem;">A look inside the data pipeline.</p>
-            </div>
-            <div class="flow-container">
-                
-                <div class="flow-step">
-                    <div class="flow-number">1</div>
-                    <div class="flow-content">
-                        <h3>Edge Anonymization</h3>
-                        <p>Before data leaves your servers or the user's mobile device, all PII (names, emails, SSNs) is stripped. Data is tagged with a meaningless UUID.</p>
-                    </div>
-                </div>
-            
-                <div class="flow-step">
-                    <div class="flow-number">2</div>
-                    <div class="flow-content">
-                        <h3>Encrypted Transit & Processing</h3>
-                        <p>The anonymous payload is transmitted via TLS 1.3 and processed entirely in-memory within our secure VPC enclaves.</p>
-                    </div>
-                </div>
-            
-                <div class="flow-step">
-                    <div class="flow-number">3</div>
-                    <div class="flow-content">
-                        <h3>Zero-Retention Inference</h3>
-                        <p>Once the SOMA engine generates the interpretation or protocol, the result is returned to your servers, and the biological payload is instantly destroyed from our working memory.</p>
-                    </div>
-                </div>
-            
-                <div class="flow-step">
-                    <div class="flow-number">4</div>
-                    <div class="flow-content">
-                        <h3>Re-Identification at Source</h3>
-                        <p>Your internal systems match the returned UUID back to the patient profile. Nostavia never knows who the patient actually is.</p>
-                    </div>
-                </div>
-            
-            </div>
-        </div>
-    </section>
-        
-    
-    
-    <!-- FAQ Section -->
-    <section class="faq-section">
-        <div class="container faq-container">
-            <div class="faq-header">
-                <h2>Frequently Asked Questions</h2>
-            </div>
-            <div class="faq-list">
-                
-                <div class="faq-item">
-                    <button class="faq-question">Are you HIPAA compliant? <i data-lucide="chevron-down"></i></button>
-                    <div class="faq-answer">
-                        <p>Our architecture is designed to exceed HIPAA security and privacy standards. We sign Business Associate Agreements (BAAs) with all US-based enterprise partners.</p>
-                    </div>
-                </div>
-            
-                <div class="faq-item">
-                    <button class="faq-question">Do you sell user data? <i data-lucide="chevron-down"></i></button>
-                    <div class="faq-answer">
-                        <p>Never. We are an infrastructure company, not a data broker. Our business model is licensing software. We do not sell, rent, or monetize your users' biological data in any capacity.</p>
-                    </div>
-                </div>
-            
-                <div class="faq-item">
-                    <button class="faq-question">Do you use our data to train your AI? <i data-lucide="chevron-down"></i></button>
-                    <div class="faq-answer">
-                        <p>By default, no. We train our foundational models on massive, anonymized, proprietary datasets acquired legally and ethically. Enterprise partners can opt-in to federated learning loops if they wish to improve their own specific model performance, but it is never mandatory.</p>
-                    </div>
-                </div>
-            
-                <div class="faq-item">
-                    <button class="faq-question">How often do you undergo security audits? <i data-lucide="chevron-down"></i></button>
-                    <div class="faq-answer">
-                        <p>We undergo rigorous, independent third-party penetration testing and security audits bi-annually, and make these compliance reports available to enterprise partners under NDA.</p>
-                    </div>
-                </div>
-            
-            </div>
-        </div>
-    </section>
-        
+    </div>
+</div>
 
 <!-- 11. Footer -->
     <footer class="hero-footer">
@@ -486,28 +394,82 @@
     <script>
         lucide.createIcons();
         
-        </script>
+        // Health 360 Scroll Logic
+        const steps = document.querySelectorAll('.scroll-step');
+        const tabs = document.querySelectorAll('.d-input');
+        const lines = document.querySelectorAll('.diagram-lines .d-line');
+        // Map of tab IDs to their respective mockup images
+        const mockupImages = {
+            'wearables': 'assets/lab.png',
+            'iot': 'assets/food.png',
+            'photos': 'assets/wearable.png',
+            'labs': 'assets/Intelligence.png'
+        };
 
-        <script>
-        document.querySelectorAll('.faq-question').forEach(button => {
-            button.addEventListener('click', () => {
-                const answer = button.nextElementSibling;
-                const icon = button.querySelector('i');
-                const isOpen = answer.style.maxHeight;
-
-                document.querySelectorAll('.faq-answer').forEach(ans => ans.style.maxHeight = null);
-                document.querySelectorAll('.faq-question i').forEach(ic => ic.setAttribute('data-lucide', 'chevron-down'));
-
-                if (!isOpen) {
-                    answer.style.maxHeight = answer.scrollHeight + "px";
-                    icon.setAttribute('data-lucide', 'chevron-up');
-                }
-                
-                lucide.createIcons();
-            });
+        // Preload images to prevent network delay glitches
+        Object.values(mockupImages).forEach(src => {
+            const img = new Image();
+            img.src = src;
         });
-        </script>
-        
+
+        const mockupImg = document.getElementById('dynamic-mockup');
+        let imageSwapTimeout;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    // Get the tab id from the active scroll step
+                    const tabId = entry.target.getAttribute('data-tab');
+                    
+                    // Highlight the text block
+                    steps.forEach(s => s.classList.remove('is-active'));
+                    entry.target.classList.add('is-active');
+                    
+                    // Update the mockup image smoothly without glitches
+                    if (mockupImg && mockupImages[tabId] && mockupImg.getAttribute('data-current-tab') !== tabId) {
+                        mockupImg.setAttribute('data-current-tab', tabId);
+                        
+                        // Fast crossfade effect
+                        mockupImg.style.opacity = 0.5;
+                        mockupImg.style.transform = 'scale(0.97)';
+                        
+                        clearTimeout(imageSwapTimeout);
+                        imageSwapTimeout = setTimeout(() => {
+                            // Only swap and fade in if the user hasn't scrolled to a new tab already
+                            if (mockupImg.getAttribute('data-current-tab') === tabId) {
+                                mockupImg.src = mockupImages[tabId];
+                                mockupImg.style.opacity = 1;
+                                mockupImg.style.transform = 'scale(1)';
+                            }
+                        }, 150);
+                    }
+                    
+                    // Highlight the diagram inputs and lines
+                    tabs.forEach(t => {
+                        if (t.getAttribute('data-tab') === tabId) {
+                            t.classList.add('active');
+                        } else {
+                            t.classList.remove('active');
+                        }
+                    });
+                    
+                    lines.forEach(l => l.classList.remove('active'));
+                    document.getElementById('path-' + tabId).classList.add('active');
+                }
+            });
+        }, { 
+            // Trigger when the item is roughly in the middle 20% of the viewport
+            rootMargin: '-40% 0px -40% 0px',
+            threshold: 0
+        });
+
+        steps.forEach(step => observer.observe(step));
+    </script>
 </body>
 </html>
 
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+    mermaid.initialize({ startOnLoad: true });
+</script>

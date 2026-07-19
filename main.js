@@ -1,6 +1,43 @@
 // main.js
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Mega Menu Logic
+    const navItems = document.querySelectorAll('.nav-item[data-menu]');
+    const megaMenus = document.querySelectorAll('.mega-menu');
+    const backdrop = document.querySelector('.nav-backdrop');
+    const navContainer = document.querySelector('.nav-container');
+
+    let menuTimeout;
+
+    function openMenu(menuId) {
+        clearTimeout(menuTimeout);
+        megaMenus.forEach(m => m.classList.remove('active'));
+        const targetMenu = document.getElementById(`menu-${menuId}`);
+        if (targetMenu) {
+            targetMenu.classList.add('active');
+            if (backdrop) backdrop.classList.add('active');
+            if (navContainer) navContainer.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+        }
+    }
+
+    function closeMenu() {
+        menuTimeout = setTimeout(() => {
+            megaMenus.forEach(m => m.classList.remove('active'));
+            if (backdrop) backdrop.classList.remove('active');
+            if (navContainer) navContainer.style.backgroundColor = '';
+        }, 100);
+    }
+
+    navItems.forEach(item => {
+        item.addEventListener('mouseenter', () => openMenu(item.dataset.menu));
+        item.addEventListener('mouseleave', closeMenu);
+    });
+
+    megaMenus.forEach(menu => {
+        menu.addEventListener('mouseenter', () => clearTimeout(menuTimeout));
+        menu.addEventListener('mouseleave', closeMenu);
+    });
+
     // 1. Sticky Navbar Effect (Optimized)
     const navbar = document.getElementById('navbar');
     let isScrolling = false;
@@ -42,29 +79,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 3. Simple scroll reveal animation for segments (Optional but premium)
-    const observerOptions = {
+    // 3. Enhanced scroll reveal animation (Sarvam-style)
+    const revealObserverOptions = {
         root: null,
         rootMargin: '0px',
         threshold: 0.1
     };
 
-    const observer = new IntersectionObserver((entries, observer) => {
+    const revealObserver = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = 1;
                 entry.target.style.transform = 'translateY(0)';
-                observer.unobserve(entry.target);
+                obs.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, revealObserverOptions);
 
-    const cards = document.querySelectorAll('.segment-card, .pricing-card');
-    cards.forEach(card => {
-        card.style.opacity = 0;
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-        observer.observe(card);
+    const revealElements = document.querySelectorAll('.segment-card, .pricing-card, .section-header, .stat-item, .badge, .security-header, .dev-content, .dev-code');
+    revealElements.forEach((el, i) => {
+        el.style.opacity = 0;
+        el.style.transform = 'translateY(25px)';
+        el.style.transition = `opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${(i % 4) * 0.1}s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${(i % 4) * 0.1}s`;
+        revealObserver.observe(el);
     });
 
     // 4. Modal Logic

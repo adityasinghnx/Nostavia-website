@@ -14,57 +14,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us | Nostavia</title>
-    <meta name="description" content="Contact Nostavia Health. Get in touch with our team for support, partnerships, or general inquiries.">
+    <meta name="description" content="Nostavia Technologies builds the intelligence layer for the health economy. Its whole-body health-intelligence system, delivered as an SDK, a white-label application or AI-native services, lets diagnostic laboratories, clinics, wellness platforms and insurers turn fragmented lab, wearable and lifestyle data into continuous, personalised intelligence — entirely under their own brand.">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.cdnfonts.com/css/google-sans" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        .legal-section {
-            padding: 120px 0 80px;
-            background: var(--bg-primary);
-            color: var(--text-ink);
-            min-height: 100vh;
-        }
-        .legal-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        .legal-header h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--brand-blue);
-        }
-        .legal-header p {
-            color: var(--text-slate);
-            margin-bottom: 3rem;
-        }
-        .legal-content h2 {
-            font-size: 1.5rem;
-            margin-top: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-ink);
-        }
-        .legal-content p, .legal-content li {
-            color: var(--text-slate);
-            line-height: 1.7;
-            margin-bottom: 1rem;
-        }
-        .legal-content ul {
-            margin-left: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        .contact-box {
-            background: var(--surface-paper);
-            padding: 2rem;
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-sm);
-            margin-top: 2rem;
-            border: 1px solid var(--border-slate);
-        }
-    </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z7X9Y13D5K"></script>
     <script>
@@ -76,59 +31,269 @@
     </script>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav id="navbar" style="background: var(--surface-paper); border-bottom: 1px solid var(--border-slate);">
+    <div class="nav-backdrop"></div>
+    
+    <!-- 1. Mega Menu Nav -->
+    <nav id="navbar">
         <div class="nav-container">
             <div class="logo">
-                <a href="/" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 28px; width: auto; object-fit: contain; filter: invert(1) brightness(0);"></a>
+                <a href="/" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 28px; width: auto; object-fit: contain; filter: invert(1) brightness(0); margin-bottom: 4px;"></a>
             </div>
+            
             <div class="nav-links">
-                <a href="/#solutions">Solutions</a>
-                <a href="/#integrations">Integrations</a>
-                <a href="/#pricing">Pricing</a>
+                <div class="nav-item" data-menu="solutions">
+                    <a href="#solutions">Solutions</a>
+                </div>
+                <div class="nav-item" data-menu="developers">
+                    <a href="#developers">Developers</a>
+                </div>
+                <div class="nav-item" data-menu="company">
+                    <a href="#company">Company</a>
+                </div>
             </div>
+
             <div class="nav-actions">
                 <a href="javascript:void(0)" class="btn btn-primary btn-sm open-demo-modal">Book a demo</a>
             </div>
+            
             <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+
+        <!-- Mega Menus Container -->
+        <div class="mega-menu-container">
+            
+            <!-- Solutions Mega Menu -->
+            <div class="mega-menu" id="menu-solutions">
+                <div class="mega-menu-grid">
+                    <div class="mega-col-left">
+                        <span class="mega-label">SOLUTIONS</span>
+                        <a href="/labs.html" class="mega-link">
+                            <div class="mega-icon"><i data-lucide="microscope"></i></div>
+                            <div class="mega-text">
+                                <h4>Diagnostic Labs</h4>
+                                <p>Turn reports into daily relationships</p>
+                            </div>
+                        </a>
+                        <a href="/clinics.html" class="mega-link">
+                            <div class="mega-icon"><i data-lucide="building-2"></i></div>
+                            <div class="mega-text">
+                                <h4>Longevity Clinics</h4>
+                                <p>Close the gap between healthspan and revenue</p>
+                            </div>
+                        </a>
+                        <a href="/wellness.html" class="mega-link">
+                            <div class="mega-icon"><i data-lucide="dumbbell"></i></div>
+                            <div class="mega-text">
+                                <h4>Fitness &amp; Sports</h4>
+                                <p>Biological context for movement data</p>
+                            </div>
+                        </a>
+                        <a href="/insurers.html" class="mega-link">
+                            <div class="mega-icon"><i data-lucide="shield-check"></i></div>
+                            <div class="mega-text">
+                                <h4>Health Insurers</h4>
+                                <p>Risk scoring from real biomarkers</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mega-col-right">
+                        <div class="mega-feature-card" style="background: linear-gradient(135deg, #FFE0C4 0%, #E3D9F8 100%);">
+                            <div class="mega-feature-content">
+                                <h3>Smart Report as a Service</h3>
+                                <p>Generate personalized interpretations for every routine panel. Delivered at software margins.</p>
+                                <a href="labs.html" class="mega-feature-link" style="text-decoration: none; color: inherit; display: inline-flex;">Explore Smart Reports <i data-lucide="arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Developers Mega Menu -->
+            <div class="mega-menu" id="menu-developers">
+                <div class="mega-menu-grid">
+                    <div class="mega-col-left mega-col-2">
+                        <div>
+                            <span class="mega-label">INTEGRATIONS</span>
+                            <a href="/sdk.html" class="mega-link">
+                                <div class="mega-icon"><i data-lucide="code-2"></i></div>
+                                <div class="mega-text">
+                                    <h4>Intelligence SDK</h4>
+                                    <p>Embed our health intelligence engine</p>
+                                </div>
+                            </a>
+                            <a href="/wearables.html" class="mega-link">
+                                <div class="mega-icon"><i data-lucide="watch"></i></div>
+                                <div class="mega-text">
+                                    <h4>Wearables SDK</h4>
+                                    <p>One integration for all devices</p>
+                                </div>
+                            </a>
+                            <a href="/white-label.html" class="mega-link">
+                                <div class="mega-icon"><i data-lucide="smartphone"></i></div>
+                                <div class="mega-text">
+                                    <h4>White-Label App</h4>
+                                    <p>Launch your own platform</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div style="padding-top: 0;">
+                            <span class="mega-label">RESOURCES</span>
+                            <a href="documentation.html" class="mega-link-simple"><i data-lucide="book"></i> Documentation</a>
+                            <a href="api-reference.html" class="mega-link-simple"><i data-lucide="terminal"></i> API Reference</a>
+                            <a href="github-examples.html" class="mega-link-simple"><i data-lucide="github"></i> GitHub Examples</a>
+                        </div>
+                    </div>
+                    <div class="mega-col-right">
+                        <div class="mega-feature-card" style="background: linear-gradient(135deg, var(--brand-blue) 0%, #2A5298 100%); color: white;">
+                            <div class="mega-feature-content">
+                                <h3 style="color: white;">SOMA Architecture</h3>
+                                <p style="color: rgba(255,255,255,0.8);">Learn about our Dual-Brain AI architecture built for precise clinical reasoning.</p>
+                                <a href="security.html" class="mega-feature-link" style="color: white; text-decoration: none; display: inline-flex;">Read the Whitepaper <i data-lucide="arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Company Mega Menu -->
+            <div class="mega-menu" id="menu-company">
+                <div class="mega-menu-grid">
+                    <div class="mega-col-left">
+                        <span class="mega-label">COMPANY</span>
+                        <a href="/about.html" class="mega-link-simple"><i data-lucide="info"></i> About Us</a>
+                        <a href="/careers.html" class="mega-link-simple"><i data-lucide="users"></i> Careers</a>
+                        <a href="/contact.html" class="mega-link-simple"><i data-lucide="mail"></i> Contact</a>
+                        <a href="/security.html" class="mega-link-simple"><i data-lucide="shield"></i> Security &amp; Privacy</a>
+                    </div>
+                    <div class="mega-col-right">
+                        <div class="mega-feature-card" style="background: radial-gradient(circle at top right, rgba(251, 200, 160, 0.4), transparent), var(--surface-bg);">
+                            <div class="mega-feature-content">
+                                <h3>Building for Data Sovereignty</h3>
+                                <p>Read our commitment to localized data sovereignty, DPDP compliance, and UAE health data laws.</p>
+                                <a href="about.html" class="mega-feature-link" style="text-decoration: none; color: inherit; display: inline-flex;">Read our manifesto <i data-lucide="arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </nav>
 
-    <!-- Content -->
-    <section class="legal-section">
-        <div class="legal-container">
-            <div class="legal-header">
-                <h1>Contact Us</h1>
-                <p>We're here to help.</p>
+    
+    <!-- Homepage-Parity Hero -->
+    <header class="hero">
+        <div class="hero-petals">
+            <div class="petal petal-1"></div>
+            <div class="petal petal-2"></div>
+            <div class="petal petal-3"></div>
+            <div class="petal petal-4"></div>
+        </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-pill">
+                    <span class="hero-pill-badge">Overview</span>
+                    <span class="hero-pill-text">Contact Us</span>
+                </div>
+                <h1 class="hero-headline">
+                    Let's<br>
+                    <span class="hero-accent">Talk.</span>
+                </h1>
+                <p class="hero-subtitle">We're here to help you integrate health intelligence. Reach out for enterprise licensing, technical support, or partnership inquiries.</p>
+                <div class="hero-ctas">
+                    <a href="javascript:void(0)" class="btn btn-hero open-demo-modal">Book a demo</a>
+                </div>
             </div>
-            <div class="legal-content">
-                <p>If you have any questions, require support with our application, or are interested in partnership opportunities, please reach out to us. Our team aims to respond to all inquiries within 1-2 business days.</p>
+        </div>
+    </header>
 
-                <div class="contact-box">
-                    <h2>General Inquiries & Support</h2>
-                    <p><strong>Email:</strong> <a href="mailto:contact@nostaviahealth.com" style="color: var(--brand-blue); text-decoration: underline;">contact@nostaviahealth.com</a></p>
-                    
-                    <h2>Data & Privacy Questions</h2>
-                    <p>For any questions related to data safety, our Privacy Policy, or to request account deletion, please email our Data Protection team at the email address above.</p>
-                    
-                    <h2>Our Headquarters</h2>
-                    <p>Nostavia Health<br>
-                    Lucknow, Uttar Pradesh<br>
-                    India</p>
+    <!-- Homepage-Parity Trust Strip -->
+    <section class="trust-strip">
+        <div class="container">
+            <div class="trust-stats" style="justify-content: center; gap: 4rem;">
+
+                <div class="stat-item">
+                    <span class="stat-value">India</span>
+                    <span class="stat-label">and UAE</span>
+                </div>
+        
+                <div class="stat-item">
+                    <span class="stat-value">24/7</span>
+                    <span class="stat-label">Support Available</span>
+                </div>
+        
+                <div class="stat-item">
+                    <span class="stat-value">Enterprise</span>
+                    <span class="stat-label">SLAs</span>
+                </div>
+        
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Statement (Light Premium Box) -->
+    <section class="security-section" style="padding-bottom: 4rem;">
+        <div class="container">
+            <div class="security-wall" style="display: block; max-width: 1000px; margin: 0 auto; text-align: center;">
+                <div class="security-header" style="max-width: none;">
+                    <h2>Global Presence, Local Compliance</h2>
+                    <p style="font-size: 1.25rem; margin: 0 auto; max-width: 800px; color: var(--text-slate); line-height: 1.8;">We are actively serving high-growth markets across India and the UAE. Our platform is architected from the ground up to respect localized data sovereignty, aligning strictly with India's DPDP Act and the Dubai health-data Law No. 17 of 2026 framework.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
+    <!-- Bento Features using Homepage Component -->
+    <section class="segments-section" style="background: transparent; padding-top: 4rem;">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Capabilities</h2>
+                <p style="color: var(--text-slate);">Everything you need to build the next generation of health products.</p>
+            </div>
+            <div class="ent-bento-grid">
+                
+            <div class="segment-card span-6">
+                <div class="card-icon-wrapper"><i data-lucide="map-pin"></i></div>
+                <h3 style="font-size: 1.6rem; margin-bottom: 1rem;">Global Headquarters</h3>
+                <p class="segment-use-case" style="font-size: 1.1rem; line-height: 1.7;">Nostavia Technologies Pvt. Ltd.<br>Lucknow, Uttar Pradesh, India<br><br><em>Our engineering and operations hub driving the future of health infrastructure.</em></p>
+            </div>
+        
+            <div class="segment-card span-6">
+                <div class="card-icon-wrapper"><i data-lucide="mail"></i></div>
+                <h3 style="font-size: 1.6rem; margin-bottom: 1rem;">Direct Communication</h3>
+                <p class="segment-use-case" style="font-size: 1.1rem; line-height: 1.7;"><strong>Enterprise Sales & Partnerships:</strong><br>contact@nostaviahealth.com<br><br><strong>Direct Line:</strong><br>+91 95983 20558</p>
+            </div>
+        
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    
+
+<!-- 11. Footer -->
+    <footer class="hero-footer">
+        <div class="footer-petals">
+            <div class="petal petal-1" style="top: -10%; left: -10%; filter: blur(50px); opacity: 0.15;"></div>
+            <div class="petal petal-3" style="top: 50%; right: -5%; filter: blur(60px); opacity: 0.1;"></div>
+            <div class="petal petal-2" style="bottom: -20%; left: 40%; filter: blur(60px); opacity: 0.15;"></div>
+        </div>
         <div class="container footer-grid">
             <div class="footer-brand">
                 <div class="logo">
-                    <a href="/" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 32px; width: auto; object-fit: contain; margin-bottom: 1rem;"></a>
+                    <a href="/" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 32px; width: auto; object-fit: contain; margin-bottom: 1rem; filter: invert(1) brightness(0);"></a>
                 </div>
-                <p>Health intelligence infrastructure. Reinventing the Human Lifespan.</p>
+                <p>The intelligence layer for the health economy.</p>
                 <p class="hq">Headquartered in Lucknow, India</p>
+                <div class="app-downloads" style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+                    <a href="https://play.google.com/store/apps/details?id=com.nostavia.nostavia_health" target="_blank" style="transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" style="height: 40px; width: auto;">
+                    </a>
+                    <a href="https://apps.apple.com/us/app/nostavia-health/id6760108353" target="_blank" style="transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store" style="height: 40px; width: auto;">
+                    </a>
+                </div>
             </div>
             <div class="footer-links">
                 <h4>Solutions</h4>
@@ -161,12 +326,12 @@
         </div>
         <div class="container">
             <div class="footer-bottom">
-                <p>&copy; 2026 Nostavia Health. All rights reserved.</p>
+                <p>&copy; 2026 Nostavia Technologies Pvt. Ltd. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Demo Modal -->
+    <!-- Modal Form -->
     <div id="demo-modal" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close" id="close-modal"><i data-lucide="x"></i></button>
@@ -177,20 +342,60 @@
             <form action="https://formsubmit.co/contact@nostaviahealth.com" method="POST" class="demo-form">
                 <input type="hidden" name="_subject" value="New Demo Request: Nostavia">
                 <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" id="next-url" value="">
+
                 <div class="form-group">
                     <label for="name">Full Name</label>
                     <input type="text" id="name" name="name" required placeholder="Your full name">
                 </div>
                 <div class="form-group">
+                    <label for="mobile">Mobile Number</label>
+                    <input type="tel" id="mobile" name="mobile" required placeholder="+1 (555) 000-0000">
+                </div>
+                <div class="form-group">
                     <label for="email">Work Email</label>
                     <input type="email" id="email" name="email" required placeholder="you@company.com">
+                </div>
+                <div class="form-group">
+                    <label for="company">Company Name</label>
+                    <input type="text" id="company" name="company" required placeholder="Company Inc.">
+                </div>
+                <div class="form-group">
+                    <label for="employees">Number of Employees</label>
+                    <select id="employees" name="employees" required>
+                        <option value="" disabled selected>Select company size</option>
+                        <option value="1-10">1-10</option>
+                        <option value="11-50">11-50</option>
+                        <option value="51-200">51-200</option>
+                        <option value="201-500">201-500</option>
+                        <option value="500+">500+</option>
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary full-width">Submit Request</button>
             </form>
         </div>
     </div>
 
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal-overlay">
+        <div class="modal-content text-center" style="text-align: center;">
+            <button class="modal-close" id="close-success-modal"><i data-lucide="x"></i></button>
+            <div class="modal-header">
+                <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: var(--surface-mint); color: var(--brand-blue); border-radius: 50%; margin-bottom: 1.5rem;">
+                    <i data-lucide="check-circle" style="width: 32px; height: 32px;"></i>
+                </div>
+                <h2>Thank you for your interest!</h2>
+                <p>Our team will contact you in 1-3 business days.</p>
+            </div>
+            <button class="btn btn-primary" id="close-success-modal-btn" style="min-width: 150px;">Done</button>
+        </div>
+    </div>
+
     <script src="main.js"></script>
-    <script>lucide.createIcons();</script>
+    <script>
+        lucide.createIcons();
+        
+        </script>
 </body>
 </html>
+

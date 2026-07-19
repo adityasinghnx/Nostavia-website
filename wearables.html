@@ -13,8 +13,8 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health Intelligence Infrastructure | Nostavia</title>
-    <meta name="description" content="The B2B health intelligence infrastructure for modern clinical, longevity, and wellness applications.">
+    <title>Wearables SDK | Nostavia</title>
+    <meta name="description" content="Nostavia Technologies builds the intelligence layer for the health economy. Its whole-body health-intelligence system, delivered as an SDK, a white-label application or AI-native services, lets diagnostic laboratories, clinics, wellness platforms and insurers turn fragmented lab, wearable and lifestyle data into continuous, personalised intelligence — entirely under their own brand.">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,205 +31,339 @@
     </script>
 </head>
 <body>
-    <!-- 1. Sticky minimal nav -->
+    <div class="nav-backdrop"></div>
+    
+    <!-- 1. Mega Menu Nav -->
     <nav id="navbar">
         <div class="nav-container">
             <div class="logo">
-                <a href="/" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 28px; width: auto; object-fit: contain; filter: invert(1) brightness(0);"></a>
+                <a href="/" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 28px; width: auto; object-fit: contain; filter: invert(1) brightness(0); margin-bottom: 4px;"></a>
             </div>
+            
             <div class="nav-links">
-                <a href="index.html#solutions">Solutions</a>
-                <a href="index.html#integrations">Integrations</a>
-                <a href="index.html#pricing">Pricing</a>
-                <a href="javascript:void(0)" class="btn btn-primary btn-sm open-demo-modal mobile-only-btn" style="display: none;">Book a demo</a>
+                <div class="nav-item" data-menu="solutions">
+                    <a href="#solutions">Solutions</a>
+                </div>
+                <div class="nav-item" data-menu="developers">
+                    <a href="#developers">Developers</a>
+                </div>
+                <div class="nav-item" data-menu="company">
+                    <a href="#company">Company</a>
+                </div>
             </div>
+
             <div class="nav-actions">
                 <a href="javascript:void(0)" class="btn btn-primary btn-sm open-demo-modal">Book a demo</a>
             </div>
-        <div class="hamburger"><span></span><span></span><span></span></div>
+            
+            <div class="hamburger"><span></span><span></span><span></span></div>
         </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <header class="wearables-hero">
-        <div class="container">
-            <div class="hero-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; overflow: visible;">
-                <div class="hero-text-col" style="text-align: left; z-index: 10;">
-                    <h1 class="gradient-text hero-title">Wearable<br>Intelligence</h1>
-                    <p class="hero-subtitle" style="margin: 0; text-align: left;">The B2B engine that turns raw biometric data into actionable health protocols. We power the next generation of longevity clinics, diagnostic labs, and wellness platforms with unified device connectivity and clinical-grade intelligence.</p>
-                    <div style="margin-top: 2rem; margin-bottom: 3rem;">
-                        <a href="javascript:void(0)" class="btn btn-primary open-demo-modal">Book a demo</a>
-                    </div>
-                    <div class="compliance-badges" style="justify-content: flex-start;">
-                        <div class="badge-item"><i data-lucide="shield-check"></i> GDPR Compliant</div>
-                        <div class="badge-item"><i data-lucide="shield-check"></i> DPDP Compliant</div>
-                        <div class="badge-item"><i data-lucide="shield-check"></i> SOC 2 Type II</div>
-                    </div>
-                </div>
-            <div class="hero-diagram-col" style="position: relative; width: 100%; height: 600px; display: flex; align-items: center; justify-content: flex-start;">
-                    <!-- Diagram Container Scaled Down to fit the right column -->
-                    <div class="custom-diagram-container" style="transform: scale(0.6); transform-origin: left center; width: 1200px; height: 600px; position: absolute; left: 0;">
-                        <!-- Background SVG for lines -->
-                        <svg class="cd-svg-lines" viewBox="0 0 1200 600" preserveAspectRatio="none">
-                            <defs>
-                                <linearGradient id="cdGradLeft" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" stop-color="rgba(2, 37, 75, 0.1)" />
-                                    <stop offset="100%" stop-color="rgba(2, 37, 75, 0.8)" />
-                                </linearGradient>
-                                <linearGradient id="cdGradRight" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" stop-color="rgba(2, 37, 75, 0.8)" />
-                                    <stop offset="100%" stop-color="rgba(2, 37, 75, 0.1)" />
-                                </linearGradient>
-                            </defs>
-                            
-                            <!-- Paths from left (sources) to center (hub) -->
-                            <!-- Wearables -->
-                            <path d="M 280,100 C 450,100 450,300 550,300" class="cd-bg-path" stroke="url(#cdGradLeft)" />
-                            <path d="M 280,100 C 450,100 450,300 550,300" class="cd-fg-path" />
-                            
-                            <!-- IoT -->
-                            <path d="M 280,300 L 550,300" class="cd-bg-path" stroke="url(#cdGradLeft)" />
-                            <path d="M 280,300 L 550,300" class="cd-fg-path" />
-
-                            <!-- Apps -->
-                            <path d="M 280,500 C 450,500 450,300 550,300" class="cd-bg-path" stroke="url(#cdGradLeft)" />
-                            <path d="M 280,500 C 450,500 450,300 550,300" class="cd-fg-path" />
-
-                            <!-- Path from Hub to Destinations -->
-                            <path d="M 650,300 L 820,300" class="cd-bg-path" stroke="url(#cdGradRight)" />
-                            <path d="M 650,300 L 820,300" class="cd-fg-path" />
-                        </svg>
-
-                        <!-- CSS Grid to overlay HTML -->
-                        <div class="cd-content-grid">
-                            <!-- Left Column -->
-                            <div class="cd-left-col">
-                                <div class="cd-source-group" style="margin-top: 40px;">
-                                    <span class="cd-source-title">WEARABLES</span>
-                                    <div class="cd-pill">
-                                        <div class="cd-icon-box"><i data-lucide="apple"></i></div>
-                                        <div class="cd-icon-box"><i data-lucide="watch"></i></div>
-                                        <div class="cd-icon-box">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                                <circle cx="12" cy="12" r="7" stroke-width="4" />
-                                                <path d="M10 5h4" stroke-width="5" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cd-source-group" style="margin-top: 100px;">
-                                    <span class="cd-source-title">CONSUMER IOT</span>
-                                    <div class="cd-pill">
-                                        <div class="cd-icon-box"><i data-lucide="bike"></i></div>
-                                        <div class="cd-icon-box"><i data-lucide="scale"></i></div>
-                                        <div class="cd-icon-box"><i data-lucide="thermometer"></i></div>
-                                    </div>
-                                </div>
-                                <div class="cd-source-group" style="margin-top: 100px;">
-                                    <span class="cd-source-title">APPS</span>
-                                    <div class="cd-pill">
-                                        <div class="cd-icon-box"><i data-lucide="heart"></i></div>
-                                        <div class="cd-icon-box"><i data-lucide="smartphone"></i></div>
-                                        <div class="cd-icon-box"><i data-lucide="apple"></i></div>
-                                    </div>
-                                </div>
+        <!-- Mega Menus Container -->
+        <div class="mega-menu-container">
+            
+            <!-- Solutions Mega Menu -->
+            <div class="mega-menu" id="menu-solutions">
+                <div class="mega-menu-grid">
+                    <div class="mega-col-left">
+                        <span class="mega-label">SOLUTIONS</span>
+                        <a href="/labs.html" class="mega-link">
+                            <div class="mega-icon"><i data-lucide="microscope"></i></div>
+                            <div class="mega-text">
+                                <h4>Diagnostic Labs</h4>
+                                <p>Turn reports into daily relationships</p>
                             </div>
-
-                            <!-- Center Column -->
-                            <div class="cd-center-col">
-                                <div class="cd-hub-node">
-                                    <span class="cd-hub-title">NOSTAVIA</span>
-                                    <div class="cd-hub-box">
-                                        <i data-lucide="share-2" style="width: 48px; height: 48px; color: var(--text-ink);"></i>
-                                    </div>
-                                    <span class="cd-hub-subtitle">SDK</span>
-                                </div>
+                        </a>
+                        <a href="/clinics.html" class="mega-link">
+                            <div class="mega-icon"><i data-lucide="building-2"></i></div>
+                            <div class="mega-text">
+                                <h4>Longevity Clinics</h4>
+                                <p>Close the gap between healthspan and revenue</p>
                             </div>
-
-                            <!-- Right Column -->
-                            <div class="cd-right-col" style="display: flex; align-items: center; justify-content: flex-start;">
-                                <div class="cd-dest-group cd-dest-mobile" style="position: relative; top: 0; left: 20px;">
-                                    <span class="cd-dest-title">Your App</span>
-                                    <img src="assets/wearable.png" alt="App Mockup" class="cd-dest-img cd-mobile" onerror="this.src='https://via.placeholder.com/140x280/ffffff/02254b?text=App'">
-                                </div>
+                        </a>
+                        <a href="/wellness.html" class="mega-link">
+                            <div class="mega-icon"><i data-lucide="dumbbell"></i></div>
+                            <div class="mega-text">
+                                <h4>Fitness &amp; Sports</h4>
+                                <p>Biological context for movement data</p>
+                            </div>
+                        </a>
+                        <a href="/insurers.html" class="mega-link">
+                            <div class="mega-icon"><i data-lucide="shield-check"></i></div>
+                            <div class="mega-text">
+                                <h4>Health Insurers</h4>
+                                <p>Risk scoring from real biomarkers</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mega-col-right">
+                        <div class="mega-feature-card" style="background: linear-gradient(135deg, #FFE0C4 0%, #E3D9F8 100%);">
+                            <div class="mega-feature-content">
+                                <h3>Smart Report as a Service</h3>
+                                <p>Generate personalized interpretations for every routine panel. Delivered at software margins.</p>
+                                <a href="labs.html" class="mega-feature-link" style="text-decoration: none; color: inherit; display: inline-flex;">Explore Smart Reports <i data-lucide="arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Developers Mega Menu -->
+            <div class="mega-menu" id="menu-developers">
+                <div class="mega-menu-grid">
+                    <div class="mega-col-left mega-col-2">
+                        <div>
+                            <span class="mega-label">INTEGRATIONS</span>
+                            <a href="/sdk.html" class="mega-link">
+                                <div class="mega-icon"><i data-lucide="code-2"></i></div>
+                                <div class="mega-text">
+                                    <h4>Intelligence SDK</h4>
+                                    <p>Embed our health intelligence engine</p>
+                                </div>
+                            </a>
+                            <a href="/wearables.html" class="mega-link">
+                                <div class="mega-icon"><i data-lucide="watch"></i></div>
+                                <div class="mega-text">
+                                    <h4>Wearables SDK</h4>
+                                    <p>One integration for all devices</p>
+                                </div>
+                            </a>
+                            <a href="/white-label.html" class="mega-link">
+                                <div class="mega-icon"><i data-lucide="smartphone"></i></div>
+                                <div class="mega-text">
+                                    <h4>White-Label App</h4>
+                                    <p>Launch your own platform</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div style="padding-top: 0;">
+                            <span class="mega-label">RESOURCES</span>
+                            <a href="documentation.html" class="mega-link-simple"><i data-lucide="book"></i> Documentation</a>
+                            <a href="api-reference.html" class="mega-link-simple"><i data-lucide="terminal"></i> API Reference</a>
+                            <a href="github-examples.html" class="mega-link-simple"><i data-lucide="github"></i> GitHub Examples</a>
+                        </div>
+                    </div>
+                    <div class="mega-col-right">
+                        <div class="mega-feature-card" style="background: linear-gradient(135deg, var(--brand-blue) 0%, #2A5298 100%); color: white;">
+                            <div class="mega-feature-content">
+                                <h3 style="color: white;">SOMA Architecture</h3>
+                                <p style="color: rgba(255,255,255,0.8);">Learn about our Dual-Brain AI architecture built for precise clinical reasoning.</p>
+                                <a href="security.html" class="mega-feature-link" style="color: white; text-decoration: none; display: inline-flex;">Read the Whitepaper <i data-lucide="arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Company Mega Menu -->
+            <div class="mega-menu" id="menu-company">
+                <div class="mega-menu-grid">
+                    <div class="mega-col-left">
+                        <span class="mega-label">COMPANY</span>
+                        <a href="/about.html" class="mega-link-simple"><i data-lucide="info"></i> About Us</a>
+                        <a href="/careers.html" class="mega-link-simple"><i data-lucide="users"></i> Careers</a>
+                        <a href="/contact.html" class="mega-link-simple"><i data-lucide="mail"></i> Contact</a>
+                        <a href="/security.html" class="mega-link-simple"><i data-lucide="shield"></i> Security &amp; Privacy</a>
+                    </div>
+                    <div class="mega-col-right">
+                        <div class="mega-feature-card" style="background: radial-gradient(circle at top right, rgba(251, 200, 160, 0.4), transparent), var(--surface-bg);">
+                            <div class="mega-feature-content">
+                                <h3>Building for Data Sovereignty</h3>
+                                <p>Read our commitment to localized data sovereignty, DPDP compliance, and UAE health data laws.</p>
+                                <a href="about.html" class="mega-feature-link" style="text-decoration: none; color: inherit; display: inline-flex;">Read our manifesto <i data-lucide="arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <!-- Homepage-Parity Hero -->
+    <header class="hero">
+        <div class="hero-petals">
+            <div class="petal petal-1"></div>
+            <div class="petal petal-2"></div>
+            <div class="petal petal-3"></div>
+            <div class="petal petal-4"></div>
+        </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-pill">
+                    <span class="hero-pill-badge">Overview</span>
+                    <span class="hero-pill-text">Wearables SDK</span>
+                </div>
+                <h1 class="hero-headline">
+                    The Wearables<br>
+                    <span class="hero-accent">SDK.</span>
+                </h1>
+                <p class="hero-subtitle">One unified integration for Apple Watch, Oura, WHOOP, Fitbit, and Garmin. Stop maintaining hardware APIs.</p>
+                <div class="hero-ctas">
+                    <a href="javascript:void(0)" class="btn btn-hero open-demo-modal">Book a demo</a>
+                </div>
+            </div>
         </div>
     </header>
 
-    <!-- Features Section -->
-    <section class="wearables-features bg-slate-light">
+    <!-- Homepage-Parity Trust Strip -->
+    <section class="trust-strip">
         <div class="container">
-            <h2 class="text-center" style="margin-bottom: 3rem;">Enterprise-Grade Health Intelligence</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="icon-box"><i data-lucide="watch"></i></div>
-                    <h3>Unified Data Infrastructure</h3>
-                    <p>Integrate every major wearable and health device through a single, secure API. We handle device parity, data normalization, and continuous sync so you can focus on building your product.</p>
+            <div class="trust-stats" style="justify-content: center; gap: 4rem;">
+
+                <div class="stat-item">
+                    <span class="stat-value">1</span>
+                    <span class="stat-label">Unified SDK</span>
                 </div>
-                <div class="feature-card">
-                    <div class="icon-box"><i data-lucide="database"></i></div>
-                    <h3>Clinical Data Normalization</h3>
-                    <p>Transform noisy, vendor-specific raw data into high-fidelity, actionable datasets. Our infrastructure provides consistent schema across all devices, mapped to established clinical standards.</p>
+        
+                <div class="stat-item">
+                    <span class="stat-value">4+</span>
+                    <span class="stat-label">Major Devices</span>
                 </div>
-                <div class="feature-card">
-                    <div class="icon-box"><i data-lucide="cpu"></i></div>
-                    <h3>Intelligence & Protocol Layer</h3>
-                    <p>Move beyond simple data streaming. Our platform provides the compute layer to correlate biometric data with lab panels, generate readiness scores, and trigger personalized intervention protocols.</p>
+        
+                <div class="stat-item">
+                    <span class="stat-value">Real-Time</span>
+                    <span class="stat-label">Data Sync</span>
                 </div>
-                <div class="feature-card">
-                    <div class="icon-box"><i data-lucide="zap"></i></div>
-                    <h3>Scalable Real-Time Engine</h3>
-                    <p>Built for the scale and security requirements of clinical environments. With low-latency webhooks and enterprise-grade encryption, we ensure your users receive timely, accurate health insights.</p>
+        
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Statement (Light Premium Box) -->
+    <section class="security-section" style="padding-bottom: 4rem;">
+        <div class="container">
+            <div class="security-wall" style="display: block; max-width: 1000px; margin: 0 auto; text-align: center;">
+                <div class="security-header" style="max-width: none;">
+                    <h2>Fragmented Device Ecosystems</h2>
+                    <p style="font-size: 1.25rem; margin: 0 auto; max-width: 800px; color: var(--text-slate); line-height: 1.8;">The wearable market is a fragmented nightmare of competing standards. Engineering teams waste months maintaining a dozen separate provider integrations, wrestling with custom OAuth flows, undocumented API changes, and writing bespoke parsing logic for every new piece of hardware that hits the market. It is an endless maintenance sinkhole.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Bento Features using Homepage Component -->
+    <section class="segments-section" style="background: transparent; padding-top: 4rem;">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Capabilities</h2>
+                <p style="color: var(--text-slate);">Everything you need to build the next generation of health products.</p>
+            </div>
+            <div class="ent-bento-grid">
+                
+            <div class="segment-card span-12">
+                <div class="card-icon-wrapper"><i data-lucide="activity"></i></div>
+                <h3 style="font-size: 1.6rem; margin-bottom: 1rem;">Universal Normalisation & Real-Time Sync</h3>
+                <p class="segment-use-case" style="font-size: 1.1rem; line-height: 1.7;">Write code once. A single integration with the Nostavia Wearables SDK normalises every major device on the market into a single, elegant schema. We handle the OAuth handshakes, token refreshes, rate-limiting, and webhook ingestion invisibly. We ingest heart-rate variability, sleep staging, recovery scores, SpO2, and stress signals, cleaning and structuring the data instantly. When WHOOP updates their API, our engineers fix it—your code never breaks.</p>
+            </div>
+        
+            </div>
+        </div>
+    </section>
+    
+    
+    <!-- Architecture Flow Section -->
+    <section class="flow-section">
+        <div class="container" style="max-width: 900px;">
+            <div class="section-header text-center">
+                <h2>How it Works</h2>
+                <p style="color: var(--text-slate); font-size: 1.2rem;">A look inside the data pipeline.</p>
+            </div>
+            <div class="flow-container">
+                
+                <div class="flow-step">
+                    <div class="flow-number">1</div>
+                    <div class="flow-content">
+                        <h3>Drop-In Authentication UI</h3>
+                        <p>Launch the Nostavia `DeviceManager` component in your app. It provides a beautiful, white-labeled UI for users to select and authenticate their preferred wearable device.</p>
+                    </div>
+                </div>
+            
+                <div class="flow-step">
+                    <div class="flow-number">2</div>
+                    <div class="flow-content">
+                        <h3>Background Synchronization</h3>
+                        <p>Once authorized, Nostavia establishes background webhook connections with the provider (e.g., Oura Cloud). Data syncs automatically as the user wears the device.</p>
+                    </div>
+                </div>
+            
+                <div class="flow-step">
+                    <div class="flow-number">3</div>
+                    <div class="flow-content">
+                        <h3>Universal Schema Transformation</h3>
+                        <p>Nostavia transforms proprietary data shapes (like WHOOP's 'Recovery Score' vs Garmin's 'Body Battery') into a unified, predictable `NormalizedTelemetry` schema.</p>
+                    </div>
+                </div>
+            
+                <div class="flow-step">
+                    <div class="flow-number">4</div>
+                    <div class="flow-content">
+                        <h3>Webhook Delivery</h3>
+                        <p>Clean, normalized JSON payloads are pushed directly to your backend servers via secure webhooks the moment new data is available.</p>
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+    </section>
+        
+    
+    
     <!-- FAQ Section -->
-    <section class="wearables-faq">
-        <div class="container">
-            <h2 class="text-center" style="margin-bottom: 3rem;">Frequently Asked Questions</h2>
-            <div class="faq-accordion">
+    <section class="faq-section">
+        <div class="container faq-container">
+            <div class="faq-header">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-list">
+                
                 <div class="faq-item">
-                    <button class="faq-question">What is the Nostavia Infrastructure? <i data-lucide="chevron-down"></i></button>
+                    <button class="faq-question">Do users need to create a Nostavia account? <i data-lucide="chevron-down"></i></button>
                     <div class="faq-answer">
-                        <p>Nostavia is an enterprise health data platform that provides unified device connectivity, clinical data normalization, and an intelligent logic layer to power professional health applications.</p>
+                        <p>No. The integration is completely white-labeled. The OAuth consent screens will display your company's name and logo. The user never knows Nostavia exists.</p>
                     </div>
                 </div>
+            
                 <div class="faq-item">
-                    <button class="faq-question">How does Nostavia improve clinical outcomes? <i data-lucide="chevron-down"></i></button>
+                    <button class="faq-question">Can I request historical data? <i data-lucide="chevron-down"></i></button>
                     <div class="faq-answer">
-                        <p>By automating the data ingestion and intelligence process, clinicians can focus on patient care instead of data management. We provide the tools for continuous monitoring and evidence-based personalized protocols.</p>
+                        <p>Yes. Upon initial connection, you can configure the SDK to backfill up to 3 years of historical telemetry data from the provider (subject to the provider's API limits).</p>
                     </div>
                 </div>
+            
                 <div class="faq-item">
-                    <button class="faq-question">How fast can we integrate? <i data-lucide="chevron-down"></i></button>
+                    <button class="faq-question">What happens if a provider's API goes down? <i data-lucide="chevron-down"></i></button>
                     <div class="faq-answer">
-                        <p>Our API-first design allows engineering teams to integrate within weeks. We provide dedicated support, comprehensive documentation, and SDKs tailored for enterprise environments.</p>
+                        <p>Nostavia acts as a resilient buffer. We automatically queue webhook retries, handle exponential backoff, and provide detailed dashboard analytics on provider uptime and sync status.</p>
                     </div>
                 </div>
+            
                 <div class="faq-item">
-                    <button class="faq-question">What about compliance and data privacy? <i data-lucide="chevron-down"></i></button>
+                    <button class="faq-question">Is the data stored on Nostavia servers? <i data-lucide="chevron-down"></i></button>
                     <div class="faq-answer">
-                        <p>We are architected for security. Our infrastructure is SOC 2 Type II compliant, with robust encryption for data at rest and in transit, ensuring alignment with GDPR and regional data privacy frameworks like India's DPDP.</p>
+                        <p>You have the option to use Nostavia purely as a passthrough pipe (zero retention) or to utilize our managed datastore for faster querying and historical aggregations.</p>
                     </div>
                 </div>
+            
             </div>
         </div>
     </section>
+        
 
-    <!-- Footer -->
-    <footer>
+<!-- 11. Footer -->
+    <footer class="hero-footer">
+        <div class="footer-petals">
+            <div class="petal petal-1" style="top: -10%; left: -10%; filter: blur(50px); opacity: 0.15;"></div>
+            <div class="petal petal-3" style="top: 50%; right: -5%; filter: blur(60px); opacity: 0.1;"></div>
+            <div class="petal petal-2" style="bottom: -20%; left: 40%; filter: blur(60px); opacity: 0.15;"></div>
+        </div>
         <div class="container footer-grid">
             <div class="footer-brand">
                 <div class="logo">
-                    <a href="/" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 32px; width: auto; object-fit: contain; margin-bottom: 1rem;"></a>
+                    <a href="/" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 32px; width: auto; object-fit: contain; margin-bottom: 1rem; filter: invert(1) brightness(0);"></a>
                 </div>
-                <p>Health intelligence infrastructure. Reinventing the Human Lifespan.</p>
+                <p>The intelligence layer for the health economy.</p>
                 <p class="hq">Headquartered in Lucknow, India</p>
                 <div class="app-downloads" style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
                     <a href="https://play.google.com/store/apps/details?id=com.nostavia.nostavia_health" target="_blank" style="transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
@@ -271,7 +405,7 @@
         </div>
         <div class="container">
             <div class="footer-bottom">
-                <p>&copy; 2026 Nostavia Health. All rights reserved.</p>
+                <p>&copy; 2026 Nostavia Technologies Pvt. Ltd. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -282,7 +416,7 @@
             <button class="modal-close" id="close-modal"><i data-lucide="x"></i></button>
             <div class="modal-header">
                 <h2>Book a Demo</h2>
-                <p>Health intelligence infrastructure. Reinventing the Human Lifespan.</p>
+                <p>See how Nostavia's intelligence layer can power your health product.</p>
             </div>
             <form action="https://formsubmit.co/contact@nostaviahealth.com" method="POST" class="demo-form">
                 <input type="hidden" name="_subject" value="New Demo Request: Nostavia">
@@ -308,12 +442,12 @@
                 <div class="form-group">
                     <label for="employees">Number of Employees</label>
                     <select id="employees" name="employees" required>
-                        <option value="" disabled selected>Select an option</option>
-                        <option value="1-10">1 - 10</option>
-                        <option value="11-50">11 - 50</option>
-                        <option value="51-200">51 - 200</option>
-                        <option value="201-1000">201 - 1000</option>
-                        <option value="1000+">1000+</option>
+                        <option value="" disabled selected>Select company size</option>
+                        <option value="1-10">1-10</option>
+                        <option value="11-50">11-50</option>
+                        <option value="51-200">51-200</option>
+                        <option value="201-500">201-500</option>
+                        <option value="500+">500+</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary full-width">Submit Request</button>
@@ -340,14 +474,15 @@
     <script>
         lucide.createIcons();
         
-        // FAQ Accordion Logic
+        </script>
+
+        <script>
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
                 const answer = button.nextElementSibling;
                 const icon = button.querySelector('i');
                 const isOpen = answer.style.maxHeight;
 
-                // Close all others
                 document.querySelectorAll('.faq-answer').forEach(ans => ans.style.maxHeight = null);
                 document.querySelectorAll('.faq-question i').forEach(ic => ic.setAttribute('data-lucide', 'chevron-down'));
 
@@ -359,7 +494,8 @@
                 lucide.createIcons();
             });
         });
-    </script>
+        </script>
+        
 </body>
 </html>
 

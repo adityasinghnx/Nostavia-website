@@ -14,7 +14,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nostavia | Health Intelligence Infrastructure</title>
-    <meta name="description" content="Nostavia is health intelligence infrastructure. Labs, clinics, and health platforms integrate our SDK or launch our white-label app to deliver lab decoding, food bio-impact analysis, wearable integration, adaptive protocols, and an AI health concierge — all under their own brand.">
+    <meta name="description" content="Nostavia Technologies builds the intelligence layer for the health economy. Its whole-body health-intelligence system, delivered as an SDK, a white-label application or AI-native services, lets diagnostic laboratories, clinics, wellness platforms and insurers turn fragmented lab, wearable and lifestyle data into continuous, personalised intelligence — entirely under their own brand.">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,67 +31,174 @@
     </script>
 </head>
 <body>
-    <!-- 1. Sticky minimal nav -->
+    <div class="nav-backdrop"></div>
+    
+    <!-- 1. Mega Menu Nav -->
     <nav id="navbar">
         <div class="nav-container">
             <div class="logo">
-                <a href="/" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 28px; width: auto; object-fit: contain; filter: invert(1) brightness(0);"></a>
+                <a href="/" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 28px; width: auto; object-fit: contain; filter: invert(1) brightness(0); margin-bottom: 4px;"></a>
             </div>
+            
             <div class="nav-links">
-                <a href="#solutions">Solutions</a>
-                <a href="#integrations">Integrations</a>
-                <a href="#pricing">Pricing</a>
-                <a href="javascript:void(0)" class="btn btn-primary btn-sm open-demo-modal mobile-only-btn" style="display: none;">Book a demo</a>
+                <div class="nav-item" data-menu="solutions">
+                    <a href="#solutions">Solutions</a>
+                </div>
+                <div class="nav-item" data-menu="developers">
+                    <a href="#developers">Developers</a>
+                </div>
+                <div class="nav-item" data-menu="company">
+                    <a href="#company">Company</a>
+                </div>
             </div>
+
             <div class="nav-actions">
                 <a href="javascript:void(0)" class="btn btn-primary btn-sm open-demo-modal">Book a demo</a>
             </div>
-        <div class="hamburger"><span></span><span></span><span></span></div>
+            
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+
+        <!-- Mega Menus Container -->
+        <div class="mega-menu-container">
+            
+            <!-- Solutions Mega Menu -->
+            <div class="mega-menu" id="menu-solutions">
+                <div class="mega-menu-grid">
+                    <div class="mega-col-left">
+                        <span class="mega-label">SOLUTIONS</span>
+                        <a href="/labs.html" class="mega-link">
+                            <div class="mega-icon"><i data-lucide="microscope"></i></div>
+                            <div class="mega-text">
+                                <h4>Diagnostic Labs</h4>
+                                <p>Turn reports into daily relationships</p>
+                            </div>
+                        </a>
+                        <a href="/clinics.html" class="mega-link">
+                            <div class="mega-icon"><i data-lucide="building-2"></i></div>
+                            <div class="mega-text">
+                                <h4>Longevity Clinics</h4>
+                                <p>Close the gap between healthspan and revenue</p>
+                            </div>
+                        </a>
+                        <a href="/wellness.html" class="mega-link">
+                            <div class="mega-icon"><i data-lucide="dumbbell"></i></div>
+                            <div class="mega-text">
+                                <h4>Fitness &amp; Sports</h4>
+                                <p>Biological context for movement data</p>
+                            </div>
+                        </a>
+                        <a href="/insurers.html" class="mega-link">
+                            <div class="mega-icon"><i data-lucide="shield-check"></i></div>
+                            <div class="mega-text">
+                                <h4>Health Insurers</h4>
+                                <p>Risk scoring from real biomarkers</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mega-col-right">
+                        <div class="mega-feature-card" style="background: linear-gradient(135deg, #FFE0C4 0%, #E3D9F8 100%);">
+                            <div class="mega-feature-content">
+                                <h3>Smart Report as a Service</h3>
+                                <p>Generate personalized interpretations for every routine panel. Delivered at software margins.</p>
+                                <a href="labs.html" class="mega-feature-link" style="text-decoration: none; color: inherit; display: inline-flex;">Explore Smart Reports <i data-lucide="arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Developers Mega Menu -->
+            <div class="mega-menu" id="menu-developers">
+                <div class="mega-menu-grid">
+                    <div class="mega-col-left mega-col-2">
+                        <div>
+                            <span class="mega-label">INTEGRATIONS</span>
+                            <a href="/sdk.html" class="mega-link">
+                                <div class="mega-icon"><i data-lucide="code-2"></i></div>
+                                <div class="mega-text">
+                                    <h4>Intelligence SDK</h4>
+                                    <p>Embed our health intelligence engine</p>
+                                </div>
+                            </a>
+                            <a href="/wearables.html" class="mega-link">
+                                <div class="mega-icon"><i data-lucide="watch"></i></div>
+                                <div class="mega-text">
+                                    <h4>Wearables SDK</h4>
+                                    <p>One integration for all devices</p>
+                                </div>
+                            </a>
+                            <a href="/white-label.html" class="mega-link">
+                                <div class="mega-icon"><i data-lucide="smartphone"></i></div>
+                                <div class="mega-text">
+                                    <h4>White-Label App</h4>
+                                    <p>Launch your own platform</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div style="padding-top: 0;">
+                            <span class="mega-label">RESOURCES</span>
+                            <a href="documentation.html" class="mega-link-simple"><i data-lucide="book"></i> Documentation</a>
+                            <a href="api-reference.html" class="mega-link-simple"><i data-lucide="terminal"></i> API Reference</a>
+                            <a href="github-examples.html" class="mega-link-simple"><i data-lucide="github"></i> GitHub Examples</a>
+                        </div>
+                    </div>
+                    <div class="mega-col-right">
+                        <div class="mega-feature-card" style="background: linear-gradient(135deg, var(--brand-blue) 0%, #2A5298 100%); color: white;">
+                            <div class="mega-feature-content">
+                                <h3 style="color: white;">SOMA Architecture</h3>
+                                <p style="color: rgba(255,255,255,0.8);">Learn about our Dual-Brain AI architecture built for precise clinical reasoning.</p>
+                                <a href="security.html" class="mega-feature-link" style="color: white; text-decoration: none; display: inline-flex;">Read the Whitepaper <i data-lucide="arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Company Mega Menu -->
+            <div class="mega-menu" id="menu-company">
+                <div class="mega-menu-grid">
+                    <div class="mega-col-left">
+                        <span class="mega-label">COMPANY</span>
+                        <a href="/about.html" class="mega-link-simple"><i data-lucide="info"></i> About Us</a>
+                        <a href="/careers.html" class="mega-link-simple"><i data-lucide="users"></i> Careers</a>
+                        <a href="/contact.html" class="mega-link-simple"><i data-lucide="mail"></i> Contact</a>
+                        <a href="/security.html" class="mega-link-simple"><i data-lucide="shield"></i> Security &amp; Privacy</a>
+                    </div>
+                    <div class="mega-col-right">
+                        <div class="mega-feature-card" style="background: radial-gradient(circle at top right, rgba(251, 200, 160, 0.4), transparent), var(--surface-bg);">
+                            <div class="mega-feature-content">
+                                <h3>Building for Data Sovereignty</h3>
+                                <p>Read our commitment to localized data sovereignty, DPDP compliance, and UAE health data laws.</p>
+                                <a href="about.html" class="mega-feature-link" style="text-decoration: none; color: inherit; display: inline-flex;">Read our manifesto <i data-lucide="arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </nav>
 
     <!-- 2. Hero Section -->
     <header class="hero">
-        <!-- Floating decorative elements -->
-        <div class="hero-float hero-float-card hero-float-1" aria-hidden="true">
-            <i data-lucide="watch"></i>
-            <span>Lab Decoding</span>
+        <div class="hero-petals">
+            <div class="petal petal-1"></div>
+            <div class="petal petal-2"></div>
+            <div class="petal petal-3"></div>
+            <div class="petal petal-4"></div>
         </div>
-        <div class="hero-float hero-float-card hero-float-2" aria-hidden="true">
-            <i data-lucide="activity-square"></i>
-            <span>Food Scan</span>
-        </div>
-        <div class="hero-float hero-float-card hero-float-3" aria-hidden="true">
-            <i data-lucide="flask-conical"></i>
-            <span>AI Concierge</span>
-        </div>
-        <div class="hero-float hero-float-card hero-float-4" aria-hidden="true">
-            <i data-lucide="shield-check"></i>
-            <span>Digital Twin</span>
-        </div>
-        <div class="hero-float hero-float-card hero-float-5" aria-hidden="true">
-            <i data-lucide="cpu"></i>
-            <span>Protocols</span>
-        </div>
-        <div class="hero-float hero-float-card hero-float-6" aria-hidden="true">
-            <i data-lucide="heart-pulse"></i>
-            <span>Wearables</span>
-        </div>
-        <div class="hero-float hero-float-icon-only hero-float-7" aria-hidden="true">
-            <i data-lucide="dna"></i>
-        </div>
-        <div class="hero-float hero-float-icon-only hero-float-8" aria-hidden="true">
-            <i data-lucide="zap"></i>
-        </div>
-
         <div class="hero-container">
             <div class="hero-content">
-                <div class="hero-pill">Supported by Google · Nvidia · Microsoft · ElevenLabs</div>
+                <div class="hero-pill">
+                    <span class="hero-pill-badge">Backed By</span>
+                    <span class="hero-pill-text">Google, Nvidia, Microsoft & ElevenLabs</span>
+                </div>
                 <h1 class="hero-headline">
                     Health's missing<br>
                     <span class="hero-accent">intelligence layer.</span>
                 </h1>
-                <p class="hero-subtitle">Labs, clinics, and health platforms integrate our SDK or launch our white-label app to give their users lab decoding, food bio-impact analysis, wearable integration, adaptive protocols, and an AI health concierge — all under their own brand.</p>
+                <p class="hero-subtitle">The intelligence layer for the health economy. Diagnostic labs, clinics, wellness platforms, fitness apps, and insurers integrate our SDK or launch our white-label app to turn fragmented lab, wearable, and lifestyle data into continuous, personalised intelligence — entirely under their own brand.</p>
                 <div class="hero-ctas">
                     <a href="javascript:void(0)" class="btn btn-hero open-demo-modal">Book a demo</a>
                 </div>
@@ -102,7 +209,7 @@
     <!-- 3. Trust Strip -->
     <section class="trust-strip">
         <div class="container">
-            <p class="trust-label">Trusted by diagnostic labs, longevity clinics, and digital health platforms</p>
+            <p class="trust-label">Trusted by diagnostic labs, longevity clinics, wellness platforms, and insurers</p>
             <div class="trust-stats">
                 <div class="stat-item">
                     <span class="stat-value">100+</span>
@@ -113,8 +220,8 @@
                     <span class="stat-label">Active Users</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-value">SOC 2</span>
-                    <span class="stat-label">Type II Infrastructure</span>
+                    <span class="stat-value">Private</span>
+                    <span class="stat-label">by Design</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-value">&lt; 3</span>
@@ -293,11 +400,11 @@
         <div class="container dev-grid">
             <div class="dev-content">
                 <h2>Launch in weeks, not years.</h2>
-                <p>Two integration surfaces. One conversation. Your brand on top, our intelligence underneath. Launch a complete white-label app or embed specific capabilities through the SDK — no engineering army required.</p>
+                <p>Three integration surfaces. One conversation. Your brand on top, our intelligence underneath. Embed lab decoding, food scanning, protocols, and the AI concierge via the Intelligence SDK, normalise every wearable with the Wearables SDK, or launch a complete white-label app — no engineering army required.</p>
                 <ul class="dev-features">
-                    <li><i data-lucide="code-2"></i> White-label app or modular SDK</li>
+                    <li><i data-lucide="code-2"></i> Intelligence SDK, Wearables SDK, or White-Label App</li>
                     <li><i data-lucide="refresh-cw"></i> SOMA Dual-Brain AI architecture</li>
-                    <li><i data-lucide="wrench"></i> Intelligence that compounds with scale</li>
+                    <li><i data-lucide="wrench"></i> Cross-partner network effect that compounds with scale</li>
                 </ul>
             </div>
             <div class="dev-code">
@@ -338,29 +445,58 @@
         <div class="container">
             <div class="security-wall">
                 <div class="security-header">
-                    <h2>Privacy-first architecture, built for health data.</h2>
-                    <p>Your users' health data is sensitive. Our architecture treats it that way.</p>
+                    <h2>Private by design, built for health data.</h2>
+                    <p>Personal data is understood on-device. Only de-identified clinical briefs reach the cloud.</p>
                 </div>
                 <div class="security-badges">
                     <div class="badge">
                         <i data-lucide="lock"></i>
-                        <span>GDPR Aligned</span>
+                        <span>DPDP-Aligned</span>
+                        <small>Explicit consent & data minimisation</small>
                     </div>
                     <div class="badge">
-                        <i data-lucide="key"></i>
-                        <span>AES-256 Encryption</span>
-                        <small>At rest & in transit</small>
+                        <i data-lucide="cpu"></i>
+                        <span>Privacy at the Edge</span>
+                        <small>PII stripped on-device before cloud inference</small>
                     </div>
                     <div class="badge">
                         <i data-lucide="globe"></i>
-                        <span>DPDP Compliant</span>
-                        <small>India's data protection framework</small>
+                        <span>UAE & Cross-Border Ready</span>
+                        <small>Dubai health-data rules & Law No. 17 of 2026</small>
                     </div>
                     <div class="badge">
-                        <i data-lucide="user-check"></i>
-                        <span>Strict Privacy</span>
-                        <small>Opt-in consent architecture</small>
+                        <i data-lucide="shield-check"></i>
+                        <span>Clinical Governance</span>
+                        <small>Validated against licensed clinical advisory bench</small>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI-Native Services -->
+    <section class="services-section" style="padding: 4rem 0; background-color: var(--surface-mint);">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>AI-Native Services</h2>
+                <p>Each replaces work that labs and clinics currently pay people to do — delivered at software margins with no marginal headcount. Every engagement converts into a platform subscription.</p>
+            </div>
+            <div class="segments-grid" style="margin-top: 3rem;">
+                <div class="segment-card" style="background: white;">
+                    <h3>Smart Report as a Service</h3>
+                    <p class="segment-use-case">The interpretation a clinician would spend twenty minutes writing — generated for every routine panel, delivered under your laboratory's brand. Priced per report.</p>
+                </div>
+                <div class="segment-card mt-offset" style="background: white;">
+                    <h3>Clinical Intake Briefs</h3>
+                    <p class="segment-use-case">The ten to fifteen minutes of unpaid chart review before every new-patient consultation — reports parsed, outliers flagged, history summarised into a single page. Priced per consult.</p>
+                </div>
+                <div class="segment-card" style="background: white;">
+                    <h3>Re-Test Recall Campaigns</h3>
+                    <p class="segment-use-case">Reactivate dormant patients. We identify who is due for a re-test and why — drawing on your laboratory's own historical database — and re-engage them under your name. Priced per campaign.</p>
+                </div>
+                <div class="segment-card mt-offset" style="background: white;">
+                    <h3>Solutions Engineering</h3>
+                    <p class="segment-use-case">Paid deployments of custom intelligence modules, branded report formats, and clinic-side dashboards — built on our SDKs and delivered by our founding engineering team.</p>
                 </div>
             </div>
         </div>
@@ -376,15 +512,14 @@
             <div class="pricing-grid">
                 <!-- Card 1 -->
                 <div class="pricing-card">
-                    <h3 class="card-tier">STARTER</h3>
-                    <p class="price"><span class="dynamic-price" data-inr="30000">₹30K</span><span class="price-period">/mo</span></p>
-                    <div class="price-pill">+ <span class="dynamic-price" data-inr="5000">₹5K</span> per extra module</div>
-                    <p class="user-count">Up to 5,000 active users</p>
+                    <h3 class="card-tier">STARTER SDK</h3>
+                    <p class="price"><span>$299</span><span class="price-period">/mo</span></p>
+                    <p class="user-count mt-pill">Up to 5,000 active users</p>
                     <ul>
                         <li>Core intelligence infrastructure</li>
                         <li>Any 4 intelligence modules</li>
-                        <li>SDK documentation & guides</li>
-                        <li>48-hour email support</li>
+                        <li>API documentation</li>
+                        <li>48-hour support</li>
                     </ul>
                     <a href="javascript:void(0)" class="btn btn-secondary full-width mt-auto open-demo-modal">Get Started</a>
                 </div>
@@ -392,15 +527,14 @@
                 <!-- Card 2 -->
                 <div class="pricing-card popular">
                     <div class="badge-popular">MOST POPULAR</div>
-                    <h3 class="card-tier">GROWTH</h3>
-                    <p class="price"><span class="dynamic-price" data-inr="125000">₹1.25L</span><span class="price-period">/mo</span></p>
+                    <h3 class="card-tier">GROWTH SDK</h3>
+                    <p class="price"><span>$999</span><span class="price-period">/mo</span></p>
                     <p class="user-count mt-pill">Up to 50,000 active users</p>
                     <ul>
                         <li>All 8 intelligence modules</li>
-                        <li>Population health analytics</li>
-                        <li>Advanced cohort intelligence</li>
-                        <li>Custom protocol templates</li>
-                        <li>Full white-label branding</li>
+                        <li>Population analytics</li>
+                        <li>Cohort insights</li>
+                        <li>Co-branding</li>
                         <li>4-hour priority support</li>
                         <li>Dedicated integration engineer</li>
                     </ul>
@@ -409,16 +543,14 @@
 
                 <!-- Card 3 -->
                 <div class="pricing-card">
-                    <h3 class="card-tier">WHITE LABEL PRO</h3>
-                    <p class="price"><span class="dynamic-price" data-inr="200000">₹2L</span><span class="price-period">/mo</span></p>
-                    <div class="price-pill">+ <span class="dynamic-price" data-inr="90000">₹90K</span> setup fee</div>
+                    <h3 class="card-tier">WHITE-LABEL PRO</h3>
+                    <p class="price"><span>$1,999</span><span class="price-period">/mo</span></p>
+                    <div class="price-pill">+ $1,000 one-time setup fee</div>
                     <p class="user-count">Unlimited active users</p>
                     <ul>
-                        <li>Complete white-label app experience</li>
-                        <li>All 8 intelligence modules</li>
-                        <li>Dedicated branded app shell</li>
-                        <li>Priority 24/7 technical support</li>
-                        <li>Direct API & SDK access</li>
+                        <li>Fully branded application</li>
+                        <li>All intelligence modules</li>
+                        <li>Priority support</li>
                     </ul>
                     <a href="javascript:void(0)" class="btn btn-secondary full-width mt-auto open-demo-modal">Get Started</a>
                 </div>
@@ -431,12 +563,13 @@
                         <p class="enterprise-desc">For large-scale deployments, custom biomarker models, or specialized integrations requiring dedicated infrastructure and clinical governance.</p>
                     </div>
                     <div class="enterprise-right">
-                        <p class="price"><span class="dynamic-price" data-inr="500000" data-inr-max="800000">₹5-8L</span><span class="price-period">/mo (custom)</span></p>
+                        <p class="price"><span>from $5,000</span><span class="price-period">/mo</span></p>
+                        <p class="user-count">Unlimited active users</p>
                         <ul class="enterprise-list">
-                            <li>Custom AI model training on partner data</li>
-                            <li>Enterprise SLA guarantees (99.99%)</li>
-                            <li>On-site deployment & onboarding</li>
-                            <li>Quarterly clinical & business reviews</li>
+                            <li>Custom AI training on partner data</li>
+                            <li>Service-level agreements</li>
+                            <li>On-site onboarding</li>
+                            <li>Quarterly reviews</li>
                         </ul>
                         <a href="javascript:void(0)" class="btn btn-secondary mt-4">Contact Partnerships</a>
                     </div>
@@ -448,25 +581,34 @@
 
 
     <!-- 10. Final CTA Band -->
-    <section class="cta-band">
+    <section class="cta-band hero-footer">
+        <div class="footer-petals">
+            <div class="petal petal-1" style="top: -50%; left: -10%; filter: blur(60px); opacity: 0.1;"></div>
+            <div class="petal petal-3" style="top: 20%; right: -5%; filter: blur(70px); opacity: 0.08;"></div>
+        </div>
         <div class="container cta-content">
             <h2>Bring health intelligence to your product.</h2>
             <p>Join the labs, clinics, and platforms building on Nostavia.</p>
             <div class="hero-ctas justify-center">
-                <a href="javascript:void(0)" class="btn btn-white open-demo-modal">Book a demo</a>
-                <a href="javascript:void(0)" class="btn btn-secondary on-dark open-demo-modal">Contact Sales</a>
+                <a href="javascript:void(0)" class="btn btn-primary open-demo-modal">Book a demo</a>
+                <a href="javascript:void(0)" class="btn btn-secondary open-demo-modal">Contact Sales</a>
             </div>
         </div>
     </section>
 
     <!-- 11. Footer -->
-    <footer>
+    <footer class="hero-footer">
+        <div class="footer-petals">
+            <div class="petal petal-1" style="top: -10%; left: -10%; filter: blur(50px); opacity: 0.15;"></div>
+            <div class="petal petal-3" style="top: 50%; right: -5%; filter: blur(60px); opacity: 0.1;"></div>
+            <div class="petal petal-2" style="bottom: -20%; left: 40%; filter: blur(60px); opacity: 0.15;"></div>
+        </div>
         <div class="container footer-grid">
             <div class="footer-brand">
                 <div class="logo">
-                    <a href="/" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 32px; width: auto; object-fit: contain; margin-bottom: 1rem;"></a>
+                    <a href="/" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 32px; width: auto; object-fit: contain; margin-bottom: 1rem; filter: invert(1) brightness(0);"></a>
                 </div>
-                <p>Health intelligence infrastructure. Reinventing the Human Lifespan.</p>
+                <p>The intelligence layer for the health economy.</p>
                 <p class="hq">Headquartered in Lucknow, India</p>
                 <div class="app-downloads" style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
                     <a href="https://play.google.com/store/apps/details?id=com.nostavia.nostavia_health" target="_blank" style="transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
@@ -508,7 +650,7 @@
         </div>
         <div class="container">
             <div class="footer-bottom">
-                <p>&copy; 2026 Nostavia Health. All rights reserved.</p>
+                <p>&copy; 2026 Nostavia Technologies Pvt. Ltd. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -611,7 +753,10 @@
                     // Update the mockup image smoothly without glitches
                     if (mockupImg && mockupImages[tabId] && mockupImg.getAttribute('data-current-tab') !== tabId) {
                         mockupImg.setAttribute('data-current-tab', tabId);
-                        mockupImg.style.opacity = 0;
+                        
+                        // Fast crossfade effect
+                        mockupImg.style.opacity = 0.5;
+                        mockupImg.style.transform = 'scale(0.97)';
                         
                         clearTimeout(imageSwapTimeout);
                         imageSwapTimeout = setTimeout(() => {
@@ -619,8 +764,9 @@
                             if (mockupImg.getAttribute('data-current-tab') === tabId) {
                                 mockupImg.src = mockupImages[tabId];
                                 mockupImg.style.opacity = 1;
+                                mockupImg.style.transform = 'scale(1)';
                             }
-                        }, 250); // Slightly longer than the CSS transition to ensure a clean fade
+                        }, 150);
                     }
                     
                     // Highlight the diagram inputs and lines
@@ -637,8 +783,8 @@
                 }
             });
         }, { 
-            // Trigger when the item is roughly in the middle 50% of the viewport
-            rootMargin: '-30% 0px -30% 0px',
+            // Trigger when the item is roughly in the middle 20% of the viewport
+            rootMargin: '-40% 0px -40% 0px',
             threshold: 0
         });
 

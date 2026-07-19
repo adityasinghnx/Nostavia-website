@@ -13,8 +13,8 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lab Intelligence | Nostavia</title>
-    <meta name="description" content="Nostavia provides health intelligence infrastructure for clinics and digital health apps. Automate lab decoding, biomarker analysis, and patient insights under your own brand.">
+    <title>Diagnostic Labs | Nostavia</title>
+    <meta name="description" content="Nostavia Technologies builds the intelligence layer for the health economy. Its whole-body health-intelligence system, delivered as an SDK, a white-label application or AI-native services, lets diagnostic laboratories, clinics, wellness platforms and insurers turn fragmented lab, wearable and lifestyle data into continuous, personalised intelligence — entirely under their own brand.">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,200 +31,351 @@
     </script>
 </head>
 <body>
-    <!-- 1. Sticky minimal nav -->
+    <div class="nav-backdrop"></div>
+    
+    <!-- 1. Mega Menu Nav -->
     <nav id="navbar">
         <div class="nav-container">
             <div class="logo">
-                <a href="/" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 28px; width: auto; object-fit: contain; filter: invert(1) brightness(0);"></a>
+                <a href="/" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 28px; width: auto; object-fit: contain; filter: invert(1) brightness(0); margin-bottom: 4px;"></a>
             </div>
+            
             <div class="nav-links">
-                <a href="index.html#solutions">Solutions</a>
-                <a href="index.html#integrations">Integrations</a>
-                <a href="index.html#pricing">Pricing</a>
-                <a href="javascript:void(0)" class="btn btn-primary btn-sm open-demo-modal mobile-only-btn" style="display: none;">Book a demo</a>
+                <div class="nav-item" data-menu="solutions">
+                    <a href="#solutions">Solutions</a>
+                </div>
+                <div class="nav-item" data-menu="developers">
+                    <a href="#developers">Developers</a>
+                </div>
+                <div class="nav-item" data-menu="company">
+                    <a href="#company">Company</a>
+                </div>
             </div>
+
             <div class="nav-actions">
                 <a href="javascript:void(0)" class="btn btn-primary btn-sm open-demo-modal">Book a demo</a>
             </div>
-        <div class="hamburger"><span></span><span></span><span></span></div>
+            
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+
+        <!-- Mega Menus Container -->
+        <div class="mega-menu-container">
+            
+            <!-- Solutions Mega Menu -->
+            <div class="mega-menu" id="menu-solutions">
+                <div class="mega-menu-grid">
+                    <div class="mega-col-left">
+                        <span class="mega-label">SOLUTIONS</span>
+                        <a href="/labs.html" class="mega-link">
+                            <div class="mega-icon"><i data-lucide="microscope"></i></div>
+                            <div class="mega-text">
+                                <h4>Diagnostic Labs</h4>
+                                <p>Turn reports into daily relationships</p>
+                            </div>
+                        </a>
+                        <a href="/clinics.html" class="mega-link">
+                            <div class="mega-icon"><i data-lucide="building-2"></i></div>
+                            <div class="mega-text">
+                                <h4>Longevity Clinics</h4>
+                                <p>Close the gap between healthspan and revenue</p>
+                            </div>
+                        </a>
+                        <a href="/wellness.html" class="mega-link">
+                            <div class="mega-icon"><i data-lucide="dumbbell"></i></div>
+                            <div class="mega-text">
+                                <h4>Fitness &amp; Sports</h4>
+                                <p>Biological context for movement data</p>
+                            </div>
+                        </a>
+                        <a href="/insurers.html" class="mega-link">
+                            <div class="mega-icon"><i data-lucide="shield-check"></i></div>
+                            <div class="mega-text">
+                                <h4>Health Insurers</h4>
+                                <p>Risk scoring from real biomarkers</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mega-col-right">
+                        <div class="mega-feature-card" style="background: linear-gradient(135deg, #FFE0C4 0%, #E3D9F8 100%);">
+                            <div class="mega-feature-content">
+                                <h3>Smart Report as a Service</h3>
+                                <p>Generate personalized interpretations for every routine panel. Delivered at software margins.</p>
+                                <a href="labs.html" class="mega-feature-link" style="text-decoration: none; color: inherit; display: inline-flex;">Explore Smart Reports <i data-lucide="arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Developers Mega Menu -->
+            <div class="mega-menu" id="menu-developers">
+                <div class="mega-menu-grid">
+                    <div class="mega-col-left mega-col-2">
+                        <div>
+                            <span class="mega-label">INTEGRATIONS</span>
+                            <a href="/sdk.html" class="mega-link">
+                                <div class="mega-icon"><i data-lucide="code-2"></i></div>
+                                <div class="mega-text">
+                                    <h4>Intelligence SDK</h4>
+                                    <p>Embed our health intelligence engine</p>
+                                </div>
+                            </a>
+                            <a href="/wearables.html" class="mega-link">
+                                <div class="mega-icon"><i data-lucide="watch"></i></div>
+                                <div class="mega-text">
+                                    <h4>Wearables SDK</h4>
+                                    <p>One integration for all devices</p>
+                                </div>
+                            </a>
+                            <a href="/white-label.html" class="mega-link">
+                                <div class="mega-icon"><i data-lucide="smartphone"></i></div>
+                                <div class="mega-text">
+                                    <h4>White-Label App</h4>
+                                    <p>Launch your own platform</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div style="padding-top: 0;">
+                            <span class="mega-label">RESOURCES</span>
+                            <a href="documentation.html" class="mega-link-simple"><i data-lucide="book"></i> Documentation</a>
+                            <a href="api-reference.html" class="mega-link-simple"><i data-lucide="terminal"></i> API Reference</a>
+                            <a href="github-examples.html" class="mega-link-simple"><i data-lucide="github"></i> GitHub Examples</a>
+                        </div>
+                    </div>
+                    <div class="mega-col-right">
+                        <div class="mega-feature-card" style="background: linear-gradient(135deg, var(--brand-blue) 0%, #2A5298 100%); color: white;">
+                            <div class="mega-feature-content">
+                                <h3 style="color: white;">SOMA Architecture</h3>
+                                <p style="color: rgba(255,255,255,0.8);">Learn about our Dual-Brain AI architecture built for precise clinical reasoning.</p>
+                                <a href="security.html" class="mega-feature-link" style="color: white; text-decoration: none; display: inline-flex;">Read the Whitepaper <i data-lucide="arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Company Mega Menu -->
+            <div class="mega-menu" id="menu-company">
+                <div class="mega-menu-grid">
+                    <div class="mega-col-left">
+                        <span class="mega-label">COMPANY</span>
+                        <a href="/about.html" class="mega-link-simple"><i data-lucide="info"></i> About Us</a>
+                        <a href="/careers.html" class="mega-link-simple"><i data-lucide="users"></i> Careers</a>
+                        <a href="/contact.html" class="mega-link-simple"><i data-lucide="mail"></i> Contact</a>
+                        <a href="/security.html" class="mega-link-simple"><i data-lucide="shield"></i> Security &amp; Privacy</a>
+                    </div>
+                    <div class="mega-col-right">
+                        <div class="mega-feature-card" style="background: radial-gradient(circle at top right, rgba(251, 200, 160, 0.4), transparent), var(--surface-bg);">
+                            <div class="mega-feature-content">
+                                <h3>Building for Data Sovereignty</h3>
+                                <p>Read our commitment to localized data sovereignty, DPDP compliance, and UAE health data laws.</p>
+                                <a href="about.html" class="mega-feature-link" style="text-decoration: none; color: inherit; display: inline-flex;">Read our manifesto <i data-lucide="arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="wearables-hero">
-        <div class="container">
-            <div class="hero-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; overflow: visible;">
-                <div class="hero-text-col" style="text-align: left; z-index: 10;">
-                    <h1 class="gradient-text hero-title">Advanced Lab<br>Intelligence</h1>
-                    <p class="hero-subtitle" style="margin: 0; text-align: left;">Upload a blood report from any lab, anywhere in the world. Nostavia parses native PDFs, decodes 100+ biomarkers, and classifies each as Optimal, In-range, or Outlier — with historical trend lines that catch deterioration before it becomes a problem. All delivered under your partner brand.</p>
-                    <div style="margin-top: 2rem; margin-bottom: 3rem;">
-                        <a href="javascript:void(0)" class="btn btn-primary open-demo-modal">Book a demo</a>
-                    </div>
-                    <div class="compliance-badges" style="justify-content: flex-start;">
-                        <div class="badge-item"><i data-lucide="shield-check"></i> GDPR Compliant</div>
-                        <div class="badge-item"><i data-lucide="shield-check"></i> DPDP Compliant</div>
-                        <div class="badge-item"><i data-lucide="shield-check"></i> SOC 2 Type II</div>
-                    </div>
+    
+    <!-- Homepage-Parity Hero -->
+    <header class="hero">
+        <div class="hero-petals">
+            <div class="petal petal-1"></div>
+            <div class="petal petal-2"></div>
+            <div class="petal petal-3"></div>
+            <div class="petal petal-4"></div>
+        </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-pill">
+                    <span class="hero-pill-badge">Overview</span>
+                    <span class="hero-pill-text">Diagnostic Labs</span>
                 </div>
-            <div class="hero-diagram-col" style="position: relative; width: 100%; height: 600px; display: flex; align-items: center; justify-content: center;">
-                    <div class="reports-composition" style="position: relative; width: 500px; height: 550px;">
-                        
-                        <!-- Lipid Panel Report (Back Right) -->
-                        <div style="position: absolute; top: 20px; left: 100px; width: 280px; height: 380px; background: #fff; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; padding: 1.5rem; transform: rotate(8deg); z-index: 1; transition: transform 0.3s ease;">
-                            <div style="display: flex; align-items: center; gap: 0.5rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; margin-bottom: 1rem;">
-                                <div style="width: 32px; height: 32px; background: var(--brand-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;"><i data-lucide="droplet" style="width: 18px;"></i></div>
-                                <h4 style="font-size: 1.05rem; font-family: 'Google Sans', sans-serif; font-weight: 700; color: var(--text-ink); letter-spacing: 0.5px; margin: 0;">LIPID PANEL REPORT</h4>
-                            </div>
-                            <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-                                <div style="width: 45%; height: 16px; background: #bfdbfe; border-radius: 4px; opacity: 0.5;"></div>
-                                <div style="width: 35%; height: 16px; background: #bfdbfe; border-radius: 4px; opacity: 0.5;"></div>
-                            </div>
-                            <div style="width: 100%; height: 220px; border: 1px solid #e2e8f0; border-radius: 4px; background-image: linear-gradient(#f1f5f9 2px, transparent 2px); background-size: 100% 32px; margin-top: 1rem;"></div>
-                        </div>
-
-                        <!-- Urine Report (Middle Left) -->
-                        <div style="position: absolute; top: 100px; left: -20px; width: 280px; height: 380px; background: #fff; border-radius: 8px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border: 1px solid #e2e8f0; padding: 1.5rem; transform: rotate(-6deg); z-index: 2; transition: transform 0.3s ease;">
-                            <div style="display: flex; align-items: center; gap: 0.5rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; margin-bottom: 1rem;">
-                                <div style="width: 32px; height: 32px; background: var(--brand-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;"><i data-lucide="beaker" style="width: 18px;"></i></div>
-                                <h4 style="font-size: 1.05rem; font-family: 'Google Sans', sans-serif; font-weight: 700; color: var(--text-ink); letter-spacing: 0.5px; margin: 0;">URINE REPORT</h4>
-                            </div>
-                            <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-                                <div style="width: 40%; height: 16px; background: #bfdbfe; border-radius: 4px; opacity: 0.5;"></div>
-                                <div style="width: 30%; height: 16px; background: #bfdbfe; border-radius: 4px; opacity: 0.5;"></div>
-                            </div>
-                            <div style="width: 100%; height: 220px; border: 1px solid #e2e8f0; border-radius: 4px; background-image: linear-gradient(#f1f5f9 2px, transparent 2px); background-size: 100% 32px; margin-top: 1rem;"></div>
-                        </div>
-
-                        <!-- Blood Report (Front) -->
-                        <div style="position: absolute; top: 130px; left: 40px; width: 320px; height: 400px; background: #fff; border-radius: 8px; box-shadow: -5px 20px 40px rgba(0,0,0,0.12); border: 1px solid #cbd5e1; padding: 1.5rem; transform: rotate(0deg); z-index: 3; transition: transform 0.3s ease;">
-                            <div style="display: flex; align-items: center; gap: 0.5rem; border-bottom: 3px solid #e2e8f0; padding-bottom: 0.75rem; margin-bottom: 1rem;">
-                                <div style="width: 36px; height: 36px; background: var(--brand-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;"><i data-lucide="activity" style="width: 20px; stroke-width: 3px;"></i></div>
-                                <h4 style="font-size: 1.3rem; font-family: 'Google Sans', sans-serif; font-weight: 800; color: var(--text-ink); letter-spacing: 0.5px; margin: 0;">BLOOD REPORT</h4>
-                            </div>
-                            
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.5rem; font-size: 0.8rem; color: var(--text-slate); font-weight: 500;">
-                                <div>Name: <span style="display: inline-block; width: 60px; height: 14px; background: #bfdbfe; border-radius: 3px; vertical-align: middle;"></span></div>
-                                <div>Date: <span style="display: inline-block; width: 60px; height: 14px; background: #bfdbfe; border-radius: 3px; vertical-align: middle;"></span></div>
-                                <div>Age: <span style="display: inline-block; width: 40px; height: 14px; background: #bfdbfe; border-radius: 3px; vertical-align: middle;"></span></div>
-                                <div>Sex: <span style="display: inline-block; width: 40px; height: 14px; background: #bfdbfe; border-radius: 3px; vertical-align: middle;"></span></div>
-                            </div>
-
-                            <h5 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 0.5rem; margin-top: 0; color: var(--text-ink);">COMPLETE BLOOD COUNT (CBC)</h5>
-                            
-                            <table style="width: 100%; font-size: 0.75rem; border-collapse: collapse; font-family: 'Inter', sans-serif;">
-                                <tr style="border-bottom: 2px solid #e2e8f0; font-weight: 600; color: var(--text-slate);">
-                                    <td style="padding: 6px 0;">Test</td>
-                                    <td style="padding: 6px 0; text-align: right;">Results</td>
-                                    <td style="padding: 6px 0; text-align: right;">Ref Range</td>
-                                </tr>
-                                <tr style="border-bottom: 1px solid #e2e8f0;">
-                                    <td style="padding: 8px 0; font-weight: 600; color: var(--text-ink);">WBC</td>
-                                    <td style="padding: 8px 0; text-align: right; font-weight: 500;">5.4 x10⁹/L</td>
-                                    <td style="padding: 8px 0; text-align: right; color: var(--text-slate);">4.0-10.0</td>
-                                </tr>
-                                <tr style="border-bottom: 1px solid #e2e8f0;">
-                                    <td style="padding: 8px 0; font-weight: 600; color: var(--text-ink);">RBC</td>
-                                    <td style="padding: 8px 0; text-align: right; font-weight: 500;">4.2 x10¹²/L</td>
-                                    <td style="padding: 8px 0; text-align: right; color: var(--text-slate);">4.5-5.9</td>
-                                </tr>
-                                <tr style="border-bottom: 1px solid #e2e8f0;">
-                                    <td style="padding: 8px 0; font-weight: 600; color: var(--text-ink);">Hemoglobin</td>
-                                    <td style="padding: 8px 0; text-align: right; font-weight: 500;">13.0 g/dL</td>
-                                    <td style="padding: 8px 0; text-align: right; color: var(--text-slate);">13.5-17.5</td>
-                                </tr>
-                                <tr style="border-bottom: 1px solid #e2e8f0;">
-                                    <td style="padding: 8px 0; font-weight: 600; color: var(--text-ink);">Hematocrit</td>
-                                    <td style="padding: 8px 0; text-align: right; font-weight: 500;">39.0 %</td>
-                                    <td style="padding: 8px 0; text-align: right; color: var(--text-slate);">40.0-54.0</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 8px 0; font-weight: 600; color: var(--text-ink);">Platelets</td>
-                                    <td style="padding: 8px 0; text-align: right; font-weight: 500;">250 x10⁹/L</td>
-                                    <td style="padding: 8px 0; text-align: right; color: var(--text-slate);">150-400</td>
-                                </tr>
-                            </table>
-                        </div>
-
-                        <!-- Phone Mockup (Front Right) -->
-                        <div style="position: absolute; top: 60px; right: -50px; z-index: 10; width: 230px;">
-                            <img src="assets/lab.png" alt="Lab API Mobile Mockup" style="width: 100%; height: auto; display: block; filter: drop-shadow(-15px 25px 35px rgba(0,0,0,0.25));" onerror="this.src='https://via.placeholder.com/230x470/ffffff/02254b?text=App'">
-                        </div>
-                    </div>
+                <h1 class="hero-headline">
+                    Smart Report as a<br>
+                    <span class="hero-accent">Service.</span>
+                </h1>
+                <p class="hero-subtitle">Turn standard reports into daily relationships. Generate personalized interpretations, historical trend lines, and automated re-test prompts for every routine panel.</p>
+                <div class="hero-ctas">
+                    <a href="javascript:void(0)" class="btn btn-hero open-demo-modal">Book a demo</a>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Features Section -->
-    <section class="wearables-features bg-slate-light">
+    <!-- Homepage-Parity Trust Strip -->
+    <section class="trust-strip">
         <div class="container">
-            <h2 class="text-center" style="margin-bottom: 3rem;">Intelligent Lab Decoding</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="icon-box"><i data-lucide="scan-text"></i></div>
-                    <h3>Universal Lab Upload</h3>
-                    <p>Accept blood reports from any lab worldwide. Our ingestion architecture handles native PDFs, digital signatures, and varied formats — validated across 282 clinical test cases.</p>
+            <div class="trust-stats" style="justify-content: center; gap: 4rem;">
+
+                <div class="stat-item">
+                    <span class="stat-value">100+</span>
+                    <span class="stat-label">Biomarkers Decoded</span>
                 </div>
-                <div class="feature-card">
-                    <div class="icon-box"><i data-lucide="list"></i></div>
-                    <h3>Optimal-Range Scoring</h3>
-                    <p>Go beyond "normal." Every biomarker is classified as Optimal, In-range, or Outlier for long-term health — not just clinical reference ranges.</p>
+        
+                <div class="stat-item">
+                    <span class="stat-value">20 mins</span>
+                    <span class="stat-label">Saved per Report</span>
                 </div>
-                <div class="feature-card">
-                    <div class="icon-box"><i data-lucide="line-chart"></i></div>
-                    <h3>Historical Trend Lines</h3>
-                    <p>Every biomarker carries a trend line across tests. Deterioration becomes visible months before it triggers a clinical flag, enabling early intervention.</p>
+        
+                <div class="stat-item">
+                    <span class="stat-value">0</span>
+                    <span class="stat-label">Marginal Headcount</span>
                 </div>
-                <div class="feature-card">
-                    <div class="icon-box"><i data-lucide="shield"></i></div>
-                    <h3>Privacy-First Architecture</h3>
-                    <p>Built on SOC 2 Type II certified infrastructure with GDPR and DPDP compliance. All data encrypted in transit and at rest.</p>
+        
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Statement (Light Premium Box) -->
+    <section class="security-section" style="padding-bottom: 4rem;">
+        <div class="container">
+            <div class="security-wall" style="display: block; max-width: 1000px; margin: 0 auto; text-align: center;">
+                <div class="security-header" style="max-width: none;">
+                    <h2>The Diagnostic Blind Spot</h2>
+                    <p style="font-size: 1.25rem; margin: 0 auto; max-width: 800px; color: var(--text-slate); line-height: 1.8;">Diagnostic laboratories own the most valuable data in healthcare, but not the intelligence layer on top of it. You process thousands of panels a day, but the end product is a static PDF. Patients take those PDFs to a clinician, or worse, Google them. Your laboratory loses the relationship the moment the report is delivered, forfeiting the lifetime value of the patient.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Bento Features using Homepage Component -->
+    <section class="segments-section" style="background: transparent; padding-top: 4rem;">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Capabilities</h2>
+                <p style="color: var(--text-slate);">Everything you need to build the next generation of health products.</p>
+            </div>
+            <div class="ent-bento-grid">
+                
+            <div class="segment-card span-8">
+                <div class="card-icon-wrapper"><i data-lucide="file-text"></i></div>
+                <h3 style="font-size: 1.6rem; margin-bottom: 1rem;">Smart Report as a Service</h3>
+                <p class="segment-use-case" style="font-size: 1.1rem; line-height: 1.7;">Instead of handing patients a table of numbers and "normal" reference ranges, deliver a beautifully formatted, consumer-friendly Smart Report. Nostavia automatically ingests the raw data from your LIS, classifies biomarkers against optimal ranges for long-term health (not just disease absence), builds historical trend lines for returning patients, and flags early deterioration. This is the exact interpretation a longevity clinician would spend twenty minutes writing, generated in under 50 milliseconds and delivered entirely under your laboratory's brand.</p>
+            </div>
+        
+            <div class="segment-card span-4">
+                <div class="card-icon-wrapper"><i data-lucide="clock"></i></div>
+                <h3 style="font-size: 1.6rem; margin-bottom: 1rem;">Clinical Intake Briefs</h3>
+                <p class="segment-use-case" style="font-size: 1.1rem; line-height: 1.7;">Arm your partner physicians with superpowers. Nostavia parses years of a patient's LIS history, flags critical outliers, and summarizes biological drift into a single-page brief generated the moment the patient checks in for a consult. Save doctors time, and they will route more testing volume to your lab.</p>
+            </div>
+        
+            <div class="segment-card span-12">
+                <div class="card-icon-wrapper"><i data-lucide="refresh-cw"></i></div>
+                <h3 style="font-size: 1.6rem; margin-bottom: 1rem;">Re-Test Recall Campaigns</h3>
+                <p class="segment-use-case" style="font-size: 1.1rem; line-height: 1.7;">Reactivate dormant patients automatically. Nostavia's intelligence engine constantly sweeps your laboratory's historical database to identify who is due for a re-test and exactly why. If a patient's HbA1c was borderline six months ago, Nostavia triggers a personalized, medically-grounded email or SMS prompt under your lab's name, explaining the clinical value of re-testing today. Turn your archive of dead PDFs into a recurring revenue engine.</p>
+            </div>
+        
+            </div>
+        </div>
+    </section>
+    
+    
+    <!-- Architecture Flow Section -->
+    <section class="flow-section">
+        <div class="container" style="max-width: 900px;">
+            <div class="section-header text-center">
+                <h2>How it Works</h2>
+                <p style="color: var(--text-slate); font-size: 1.2rem;">A look inside the data pipeline.</p>
+            </div>
+            <div class="flow-container">
+                
+                <div class="flow-step">
+                    <div class="flow-number">1</div>
+                    <div class="flow-content">
+                        <h3>Data Ingestion via API or LIS Integration</h3>
+                        <p>Connect your Laboratory Information System (LIS) directly to Nostavia's secure ingestion API. We support HL7, FHIR, and custom JSON payloads. Data never rests in our cloud; it is processed entirely in memory.</p>
+                    </div>
+                </div>
+            
+                <div class="flow-step">
+                    <div class="flow-number">2</div>
+                    <div class="flow-content">
+                        <h3>Biomarker Decoding & Normalization</h3>
+                        <p>The SOMA engine maps your lab's specific assay codes and reference ranges to our universal biomarker ontology, standardizing over 100+ unique metabolic, hormonal, and cardiovascular markers.</p>
+                    </div>
+                </div>
+            
+                <div class="flow-step">
+                    <div class="flow-number">3</div>
+                    <div class="flow-content">
+                        <h3>Intelligence & Interpretation Generation</h3>
+                        <p>Our clinical rules engine evaluates the normalized data against optimal longevity ranges, cross-references historical tests to calculate drift, and generates a personalized, plain-English interpretation of the patient's biological state.</p>
+                    </div>
+                </div>
+            
+                <div class="flow-step">
+                    <div class="flow-number">4</div>
+                    <div class="flow-content">
+                        <h3>White-Label Delivery</h3>
+                        <p>The final Smart Report is pushed back to your LIS or patient portal as a structured JSON object or a rendered, branded PDF, completely invisible to the end user.</p>
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+    </section>
+        
+    
+    
     <!-- FAQ Section -->
-    <section class="wearables-faq">
-        <div class="container">
-            <h2 class="text-center" style="margin-bottom: 3rem;">Frequently Asked Questions</h2>
-            <div class="faq-accordion">
+    <section class="faq-section">
+        <div class="container faq-container">
+            <div class="faq-header">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-list">
+                
                 <div class="faq-item">
-                    <button class="faq-question">What does Lab Intelligence include? <i data-lucide="chevron-down"></i></button>
+                    <button class="faq-question">How long does integration take? <i data-lucide="chevron-down"></i></button>
                     <div class="faq-answer">
-                        <p>Nostavia's Lab Intelligence parses any blood report PDF, decodes 100+ biomarkers with optimal-range scoring, tracks historical trends, and flags biomarker drift automatically — all delivered under your partner brand.</p>
+                        <p>Standard API integration takes less than two weeks. If you prefer not to write any code, you can use our secure drag-and-drop web portal to upload batches of LIS exports directly.</p>
                     </div>
                 </div>
+            
                 <div class="faq-item">
-                    <button class="faq-question">Can it handle lab reports from different labs and formats? <i data-lucide="chevron-down"></i></button>
+                    <button class="faq-question">Is patient data stored on Nostavia's servers? <i data-lucide="chevron-down"></i></button>
                     <div class="faq-answer">
-                        <p>Yes. Our ingestion architecture has been stress-tested against real-world clinical reports from labs worldwide, including validation across 282 clinical test cases with a leading Indian diagnostics chain.</p>
+                        <p>No. We operate a zero-retention architecture for LIS payloads. Personally Identifiable Information (PII) is stripped at the edge. We process the anonymous biomarker payload in memory, return the interpretation, and instantly destroy the payload.</p>
                     </div>
                 </div>
+            
                 <div class="faq-item">
-                    <button class="faq-question">How is this different from standard lab report parsing? <i data-lucide="chevron-down"></i></button>
+                    <button class="faq-question">How do you handle different reference ranges across labs? <i data-lucide="chevron-down"></i></button>
                     <div class="faq-answer">
-                        <p>Standard parsers extract data. Nostavia interprets it. We classify biomarkers against optimal ranges for long-term health, build historical trend lines, flag deterioration early, and generate actionable protocols — not just structured data.</p>
+                        <p>Nostavia's ontology maps your specific reference ranges alongside our 'Optimal' ranges. The generated reports will always respect the clinical bounds set by your specific assay machinery while providing the 'Optimal' context as an overlay.</p>
                     </div>
                 </div>
+            
                 <div class="faq-item">
-                    <button class="faq-question">How does it help with patient retention? <i data-lucide="chevron-down"></i></button>
+                    <button class="faq-question">What is the pricing model? <i data-lucide="chevron-down"></i></button>
                     <div class="faq-answer">
-                        <p>By turning a one-time lab report into a continuous engagement engine. Users track their biomarkers over time, receive drift alerts, and get data-triggered prompts for their next test — keeping them inside your product between visits.</p>
+                        <p>We operate on a pure usage-based model. You are charged a fractional fee per Smart Report generated. There are no massive upfront licensing fees or restrictive annual contracts.</p>
                     </div>
                 </div>
+            
             </div>
         </div>
     </section>
+        
 
-    <!-- Footer -->
-    <footer>
+<!-- 11. Footer -->
+    <footer class="hero-footer">
+        <div class="footer-petals">
+            <div class="petal petal-1" style="top: -10%; left: -10%; filter: blur(50px); opacity: 0.15;"></div>
+            <div class="petal petal-3" style="top: 50%; right: -5%; filter: blur(60px); opacity: 0.1;"></div>
+            <div class="petal petal-2" style="bottom: -20%; left: 40%; filter: blur(60px); opacity: 0.15;"></div>
+        </div>
         <div class="container footer-grid">
             <div class="footer-brand">
                 <div class="logo">
-                    <a href="/" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 32px; width: auto; object-fit: contain; margin-bottom: 1rem;"></a>
+                    <a href="/" style="display: flex; align-items: center;"><img src="logo-white.png" alt="Nostavia Logo" style="height: 32px; width: auto; object-fit: contain; margin-bottom: 1rem; filter: invert(1) brightness(0);"></a>
                 </div>
-                <p>Health intelligence infrastructure. Reinventing the Human Lifespan.</p>
+                <p>The intelligence layer for the health economy.</p>
                 <p class="hq">Headquartered in Lucknow, India</p>
                 <div class="app-downloads" style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
                     <a href="https://play.google.com/store/apps/details?id=com.nostavia.nostavia_health" target="_blank" style="transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
@@ -266,7 +417,7 @@
         </div>
         <div class="container">
             <div class="footer-bottom">
-                <p>&copy; 2026 Nostavia Health. All rights reserved.</p>
+                <p>&copy; 2026 Nostavia Technologies Pvt. Ltd. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -277,7 +428,7 @@
             <button class="modal-close" id="close-modal"><i data-lucide="x"></i></button>
             <div class="modal-header">
                 <h2>Book a Demo</h2>
-                <p>Health intelligence infrastructure. Reinventing the Human Lifespan.</p>
+                <p>See how Nostavia's intelligence layer can power your health product.</p>
             </div>
             <form action="https://formsubmit.co/contact@nostaviahealth.com" method="POST" class="demo-form">
                 <input type="hidden" name="_subject" value="New Demo Request: Nostavia">
@@ -303,12 +454,12 @@
                 <div class="form-group">
                     <label for="employees">Number of Employees</label>
                     <select id="employees" name="employees" required>
-                        <option value="" disabled selected>Select an option</option>
-                        <option value="1-10">1 - 10</option>
-                        <option value="11-50">11 - 50</option>
-                        <option value="51-200">51 - 200</option>
-                        <option value="201-1000">201 - 1000</option>
-                        <option value="1000+">1000+</option>
+                        <option value="" disabled selected>Select company size</option>
+                        <option value="1-10">1-10</option>
+                        <option value="11-50">11-50</option>
+                        <option value="51-200">51-200</option>
+                        <option value="201-500">201-500</option>
+                        <option value="500+">500+</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary full-width">Submit Request</button>
@@ -335,14 +486,15 @@
     <script>
         lucide.createIcons();
         
-        // FAQ Accordion Logic
+        </script>
+
+        <script>
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
                 const answer = button.nextElementSibling;
                 const icon = button.querySelector('i');
                 const isOpen = answer.style.maxHeight;
 
-                // Close all others
                 document.querySelectorAll('.faq-answer').forEach(ans => ans.style.maxHeight = null);
                 document.querySelectorAll('.faq-question i').forEach(ic => ic.setAttribute('data-lucide', 'chevron-down'));
 
@@ -354,7 +506,8 @@
                 lucide.createIcons();
             });
         });
-    </script>
+        </script>
+        
 </body>
 </html>
 
