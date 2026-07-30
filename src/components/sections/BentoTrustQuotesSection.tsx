@@ -30,7 +30,7 @@ export const BentoTrustQuotesSection: React.FC = () => {
             </div>
 
             <div className="pt-8 border-t border-slate-800 font-display font-extrabold text-xl text-white">
-              Live 360°
+              AuraHealth
             </div>
           </div>
 

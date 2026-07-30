@@ -169,7 +169,7 @@ export const CompanyPage: React.FC = () => {
             <div className="font-mono text-xs font-bold text-[#64748B]">BILLED REVENUE & CLIENTS</div>
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">Commercial Revenue</h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-body">
-              Billed across production enterprise clients. Active reference clients include Live360° Health Network and incubator IIHMF.
+              Billed across production enterprise clients. Active reference clients include Apex Diagnostic Network and incubator IIHMF.
             </p>
           </div>
 

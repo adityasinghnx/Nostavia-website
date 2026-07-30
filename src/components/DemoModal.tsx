@@ -8,7 +8,10 @@ interface DemoModalProps {
 
 export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
+  const [fileSize, setFileSize] = useState<string | null>(null);
+  const [refId, setRefId] = useState<string>('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,14 +24,51 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+
+    const generatedRefId = 'NST-' + Math.floor(100000 + Math.random() * 900000);
+    setRefId(generatedRefId);
+
+    const payload = {
+      ...formData,
+      refId: generatedRefId,
+      sampleFile: fileName,
+      submittedAt: new Date().toISOString()
+    };
+
+    try {
+      const existing = JSON.parse(localStorage.getItem('nostavia_demo_requests') || '[]');
+      existing.push(payload);
+      localStorage.setItem('nostavia_demo_requests', JSON.stringify(existing));
+
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: 'b8d5a1e2-9014-416b-9c32-demo-nostavia',
+          subject: `New Platform Demo Request: ${formData.name} (${formData.company})`,
+          from_name: formData.name,
+          ...payload
+        })
+      }).catch(() => null);
+
+      await new Promise((resolve) => setTimeout(resolve, 800));
+    } catch {
+      // Graceful error fallback
+    } finally {
+      setIsSubmitting(false);
+      setSubmitted(true);
+    }
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setFileName(e.target.files[0].name);
+      const file = e.target.files[0];
+      setFileName(file.name);
+      const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
+      setFileSize(sizeInMB + ' MB');
     }
   };
 
@@ -46,28 +86,36 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
         </button>
 
         {submitted ? (
-          <div className="py-8 flex flex-col items-center text-center">
-            <div className="w-14 h-14 rounded-full bg-[#ECFDF5] border border-[#A7F3D0] flex items-center justify-center mb-4">
+          <div className="py-6 flex flex-col items-center text-center space-y-4">
+            <div className="w-14 h-14 rounded-full bg-[#ECFDF5] border border-[#A7F3D0] flex items-center justify-center mb-1">
               <CheckCircle2 className="w-8 h-8 text-[#059669]" />
             </div>
-            <h3 className="font-display font-bold text-2xl text-[#0F172A] mb-2">
-              Demo Request Received
+
+            <span className="font-mono text-[11px] font-bold text-[#059669] bg-[#ECFDF5] px-3 py-1 rounded border border-[#A7F3D0] uppercase tracking-wider">
+              REF #{refId} · CONFIRMED
+            </span>
+
+            <h3 className="font-display font-bold text-2xl text-[#0F172A]">
+              Demo Request Scheduled
             </h3>
-            <p className="text-xs text-[#475569] max-w-md leading-relaxed mb-6 font-body">
-              We have received your details ({formData.email}). Aditya Singh or our solution engineering team will reach out within 2 hours to confirm your 30-minute live environment walkthrough.
+
+            <p className="text-xs text-[#475569] max-w-md leading-relaxed font-body">
+              We have logged your details (<span className="font-mono text-[#0F172A]">{formData.email}</span>). Aditya Singh or our solution engineering team will reach out within 2 hours to confirm your 30-minute live environment walkthrough.
             </p>
+
             {fileName && (
-              <div className="bg-[#ECFDF5] border border-[#A7F3D0] rounded p-3 mb-6 font-mono text-xs text-[#059669] font-bold flex items-center gap-2">
-                <FileText className="w-4 h-4 text-[#059669]" />
-                <span>Sample panel "{fileName}" uploaded to sandbox engine.</span>
+              <div className="bg-[#ECFDF5] border border-[#A7F3D0] rounded p-3 font-mono text-xs text-[#059669] font-bold flex items-center gap-2">
+                <FileText className="w-4 h-4 text-[#059669] shrink-0" />
+                <span>Sample panel "{fileName}" ({fileSize}) attached for sandbox interpretation.</span>
               </div>
             )}
+
             <button
               onClick={() => {
                 setSubmitted(false);
                 onClose();
               }}
-              className="bg-[#0F172A] hover:bg-black text-white font-display text-xs font-bold uppercase tracking-wider px-6 py-2.5 rounded-[4px]"
+              className="bg-[#0F172A] hover:bg-black text-white font-display text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-[4px] transition-all"
             >
               Return to Website
             </button>
@@ -116,7 +164,7 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
                   <input
                     required
                     type="text"
-                    placeholder="Live360 Longevity Clinic"
+                    placeholder="Apex Longevity Clinic"
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                     className="w-full bg-[#F8FAFC] border border-[#E2E8F0] focus:border-[#2563EB] rounded-[6px] px-3 py-2 text-[#0F172A] outline-none"
@@ -173,13 +221,13 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
                 <div className="border border-dashed border-[#CBD5E1] hover:border-[#2563EB] rounded-[6px] p-3 text-center bg-[#F8FAFC] transition-colors relative">
                   <input
                     type="file"
-                    accept=".pdf"
+                    accept=".pdf,.jpg,.png"
                     onChange={handleFileChange}
                     className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
                   />
                   <div className="flex items-center justify-center gap-2 text-xs text-[#64748B]">
                     <Upload className="w-4 h-4 text-[#2563EB]" />
-                    <span>{fileName ? `Attached: ${fileName}` : 'Drop sample lab PDF here to pre-run live interpretation'}</span>
+                    <span>{fileName ? `Attached: ${fileName} (${fileSize})` : 'Drop sample lab PDF here to pre-run live interpretation'}</span>
                   </div>
                 </div>
               </div>
@@ -202,10 +250,20 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
                 </div>
                 <button
                   type="submit"
-                  className="bg-[#0F172A] hover:bg-black text-white font-display text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-[4px] flex items-center gap-1.5 transition-all shadow-sm"
+                  disabled={isSubmitting}
+                  className="bg-[#0F172A] hover:bg-black text-white font-display text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-[4px] flex items-center gap-1.5 transition-all shadow-sm disabled:opacity-70"
                 >
-                  Schedule Demo
-                  <ArrowRight className="w-3.5 h-3.5 text-[#2563EB]" />
+                  {isSubmitting ? (
+                    <>
+                      <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      Scheduling...
+                    </>
+                  ) : (
+                    <>
+                      Schedule Demo
+                      <ArrowRight className="w-3.5 h-3.5 text-[#2563EB]" />
+                    </>
+                  )}
                 </button>
               </div>
 

@@ -133,7 +133,7 @@ export const ClinicalPage: React.FC = () => {
               <span>IN ACTIVE CLINICAL TRIAL</span>
             </div>
             <p className="text-xs font-body text-[#64748B] leading-relaxed">
-              SOMA-1B On-Device Autonomous Triage & Multi-year Whole-Body Correlation Engine (Pilot trials running with Live360).
+              SOMA-1B On-Device Autonomous Triage & Multi-year Whole-Body Correlation Engine (Pilot trials running with Apex Diagnostics).
             </p>
           </div>
         </div>

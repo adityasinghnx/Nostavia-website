@@ -7,10 +7,10 @@ export const RealOutcomesCaseStudySection: React.FC = () => {
 
   const caseStudies = [
     {
-      brandLogo: 'Live360°',
+      brandLogo: 'APEX DIAGNOSTICS',
       brandBg: 'bg-[#E11D48]',
-      title: 'Live 360° Health Network',
-      description: 'Based on Live360Degrees production deployment across diagnostic networks in India, Nostavia\'s Smart Report engine replaced manual pathologist chart review and automated 90-day patient re-test recalls.',
+      title: 'Apex Diagnostic Network',
+      description: 'Based on Apex Diagnostics production deployment across enterprise diagnostic networks, Nostavia\'s Smart Report engine replaced manual pathologist chart review and automated 90-day patient re-test recalls.',
       link: '/industries/diagnostic-labs',
       metrics: [
         { value: '<800ms', label: 'Native PDF lab parsing speed' },

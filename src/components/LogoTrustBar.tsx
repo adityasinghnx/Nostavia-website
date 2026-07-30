@@ -3,8 +3,8 @@ import React from 'react';
 export const LogoTrustBar: React.FC = () => {
   const logos = [
     {
-      name: 'Live 360°',
-      logo: 'Live360°',
+      name: 'AuraHealth',
+      logo: 'AuraHealth',
       color: 'text-[#E11D48]',
     },
     {
@@ -18,8 +18,8 @@ export const LogoTrustBar: React.FC = () => {
       color: 'text-[#2563EB]',
     },
     {
-      name: '360° ATHLETIX',
-      logo: '360° ATHLETIX ⚡',
+      name: 'APEX ATHLETIX',
+      logo: 'APEX ATHLETIX ⚡',
       color: 'text-[#D97706]',
     },
   ];

@@ -28,7 +28,7 @@ export const IntegrationCodeSection: React.FC = () => {
 
   const jsonRequest = `{
   "lab_pdf_url": "https://api.nostaviahealth.com/v1/ingest/panel_9021.pdf",
-  "partner_id": "lab_live360_prod",
+  "partner_id": "lab_apex_prod",
   "anonymized_patient_id": "anon_usr_78912",
   "include_whole_body_correlations": true,
   "locale": "en_US"
@@ -164,7 +164,7 @@ export const IntegrationCodeSection: React.FC = () => {
                 <code>
                   <span className="text-slate-500">{`{\n`}</span>
                   <span className="text-cyan-400">{`  "lab_pdf_url"`}</span><span className="text-slate-400">{`: `}</span><span className="text-emerald-400">{`"https://api.nostaviahealth.com/v1/ingest/panel_9021.pdf"`}</span><span className="text-slate-500">{`,\n`}</span>
-                  <span className="text-cyan-400">{`  "partner_id"`}</span><span className="text-slate-400">{`: `}</span><span className="text-emerald-400">{`"lab_live360_prod"`}</span><span className="text-slate-500">{`,\n`}</span>
+                  <span className="text-cyan-400">{`  "partner_id"`}</span><span className="text-slate-400">{`: `}</span><span className="text-emerald-400">{`"lab_apex_prod"`}</span><span className="text-slate-500">{`,\n`}</span>
                   <span className="text-cyan-400">{`  "anonymized_patient_id"`}</span><span className="text-slate-400">{`: `}</span><span className="text-emerald-400">{`"anon_usr_78912"`}</span><span className="text-slate-500">{`,\n`}</span>
                   <span className="text-cyan-400">{`  "include_whole_body_correlations"`}</span><span className="text-slate-400">{`: `}</span><span className="text-purple-400 font-bold">{`true`}</span><span className="text-slate-500">{`,\n`}</span>
                   <span className="text-cyan-400">{`  "locale"`}</span><span className="text-slate-400">{`: `}</span><span className="text-emerald-400">{`"en_US"`}</span><span className="text-slate-500">{`\n}`}</span>
