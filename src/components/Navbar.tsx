@@ -109,23 +109,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
               </button>
             </div>
 
-            <div
-              className="relative py-3"
-              onMouseEnter={() => handleMouseEnter('customers')}
-              onMouseLeave={handleMouseLeave}
-            >
-              <button
-                onClick={() => setActiveMenu(activeMenu === 'customers' ? null : 'customers')}
-                className={`px-3.5 py-2 rounded-[4px] flex items-center gap-1 transition-colors ${
-                  activeMenu === 'customers' || location.pathname.startsWith('/industries')
-                    ? 'text-[#0F172A] bg-[#E5E7EB] font-extrabold'
-                    : 'hover:text-[#0F172A] hover:bg-[#F8FAFC]'
-                }`}
-              >
-                INDUSTRIES & BUYERS
-              </button>
-            </div>
-
             <Link
               to="/clinical"
               onClick={closeMenus}
@@ -427,40 +410,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
                           <div className="font-display font-bold text-xs text-[#0F172A]">SOMA Dual-Brain</div>
                           <div className="text-[10px] text-[#64748B]">On-device & Cloud models</div>
                         </div>
-                      </div>
-                      <span className="text-xs text-[#64748B]">▶</span>
-                    </Link>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="eyebrow text-[#94A3B8] mb-2 text-[10px] uppercase tracking-widest font-mono font-bold">INDUSTRIES & BUYERS</div>
-                  <div className="grid grid-cols-1 gap-2">
-                    <Link to="/industries/diagnostic-labs" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <Activity className="w-4 h-4 text-[#2563EB]" />
-                        <span className="font-display font-bold text-xs text-[#0F172A]">Diagnostic Labs</span>
-                      </div>
-                      <span className="text-xs text-[#64748B]">▶</span>
-                    </Link>
-                    <Link to="/industries/clinics" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <Stethoscope className="w-4 h-4 text-emerald-600" />
-                        <span className="font-display font-bold text-xs text-[#0F172A]">Clinics & Longevity</span>
-                      </div>
-                      <span className="text-xs text-[#64748B]">▶</span>
-                    </Link>
-                    <Link to="/industries/supplements" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <Smartphone className="w-4 h-4 text-pink-600" />
-                        <span className="font-display font-bold text-xs text-[#0F172A]">Wellness & Apps</span>
-                      </div>
-                      <span className="text-xs text-[#64748B]">▶</span>
-                    </Link>
-                    <Link to="/industries/payer" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <ShieldCheck className="w-4 h-4 text-orange-600" />
-                        <span className="font-display font-bold text-xs text-[#0F172A]">Insurers & Payers</span>
                       </div>
                       <span className="text-xs text-[#64748B]">▶</span>
                     </Link>
