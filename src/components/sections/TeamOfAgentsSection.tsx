@@ -83,7 +83,7 @@ export const TeamOfAgentsSection: React.FC = () => {
           </div>
 
           {/* Right Column (55% Width): Real Background Image & Animated 3-Column Marquee */}
-          <div className="lg:col-span-7 relative overflow-hidden rounded-[2px] h-[520px] border border-[#E2E8F0] group-marquee bg-slate-100">
+          <div className="lg:col-span-7 relative overflow-hidden rounded-[2px] h-[400px] sm:h-[520px] border border-[#E2E8F0] group-marquee bg-slate-100">
             
             {/* Real Background Photograph with Muted Desaturation */}
             <img
@@ -100,8 +100,8 @@ export const TeamOfAgentsSection: React.FC = () => {
             <div className="absolute top-0 inset-x-0 h-10 bg-gradient-to-b from-white/70 to-transparent z-20 pointer-events-none" />
             <div className="absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-white/70 to-transparent z-20 pointer-events-none" />
 
-            {/* 3 Columns Layout with Edge-to-Edge Spacing */}
-            <div className="relative z-10 grid grid-cols-3 gap-3 h-full px-3 py-0 overflow-hidden">
+            {/* Responsive Columns Layout */}
+            <div className="relative z-10 grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 h-full px-2 sm:px-3 py-0 overflow-hidden">
               
               {/* Column 1: Moves UP to DOWN */}
               <div className="overflow-hidden h-full">

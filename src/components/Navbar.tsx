@@ -42,19 +42,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
           <div className="absolute -top-36 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] bg-amber-200/40 blur-3xl pointer-events-none rounded-full" />
 
           <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center gap-3">
-            <h2 className="font-display font-bold text-3xl sm:text-5xl text-[#0F172A] tracking-tight leading-[1.15]">
-              Custom Health AI Infrastructure. <br />
+            <h2 className="font-display font-bold text-2xl sm:text-4xl lg:text-5xl text-[#0F172A] tracking-tight leading-[1.15]">
+              Custom Health AI Infrastructure. <br className="hidden sm:inline" />
               Built directly by our founding engineers.
             </h2>
 
-            <p className="text-sm sm:text-base text-[#475569] font-semibold max-w-2xl">
+            <p className="text-xs sm:text-base text-[#475569] font-semibold max-w-2xl px-2">
               Solutions Engineering — bespoke health intelligence modules, EHR integrations, and custom clinical deployments for enterprise health systems.
             </p>
 
             <div className="pt-3">
               <Link
                 to="/solutions/supplements"
-                className="inline-block bg-[#0F172A] hover:bg-black text-white font-mono text-[11px] font-bold uppercase tracking-widest px-6 py-2.5 rounded-[2px] transition-all shadow-md"
+                className="inline-block bg-[#0F172A] hover:bg-black text-white font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-widest px-5 sm:px-6 py-2.5 rounded-[2px] transition-all shadow-md"
               >
                 EXPLORE SOLUTIONS ENGINEERING
               </Link>
@@ -354,6 +354,132 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
                     <span className="text-[10px] text-[#0F172A]">▶</span>
                   </Link>
 
+                </div>
+              </div>
+
+            </div>
+          </div>
+        )}
+        {/* ========================================================================= */}
+        {/* RESPONSIVE MOBILE NAVIGATION DRAWER */}
+        {/* ========================================================================= */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden bg-white border-b border-[#E5E7EB] shadow-2xl max-h-[calc(100vh-4rem)] overflow-y-auto font-body">
+            <div className="px-4 py-6 space-y-6">
+              
+              {/* Quick Action Buttons */}
+              <div className="flex flex-col gap-2.5 pb-4 border-b border-[#E2E8F0]">
+                <Link
+                  to="/demo"
+                  onClick={closeMenus}
+                  className="w-full text-center bg-[#000000] hover:bg-[#1A1A1A] text-white font-display text-xs font-bold uppercase tracking-wider py-3 rounded-[4px] shadow-sm"
+                >
+                  REQUEST A DEMO
+                </Link>
+                <Link
+                  to="/security"
+                  onClick={closeMenus}
+                  className="w-full text-center bg-[#B45309] hover:bg-[#92400E] text-white text-xs font-mono font-bold uppercase py-2.5 rounded-[2px] shadow-sm"
+                >
+                  CONTEXT 2026
+                </Link>
+              </div>
+
+              {/* Main Nav Links */}
+              <div className="space-y-4">
+                <div>
+                  <div className="eyebrow text-[#94A3B8] mb-2 text-[10px] uppercase tracking-widest font-mono font-bold">PLATFORM & SERVICES</div>
+                  <div className="grid grid-cols-1 gap-2">
+                    <Link to="/solutions/gravity" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <Code className="w-4 h-4 text-[#2563EB]" />
+                        <div>
+                          <div className="font-display font-bold text-xs text-[#0F172A]">Intelligence SDK</div>
+                          <div className="text-[10px] text-[#64748B]">Lab parsing & AI concierge</div>
+                        </div>
+                      </div>
+                      <span className="text-xs text-[#64748B]">▶</span>
+                    </Link>
+                    <Link to="/solutions/galaxy" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <Layers className="w-4 h-4 text-purple-600" />
+                        <div>
+                          <div className="font-display font-bold text-xs text-[#0F172A]">Wearables SDK</div>
+                          <div className="text-[10px] text-[#64748B]">Unified API for Apple & Oura</div>
+                        </div>
+                      </div>
+                      <span className="text-xs text-[#64748B]">▶</span>
+                    </Link>
+                    <Link to="/solutions/storyhealth" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <Smartphone className="w-4 h-4 text-emerald-600" />
+                        <div>
+                          <div className="font-display font-bold text-xs text-[#0F172A]">White-Label App</div>
+                          <div className="text-[10px] text-[#64748B]">Branded mobile app for health systems</div>
+                        </div>
+                      </div>
+                      <span className="text-xs text-[#64748B]">▶</span>
+                    </Link>
+                    <Link to="/solutions/pqs" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <Cpu className="w-4 h-4 text-amber-600" />
+                        <div>
+                          <div className="font-display font-bold text-xs text-[#0F172A]">SOMA Dual-Brain</div>
+                          <div className="text-[10px] text-[#64748B]">On-device & Cloud models</div>
+                        </div>
+                      </div>
+                      <span className="text-xs text-[#64748B]">▶</span>
+                    </Link>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="eyebrow text-[#94A3B8] mb-2 text-[10px] uppercase tracking-widest font-mono font-bold">INDUSTRIES & BUYERS</div>
+                  <div className="grid grid-cols-1 gap-2">
+                    <Link to="/industries/diagnostic-labs" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <Activity className="w-4 h-4 text-[#2563EB]" />
+                        <span className="font-display font-bold text-xs text-[#0F172A]">Diagnostic Labs</span>
+                      </div>
+                      <span className="text-xs text-[#64748B]">▶</span>
+                    </Link>
+                    <Link to="/industries/clinics" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <Stethoscope className="w-4 h-4 text-emerald-600" />
+                        <span className="font-display font-bold text-xs text-[#0F172A]">Clinics & Longevity</span>
+                      </div>
+                      <span className="text-xs text-[#64748B]">▶</span>
+                    </Link>
+                    <Link to="/industries/supplements" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <Smartphone className="w-4 h-4 text-pink-600" />
+                        <span className="font-display font-bold text-xs text-[#0F172A]">Wellness & Apps</span>
+                      </div>
+                      <span className="text-xs text-[#64748B]">▶</span>
+                    </Link>
+                    <Link to="/industries/payer" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <ShieldCheck className="w-4 h-4 text-orange-600" />
+                        <span className="font-display font-bold text-xs text-[#0F172A]">Insurers & Payers</span>
+                      </div>
+                      <span className="text-xs text-[#64748B]">▶</span>
+                    </Link>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="eyebrow text-[#94A3B8] mb-2 text-[10px] uppercase tracking-widest font-mono font-bold">COMPANY & RESOURCES</div>
+                  <div className="flex flex-col gap-1 text-sm font-display font-semibold text-[#334155]">
+                    <Link to="/clinical" onClick={closeMenus} className="py-2 px-3 hover:bg-[#F8FAFC] rounded-[4px]">
+                      Clinical Evidence
+                    </Link>
+                    <Link to="/security" onClick={closeMenus} className="py-2 px-3 hover:bg-[#F8FAFC] rounded-[4px]">
+                      Security & Privacy
+                    </Link>
+                    <Link to="/company" onClick={closeMenus} className="py-2 px-3 hover:bg-[#F8FAFC] rounded-[4px]">
+                      Company
+                    </Link>
+                  </div>
                 </div>
               </div>
 

@@ -148,9 +148,9 @@ export const ProductModuleScreens: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
               <div className="p-6 bg-white border border-[#E2E8F0] rounded-[6px] text-center flex flex-col items-center shadow-sm">
                 <div className="text-xs font-mono text-[#64748B] uppercase mb-1">CHRONOLOGICAL vs BIOLOGICAL</div>
-                <div className="flex items-baseline gap-3 my-2 font-mono">
-                  <span className="text-4xl text-[#94A3B8] line-through font-semibold">42.0 yrs</span>
-                  <span className="text-5xl text-[#059669] font-bold">36.4 yrs</span>
+                <div className="flex items-baseline gap-2 sm:gap-3 my-2 font-mono flex-wrap justify-center">
+                  <span className="text-2xl sm:text-4xl text-[#94A3B8] line-through font-semibold">42.0 yrs</span>
+                  <span className="text-3xl sm:text-5xl text-[#059669] font-bold">36.4 yrs</span>
                 </div>
                 <div className="text-xs font-mono text-[#059669] bg-[#ECFDF5] px-3 py-1 rounded border border-[#A7F3D0] font-semibold">
                   -5.6 Years Younger Phenotype

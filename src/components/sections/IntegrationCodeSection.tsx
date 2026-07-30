@@ -75,17 +75,17 @@ export const IntegrationCodeSection: React.FC = () => {
         <div className="border border-[#1E293B] rounded-[2px] bg-[#090D16] shadow-2xl overflow-hidden font-mono text-xs">
           
           {/* Top Window Bar with macOS Control Dots & Tab Selector */}
-          <div className="flex items-center justify-between px-5 py-3.5 bg-[#0F172A] border-b border-slate-800/80 select-none">
+          <div className="flex flex-wrap items-center justify-between gap-3 px-4 sm:px-5 py-3.5 bg-[#0F172A] border-b border-slate-800/80 select-none">
             
             {/* Left Traffic Dots & Tabs */}
-            <div className="flex items-center gap-6">
-              <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-3 sm:gap-6 flex-wrap">
+              <div className="hidden sm:flex items-center gap-1.5">
                 <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block" />
                 <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
                 <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
               </div>
 
-              <div className="flex items-center gap-2 border-l border-slate-800 pl-6">
+              <div className="flex items-center gap-2 sm:border-l sm:border-slate-800 sm:pl-6 flex-wrap">
                 <button
                   onClick={() => setActiveTab('response')}
                   className={`flex items-center gap-2 px-3 py-1.5 rounded-[2px] font-bold text-xs transition-all ${

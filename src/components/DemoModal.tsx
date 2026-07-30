@@ -34,7 +34,7 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm overflow-y-auto">
-      <div className="relative w-full max-w-xl bg-white border border-[#E5E7EB] rounded-[12px] p-6 sm:p-8 shadow-2xl my-8 text-[#0F172A]">
+      <div className="relative w-full max-w-xl bg-white border border-[#E5E7EB] rounded-[12px] p-5 sm:p-8 shadow-2xl my-auto max-h-[90vh] overflow-y-auto text-[#0F172A]">
         
         {/* Close Button */}
         <button
