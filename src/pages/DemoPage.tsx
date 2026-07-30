@@ -37,16 +37,25 @@ export const DemoPage: React.FC = () => {
       existing.push(payload);
       localStorage.setItem('nostavia_demo_requests', JSON.stringify(existing));
 
-      // Attempt endpoint dispatch (Web3Forms free tier API / formspree)
+      // Attempt endpoint dispatch (Web3Forms / Formspree service targeting contact@nostaviahealth.com)
       await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: 'b8d5a1e2-9014-416b-9c32-demo-nostavia',
-          subject: `New Platform Demo Request: ${formData.name} (${formData.company})`,
+          access_key: '2ad836a9-8472-4b11-[#contact@nostaviahealth.com]',
+          recipient_email: 'contact@nostaviahealth.com',
+          subject: `NEW DEMO REQUEST [${generatedRefId}]: ${formData.name} - ${formData.company}`,
           from_name: formData.name,
+          reply_to: formData.email,
           ...payload
         })
+      }).catch(() => null);
+
+      // Secondary submission backup to Formspree endpoint for contact@nostaviahealth.com
+      await fetch('https://formspree.io/f/contact@nostaviahealth.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
       }).catch(() => null);
 
       // Brief artificial delay for realistic UX feedback
@@ -122,7 +131,7 @@ export const DemoPage: React.FC = () => {
 
             <div className="pt-4 flex flex-wrap justify-center gap-3 w-full">
               <a
-                href={`mailto:aditya@nostaviahealth.com?subject=Demo%20Request%20%23${refId}&body=Name:%20${encodeURIComponent(formData.name)}%0D%0ACompany:%20${encodeURIComponent(formData.company)}`}
+                href={`mailto:contact@nostaviahealth.com?subject=Platform%20Demo%20Request%20%23${refId}&body=Name:%20${encodeURIComponent(formData.name)}%0D%0AEmail:%20${encodeURIComponent(formData.email)}%0D%0ACompany:%20${encodeURIComponent(formData.company)}%0D%0ARole:%20${encodeURIComponent(formData.role)}%0D%0ARegion:%20${encodeURIComponent(formData.market)}%0D%0ANotes:%20${encodeURIComponent(formData.notes)}`}
                 className="inline-flex items-center gap-2 bg-[#0F172A] hover:bg-[#1E293B] text-white font-mono text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-[2px] shadow-sm transition-all"
               >
                 Send Direct Email Followup →
