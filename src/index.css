@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --brand-purple: #DFB4FF;
+    --brand-periwinkle: #D1C4FF;
+    --brand-ice: #B8DBFF;
+    --brand-cyan: #92D0EA;
+    --brand-teal: #69C3D3;
+    
+    --page: #FFFFFF;
+    --surface: #F8F9FA;
+    --surface-raised: #FFFFFF;
+    --surface-dark: #000000;
+    --line: #E5E7EB;
+    --line-bright: #D1D5DB;
+    --line-dark: #1F2937;
+    --blue: #69C3D3;
+    --blue-dim: #92D0EA;
+    --blue-wash: #EFF6FF;
+    --optimal: #059669;
+    --in-range: #64748B;
+    --outlier: #D97706;
+    --text: #0F172A;
+    --text-muted: #475569;
+    --text-faint: #94A3B8;
+  }
+
+  *, body, button, input, select, textarea, p, span, div, h1, h2, h3, h4, h5, h6, a, label, code, pre {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+  }
+
+  body {
+    background-color: var(--page);
+    color: var(--text);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.025em;
+  }
+}
+
+/* Custom scrollbar and utilities */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Infinite Marquee Animations for Agent Cards Mosaic */
+@keyframes marquee-down {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes marquee-up {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-marquee-down {
+  animation: marquee-down 24s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-up {
+  animation: marquee-up 24s linear infinite;
+  will-change: transform;
+}
+
+.group-marquee:hover .animate-marquee-down,
+.group-marquee:hover .animate-marquee-up {
+  animation-play-state: paused;
+}
