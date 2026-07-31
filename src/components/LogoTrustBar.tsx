@@ -17,6 +17,11 @@ export const LogoTrustBar: React.FC = () => {
       src: '/client_logos/logo_tbi.e78b7546c7bb1d87e9f2 (1).png',
       className: 'h-[72px] sm:h-[80px] w-auto object-contain grayscale',
     },
+    {
+      name: 'Client Logo 4',
+      src: '/client_logos/Screenshot 2026-07-31 at 11.44.24 AM.png',
+      className: 'h-9 sm:h-10 w-auto object-contain grayscale',
+    },
   ];
 
   // Repeat 3 client logos 8 times to fill the marquee track completely and create a rich, dense loop
