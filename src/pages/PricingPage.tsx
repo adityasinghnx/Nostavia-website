@@ -33,19 +33,54 @@ export const PricingPage: React.FC = () => {
       {/* HEADER HERO */}
       <div className="space-y-4 text-center flex flex-col items-center max-w-3xl mx-auto">
         <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-          PRICING
+          PRICING & COMMERCIAL MODELS
         </div>
         <h1 className="font-display font-extrabold text-4xl sm:text-6xl text-[#0F172A] tracking-tight leading-[1.05]">
-          One monthly platform fee, tiered by scale.
+          Two distinct products. Clear, transparent pricing for both.
         </h1>
         <p className="text-base sm:text-lg text-[#64748B] leading-relaxed font-body">
-          No per-user maths that nobody can forecast. The tier sets the fee and the ceiling on monthly active users.
+          Select your deployment model below — self-serve developer SDKs for digital health apps or full-service turnkey patient programs for hospitals.
         </p>
+
+        {/* PRODUCT MODEL BRIDGE SELECTOR */}
+        <div className="w-full pt-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left font-body">
+            
+            <div className="p-5 bg-[#0F172A] text-white rounded-[2px] border border-[#0F172A] space-y-2 relative">
+              <span className="px-2 py-0.5 bg-amber-400 text-[#0F172A] font-mono text-[10px] font-bold uppercase rounded">
+                YOU ARE VIEWING
+              </span>
+              <div className="font-display font-extrabold text-lg text-white">Developer & App Builder SDKs</div>
+              <p className="text-xs text-slate-300">
+                For healthtech startups, lab networks & app developers embedding API/SDK components. Tiered monthly platform fee based on Monthly Active Users (MAU).
+              </p>
+            </div>
+
+            <Link
+              to="/industries/hospitals#pricing"
+              className="p-5 bg-[#F8FAFC] text-[#0F172A] hover:bg-slate-100 rounded-[2px] border border-[#E2E8F0] space-y-2 transition-all block group"
+            >
+              <div className="flex justify-between items-center">
+                <span className="px-2 py-0.5 bg-[#E2E8F0] text-[#64748B] font-mono text-[10px] font-bold uppercase rounded">
+                  ENTERPRISE
+                </span>
+                <span className="text-xs font-bold text-[#2563EB] group-hover:underline flex items-center gap-1 font-mono">
+                  View Hospital Pricing →
+                </span>
+              </div>
+              <div className="font-display font-extrabold text-lg text-[#0F172A]">Hospitals & Health Systems</div>
+              <p className="text-xs text-[#64748B]">
+                For hospitals deploying white-labelled patient programs, Leakage Audit & Attribution Engine. Performance-linked Partner pricing (base + % attributed revenue) or flat rates.
+              </p>
+            </Link>
+
+          </div>
+        </div>
 
         {/* CURRENCY TOGGLE */}
         <div className="pt-4 flex items-center justify-center">
           <div className="bg-[#F8FAFC] border border-[#E2E8F0] p-1.5 rounded-[2px] flex items-center gap-1 font-mono text-xs shadow-none">
-            <span className="text-[#64748B] px-2 text-[10px] uppercase font-bold">Currency:</span>
+            <span className="text-[#64748B] px-2 text-[10px] uppercase font-bold">SDK Currency:</span>
             
             <button
               onClick={() => setCurrency('USD')}

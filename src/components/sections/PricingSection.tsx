@@ -64,15 +64,35 @@ export const PricingSection: React.FC = () => {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 space-y-10">
         
         {/* Header */}
-        <div className="border-b border-[#E2E8F0] pb-4">
-          <div className="space-y-2">
-            <div className="eyebrow text-[#B45309] font-bold text-xs uppercase tracking-widest font-mono">
-              PRICING
-            </div>
-            <h2 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-[54px] text-[#0F172A] tracking-tight leading-[1.05]">
-              One monthly platform fee, tiered by scale.
-            </h2>
+        <div className="border-b border-[#E2E8F0] pb-4 space-y-3">
+          <div className="eyebrow text-[#B45309] font-bold text-xs uppercase tracking-widest font-mono">
+            DEVELOPER & HEALTHTECH SDK PRICING
           </div>
+          <h2 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-[54px] text-[#0F172A] tracking-tight leading-[1.05]">
+            One monthly platform fee, tiered by scale.
+          </h2>
+          <p className="text-sm text-[#64748B] max-w-3xl leading-relaxed font-body">
+            For digital health apps, lab chains, and startups embedding Nostavia AI modules via API & SDKs.
+          </p>
+        </div>
+
+        {/* Hospital Platform Bridge Callout */}
+        <div className="p-5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div className="space-y-1">
+            <div className="font-mono text-xs font-bold text-[#0F172A] uppercase flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#2563EB]"></span>
+              Looking for Hospital & Health System Front-Door Pricing?
+            </div>
+            <p className="text-xs text-[#64748B] font-body">
+              Hospitals deploy turnkey white-labelled patient programs, the Leakage Audit, and Attribution Engine under performance-linked partner pricing (base + % of attributed revenue) or flat commercial licensing (in INR / AED).
+            </p>
+          </div>
+          <Link
+            to="/industries/hospitals#pricing"
+            className="shrink-0 text-xs font-bold font-display uppercase tracking-wider text-[#2563EB] hover:text-[#1D4ED8] underline"
+          >
+            View Hospital Platform Pricing →
+          </Link>
         </div>
 
         {/* 4 Tier Cards Inline Grid matching Copy v2 spec */}

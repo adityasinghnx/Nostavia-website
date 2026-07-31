@@ -365,16 +365,16 @@ export const HospitalsPage: React.FC = () => {
       </section>
 
       {/* 6. TWO-DOOR PRICING */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
+      <section id="pricing" className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10 scroll-mt-24">
         <div className="space-y-3">
           <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            TWO PRICING MODELS — PICK YOUR COMFORT
+            HOSPITAL FRONT-DOOR PLATFORM PRICING
           </div>
           <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
             We only win big when you do
           </h2>
           <p className="text-base text-[#64748B] max-w-3xl leading-relaxed font-body">
-            Most CFOs who've seen their Leakage Report choose Partner pricing. But both doors are designed to be said yes to.
+            Hospital platform deployment includes turnkey white-labelled patient programs, the Leakage Audit, Attribution Engine, and Command Center. (For self-serve developer SDK component pricing for healthtech startups, <Link to="/pricing" className="text-[#2563EB] font-bold underline">see developer SDK tiers</Link>).
           </p>
         </div>
 
