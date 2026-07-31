@@ -82,8 +82,8 @@ export const HospitalsPage: React.FC = () => {
               <div className="text-[#64748B] font-semibold mt-1">Direct Founder Engineering</div>
             </div>
             <div>
-              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">-27%</div>
-              <div className="text-[#64748B] font-semibold mt-1">Post-Discharge CHF Mortality Risk</div>
+              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">48 Hours</div>
+              <div className="text-[#64748B] font-semibold mt-1">Smart Report Counter Wedge</div>
             </div>
           </div>
 
@@ -162,8 +162,8 @@ export const HospitalsPage: React.FC = () => {
               </p>
             </div>
             <div className="pt-4 border-t border-[#E2E8F0] space-y-2 font-mono text-[11px] text-[#475569]">
-              <div className="font-bold text-[#0F172A]">Clinical & Revenue Impact:</div>
-              <div>Captures follow-up OPD visits & addresses the documented 31% discharge completeness gap.</div>
+              <div className="font-bold text-[#0F172A]">Clinical Evidence (Published Meta-Analysis):</div>
+              <div>Structured post-discharge care cuts all-cause CHF mortality by ~27% & addresses the documented 31% discharge notes gap (PLOS One / PMC).</div>
             </div>
           </div>
 
