@@ -53,8 +53,8 @@ export const Footer: React.FC = () => {
             <div className="font-display font-bold text-xs text-[#0F172A] uppercase tracking-wider">INDUSTRIES</div>
             <Link to="/industries/diagnostic-labs" className="hover:text-[#2563EB] transition-colors">Diagnostic Labs</Link>
             <Link to="/industries/clinics" className="hover:text-[#2563EB] transition-colors">Clinics & Longevity</Link>
-            <Link to="/industries/hospitals" className="hover:text-[#2563EB] transition-colors">Hospitals (In dev)</Link>
-            <Link to="/industries/supplements" className="hover:text-[#2563EB] transition-colors">Supplements (In pilot)</Link>
+            <Link to="/industries/hospitals" className="hover:text-[#2563EB] transition-colors">Hospitals</Link>
+            <Link to="/industries/supplements" className="hover:text-[#2563EB] transition-colors">Supplements</Link>
           </div>
 
           <div className="flex flex-col gap-3">
