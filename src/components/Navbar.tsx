@@ -143,13 +143,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
           {/* Right Action Buttons */}
           <div className="flex items-center gap-3">
             <Link
-              to="/security"
-              className="hidden sm:inline-flex items-center justify-center bg-[#B45309] hover:bg-[#92400E] text-white text-[11px] font-mono font-bold uppercase px-5 py-2.5 rounded-[2px] shadow-sm transition-all"
-            >
-              CONTEXT 2026
-            </Link>
-
-            <Link
               to="/demo"
               onClick={closeMenus}
               className="bg-[#000000] hover:bg-[#1A1A1A] text-white font-display text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-[4px] transition-all shadow-sm"
@@ -358,13 +351,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
                   className="w-full text-center bg-[#000000] hover:bg-[#1A1A1A] text-white font-display text-xs font-bold uppercase tracking-wider py-3 rounded-[4px] shadow-sm"
                 >
                   REQUEST A DEMO
-                </Link>
-                <Link
-                  to="/security"
-                  onClick={closeMenus}
-                  className="w-full text-center bg-[#B45309] hover:bg-[#92400E] text-white text-xs font-mono font-bold uppercase py-2.5 rounded-[2px] shadow-sm"
-                >
-                  CONTEXT 2026
                 </Link>
               </div>
 
