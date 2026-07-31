@@ -126,13 +126,12 @@ export const WorkflowAutonomousAgentsSection: React.FC = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTabIndex(idx)}
-                className={`transition-all flex items-center gap-2.5 whitespace-nowrap ${
+                className={`transition-all flex items-center justify-center whitespace-nowrap ${
                   activeTabIndex === idx
                     ? 'bg-[#FFF7ED] border border-[#FDBA74] text-[#7C2D12] font-extrabold px-4 py-2.5 rounded-[2px] shadow-sm'
                     : 'bg-transparent border-transparent text-[#64748B] hover:text-[#0F172A] font-medium px-2 py-2.5'
                 }`}
               >
-                {tab.icon}
                 <span>{tab.label}</span>
               </button>
             ))}
