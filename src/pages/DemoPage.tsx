@@ -1,5 +1,18 @@
-import React, { useState } from 'react';
-import { CheckCircle2, ArrowRight, FileText, Upload } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { CheckCircle2, ArrowRight, FileText, Upload, Database, Download, Trash2, Key } from 'lucide-react';
+
+interface DemoRequest {
+  refId: string;
+  name: string;
+  email: string;
+  company: string;
+  role: string;
+  segment: string;
+  market: string;
+  notes: string;
+  sampleFile?: string | null;
+  submittedAt: string;
+}
 
 export const DemoPage: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -7,15 +20,40 @@ export const DemoPage: React.FC = () => {
   const [fileName, setFileName] = useState<string | null>(null);
   const [fileSize, setFileSize] = useState<string | null>(null);
   const [refId, setRefId] = useState<string>('');
+  const [showAdmin, setShowAdmin] = useState(false);
+  const [submissions, setSubmissions] = useState<DemoRequest[]>([]);
+  const [web3Key, setWeb3Key] = useState<string>('');
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     company: '',
     role: '',
-    segment: 'Diagnostic lab',
-    market: 'UAE',
+    segment: 'Diagnostic lab network',
+    market: 'UAE & GCC',
     notes: ''
   });
+
+  // Load submissions and API key on mount
+  useEffect(() => {
+    loadSubmissions();
+    const savedKey = localStorage.getItem('nostavia_web3forms_key') || '';
+    setWeb3Key(savedKey);
+  }, []);
+
+  const loadSubmissions = () => {
+    try {
+      const existing = JSON.parse(localStorage.getItem('nostavia_demo_requests') || '[]');
+      setSubmissions(existing);
+    } catch {
+      setSubmissions([]);
+    }
+  };
+
+  const handleSaveKey = (key: string) => {
+    setWeb3Key(key);
+    localStorage.setItem('nostavia_web3forms_key', key);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,25 +62,27 @@ export const DemoPage: React.FC = () => {
     const generatedRefId = 'NST-' + Math.floor(100000 + Math.random() * 900000);
     setRefId(generatedRefId);
 
-    const payload = {
+    const payload: DemoRequest = {
       ...formData,
       refId: generatedRefId,
       sampleFile: fileName,
-      submittedAt: new Date().toISOString()
+      submittedAt: new Date().toLocaleString()
     };
 
     try {
-      // Store locally as fallback record
+      // 1. Store in browser localStorage
       const existing = JSON.parse(localStorage.getItem('nostavia_demo_requests') || '[]');
-      existing.push(payload);
-      localStorage.setItem('nostavia_demo_requests', JSON.stringify(existing));
+      const updated = [payload, ...existing];
+      localStorage.setItem('nostavia_demo_requests', JSON.stringify(updated));
+      setSubmissions(updated);
 
-      // Attempt endpoint dispatch via Web3Forms & Formspree
+      // 2. Dispatch to Web3Forms using custom key if available, or fallback key
+      const activeKey = web3Key.trim() || '2ad836a9-8472-4b11-a5c9-94038167f2ce';
       await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: '2ad836a9-8472-4b11-a5c9-94038167f2ce',
+          access_key: activeKey,
           subject: `NEW DEMO REQUEST [${generatedRefId}]: ${formData.name} - ${formData.company}`,
           from_name: formData.name,
           reply_to: formData.email,
@@ -50,15 +90,9 @@ export const DemoPage: React.FC = () => {
         })
       }).catch(() => null);
 
-      await fetch('https://formspree.io/f/contact@nostaviahealth.com', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      }).catch(() => null);
-
       await new Promise((resolve) => setTimeout(resolve, 600));
     } catch {
-      // Graceful fallback to success state + mailto backup
+      // Fallback continuation
     } finally {
       setIsSubmitting(false);
       setSubmitted(true);
@@ -80,9 +114,169 @@ export const DemoPage: React.FC = () => {
     setFileSize(null);
   };
 
+  const exportToCSV = () => {
+    if (submissions.length === 0) return;
+    const headers = ['Ref ID', 'Date', 'Name', 'Email', 'Company', 'Role', 'Segment', 'Region', 'File', 'Notes'];
+    const rows = submissions.map(s => [
+      s.refId,
+      s.submittedAt,
+      `"${s.name.replace(/"/g, '""')}"`,
+      `"${s.email.replace(/"/g, '""')}"`,
+      `"${s.company.replace(/"/g, '""')}"`,
+      `"${s.role.replace(/"/g, '""')}"`,
+      `"${s.segment.replace(/"/g, '""')}"`,
+      `"${s.market.replace(/"/g, '""')}"`,
+      `"${(s.sampleFile || '').replace(/"/g, '""')}"`,
+      `"${(s.notes || '').replace(/"/g, '""')}"`
+    ]);
+    const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', `nostavia_demo_requests_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const clearSubmissions = () => {
+    if (window.confirm('Are you sure you want to clear all logged submissions?')) {
+      localStorage.removeItem('nostavia_demo_requests');
+      setSubmissions([]);
+    }
+  };
+
   return (
-    <div className="flex flex-col gap-12 py-10 max-w-[800px] mx-auto px-4 sm:px-6 font-body text-[#0F172A] bg-white">
+    <div className="flex flex-col gap-8 py-10 max-w-[960px] mx-auto px-4 sm:px-6 font-body text-[#0F172A] bg-white">
       
+      {/* TOP TOGGLE HEADER */}
+      <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-4">
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="font-mono text-xs font-bold text-[#64748B] uppercase tracking-wider">
+            DEMO GATEWAY & LEAD LOG
+          </span>
+        </div>
+
+        <button
+          onClick={() => setShowAdmin(!showAdmin)}
+          className="inline-flex items-center gap-2 bg-[#F1F5F9] hover:bg-[#E2E8F0] text-[#0F172A] border border-[#CBD5E1] font-mono text-xs font-bold px-3 py-1.5 rounded-[2px] transition-all"
+        >
+          <Database className="w-3.5 h-3.5 text-[#2563EB]" />
+          <span>{showAdmin ? 'Hide Submissions' : `View Logged Submissions (${submissions.length})`}</span>
+        </button>
+      </div>
+
+      {/* SUBMISSIONS DASHBOARD PANEL */}
+      {showAdmin && (
+        <div className="bg-[#0F172A] text-white rounded-[4px] p-6 space-y-6 shadow-xl border border-slate-700">
+          
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+            <div>
+              <h2 className="font-display font-bold text-xl text-white flex items-center gap-2">
+                <Database className="w-5 h-5 text-[#2563EB]" />
+                Logged Lead Submissions ({submissions.length})
+              </h2>
+              <p className="text-xs text-slate-400 font-mono mt-0.5">
+                All demo form submissions are saved locally in your browser and dispatched via email.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <button
+                onClick={exportToCSV}
+                disabled={submissions.length === 0}
+                className="inline-flex items-center gap-1.5 bg-[#2563EB] hover:bg-blue-600 text-white font-mono text-xs font-bold px-3 py-2 rounded-[2px] disabled:opacity-50 transition-all"
+              >
+                <Download className="w-3.5 h-3.5" />
+                Export CSV
+              </button>
+              <button
+                onClick={clearSubmissions}
+                disabled={submissions.length === 0}
+                className="inline-flex items-center gap-1.5 bg-red-600/20 hover:bg-red-600/30 text-red-300 border border-red-500/30 font-mono text-xs font-bold px-3 py-2 rounded-[2px] disabled:opacity-50 transition-all"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+                Clear
+              </button>
+            </div>
+          </div>
+
+          {/* Web3Forms Access Key Field */}
+          <div className="bg-slate-900 border border-slate-800 rounded p-4 text-xs font-mono space-y-2">
+            <div className="flex items-center gap-2 text-slate-300 font-bold">
+              <Key className="w-4 h-4 text-amber-400" />
+              <span>Optional Email API Access Key (Web3Forms / Formspree)</span>
+            </div>
+            <p className="text-[11px] text-slate-400">
+              Enter a free key from <a href="https://web3forms.com" target="_blank" rel="noreferrer" className="text-blue-400 underline">Web3Forms.com</a> (or Formspree) to receive instant email notifications directly in your inbox:
+            </p>
+            <div className="flex items-center gap-2 pt-1">
+              <input
+                type="text"
+                placeholder="e.g. 2ad836a9-8472-4b11-a5c9-94038167f2ce"
+                value={web3Key}
+                onChange={(e) => handleSaveKey(e.target.value)}
+                className="flex-1 bg-slate-950 border border-slate-700 text-white px-3 py-2 rounded text-xs outline-none focus:border-blue-500 font-mono"
+              />
+              <span className="text-[10px] text-emerald-400 font-bold">Auto-Saved</span>
+            </div>
+          </div>
+
+          {/* Table of Submissions */}
+          {submissions.length === 0 ? (
+            <div className="py-8 text-center text-slate-400 text-xs font-mono border border-dashed border-slate-800 rounded">
+              No submissions recorded yet. Submit the form below to test logging.
+            </div>
+          ) : (
+            <div className="overflow-x-auto border border-slate-800 rounded max-h-[360px]">
+              <table className="w-full text-left border-collapse text-xs font-body">
+                <thead>
+                  <tr className="bg-slate-900 text-slate-400 font-mono text-[11px] uppercase border-b border-slate-800">
+                    <th className="p-3">Ref ID / Time</th>
+                    <th className="p-3">Name & Email</th>
+                    <th className="p-3">Company & Role</th>
+                    <th className="p-3">Segment & Region</th>
+                    <th className="p-3">File / Notes</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-800/60">
+                  {submissions.map((sub, i) => (
+                    <tr key={i} className="hover:bg-slate-800/40 transition-colors">
+                      <td className="p-3 font-mono">
+                        <div className="text-emerald-400 font-bold">{sub.refId}</div>
+                        <div className="text-[10px] text-slate-400">{sub.submittedAt}</div>
+                      </td>
+                      <td className="p-3">
+                        <div className="font-bold text-white">{sub.name}</div>
+                        <div className="text-[#93C5FD] font-mono text-[11px]">{sub.email}</div>
+                      </td>
+                      <td className="p-3">
+                        <div className="font-semibold text-white">{sub.company}</div>
+                        <div className="text-slate-400 text-[11px]">{sub.role}</div>
+                      </td>
+                      <td className="p-3 font-mono text-[11px]">
+                        <div className="text-amber-300">{sub.segment}</div>
+                        <div className="text-slate-400">{sub.market}</div>
+                      </td>
+                      <td className="p-3 text-[11px] max-w-[200px]">
+                        {sub.sampleFile && (
+                          <div className="text-blue-300 font-mono text-[10px] bg-blue-950/60 px-1.5 py-0.5 rounded border border-blue-800 mb-1 inline-block">
+                            📄 {sub.sampleFile}
+                          </div>
+                        )}
+                        <div className="text-slate-300 truncate">{sub.notes || '—'}</div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+        </div>
+      )}
+
       {/* HEADER */}
       <div className="space-y-3 text-center">
         <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
@@ -105,7 +299,7 @@ export const DemoPage: React.FC = () => {
             </div>
 
             <span className="font-mono text-[11px] font-bold text-[#059669] bg-[#ECFDF5] px-3 py-1 rounded border border-[#A7F3D0] uppercase tracking-wider">
-              REF #{refId} · CONFIRMED
+              REF #{refId} · LOGGED & CONFIRMED
             </span>
 
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
@@ -113,7 +307,7 @@ export const DemoPage: React.FC = () => {
             </h3>
 
             <p className="text-sm text-[#64748B] max-w-md leading-relaxed font-body">
-              Thank you, <strong className="text-[#0F172A]">{formData.name}</strong>. We have logged your request (<span className="font-mono text-[#0F172A]">{formData.email}</span>). Aditya Singh or our solution engineering team will reach out within 2 hours to confirm your meeting time.
+              Thank you, <strong className="text-[#0F172A]">{formData.name}</strong>. Your request details have been saved to the Submissions Log (<span className="font-mono text-[#0F172A]">{formData.email}</span>). Our team will reach out within 2 hours.
             </p>
 
             {fileName && (
@@ -127,6 +321,14 @@ export const DemoPage: React.FC = () => {
             )}
 
             <div className="pt-4 flex flex-wrap justify-center gap-3 w-full">
+              <button
+                onClick={() => setShowAdmin(true)}
+                className="inline-flex items-center gap-2 bg-[#2563EB] hover:bg-blue-700 text-white font-mono text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-[2px] shadow-sm transition-all"
+              >
+                <Database className="w-4 h-4" />
+                View Logged Lead Data ({submissions.length})
+              </button>
+
               <a
                 href={`mailto:contact@nostaviahealth.com?subject=Platform%20Demo%20Request%20%23${refId}&body=Name:%20${encodeURIComponent(formData.name)}%0D%0AEmail:%20${encodeURIComponent(formData.email)}%0D%0ACompany:%20${encodeURIComponent(formData.company)}%0D%0ARole:%20${encodeURIComponent(formData.role)}%0D%0ARegion:%20${encodeURIComponent(formData.market)}%0D%0ANotes:%20${encodeURIComponent(formData.notes)}`}
                 className="inline-flex items-center gap-2 bg-[#0F172A] hover:bg-[#1E293B] text-white font-mono text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-[2px] shadow-sm transition-all"
@@ -205,11 +407,11 @@ export const DemoPage: React.FC = () => {
                   onChange={(e) => setFormData({ ...formData, segment: e.target.value })}
                   className="w-full bg-white border border-[#E2E8F0] focus:border-[#0F172A] rounded-[2px] px-4 py-3 text-[#0F172A] outline-none font-body text-sm"
                 >
-                  <option value="Diagnostic lab">Diagnostic lab network</option>
-                  <option value="Preventative clinic">Longevity & preventative clinic</option>
+                  <option value="Diagnostic lab network">Diagnostic lab network</option>
+                  <option value="Longevity & preventative clinic">Longevity & preventative clinic</option>
                   <option value="Hospital system">Hospital system</option>
-                  <option value="Insurer / Payer">Health insurer / Payer</option>
-                  <option value="Digital health app">Digital health platform</option>
+                  <option value="Health insurer / Payer">Health insurer / Payer</option>
+                  <option value="Digital health platform">Digital health platform</option>
                 </select>
               </div>
 
@@ -220,10 +422,10 @@ export const DemoPage: React.FC = () => {
                   onChange={(e) => setFormData({ ...formData, market: e.target.value })}
                   className="w-full bg-white border border-[#E2E8F0] focus:border-[#0F172A] rounded-[2px] px-4 py-3 text-[#0F172A] outline-none font-body text-sm"
                 >
-                  <option value="Global">Global / Multi-region</option>
-                  <option value="UAE">UAE & GCC</option>
+                  <option value="Global / Multi-region">Global / Multi-region</option>
+                  <option value="UAE & GCC">UAE & GCC</option>
                   <option value="India">India</option>
-                  <option value="US / EU">US / Europe</option>
+                  <option value="US / Europe">US / Europe</option>
                 </select>
               </div>
             </div>
