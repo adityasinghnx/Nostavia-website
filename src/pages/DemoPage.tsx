@@ -246,38 +246,21 @@ export const DemoPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Service Integrations Configuration */}
-          <div className="bg-slate-900 border border-slate-800 rounded p-4 text-xs font-mono space-y-4">
-            <div className="flex items-center gap-2 text-slate-200 font-bold border-b border-slate-800 pb-2">
-              <Key className="w-4 h-4 text-amber-400" />
-              <span>Connect Formspree or Web3Forms (Direct Dashboard Delivery)</span>
+          {/* Active Backend Integration Banner */}
+          <div className="bg-slate-900 border border-slate-800 rounded p-4 text-xs font-mono space-y-3">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-2">
+              <div className="flex items-center gap-2 text-slate-200 font-bold">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>FormSubmit.co (Active Primary Backend)</span>
+              </div>
+              <span className="text-[10px] text-emerald-400 bg-emerald-950/80 border border-emerald-800 px-2 py-0.5 rounded font-bold uppercase">
+                UNLIMITED FREE SUBMISSIONS
+              </span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-slate-300 mb-1 text-[11px] font-bold">FORMSPREE FORM ID (OR URL)</label>
-                <input
-                  type="text"
-                  placeholder="e.g. xqyvblz (or https://formspree.io/f/...)"
-                  value={formspreeId}
-                  onChange={(e) => handleSaveFormspreeId(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-700 text-white px-3 py-2 rounded text-xs outline-none focus:border-blue-500 font-mono"
-                />
-                <span className="text-[10px] text-slate-400 block mt-1">Get free ID at <a href="https://formspree.io" target="_blank" rel="noreferrer" className="text-blue-400 underline">formspree.io</a></span>
-              </div>
-
-              <div>
-                <label className="block text-slate-300 mb-1 text-[11px] font-bold">WEB3FORMS ACCESS KEY</label>
-                <input
-                  type="text"
-                  placeholder="e.g. 2ad836a9-8472-4b11-a5c9-94038167f2ce"
-                  value={web3Key}
-                  onChange={(e) => handleSaveWeb3Key(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-700 text-white px-3 py-2 rounded text-xs outline-none focus:border-blue-500 font-mono"
-                />
-                <span className="text-[10px] text-slate-400 block mt-1">Get free key at <a href="https://web3forms.com" target="_blank" rel="noreferrer" className="text-blue-400 underline">web3forms.com</a></span>
-              </div>
-            </div>
+            <p className="text-[11px] text-slate-400">
+              Form responses are automatically delivered to <strong className="text-white">contact@nostaviahealth.com</strong> with zero monthly submission caps.
+            </p>
           </div>
 
           {/* Table of Submissions */}
