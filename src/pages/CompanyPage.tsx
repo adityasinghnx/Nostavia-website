@@ -60,7 +60,7 @@ export const CompanyPage: React.FC = () => {
               </div>
             </div>
             <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              Leads product architecture, go-to-market strategy, and the clinical-data pipeline. Co-built the live production SOMA AI stack. B.Tech in Biotechnology, MNNIT Allahabad.
+              Leads product architecture, go-to-market strategy, and the clinical-data pipeline. Co-built the live production SOMA AI stack.
             </p>
           </div>
 
@@ -75,7 +75,7 @@ export const CompanyPage: React.FC = () => {
               </div>
             </div>
             <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              Leads AI model architecture, on-device training, and MLOps. Built the SOMA Dual-Brain stack running in production today. B.Tech in Biotechnology, MNNIT Allahabad.
+              Leads AI model architecture, on-device training, and MLOps. Built the SOMA Dual-Brain stack running in production today.
             </p>
           </div>
 
