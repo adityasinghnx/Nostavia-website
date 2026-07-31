@@ -220,15 +220,15 @@ export const DemoPage: React.FC = () => {
 
             <div className="pt-4 flex flex-wrap justify-center gap-3 w-full">
               <a
-                href={`mailto:contact@nostaviahealth.com?subject=Platform%20Demo%20Request%20%23${refId}&body=Name:%20${encodeURIComponent(formData.name)}%0D%0AEmail:%20${encodeURIComponent(formData.email)}%0D%0ACompany:%20${encodeURIComponent(formData.company)}%0D%0ARole:%20${encodeURIComponent(formData.role)}%0D%0ARegion:%20${encodeURIComponent(formData.market)}%0D%0ANotes:%20${encodeURIComponent(formData.notes)}`}
-                className="inline-flex items-center gap-2 bg-[#0F172A] hover:bg-[#1E293B] text-white font-mono text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-[2px] shadow-sm transition-all"
+                href={`mailto:contact@nostaviahealth.com,aditya@nostaviacorp.com?subject=${encodeURIComponent(`Platform Demo Request [${refId}]: ${formData.name} - ${formData.company}`)}&body=${encodeURIComponent(`Hi Aditya & Nostavia Team,\n\nI am following up on my demo request (#${refId}).\n\nRequest Details:\n- Name: ${formData.name}\n- Work Email: ${formData.email}\n- Company: ${formData.company}\n- Role: ${formData.role}\n- Region: ${formData.market}\n- Notes: ${formData.notes || 'N/A'}\n\nLooking forward to scheduling our 30-minute walkthrough.`)}`}
+                className="inline-flex items-center gap-2 bg-[#0F172A] hover:bg-[#1E293B] text-white font-mono text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-[2px] shadow-sm transition-all cursor-pointer"
               >
-                Send Direct Email Followup →
+                SEND DIRECT EMAIL FOLLOWUP →
               </a>
 
               <button
                 onClick={() => setSubmitted(false)}
-                className="bg-white hover:bg-[#F1F5F9] text-[#0F172A] border border-[#CBD5E1] font-display text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-[2px] transition-all"
+                className="bg-white hover:bg-[#F1F5F9] text-[#0F172A] border border-[#CBD5E1] font-display text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-[2px] transition-all cursor-pointer"
               >
                 Submit Another Request
               </button>
