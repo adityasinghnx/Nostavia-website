@@ -3,6 +3,11 @@ import React from 'react';
 export const LogoTrustBar: React.FC = () => {
   const clientLogos = [
     {
+      name: 'ETLAWM',
+      src: '/client_logos/Screenshot_2025-11-06_at_6.15.42_PM-removebg-preview 1.png',
+      className: 'h-9 sm:h-10 w-auto object-contain grayscale',
+    },
+    {
       name: 'Live 360',
       src: '/client_logos/snksn-removebg-preview 1.png',
       className: 'h-[50px] sm:h-[56px] w-auto object-contain grayscale',
