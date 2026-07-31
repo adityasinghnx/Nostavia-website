@@ -165,47 +165,78 @@ export const ClinicsPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. INTERACTIVE FAQ SECTION */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
-        <div className="space-y-3">
-          <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            FREQUENTLY ASKED QUESTIONS
-          </div>
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
-            Everything clinic directors ask us
-          </h2>
-        </div>
-
-        <div className="space-y-4 max-w-4xl">
-          {[
-            {
-              q: "How does Nostavia integrate with our existing EHR / EMR system?",
-              a: "Nostavia integrates via lightweight REST APIs, FHIR standards, or our Intelligence SDK. Intake Briefs can also be delivered as instant 1-page PDF briefs directly to the physician's tablet."
-            },
-            {
-              q: "Does Nostavia diagnose diseases autonomously?",
-              a: "No. Nostavia operates as a clinician-supervised decision support tool. All protocol recommendations and intake summaries are presented for physician review and final sign-off."
-            },
-            {
-              q: "Can we customize optimal reference ranges for our longevity protocol?",
-              a: "Yes. Enterprise clinic partners can specify custom optimal biomarker targets, supplement formularies, and clinical protocol rules within the Nostavia admin dashboard."
-            }
-          ].map((faq, idx) => (
-            <div key={idx} className="border border-[#E2E8F0] rounded-[2px] overflow-hidden bg-white shadow-none">
-              <button
-                onClick={() => toggleFaq(idx)}
-                className="w-full p-6 text-left font-display font-extrabold text-lg text-[#0F172A] flex items-center justify-between hover:bg-slate-50 transition-colors"
-              >
-                <span>{faq.q}</span>
-                {activeFaq === idx ? <ChevronUp className="w-5 h-5 text-[#0F172A]" /> : <ChevronDown className="w-5 h-5 text-slate-400" />}
-              </button>
-              {activeFaq === idx && (
-                <div className="p-6 pt-0 text-sm text-[#64748B] leading-relaxed border-t border-[#E2E8F0] font-body">
-                  {faq.a}
-                </div>
-              )}
+      {/* 4. INTERACTIVE FAQ SECTION - 2-COLUMN MODERN LAYOUT */}
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full pt-4">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+          
+          {/* Left Column */}
+          <div className="lg:col-span-5 space-y-4 lg:sticky lg:top-24">
+            <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
+              FREQUENTLY ASKED QUESTIONS
             </div>
-          ))}
+            <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-[#0F172A] tracking-tight leading-[1.08]">
+              Everything clinic directors ask us
+            </h2>
+            <p className="text-sm text-[#64748B] leading-relaxed font-body">
+              Learn how Nostavia integrates into clinical workflows, customizes biomarker targets, and safeguards clinician oversight.
+            </p>
+            <div className="pt-2">
+              <Link
+                to="/demo"
+                className="inline-flex items-center gap-2 text-xs font-bold font-display uppercase tracking-wider text-[#2563EB] hover:text-[#1D4ED8] transition-colors"
+              >
+                Schedule a clinical briefing →
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Column */}
+          <div className="lg:col-span-7 space-y-3.5">
+            {[
+              {
+                q: "How does Nostavia integrate with our existing EHR / EMR system?",
+                a: "Nostavia integrates via lightweight REST APIs, FHIR standards, or our Intelligence SDK. Intake Briefs can also be delivered as instant 1-page PDF briefs directly to the physician's tablet."
+              },
+              {
+                q: "Does Nostavia diagnose diseases autonomously?",
+                a: "No. Nostavia operates as a clinician-supervised decision support tool. All protocol recommendations and intake summaries are presented for physician review and final sign-off."
+              },
+              {
+                q: "Can we customize optimal reference ranges for our longevity protocol?",
+                a: "Yes. Enterprise clinic partners can specify custom optimal biomarker targets, supplement formularies, and clinical protocol rules within the Nostavia admin dashboard."
+              }
+            ].map((faq, idx) => {
+              const isOpen = activeFaq === idx;
+              return (
+                <div
+                  key={idx}
+                  className={`border rounded-[4px] transition-all duration-200 overflow-hidden ${
+                    isOpen
+                      ? 'bg-[#F8FAFC] border-[#CBD5E1] shadow-sm'
+                      : 'bg-white border-[#E2E8F0] hover:border-[#CBD5E1]'
+                  }`}
+                >
+                  <button
+                    onClick={() => toggleFaq(idx)}
+                    className="w-full p-5 sm:p-6 text-left font-display font-extrabold text-base sm:text-lg text-[#0F172A] flex items-center justify-between gap-4"
+                  >
+                    <span>{faq.q}</span>
+                    <span className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 ${
+                      isOpen ? 'bg-[#0F172A] text-white rotate-180' : 'bg-[#F1F5F9] text-[#64748B]'
+                    }`}>
+                      <ChevronDown className="w-4 h-4" />
+                    </span>
+                  </button>
+                  {isOpen && (
+                    <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-[#64748B] leading-relaxed border-t border-[#E2E8F0] font-body">
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
         </div>
       </section>
 

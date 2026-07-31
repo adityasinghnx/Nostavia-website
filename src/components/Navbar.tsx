@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Activity, Stethoscope, Smartphone, Layers, Cpu, ShieldCheck, FileText, RefreshCw, Code, Heart, Sparkles } from 'lucide-react';
+import { Menu, X, Activity, Stethoscope, Smartphone, Layers, Cpu, ShieldCheck, FileText, RefreshCw, Code, Heart, Sparkles, Building2 } from 'lucide-react';
 
 interface NavbarProps {
   onOpenDemo?: () => void;
@@ -228,17 +228,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
                   </Link>
 
                   <Link
-                    to="/industries/payer"
+                    to="/industries/hospitals"
                     onClick={closeMenus}
                     className="p-3.5 bg-[#F1F5F9] rounded-[6px] hover:bg-[#E2E8F0] transition-all flex items-center justify-between group border border-transparent"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-[4px] bg-[#F97316] text-white flex items-center justify-center font-bold shadow-sm">
-                        <ShieldCheck className="w-4 h-4 text-white" />
+                      <div className="w-9 h-9 rounded-[4px] bg-[#0F172A] text-white flex items-center justify-center font-bold shadow-sm">
+                        <Building2 className="w-4 h-4 text-white" />
                       </div>
                       <div>
-                        <div className="font-display font-bold text-sm text-[#0F172A]">Insurers & Payers</div>
-                        <div className="text-[11px] text-[#64748B]">Risk Scoring & MLR Lowering</div>
+                        <div className="font-display font-bold text-sm text-[#0F172A]">Hospitals & Health Systems</div>
+                        <div className="text-[11px] text-[#64748B]">5-Module Patient Front Door</div>
                       </div>
                     </div>
                     <span className="text-[#0F172A] text-xs font-bold">▶</span>
@@ -281,13 +281,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
                     </div>
                   </Link>
 
-                  <Link to="/solutions/pqs" onClick={closeMenus} className="p-3.5 border border-[#E5E7EB] rounded-[8px] bg-white hover:border-[#2563EB] flex items-center gap-3 transition-all shadow-sm group">
-                    <div className="w-8 h-8 rounded-full bg-amber-500/10 text-amber-600 flex items-center justify-center font-bold">
-                      <Cpu className="w-4 h-4" />
+                  <Link to="/solutions/hospitals" onClick={closeMenus} className="p-3.5 border border-[#E5E7EB] rounded-[8px] bg-white hover:border-[#2563EB] flex items-center gap-3 transition-all shadow-sm group">
+                    <div className="w-8 h-8 rounded-full bg-blue-500/10 text-[#2563EB] flex items-center justify-center font-bold">
+                      <Building2 className="w-4 h-4" />
                     </div>
                     <div>
-                      <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">SOMA Dual-Brain</div>
-                      <div className="text-[10px] text-[#64748B]">SOMA Edge + Cloud Model Architecture</div>
+                      <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">Hospital Patient Front Door</div>
+                      <div className="text-[10px] text-[#64748B]">Branded 5-module platform & recovery engine</div>
                     </div>
                   </Link>
                 </div>
@@ -384,17 +384,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
                         <Smartphone className="w-4 h-4 text-emerald-600" />
                         <div>
                           <div className="font-display font-bold text-xs text-[#0F172A]">White-Label App</div>
-                          <div className="text-[10px] text-[#64748B]">Branded mobile app for health systems</div>
+                          <div className="text-[10px] text-[#64748B]">Complete iOS & Android app under your brand</div>
                         </div>
                       </div>
                       <span className="text-xs text-[#64748B]">▶</span>
                     </Link>
-                    <Link to="/solutions/pqs" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
+                    <Link to="/solutions/hospitals" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <Cpu className="w-4 h-4 text-amber-600" />
+                        <Building2 className="w-4 h-4 text-[#2563EB]" />
                         <div>
-                          <div className="font-display font-bold text-xs text-[#0F172A]">SOMA Dual-Brain</div>
-                          <div className="text-[10px] text-[#64748B]">On-device & Cloud models</div>
+                          <div className="font-display font-bold text-xs text-[#0F172A]">Hospital Patient Front Door</div>
+                          <div className="text-[10px] text-[#64748B]">5-module platform for hospital systems</div>
                         </div>
                       </div>
                       <span className="text-xs text-[#64748B]">▶</span>

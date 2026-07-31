@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Activity, Stethoscope, HeartPulse, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Activity, Stethoscope, HeartPulse, Building2 } from 'lucide-react';
 
 export const WorkflowAutonomousAgentsSection: React.FC = () => {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
@@ -61,21 +61,22 @@ export const WorkflowAutonomousAgentsSection: React.FC = () => {
       ctaLink: '/solutions/galaxy',
     },
     {
-      id: 'payers',
-      label: 'Insurers & Payers',
-      icon: <ShieldCheck className="w-4 h-4 text-[#0F172A]" />,
-      headline: 'Risk is priced once a year. The population changes daily.',
-      description: 'We\'re building the layer that reads that change — risk scoring across an insured cohort from continuous signal rather than an annual form. Selecting design partners now.',
+      id: 'hospitals',
+      label: 'Hospitals & Health Systems',
+      icon: <Building2 className="w-4 h-4 text-[#0F172A]" />,
+      headline: 'Your HIS runs the hospital. Nostavia runs the relationship.',
+      description: 'Top health chains spent decades building proprietary predictive programs. Nostavia productises that continuous patient program for every hospital system in 60 days under your brand.',
       features: [
-        'Population risk',
-        'Cohort intelligence',
-        'Early identification',
+        'Preventive Engine',
+        'Discharge Recovery',
+        'Chronic Care',
+        'Built-For-You Tech',
       ],
-      metric: 'Selecting design partners now.',
-      image: '/payers-bg.jpg',
-      imageAlt: 'Insurer Population Risk Scoring',
-      ctaText: 'Talk about a design partnership →',
-      ctaLink: '/industries/payers',
+      metric: 'Measured on: LTV, retention & follow-up OPD capture.',
+      image: '/clinics-bg.jpg',
+      imageAlt: 'Hospital Patient Front Door & Continuous Care',
+      ctaText: 'Explore hospitals & health systems →',
+      ctaLink: '/industries/hospitals',
     },
   ];
 

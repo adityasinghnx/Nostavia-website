@@ -25,6 +25,7 @@ import { CuredPage } from './pages/solutions/CuredPage';
 import { CometPage } from './pages/solutions/CometPage';
 import { PQSPage } from './pages/solutions/PQSPage';
 import { StoryHealthPage } from './pages/solutions/StoryHealthPage';
+import { HospitalsPlatformPage } from './pages/solutions/HospitalsPlatformPage';
 import { HumbiPage } from './pages/solutions/HumbiPage';
 import { SupplementsPage as SolutionsEngineeringPage } from './pages/solutions/SupplementsPage';
 
@@ -45,7 +46,7 @@ export const App: React.FC = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen bg-white text-[#0F172A] flex flex-col justify-between selection:bg-[#2563EB]/20 selection:text-[#0F172A]">
+    <div className="min-h-screen bg-white text-[#0F172A] flex flex-col justify-between selection:bg-[#2563EB] selection:text-white">
       <div>
         <Navbar onOpenDemo={() => setDemoModalOpen(true)} />
         <main className="w-full">
@@ -55,7 +56,8 @@ export const App: React.FC = () => {
             
             {/* Industries Routes */}
             <Route path="/industries/provider" element={<ProviderPage />} />
-            <Route path="/industries/payer" element={<PayerPage />} />
+            <Route path="/industries/payer" element={<HospitalsPage />} />
+            <Route path="/industries/payers" element={<HospitalsPage />} />
             <Route path="/industries/public-sector" element={<PublicSectorPage />} />
             <Route path="/industries/life-sciences" element={<LifeSciencesPage />} />
             <Route path="/industries/diagnostic-labs" element={<DiagnosticLabsPage />} />
@@ -72,6 +74,8 @@ export const App: React.FC = () => {
             <Route path="/solutions/comet" element={<CometPage />} />
             <Route path="/solutions/pqs" element={<PQSPage />} />
             <Route path="/solutions/storyhealth" element={<StoryHealthPage />} />
+            <Route path="/solutions/hospitals" element={<HospitalsPlatformPage />} />
+            <Route path="/solutions/hospitals-front-door" element={<HospitalsPlatformPage />} />
             <Route path="/solutions/humbi" element={<HumbiPage />} />
             <Route path="/solutions/supplements" element={<SolutionsEngineeringPage />} />
             <Route path="/solutions/engineering" element={<SolutionsEngineeringPage />} />

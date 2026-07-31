@@ -43,6 +43,15 @@
     color: var(--text);
   }
 
+  ::selection {
+    background-color: #2563EB !important;
+    color: #FFFFFF !important;
+  }
+  ::-moz-selection {
+    background-color: #2563EB !important;
+    color: #FFFFFF !important;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     letter-spacing: -0.025em;
   }
