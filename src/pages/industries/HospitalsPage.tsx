@@ -245,13 +245,15 @@ export const HospitalsPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-[#64748B] font-body">
             <div className="p-5 bg-white border border-[#E2E8F0] rounded-[2px] space-y-2">
               <div className="font-display font-bold text-sm text-[#0F172A] flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                <ShieldCheck className="w-4 h-4 text-amber-600" />
                 ABDM & ABHA Data Architecture
               </div>
               <div className="leading-relaxed">
-                <span className="font-mono text-[10px] font-bold uppercase text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">PRODUCTION READY</span>
+                <span className="font-mono text-[10px] font-bold uppercase text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                  ARCHITECTURE READY · CERTIFICATION NOT YET COMPLETED
+                </span>
                 <p className="mt-1">
-                  Engineered to FHIR R4 and ABDM M1–M3 data specifications. Formats patient records for instant ABHA linking, allowing your hospital facility to claim DHIS incentives directly under your own HFR registration.
+                  Engineered to FHIR R4 and ABDM M1–M3 data specifications. Records are structured to FHIR R4 so that ABDM linking is a configuration step, not a re-build, once our certification completes.
                 </p>
               </div>
             </div>
