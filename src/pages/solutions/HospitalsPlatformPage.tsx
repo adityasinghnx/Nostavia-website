@@ -100,7 +100,7 @@ export const HospitalsPlatformPage: React.FC = () => {
             <div className="font-mono text-xs font-bold text-cyan-400">MECHANISM 01</div>
             <h3 className="font-display font-extrabold text-2xl text-white">Leakage Audit</h3>
             <p className="text-sm text-slate-300 leading-relaxed font-body flex-1">
-              Free pre-contract analysis. The hospital provides 12–24 months of anonymized historical data under a signed data-handling agreement. We return a Leakage Report showing the rupee value of leaked checkup customers, discharged patients who never returned, and dormant chronics who stopped engaging. Opens every door.
+              Free pre-contract analysis. The hospital provides 12–24 months of anonymized historical data under a signed data-handling agreement. We return a Leakage Report showing the rupee value of leaked checkup customers, discharged patients who never returned, and dormant chronics who stopped engaging. No HIS vendor offers this — running it requires an analytical engine, not a records system.
             </p>
             <div className="pt-2 border-t border-[#1E293B] space-y-2 font-mono text-[11px] text-slate-400">
               <div className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />Anonymized data only — signed DHA</div>
@@ -134,7 +134,7 @@ export const HospitalsPlatformPage: React.FC = () => {
             <div className="font-mono text-xs font-bold text-cyan-400">MECHANISM 03</div>
             <h3 className="font-display font-extrabold text-2xl text-white">Command Center</h3>
             <p className="text-sm text-slate-300 leading-relaxed font-body flex-1">
-              Hospital-side population intelligence: drift lists showing which chronic patients are deteriorating on which markers, cohort risk maps, program performance analytics, and department-level demand signals. The medical director's morning screen. Accumulates per-hospital intelligence that can't be exported.
+              Hospital-side population intelligence: drift lists showing which chronic patients are deteriorating on which markers, cohort risk maps, program performance analytics, and department-level demand signals. The medical director's morning screen. Gets sharper the longer it runs — six months in, the drift detection knows your patient population, not a generic one.
             </p>
             <div className="pt-2 border-t border-[#1E293B] space-y-2 font-mono text-[11px] text-slate-400">
               <div className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />Patient drift & deterioration alerts</div>
@@ -163,7 +163,10 @@ export const HospitalsPlatformPage: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           
           <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
-            <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 01</span>
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 01</span>
+              <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 font-mono text-[10px] font-bold uppercase rounded">Live</span>
+            </div>
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">Preventive Program Engine</h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-body">
               Converts health checkups from static PDFs into interactive Smart Reports with biological age, pace of aging, digital twin simulation, wearable connection, and automated re-test recall schedules.
@@ -171,7 +174,10 @@ export const HospitalsPlatformPage: React.FC = () => {
           </div>
 
           <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
-            <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 02</span>
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 02</span>
+              <span className="px-2 py-0.5 bg-amber-50 text-amber-700 border border-amber-200 font-mono text-[10px] font-bold uppercase rounded">In Pilot</span>
+            </div>
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">Discharge-to-Recovery Engine</h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-body">
               Plain-language recovery protocols, medication schedules with adherence tracking, wearable telemetry, symptom check-ins, care-team escalation flags, and auto-scheduled follow-up OPD bookings.
@@ -179,7 +185,10 @@ export const HospitalsPlatformPage: React.FC = () => {
           </div>
 
           <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
-            <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 03</span>
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 03</span>
+              <span className="px-2 py-0.5 bg-violet-50 text-violet-700 border border-violet-200 font-mono text-[10px] font-bold uppercase rounded">In Development · Design Partners 2027</span>
+            </div>
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">Chronic Care Subscription Programs</h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-body">
               Turnkey program management for subscription diabetes, cardiac, and metabolic clinics. Integrates Dexcom CGMs, wearable feeds, adaptive protocol updates, and care-team dashboards.
@@ -187,7 +196,10 @@ export const HospitalsPlatformPage: React.FC = () => {
           </div>
 
           <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
-            <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 04</span>
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 04</span>
+              <span className="px-2 py-0.5 bg-violet-50 text-violet-700 border border-violet-200 font-mono text-[10px] font-bold uppercase rounded">In Development · Design Partners 2027</span>
+            </div>
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">International Patient Continuity</h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-body">
               Post-treatment layer for medical-tourism (India–UAE corridor): format-agnostic lab PDF parser for home-country lab results, remote monitoring, teleconsult scheduling, and surgeon dashboard.
@@ -255,7 +267,7 @@ export const HospitalsPlatformPage: React.FC = () => {
             {[
               {
                 q: "What data does the Leakage Audit require and is it safe?",
-                a: "The Leakage Audit uses 12–24 months of anonymized historical data — checkup volumes, discharge records, and chronic-patient visit frequencies. All data is handled under a signed data-handling agreement. No personally identifiable information leaves your premises. We return a Leakage Report quantifying leaked revenue in rupees across checkup customers, discharged patients, and dormant chronics."
+                a: "The Leakage Audit uses 12–24 months of anonymized historical data — checkup volumes, discharge records, and chronic-patient visit frequencies. Records are anonymized before export. We never receive names, contact details, MRNs, or any identifier that maps back to a patient — only visit patterns, package types, and dates. All data is handled under a signed data-handling agreement. We return a Leakage Report quantifying leaked revenue in rupees across checkup customers, discharged patients, and dormant chronics."
               },
               {
                 q: "How does the Attribution Engine track ROI?",
@@ -275,7 +287,7 @@ export const HospitalsPlatformPage: React.FC = () => {
               },
               {
                 q: "What does the Command Center show?",
-                a: "The Command Center is the medical director's morning screen: drift lists showing which chronic patients are deteriorating on which markers, cohort risk maps, program performance analytics, and department-level demand signals. It accumulates per-hospital population intelligence that compounds over time and cannot be exported."
+                a: "The Command Center is the medical director's morning screen: drift lists showing which chronic patients are deteriorating on which markers, cohort risk maps, program performance analytics, and department-level demand signals. It gets sharper the longer it runs — six months in, the drift detection knows your patient population, not a generic one."
               }
             ].map((faq, idx) => {
               const isOpen = activeFaq === idx;

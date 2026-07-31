@@ -54,7 +54,7 @@ export const HospitalsPage: React.FC = () => {
           </h1>
 
           <p className="text-base sm:text-xl text-[#64748B] max-w-3xl leading-relaxed font-body">
-            We show the hospital its own leaked revenue before they pay a rupee. We price partly on the revenue we bring back. We put the attribution dashboard in the CFO's hands so the value is never a debate.
+            We white-label predictive patient programs onto your existing checkup, discharge and chronic volume — under your brand, live in 60 days. Then we show you, in rupees, exactly what they brought back.
           </p>
 
           <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-4 pt-2">
@@ -108,7 +108,7 @@ export const HospitalsPage: React.FC = () => {
                 </span>
               </div>
               <h2 className="font-display font-extrabold text-2xl sm:text-4xl text-white leading-tight">
-                "You leaked ₹4.7 crore of repeat revenue last year — here is the patient-level breakdown."
+                How much repeat revenue did you leak last year? Most hospitals have never been able to answer that question.
               </h2>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-body">
                 Before any contract, share 12–24 months of anonymized historical data — checkup transactions, OPD visits, discharge records. We return a <span className="text-white font-bold">Leakage Report</span> within two weeks: how many checkup customers never returned, how many discharged patients had no follow-up, how many chronic patients went dormant — and the rupee value of each bucket, computed on your own price list. Anonymized data only, processed under a signed data-handling agreement, deleted after the audit.
@@ -169,7 +169,7 @@ export const HospitalsPage: React.FC = () => {
               </p>
             </div>
             <div className="pt-4 border-t border-[#E2E8F0] font-mono text-[11px] text-[#475569]">
-              <span className="font-bold text-[#0F172A]">Opens every door.</span> No HIS vendor offers this because no HIS vendor has the analytical engine.
+              No HIS vendor offers this — running it requires an analytical engine, not a records system.
             </div>
           </div>
 
@@ -184,7 +184,7 @@ export const HospitalsPage: React.FC = () => {
               </p>
             </div>
             <div className="pt-4 border-t border-[#E2E8F0] font-mono text-[11px] text-[#475569]">
-              <span className="font-bold text-[#0F172A]">Nobody cancels a dashboard showing 6× return.</span> ROI as a number on a screen, not a claim.
+              ROI as a number on a screen, not a claim in a slide deck.
             </div>
           </div>
 
@@ -199,7 +199,7 @@ export const HospitalsPage: React.FC = () => {
               </p>
             </div>
             <div className="pt-4 border-t border-[#E2E8F0] font-mono text-[11px] text-[#475569]">
-              <span className="font-bold text-[#0F172A]">A non-exportable asset.</span> Every patient-month deepens baselines — leaving means losing accumulated intelligence.
+              Gets sharper the longer it runs. Six months in, the drift detection knows your patient population — not a generic one.
             </div>
           </div>
 
@@ -225,7 +225,10 @@ export const HospitalsPage: React.FC = () => {
           {/* PROGRAM 1 */}
           <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-5 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
             <div className="space-y-4">
-              <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 01</span>
+              <div className="flex items-center gap-3">
+                <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 01</span>
+                <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 font-mono text-[10px] font-bold uppercase rounded">Live</span>
+              </div>
               <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
                 Preventive Program Engine
               </h3>
@@ -241,7 +244,10 @@ export const HospitalsPage: React.FC = () => {
           {/* PROGRAM 2 */}
           <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-5 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
             <div className="space-y-4">
-              <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 02</span>
+              <div className="flex items-center gap-3">
+                <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 02</span>
+                <span className="px-2 py-0.5 bg-amber-50 text-amber-700 border border-amber-200 font-mono text-[10px] font-bold uppercase rounded">In Pilot</span>
+              </div>
               <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
                 Discharge-to-Recovery
               </h3>
@@ -258,7 +264,10 @@ export const HospitalsPage: React.FC = () => {
           {/* PROGRAM 3 */}
           <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-5 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
             <div className="space-y-4">
-              <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 03</span>
+              <div className="flex items-center gap-3">
+                <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 03</span>
+                <span className="px-2 py-0.5 bg-violet-50 text-violet-700 border border-violet-200 font-mono text-[10px] font-bold uppercase rounded">In Development · Design Partners 2027</span>
+              </div>
               <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
                 Chronic Care Programs
               </h3>
@@ -274,7 +283,10 @@ export const HospitalsPage: React.FC = () => {
           {/* PROGRAM 4 */}
           <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-5 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
             <div className="space-y-4">
-              <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 04</span>
+              <div className="flex items-center gap-3">
+                <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 04</span>
+                <span className="px-2 py-0.5 bg-violet-50 text-violet-700 border border-violet-200 font-mono text-[10px] font-bold uppercase rounded">In Development · Design Partners 2027</span>
+              </div>
               <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
                 International Patient Continuity
               </h3>
@@ -412,6 +424,10 @@ export const HospitalsPage: React.FC = () => {
               </div>
             </div>
           </div>
+          {/* DOOR A PRICING HONESTY LINE */}
+          <div className="p-5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] font-body text-xs text-[#475569] leading-relaxed">
+            <span className="font-bold text-[#0F172A]">A note on the arithmetic:</span> Partner pricing costs more than flat pricing when the platform performs well — that's the point. Choose it if you want your downside capped at ₹34,999. Choose flat if you'd rather cap the upside.
+          </div>
         </div>
 
         {/* DOOR B - FLAT PRICING */}
@@ -472,6 +488,39 @@ export const HospitalsPage: React.FC = () => {
               <div className="font-mono text-[10px] font-bold text-[#64748B] uppercase">GULF — ENTERPRISE</div>
               <div className="font-display font-extrabold text-xl text-[#0F172A] mt-1">AED 25,000+ <span className="text-xs font-normal text-[#64748B]">/ mo flat</span></div>
               <div className="text-[11px] text-[#64748B] mt-1">Or base + 6% attributed (Partner)</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6B. WHAT YOUR TEAM HAS TO DO */}
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-8">
+        <div className="p-8 sm:p-12 bg-white border border-[#E2E8F0] rounded-[2px] space-y-6">
+          <div className="space-y-2">
+            <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
+              WHAT YOUR TEAM HAS TO DO
+            </div>
+            <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-[#0F172A]">
+              Minimal effort from your side — no new headcount
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="p-5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-2">
+              <div className="font-display font-bold text-sm text-[#0F172A]">Leakage Audit</div>
+              <div className="text-xs text-[#64748B] leading-relaxed font-body">One data export from your HIS team. No meetings required.</div>
+            </div>
+            <div className="p-5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-2">
+              <div className="font-display font-bold text-sm text-[#0F172A]">Pilot</div>
+              <div className="text-xs text-[#64748B] leading-relaxed font-body">One point of contact, roughly two hours a week.</div>
+            </div>
+            <div className="p-5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-2">
+              <div className="font-display font-bold text-sm text-[#0F172A]">Deployment</div>
+              <div className="text-xs text-[#64748B] leading-relaxed font-body">Your brand assets, one IT contact for the connector. We do the rest.</div>
+            </div>
+            <div className="p-5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-2">
+              <div className="font-display font-bold text-sm text-[#0F172A]">Ongoing</div>
+              <div className="text-xs text-[#64748B] leading-relaxed font-body">No new headcount. The Command Center is designed for staff you already have.</div>
             </div>
           </div>
         </div>
@@ -552,6 +601,43 @@ export const HospitalsPage: React.FC = () => {
                   Plugs directly into your hospital's existing HIS or EMR via standard REST APIs, HL7, or FHIR feeds — reading appointment schedules and writing back clinical intake briefs with zero workflow disruption.
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 8B. CREDIBILITY — WHO ELSE USES THIS */}
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-8">
+        <div className="p-8 sm:p-12 bg-[#0F172A] text-white rounded-[2px] border border-[#1E293B] shadow-xl space-y-6">
+          <div className="space-y-2">
+            <div className="font-mono text-xs text-cyan-400 font-bold uppercase tracking-widest">
+              WHERE WE STAND TODAY
+            </div>
+            <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-white">
+              Early. And we'll say so plainly.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="p-5 bg-slate-900/60 border border-slate-800 rounded-[2px] space-y-2">
+              <div className="font-display font-bold text-sm text-white">Live in production</div>
+              <div className="text-xs text-slate-300 leading-relaxed font-body">Full stack running today. Our reference app is on both stores with 2,000+ users.</div>
+            </div>
+            <div className="p-5 bg-slate-900/60 border border-slate-800 rounded-[2px] space-y-2">
+              <div className="font-display font-bold text-sm text-white">A paying client</div>
+              <div className="text-xs text-slate-300 leading-relaxed font-body">Live360Degrees runs its smart-report engine on Nostavia. Available as a reference.</div>
+            </div>
+            <div className="p-5 bg-slate-900/60 border border-slate-800 rounded-[2px] space-y-2">
+              <div className="font-display font-bold text-sm text-white">Clinical governance</div>
+              <div className="text-xs text-slate-300 leading-relaxed font-body">Seven-member advisory bench — GMC-registered physicians, a senior IISc scientist, UCL-trained clinical nutrition. Protocol outputs validated before they reach any partner.</div>
+            </div>
+            <div className="p-5 bg-slate-900/60 border border-slate-800 rounded-[2px] space-y-2">
+              <div className="font-display font-bold text-sm text-white">Programmes</div>
+              <div className="text-xs text-slate-300 leading-relaxed font-body">NVIDIA Inception · Google for Startups · Microsoft for Startups.</div>
+            </div>
+            <div className="p-5 bg-slate-900/60 border border-slate-800 rounded-[2px] space-y-2 sm:col-span-2">
+              <div className="font-display font-bold text-sm text-white">Hospitals: you'd be early</div>
+              <div className="text-xs text-slate-300 leading-relaxed font-body">We'll say so plainly — and the free audit, the credited pilot, and the deployment guarantee exist because of it.</div>
             </div>
           </div>
         </div>
