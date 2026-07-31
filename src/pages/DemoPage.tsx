@@ -84,55 +84,37 @@ export const DemoPage: React.FC = () => {
       localStorage.setItem('nostavia_demo_requests', JSON.stringify(updated));
       setSubmissions(updated);
 
-      // 2. Dispatch to FormSubmit.co (Unlimited Free Submissions), Formspree, or Web3Forms
-      const formspreeId = localStorage.getItem('nostavia_formspree_id')?.trim();
-      const web3AccessKey = localStorage.getItem('nostavia_web3forms_key')?.trim();
+      // 2. Dispatch directly to user's Formspree endpoint (https://formspree.io/f/xbdnezwz)
+      const customFormspreeId = localStorage.getItem('nostavia_formspree_id')?.trim();
+      const formspreeEndpoint = customFormspreeId
+        ? (customFormspreeId.startsWith('http') ? customFormspreeId : `https://formspree.io/f/${customFormspreeId}`)
+        : 'https://formspree.io/f/xbdnezwz';
 
-      if (formspreeId) {
-        // Send to Formspree endpoint (50 free/mo)
-        const formspreeUrl = formspreeId.startsWith('http')
-          ? formspreeId
-          : `https://formspree.io/f/${formspreeId}`;
+      await fetch(formspreeEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(() => null);
 
-        await fetch(formspreeUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(payload)
-        }).catch(() => null);
-      } else if (web3AccessKey) {
-        // Send to Web3Forms endpoint (250 free/mo)
-        await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({
-            access_key: web3AccessKey,
-            subject: `NEW DEMO REQUEST [${generatedRefId}]: ${formData.name} - ${formData.company}`,
-            from_name: formData.name,
-            reply_to: formData.email,
-            ...payload
-          })
-        }).catch(() => null);
-      } else {
-        // Default: FormSubmit.co (UNLIMITED FREE SUBMISSIONS directly to contact@nostaviahealth.com)
-        await fetch('https://formsubmit.co/ajax/contact@nostaviahealth.com', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({
-            _subject: `NEW NOSTAVIA DEMO REQUEST [${generatedRefId}]: ${formData.name} - ${formData.company}`,
-            _template: 'table',
-            _captcha: 'false',
-            name: formData.name,
-            email: formData.email,
-            company: formData.company,
-            role: formData.role,
-            segment: formData.segment,
-            market: formData.market,
-            sampleFile: fileName || 'None',
-            notes: formData.notes || 'None',
-            refId: generatedRefId
-          })
-        }).catch(() => null);
-      }
+      // Dual backup dispatch to FormSubmit.co
+      await fetch('https://formsubmit.co/ajax/contact@nostaviahealth.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: `NEW NOSTAVIA DEMO REQUEST [${generatedRefId}]: ${formData.name} - ${formData.company}`,
+          _template: 'table',
+          _captcha: 'false',
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          role: formData.role,
+          segment: formData.segment,
+          market: formData.market,
+          sampleFile: fileName || 'None',
+          notes: formData.notes || 'None',
+          refId: generatedRefId
+        })
+      }).catch(() => null);
 
       await new Promise((resolve) => setTimeout(resolve, 600));
     } catch {
