@@ -5,7 +5,7 @@ export const LogoTrustBar: React.FC = () => {
     {
       name: 'Live 360',
       src: '/client_logos/snksn-removebg-preview 1.png',
-      className: 'h-9 sm:h-10 w-auto object-contain grayscale',
+      className: 'h-[50px] sm:h-[56px] w-auto object-contain grayscale',
     },
     {
       name: '360 ATHLETIX',
