@@ -23,6 +23,7 @@ export const DemoPage: React.FC = () => {
   const [showAdmin, setShowAdmin] = useState(false);
   const [submissions, setSubmissions] = useState<DemoRequest[]>([]);
   const [web3Key, setWeb3Key] = useState<string>('');
+  const [formspreeId, setFormspreeId] = useState<string>('');
   
   const [formData, setFormData] = useState({
     name: '',
@@ -34,11 +35,13 @@ export const DemoPage: React.FC = () => {
     notes: ''
   });
 
-  // Load submissions and API key on mount
+  // Load submissions and API keys on mount
   useEffect(() => {
     loadSubmissions();
-    const savedKey = localStorage.getItem('nostavia_web3forms_key') || '';
-    setWeb3Key(savedKey);
+    const savedWeb3Key = localStorage.getItem('nostavia_web3forms_key') || '';
+    const savedFormspree = localStorage.getItem('nostavia_formspree_id') || '';
+    setWeb3Key(savedWeb3Key);
+    setFormspreeId(savedFormspree);
   }, []);
 
   const loadSubmissions = () => {
@@ -50,9 +53,14 @@ export const DemoPage: React.FC = () => {
     }
   };
 
-  const handleSaveKey = (key: string) => {
+  const handleSaveWeb3Key = (key: string) => {
     setWeb3Key(key);
     localStorage.setItem('nostavia_web3forms_key', key);
+  };
+
+  const handleSaveFormspreeId = (id: string) => {
+    setFormspreeId(id);
+    localStorage.setItem('nostavia_formspree_id', id);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -76,19 +84,35 @@ export const DemoPage: React.FC = () => {
       localStorage.setItem('nostavia_demo_requests', JSON.stringify(updated));
       setSubmissions(updated);
 
-      // 2. Dispatch to Web3Forms using custom key if available, or fallback key
-      const activeKey = web3Key.trim() || '2ad836a9-8472-4b11-a5c9-94038167f2ce';
-      await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          access_key: activeKey,
-          subject: `NEW DEMO REQUEST [${generatedRefId}]: ${formData.name} - ${formData.company}`,
-          from_name: formData.name,
-          reply_to: formData.email,
-          ...payload
-        })
-      }).catch(() => null);
+      // 2. Dispatch to custom Formspree or Web3Forms endpoint
+      const formspreeId = localStorage.getItem('nostavia_formspree_id')?.trim();
+      const web3AccessKey = localStorage.getItem('nostavia_web3forms_key')?.trim() || '2ad836a9-8472-4b11-a5c9-94038167f2ce';
+
+      if (formspreeId) {
+        // Send to Formspree dashboard endpoint
+        const formspreeUrl = formspreeId.startsWith('http')
+          ? formspreeId
+          : `https://formspree.io/f/${formspreeId}`;
+
+        await fetch(formspreeUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        }).catch(() => null);
+      } else {
+        // Send to Web3Forms dashboard endpoint
+        await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            access_key: web3AccessKey,
+            subject: `NEW DEMO REQUEST [${generatedRefId}]: ${formData.name} - ${formData.company}`,
+            from_name: formData.name,
+            reply_to: formData.email,
+            ...payload
+          })
+        }).catch(() => null);
+      }
 
       await new Promise((resolve) => setTimeout(resolve, 600));
     } catch {
@@ -202,24 +226,37 @@ export const DemoPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Web3Forms Access Key Field */}
-          <div className="bg-slate-900 border border-slate-800 rounded p-4 text-xs font-mono space-y-2">
-            <div className="flex items-center gap-2 text-slate-300 font-bold">
+          {/* Service Integrations Configuration */}
+          <div className="bg-slate-900 border border-slate-800 rounded p-4 text-xs font-mono space-y-4">
+            <div className="flex items-center gap-2 text-slate-200 font-bold border-b border-slate-800 pb-2">
               <Key className="w-4 h-4 text-amber-400" />
-              <span>Optional Email API Access Key (Web3Forms / Formspree)</span>
+              <span>Connect Formspree or Web3Forms (Direct Dashboard Delivery)</span>
             </div>
-            <p className="text-[11px] text-slate-400">
-              Enter a free key from <a href="https://web3forms.com" target="_blank" rel="noreferrer" className="text-blue-400 underline">Web3Forms.com</a> (or Formspree) to receive instant email notifications directly in your inbox:
-            </p>
-            <div className="flex items-center gap-2 pt-1">
-              <input
-                type="text"
-                placeholder="e.g. 2ad836a9-8472-4b11-a5c9-94038167f2ce"
-                value={web3Key}
-                onChange={(e) => handleSaveKey(e.target.value)}
-                className="flex-1 bg-slate-950 border border-slate-700 text-white px-3 py-2 rounded text-xs outline-none focus:border-blue-500 font-mono"
-              />
-              <span className="text-[10px] text-emerald-400 font-bold">Auto-Saved</span>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-slate-300 mb-1 text-[11px] font-bold">FORMSPREE FORM ID (OR URL)</label>
+                <input
+                  type="text"
+                  placeholder="e.g. xqyvblz (or https://formspree.io/f/...)"
+                  value={formspreeId}
+                  onChange={(e) => handleSaveFormspreeId(e.target.value)}
+                  className="w-full bg-slate-950 border border-slate-700 text-white px-3 py-2 rounded text-xs outline-none focus:border-blue-500 font-mono"
+                />
+                <span className="text-[10px] text-slate-400 block mt-1">Get free ID at <a href="https://formspree.io" target="_blank" rel="noreferrer" className="text-blue-400 underline">formspree.io</a></span>
+              </div>
+
+              <div>
+                <label className="block text-slate-300 mb-1 text-[11px] font-bold">WEB3FORMS ACCESS KEY</label>
+                <input
+                  type="text"
+                  placeholder="e.g. 2ad836a9-8472-4b11-a5c9-94038167f2ce"
+                  value={web3Key}
+                  onChange={(e) => handleSaveWeb3Key(e.target.value)}
+                  className="w-full bg-slate-950 border border-slate-700 text-white px-3 py-2 rounded text-xs outline-none focus:border-blue-500 font-mono"
+                />
+                <span className="text-[10px] text-slate-400 block mt-1">Get free key at <a href="https://web3forms.com" target="_blank" rel="noreferrer" className="text-blue-400 underline">web3forms.com</a></span>
+              </div>
             </div>
           </div>
 

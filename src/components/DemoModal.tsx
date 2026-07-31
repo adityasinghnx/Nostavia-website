@@ -43,23 +43,32 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
       existing.push(payload);
       localStorage.setItem('nostavia_demo_requests', JSON.stringify(existing));
 
-      await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          access_key: '2ad836a9-8472-4b11-a5c9-94038167f2ce',
-          subject: `NEW DEMO REQUEST [${generatedRefId}]: ${formData.name} - ${formData.company}`,
-          from_name: formData.name,
-          reply_to: formData.email,
-          ...payload
-        })
-      }).catch(() => null);
+      const formspreeId = localStorage.getItem('nostavia_formspree_id')?.trim();
+      const web3AccessKey = localStorage.getItem('nostavia_web3forms_key')?.trim() || '2ad836a9-8472-4b11-a5c9-94038167f2ce';
 
-      await fetch('https://formspree.io/f/contact@nostaviahealth.com', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      }).catch(() => null);
+      if (formspreeId) {
+        const formspreeUrl = formspreeId.startsWith('http')
+          ? formspreeId
+          : `https://formspree.io/f/${formspreeId}`;
+
+        await fetch(formspreeUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        }).catch(() => null);
+      } else {
+        await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            access_key: web3AccessKey,
+            subject: `NEW DEMO REQUEST [${generatedRefId}]: ${formData.name} - ${formData.company}`,
+            from_name: formData.name,
+            reply_to: formData.email,
+            ...payload
+          })
+        }).catch(() => null);
+      }
 
       await new Promise((resolve) => setTimeout(resolve, 600));
     } catch {
