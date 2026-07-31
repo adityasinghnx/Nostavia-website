@@ -2,23 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   ArrowRight, 
-  Code, 
-  Layers, 
-  Smartphone, 
-  Cpu, 
-  ShieldCheck, 
-  CheckCircle2, 
-  Building2, 
-  Activity, 
-  Stethoscope, 
-  Database, 
-  Clock, 
-  Lock, 
-  Zap, 
   ChevronDown, 
-  ChevronUp,
-  FileText,
-  Wrench
+  Search,
+  BarChart3,
+  Monitor,
 } from 'lucide-react';
 import { ArchitectureDiagram } from '../../components/ArchitectureDiagram';
 
@@ -38,19 +25,16 @@ export const HospitalsPlatformPage: React.FC = () => {
           
           <div className="flex flex-wrap items-center gap-3">
             <span className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-              EMBEDDABLE PLATFORM & SDKs
-            </span>
-            <span className="px-2.5 py-0.5 bg-[#FFF7ED] border border-[#FED7AA] text-[#9A3412] font-mono text-[10px] font-bold uppercase rounded-[2px]">
-              HOSPITAL PATIENT FRONT DOOR PLATFORM (v2)
+              HOSPITAL PLATFORM & SDKs
             </span>
           </div>
 
-          <h1 className="font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl text-[#0F172A] tracking-tight max-w-4xl leading-[1.02]">
-            The 4-Program Patient Front Door Platform.
+          <h1 className="font-display font-extrabold text-3xl sm:text-6xl lg:text-7xl text-[#0F172A] tracking-tight max-w-4xl leading-[1.02]">
+            Audit the leak. Prove the fix. Show the value.
           </h1>
 
           <p className="text-base sm:text-xl text-[#64748B] max-w-3xl leading-relaxed font-body">
-            A turnkey intelligence platform that sits on top of your existing HIS to deliver predictive, personalized health programs under your brand in 60 days. Includes branded mobile apps, patient portal, booking layer, and direct founder engineering.
+            Three mechanisms that make ROI undeniable — a Leakage Audit that proves the problem, a pilot that proves the fix, and a live Attribution Engine that proves the value — layered on top of four embeddable patient programs and a direct engineering service.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 pt-2">
@@ -65,7 +49,7 @@ export const HospitalsPlatformPage: React.FC = () => {
               to="/industries/hospitals"
               className="bg-white hover:bg-slate-50 text-[#0F172A] border border-[#CBD5E1] font-display text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-[2px] transition-all"
             >
-              View Hospital Offer Strategy (v2)
+              View Hospital Programs
             </Link>
           </div>
 
@@ -92,13 +76,83 @@ export const HospitalsPlatformPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. THE 4 EMBEDDABLE PROGRAMS + BUILT FOR YOU */}
+      {/* 2. THREE MECHANISMS — THE NERVOUS SYSTEM */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
         <div className="space-y-3">
           <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            PLATFORM ARCHITECTURE & OFFERINGS
+            THE THREE MECHANISMS
           </div>
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
+          <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-[#0F172A] tracking-tight max-w-4xl">
+            The nervous system that makes every program provable
+          </h2>
+          <p className="text-base text-[#64748B] max-w-3xl leading-relaxed font-body">
+            Programs are the muscles. These three mechanisms are the nervous system — they open the door, price the value, and accumulate intelligence that compounds over time.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          {/* Leakage Audit */}
+          <div className="p-8 bg-[#0F172A] text-white rounded-[2px] border border-[#1E293B] space-y-5 shadow-xl flex flex-col">
+            <div className="w-11 h-11 rounded-full bg-cyan-400/10 flex items-center justify-center">
+              <Search className="w-5 h-5 text-cyan-400" />
+            </div>
+            <div className="font-mono text-xs font-bold text-cyan-400">MECHANISM 01</div>
+            <h3 className="font-display font-extrabold text-2xl text-white">Leakage Audit</h3>
+            <p className="text-sm text-slate-300 leading-relaxed font-body flex-1">
+              Free pre-contract analysis. The hospital provides 12–24 months of anonymized historical data under a signed data-handling agreement. We return a Leakage Report showing the rupee value of leaked checkup customers, discharged patients who never returned, and dormant chronics who stopped engaging. Opens every door.
+            </p>
+            <div className="pt-2 border-t border-[#1E293B] space-y-2 font-mono text-[11px] text-slate-400">
+              <div className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />Anonymized data only — signed DHA</div>
+              <div className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />Rupee-value leakage quantification</div>
+              <div className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />Delivered in 2 weeks, zero integration</div>
+            </div>
+          </div>
+
+          {/* Attribution Engine */}
+          <div className="p-8 bg-[#0F172A] text-white rounded-[2px] border border-[#1E293B] space-y-5 shadow-xl flex flex-col">
+            <div className="w-11 h-11 rounded-full bg-cyan-400/10 flex items-center justify-center">
+              <BarChart3 className="w-5 h-5 text-cyan-400" />
+            </div>
+            <div className="font-mono text-xs font-bold text-cyan-400">MECHANISM 02</div>
+            <h3 className="font-display font-extrabold text-2xl text-white">Attribution Engine</h3>
+            <p className="text-sm text-slate-300 leading-relaxed font-body flex-1">
+              Every re-test, follow-up OPD visit, and package renewal is tagged, attributed, and priced in a live CFO dashboard. ROI as a number on a screen, not a claim in a slide deck. Makes performance-based pricing possible because the value is always visible.
+            </p>
+            <div className="pt-2 border-t border-[#1E293B] space-y-2 font-mono text-[11px] text-slate-400">
+              <div className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />Real-time attribution tagging</div>
+              <div className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />Live CFO revenue dashboard</div>
+              <div className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />Enables performance-based pricing</div>
+            </div>
+          </div>
+
+          {/* Command Center */}
+          <div className="p-8 bg-[#0F172A] text-white rounded-[2px] border border-[#1E293B] space-y-5 shadow-xl flex flex-col">
+            <div className="w-11 h-11 rounded-full bg-cyan-400/10 flex items-center justify-center">
+              <Monitor className="w-5 h-5 text-cyan-400" />
+            </div>
+            <div className="font-mono text-xs font-bold text-cyan-400">MECHANISM 03</div>
+            <h3 className="font-display font-extrabold text-2xl text-white">Command Center</h3>
+            <p className="text-sm text-slate-300 leading-relaxed font-body flex-1">
+              Hospital-side population intelligence: drift lists showing which chronic patients are deteriorating on which markers, cohort risk maps, program performance analytics, and department-level demand signals. The medical director's morning screen. Accumulates per-hospital intelligence that can't be exported.
+            </p>
+            <div className="pt-2 border-t border-[#1E293B] space-y-2 font-mono text-[11px] text-slate-400">
+              <div className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />Patient drift & deterioration alerts</div>
+              <div className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />Cohort risk maps & demand signals</div>
+              <div className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />Compounding hospital-specific intelligence</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 3. THE 4 EMBEDDABLE PROGRAMS + BUILT FOR YOU */}
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
+        <div className="space-y-3">
+          <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
+            FOUR EMBEDDABLE PROGRAMS
+          </div>
+          <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-[#0F172A] tracking-tight">
             Four programs + direct engineering service
           </h2>
           <p className="text-base text-[#64748B] max-w-3xl leading-relaxed font-body">
@@ -109,9 +163,7 @@ export const HospitalsPlatformPage: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           
           <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 01</span>
-            </div>
+            <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 01</span>
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">Preventive Program Engine</h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-body">
               Converts health checkups from static PDFs into interactive Smart Reports with biological age, pace of aging, digital twin simulation, wearable connection, and automated re-test recall schedules.
@@ -119,9 +171,7 @@ export const HospitalsPlatformPage: React.FC = () => {
           </div>
 
           <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 02</span>
-            </div>
+            <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 02</span>
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">Discharge-to-Recovery Engine</h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-body">
               Plain-language recovery protocols, medication schedules with adherence tracking, wearable telemetry, symptom check-ins, care-team escalation flags, and auto-scheduled follow-up OPD bookings.
@@ -129,9 +179,7 @@ export const HospitalsPlatformPage: React.FC = () => {
           </div>
 
           <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 03</span>
-            </div>
+            <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 03</span>
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">Chronic Care Subscription Programs</h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-body">
               Turnkey program management for subscription diabetes, cardiac, and metabolic clinics. Integrates Dexcom CGMs, wearable feeds, adaptive protocol updates, and care-team dashboards.
@@ -139,9 +187,7 @@ export const HospitalsPlatformPage: React.FC = () => {
           </div>
 
           <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 04</span>
-            </div>
+            <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 04</span>
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">International Patient Continuity</h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-body">
               Post-treatment layer for medical-tourism (India–UAE corridor): format-agnostic lab PDF parser for home-country lab results, remote monitoring, teleconsult scheduling, and surgeon dashboard.
@@ -162,13 +208,13 @@ export const HospitalsPlatformPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. DUAL-BRAIN ARCHITECTURE & DIAGRAM */}
+      {/* 4. DUAL-BRAIN ARCHITECTURE & DIAGRAM */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
         <div className="space-y-3">
           <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
             TECHNICAL INTEGRATION ARCHITECTURE
           </div>
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
+          <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-[#0F172A] tracking-tight">
             How Nostavia sits on top of your existing HIS
           </h2>
           <p className="text-base text-[#64748B] max-w-3xl leading-relaxed font-body">
@@ -179,7 +225,7 @@ export const HospitalsPlatformPage: React.FC = () => {
         <ArchitectureDiagram />
       </section>
 
-      {/* 4. HOSPITAL IT & PROCUREMENT FAQ - 2-COLUMN MODERN LAYOUT */}
+      {/* 5. HOSPITAL IT & PROCUREMENT FAQ - 2-COLUMN MODERN LAYOUT */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full pt-4">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           
@@ -192,7 +238,7 @@ export const HospitalsPlatformPage: React.FC = () => {
               Frequently Asked IT Questions
             </h2>
             <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              Detailed technical answers regarding EHR data pipelines, SOMA-1B privacy models, and rapid deployment schedules.
+              Detailed technical answers regarding the Leakage Audit, Attribution Engine, deployment guarantees, and HIS integration architecture.
             </p>
             <div className="pt-2">
               <Link
@@ -208,16 +254,28 @@ export const HospitalsPlatformPage: React.FC = () => {
           <div className="lg:col-span-7 space-y-3.5">
             {[
               {
+                q: "What data does the Leakage Audit require and is it safe?",
+                a: "The Leakage Audit uses 12–24 months of anonymized historical data — checkup volumes, discharge records, and chronic-patient visit frequencies. All data is handled under a signed data-handling agreement. No personally identifiable information leaves your premises. We return a Leakage Report quantifying leaked revenue in rupees across checkup customers, discharged patients, and dormant chronics."
+              },
+              {
+                q: "How does the Attribution Engine track ROI?",
+                a: "Every re-test booking, follow-up OPD visit, and package renewal generated through Nostavia programs is tagged and attributed back to the originating program and patient cohort. The Attribution Engine surfaces this as a live CFO dashboard — revenue generated, cost per recaptured patient, and program-level ROI. It makes performance-based pricing possible because the value is always visible."
+              },
+              {
                 q: "Does Nostavia replace our hospital's existing HIS or EMR system?",
-                a: "No. Nostavia is explicitly HIS-neutral. We integrate with whatever HIS exists (KareXpert, Insta by Practo, Napier, Medinous, HealthPlix, etc.) by reading appointments and writing back clinical briefs and recovery progress."
+                a: "No. Nostavia is explicitly HIS-neutral. We integrate with whatever HIS exists (KareXpert, Insta by Practo, Napier, Medinous, HealthPlix, etc.) by reading appointments and writing back clinical briefs and recovery progress. Zero modifications to your HIS codebase."
               },
               {
                 q: "Where is patient data processed and stored?",
                 a: "Personal data is processed on-device via our SOMA-1B privacy layer before de-identified clinical briefs reach our cloud reasoning model. All infrastructure complies with India's DPDP 2023 act and UAE health data laws."
               },
               {
-                q: "What is the implementation timeline for a regional hospital chain?",
-                a: "Program 1 (Smart Reports on the health-check counter) deploys in days with zero integration. The complete patient front door deploys in 60 days."
+                q: "What is the deployment guarantee for a hospital chain?",
+                a: "Program 1 (Smart Reports on the health-check counter) deploys in days with zero integration. The complete patient front door — including Command Center, Attribution Engine, and all four programs — deploys in 60 days. We guarantee the timeline contractually."
+              },
+              {
+                q: "What does the Command Center show?",
+                a: "The Command Center is the medical director's morning screen: drift lists showing which chronic patients are deteriorating on which markers, cohort risk maps, program performance analytics, and department-level demand signals. It accumulates per-hospital population intelligence that compounds over time and cannot be exported."
               }
             ].map((faq, idx) => {
               const isOpen = activeFaq === idx;
@@ -254,21 +312,21 @@ export const HospitalsPlatformPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. FINAL CTA BANNER */}
+      {/* 6. FINAL CTA BANNER */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full pt-4">
         <div className="p-12 sm:p-16 lg:p-20 bg-[#0F172A] text-white rounded-[2px] border border-[#1E293B] shadow-2xl text-center flex flex-col items-center gap-8">
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-[54px] text-white max-w-4xl leading-[1.05] tracking-tight">
-            Schedule a technical platform briefing
+          <h2 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-[54px] text-white max-w-4xl leading-[1.05] tracking-tight">
+            Start with a free Leakage Audit
           </h2>
           <p className="text-base sm:text-lg text-slate-300 max-w-2xl font-body leading-relaxed">
-            Review integration specs, HIS data pipelines, and white-label app customization with our engineering team.
+            See the rupee value of leaked patients before signing anything. Then review integration specs, the Attribution Engine, and white-label app customization with our engineering team.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
             <Link
               to="/demo"
               className="bg-white hover:bg-slate-100 text-[#0F172A] font-display text-xs font-bold uppercase tracking-wider px-9 py-4 rounded-[2px] shadow-md transition-all inline-flex items-center gap-2"
             >
-              Book technical briefing
+              Request Leakage Audit
               <ArrowRight className="w-4 h-4 text-[#0F172A]" />
             </Link>
           </div>
