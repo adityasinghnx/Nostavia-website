@@ -47,8 +47,7 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: '2ad836a9-8472-4b11-[#contact@nostaviahealth.com]',
-          recipient_email: 'contact@nostaviahealth.com',
+          access_key: '2ad836a9-8472-4b11-a5c9-94038167f2ce',
           subject: `NEW DEMO REQUEST [${generatedRefId}]: ${formData.name} - ${formData.company}`,
           from_name: formData.name,
           reply_to: formData.email,
@@ -62,9 +61,9 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
         body: JSON.stringify(payload)
       }).catch(() => null);
 
-      await new Promise((resolve) => setTimeout(resolve, 800));
+      await new Promise((resolve) => setTimeout(resolve, 600));
     } catch {
-      // Graceful error fallback
+      // Graceful fallback
     } finally {
       setIsSubmitting(false);
       setSubmitted(true);

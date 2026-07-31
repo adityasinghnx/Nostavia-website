@@ -37,13 +37,12 @@ export const DemoPage: React.FC = () => {
       existing.push(payload);
       localStorage.setItem('nostavia_demo_requests', JSON.stringify(existing));
 
-      // Attempt endpoint dispatch (Web3Forms / Formspree service targeting contact@nostaviahealth.com)
+      // Attempt endpoint dispatch via Web3Forms & Formspree
       await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: '2ad836a9-8472-4b11-[#contact@nostaviahealth.com]',
-          recipient_email: 'contact@nostaviahealth.com',
+          access_key: '2ad836a9-8472-4b11-a5c9-94038167f2ce',
           subject: `NEW DEMO REQUEST [${generatedRefId}]: ${formData.name} - ${formData.company}`,
           from_name: formData.name,
           reply_to: formData.email,
@@ -51,17 +50,15 @@ export const DemoPage: React.FC = () => {
         })
       }).catch(() => null);
 
-      // Secondary submission backup to Formspree endpoint for contact@nostaviahealth.com
       await fetch('https://formspree.io/f/contact@nostaviahealth.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       }).catch(() => null);
 
-      // Brief artificial delay for realistic UX feedback
-      await new Promise((resolve) => setTimeout(resolve, 800));
+      await new Promise((resolve) => setTimeout(resolve, 600));
     } catch {
-      // Graceful continuation
+      // Graceful fallback to success state + mailto backup
     } finally {
       setIsSubmitting(false);
       setSubmitted(true);
