@@ -20,7 +20,7 @@ export const LogoTrustBar: React.FC = () => {
     {
       name: 'Client Logo 4',
       src: '/client_logos/Screenshot 2026-07-31 at 11.44.24 AM.png',
-      className: 'h-9 sm:h-10 w-auto object-contain grayscale',
+      className: 'h-[72px] sm:h-[80px] w-auto object-contain grayscale',
     },
   ];
 
