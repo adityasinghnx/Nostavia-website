@@ -84,12 +84,12 @@ export const DemoPage: React.FC = () => {
       localStorage.setItem('nostavia_demo_requests', JSON.stringify(updated));
       setSubmissions(updated);
 
-      // 2. Dispatch to custom Formspree or Web3Forms endpoint
+      // 2. Dispatch to FormSubmit.co (Unlimited Free Submissions), Formspree, or Web3Forms
       const formspreeId = localStorage.getItem('nostavia_formspree_id')?.trim();
-      const web3AccessKey = localStorage.getItem('nostavia_web3forms_key')?.trim() || '2ad836a9-8472-4b11-a5c9-94038167f2ce';
+      const web3AccessKey = localStorage.getItem('nostavia_web3forms_key')?.trim();
 
       if (formspreeId) {
-        // Send to Formspree dashboard endpoint
+        // Send to Formspree endpoint (50 free/mo)
         const formspreeUrl = formspreeId.startsWith('http')
           ? formspreeId
           : `https://formspree.io/f/${formspreeId}`;
@@ -99,8 +99,8 @@ export const DemoPage: React.FC = () => {
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify(payload)
         }).catch(() => null);
-      } else {
-        // Send to Web3Forms dashboard endpoint
+      } else if (web3AccessKey) {
+        // Send to Web3Forms endpoint (250 free/mo)
         await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -110,6 +110,26 @@ export const DemoPage: React.FC = () => {
             from_name: formData.name,
             reply_to: formData.email,
             ...payload
+          })
+        }).catch(() => null);
+      } else {
+        // Default: FormSubmit.co (UNLIMITED FREE SUBMISSIONS directly to contact@nostaviahealth.com)
+        await fetch('https://formsubmit.co/ajax/contact@nostaviahealth.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            _subject: `NEW NOSTAVIA DEMO REQUEST [${generatedRefId}]: ${formData.name} - ${formData.company}`,
+            _template: 'table',
+            _captcha: 'false',
+            name: formData.name,
+            email: formData.email,
+            company: formData.company,
+            role: formData.role,
+            segment: formData.segment,
+            market: formData.market,
+            sampleFile: fileName || 'None',
+            notes: formData.notes || 'None',
+            refId: generatedRefId
           })
         }).catch(() => null);
       }

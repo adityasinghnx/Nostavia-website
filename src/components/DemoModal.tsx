@@ -44,7 +44,7 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
       localStorage.setItem('nostavia_demo_requests', JSON.stringify(existing));
 
       const formspreeId = localStorage.getItem('nostavia_formspree_id')?.trim();
-      const web3AccessKey = localStorage.getItem('nostavia_web3forms_key')?.trim() || '2ad836a9-8472-4b11-a5c9-94038167f2ce';
+      const web3AccessKey = localStorage.getItem('nostavia_web3forms_key')?.trim();
 
       if (formspreeId) {
         const formspreeUrl = formspreeId.startsWith('http')
@@ -56,7 +56,7 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify(payload)
         }).catch(() => null);
-      } else {
+      } else if (web3AccessKey) {
         await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -66,6 +66,26 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
             from_name: formData.name,
             reply_to: formData.email,
             ...payload
+          })
+        }).catch(() => null);
+      } else {
+        // Default: FormSubmit.co (UNLIMITED FREE SUBMISSIONS directly to contact@nostaviahealth.com)
+        await fetch('https://formsubmit.co/ajax/contact@nostaviahealth.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            _subject: `NEW NOSTAVIA DEMO REQUEST [${generatedRefId}]: ${formData.name} - ${formData.company}`,
+            _template: 'table',
+            _captcha: 'false',
+            name: formData.name,
+            email: formData.email,
+            company: formData.company,
+            role: formData.role,
+            segment: formData.segment,
+            market: formData.market,
+            sampleFile: fileName || 'None',
+            notes: formData.notes || 'None',
+            refId: generatedRefId
           })
         }).catch(() => null);
       }
