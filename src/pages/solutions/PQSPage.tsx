@@ -114,7 +114,7 @@ export const PQSPage: React.FC = () => {
           {[
             {
               q: "Does any patient PHI ever touch cloud servers?",
-              a: "No. SOMA-1B de-identifies all data locally on-device. Cloud reasoning models receive exclusively anonymized biomarker vectors."
+              a: "No. Nostavia de-identifies all data locally on-device. Cloud reasoning models receive exclusively anonymized biomarker vectors."
             },
             {
               q: "Can enterprise partners deploy SOMA cloud models in their own private cloud?",

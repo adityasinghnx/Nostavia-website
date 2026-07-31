@@ -65,7 +65,7 @@ export const PublicSectorPage: React.FC = () => {
               Edge De-Identification
             </h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-body">
-              SOMA-1B on-device model strips personal identifiers at the user interface level before data aggregation.
+              Nostavia's on-device privacy layer strips personal identifiers at the user interface level before data aggregation.
             </p>
           </div>
 

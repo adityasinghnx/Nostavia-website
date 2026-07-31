@@ -30,7 +30,7 @@ export const PlatformLayerThreeCardsSection: React.FC = () => {
     },
     {
       title: 'SOMA Dual-Brain',
-      subtitle: 'On-device SOMA-1B + 70B cloud model',
+      subtitle: 'SOMA Edge + Cloud Model Architecture',
       description: 'Personal data interpreted on the device and stripped before anything reaches the cloud. Privacy as architecture rather than as policy.',
       linkText: 'How SOMA works →',
       linkUrl: '/solutions/pqs',

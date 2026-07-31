@@ -158,11 +158,11 @@ export const PlatformPage: React.FC = () => {
             
             <div className="p-8 bg-slate-900 border border-slate-800 rounded-[2px] space-y-4">
               <div className="inline-block px-3 py-1 bg-cyan-950 text-cyan-400 border border-cyan-800 font-mono text-[10px] font-bold uppercase rounded-[2px]">
-                ON-DEVICE DOMAIN BRAIN
+                ON-DEVICE DOMAIN BRAIN (IN DEVELOPMENT)
               </div>
-              <h3 className="font-display font-extrabold text-2xl text-white">SOMA-1B (On-Device)</h3>
+              <h3 className="font-display font-extrabold text-2xl text-white">SOMA-1B Architecture</h3>
               <p className="text-sm text-slate-300 leading-relaxed font-body">
-                A small language model that runs on-device. It understands the user's data, routes queries, personalizes responses, and distils the result into a focused, de-identified clinical brief.
+                Nostavia's upcoming specialized domain brain. Designed to run on-device to route queries, personalize responses, and distill data into de-identified clinical briefs.
               </p>
             </div>
 

@@ -29,7 +29,7 @@ export const SecurityPage: React.FC = () => {
             </div>
             <h3 className="font-display font-extrabold text-xl text-[#0F172A]">Privacy at the Edge</h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-body">
-              Personally identifiable information is stripped on-device before any cloud inference. The SOMA-1B domain brain is designed to keep personal data local.
+              Personally identifiable information is stripped on-device before any cloud inference. Nostavia's SOMA edge architecture is designed to keep personal data local.
             </p>
           </div>
         </div>

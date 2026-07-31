@@ -75,7 +75,7 @@ export const CompanyPage: React.FC = () => {
               </div>
             </div>
             <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              Leads AI model architecture, on-device training, and MLOps. Built the SOMA Dual-Brain stack running in production today.
+              Leads AI model architecture, on-device training, and MLOps. Architected the SOMA Dual-Brain framework and clinical intelligence stack.
             </p>
           </div>
 

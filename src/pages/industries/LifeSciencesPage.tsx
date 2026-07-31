@@ -77,7 +77,7 @@ export const LifeSciencesPage: React.FC = () => {
               De-Identified Compliance
             </h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-body">
-              SOMA-1B on-device de-identification guarantees trial participant PHI never leaves local participant devices un-encrypted.
+              Nostavia's on-device privacy layer guarantees trial participant PHI never leaves local participant devices un-encrypted.
             </p>
           </div>
         </div>

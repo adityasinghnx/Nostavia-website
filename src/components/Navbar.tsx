@@ -287,7 +287,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
                     </div>
                     <div>
                       <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">SOMA Dual-Brain</div>
-                      <div className="text-[10px] text-[#64748B]">On-device SOMA-1B + 70B Cloud Model</div>
+                      <div className="text-[10px] text-[#64748B]">SOMA Edge + Cloud Model Architecture</div>
                     </div>
                   </Link>
                 </div>

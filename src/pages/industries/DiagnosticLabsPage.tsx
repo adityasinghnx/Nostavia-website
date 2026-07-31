@@ -263,7 +263,7 @@ export const DiagnosticLabsPage: React.FC = () => {
             },
             {
               q: "How does Nostavia handle custom or proprietary PDF lab formats?",
-              a: "Nostavia's SOMA-1B vision engine ingests Quest, LabCorp, Dr Lal PathLabs, Thyrocare, and custom hospital PDF layouts automatically with 99.4% field accuracy, standardizing biomarker names into official LOINC & SNOMED codes."
+              a: "Nostavia's clinical vision engine ingests Quest, LabCorp, Dr Lal PathLabs, Thyrocare, and custom hospital PDF layouts automatically with 99.4% field accuracy, standardizing biomarker names into official LOINC & SNOMED codes."
             },
             {
               q: "How does the Re-Test Recall Campaign engine work?",
