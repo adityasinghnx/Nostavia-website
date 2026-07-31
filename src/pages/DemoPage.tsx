@@ -173,132 +173,8 @@ export const DemoPage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col gap-8 py-10 max-w-[960px] mx-auto px-4 sm:px-6 font-body text-[#0F172A] bg-white">
+    <div className="flex flex-col gap-12 py-10 max-w-[800px] mx-auto px-4 sm:px-6 font-body text-[#0F172A] bg-white">
       
-      {/* TOP TOGGLE HEADER */}
-      <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-4">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="font-mono text-xs font-bold text-[#64748B] uppercase tracking-wider">
-            DEMO GATEWAY & LEAD LOG
-          </span>
-        </div>
-
-        <button
-          onClick={() => setShowAdmin(!showAdmin)}
-          className="inline-flex items-center gap-2 bg-[#F1F5F9] hover:bg-[#E2E8F0] text-[#0F172A] border border-[#CBD5E1] font-mono text-xs font-bold px-3 py-1.5 rounded-[2px] transition-all"
-        >
-          <Database className="w-3.5 h-3.5 text-[#2563EB]" />
-          <span>{showAdmin ? 'Hide Submissions' : `View Logged Submissions (${submissions.length})`}</span>
-        </button>
-      </div>
-
-      {/* SUBMISSIONS DASHBOARD PANEL */}
-      {showAdmin && (
-        <div className="bg-[#0F172A] text-white rounded-[4px] p-6 space-y-6 shadow-xl border border-slate-700">
-          
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
-            <div>
-              <h2 className="font-display font-bold text-xl text-white flex items-center gap-2">
-                <Database className="w-5 h-5 text-[#2563EB]" />
-                Logged Lead Submissions ({submissions.length})
-              </h2>
-              <p className="text-xs text-slate-400 font-mono mt-0.5">
-                All demo form submissions are saved locally in your browser and dispatched via email.
-              </p>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <button
-                onClick={exportToCSV}
-                disabled={submissions.length === 0}
-                className="inline-flex items-center gap-1.5 bg-[#2563EB] hover:bg-blue-600 text-white font-mono text-xs font-bold px-3 py-2 rounded-[2px] disabled:opacity-50 transition-all"
-              >
-                <Download className="w-3.5 h-3.5" />
-                Export CSV
-              </button>
-              <button
-                onClick={clearSubmissions}
-                disabled={submissions.length === 0}
-                className="inline-flex items-center gap-1.5 bg-red-600/20 hover:bg-red-600/30 text-red-300 border border-red-500/30 font-mono text-xs font-bold px-3 py-2 rounded-[2px] disabled:opacity-50 transition-all"
-              >
-                <Trash2 className="w-3.5 h-3.5" />
-                Clear
-              </button>
-            </div>
-          </div>
-
-          {/* Active Backend Integration Banner */}
-          <div className="bg-slate-900 border border-slate-800 rounded p-4 text-xs font-mono space-y-3">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-              <div className="flex items-center gap-2 text-slate-200 font-bold">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span>FormSubmit.co (Active Primary Backend)</span>
-              </div>
-              <span className="text-[10px] text-emerald-400 bg-emerald-950/80 border border-emerald-800 px-2 py-0.5 rounded font-bold uppercase">
-                UNLIMITED FREE SUBMISSIONS
-              </span>
-            </div>
-
-            <p className="text-[11px] text-slate-400">
-              Form responses are automatically delivered to <strong className="text-white">contact@nostaviahealth.com</strong> with zero monthly submission caps.
-            </p>
-          </div>
-
-          {/* Table of Submissions */}
-          {submissions.length === 0 ? (
-            <div className="py-8 text-center text-slate-400 text-xs font-mono border border-dashed border-slate-800 rounded">
-              No submissions recorded yet. Submit the form below to test logging.
-            </div>
-          ) : (
-            <div className="overflow-x-auto border border-slate-800 rounded max-h-[360px]">
-              <table className="w-full text-left border-collapse text-xs font-body">
-                <thead>
-                  <tr className="bg-slate-900 text-slate-400 font-mono text-[11px] uppercase border-b border-slate-800">
-                    <th className="p-3">Ref ID / Time</th>
-                    <th className="p-3">Name & Email</th>
-                    <th className="p-3">Company & Role</th>
-                    <th className="p-3">Segment & Region</th>
-                    <th className="p-3">File / Notes</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-800/60">
-                  {submissions.map((sub, i) => (
-                    <tr key={i} className="hover:bg-slate-800/40 transition-colors">
-                      <td className="p-3 font-mono">
-                        <div className="text-emerald-400 font-bold">{sub.refId}</div>
-                        <div className="text-[10px] text-slate-400">{sub.submittedAt}</div>
-                      </td>
-                      <td className="p-3">
-                        <div className="font-bold text-white">{sub.name}</div>
-                        <div className="text-[#93C5FD] font-mono text-[11px]">{sub.email}</div>
-                      </td>
-                      <td className="p-3">
-                        <div className="font-semibold text-white">{sub.company}</div>
-                        <div className="text-slate-400 text-[11px]">{sub.role}</div>
-                      </td>
-                      <td className="p-3 font-mono text-[11px]">
-                        <div className="text-amber-300">{sub.segment}</div>
-                        <div className="text-slate-400">{sub.market}</div>
-                      </td>
-                      <td className="p-3 text-[11px] max-w-[200px]">
-                        {sub.sampleFile && (
-                          <div className="text-blue-300 font-mono text-[10px] bg-blue-950/60 px-1.5 py-0.5 rounded border border-blue-800 mb-1 inline-block">
-                            📄 {sub.sampleFile}
-                          </div>
-                        )}
-                        <div className="text-slate-300 truncate">{sub.notes || '—'}</div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-
-        </div>
-      )}
-
       {/* HEADER */}
       <div className="space-y-3 text-center">
         <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
@@ -321,7 +197,7 @@ export const DemoPage: React.FC = () => {
             </div>
 
             <span className="font-mono text-[11px] font-bold text-[#059669] bg-[#ECFDF5] px-3 py-1 rounded border border-[#A7F3D0] uppercase tracking-wider">
-              REF #{refId} · LOGGED & CONFIRMED
+              REF #{refId} · CONFIRMED
             </span>
 
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
@@ -329,7 +205,7 @@ export const DemoPage: React.FC = () => {
             </h3>
 
             <p className="text-sm text-[#64748B] max-w-md leading-relaxed font-body">
-              Thank you, <strong className="text-[#0F172A]">{formData.name}</strong>. Your request details have been saved to the Submissions Log (<span className="font-mono text-[#0F172A]">{formData.email}</span>). Our team will reach out within 2 hours.
+              Thank you, <strong className="text-[#0F172A]">{formData.name}</strong>. We have logged your request (<span className="font-mono text-[#0F172A]">{formData.email}</span>). Aditya Singh or our solution engineering team will reach out within 2 hours to confirm your meeting time.
             </p>
 
             {fileName && (
@@ -343,14 +219,6 @@ export const DemoPage: React.FC = () => {
             )}
 
             <div className="pt-4 flex flex-wrap justify-center gap-3 w-full">
-              <button
-                onClick={() => setShowAdmin(true)}
-                className="inline-flex items-center gap-2 bg-[#2563EB] hover:bg-blue-700 text-white font-mono text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-[2px] shadow-sm transition-all"
-              >
-                <Database className="w-4 h-4" />
-                View Logged Lead Data ({submissions.length})
-              </button>
-
               <a
                 href={`mailto:contact@nostaviahealth.com?subject=Platform%20Demo%20Request%20%23${refId}&body=Name:%20${encodeURIComponent(formData.name)}%0D%0AEmail:%20${encodeURIComponent(formData.email)}%0D%0ACompany:%20${encodeURIComponent(formData.company)}%0D%0ARole:%20${encodeURIComponent(formData.role)}%0D%0ARegion:%20${encodeURIComponent(formData.market)}%0D%0ANotes:%20${encodeURIComponent(formData.notes)}`}
                 className="inline-flex items-center gap-2 bg-[#0F172A] hover:bg-[#1E293B] text-white font-mono text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-[2px] shadow-sm transition-all"
