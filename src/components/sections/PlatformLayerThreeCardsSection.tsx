@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Code, Layers, Smartphone, Cpu } from 'lucide-react';
+import { Code, Layers, Smartphone, Cpu, Volume2 } from 'lucide-react';
 
 export const PlatformLayerThreeCardsSection: React.FC = () => {
   const cards = [
@@ -29,11 +29,19 @@ export const PlatformLayerThreeCardsSection: React.FC = () => {
       icon: <Smartphone className="w-5 h-5 text-[#0F172A]" />,
     },
     {
-      title: 'SOMA Dual-Brain',
-      subtitle: 'SOMA Edge + Cloud Model Architecture',
-      description: 'Personal data interpreted on the device and stripped before anything reaches the cloud. Privacy as architecture rather than as policy.',
-      linkText: 'How SOMA works →',
-      linkUrl: '/solutions/pqs',
+      title: 'AI Agents (including voice)',
+      subtitle: 'Always-on patient support & voice booking agent',
+      description: 'Nostavia Front Desk answers every call in Hinglish, names a specific doctor, and turns an enquiry into a booked visit across phone, WhatsApp & web under your brand.',
+      linkText: 'View AI Agents →',
+      linkUrl: '/solutions/front-desk',
+      icon: <Volume2 className="w-5 h-5 text-[#0F172A]" />,
+    },
+    {
+      title: 'Hospital Patient Front Door',
+      subtitle: 'Branded 5-module platform & recovery engine',
+      description: 'The complete enterprise front door for hospitals: preventive smart reports, discharge-to-recovery engine, leakage audit and live attribution dashboard.',
+      linkText: 'View Platform →',
+      linkUrl: '/solutions/hospitals',
       icon: <Cpu className="w-5 h-5 text-[#0F172A]" />,
     },
   ];
@@ -48,12 +56,12 @@ export const PlatformLayerThreeCardsSection: React.FC = () => {
             EMBEDDABLE PLATFORM & SDKS
           </div>
           <h2 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-[54px] text-[#0F172A] tracking-tight leading-[1.05]">
-            Four ways in. Pick the one that matches what you already have.
+            Five ways in. Pick the one that matches what you already have.
           </h2>
         </div>
 
-        {/* 4 Cards Grid (2x2 Desktop) — No Status Pills */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* 5 Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {cards.map((c, idx) => (
             <div
               key={idx}

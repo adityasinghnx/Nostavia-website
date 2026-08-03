@@ -28,6 +28,7 @@ import { StoryHealthPage } from './pages/solutions/StoryHealthPage';
 import { HospitalsPlatformPage } from './pages/solutions/HospitalsPlatformPage';
 import { HumbiPage } from './pages/solutions/HumbiPage';
 import { SupplementsPage as SolutionsEngineeringPage } from './pages/solutions/SupplementsPage';
+import { FrontDeskPage } from './pages/solutions/FrontDeskPage';
 
 // Core Pages
 import { PricingPage } from './pages/PricingPage';
@@ -79,6 +80,9 @@ export const App: React.FC = () => {
             <Route path="/solutions/humbi" element={<HumbiPage />} />
             <Route path="/solutions/supplements" element={<SolutionsEngineeringPage />} />
             <Route path="/solutions/engineering" element={<SolutionsEngineeringPage />} />
+            <Route path="/solutions/front-desk" element={<FrontDeskPage />} />
+            <Route path="/solutions/ai-agents" element={<FrontDeskPage />} />
+            <Route path="/solutions/voice-agents" element={<FrontDeskPage />} />
 
             {/* Core Pages */}
             <Route path="/pricing" element={<PricingPage />} />

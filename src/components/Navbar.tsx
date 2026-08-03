@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Activity, Stethoscope, Smartphone, Layers, Cpu, ShieldCheck, FileText, RefreshCw, Code, Heart, Sparkles, Building2 } from 'lucide-react';
+import { Menu, X, Activity, Stethoscope, Smartphone, Layers, Cpu, ShieldCheck, FileText, RefreshCw, Code, Heart, Sparkles, Building2, Volume2 } from 'lucide-react';
 
 interface NavbarProps {
   onOpenDemo?: () => void;
@@ -42,23 +42,47 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
           <div className="absolute -top-36 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] bg-amber-200/40 blur-3xl pointer-events-none rounded-full" />
 
           <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center gap-3">
-            <h2 className="font-display font-bold text-2xl sm:text-4xl lg:text-5xl text-[#0F172A] tracking-tight leading-[1.15]">
-              Custom Health AI Infrastructure. <br className="hidden sm:inline" />
-              Built directly by our founding engineers.
-            </h2>
+            {location.pathname.includes('front-desk') || location.pathname.includes('ai-agents') || location.pathname.includes('voice-agents') || location.pathname.includes('hospitals') ? (
+              <>
+                <h2 className="font-display font-bold text-2xl sm:text-4xl lg:text-5xl text-[#0F172A] tracking-tight leading-[1.15]">
+                  Always-on AI Voice & Support Agent. <br className="hidden sm:inline" />
+                  Turn hospital phone enquiries into booked visits.
+                </h2>
 
-            <p className="text-xs sm:text-base text-[#475569] font-semibold max-w-2xl px-2">
-              Solutions Engineering — bespoke health intelligence modules, EHR integrations, and custom clinical deployments for enterprise health systems.
-            </p>
+                <p className="text-xs sm:text-base text-[#475569] font-semibold max-w-2xl px-2">
+                  Nostavia Front Desk — answers every call in Hinglish, names a specific doctor, rules out emergencies, and captures late-night bookings under your hospital's brand.
+                </p>
 
-            <div className="pt-3">
-              <Link
-                to="/solutions/supplements"
-                className="inline-block bg-[#0F172A] hover:bg-black text-white font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-widest px-5 sm:px-6 py-2.5 rounded-[2px] transition-all shadow-md"
-              >
-                EXPLORE SOLUTIONS ENGINEERING
-              </Link>
-            </div>
+                <div className="pt-3">
+                  <Link
+                    to="/solutions/front-desk"
+                    className="inline-block bg-[#0F172A] hover:bg-black text-white font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-widest px-5 sm:px-6 py-2.5 rounded-[2px] transition-all shadow-md"
+                  >
+                    EXPLORE FRONT DESK VOICE AGENT
+                  </Link>
+                </div>
+              </>
+            ) : (
+              <>
+                <h2 className="font-display font-bold text-2xl sm:text-4xl lg:text-5xl text-[#0F172A] tracking-tight leading-[1.15]">
+                  Custom Health AI Infrastructure. <br className="hidden sm:inline" />
+                  Built directly by our founding engineers.
+                </h2>
+
+                <p className="text-xs sm:text-base text-[#475569] font-semibold max-w-2xl px-2">
+                  Solutions Engineering — bespoke health intelligence modules, EHR integrations, and custom clinical deployments for enterprise health systems.
+                </p>
+
+                <div className="pt-3">
+                  <Link
+                    to="/solutions/supplements"
+                    className="inline-block bg-[#0F172A] hover:bg-black text-white font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-widest px-5 sm:px-6 py-2.5 rounded-[2px] transition-all shadow-md"
+                  >
+                    EXPLORE SOLUTIONS ENGINEERING
+                  </Link>
+                </div>
+              </>
+            )}
           </div>
 
           {/* SMOOTH SINE WAVE / ECG PEAK SVG BOTTOM EDGE */}
@@ -250,44 +274,54 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
               {/* SECOND SECTION: NOSTAVIA PLATFORM & INTEGRATION MODES */}
               <div className="pt-2 border-t border-[#E5E7EB]">
                 <div className="eyebrow text-[#94A3B8] mb-3 text-[10px] uppercase tracking-widest font-mono font-bold">EMBEDDABLE PLATFORM & SDKs</div>
-                <div className="grid grid-cols-4 gap-4">
-                  <Link to="/solutions/gravity" onClick={closeMenus} className="p-3.5 border border-[#E5E7EB] rounded-[8px] bg-white hover:border-[#2563EB] flex items-center gap-3 transition-all shadow-sm group">
-                    <div className="w-8 h-8 rounded-full bg-blue-500/10 text-[#2563EB] flex items-center justify-center font-bold">
+                <div className="grid grid-cols-5 gap-3">
+                  <Link to="/solutions/gravity" onClick={closeMenus} className="p-3 border border-[#E5E7EB] rounded-[8px] bg-white hover:border-[#2563EB] flex items-center gap-2.5 transition-all shadow-sm group">
+                    <div className="w-8 h-8 rounded-full bg-blue-500/10 text-[#2563EB] flex items-center justify-center font-bold shrink-0">
                       <Code className="w-4 h-4" />
                     </div>
                     <div>
                       <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">Intelligence SDK</div>
-                      <div className="text-[10px] text-[#64748B]">Lab parsing, food scans & AI concierge</div>
+                      <div className="text-[10px] text-[#64748B] leading-tight">Lab parsing & AI concierge</div>
                     </div>
                   </Link>
 
-                  <Link to="/solutions/galaxy" onClick={closeMenus} className="p-3.5 border border-[#E5E7EB] rounded-[8px] bg-white hover:border-[#2563EB] flex items-center gap-3 transition-all shadow-sm group">
-                    <div className="w-8 h-8 rounded-full bg-purple-500/10 text-purple-600 flex items-center justify-center font-bold">
+                  <Link to="/solutions/galaxy" onClick={closeMenus} className="p-3 border border-[#E5E7EB] rounded-[8px] bg-white hover:border-[#2563EB] flex items-center gap-2.5 transition-all shadow-sm group">
+                    <div className="w-8 h-8 rounded-full bg-purple-500/10 text-purple-600 flex items-center justify-center font-bold shrink-0">
                       <Layers className="w-4 h-4" />
                     </div>
                     <div>
                       <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">Wearables SDK</div>
-                      <div className="text-[10px] text-[#64748B]">Single API for Apple, Oura, WHOOP</div>
+                      <div className="text-[10px] text-[#64748B] leading-tight">Unified API for Apple & Oura</div>
                     </div>
                   </Link>
 
-                  <Link to="/solutions/storyhealth" onClick={closeMenus} className="p-3.5 border border-[#E5E7EB] rounded-[8px] bg-white hover:border-[#2563EB] flex items-center gap-3 transition-all shadow-sm group">
-                    <div className="w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-bold">
+                  <Link to="/solutions/storyhealth" onClick={closeMenus} className="p-3 border border-[#E5E7EB] rounded-[8px] bg-white hover:border-[#2563EB] flex items-center gap-2.5 transition-all shadow-sm group">
+                    <div className="w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-bold shrink-0">
                       <Smartphone className="w-4 h-4" />
                     </div>
                     <div>
                       <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">White-Label App</div>
-                      <div className="text-[10px] text-[#64748B]">Complete iOS & Android app under your brand</div>
+                      <div className="text-[10px] text-[#64748B] leading-tight">Complete iOS & Android app</div>
                     </div>
                   </Link>
 
-                  <Link to="/solutions/hospitals" onClick={closeMenus} className="p-3.5 border border-[#E5E7EB] rounded-[8px] bg-white hover:border-[#2563EB] flex items-center gap-3 transition-all shadow-sm group">
-                    <div className="w-8 h-8 rounded-full bg-blue-500/10 text-[#2563EB] flex items-center justify-center font-bold">
+                  <Link to="/solutions/front-desk" onClick={closeMenus} className="p-3 border border-[#E5E7EB] rounded-[8px] bg-white hover:border-[#2563EB] flex items-center gap-2.5 transition-all shadow-sm group">
+                    <div className="w-8 h-8 rounded-full bg-amber-500/10 text-amber-600 flex items-center justify-center font-bold shrink-0">
+                      <Volume2 className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">AI Agents (incl. voice)</div>
+                      <div className="text-[10px] text-[#64748B] leading-tight">Always-on Front Desk agent</div>
+                    </div>
+                  </Link>
+
+                  <Link to="/solutions/hospitals" onClick={closeMenus} className="p-3 border border-[#E5E7EB] rounded-[8px] bg-white hover:border-[#2563EB] flex items-center gap-2.5 transition-all shadow-sm group">
+                    <div className="w-8 h-8 rounded-full bg-blue-500/10 text-[#2563EB] flex items-center justify-center font-bold shrink-0">
                       <Building2 className="w-4 h-4" />
                     </div>
                     <div>
                       <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">Hospital Patient Front Door</div>
-                      <div className="text-[10px] text-[#64748B]">Branded 5-module platform & recovery engine</div>
+                      <div className="text-[10px] text-[#64748B] leading-tight">5-module platform & recovery</div>
                     </div>
                   </Link>
                 </div>
@@ -385,6 +419,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
                         <div>
                           <div className="font-display font-bold text-xs text-[#0F172A]">White-Label App</div>
                           <div className="text-[10px] text-[#64748B]">Complete iOS & Android app under your brand</div>
+                        </div>
+                      </div>
+                      <span className="text-xs text-[#64748B]">▶</span>
+                    </Link>
+                    <Link to="/solutions/front-desk" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <Volume2 className="w-4 h-4 text-amber-600" />
+                        <div>
+                          <div className="font-display font-bold text-xs text-[#0F172A]">AI Agents (including voice)</div>
+                          <div className="text-[10px] text-[#64748B]">Always-on patient support & voice booking agent</div>
                         </div>
                       </div>
                       <span className="text-xs text-[#64748B]">▶</span>

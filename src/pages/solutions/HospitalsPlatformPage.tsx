@@ -163,10 +163,7 @@ export const HospitalsPlatformPage: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           
           <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 01</span>
-              <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 font-mono text-[10px] font-bold uppercase rounded">Live</span>
-            </div>
+            <div className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 01</div>
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">Preventive Program Engine</h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-body">
               Converts health checkups from static PDFs into interactive Smart Reports with biological age, pace of aging, digital twin simulation, wearable connection, and automated re-test recall schedules.
@@ -174,10 +171,7 @@ export const HospitalsPlatformPage: React.FC = () => {
           </div>
 
           <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 02</span>
-              <span className="px-2 py-0.5 bg-amber-50 text-amber-700 border border-amber-200 font-mono text-[10px] font-bold uppercase rounded">In Pilot</span>
-            </div>
+            <div className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 02</div>
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">Discharge-to-Recovery Engine</h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-body">
               Plain-language recovery protocols, medication schedules with adherence tracking, wearable telemetry, symptom check-ins, care-team escalation flags, and auto-scheduled follow-up OPD bookings.
@@ -185,10 +179,7 @@ export const HospitalsPlatformPage: React.FC = () => {
           </div>
 
           <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 03</span>
-              <span className="px-2 py-0.5 bg-violet-50 text-violet-700 border border-violet-200 font-mono text-[10px] font-bold uppercase rounded">In Development · Design Partners 2027</span>
-            </div>
+            <div className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 03</div>
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">Chronic Care Subscription Programs</h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-body">
               Turnkey program management for subscription diabetes, cardiac, and metabolic clinics. Integrates Dexcom CGMs, wearable feeds, adaptive protocol updates, and care-team dashboards.
@@ -196,14 +187,40 @@ export const HospitalsPlatformPage: React.FC = () => {
           </div>
 
           <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 04</span>
-              <span className="px-2 py-0.5 bg-violet-50 text-violet-700 border border-violet-200 font-mono text-[10px] font-bold uppercase rounded">In Development · Design Partners 2027</span>
-            </div>
+            <div className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 04</div>
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">International Patient Continuity</h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-body">
               Post-treatment layer for medical-tourism (India–UAE corridor): format-agnostic lab PDF parser for home-country lab results, remote monitoring, teleconsult scheduling, and surgeon dashboard.
             </p>
+          </div>
+
+          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all flex flex-col justify-between md:col-span-2">
+            <div className="space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 05 · VOICE & CHAT</div>
+                <Link
+                  to="/solutions/front-desk"
+                  className="font-mono text-xs font-bold text-[#0F172A] hover:text-[#2563EB] inline-flex items-center gap-1.5 underline"
+                >
+                  View Front Desk Agent →
+                </Link>
+              </div>
+              <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
+                Nostavia Front Desk Agent (Hinglish Voice & Patient Support)
+              </h3>
+              <p className="text-xs text-[#64748B] leading-relaxed font-body max-w-4xl">
+                Always-on patient support agent that answers every phone call in Hinglish, names a specific doctor with experience, rules out emergencies, and turns enquiries into booked visits across phone, WhatsApp, and web under your hospital's brand.
+              </p>
+            </div>
+            <div className="pt-4 border-t border-[#E2E8F0] flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] text-[#475569]">
+              <div><span className="font-bold text-[#0F172A]">Revenue it moves:</span> Inbound call booking conversion & peak load retention.</div>
+              <Link
+                to="/solutions/front-desk"
+                className="bg-[#0F172A] hover:bg-black text-white px-4 py-2 rounded-[2px] text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1"
+              >
+                See how Front Desk works →
+              </Link>
+            </div>
           </div>
 
         </div>
