@@ -203,7 +203,90 @@ export const DiagnosticLabsPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. SOMA DUAL-BRAIN ARCHITECTURE DEEP-DIVE FOR LABS */}
+      {/* 4. LIVE 360° CASE STUDY */}
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
+        <div className="space-y-6">
+          <div className="space-y-3">
+            <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
+              DEPLOYMENT CASE STUDY
+            </div>
+            <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
+              Live 360° — Smart Report as a Service
+            </h2>
+            <p className="text-base text-[#64748B] max-w-3xl leading-relaxed font-body">
+              <strong>Problem:</strong> Every diagnostics business has the same structural leak. The test is run, the report is delivered, the customer reads it once, and the relationship ends. The document is technically accurate and practically useless.<br/><br/>
+              <strong>Solution:</strong> Smart Report as a Service — a report intelligence layer that sits on top of the existing reporting pipeline rather than replacing it.
+            </p>
+          </div>
+          <div className="p-4 bg-white border border-[#E2E8F0] border-l-4 border-l-[#0F172A] rounded-[2px] font-mono text-xs text-[#0F172A] inline-block">
+            <strong>Category:</strong> Health and diagnostics &nbsp;|&nbsp; <strong>Scope:</strong> Web presence and report intelligence
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
+            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center font-bold font-mono text-sm">
+              1
+            </div>
+            <h3 className="font-display font-extrabold text-lg text-[#0F172A]">
+              Extraction
+            </h3>
+            <p className="text-sm text-[#64748B] leading-relaxed font-body">
+              Biomarkers pulled from any report format regardless of layout
+            </p>
+          </div>
+
+          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
+            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center font-bold font-mono text-sm">
+              2
+            </div>
+            <h3 className="font-display font-extrabold text-lg text-[#0F172A]">
+              Normalisation
+            </h3>
+            <p className="text-sm text-[#64748B] leading-relaxed font-body">
+              Reference ranges read from the report itself, not a generic table
+            </p>
+          </div>
+
+          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
+            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center font-bold font-mono text-sm">
+              3
+            </div>
+            <h3 className="font-display font-extrabold text-lg text-[#0F172A]">
+              Categorisation
+            </h3>
+            <p className="text-sm text-[#64748B] leading-relaxed font-body">
+              Optimal vs normal vs outlier (beyond binary in-range flagging)
+            </p>
+          </div>
+
+          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
+            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center font-bold font-mono text-sm">
+              4
+            </div>
+            <h3 className="font-display font-extrabold text-lg text-[#0F172A]">
+              Rendering
+            </h3>
+            <p className="text-sm text-[#64748B] leading-relaxed font-body">
+              Non-clinical reader can understand their own body
+            </p>
+          </div>
+
+          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
+            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center font-bold font-mono text-sm">
+              5
+            </div>
+            <h3 className="font-display font-extrabold text-lg text-[#0F172A]">
+              Persistence
+            </h3>
+            <p className="text-sm text-[#64748B] leading-relaxed font-body">
+              Same panel later becomes a trend, not a second unrelated file
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. SOMA DUAL-BRAIN ARCHITECTURE DEEP-DIVE FOR LABS */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
         <div className="space-y-3">
           <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">

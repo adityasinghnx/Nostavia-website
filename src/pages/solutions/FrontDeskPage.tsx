@@ -313,6 +313,27 @@ export const FrontDeskPage: React.FC = () => {
       </section>
 
       {/* ========================================================================= */}
+      {/* 3B. DEPLOYMENT PROOF */}
+      {/* ========================================================================= */}
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
+        <div className="space-y-3">
+          <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
+            DEPLOYED IN PRODUCTION
+          </div>
+          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
+            Running inside a tertiary care cardiology hospital in Kanpur
+          </h2>
+          <p className="text-xs text-[#64748B] font-mono">
+            Client named on request, under NDA.
+          </p>
+        </div>
+
+        <div className="p-4 bg-white border border-[#E2E8F0] border-l-4 border-l-[#0F172A] rounded-[2px] font-mono text-xs text-[#0F172A] leading-relaxed">
+          "This is not a demo. The voice agent handles real inbound patient calls against real hospital flow. Callers code-switch between Hindi and English mid-sentence. Family members speak on behalf of the patient. The actual question is frequently not the one asked first. The agent is built for that conversational pattern, and hands off to a human when the call leaves the routine envelope."
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
       {/* 4. ONE AGENT, THREE CHANNELS */}
       {/* ========================================================================= */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">

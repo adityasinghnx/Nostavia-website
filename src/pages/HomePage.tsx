@@ -7,6 +7,7 @@ import { WorkflowAutonomousAgentsSection } from '../components/sections/Workflow
 import { TeamOfAgentsSection } from '../components/sections/TeamOfAgentsSection';
 import { PlatformLayerThreeCardsSection } from '../components/sections/PlatformLayerThreeCardsSection';
 import { ProductizedServicesRowsSection } from '../components/sections/ProductizedServicesRowsSection';
+import { RealOutcomesCaseStudySection } from '../components/sections/RealOutcomesCaseStudySection';
 import { SecurityComplianceBandSection } from '../components/sections/SecurityComplianceBandSection';
 import { ProofSection } from '../components/sections/ProofSection';
 import { PricingSection } from '../components/sections/PricingSection';
@@ -159,6 +160,11 @@ export const HomePage: React.FC<{ onOpenDemo?: () => void }> = () => {
       {/* 6. SPECIALISED SERVICES (PRODUCTIZED SERVICES ROWS SECTION) */}
       {/* ========================================================================= */}
       <ProductizedServicesRowsSection />
+
+      {/* ========================================================================= */}
+      {/* 6.5. REAL OUTCOMES (CASE STUDY CAROUSEL SECTION) */}
+      {/* ========================================================================= */}
+      <RealOutcomesCaseStudySection />
 
       {/* ========================================================================= */}
       {/* 7. SECURITY & COMPLIANCE (SECURITY COMPLIANCE BAND SECTION) */}

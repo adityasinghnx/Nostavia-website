@@ -336,6 +336,41 @@ export const HospitalsPage: React.FC = () => {
         </div>
       </section>
 
+      {/* 4B. CASE STUDY */}
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
+        <div className="space-y-3">
+          <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
+            DEPLOYMENT CASE STUDY · TERTIARY CARE
+          </div>
+          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
+            AI Voice Agent & Contactless Vitals — Deployed in a Working Hospital
+          </h2>
+          <p className="text-xs text-[#64748B] font-mono">
+            Client named on request, under NDA
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
+            <h3 className="font-display font-extrabold text-xl text-[#0F172A]">
+              System One: AI Voice Agent
+            </h3>
+            <p className="text-sm text-[#64748B] leading-relaxed font-body">
+              Conversational voice agent handling inbound patient calls end-to-end. Handles Hinglish code-switching mid-sentence, family members speaking on behalf of patients, and hands off to a human when calls leave the routine envelope. Not a decision tree — built for real Indian conversational patterns.
+            </p>
+          </div>
+
+          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
+            <h3 className="font-display font-extrabold text-xl text-[#0F172A]">
+              System Two: Contactless Vitals (rPPG)
+            </h3>
+            <p className="text-sm text-[#64748B] leading-relaxed font-body">
+              Remote photoplethysmography returning 12 parameters from facial video. HR, BP systolic/diastolic, SpO2, respiration rate, HRV (SDNN, RMSSD), stress index, HbA1c, cholesterol, haemoglobin, pulse respiration quotient. No contact, no cuff, no device, no consumable.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* 5. THE ENTRY SEQUENCE */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-8">
         <div className="space-y-3">

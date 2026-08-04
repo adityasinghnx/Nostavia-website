@@ -42,6 +42,42 @@ export const RealOutcomesCaseStudySection: React.FC = () => {
         { value: '₹4.55L', label: 'Production billed revenue' },
       ],
     },
+    {
+      brandLogo: 'LIVE 360°',
+      brandBg: 'bg-[#7C3AED]',
+      title: 'Live 360° Diagnostics',
+      description: 'Nostavia\'s Smart Report as a Service layer sits on top of the existing lab reporting pipeline — extracting biomarkers from any format, normalising against source-specific reference ranges, categorising into optimal vs in-range vs outlier, and persisting results for longitudinal trending. The report itself becomes the retention mechanism.',
+      link: '/industries/diagnostic-labs',
+      metrics: [
+        { value: 'Any Format', label: 'Lab PDF extraction regardless of layout' },
+        { value: 'Optimal Bands', label: 'Beyond binary in-range flagging' },
+        { value: 'Longitudinal', label: 'Same panel becomes a trend, not a second file' },
+      ],
+    },
+    {
+      brandLogo: 'KANPUR CARDIOLOGY',
+      brandBg: 'bg-[#0F172A]',
+      title: 'Tertiary Care Cardiology Hospital',
+      description: 'Two systems deployed inside a working hospital against real patient flow. An AI voice agent handling inbound calls end-to-end in Hinglish — including code-switching mid-sentence and family members speaking on behalf of patients — and a contactless rPPG vitals pipeline returning 12 physiological parameters from a single facial video capture.',
+      link: '/solutions/front-desk',
+      metrics: [
+        { value: '12 Params', label: 'Contactless vitals from a single camera capture' },
+        { value: 'Hinglish', label: 'Code-switching conversational voice agent' },
+        { value: 'Live', label: 'Running against real patient flow, not a sandbox' },
+      ],
+    },
+    {
+      brandLogo: 'KISHOK',
+      brandBg: 'bg-[#D97706]',
+      title: 'Village Health Kiosk Platform',
+      description: 'Offline-first health platform across four Uttar Pradesh districts turning the village health worker the state already deploys into a clinical navigator. Hindi voice copilot, decoded diagnostics spoken aloud, chronic disease registry with automated recall, and medicine stock intelligence — all on a single tablet at each kiosk.',
+      link: '/company',
+      metrics: [
+        { value: '4 Districts', label: 'Chitrakoot, Pratapgarh, Kaushambi, Prayagraj' },
+        { value: 'Offline-First', label: 'Full day of visits with zero network dependency' },
+        { value: '10,000', label: 'Households covered per hub cluster' },
+      ],
+    },
   ];
 
   const currentCase = caseStudies[activeCaseIndex];

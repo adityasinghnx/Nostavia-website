@@ -145,6 +145,80 @@ export const CompanyPage: React.FC = () => {
         <ClientShowcaseGrid />
       </section>
 
+      {/* 4.5. KISHOK CASE STUDY */}
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
+        <div className="space-y-3">
+          <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
+            DELIVERY DEPTH · RURAL PUBLIC HEALTH
+          </div>
+          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
+            Kishok — The Village Health Kiosk Platform
+          </h2>
+          <p className="text-base sm:text-xl text-[#64748B] max-w-3xl leading-relaxed font-body">
+            An offline-first health platform across four Uttar Pradesh districts, designed against a 57-household primary survey. Turns the village health worker the state already deploys into a clinical navigator — instead of building an app patients are expected to operate themselves.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
+            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center font-bold font-mono text-sm">
+              1
+            </div>
+            <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">The Copilot</h3>
+            <p className="text-sm text-[#64748B] leading-relaxed font-body">
+              Hindi voice in, Hindi voice out. Symptoms and vitals go in, structured encounter with danger sign flags, referral decision, and a counselling script comes out. Voice rendered in Awadhi and Bhojpuri inflected Hindi.
+            </p>
+          </div>
+
+          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
+            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center font-bold font-mono text-sm">
+              2
+            </div>
+            <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">Decoded Diagnostics</h3>
+            <p className="text-sm text-[#64748B] leading-relaxed font-body">
+              Point of care test taken at the kiosk. Result decoded into plain Hindi, spoken aloud, printed on a take-home card. Patient who cannot read her own report understands her own body in ninety seconds.
+            </p>
+          </div>
+
+          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
+            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center font-bold font-mono text-sm">
+              3
+            </div>
+            <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">Chronic Registry & Recall</h3>
+            <p className="text-sm text-[#64748B] leading-relaxed font-body">
+              Screen, register, monitor, refill, recall. Roughly a third of respondents show a chronic disease signal with no existing system. Live from month one.
+            </p>
+          </div>
+
+          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
+            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center font-bold font-mono text-sm">
+              4
+            </div>
+            <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">Medicine Intelligence</h3>
+            <p className="text-sm text-[#64748B] leading-relaxed font-body">
+              Demand prediction so the kiosk does not stock out, generic substitution by default, price transparency, live in-stock indicator at the moment of prescribing.
+            </p>
+          </div>
+
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+          <div className="p-4 bg-white border border-[#E2E8F0] border-l-4 border-l-[#0F172A] rounded-[2px] font-mono text-xs text-[#0F172A] leading-relaxed">
+            <span className="font-bold">4 Districts</span> — Chitrakoot, Pratapgarh, Kaushambi, Prayagraj
+          </div>
+          <div className="p-4 bg-white border border-[#E2E8F0] border-l-4 border-l-[#0F172A] rounded-[2px] font-mono text-xs text-[#0F172A] leading-relaxed">
+            <span className="font-bold">10,000</span> — Households per hub cluster
+          </div>
+          <div className="p-4 bg-white border border-[#E2E8F0] border-l-4 border-l-[#0F172A] rounded-[2px] font-mono text-xs text-[#0F172A] leading-relaxed">
+            <span className="font-bold">Offline-First</span> — Full day of visits, zero network dependency
+          </div>
+          <div className="p-4 bg-white border border-[#E2E8F0] border-l-4 border-l-[#0F172A] rounded-[2px] font-mono text-xs text-[#0F172A] leading-relaxed">
+            <span className="font-bold">57 Households</span> — Primary survey powering the design
+          </div>
+        </div>
+      </section>
+
       {/* 5. COMPANY TRACTION & GRANT SUPPORT */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
         <div className="space-y-3">
