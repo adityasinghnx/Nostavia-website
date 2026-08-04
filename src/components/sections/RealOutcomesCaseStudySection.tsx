@@ -7,18 +7,6 @@ export const RealOutcomesCaseStudySection: React.FC = () => {
 
   const caseStudies = [
     {
-      brandLogo: 'APEX DIAGNOSTICS',
-      brandBg: 'bg-[#E11D48]',
-      title: 'Apex Diagnostic Network',
-      description: 'Based on Apex Diagnostics production deployment across enterprise diagnostic networks, Nostavia\'s Smart Report engine replaced manual pathologist chart review and automated 90-day patient re-test recalls.',
-      link: '/industries/diagnostic-labs',
-      metrics: [
-        { value: '<800ms', label: 'Native PDF lab parsing speed' },
-        { value: '3.8x', label: 'Re-test recall rate increase' },
-        { value: '2,000+', label: 'Active monthly users on platform' },
-      ],
-    },
-    {
       brandLogo: 'Dubai Longevity',
       brandBg: 'bg-[#059669]',
       title: 'GCC Longevity & Preventive Clinic',
@@ -67,7 +55,7 @@ export const RealOutcomesCaseStudySection: React.FC = () => {
       ],
     },
     {
-      brandLogo: 'KISHOK',
+      brandLogo: 'KIOSK',
       brandBg: 'bg-[#D97706]',
       title: 'Village Health Kiosk Platform',
       description: 'Offline-first health platform across four Uttar Pradesh districts turning the village health worker the state already deploys into a clinical navigator. Hindi voice copilot, decoded diagnostics spoken aloud, chronic disease registry with automated recall, and medicine stock intelligence — all on a single tablet at each kiosk.',

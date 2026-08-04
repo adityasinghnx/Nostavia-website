@@ -152,7 +152,7 @@ export const CompanyPage: React.FC = () => {
             DELIVERY DEPTH · RURAL PUBLIC HEALTH
           </div>
           <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
-            Kishok — The Village Health Kiosk Platform
+            Kiosk — The Village Health Kiosk Platform
           </h2>
           <p className="text-base sm:text-xl text-[#64748B] max-w-3xl leading-relaxed font-body">
             An offline-first health platform across four Uttar Pradesh districts, designed against a 57-household primary survey. Turns the village health worker the state already deploys into a clinical navigator — instead of building an app patients are expected to operate themselves.
@@ -243,7 +243,7 @@ export const CompanyPage: React.FC = () => {
             <div className="font-mono text-xs font-bold text-[#64748B]">BILLED REVENUE & CLIENTS</div>
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">Commercial Revenue</h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-body">
-              Billed across production enterprise clients. Active reference clients include Apex Diagnostic Network and incubator IIHMF.
+              Billed across production enterprise clients. Active reference clients include incubator IIHMF.
             </p>
           </div>
 
