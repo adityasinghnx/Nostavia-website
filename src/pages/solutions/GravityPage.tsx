@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronDown, ChevronUp, Download, Search, Brain, Zap, TrendingUp } from 'lucide-react';
+import { FaqSection } from '../../components/sections/FaqSection';
 
 export const GravityPage: React.FC = () => {
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
@@ -79,9 +80,6 @@ export const GravityPage: React.FC = () => {
           {/* Center Multi-Layer Ring Core */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 sm:w-48 sm:h-48 rounded-full border border-[#E2E8F0] bg-[#F8FAFC] p-2.5 shadow-xl flex items-center justify-center z-10">
             <div className="w-full h-full rounded-full bg-[#0F172A] flex flex-col items-center justify-center text-center p-3 shadow-inner">
-              <span className="font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-[2px] text-slate-400 mb-1">
-                SOMA CORE
-              </span>
               <span className="font-display font-extrabold text-base sm:text-xl text-white leading-tight tracking-tight">
                 NOSTAVIA
               </span>
@@ -96,70 +94,55 @@ export const GravityPage: React.FC = () => {
 
           {/* 5 Clean Orbital Node Cards */}
           
-          {/* 01. Ingest */}
+          {/* Ingest */}
           <div className="absolute z-20" style={{ top: '-2%', left: '50%', transform: 'translateX(-50%)' }}>
             <div className="bg-white border border-[#E2E8F0] hover:border-[#0F172A] p-3 sm:p-4 rounded-[4px] shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center w-[150px] sm:w-[170px] group">
-              <div className="flex items-center gap-2 mb-1.5">
-                <span className="font-mono text-[10px] font-bold text-[#64748B] bg-[#F8FAFC] px-1.5 py-0.5 rounded-[2px] border border-[#E2E8F0]">01</span>
-                <div className="w-7 h-7 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center group-hover:scale-105 transition-transform">
-                  <Download className="w-3.5 h-3.5" />
-                </div>
+              <div className="w-8 h-8 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center mb-1.5 group-hover:scale-105 transition-transform">
+                <Download className="w-4 h-4" />
               </div>
               <div className="font-display font-extrabold text-xs sm:text-sm text-[#0F172A]">Ingest</div>
               <div className="text-[10px] sm:text-xs text-[#64748B] font-body mt-0.5">Labs, wearables, nutrition</div>
             </div>
           </div>
 
-          {/* 02. Decode */}
+          {/* Decode */}
           <div className="absolute z-20" style={{ top: '20%', right: '-2%' }}>
             <div className="bg-white border border-[#E2E8F0] hover:border-[#0F172A] p-3 sm:p-4 rounded-[4px] shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center w-[150px] sm:w-[170px] group">
-              <div className="flex items-center gap-2 mb-1.5">
-                <span className="font-mono text-[10px] font-bold text-[#64748B] bg-[#F8FAFC] px-1.5 py-0.5 rounded-[2px] border border-[#E2E8F0]">02</span>
-                <div className="w-7 h-7 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center group-hover:scale-105 transition-transform">
-                  <Search className="w-3.5 h-3.5" />
-                </div>
+              <div className="w-8 h-8 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center mb-1.5 group-hover:scale-105 transition-transform">
+                <Search className="w-4 h-4" />
               </div>
               <div className="font-display font-extrabold text-xs sm:text-sm text-[#0F172A]">Decode</div>
               <div className="text-[10px] sm:text-xs text-[#64748B] font-body mt-0.5">Biomarker extraction</div>
             </div>
           </div>
 
-          {/* 03. Reason */}
+          {/* Reason */}
           <div className="absolute z-20" style={{ bottom: '2%', right: '4%' }}>
             <div className="bg-white border border-[#E2E8F0] hover:border-[#0F172A] p-3 sm:p-4 rounded-[4px] shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center w-[150px] sm:w-[170px] group">
-              <div className="flex items-center gap-2 mb-1.5">
-                <span className="font-mono text-[10px] font-bold text-[#64748B] bg-[#F8FAFC] px-1.5 py-0.5 rounded-[2px] border border-[#E2E8F0]">03</span>
-                <div className="w-7 h-7 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center group-hover:scale-105 transition-transform">
-                  <Brain className="w-3.5 h-3.5" />
-                </div>
+              <div className="w-8 h-8 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center mb-1.5 group-hover:scale-105 transition-transform">
+                <Brain className="w-4 h-4" />
               </div>
               <div className="font-display font-extrabold text-xs sm:text-sm text-[#0F172A]">Reason</div>
               <div className="text-[10px] sm:text-xs text-[#64748B] font-body mt-0.5">Cross-domain correlation</div>
             </div>
           </div>
 
-          {/* 04. Act */}
+          {/* Act */}
           <div className="absolute z-20" style={{ bottom: '2%', left: '4%' }}>
             <div className="bg-white border border-[#E2E8F0] hover:border-[#0F172A] p-3 sm:p-4 rounded-[4px] shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center w-[150px] sm:w-[170px] group">
-              <div className="flex items-center gap-2 mb-1.5">
-                <span className="font-mono text-[10px] font-bold text-[#64748B] bg-[#F8FAFC] px-1.5 py-0.5 rounded-[2px] border border-[#E2E8F0]">04</span>
-                <div className="w-7 h-7 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center group-hover:scale-105 transition-transform">
-                  <Zap className="w-3.5 h-3.5" />
-                </div>
+              <div className="w-8 h-8 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center mb-1.5 group-hover:scale-105 transition-transform">
+                <Zap className="w-4 h-4" />
               </div>
               <div className="font-display font-extrabold text-xs sm:text-sm text-[#0F172A]">Act</div>
               <div className="text-[10px] sm:text-xs text-[#64748B] font-body mt-0.5">Protocols & coaching</div>
             </div>
           </div>
 
-          {/* 05. Learn */}
+          {/* Learn */}
           <div className="absolute z-20" style={{ top: '20%', left: '-2%' }}>
             <div className="bg-white border border-[#E2E8F0] hover:border-[#0F172A] p-3 sm:p-4 rounded-[4px] shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center w-[150px] sm:w-[170px] group">
-              <div className="flex items-center gap-2 mb-1.5">
-                <span className="font-mono text-[10px] font-bold text-[#64748B] bg-[#F8FAFC] px-1.5 py-0.5 rounded-[2px] border border-[#E2E8F0]">05</span>
-                <div className="w-7 h-7 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center group-hover:scale-105 transition-transform">
-                  <TrendingUp className="w-3.5 h-3.5" />
-                </div>
+              <div className="w-8 h-8 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center mb-1.5 group-hover:scale-105 transition-transform">
+                <TrendingUp className="w-4 h-4" />
               </div>
               <div className="font-display font-extrabold text-xs sm:text-sm text-[#0F172A]">Learn</div>
               <div className="text-[10px] sm:text-xs text-[#64748B] font-body mt-0.5">Longitudinal memory</div>
@@ -220,44 +203,19 @@ export const GravityPage: React.FC = () => {
       </section>
 
       {/* 3. INTERACTIVE FAQ SECTION */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
-        <div className="space-y-3">
-          <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            FREQUENTLY ASKED QUESTIONS
-          </div>
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
-            Frequently Asked Questions
-          </h2>
-        </div>
-
-        <div className="space-y-4 max-w-4xl">
-          {[
-            {
-              q: "How long does SDK integration take?",
-              a: "Engineers typically integrate Nostavia REST/GraphQL APIs and SDK components into existing apps within 3 to 5 business days."
-            },
-            {
-              q: "Is the SDK compatible with React Native, Flutter, and Native iOS/Android?",
-              a: "Yes. Nostavia provides native iOS (Swift), Android (Kotlin), and Web/React SDKs with full TypeScript definitions."
-            }
-          ].map((faq, idx) => (
-            <div key={idx} className="border border-[#E2E8F0] rounded-[2px] overflow-hidden bg-white shadow-none">
-              <button
-                onClick={() => toggleFaq(idx)}
-                className="w-full p-6 text-left font-display font-extrabold text-lg text-[#0F172A] flex items-center justify-between hover:bg-slate-50 transition-colors"
-              >
-                <span>{faq.q}</span>
-                {activeFaq === idx ? <ChevronUp className="w-5 h-5 text-[#0F172A]" /> : <ChevronDown className="w-5 h-5 text-slate-400" />}
-              </button>
-              {activeFaq === idx && (
-                <div className="p-6 pt-0 text-sm text-[#64748B] leading-relaxed border-t border-[#E2E8F0] font-body">
-                  {faq.a}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </section>
+      <FaqSection
+        title="Everything developers & product leaders ask about Gravity SDK"
+        faqs={[
+          {
+            q: "How long does SDK integration take?",
+            a: "Engineers typically integrate Nostavia REST/GraphQL APIs and SDK components into existing apps within 3 to 5 business days."
+          },
+          {
+            q: "Is the SDK compatible with React Native, Flutter, and Native iOS/Android?",
+            a: "Yes. Nostavia provides native iOS (Swift), Android (Kotlin), and Web/React SDKs with full TypeScript definitions."
+          }
+        ]}
+      />
 
       {/* 4. FINAL CTA BANNER */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full pt-4">

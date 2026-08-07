@@ -13,6 +13,7 @@ import {
   UserCheck,
   Volume2
 } from 'lucide-react';
+import { FaqSection } from '../../components/sections/FaqSection';
 
 export const FrontDeskPage: React.FC = () => {
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
@@ -710,50 +711,25 @@ export const FrontDeskPage: React.FC = () => {
       </section>
 
       {/* ========================================================================= */}
-      {/* 9. INTERACTIVE FAQ SECTION */}
+      {/* 9. FREQUENTLY ASKED QUESTIONS */}
       {/* ========================================================================= */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
-        <div className="space-y-3">
-          <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            FREQUENTLY ASKED QUESTIONS
-          </div>
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
-            Frequently Asked Questions
-          </h2>
-        </div>
-
-        <div className="space-y-4 max-w-4xl">
-          {[
-            {
-              q: "How does Nostavia Front Desk handle Hinglish and accent variations?",
-              a: "Nostavia Front Desk uses specialized conversational models trained on natural Indian dialect patterns, code-switching between Hindi and English, and regional medical term variations."
-            },
-            {
-              q: "Can the agent integrate into our hospital line without replacing our phone system?",
-              a: "Yes. Nostavia Front Desk operates via direct call-forwarding or SIP trunking from your existing hospital PBX. Unanswered or after-hours calls redirect seamlessly."
-            },
-            {
-              q: "What happens when a caller requires an immediate human handoff?",
-              a: "If a caller asks for a human or requires complex coordination outside operational bounds, the agent places a warm transfer directly to your reception desk or call center line."
-            }
-          ].map((faq, idx) => (
-            <div key={idx} className="border border-[#E2E8F0] rounded-[2px] overflow-hidden bg-white shadow-none">
-              <button
-                onClick={() => toggleFaq(idx)}
-                className="w-full p-6 text-left font-display font-extrabold text-lg text-[#0F172A] flex items-center justify-between hover:bg-slate-50 transition-colors"
-              >
-                <span>{faq.q}</span>
-                {activeFaq === idx ? <ChevronUp className="w-5 h-5 text-[#0F172A]" /> : <ChevronDown className="w-5 h-5 text-slate-400" />}
-              </button>
-              {activeFaq === idx && (
-                <div className="p-6 pt-0 text-sm text-[#64748B] leading-relaxed border-t border-[#E2E8F0] font-body">
-                  {faq.a}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </section>
+      <FaqSection
+        title="Everything hospital operations leaders ask about Nostavia Front Desk"
+        faqs={[
+          {
+            q: "How does Nostavia Front Desk handle Hinglish and accent variations?",
+            a: "Nostavia Front Desk uses specialized conversational models trained on natural Indian dialect patterns, code-switching between Hindi and English, and regional medical term variations."
+          },
+          {
+            q: "Can the agent integrate into our hospital line without replacing our phone system?",
+            a: "Yes. Nostavia Front Desk operates via direct call-forwarding or SIP trunking from your existing hospital PBX. Unanswered or after-hours calls redirect seamlessly."
+          },
+          {
+            q: "What happens when a caller requires an immediate human handoff?",
+            a: "If a caller asks for a human or requires complex coordination outside operational bounds, the agent places a warm transfer directly to your reception desk or call center line."
+          }
+        ]}
+      />
 
       {/* ========================================================================= */}
       {/* 10. FINAL ENTERPRISE CTA BANNER */}

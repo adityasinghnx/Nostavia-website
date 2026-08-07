@@ -25,9 +25,9 @@ import {
   Search,
   Target,
   FileSearch,
-  LayoutDashboard,
-  Brain
+  LayoutDashboard
 } from 'lucide-react';
+import { FaqSection } from '../../components/sections/FaqSection';
 
 export const HospitalsPage: React.FC = () => {
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
@@ -696,82 +696,29 @@ export const HospitalsPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 9. FAQ SECTION */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full pt-4">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-          
-          <div className="lg:col-span-5 space-y-4 lg:sticky lg:top-24">
-            <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-              FREQUENTLY ASKED QUESTIONS
-            </div>
-            <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-[#0F172A] tracking-tight leading-[1.08]">
-              Hospital Leadership FAQ
-            </h2>
-            <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              Everything you need to know about the Leakage Audit, Attribution Engine, deployment guarantees, and our engineering capabilities.
-            </p>
-            <div className="pt-2">
-              <Link
-                to="/demo"
-                className="inline-flex items-center gap-2 text-xs font-bold font-display uppercase tracking-wider text-[#2563EB] hover:text-[#1D4ED8] transition-colors"
-              >
-                Request a free Leakage Audit →
-              </Link>
-            </div>
-          </div>
-
-          <div className="lg:col-span-7 space-y-3.5">
-            {[
-              {
-                q: "What does the free Leakage Audit actually show us?",
-                a: "A rupee-valued report computed on your own price list: how many checkup customers never returned, how many discharged patients had no follow-up visit, how many chronic patients went dormant — with the revenue value of each bucket. Anonymized data only, processed under a signed data-handling agreement."
-              },
-              {
-                q: "What happens if the 90-day pilot doesn't move our numbers?",
-                a: "The pilot fee is credited in full against any future contract — or you simply walk. We control the variables enough to offer this with confidence."
-              },
-              {
-                q: "How does the Attribution Engine work?",
-                a: "Every re-test, follow-up OPD, and package renewal generated through Nostavia is tagged and priced in a live dashboard your CFO owns. Platform-attributed revenue vs. platform cost, updated daily. ROI as a number on a screen, not a claim in a renewal deck."
-              },
-              {
-                q: "What is the 60-day deployment guarantee?",
-                a: "Full patient front-door deployment in 60 days or one month of base fees credited per month of delay. We are fast — and we should be penalized when we aren't."
-              }
-            ].map((faq, idx) => {
-              const isOpen = activeFaq === idx;
-              return (
-                <div
-                  key={idx}
-                  className={`border rounded-[4px] transition-all duration-200 overflow-hidden ${
-                    isOpen
-                      ? 'bg-[#F8FAFC] border-[#CBD5E1] shadow-sm'
-                      : 'bg-white border-[#E2E8F0] hover:border-[#CBD5E1]'
-                  }`}
-                >
-                  <button
-                    onClick={() => toggleFaq(idx)}
-                    className="w-full p-5 sm:p-6 text-left font-display font-extrabold text-base sm:text-lg text-[#0F172A] flex items-center justify-between gap-4"
-                  >
-                    <span>{faq.q}</span>
-                    <span className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 ${
-                      isOpen ? 'bg-[#0F172A] text-white rotate-180' : 'bg-[#F1F5F9] text-[#64748B]'
-                    }`}>
-                      <ChevronDown className="w-4 h-4" />
-                    </span>
-                  </button>
-                  {isOpen && (
-                    <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-[#64748B] leading-relaxed border-t border-[#E2E8F0] font-body">
-                      {faq.a}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-
-        </div>
-      </section>
+      {/* 9. HOSPITAL LEADERSHIP FAQ */}
+      <FaqSection
+        title="Hospital Leadership FAQ"
+        description="Everything you need to know about the Leakage Audit, Attribution Engine, deployment guarantees, and our engineering capabilities."
+        faqs={[
+          {
+            q: "What does the free Leakage Audit actually show us?",
+            a: "A rupee-valued report computed on your own price list: how many checkup customers never returned, how many discharged patients had no follow-up visit, how many chronic patients went dormant — with the revenue value of each bucket. Anonymized data only, processed under a signed data-handling agreement."
+          },
+          {
+            q: "What happens if the 90-day pilot doesn't move our numbers?",
+            a: "The pilot fee is credited in full against any future contract — or you simply walk. We control the variables enough to offer this with confidence."
+          },
+          {
+            q: "How does the Attribution Engine work?",
+            a: "Every re-test, follow-up OPD, and package renewal generated through Nostavia is tagged and priced in a live dashboard your CFO owns. Platform-attributed revenue vs. platform cost, updated daily. ROI as a number on a screen, not a claim in a renewal deck."
+          },
+          {
+            q: "What is the 60-day deployment guarantee?",
+            a: "Full patient front-door deployment in 60 days or one month of base fees credited per month of delay. We are fast — and we should be penalized when we aren't."
+          }
+        ]}
+      />
 
       {/* 10. FOOTER CTA BANNER */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full pt-4">
