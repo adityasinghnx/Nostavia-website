@@ -12,17 +12,17 @@ export const PricingPage: React.FC = () => {
       case 'USD':
         if (tier === 'starter') return '$299';
         if (tier === 'growth') return '$999';
-        if (tier === 'whitelabel') return '$1,999';
+        if (tier === 'whitelabel') return '$999';
         return 'from $5,000';
       case 'AED':
         if (tier === 'starter') return 'AED 1,100';
         if (tier === 'growth') return 'AED 3,670';
-        if (tier === 'whitelabel') return 'AED 7,340';
+        if (tier === 'whitelabel') return 'AED 3,670';
         return 'from AED 18,360';
       case 'INR':
         if (tier === 'starter') return '₹24,990';
         if (tier === 'growth') return '₹82,990';
-        if (tier === 'whitelabel') return '₹1,65,990';
+        if (tier === 'whitelabel') return '₹82,990';
         return 'from ₹4,15,000';
     }
   };

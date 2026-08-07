@@ -33,7 +33,7 @@ export const PricingSection: React.FC = () => {
     },
     {
       name: 'White-Label Pro',
-      price: '$1,999',
+      price: '$999',
       unit: '/mo',
       features: [
         'Unlimited MAU',
