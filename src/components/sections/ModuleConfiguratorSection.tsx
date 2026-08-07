@@ -117,10 +117,10 @@ export const ModuleConfiguratorSection: React.FC = () => {
           <div className="flex justify-center pt-2">
             <button
               onClick={() => setShowAll(!showAll)}
-              className="inline-flex items-center gap-2 bg-[#0F172A] hover:bg-[#1E293B] text-white font-display text-xs font-bold uppercase tracking-wider px-8 py-3.5 rounded-[2px] transition-all shadow-sm cursor-pointer"
+              className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-[#0F172A] hover:text-[#2563EB] transition-colors cursor-pointer"
             >
               <span>{showAll ? 'Show Less' : `View All ${modules.length} Modules`}</span>
-              {showAll ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+              {showAll ? <ChevronUp className="w-4 h-4 text-[#0F172A]" /> : <ChevronDown className="w-4 h-4 text-[#0F172A]" />}
             </button>
           </div>
         )}
