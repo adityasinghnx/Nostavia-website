@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { 
   Layers, FileText, Watch, Bot, RefreshCw, ClipboardList, GitBranch, Users, 
   Clock, ShieldAlert, Zap, Phone, Pill, Check, Sparkles, Apple, HeartPulse, 
-  Flame, Flower2, Brain, Moon, BarChart3 
+  Flame, Flower2, Brain, Moon, BarChart3, ChevronDown, ChevronUp 
 } from 'lucide-react';
 
 const modules = [
@@ -35,6 +35,7 @@ const modules = [
 export const ModuleConfiguratorSection: React.FC = () => {
   const initialActive = new Set(modules.filter(m => m.defaultActive).map(m => m.id));
   const [activeModules, setActiveModules] = useState<Set<string>>(initialActive);
+  const [showAll, setShowAll] = useState(false);
 
   const toggleModule = (id: string) => {
     const next = new Set(activeModules);
@@ -48,6 +49,8 @@ export const ModuleConfiguratorSection: React.FC = () => {
 
   const activateAll = () => setActiveModules(new Set(modules.map(m => m.id)));
   const reset = () => setActiveModules(initialActive);
+
+  const visibleModules = showAll ? modules : modules.slice(0, 12);
 
   return (
     <section className="w-full font-body text-[#0F172A] py-12 bg-white">
@@ -75,7 +78,7 @@ export const ModuleConfiguratorSection: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {modules.map(mod => {
+          {visibleModules.map(mod => {
             const isActive = activeModules.has(mod.id);
             const Icon = mod.icon;
             return (
@@ -109,6 +112,18 @@ export const ModuleConfiguratorSection: React.FC = () => {
             );
           })}
         </div>
+
+        {modules.length > 12 && (
+          <div className="flex justify-center pt-2">
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="inline-flex items-center gap-2 bg-[#0F172A] hover:bg-[#1E293B] text-white font-display text-xs font-bold uppercase tracking-wider px-8 py-3.5 rounded-[2px] transition-all shadow-sm cursor-pointer"
+            >
+              <span>{showAll ? 'Show Less' : `View All ${modules.length} Modules`}</span>
+              {showAll ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
