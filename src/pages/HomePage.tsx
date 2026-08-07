@@ -12,7 +12,6 @@ import { SecurityComplianceBandSection } from '../components/sections/SecurityCo
 import { ProofSection } from '../components/sections/ProofSection';
 import { PricingSection } from '../components/sections/PricingSection';
 import { MarketRealitySection } from '../components/sections/MarketRealitySection';
-import { IndustryGridSection } from '../components/sections/IndustryGridSection';
 import { ModuleConfiguratorSection } from '../components/sections/ModuleConfiguratorSection';
 
 export const HomePage: React.FC<{ onOpenDemo?: () => void }> = () => {
