@@ -196,16 +196,46 @@ export const WorkflowAutonomousAgentsSection: React.FC = () => {
 
         </div>
 
-        {/* Additional Industry Coverage Bar */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] text-xs font-body">
-          <div className="flex flex-wrap items-center gap-2 text-[#64748B]">
-            <span className="font-mono font-bold uppercase tracking-wider text-[#0F172A]">Also Supporting:</span>
-            <span>Supplement Brands · Insurance & Payers · Public Health & CSR · Life Sciences & Pharma</span>
+        {/* Additional Enterprise Verticals Bar */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 sm:p-5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px]">
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#64748B]">
+              ADDITIONAL ENTERPRISE VERTICALS
+            </span>
           </div>
-          <div className="flex flex-wrap items-center gap-4 font-mono font-semibold text-[#0F172A] shrink-0">
-            <Link to="/industries/supplements" className="hover:text-[#2563EB] transition-colors">Supplements →</Link>
-            <Link to="/industries/payer" className="hover:text-[#2563EB] transition-colors">Payers →</Link>
-            <Link to="/industries/public-sector" className="hover:text-[#2563EB] transition-colors">Public Sector →</Link>
+
+          <div className="flex flex-wrap items-center gap-2.5">
+            <Link
+              to="/industries/supplements"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-[#E2E8F0] hover:border-[#0F172A] text-[#0F172A] rounded-[2px] font-mono text-xs font-semibold transition-all"
+            >
+              <span>Supplement Brands</span>
+              <span className="text-[#64748B]">→</span>
+            </Link>
+
+            <Link
+              to="/industries/payer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-[#E2E8F0] hover:border-[#0F172A] text-[#0F172A] rounded-[2px] font-mono text-xs font-semibold transition-all"
+            >
+              <span>Insurance & Payers</span>
+              <span className="text-[#64748B]">→</span>
+            </Link>
+
+            <Link
+              to="/industries/public-sector"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-[#E2E8F0] hover:border-[#0F172A] text-[#0F172A] rounded-[2px] font-mono text-xs font-semibold transition-all"
+            >
+              <span>Public Health & CSR</span>
+              <span className="text-[#64748B]">→</span>
+            </Link>
+
+            <Link
+              to="/industries/life-sciences"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-[#E2E8F0] hover:border-[#0F172A] text-[#0F172A] rounded-[2px] font-mono text-xs font-semibold transition-all"
+            >
+              <span>Life Sciences & Pharma</span>
+              <span className="text-[#64748B]">→</span>
+            </Link>
           </div>
         </div>
 
