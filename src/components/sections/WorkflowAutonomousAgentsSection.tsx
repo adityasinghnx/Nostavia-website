@@ -175,7 +175,7 @@ export const WorkflowAutonomousAgentsSection: React.FC = () => {
                 <div>
                   <Link
                     to={currentTab.ctaLink}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0F172A] hover:text-[#2563EB] transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0F172A] hover:text-[#64748B] transition-colors"
                   >
                     {currentTab.ctaText}
                   </Link>
@@ -199,13 +199,13 @@ export const WorkflowAutonomousAgentsSection: React.FC = () => {
         {/* Clean Unboxed Verticals Text Line */}
         <div className="pt-1 text-xs text-[#64748B] font-body flex flex-wrap items-center gap-x-2.5 gap-y-1">
           <span className="font-mono font-bold uppercase tracking-widest text-[#0F172A]">ALSO POWERING:</span>
-          <Link to="/industries/supplements" className="hover:text-[#2563EB] transition-colors font-medium">Supplement Brands</Link>
+          <Link to="/industries/supplements" className="hover:text-[#0F172A] transition-colors font-medium">Supplement Brands</Link>
           <span className="text-slate-300">•</span>
-          <Link to="/industries/payer" className="hover:text-[#2563EB] transition-colors font-medium">Payers & Insurers</Link>
+          <Link to="/industries/payer" className="hover:text-[#0F172A] transition-colors font-medium">Payers & Insurers</Link>
           <span className="text-slate-300">•</span>
-          <Link to="/industries/public-sector" className="hover:text-[#2563EB] transition-colors font-medium">Public Health & CSR</Link>
+          <Link to="/industries/public-sector" className="hover:text-[#0F172A] transition-colors font-medium">Public Health & CSR</Link>
           <span className="text-slate-300">•</span>
-          <Link to="/industries/life-sciences" className="hover:text-[#2563EB] transition-colors font-medium">Life Sciences & Pharma</Link>
+          <Link to="/industries/life-sciences" className="hover:text-[#0F172A] transition-colors font-medium">Life Sciences & Pharma</Link>
         </div>
 
       </div>

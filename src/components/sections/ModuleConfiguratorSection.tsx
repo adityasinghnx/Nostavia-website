@@ -117,7 +117,7 @@ export const ModuleConfiguratorSection: React.FC = () => {
           <div className="flex justify-center pt-2">
             <button
               onClick={() => setShowAll(!showAll)}
-              className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-[#0F172A] hover:text-[#2563EB] transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-[#0F172A] hover:text-[#64748B] transition-colors cursor-pointer"
             >
               <span>{showAll ? 'Show Less' : `View All ${modules.length} Modules`}</span>
               {showAll ? <ChevronUp className="w-4 h-4 text-[#0F172A]" /> : <ChevronDown className="w-4 h-4 text-[#0F172A]" />}
