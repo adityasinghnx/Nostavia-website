@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Activity, Stethoscope, HeartPulse, Building2 } from 'lucide-react';
+import { 
+  ArrowLeft, 
+  ArrowRight, 
+  Activity, 
+  Stethoscope, 
+  Building2, 
+  Pill, 
+  HeartPulse, 
+  ShieldCheck, 
+  Landmark, 
+  Microscope 
+} from 'lucide-react';
 
 export const WorkflowAutonomousAgentsSection: React.FC = () => {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
@@ -43,8 +54,44 @@ export const WorkflowAutonomousAgentsSection: React.FC = () => {
       ctaLink: '/industries/clinics',
     },
     {
+      id: 'hospitals',
+      label: 'Hospitals & Health Systems',
+      icon: <Building2 className="w-4 h-4 text-[#0F172A]" />,
+      headline: 'Your HIS runs the hospital. Nostavia runs the relationship.',
+      description: 'Top health chains spent decades building proprietary predictive programs. Nostavia productises that continuous patient program for every hospital system in 60 days under your brand.',
+      features: [
+        'Preventive Engine',
+        'Discharge Recovery',
+        'Chronic Care',
+        'Front Desk Voice',
+      ],
+      metric: 'Measured on: LTV, retention & follow-up OPD capture.',
+      image: '/clinics-bg.jpg',
+      imageAlt: 'Hospital Patient Front Door & Continuous Care',
+      ctaText: 'Explore hospitals & health systems →',
+      ctaLink: '/industries/hospitals',
+    },
+    {
+      id: 'supplements',
+      label: 'Supplement Brands',
+      icon: <Pill className="w-4 h-4 text-[#0F172A]" />,
+      headline: 'Recommend from biology, not from browsing history.',
+      description: 'Personalized biomarker stacks and automated predictive refill signals that convert one-off supplement buyers into lifelong biomarker-guided subscribers.',
+      features: [
+        'Biomarker Stacks',
+        'Predictive Refills',
+        'Lab Integrations',
+        'Clinical Guardrails',
+      ],
+      metric: 'Measured on: repeat purchase rate (22% → 64%).',
+      image: '/wellness-bg.jpg',
+      imageAlt: 'Biomarker Guided Supplement Recommendations',
+      ctaText: 'Explore supplement brands →',
+      ctaLink: '/industries/supplements',
+    },
+    {
       id: 'wellness',
-      label: 'Wellness & Apps',
+      label: 'Wellness & Health Apps',
       icon: <HeartPulse className="w-4 h-4 text-[#0F172A]" />,
       headline: 'Your app counts. Make it interpret.',
       description: 'One integration adds lab decoding, food bio-impact, biological age and adaptive protocols to a product your users already open every day.',
@@ -61,22 +108,58 @@ export const WorkflowAutonomousAgentsSection: React.FC = () => {
       ctaLink: '/solutions/galaxy',
     },
     {
-      id: 'hospitals',
-      label: 'Hospitals & Health Systems',
-      icon: <Building2 className="w-4 h-4 text-[#0F172A]" />,
-      headline: 'Your HIS runs the hospital. Nostavia runs the relationship.',
-      description: 'Top health chains spent decades building proprietary predictive programs. Nostavia productises that continuous patient program for every hospital system in 60 days under your brand.',
+      id: 'payer',
+      label: 'Insurance & Payers',
+      icon: <ShieldCheck className="w-4 h-4 text-[#0F172A]" />,
+      headline: 'Incentivize outcome improvement, not just policy renewal.',
+      description: 'Continuous biomarker risk tracking and wearable telemetry fusion that powers dynamic premium incentives, risk stratification, and preventive health interventions.',
       features: [
-        'Preventive Engine',
-        'Discharge Recovery',
-        'Chronic Care',
-        'Built-For-You Tech',
+        'Risk Scoring',
+        'Wearable Telemetry',
+        'Outcome Rewards',
+        'Cohort Analytics',
       ],
-      metric: 'Measured on: LTV, retention & follow-up OPD capture.',
-      image: '/clinics-bg.jpg',
-      imageAlt: 'Hospital Patient Front Door & Continuous Care',
-      ctaText: 'Explore hospitals & health systems →',
-      ctaLink: '/industries/hospitals',
+      metric: 'Measured on: claims reduction & member engagement.',
+      image: '/hero-bg.jpg',
+      imageAlt: 'Payer Health Intelligence & Risk Tracking',
+      ctaText: 'Explore insurance & payers →',
+      ctaLink: '/industries/payer',
+    },
+    {
+      id: 'public-sector',
+      label: 'Public Health & CSR',
+      icon: <Landmark className="w-4 h-4 text-[#0F172A]" />,
+      headline: 'Offline-first health intelligence for frontline worker networks.',
+      description: 'Turn village health workers into clinical navigators with Hindi voice copilots, point-of-care decoded diagnostics, and automated chronic disease registers across rural clusters.',
+      features: [
+        'Vernacular Voice',
+        'Offline-First',
+        'Decoded Diagnostics',
+        'Chronic Register',
+      ],
+      metric: 'Measured on: out-of-pocket cost reduction & follow-up.',
+      image: '/hero-bg.jpg',
+      imageAlt: 'Village Kiosk Rural Public Health Platform',
+      ctaText: 'Explore public health & CSR →',
+      ctaLink: '/industries/public-sector',
+    },
+    {
+      id: 'life-sciences',
+      label: 'Life Sciences & Research',
+      icon: <Microscope className="w-4 h-4 text-[#0F172A]" />,
+      headline: 'Real-world telemetry and biomarker graphs for clinical studies.',
+      description: 'Ingest continuous longitudinal biomarker data, wearable sensor telemetry, and patient-reported outcomes with HIPAA, DPDP 2023, and ABDM data readiness.',
+      features: [
+        'Longitudinal Data',
+        'Atlas Graph',
+        'SOMA Dual-Brain',
+        'Audit Readiness',
+      ],
+      metric: 'Measured on: trial adherence & data precision.',
+      image: '/labs-bg.jpg',
+      imageAlt: 'Life Sciences Real World Telemetry',
+      ctaText: 'Explore life sciences →',
+      ctaLink: '/industries/life-sciences',
     },
   ];
 
@@ -96,9 +179,14 @@ export const WorkflowAutonomousAgentsSection: React.FC = () => {
         
         {/* Top Header Row matching Reference */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
-          <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-[46px] text-[#0F172A] tracking-tight leading-[1.06] max-w-2xl">
-            What are you building?
-          </h2>
+          <div className="space-y-2">
+            <div className="font-mono text-xs font-bold uppercase tracking-widest text-[#64748B]">
+              WHO IT'S FOR & WHAT WE BUILD
+            </div>
+            <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-[46px] text-[#0F172A] tracking-tight leading-[1.06] max-w-2xl">
+              What are you building?
+            </h2>
+          </div>
           
           <div className="flex items-center gap-2 shrink-0 pb-1">
             <button
@@ -121,18 +209,19 @@ export const WorkflowAutonomousAgentsSection: React.FC = () => {
         {/* Main Tabbed Frame with 1px border matching Screenshot 1 */}
         <div className="border border-[#E2E8F0] bg-white rounded-[2px] overflow-hidden shadow-none">
           
-          {/* Top Horizontal Tab Bar (No Status Pills) */}
-          <div className="flex items-center gap-6 overflow-x-auto px-6 py-4 border-b border-[#E2E8F0] bg-white scrollbar-none font-body text-xs">
+          {/* Top Horizontal Tab Bar with Pill Badges */}
+          <div className="flex items-center gap-3 overflow-x-auto px-6 py-4 border-b border-[#E2E8F0] bg-[#F8FAFC] scrollbar-none font-body text-xs">
             {tabs.map((tab, idx) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTabIndex(idx)}
-                className={`transition-all flex items-center justify-center whitespace-nowrap ${
+                className={`transition-all flex items-center gap-2 whitespace-nowrap px-4 py-2.5 rounded-[2px] ${
                   activeTabIndex === idx
-                    ? 'bg-[#FFF7ED] border border-[#FDBA74] text-[#7C2D12] font-extrabold px-4 py-2.5 rounded-[2px] shadow-sm'
-                    : 'bg-transparent border-transparent text-[#64748B] hover:text-[#0F172A] font-medium px-2 py-2.5'
+                    ? 'bg-[#FFF7ED] border border-[#FDBA74] text-[#7C2D12] font-extrabold shadow-sm'
+                    : 'bg-white border border-[#E2E8F0] text-[#64748B] hover:text-[#0F172A] hover:border-[#CBD5E1] font-semibold'
                 }`}
               >
+                {tab.icon}
                 <span>{tab.label}</span>
               </button>
             ))}

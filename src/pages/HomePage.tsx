@@ -150,11 +150,6 @@ export const HomePage: React.FC<{ onOpenDemo?: () => void }> = () => {
       <MarketRealitySection />
 
       {/* ========================================================================= */}
-      {/* 2.75. INDUSTRY GRID (WHO IT'S FOR) */}
-      {/* ========================================================================= */}
-      <IndustryGridSection />
-
-      {/* ========================================================================= */}
       {/* 3. SECTOR SELECTOR (WORKFLOW AUTONOMOUS AGENTS SECTION) */}
       {/* ========================================================================= */}
       <WorkflowAutonomousAgentsSection />
