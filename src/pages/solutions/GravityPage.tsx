@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowRight, ChevronDown, ChevronUp, Download, Search, Brain, Zap, TrendingUp } from 'lucide-react';
 
 export const GravityPage: React.FC = () => {
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
@@ -60,6 +60,79 @@ export const GravityPage: React.FC = () => {
 
         </div>
       </section>
+
+      {/* 1.5. ORBITAL ARCHITECTURE DIAGRAM */}
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
+        <div className="text-center space-y-3">
+          <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
+            HOW THE SDK WORKS
+          </div>
+          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
+            Intelligence that remembers, reasons, and adapts
+          </h2>
+          <p className="text-base sm:text-lg text-[#475569] font-body leading-relaxed max-w-2xl mx-auto">
+            Five capabilities in a continuous loop. Each call to the SDK draws on everything the system has learned about that individual.
+          </p>
+        </div>
+
+        <div className="relative w-full max-w-[640px] mx-auto h-[400px] sm:h-[500px]">
+          {/* Center Circle */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-[#0F172A] flex flex-col items-center justify-center text-center z-10">
+            <div className="font-display font-extrabold text-xl text-white">SOMA</div>
+            <div className="font-mono text-[10px] font-bold uppercase tracking-[3px] text-white/60 mt-1">ENGINE</div>
+          </div>
+
+          {/* Dotted Orbit Ring */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[85%] rounded-full border border-dashed border-[#CBD5E1]"></div>
+
+          {/* 5 Orbital Nodes */}
+          {/* 1. Ingest */}
+          <div className="absolute flex flex-col items-center text-center" style={{ top: '2%', left: '50%', transform: 'translateX(-50%)' }}>
+            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center mb-2">
+              <Download className="w-5 h-5" />
+            </div>
+            <div className="font-display font-bold text-xs sm:text-sm text-[#0F172A]">Ingest</div>
+            <div className="text-[10px] sm:text-xs text-[#64748B] font-body">Labs, wearables, nutrition</div>
+          </div>
+
+          {/* 2. Decode */}
+          <div className="absolute flex flex-col items-center text-center" style={{ top: '25%', right: '2%' }}>
+            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center mb-2">
+              <Search className="w-5 h-5" />
+            </div>
+            <div className="font-display font-bold text-xs sm:text-sm text-[#0F172A]">Decode</div>
+            <div className="text-[10px] sm:text-xs text-[#64748B] font-body">Biomarker extraction</div>
+          </div>
+
+          {/* 3. Reason */}
+          <div className="absolute flex flex-col items-center text-center" style={{ bottom: '10%', right: '10%' }}>
+            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center mb-2">
+              <Brain className="w-5 h-5" />
+            </div>
+            <div className="font-display font-bold text-xs sm:text-sm text-[#0F172A]">Reason</div>
+            <div className="text-[10px] sm:text-xs text-[#64748B] font-body">Cross-domain correlation</div>
+          </div>
+
+          {/* 4. Act */}
+          <div className="absolute flex flex-col items-center text-center" style={{ bottom: '10%', left: '10%' }}>
+            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center mb-2">
+              <Zap className="w-5 h-5" />
+            </div>
+            <div className="font-display font-bold text-xs sm:text-sm text-[#0F172A]">Act</div>
+            <div className="text-[10px] sm:text-xs text-[#64748B] font-body">Protocols & coaching</div>
+          </div>
+
+          {/* 5. Learn */}
+          <div className="absolute flex flex-col items-center text-center" style={{ top: '25%', left: '2%' }}>
+            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center mb-2">
+              <TrendingUp className="w-5 h-5" />
+            </div>
+            <div className="font-display font-bold text-xs sm:text-sm text-[#0F172A]">Learn</div>
+            <div className="text-[10px] sm:text-xs text-[#64748B] font-body">Longitudinal memory</div>
+          </div>
+        </div>
+      </section>
+
 
       {/* 2. SDK MODULES */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">

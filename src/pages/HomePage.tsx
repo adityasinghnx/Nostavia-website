@@ -11,6 +11,9 @@ import { RealOutcomesCaseStudySection } from '../components/sections/RealOutcome
 import { SecurityComplianceBandSection } from '../components/sections/SecurityComplianceBandSection';
 import { ProofSection } from '../components/sections/ProofSection';
 import { PricingSection } from '../components/sections/PricingSection';
+import { MarketRealitySection } from '../components/sections/MarketRealitySection';
+import { IndustryGridSection } from '../components/sections/IndustryGridSection';
+import { ModuleConfiguratorSection } from '../components/sections/ModuleConfiguratorSection';
 
 export const HomePage: React.FC<{ onOpenDemo?: () => void }> = () => {
   return (
@@ -142,6 +145,16 @@ export const HomePage: React.FC<{ onOpenDemo?: () => void }> = () => {
       </div>
 
       {/* ========================================================================= */}
+      {/* 2.5. MARKET REALITY (BIG STAT + 3 PROBLEM CARDS) */}
+      {/* ========================================================================= */}
+      <MarketRealitySection />
+
+      {/* ========================================================================= */}
+      {/* 2.75. INDUSTRY GRID (WHO IT'S FOR) */}
+      {/* ========================================================================= */}
+      <IndustryGridSection />
+
+      {/* ========================================================================= */}
       {/* 3. SECTOR SELECTOR (WORKFLOW AUTONOMOUS AGENTS SECTION) */}
       {/* ========================================================================= */}
       <WorkflowAutonomousAgentsSection />
@@ -155,6 +168,11 @@ export const HomePage: React.FC<{ onOpenDemo?: () => void }> = () => {
       {/* 5. INTELLIGENCE MODULES (TEAM OF AGENTS MARQUEE SECTION) */}
       {/* ========================================================================= */}
       <TeamOfAgentsSection />
+
+      {/* ========================================================================= */}
+      {/* 5.5. MODULE CONFIGURATOR (BUILD YOUR NOSTAVIA STACK) */}
+      {/* ========================================================================= */}
+      <ModuleConfiguratorSection />
 
       {/* ========================================================================= */}
       {/* 6. SPECIALISED SERVICES (PRODUCTIZED SERVICES ROWS SECTION) */}
