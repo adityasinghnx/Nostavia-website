@@ -196,47 +196,16 @@ export const WorkflowAutonomousAgentsSection: React.FC = () => {
 
         </div>
 
-        {/* Additional Enterprise Verticals Bar */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 sm:p-5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px]">
-          <div className="flex items-center gap-2 shrink-0">
-            <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#64748B]">
-              ADDITIONAL ENTERPRISE VERTICALS
-            </span>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-2.5">
-            <Link
-              to="/industries/supplements"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-[#E2E8F0] hover:border-[#0F172A] text-[#0F172A] rounded-[2px] font-mono text-xs font-semibold transition-all"
-            >
-              <span>Supplement Brands</span>
-              <span className="text-[#64748B]">→</span>
-            </Link>
-
-            <Link
-              to="/industries/payer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-[#E2E8F0] hover:border-[#0F172A] text-[#0F172A] rounded-[2px] font-mono text-xs font-semibold transition-all"
-            >
-              <span>Insurance & Payers</span>
-              <span className="text-[#64748B]">→</span>
-            </Link>
-
-            <Link
-              to="/industries/public-sector"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-[#E2E8F0] hover:border-[#0F172A] text-[#0F172A] rounded-[2px] font-mono text-xs font-semibold transition-all"
-            >
-              <span>Public Health & CSR</span>
-              <span className="text-[#64748B]">→</span>
-            </Link>
-
-            <Link
-              to="/industries/life-sciences"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-[#E2E8F0] hover:border-[#0F172A] text-[#0F172A] rounded-[2px] font-mono text-xs font-semibold transition-all"
-            >
-              <span>Life Sciences & Pharma</span>
-              <span className="text-[#64748B]">→</span>
-            </Link>
-          </div>
+        {/* Clean Unboxed Verticals Text Line */}
+        <div className="pt-1 text-xs text-[#64748B] font-body flex flex-wrap items-center gap-x-2.5 gap-y-1">
+          <span className="font-mono font-bold uppercase tracking-widest text-[#0F172A]">ALSO POWERING:</span>
+          <Link to="/industries/supplements" className="hover:text-[#2563EB] transition-colors font-medium">Supplement Brands</Link>
+          <span className="text-slate-300">•</span>
+          <Link to="/industries/payer" className="hover:text-[#2563EB] transition-colors font-medium">Payers & Insurers</Link>
+          <span className="text-slate-300">•</span>
+          <Link to="/industries/public-sector" className="hover:text-[#2563EB] transition-colors font-medium">Public Health & CSR</Link>
+          <span className="text-slate-300">•</span>
+          <Link to="/industries/life-sciences" className="hover:text-[#2563EB] transition-colors font-medium">Life Sciences & Pharma</Link>
         </div>
 
       </div>
