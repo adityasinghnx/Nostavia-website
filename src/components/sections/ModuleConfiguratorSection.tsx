@@ -1,19 +1,35 @@
 import React, { useState } from 'react';
-import { Layers, FileText, Watch, Bot, RefreshCw, ClipboardList, GitBranch, Users, Clock, ShieldAlert, Zap, Phone, Pill, Check } from 'lucide-react';
+import { 
+  Layers, FileText, Watch, Bot, RefreshCw, ClipboardList, GitBranch, Users, 
+  Clock, ShieldAlert, Zap, Phone, Pill, Check, Sparkles, Apple, HeartPulse, 
+  Flame, Flower2, Brain, Moon, BarChart3 
+} from 'lucide-react';
 
 const modules = [
   { id: 'smart-reports', name: 'Smart Reports', desc: 'Lab PDF parsing & biomarker decoding', icon: FileText, defaultActive: true },
   { id: 'wearable-telemetry', name: 'Wearable Telemetry', desc: 'Apple, Oura, WHOOP, Garmin fusion', icon: Watch, defaultActive: true },
   { id: 'ai-companion', name: 'AI Health Companion', desc: 'Conversational health AI concierge', icon: Bot, defaultActive: true },
   { id: 'retest-recall', name: 'Re-Test Recall Engine', desc: 'Automated 90-day re-test campaigns', icon: RefreshCw, defaultActive: true },
+  
+  { id: 'personalisation-engine', name: 'Personalisation Engine', desc: 'Adaptive habit & intervention tailoring', icon: Sparkles, defaultActive: false },
+  { id: 'food-intelligence', name: 'Food Intelligence', desc: 'Glycemic bio-impact & meal scanning', icon: Apple, defaultActive: false },
+  { id: 'cardio-intelligence', name: 'Cardiovascular Intelligence', desc: 'HRV, arterial health & pulse wave analysis', icon: HeartPulse, defaultActive: false },
+  { id: 'performance-intel', name: 'Performance Intelligence', desc: 'Athletic recovery, VO2 max & readiness', icon: Flame, defaultActive: false },
+
+  { id: 'womens-health', name: "Women's Health Engine", desc: 'Cycle tracking, hormonal phases & fertility', icon: Flower2, defaultActive: false },
+  { id: 'mental-health', name: 'Mental & Behavioral Health', desc: 'Stress resilience, mood logging & mindfulness', icon: Brain, defaultActive: false },
   { id: 'intake-briefs', name: 'Clinical Intake Briefs', desc: 'Pre-consultation chart synthesis', icon: ClipboardList, defaultActive: false },
   { id: 'adaptive-protocols', name: 'Adaptive Protocols', desc: 'Condition-aware care pathways', icon: GitBranch, defaultActive: false },
+
   { id: 'digital-twin', name: 'Digital Twin', desc: 'Future-self model under current habits', icon: Users, defaultActive: false },
-  { id: 'biological-age', name: 'Biological Age', desc: 'Real body age vs chronological', icon: Clock, defaultActive: false },
+  { id: 'biological-age', name: 'Biological Age', desc: 'Real body age vs chronological scoring', icon: Clock, defaultActive: false },
   { id: 'disease-risk', name: 'Disease Risk Engine', desc: 'Metabolic & cardiovascular risk scoring', icon: ShieldAlert, defaultActive: false },
   { id: 'correlation-engine', name: 'Correlation Engine', desc: 'Cross-domain marker relationships', icon: Zap, defaultActive: false },
+
   { id: 'voice-agent', name: 'AI Voice Agent', desc: 'Front desk call handling in Hinglish', icon: Phone, defaultActive: false },
   { id: 'medication-intel', name: 'Medication Intelligence', desc: 'Drug interactions & refill signals', icon: Pill, defaultActive: false },
+  { id: 'sleep-recovery', name: 'Sleep & Recovery Engine', desc: 'Circadian tracking & sleep debt analysis', icon: Moon, defaultActive: false },
+  { id: 'b2b-analytics', name: 'B2B Analytics Dashboard', desc: 'Cohort risk insights & executive reporting', icon: BarChart3, defaultActive: false },
 ];
 
 export const ModuleConfiguratorSection: React.FC = () => {
@@ -49,7 +65,7 @@ export const ModuleConfiguratorSection: React.FC = () => {
             <Layers className="w-5 h-5 text-[#0F172A]" />
             <div>
               <span className="font-mono font-bold text-xs uppercase tracking-widest text-[#64748B] block">YOUR NOSTAVIA STACK</span>
-              <span className="font-display font-bold text-sm text-[#0F172A]">{activeModules.size} / 12 modules active</span>
+              <span className="font-display font-bold text-sm text-[#0F172A]">{activeModules.size} / {modules.length} modules active</span>
             </div>
           </div>
           <div className="flex space-x-4">
