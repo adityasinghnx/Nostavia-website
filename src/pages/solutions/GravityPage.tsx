@@ -75,64 +75,99 @@ export const GravityPage: React.FC = () => {
           </p>
         </div>
 
-        <div className="relative w-full max-w-[640px] mx-auto h-[400px] sm:h-[500px]">
-          {/* Center Circle */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-[#0F172A] flex flex-col items-center justify-center text-center z-10">
-            <div className="font-display font-extrabold text-xl text-white">SOMA</div>
-            <div className="font-mono text-[10px] font-bold uppercase tracking-[3px] text-white/60 mt-1">ENGINE</div>
+        <div className="relative w-full max-w-[680px] mx-auto h-[460px] sm:h-[540px] my-6 select-none">
+          {/* Center Multi-Layer Ring Core */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 sm:w-48 sm:h-48 rounded-full border border-[#E2E8F0] bg-[#F8FAFC] p-2.5 shadow-xl flex items-center justify-center z-10">
+            <div className="w-full h-full rounded-full bg-[#0F172A] flex flex-col items-center justify-center text-center p-3 shadow-inner">
+              <span className="font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-[2px] text-slate-400 mb-1">
+                SOMA CORE
+              </span>
+              <span className="font-display font-extrabold text-base sm:text-xl text-white leading-tight tracking-tight">
+                NOSTAVIA
+              </span>
+              <span className="font-display font-bold text-xs sm:text-sm text-slate-300 leading-tight tracking-wider">
+                INTELLIGENCE
+              </span>
+            </div>
           </div>
 
           {/* Dotted Orbit Ring */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[85%] rounded-full border border-dashed border-[#CBD5E1]"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[78%] h-[78%] rounded-full border-2 border-dashed border-[#CBD5E1]"></div>
 
-          {/* 5 Orbital Nodes */}
-          {/* 1. Ingest */}
-          <div className="absolute flex flex-col items-center text-center" style={{ top: '2%', left: '50%', transform: 'translateX(-50%)' }}>
-            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center mb-2">
-              <Download className="w-5 h-5" />
+          {/* 5 Clean Orbital Node Cards */}
+          
+          {/* 01. Ingest */}
+          <div className="absolute z-20" style={{ top: '-2%', left: '50%', transform: 'translateX(-50%)' }}>
+            <div className="bg-white border border-[#E2E8F0] hover:border-[#0F172A] p-3 sm:p-4 rounded-[4px] shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center w-[150px] sm:w-[170px] group">
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="font-mono text-[10px] font-bold text-[#64748B] bg-[#F8FAFC] px-1.5 py-0.5 rounded-[2px] border border-[#E2E8F0]">01</span>
+                <div className="w-7 h-7 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <Download className="w-3.5 h-3.5" />
+                </div>
+              </div>
+              <div className="font-display font-extrabold text-xs sm:text-sm text-[#0F172A]">Ingest</div>
+              <div className="text-[10px] sm:text-xs text-[#64748B] font-body mt-0.5">Labs, wearables, nutrition</div>
             </div>
-            <div className="font-display font-bold text-xs sm:text-sm text-[#0F172A]">Ingest</div>
-            <div className="text-[10px] sm:text-xs text-[#64748B] font-body">Labs, wearables, nutrition</div>
           </div>
 
-          {/* 2. Decode */}
-          <div className="absolute flex flex-col items-center text-center" style={{ top: '25%', right: '2%' }}>
-            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center mb-2">
-              <Search className="w-5 h-5" />
+          {/* 02. Decode */}
+          <div className="absolute z-20" style={{ top: '20%', right: '-2%' }}>
+            <div className="bg-white border border-[#E2E8F0] hover:border-[#0F172A] p-3 sm:p-4 rounded-[4px] shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center w-[150px] sm:w-[170px] group">
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="font-mono text-[10px] font-bold text-[#64748B] bg-[#F8FAFC] px-1.5 py-0.5 rounded-[2px] border border-[#E2E8F0]">02</span>
+                <div className="w-7 h-7 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <Search className="w-3.5 h-3.5" />
+                </div>
+              </div>
+              <div className="font-display font-extrabold text-xs sm:text-sm text-[#0F172A]">Decode</div>
+              <div className="text-[10px] sm:text-xs text-[#64748B] font-body mt-0.5">Biomarker extraction</div>
             </div>
-            <div className="font-display font-bold text-xs sm:text-sm text-[#0F172A]">Decode</div>
-            <div className="text-[10px] sm:text-xs text-[#64748B] font-body">Biomarker extraction</div>
           </div>
 
-          {/* 3. Reason */}
-          <div className="absolute flex flex-col items-center text-center" style={{ bottom: '10%', right: '10%' }}>
-            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center mb-2">
-              <Brain className="w-5 h-5" />
+          {/* 03. Reason */}
+          <div className="absolute z-20" style={{ bottom: '2%', right: '4%' }}>
+            <div className="bg-white border border-[#E2E8F0] hover:border-[#0F172A] p-3 sm:p-4 rounded-[4px] shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center w-[150px] sm:w-[170px] group">
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="font-mono text-[10px] font-bold text-[#64748B] bg-[#F8FAFC] px-1.5 py-0.5 rounded-[2px] border border-[#E2E8F0]">03</span>
+                <div className="w-7 h-7 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <Brain className="w-3.5 h-3.5" />
+                </div>
+              </div>
+              <div className="font-display font-extrabold text-xs sm:text-sm text-[#0F172A]">Reason</div>
+              <div className="text-[10px] sm:text-xs text-[#64748B] font-body mt-0.5">Cross-domain correlation</div>
             </div>
-            <div className="font-display font-bold text-xs sm:text-sm text-[#0F172A]">Reason</div>
-            <div className="text-[10px] sm:text-xs text-[#64748B] font-body">Cross-domain correlation</div>
           </div>
 
-          {/* 4. Act */}
-          <div className="absolute flex flex-col items-center text-center" style={{ bottom: '10%', left: '10%' }}>
-            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center mb-2">
-              <Zap className="w-5 h-5" />
+          {/* 04. Act */}
+          <div className="absolute z-20" style={{ bottom: '2%', left: '4%' }}>
+            <div className="bg-white border border-[#E2E8F0] hover:border-[#0F172A] p-3 sm:p-4 rounded-[4px] shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center w-[150px] sm:w-[170px] group">
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="font-mono text-[10px] font-bold text-[#64748B] bg-[#F8FAFC] px-1.5 py-0.5 rounded-[2px] border border-[#E2E8F0]">04</span>
+                <div className="w-7 h-7 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <Zap className="w-3.5 h-3.5" />
+                </div>
+              </div>
+              <div className="font-display font-extrabold text-xs sm:text-sm text-[#0F172A]">Act</div>
+              <div className="text-[10px] sm:text-xs text-[#64748B] font-body mt-0.5">Protocols & coaching</div>
             </div>
-            <div className="font-display font-bold text-xs sm:text-sm text-[#0F172A]">Act</div>
-            <div className="text-[10px] sm:text-xs text-[#64748B] font-body">Protocols & coaching</div>
           </div>
 
-          {/* 5. Learn */}
-          <div className="absolute flex flex-col items-center text-center" style={{ top: '25%', left: '2%' }}>
-            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center mb-2">
-              <TrendingUp className="w-5 h-5" />
+          {/* 05. Learn */}
+          <div className="absolute z-20" style={{ top: '20%', left: '-2%' }}>
+            <div className="bg-white border border-[#E2E8F0] hover:border-[#0F172A] p-3 sm:p-4 rounded-[4px] shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center w-[150px] sm:w-[170px] group">
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="font-mono text-[10px] font-bold text-[#64748B] bg-[#F8FAFC] px-1.5 py-0.5 rounded-[2px] border border-[#E2E8F0]">05</span>
+                <div className="w-7 h-7 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <TrendingUp className="w-3.5 h-3.5" />
+                </div>
+              </div>
+              <div className="font-display font-extrabold text-xs sm:text-sm text-[#0F172A]">Learn</div>
+              <div className="text-[10px] sm:text-xs text-[#64748B] font-body mt-0.5">Longitudinal memory</div>
             </div>
-            <div className="font-display font-bold text-xs sm:text-sm text-[#0F172A]">Learn</div>
-            <div className="text-[10px] sm:text-xs text-[#64748B] font-body">Longitudinal memory</div>
           </div>
+
         </div>
       </section>
-
 
       {/* 2. SDK MODULES */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
