@@ -428,13 +428,8 @@ export const StackPricingCalculatorSection: React.FC = () => {
                     <div className="flex items-center gap-2.5">
                       <Smartphone className="w-4 h-4 text-slate-400 group-hover:text-white transition-colors" />
                       <div>
-                        <div className="text-xs font-display font-bold text-white flex items-center gap-1.5">
+                        <div className="text-xs font-display font-bold text-white">
                           White-Label App
-                          {whitelabelOn && (
-                            <span className="text-[8px] font-mono font-bold bg-amber-500 text-white px-1.5 py-0.5 rounded-[2px] uppercase">
-                              Active
-                            </span>
-                          )}
                         </div>
                         <div className="text-[10px] text-slate-400 font-body">
                           Branded iOS & Android
