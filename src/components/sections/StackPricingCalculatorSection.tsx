@@ -188,7 +188,7 @@ export const StackPricingCalculatorSection: React.FC = () => {
   const visibleModules = showAll ? modules : modules.slice(0, DESKTOP_VISIBLE);
 
   return (
-    <section className="w-full font-body text-[#0F172A] py-12 bg-white">
+    <section className="w-full font-body text-[#0F172A] pt-12 pb-20 lg:pb-12 bg-white">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 space-y-10">
 
         {/* ── Header ── */}

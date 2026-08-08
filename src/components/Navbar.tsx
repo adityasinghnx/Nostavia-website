@@ -169,7 +169,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
             <Link
               to="/demo"
               onClick={closeMenus}
-              className="bg-[#000000] hover:bg-[#1A1A1A] text-white font-display text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-[4px] transition-all shadow-sm"
+              className="hidden sm:inline-flex bg-[#000000] hover:bg-[#1A1A1A] text-white font-display text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-[4px] transition-all shadow-sm"
             >
               REQUEST A DEMO
             </Link>

@@ -101,22 +101,22 @@ export const TeamOfAgentsSection: React.FC = () => {
             <div className="absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-white/70 to-transparent z-20 pointer-events-none" />
 
             {/* Responsive Columns Layout */}
-            <div className="relative z-10 grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 h-full px-2 sm:px-3 py-0 overflow-hidden">
+            <div className="relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 h-full px-2 sm:px-3 py-0 overflow-hidden">
               
-              {/* Column 1: Moves UP to DOWN */}
+              {/* Column 1: Moves UP to DOWN (Visible on all screens) */}
               <div className="overflow-hidden h-full">
                 <div className="flex flex-col gap-3 animate-marquee-down">
                   {col1Duplicated.map((agent, idx) => (
                     <div
                       key={idx}
-                      className="bg-white/95 backdrop-blur-sm p-5 rounded-[2px] border border-[#E2E8F0] shadow-sm space-y-2 hover:shadow-md transition-all shrink-0"
+                      className="bg-white/95 backdrop-blur-sm p-4 sm:p-5 rounded-[2px] border border-[#E2E8F0] shadow-sm space-y-2 hover:shadow-md transition-all shrink-0"
                     >
                       <div className="w-6 h-6 flex items-center justify-center text-[#0F172A]">
                         {agent.icon}
                       </div>
 
                       <div>
-                        <div className="font-display font-extrabold text-[13px] text-[#0F172A] tracking-tight uppercase leading-tight">
+                        <div className="font-display font-extrabold text-xs sm:text-[13px] text-[#0F172A] tracking-tight uppercase leading-tight">
                           {agent.title}
                         </div>
                         <div className="font-mono text-[9px] font-bold text-[#64748B] uppercase tracking-wider mt-0.5">
@@ -132,20 +132,20 @@ export const TeamOfAgentsSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Column 2: Moves DOWN to UP */}
-              <div className="overflow-hidden h-full">
+              {/* Column 2: Moves DOWN to UP (Visible on sm+) */}
+              <div className="hidden sm:block overflow-hidden h-full">
                 <div className="flex flex-col gap-3 animate-marquee-up">
                   {col2Duplicated.map((agent, idx) => (
                     <div
                       key={idx}
-                      className="bg-white/95 backdrop-blur-sm p-5 rounded-[2px] border border-[#E2E8F0] shadow-sm space-y-2 hover:shadow-md transition-all shrink-0"
+                      className="bg-white/95 backdrop-blur-sm p-4 sm:p-5 rounded-[2px] border border-[#E2E8F0] shadow-sm space-y-2 hover:shadow-md transition-all shrink-0"
                     >
                       <div className="w-6 h-6 flex items-center justify-center text-[#0F172A]">
                         {agent.icon}
                       </div>
 
                       <div>
-                        <div className="font-display font-extrabold text-[13px] text-[#0F172A] tracking-tight uppercase leading-tight">
+                        <div className="font-display font-extrabold text-xs sm:text-[13px] text-[#0F172A] tracking-tight uppercase leading-tight">
                           {agent.title}
                         </div>
                         <div className="font-mono text-[9px] font-bold text-[#64748B] uppercase tracking-wider mt-0.5">
@@ -161,20 +161,20 @@ export const TeamOfAgentsSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Column 3: Moves UP to DOWN */}
-              <div className="overflow-hidden h-full">
+              {/* Column 3: Moves UP to DOWN (Visible on sm+) */}
+              <div className="hidden sm:block overflow-hidden h-full">
                 <div className="flex flex-col gap-3 animate-marquee-down">
                   {col3Duplicated.map((agent, idx) => (
                     <div
                       key={idx}
-                      className="bg-white/95 backdrop-blur-sm p-5 rounded-[2px] border border-[#E2E8F0] shadow-sm space-y-2 hover:shadow-md transition-all shrink-0"
+                      className="bg-white/95 backdrop-blur-sm p-4 sm:p-5 rounded-[2px] border border-[#E2E8F0] shadow-sm space-y-2 hover:shadow-md transition-all shrink-0"
                     >
                       <div className="w-6 h-6 flex items-center justify-center text-[#0F172A]">
                         {agent.icon}
                       </div>
 
                       <div>
-                        <div className="font-display font-extrabold text-[13px] text-[#0F172A] tracking-tight uppercase leading-tight">
+                        <div className="font-display font-extrabold text-xs sm:text-[13px] text-[#0F172A] tracking-tight uppercase leading-tight">
                           {agent.title}
                         </div>
                         <div className="font-mono text-[9px] font-bold text-[#64748B] uppercase tracking-wider mt-0.5">
