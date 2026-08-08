@@ -15,6 +15,7 @@ const PREMIUM_MODULE_IDS = new Set([
   'disease-risk',
   'performance-intel',
   'retest-recall',
+  'womens-health',
 ]);
 
 /* ── Default active modules for White-Label base stack ── */
