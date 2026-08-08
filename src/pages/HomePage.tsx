@@ -10,9 +10,8 @@ import { ProductizedServicesRowsSection } from '../components/sections/Productiz
 import { RealOutcomesCaseStudySection } from '../components/sections/RealOutcomesCaseStudySection';
 import { SecurityComplianceBandSection } from '../components/sections/SecurityComplianceBandSection';
 import { ProofSection } from '../components/sections/ProofSection';
-import { PricingSection } from '../components/sections/PricingSection';
 import { MarketRealitySection } from '../components/sections/MarketRealitySection';
-import { ModuleConfiguratorSection } from '../components/sections/ModuleConfiguratorSection';
+import { StackPricingCalculatorSection } from '../components/sections/StackPricingCalculatorSection';
 
 export const HomePage: React.FC<{ onOpenDemo?: () => void }> = () => {
   return (
@@ -164,9 +163,9 @@ export const HomePage: React.FC<{ onOpenDemo?: () => void }> = () => {
       <TeamOfAgentsSection />
 
       {/* ========================================================================= */}
-      {/* 5.5. MODULE CONFIGURATOR (BUILD YOUR NOSTAVIA STACK) */}
+      {/* 5.5. BUILD & PRICE YOUR STACK (MERGED MODULE CONFIGURATOR + PRICING) */}
       {/* ========================================================================= */}
-      <ModuleConfiguratorSection />
+      <StackPricingCalculatorSection />
 
       {/* ========================================================================= */}
       {/* 6. SPECIALISED SERVICES (PRODUCTIZED SERVICES ROWS SECTION) */}
@@ -188,10 +187,7 @@ export const HomePage: React.FC<{ onOpenDemo?: () => void }> = () => {
       {/* ========================================================================= */}
       <ProofSection />
 
-      {/* ========================================================================= */}
-      {/* 9. PRICING (PRICING SECTION) */}
-      {/* ========================================================================= */}
-      <PricingSection />
+
 
       {/* ========================================================================= */}
       {/* 10. CLOSE (FINAL ENTERPRISE CTA SECTION) */}
