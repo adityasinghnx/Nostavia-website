@@ -183,8 +183,8 @@ export const StackPricingCalculatorSection: React.FC = () => {
   const totalPrice = basePrice + totalSurcharge;
   const prefix = currentTier.currencyPrefix[currency];
 
-  /* On desktop 3 cols → 9 cards for 3 rows */
-  const DESKTOP_VISIBLE = 9;
+  /* On desktop 3 cols → 12 cards for 4 rows */
+  const DESKTOP_VISIBLE = 12;
   const visibleModules = showAll ? modules : modules.slice(0, DESKTOP_VISIBLE);
 
   return (
