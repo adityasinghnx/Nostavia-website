@@ -38,7 +38,7 @@ export const ProductizedServicesRowsSection: React.FC = () => {
           <div className="eyebrow text-[#B45309] font-bold text-xs uppercase tracking-widest font-mono">
             SPECIALISED SERVICES
           </div>
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-[54px] text-[#0F172A] tracking-tight leading-[1.05]">
+          <h2 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-[54px] text-[#0F172A] tracking-tight leading-[1.08]">
             Four things you currently pay people to do — or don't do at all.
           </h2>
         </div>

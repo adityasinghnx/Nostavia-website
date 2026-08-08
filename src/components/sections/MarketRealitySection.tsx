@@ -9,17 +9,17 @@ export const MarketRealitySection: React.FC = () => {
           <div className="font-mono text-xs font-bold uppercase tracking-widest text-[#64748B]">
             THE MARKET REALITY
           </div>
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-[54px] text-[#0F172A] tracking-tight leading-[1.05]">
+          <h2 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-[54px] text-[#0F172A] tracking-tight leading-[1.08]">
             83% of diagnostic reports are read once and never opened again.
           </h2>
-          <p className="text-base sm:text-lg text-[#475569] font-body leading-relaxed max-w-3xl">
+          <p className="text-sm sm:text-lg text-[#475569] font-body leading-relaxed max-w-3xl">
             Most health companies collect enormous clinical data and cannot interpret it. The relationship ends where the intelligence should begin.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card 1 */}
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] hover:border-[#CBD5E1] transition-all space-y-4">
+          <div className="p-6 sm:p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] hover:border-[#CBD5E1] transition-all space-y-4">
             <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center">
               <FileX className="w-5 h-5" />
             </div>
@@ -32,7 +32,7 @@ export const MarketRealitySection: React.FC = () => {
           </div>
 
           {/* Card 2 */}
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] hover:border-[#CBD5E1] transition-all space-y-4">
+          <div className="p-6 sm:p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] hover:border-[#CBD5E1] transition-all space-y-4">
             <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center">
               <Unplug className="w-5 h-5" />
             </div>
@@ -45,7 +45,7 @@ export const MarketRealitySection: React.FC = () => {
           </div>
 
           {/* Card 3 */}
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] hover:border-[#CBD5E1] transition-all space-y-4">
+          <div className="p-6 sm:p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] hover:border-[#CBD5E1] transition-all space-y-4">
             <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center">
               <DoorOpen className="w-5 h-5" />
             </div>

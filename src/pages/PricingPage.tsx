@@ -70,8 +70,8 @@ export const PricingPage: React.FC = () => {
           </h2>
         </div>
 
-        <div className="border border-[#E2E8F0] rounded-[2px] overflow-hidden bg-white">
-          <table className="w-full text-left border-collapse font-body text-sm">
+        <div className="border border-[#E2E8F0] rounded-[2px] overflow-x-auto bg-white">
+          <table className="w-full min-w-[600px] text-left border-collapse font-body text-sm">
             <thead>
               <tr className="bg-[#F8FAFC] border-b border-[#E2E8F0] font-mono text-xs uppercase tracking-wider text-[#64748B]">
                 <th className="p-4 sm:p-5 font-bold">SERVICE</th>
@@ -106,8 +106,8 @@ export const PricingPage: React.FC = () => {
       </div>
 
       {/* FOOTER CTA */}
-      <div className="p-12 sm:p-16 lg:p-20 bg-[#0F172A] text-white rounded-[2px] border border-[#1E293B] shadow-2xl text-center flex flex-col items-center gap-8">
-        <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-white max-w-3xl leading-tight">
+      <div className="p-8 sm:p-16 lg:p-20 bg-[#0F172A] text-white rounded-[2px] border border-[#1E293B] shadow-2xl text-center flex flex-col items-center gap-6 sm:gap-8">
+        <h2 className="font-display font-extrabold text-2xl sm:text-4xl lg:text-5xl text-white max-w-3xl leading-tight">
           Ready to deploy white-labeled health intelligence?
         </h2>
         <Link

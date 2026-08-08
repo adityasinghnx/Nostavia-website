@@ -196,10 +196,10 @@ export const StackPricingCalculatorSection: React.FC = () => {
           <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#64748B]">
             BUILD & PRICE YOUR STACK
           </span>
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight mt-4">
+          <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-[#0F172A] tracking-tight mt-3 leading-tight">
             Build your stack. See your price.
           </h2>
-          <p className="text-base sm:text-lg text-[#475569] font-body leading-relaxed max-w-2xl mt-4">
+          <p className="text-sm sm:text-base lg:text-lg text-[#475569] font-body leading-relaxed max-w-2xl mt-3">
             Activate modules, toggle white-label — the pricing updates in real time.
             Ship it under your brand. Add more as you grow.
           </p>
@@ -513,6 +513,27 @@ export const StackPricingCalculatorSection: React.FC = () => {
           </div>
 
         </div>
+      </div>
+
+      {/* ── Mobile Floating Calculation Bar (visible on small screens) ── */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0F172A]/95 backdrop-blur-md text-white border-t border-slate-800 p-3 px-4 shadow-2xl flex items-center justify-between gap-3">
+        <div className="space-y-0.5 min-w-0">
+          <div className="font-mono text-[10px] uppercase font-bold text-slate-400 truncate">
+            {count} Modules · {currentTier.name}
+          </div>
+          <div className="font-display font-extrabold text-lg text-white leading-none">
+            {formatPrice(totalPrice, currency, prefix)}
+            <span className="text-[10px] font-mono font-normal text-slate-400 ml-1">/mo</span>
+          </div>
+        </div>
+
+        <Link
+          to="/demo"
+          className="bg-white text-[#0F172A] font-display text-[11px] font-bold uppercase tracking-wider px-4 py-2.5 rounded-[2px] shrink-0 flex items-center gap-1 hover:bg-slate-100 transition-colors"
+        >
+          Deploy
+          <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
       </div>
     </section>
   );
