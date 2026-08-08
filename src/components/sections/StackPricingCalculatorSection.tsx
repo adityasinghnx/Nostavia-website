@@ -49,7 +49,7 @@ const modules = [
   { id: 'disease-risk', name: 'Disease Risk Engine', desc: 'Metabolic & cardiovascular risk scoring', icon: ShieldAlert, defaultActive: false },
   { id: 'correlation-engine', name: 'Correlation Engine', desc: 'Cross-domain marker relationships', icon: Zap, defaultActive: false },
 
-  { id: 'voice-agent', name: 'AI Voice Agent', desc: 'Front desk call handling in Hinglish', icon: Phone, defaultActive: false },
+  { id: 'voice-agent', name: 'AI Voice Agent', desc: 'Front desk call handling in local languages', icon: Phone, defaultActive: false },
   { id: 'medication-intel', name: 'Medication Intelligence', desc: 'Drug interactions & refill signals', icon: Pill, defaultActive: false },
   { id: 'sleep-recovery', name: 'Sleep & Recovery Engine', desc: 'Circadian tracking & sleep debt analysis', icon: Moon, defaultActive: false },
   { id: 'b2b-analytics', name: 'B2B Analytics Dashboard', desc: 'Cohort risk insights & executive reporting', icon: BarChart3, defaultActive: false },

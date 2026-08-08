@@ -46,11 +46,11 @@ export const RealOutcomesCaseStudySection: React.FC = () => {
       brandLogo: 'KANPUR CARDIOLOGY',
       brandBg: 'bg-[#0F172A]',
       title: 'Tertiary Care Cardiology Hospital',
-      description: 'Two systems deployed inside a working hospital against real patient flow. An AI voice agent handling inbound calls end-to-end in Hinglish — including code-switching mid-sentence and family members speaking on behalf of patients — and a contactless rPPG vitals pipeline returning 12 physiological parameters from a single facial video capture.',
+      description: 'Two systems deployed inside a working hospital against real patient flow. An AI voice agent handling inbound calls end-to-end in local languages — including code-switching mid-sentence and family members speaking on behalf of patients — and a contactless rPPG vitals pipeline returning 12 physiological parameters from a single facial video capture.',
       link: '/solutions/front-desk',
       metrics: [
         { value: '12 Params', label: 'Contactless vitals from a single camera capture' },
-        { value: 'Hinglish', label: 'Code-switching conversational voice agent' },
+        { value: 'Multilingual', label: 'Code-switching conversational voice agent' },
         { value: 'Live', label: 'Running against real patient flow, not a sandbox' },
       ],
     },

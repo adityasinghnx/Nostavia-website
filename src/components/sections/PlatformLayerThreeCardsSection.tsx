@@ -31,7 +31,7 @@ export const PlatformLayerThreeCardsSection: React.FC = () => {
     {
       title: 'AI Agents (including voice)',
       subtitle: 'Always-on patient support & voice booking agent',
-      description: 'Nostavia Front Desk answers every call in Hinglish, names a specific doctor, and turns an enquiry into a booked visit across phone, WhatsApp & web under your brand.',
+      description: 'Nostavia Front Desk answers every call in local languages, names a specific doctor, and turns an enquiry into a booked visit across phone, WhatsApp & web under your brand.',
       linkText: 'View AI Agents →',
       linkUrl: '/solutions/front-desk',
       icon: <Volume2 className="w-5 h-5 text-[#0F172A]" />,

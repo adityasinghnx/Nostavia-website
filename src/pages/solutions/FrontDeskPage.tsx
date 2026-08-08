@@ -73,7 +73,7 @@ export const FrontDeskPage: React.FC = () => {
           </h1>
 
           <p className="text-base sm:text-xl text-[#64748B] max-w-3xl leading-relaxed font-body">
-            Nostavia Front Desk is an always-on patient support agent that answers every call in Hinglish, names a specific doctor, and turns an enquiry into a booked visit. It runs under your hospital's name.
+            Nostavia Front Desk is an always-on patient support agent that answers every call in local languages, names a specific doctor, and turns an enquiry into a booked visit. It runs under your hospital's name.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 pt-4">
@@ -96,7 +96,7 @@ export const FrontDeskPage: React.FC = () => {
           {/* Key Metrics Banner */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-[#E2E8F0] font-mono text-xs text-[#0F172A]">
             <div>
-              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">Hinglish</div>
+              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">Multilingual</div>
               <div className="text-[#64748B] font-semibold mt-1">Native Voice Conversational</div>
             </div>
             <div>
@@ -717,7 +717,7 @@ export const FrontDeskPage: React.FC = () => {
         title="Everything hospital operations leaders ask about Nostavia Front Desk"
         faqs={[
           {
-            q: "How does Nostavia Front Desk handle Hinglish and accent variations?",
+            q: "How does Nostavia Front Desk handle local languages and accent variations?",
             a: "Nostavia Front Desk uses specialized conversational models trained on natural Indian dialect patterns, code-switching between Hindi and English, and regional medical term variations."
           },
           {

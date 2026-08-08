@@ -50,7 +50,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
                 </h2>
 
                 <p className="text-xs sm:text-base text-[#475569] font-semibold max-w-2xl px-2">
-                  Nostavia Front Desk — answers every call in Hinglish, names a specific doctor, rules out emergencies, and captures late-night bookings under your hospital's brand.
+                  Nostavia Front Desk — answers every call in local languages, names a specific doctor, rules out emergencies, and captures late-night bookings under your hospital's brand.
                 </p>
 
                 <div className="pt-3">

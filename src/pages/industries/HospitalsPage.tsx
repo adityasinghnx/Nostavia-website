@@ -300,10 +300,10 @@ export const HospitalsPage: React.FC = () => {
                 </Link>
               </div>
               <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-                Nostavia Front Desk Agent (Hinglish Voice & Patient Support)
+                Nostavia Front Desk Agent (Multilingual Voice & Patient Support)
               </h3>
               <p className="text-xs text-[#64748B] leading-relaxed font-body max-w-4xl">
-                Always-on patient support agent that answers every phone call in Hinglish, names a specific doctor with experience, rules out emergencies, and turns enquiries into booked visits. Operates seamlessly across telephony, WhatsApp, and website chat under your hospital's brand.
+                Always-on patient support agent that answers every phone call in local languages, names a specific doctor with experience, rules out emergencies, and turns enquiries into booked visits. Operates seamlessly across telephony, WhatsApp, and website chat under your hospital's brand.
               </p>
             </div>
             <div className="pt-4 border-t border-[#E2E8F0] flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] text-[#475569]">
@@ -356,7 +356,7 @@ export const HospitalsPage: React.FC = () => {
               System One: AI Voice Agent
             </h3>
             <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              Conversational voice agent handling inbound patient calls end-to-end. Handles Hinglish code-switching mid-sentence, family members speaking on behalf of patients, and hands off to a human when calls leave the routine envelope. Not a decision tree — built for real Indian conversational patterns.
+              Conversational voice agent handling inbound patient calls end-to-end. Handles local language code-switching mid-sentence, family members speaking on behalf of patients, and hands off to a human when calls leave the routine envelope. Not a decision tree — built for real conversational patterns.
             </p>
           </div>
 
