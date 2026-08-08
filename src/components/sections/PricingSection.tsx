@@ -5,12 +5,12 @@ export const PricingSection: React.FC = () => {
   const tiers = [
     {
       name: 'Starter SDK',
-      price: '$299',
+      price: '$99',
       unit: '/mo',
       features: [
         'Up to 5,000 MAU',
         'Core infrastructure',
-        'Any four modules',
+        'Up to four modules',
         'API documentation',
         '48-hour support SLAs',
       ],
@@ -18,7 +18,7 @@ export const PricingSection: React.FC = () => {
     },
     {
       name: 'Growth SDK',
-      price: '$999',
+      price: '$199',
       unit: '/mo',
       isPopular: true,
       features: [
@@ -33,20 +33,22 @@ export const PricingSection: React.FC = () => {
     },
     {
       name: 'White-Label Pro',
-      price: '$999',
+      price: '$299',
       unit: '/mo',
+      isOffer: true,
       features: [
         'Unlimited MAU',
         'Fully branded iOS & Android app',
-        'All modules unlocked',
+        'Base modules included',
+        'Premium modules +$50/mo each',
         'Priority 2-hour support',
-        '$1,000 setup fee waived on annual',
+        'No upfront cost on annual plan',
       ],
       ctaText: 'Deploy White-Label',
     },
     {
       name: 'Enterprise',
-      price: 'from $5,000',
+      price: 'from $2,499',
       unit: '/mo',
       features: [
         'Unlimited MAU & scale',

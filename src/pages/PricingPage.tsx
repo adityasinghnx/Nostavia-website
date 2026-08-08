@@ -10,20 +10,20 @@ export const PricingPage: React.FC = () => {
   const getPrice = (tier: 'starter' | 'growth' | 'whitelabel' | 'enterprise') => {
     switch (currency) {
       case 'USD':
-        if (tier === 'starter') return '$299';
-        if (tier === 'growth') return '$999';
-        if (tier === 'whitelabel') return '$999';
-        return 'from $5,000';
+        if (tier === 'starter') return '$99';
+        if (tier === 'growth') return '$199';
+        if (tier === 'whitelabel') return '$299';
+        return 'from $2,499';
       case 'AED':
-        if (tier === 'starter') return 'AED 1,100';
-        if (tier === 'growth') return 'AED 3,670';
-        if (tier === 'whitelabel') return 'AED 3,670';
-        return 'from AED 18,360';
+        if (tier === 'starter') return 'AED 365';
+        if (tier === 'growth') return 'AED 730';
+        if (tier === 'whitelabel') return 'AED 1,100';
+        return 'from AED 9,180';
       case 'INR':
-        if (tier === 'starter') return '₹24,990';
-        if (tier === 'growth') return '₹82,990';
-        if (tier === 'whitelabel') return '₹82,990';
-        return 'from ₹4,15,000';
+        if (tier === 'starter') return '₹8,290';
+        if (tier === 'growth') return '₹16,590';
+        if (tier === 'whitelabel') return '₹24,990';
+        return 'from ₹2,08,000';
     }
   };
 
@@ -206,7 +206,12 @@ export const PricingPage: React.FC = () => {
         </div>
 
         {/* Tier 3: White-Label Pro */}
-        <div className="p-6 sm:p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] flex flex-col justify-between space-y-6 hover:border-[#CBD5E1] transition-all">
+        <div className="p-6 sm:p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] flex flex-col justify-between space-y-6 hover:border-[#CBD5E1] transition-all relative">
+          <div className="absolute -top-3 left-6">
+            <span className="text-[10px] font-mono font-bold bg-amber-500 text-white px-2.5 py-1 rounded-[2px] uppercase">
+              Limited-period offer
+            </span>
+          </div>
           <div className="space-y-4">
             <div className="font-mono text-xs text-[#64748B] uppercase font-bold tracking-wider">White-Label Pro</div>
             <div>
@@ -223,7 +228,11 @@ export const PricingPage: React.FC = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Check className="w-3.5 h-3.5 text-[#0F172A]" />
-                <span>All intelligence modules unlocked</span>
+                <span>Base modules included</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="w-3.5 h-3.5 text-[#0F172A]" />
+                <span>Premium modules at +$50/mo each</span>
               </div>
               <div className="flex items-center gap-2">
                 <Check className="w-3.5 h-3.5 text-[#0F172A]" />
@@ -231,7 +240,7 @@ export const PricingPage: React.FC = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Check className="w-3.5 h-3.5 text-[#0F172A]" />
-                <span>$1,000 setup fee waived on annual</span>
+                <span>No upfront cost on annual plan</span>
               </div>
             </div>
           </div>
