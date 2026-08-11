@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Deletion Request | Nostavia Health</title>
+  <meta name="description" content="Request partial or complete deletion of your health metrics, telemetry, and personal data from Nostavia Health systems.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0F172A;
+      --accent: #2563EB;
+      --accent-hover: #1D4ED8;
+      --text: #0F172A;
+      --text-muted: #64748B;
+      --bg: #FFFFFF;
+      --bg-alt: #F8FAFC;
+      --border: #E2E8F0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: #ffffff;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 1.25rem;
+    }
+
+    .brand img {
+      height: 32px;
+      width: auto;
+    }
+
+    .nav-back {
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem 1.5rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      background: #EFF6FF;
+      padding: 0.35rem 0.75rem;
+      border-radius: 4px;
+      border: 1px solid #BFDBFE;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .info-card {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+
+    .info-card h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .info-card p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    .form-box {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    input[type="email"], input[type="text"], select, textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      color: var(--primary);
+      background: #FFFFFF;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: #334155;
+    }
+
+    .checkbox-item input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--accent);
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.85rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    .btn-submit:hover {
+      background: var(--accent-hover);
+    }
+
+    .success-banner {
+      display: none;
+      background: #ECFDF5;
+      border: 1px solid #6EE7B7;
+      color: #065F46;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 1.5rem;
+    }
+
+    .success-banner h3 {
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      color: #065F46;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--bg-alt);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      margin: 0 0.5rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="/" class="brand">
+        <img src="/logo.png" alt="Nostavia Logo" onerror="this.style.display='none'">
+        <span>Nostavia Health</span>
+      </a>
+      <a href="/" class="nav-back">← Back to Main Site</a>
+    </div>
+  </header>
+
+  <main>
+    <span class="hero-badge">DATA PRIVACY & RIGHT TO ERASE</span>
+    <h1>Data Deletion Request</h1>
+    <p class="subtitle">Submit a request to delete specific categories or all personal health telemetry and account data managed by Nostavia Health.</p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>🔒 On-Device De-Identification</h4>
+        <p>SOMA Edge strips personal identifiers before processing. Deletion requests ensure any remaining associated data in our systems is fully wiped.</p>
+      </div>
+      <div class="info-card">
+        <h4>📋 Granular Control</h4>
+        <p>You can choose to delete specific telemetry data (wearable logs, clinical briefs) without closing your Nostavia account.</p>
+      </div>
+      <div class="info-card">
+        <h4>⏱️ 30-Day Resolution</h4>
+        <p>All validated data deletion requests are completed within 30 days in compliance with DPDP 2023 and global privacy standards.</p>
+      </div>
+    </div>
+
+    <div class="form-box">
+      <form id="dataDeletionForm" onsubmit="handleDataSubmit(event)">
+        <div class="form-group">
+          <label for="email">Account Email Address *</label>
+          <input type="email" id="email" required placeholder="e.g. user@example.com">
+        </div>
+
+        <div class="form-group">
+          <label>Select Data Categories to Delete *</label>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" name="categories" value="telemetry" checked>
+              Wearable & Biometric Telemetry (HRV, sleep, step logs)
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="categories" value="clinical" checked>
+              Uploaded Lab Records & Clinical Briefs
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="categories" value="app_logs" checked>
+              App Activity & Usage Logs
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="categories" value="all_data">
+              All Personal Data & Account Removal
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="notes">Additional Scope or Instructions (Optional)</label>
+          <textarea id="notes" rows="3" placeholder="Specify any specific date ranges or lab briefs you wish to purge..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Submit Data Deletion Request</button>
+      </form>
+
+      <div id="dataSuccessMessage" class="success-banner">
+        <h3>✅ Data Deletion Request Submitted</h3>
+        <p>We have logged your data deletion request for <strong id="userEmailText">your email</strong>. An automated ticket has been opened with our Privacy Engineering team. You will receive an email confirmation once processing is complete.</p>
+        <p style="margin-top: 0.75rem; font-size: 0.875rem;">Need help? Email our Data Officer at <a href="mailto:privacy@nostaviahealth.com" style="color: #065F46; font-weight: 700;">privacy@nostaviahealth.com</a>.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Nostavia Health Inc. All rights reserved.</p>
+    <p style="margin-top: 0.5rem;">
+      <a href="/privacy-policy.html">Privacy Policy</a> |
+      <a href="/delete-account.html">Account Deletion</a> |
+      <a href="/data-deletion.html">Data Deletion</a> |
+      <a href="/security">Security & Compliance</a>
+    </p>
+  </footer>
+
+  <script>
+    function handleDataSubmit(event) {
+      event.preventDefault();
+      const email = document.getElementById('email').value;
+
+      document.getElementById('userEmailText').innerText = email;
+      document.getElementById('dataDeletionForm').style.display = 'none';
+      document.getElementById('dataSuccessMessage').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

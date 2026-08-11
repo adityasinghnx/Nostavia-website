@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Deletion Request | Nostavia Health</title>
+  <meta name="description" content="Request the deletion of your Nostavia Health account and associated personal data. Google Play Policy compliant deletion portal.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0F172A;
+      --accent: #2563EB;
+      --accent-hover: #1D4ED8;
+      --danger: #DC2626;
+      --text: #0F172A;
+      --text-muted: #64748B;
+      --bg: #FFFFFF;
+      --bg-alt: #F8FAFC;
+      --border: #E2E8F0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: #ffffff;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 1.25rem;
+    }
+
+    .brand img {
+      height: 32px;
+      width: auto;
+    }
+
+    .nav-back {
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem 1.5rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--danger);
+      background: #FEF2F2;
+      padding: 0.35rem 0.75rem;
+      border-radius: 4px;
+      border: 1px solid #FCA5A5;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .info-card {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .info-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--primary);
+    }
+
+    .info-card ul {
+      padding-left: 1.25rem;
+    }
+
+    .info-card li {
+      font-size: 0.925rem;
+      color: #334155;
+      margin-bottom: 0.35rem;
+    }
+
+    .form-box {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    input[type="email"], input[type="text"], select, textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      color: var(--primary);
+      background: #FFFFFF;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--danger);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.85rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    .btn-submit:hover {
+      background: #B91C1C;
+    }
+
+    .success-banner {
+      display: none;
+      background: #ECFDF5;
+      border: 1px solid #6EE7B7;
+      color: #065F46;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 1.5rem;
+    }
+
+    .success-banner h3 {
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      color: #065F46;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--bg-alt);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      margin: 0 0.5rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="/" class="brand">
+        <img src="/logo.png" alt="Nostavia Logo" onerror="this.style.display='none'">
+        <span>Nostavia Health</span>
+      </a>
+      <a href="/" class="nav-back">← Back to Main Site</a>
+    </div>
+  </header>
+
+  <main>
+    <span class="hero-badge">GOOGLE PLAY COMPLIANCE PORTAL</span>
+    <h1>Request Account Deletion</h1>
+    <p class="subtitle">Use this form to submit an official request to permanently delete your Nostavia Health user account and associated personal data.</p>
+
+    <div class="info-card">
+      <h3>What happens when you request account deletion?</h3>
+      <ul>
+        <li><strong>Permanent Data Erasure:</strong> Your user profile, credentials, connected health metrics, app telemetry, and personal preferences will be permanently purged from our primary servers.</li>
+        <li><strong>Cancellation of Access:</strong> You will immediately lose access to your Nostavia Health mobile app account and active digital health briefs.</li>
+        <li><strong>Turnaround Time:</strong> Account deletion requests are processed within <strong>30 calendar days</strong>.</li>
+        <li><strong>Legal & Regulatory Retention:</strong> Certain anonymised telemetry and financial transaction receipts may be retained for up to 7 years solely to satisfy statutory audit, tax, and healthcare regulatory requirements.</li>
+      </ul>
+    </div>
+
+    <div class="form-box">
+      <form id="deletionForm" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label for="email">Registered Account Email Address *</label>
+          <input type="email" id="email" required placeholder="e.g. user@example.com">
+        </div>
+
+        <div class="form-group">
+          <label for="confirmEmail">Confirm Email Address *</label>
+          <input type="email" id="confirmEmail" required placeholder="Re-enter your email">
+        </div>
+
+        <div class="form-group">
+          <label for="reason">Reason for Account Deletion (Optional)</label>
+          <select id="reason">
+            <option value="">Select a reason (optional)</option>
+            <option value="no_longer_using">No longer using Nostavia Health</option>
+            <option value="privacy_concerns">Privacy or data concerns</option>
+            <option value="created_duplicate">Created a duplicate account</option>
+            <option value="other">Other reason</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="details">Additional Notes / Request Details (Optional)</label>
+          <textarea id="details" rows="3" placeholder="Provide any additional details or specific requests regarding your account..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Submit Account Deletion Request</button>
+      </form>
+
+      <div id="successMessage" class="success-banner">
+        <h3>✅ Deletion Request Submitted</h3>
+        <p>We have received your account deletion request for <strong id="userEmailText">your email</strong>. A confirmation link has been dispatched to your inbox. Upon verification, your account and associated data will be deleted within 30 days.</p>
+        <p style="margin-top: 0.75rem; font-size: 0.875rem;">If you have immediate questions, please contact <a href="mailto:privacy@nostaviahealth.com" style="color: #065F46; font-weight: 700;">privacy@nostaviahealth.com</a>.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Nostavia Health Inc. All rights reserved.</p>
+    <p style="margin-top: 0.5rem;">
+      <a href="/privacy-policy.html">Privacy Policy</a> |
+      <a href="/delete-account.html">Account Deletion</a> |
+      <a href="/data-deletion.html">Data Deletion</a> |
+      <a href="/security">Security & Compliance</a>
+    </p>
+  </footer>
+
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault();
+      const email = document.getElementById('email').value;
+      const confirmEmail = document.getElementById('confirmEmail').value;
+
+      if (email !== confirmEmail) {
+        alert('Email addresses do not match. Please verify your email.');
+        return;
+      }
+
+      document.getElementById('userEmailText').innerText = email;
+      document.getElementById('deletionForm').style.display = 'none';
+      document.getElementById('successMessage').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
