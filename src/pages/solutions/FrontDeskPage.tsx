@@ -654,7 +654,6 @@ export const FrontDeskPage: React.FC = () => {
                   <input
                     required
                     type="tel"
-                    placeholder="+91 98765 43210"
                     value={formData.contactNumber}
                     onChange={(e) => setFormData({ ...formData, contactNumber: e.target.value })}
                     className="w-full bg-white border border-[#E2E8F0] focus:border-[#0F172A] rounded-[2px] px-4 py-3 text-[#0F172A] outline-none font-body text-sm"

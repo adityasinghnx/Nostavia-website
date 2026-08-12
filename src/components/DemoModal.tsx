@@ -15,6 +15,7 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     company: '',
     role: '',
     segment: 'Diagnostic lab',
@@ -63,6 +64,7 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
           _captcha: 'false',
           name: formData.name,
           email: formData.email,
+          phone: formData.phone || 'N/A',
           company: formData.company,
           role: formData.role,
           segment: formData.segment,
@@ -131,7 +133,7 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
 
             <div className="pt-2 flex flex-wrap justify-center gap-3 w-full">
               <a
-                href={`mailto:contact@nostaviahealth.com,aditya@nostaviacorp.com?subject=${encodeURIComponent(`Platform Demo Request [${refId}]: ${formData.name} - ${formData.company}`)}&body=${encodeURIComponent(`Hi Aditya & Nostavia Team,\n\nI am following up on my demo request (#${refId}).\n\nRequest Details:\n- Name: ${formData.name}\n- Work Email: ${formData.email}\n- Company: ${formData.company}\n- Role: ${formData.role}\n- Region: ${formData.market}\n- Notes: ${formData.notes || 'N/A'}\n\nLooking forward to scheduling our 30-minute walkthrough.`)}`}
+                href={`mailto:contact@nostaviahealth.com,aditya@nostaviacorp.com?subject=${encodeURIComponent(`Platform Demo Request [${refId}]: ${formData.name} - ${formData.company}`)}&body=${encodeURIComponent(`Hi Aditya & Nostavia Team,\n\nI am following up on my demo request (#${refId}).\n\nRequest Details:\n- Name: ${formData.name}\n- Work Email: ${formData.email}\n- Phone: ${formData.phone || 'N/A'}\n- Company: ${formData.company}\n- Role: ${formData.role}\n- Region: ${formData.market}\n- Notes: ${formData.notes || 'N/A'}\n\nLooking forward to scheduling our 30-minute walkthrough.`)}`}
                 className="inline-flex items-center gap-2 bg-[#0F172A] hover:bg-black text-white font-mono text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-[4px] transition-all cursor-pointer shadow-sm"
               >
                 SEND DIRECT EMAIL FOLLOWUP →
@@ -188,6 +190,16 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
+                  <label className="block text-[#64748B] mb-1 font-mono text-[11px] font-bold">PHONE / WHATSAPP NUMBER</label>
+                  <input
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] focus:border-[#2563EB] rounded-[6px] px-3 py-2 text-[#0F172A] outline-none"
+                  />
+                </div>
+
+                <div>
                   <label className="block text-[#64748B] mb-1 font-mono text-[11px] font-bold">COMPANY *</label>
                   <input
                     required
@@ -198,7 +210,9 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
                     className="w-full bg-[#F8FAFC] border border-[#E2E8F0] focus:border-[#2563EB] rounded-[6px] px-3 py-2 text-[#0F172A] outline-none"
                   />
                 </div>
+              </div>
 
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[#64748B] mb-1 font-mono text-[11px] font-bold">ROLE *</label>
                   <input
@@ -210,9 +224,7 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
                     className="w-full bg-[#F8FAFC] border border-[#E2E8F0] focus:border-[#2563EB] rounded-[6px] px-3 py-2 text-[#0F172A] outline-none"
                   />
                 </div>
-              </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[#64748B] mb-1 font-mono text-[11px] font-bold">WHICH BEST DESCRIBES YOU *</label>
                   <select
@@ -227,20 +239,20 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
                     <option value="Other">Other</option>
                   </select>
                 </div>
+              </div>
 
-                <div>
-                  <label className="block text-[#64748B] mb-1 font-mono text-[11px] font-bold">PRIMARY MARKET *</label>
-                  <select
-                    value={formData.market}
-                    onChange={(e) => setFormData({ ...formData, market: e.target.value })}
-                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] focus:border-[#2563EB] rounded-[6px] px-3 py-2 text-[#0F172A] outline-none"
-                  >
-                    <option value="UAE">United Arab Emirates (UAE)</option>
-                    <option value="India">India</option>
-                    <option value="Saudi">Saudi Arabia (KSA)</option>
-                    <option value="Other">Other Global</option>
-                  </select>
-                </div>
+              <div>
+                <label className="block text-[#64748B] mb-1 font-mono text-[11px] font-bold">PRIMARY MARKET *</label>
+                <select
+                  value={formData.market}
+                  onChange={(e) => setFormData({ ...formData, market: e.target.value })}
+                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] focus:border-[#2563EB] rounded-[6px] px-3 py-2 text-[#0F172A] outline-none"
+                >
+                  <option value="UAE">United Arab Emirates (UAE)</option>
+                  <option value="India">India</option>
+                  <option value="Saudi">Saudi Arabia (KSA)</option>
+                  <option value="Other">Other Global</option>
+                </select>
               </div>
 
               {/* Optional Lab PDF Sample Upload */}

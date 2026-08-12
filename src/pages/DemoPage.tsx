@@ -5,6 +5,7 @@ interface DemoRequest {
   refId: string;
   name: string;
   email: string;
+  phone?: string;
   company: string;
   role: string;
   segment: string;
@@ -28,6 +29,7 @@ export const DemoPage: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     company: '',
     role: '',
     segment: 'Diagnostic lab network',
@@ -106,6 +108,7 @@ export const DemoPage: React.FC = () => {
           _captcha: 'false',
           name: formData.name,
           email: formData.email,
+          phone: formData.phone || 'N/A',
           company: formData.company,
           role: formData.role,
           segment: formData.segment,
@@ -142,12 +145,13 @@ export const DemoPage: React.FC = () => {
 
   const exportToCSV = () => {
     if (submissions.length === 0) return;
-    const headers = ['Ref ID', 'Date', 'Name', 'Email', 'Company', 'Role', 'Segment', 'Region', 'File', 'Notes'];
+    const headers = ['Ref ID', 'Date', 'Name', 'Email', 'Phone', 'Company', 'Role', 'Segment', 'Region', 'File', 'Notes'];
     const rows = submissions.map(s => [
       s.refId,
       s.submittedAt,
       `"${s.name.replace(/"/g, '""')}"`,
       `"${s.email.replace(/"/g, '""')}"`,
+      `"${(s.phone || '').replace(/"/g, '""')}"`,
       `"${s.company.replace(/"/g, '""')}"`,
       `"${s.role.replace(/"/g, '""')}"`,
       `"${s.segment.replace(/"/g, '""')}"`,
@@ -220,7 +224,7 @@ export const DemoPage: React.FC = () => {
 
             <div className="pt-4 flex flex-wrap justify-center gap-3 w-full">
               <a
-                href={`mailto:contact@nostaviahealth.com,aditya@nostaviacorp.com?subject=${encodeURIComponent(`Platform Demo Request [${refId}]: ${formData.name} - ${formData.company}`)}&body=${encodeURIComponent(`Hi Aditya & Nostavia Team,\n\nI am following up on my demo request (#${refId}).\n\nRequest Details:\n- Name: ${formData.name}\n- Work Email: ${formData.email}\n- Company: ${formData.company}\n- Role: ${formData.role}\n- Region: ${formData.market}\n- Notes: ${formData.notes || 'N/A'}\n\nLooking forward to scheduling our 30-minute walkthrough.`)}`}
+                href={`mailto:contact@nostaviahealth.com,aditya@nostaviacorp.com?subject=${encodeURIComponent(`Platform Demo Request [${refId}]: ${formData.name} - ${formData.company}`)}&body=${encodeURIComponent(`Hi Aditya & Nostavia Team,\n\nI am following up on my demo request (#${refId}).\n\nRequest Details:\n- Name: ${formData.name}\n- Work Email: ${formData.email}\n- Phone: ${formData.phone || 'N/A'}\n- Company: ${formData.company}\n- Role: ${formData.role}\n- Region: ${formData.market}\n- Notes: ${formData.notes || 'N/A'}\n\nLooking forward to scheduling our 30-minute walkthrough.`)}`}
                 className="inline-flex items-center gap-2 bg-[#0F172A] hover:bg-[#1E293B] text-white font-mono text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-[2px] shadow-sm transition-all cursor-pointer"
               >
                 SEND DIRECT EMAIL FOLLOWUP →
@@ -265,6 +269,16 @@ export const DemoPage: React.FC = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
+                <label className="block text-[#0F172A] mb-1.5 font-mono text-[11px] font-bold uppercase">PHONE / WHATSAPP NUMBER</label>
+                <input
+                  type="tel"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="w-full bg-white border border-[#E2E8F0] focus:border-[#0F172A] rounded-[2px] px-4 py-3 text-[#0F172A] outline-none font-body text-sm"
+                />
+              </div>
+
+              <div>
                 <label className="block text-[#0F172A] mb-1.5 font-mono text-[11px] font-bold uppercase">COMPANY *</label>
                 <input
                   required
@@ -275,7 +289,9 @@ export const DemoPage: React.FC = () => {
                   className="w-full bg-white border border-[#E2E8F0] focus:border-[#0F172A] rounded-[2px] px-4 py-3 text-[#0F172A] outline-none font-body text-sm"
                 />
               </div>
+            </div>
 
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
                 <label className="block text-[#0F172A] mb-1.5 font-mono text-[11px] font-bold uppercase">ROLE *</label>
                 <input
@@ -287,9 +303,7 @@ export const DemoPage: React.FC = () => {
                   className="w-full bg-white border border-[#E2E8F0] focus:border-[#0F172A] rounded-[2px] px-4 py-3 text-[#0F172A] outline-none font-body text-sm"
                 />
               </div>
-            </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
                 <label className="block text-[#0F172A] mb-1.5 font-mono text-[11px] font-bold uppercase">INDUSTRY SEGMENT *</label>
                 <select
@@ -304,20 +318,20 @@ export const DemoPage: React.FC = () => {
                   <option value="Digital health platform">Digital health platform</option>
                 </select>
               </div>
+            </div>
 
-              <div>
-                <label className="block text-[#0F172A] mb-1.5 font-mono text-[11px] font-bold uppercase">PRIMARY REGION *</label>
-                <select
-                  value={formData.market}
-                  onChange={(e) => setFormData({ ...formData, market: e.target.value })}
-                  className="w-full bg-white border border-[#E2E8F0] focus:border-[#0F172A] rounded-[2px] px-4 py-3 text-[#0F172A] outline-none font-body text-sm"
-                >
-                  <option value="Global / Multi-region">Global / Multi-region</option>
-                  <option value="UAE & GCC">UAE & GCC</option>
-                  <option value="India">India</option>
-                  <option value="US / Europe">US / Europe</option>
-                </select>
-              </div>
+            <div>
+              <label className="block text-[#0F172A] mb-1.5 font-mono text-[11px] font-bold uppercase">PRIMARY REGION *</label>
+              <select
+                value={formData.market}
+                onChange={(e) => setFormData({ ...formData, market: e.target.value })}
+                className="w-full bg-white border border-[#E2E8F0] focus:border-[#0F172A] rounded-[2px] px-4 py-3 text-[#0F172A] outline-none font-body text-sm"
+              >
+                <option value="Global / Multi-region">Global / Multi-region</option>
+                <option value="UAE & GCC">UAE & GCC</option>
+                <option value="India">India</option>
+                <option value="US / Europe">US / Europe</option>
+              </select>
             </div>
 
             <div>
