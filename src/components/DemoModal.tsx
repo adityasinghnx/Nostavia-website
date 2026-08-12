@@ -193,6 +193,7 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
                   <label className="block text-[#64748B] mb-1 font-mono text-[11px] font-bold">PHONE / WHATSAPP NUMBER</label>
                   <input
                     type="tel"
+                    placeholder="Enter your phone or WhatsApp number"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className="w-full bg-[#F8FAFC] border border-[#E2E8F0] focus:border-[#2563EB] rounded-[6px] px-3 py-2 text-[#0F172A] outline-none"

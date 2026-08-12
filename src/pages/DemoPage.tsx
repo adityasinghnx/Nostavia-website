@@ -272,6 +272,7 @@ export const DemoPage: React.FC = () => {
                 <label className="block text-[#0F172A] mb-1.5 font-mono text-[11px] font-bold uppercase">PHONE / WHATSAPP NUMBER</label>
                 <input
                   type="tel"
+                  placeholder="Enter your phone or WhatsApp number"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   className="w-full bg-white border border-[#E2E8F0] focus:border-[#0F172A] rounded-[2px] px-4 py-3 text-[#0F172A] outline-none font-body text-sm"
