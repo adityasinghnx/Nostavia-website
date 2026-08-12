@@ -190,8 +190,9 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[#64748B] mb-1 font-mono text-[11px] font-bold">PHONE / WHATSAPP NUMBER</label>
+                  <label className="block text-[#64748B] mb-1 font-mono text-[11px] font-bold">PHONE / WHATSAPP NUMBER *</label>
                   <input
+                    required
                     type="tel"
                     placeholder="Enter your phone or WhatsApp number"
                     value={formData.phone}

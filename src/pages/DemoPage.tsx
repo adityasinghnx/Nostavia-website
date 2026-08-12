@@ -269,8 +269,9 @@ export const DemoPage: React.FC = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
-                <label className="block text-[#0F172A] mb-1.5 font-mono text-[11px] font-bold uppercase">PHONE / WHATSAPP NUMBER</label>
+                <label className="block text-[#0F172A] mb-1.5 font-mono text-[11px] font-bold uppercase">PHONE / WHATSAPP NUMBER *</label>
                 <input
+                  required
                   type="tel"
                   placeholder="Enter your phone or WhatsApp number"
                   value={formData.phone}
