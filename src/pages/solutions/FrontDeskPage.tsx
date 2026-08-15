@@ -11,7 +11,8 @@ import {
   Lock,
   Building2,
   UserCheck,
-  Volume2
+  Volume2,
+  Calendar
 } from 'lucide-react';
 import { FaqSection } from '../../components/sections/FaqSection';
 
@@ -38,6 +39,9 @@ export const FrontDeskPage: React.FC = () => {
     e.preventDefault();
     if (formData.hospitalName && formData.yourName && formData.contactNumber) {
       setSubmitted(true);
+      setTimeout(() => {
+        window.location.href = 'https://calendar.app.google/cysR8LF2gMtuneNs9';
+      }, 500);
     }
   };
 
@@ -598,8 +602,21 @@ export const FrontDeskPage: React.FC = () => {
               </h3>
 
               <p className="text-sm text-[#64748B] max-w-lg leading-relaxed">
-                Thank you. We will reply on WhatsApp within one working day to confirm a time from the slots you have given.
+                Thank you. We have logged your request. We are redirecting you to select a suitable time on Google Calendar.
               </p>
+
+              <div className="bg-[#EFF6FF] border border-[#BFDBFE] rounded-[2px] p-4 text-center w-full max-w-md space-y-2 my-2">
+                <p className="text-xs text-[#1E40AF] font-medium">
+                  Redirecting you to Google Calendar to select your demo slot...
+                </p>
+                <a
+                  href="https://calendar.app.google/cysR8LF2gMtuneNs9"
+                  className="inline-flex items-center justify-center gap-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-[2px] transition-all cursor-pointer shadow-sm w-full"
+                >
+                  <Calendar className="w-4 h-4" />
+                  PICK A TIME ON GOOGLE CALENDAR →
+                </a>
+              </div>
 
               <button
                 onClick={() => setSubmitted(false)}

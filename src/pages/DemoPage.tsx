@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CheckCircle2, ArrowRight, FileText, Upload, Database, Download, Trash2, Key } from 'lucide-react';
+import { CheckCircle2, ArrowRight, FileText, Upload, Database, Download, Trash2, Key, Calendar } from 'lucide-react';
 
 interface DemoRequest {
   refId: string;
@@ -125,6 +125,9 @@ export const DemoPage: React.FC = () => {
     } finally {
       setIsSubmitting(false);
       setSubmitted(true);
+      setTimeout(() => {
+        window.location.href = 'https://calendar.app.google/cysR8LF2gMtuneNs9';
+      }, 500);
     }
   };
 
@@ -221,6 +224,19 @@ export const DemoPage: React.FC = () => {
                 <span className="text-[10px] text-[#059669] bg-[#ECFDF5] px-2 py-0.5 rounded border border-[#A7F3D0] shrink-0">Attached</span>
               </div>
             )}
+
+            <div className="bg-[#EFF6FF] border border-[#BFDBFE] rounded-[2px] p-4 text-center w-full max-w-md space-y-2 my-2">
+              <p className="text-xs text-[#1E40AF] font-medium">
+                Redirecting you to Google Calendar to select your demo slot...
+              </p>
+              <a
+                href="https://calendar.app.google/cysR8LF2gMtuneNs9"
+                className="inline-flex items-center justify-center gap-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-[2px] transition-all cursor-pointer shadow-sm w-full"
+              >
+                <Calendar className="w-4 h-4" />
+                PICK A TIME ON GOOGLE CALENDAR →
+              </a>
+            </div>
 
             <div className="pt-4 flex flex-wrap justify-center gap-3 w-full">
               <a

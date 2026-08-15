@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Upload, CheckCircle2, ArrowRight, ShieldCheck, FileText } from 'lucide-react';
+import { X, Upload, CheckCircle2, ArrowRight, ShieldCheck, FileText, Calendar } from 'lucide-react';
 
 interface DemoModalProps {
   isOpen: boolean;
@@ -81,6 +81,9 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
     } finally {
       setIsSubmitting(false);
       setSubmitted(true);
+      setTimeout(() => {
+        window.location.href = 'https://calendar.app.google/cysR8LF2gMtuneNs9';
+      }, 500);
     }
   };
 
@@ -130,6 +133,19 @@ export const DemoModal: React.FC<DemoModalProps> = ({ isOpen, onClose }) => {
                 <span>Sample panel "{fileName}" ({fileSize}) attached for sandbox interpretation.</span>
               </div>
             )}
+
+            <div className="bg-[#EFF6FF] border border-[#BFDBFE] rounded-lg p-4 text-center w-full space-y-2 my-2">
+              <p className="text-xs text-[#1E40AF] font-medium">
+                Redirecting you to Google Calendar to select your demo slot...
+              </p>
+              <a
+                href="https://calendar.app.google/cysR8LF2gMtuneNs9"
+                className="inline-flex items-center justify-center gap-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-[4px] transition-all cursor-pointer shadow-sm w-full"
+              >
+                <Calendar className="w-4 h-4" />
+                PICK A TIME ON GOOGLE CALENDAR →
+              </a>
+            </div>
 
             <div className="pt-2 flex flex-wrap justify-center gap-3 w-full">
               <a
