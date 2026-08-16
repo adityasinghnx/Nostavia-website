@@ -89,7 +89,7 @@ export const HomePage: React.FC<{ onOpenDemo?: () => void }> = () => {
             
             {/* Headline Stack */}
             <div className="font-display font-extrabold text-5xl sm:text-7xl lg:text-[88px] leading-[0.98] tracking-tighter text-[#0F172A] relative z-30">
-              <div className="mb-0 relative z-40">Enabling</div>
+              <div className="mb-0 relative z-60">Enabling</div>
               
               <div className="inline-block bg-white pt-2.5 pb-4 sm:pt-3.5 sm:pb-5 px-4 sm:px-6 -ml-4 sm:-ml-6 text-[#0F172A] relative z-50 lg:whitespace-nowrap">
                 Autonomous Intelligence
