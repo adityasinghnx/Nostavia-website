@@ -88,15 +88,15 @@ export const HomePage: React.FC<{ onOpenDemo?: () => void }> = () => {
           <div className="max-w-[1280px] mx-auto px-4 sm:px-6 relative z-20 pt-8 pb-12 min-h-[500px] sm:min-h-[580px] lg:min-h-[640px] flex flex-col justify-center">
             
             {/* Headline Stack */}
-            <div className="font-display font-extrabold text-5xl sm:text-7xl lg:text-[88px] leading-[0.98] tracking-tighter text-[#0F172A] relative z-20">
+            <div className="font-display font-extrabold text-5xl sm:text-7xl lg:text-[88px] leading-[0.98] tracking-tighter text-[#0F172A] relative z-30">
               <div className="mb-0 relative z-40">Enabling</div>
               
-              <div className="inline-block bg-white py-2.5 sm:py-3.5 px-4 sm:px-6 -ml-4 sm:-ml-6 text-[#0F172A] relative z-50 lg:whitespace-nowrap">
+              <div className="inline-block bg-white pt-2.5 pb-4 sm:pt-3.5 sm:pb-5 px-4 sm:px-6 -ml-4 sm:-ml-6 text-[#0F172A] relative z-50 lg:whitespace-nowrap">
                 Autonomous Intelligence
               </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start -mt-0.5 lg:-mt-1 relative z-20">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start -mt-0.5 lg:-mt-1 relative z-10">
               
               {/* Left Subtext & CTA */}
               <div className="lg:col-span-5 space-y-6 pt-2">
