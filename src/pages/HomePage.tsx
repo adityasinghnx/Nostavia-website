@@ -92,7 +92,7 @@ export const HomePage: React.FC<{ onOpenDemo?: () => void }> = () => {
               <div className="mb-0 relative z-40">Enabling</div>
               
               <div className="inline-block bg-white py-2.5 sm:py-3.5 px-4 sm:px-6 -ml-4 sm:-ml-6 text-[#0F172A] relative z-30 lg:whitespace-nowrap">
-                Autonomous Operations
+                Autonomous Intelligence
               </div>
             </div>
 
