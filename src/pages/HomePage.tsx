@@ -88,15 +88,15 @@ export const HomePage: React.FC<{ onOpenDemo?: () => void }> = () => {
           <div className="max-w-[1280px] mx-auto px-4 sm:px-6 relative z-20 pt-8 pb-12 min-h-[500px] sm:min-h-[580px] lg:min-h-[640px] flex flex-col justify-center">
             
             {/* Headline Stack */}
-            <div className="font-display font-extrabold text-5xl sm:text-7xl lg:text-[88px] leading-[0.98] tracking-tighter text-[#0F172A] relative z-30">
-              <div className="mb-0 relative z-60">Enabling</div>
+            <div className="font-display font-extrabold text-5xl sm:text-7xl lg:text-[88px] leading-[1.02] tracking-tighter text-[#0F172A] relative z-30">
+              <div className="mb-2 sm:mb-4 relative z-40">Enabling</div>
               
-              <div className="inline-block bg-white pt-2.5 pb-4 sm:pt-3.5 sm:pb-5 px-4 sm:px-6 -ml-4 sm:-ml-6 text-[#0F172A] relative z-50 lg:whitespace-nowrap">
+              <div className="inline-block bg-white py-3 sm:py-4 px-4 sm:px-6 -ml-4 sm:-ml-6 text-[#0F172A] relative z-30 lg:whitespace-nowrap">
                 Autonomous Intelligence
               </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start -mt-0.5 lg:-mt-1 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start mt-3 sm:mt-4 lg:mt-5 relative z-20">
               
               {/* Left Subtext & CTA */}
               <div className="lg:col-span-5 space-y-6 pt-2">
@@ -116,8 +116,8 @@ export const HomePage: React.FC<{ onOpenDemo?: () => void }> = () => {
 
               {/* Right Indented Row 3 */}
               <div className="lg:col-span-7 pt-0">
-                <div className="font-display font-extrabold text-5xl sm:text-7xl lg:text-[88px] leading-[0.98] tracking-tighter text-[#0F172A]">
-                  <div className="inline-block bg-white py-2.5 sm:py-3.5 px-4 sm:px-6 text-[#0F172A] relative z-30">
+                <div className="font-display font-extrabold text-5xl sm:text-7xl lg:text-[88px] leading-[1.02] tracking-tighter text-[#0F172A]">
+                  <div className="inline-block bg-white py-3 sm:py-4 px-4 sm:px-6 text-[#0F172A] relative z-30">
                     for Healthcare
                   </div>
                 </div>
