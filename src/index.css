@@ -110,7 +110,7 @@
 }
 
 .animate-marquee-left {
-  animation: marquee-left 25s linear infinite;
+  animation: marquee-left 30s linear infinite;
   will-change: transform;
 }
 
