@@ -248,10 +248,10 @@ export const CompanyPage: React.FC = () => {
           </div>
 
           <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
-            <div className="font-mono text-xs font-bold text-[#64748B]">SEED GRANT & ECOSYSTEM</div>
-            <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">NIDHI Seed Grant</h3>
+            <div className="font-mono text-xs font-bold text-[#64748B]">FUNDING & ECOSYSTEM</div>
+            <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">₹50 Lakh Round + NIDHI</h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-body">
-              Awarded non-dilutive grant funding under government NIDHI scheme. Backed by Google for Startups, NVIDIA Inception, Microsoft for Startups, and ElevenLabs Grants.
+              Backed by institutional seed investment alongside government NIDHI grants, Google for Startups, NVIDIA Inception, Microsoft for Startups, and ElevenLabs.
             </p>
           </div>
         </div>

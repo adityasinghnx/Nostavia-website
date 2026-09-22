@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Activity, Stethoscope, Smartphone, Layers, Cpu, ShieldCheck, FileText, RefreshCw, Code, Heart, Sparkles, Building2, Volume2 } from 'lucide-react';
+import { Menu, X, Activity, Stethoscope, Smartphone, Layers, Cpu, ShieldCheck, FileText, RefreshCw, Code, Heart, Sparkles, Building2, Volume2, ArrowUpRight } from 'lucide-react';
 
 interface NavbarProps {
   onOpenDemo?: () => void;
@@ -65,21 +65,23 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
             ) : (
               <>
                 <h2 className="font-display font-bold text-2xl sm:text-4xl lg:text-5xl text-[#0F172A] tracking-tight leading-[1.15]">
-                  Custom Health AI Infrastructure. <br className="hidden sm:inline" />
-                  Built directly by our founding engineers.
+                  Nostavia Health raises ₹50 Lakh in funding.
                 </h2>
 
                 <p className="text-xs sm:text-base text-[#475569] font-semibold max-w-2xl px-2">
-                  Solutions Engineering — bespoke health intelligence modules, EHR integrations, and custom clinical deployments for enterprise health systems.
+                  Building the intelligence infrastructure for the next generation of preventive healthcare, embedded into the diagnostic labs and clinics people already trust.
                 </p>
 
                 <div className="pt-3">
-                  <Link
-                    to="/solutions/supplements"
-                    className="inline-block bg-[#0F172A] hover:bg-black text-white font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-widest px-5 sm:px-6 py-2.5 rounded-[2px] transition-all shadow-md"
+                  <a
+                    href="https://lnkd.in/p/dBqTFF95"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-[#0F172A] hover:bg-black text-white font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-widest px-6 py-3 rounded-[2px] transition-all shadow-md group"
                   >
-                    EXPLORE SOLUTIONS ENGINEERING
-                  </Link>
+                    <span>READ FULL STORY</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </a>
                 </div>
               </>
             )}
