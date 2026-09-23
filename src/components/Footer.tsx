@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Lock, Globe } from 'lucide-react';
+import { ShieldCheck, Lock, Globe, ArrowUpRight } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
@@ -105,6 +105,15 @@ export const Footer: React.FC = () => {
             <Link to="/clinical" className="hover:text-[#2563EB] transition-colors">Clinical Governance</Link>
             <Link to="/company" className="hover:text-[#2563EB] transition-colors">About & Founders</Link>
             <Link to="/demo" className="hover:text-[#2563EB] transition-colors">Book a Demo</Link>
+            <a
+              href="https://www.crunchbase.com/organization/nostavia-health"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#2563EB] transition-colors inline-flex items-center gap-1 group"
+            >
+              <span>Crunchbase</span>
+              <ArrowUpRight className="w-3 h-3 text-[#94A3B8] group-hover:text-[#2563EB] transition-colors" />
+            </a>
           </div>
 
         </div>

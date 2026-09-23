@@ -29,6 +29,11 @@ export const LogoTrustBar: React.FC = () => {
       className: 'h-9 sm:h-10 w-auto object-contain',
     },
     {
+      name: 'Atmaram Healthcare',
+      src: '/client_logos/atmaram_healthcare.png',
+      className: 'h-8 sm:h-9 w-auto object-contain',
+    },
+    {
       name: 'ETLAWM',
       src: '/client_logos/Screenshot_2025-11-06_at_6.15.42_PM-removebg-preview 1.png',
       className: 'h-6 sm:h-7 w-auto object-contain',
