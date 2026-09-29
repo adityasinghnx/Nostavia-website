@@ -93,7 +93,7 @@ export const CompanyPage: React.FC = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           
           <div className="p-6 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-3 hover:border-[#CBD5E1] transition-all">
             <div className="font-display font-extrabold text-lg text-[#0F172A]">Dr. Sparsh Sehdev</div>
@@ -105,12 +105,6 @@ export const CompanyPage: React.FC = () => {
             <div className="font-display font-extrabold text-lg text-[#0F172A]">Aakanksha Pant, PhD</div>
             <div className="text-xs text-[#64748B] font-mono font-bold">Chief Longevity Officer</div>
             <div className="text-xs text-[#64748B] font-body">Senior Scientist, IISc Bangalore; aging & development biology specialist.</div>
-          </div>
-
-          <div className="p-6 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-3 hover:border-[#CBD5E1] transition-all">
-            <div className="font-display font-extrabold text-lg text-[#0F172A]">Dr. Vivek Rai</div>
-            <div className="text-xs text-[#64748B] font-mono font-bold">MBBS, MD Pharmacology</div>
-            <div className="text-xs text-[#64748B] font-body">Principal Investigator in clinical trials; diabetes and hypertension.</div>
           </div>
 
           <div className="p-6 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-3 hover:border-[#CBD5E1] transition-all">

@@ -682,7 +682,7 @@ export const HospitalsPage: React.FC = () => {
             </div>
             <div className="p-5 bg-slate-900/60 border border-slate-800 rounded-[2px] space-y-2">
               <div className="font-display font-bold text-sm text-white">Clinical governance</div>
-              <div className="text-xs text-slate-300 leading-relaxed font-body">Seven-member advisory bench — GMC-registered physicians, a senior IISc scientist, UCL-trained clinical nutrition. Protocol outputs validated before they reach any partner.</div>
+              <div className="text-xs text-slate-300 leading-relaxed font-body">Six-member advisory bench — GMC-registered physicians, a senior IISc scientist, UCL-trained clinical nutrition. Protocol outputs validated before they reach any partner.</div>
             </div>
             <div className="p-5 bg-slate-900/60 border border-slate-800 rounded-[2px] space-y-2">
               <div className="font-display font-bold text-sm text-white">Programmes</div>
