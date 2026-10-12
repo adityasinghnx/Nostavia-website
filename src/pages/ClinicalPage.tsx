@@ -229,7 +229,7 @@ export const ClinicalPage: React.FC = () => {
                     Nostavia is built on a distinction that most health software ignores.
                   </p>
                   <p>
-                    <strong className="text-[#0F172A]">Normal ranges</strong> are derived from the general population, including people with undiagnosed chronic disease. A result inside a normal range means you are statistically unremarkable. It does not mean you are well.
+                    <strong className="text-[#0F172A]">Normal ranges</strong> are derived from the general population, including people with unrecognised chronic disease. A result inside a normal range means you are statistically unremarkable. It does not mean you are well.
                   </p>
                   <p>
                     <strong className="text-[#0F172A]">Optimal ranges</strong> are derived from longevity research, centenarian cohorts, cardiovascular outcome trials and performance physiology. They describe the physiological state associated with the lowest long-term risk.
@@ -292,7 +292,7 @@ export const ClinicalPage: React.FC = () => {
                     {
                       icon: <Shield className="w-5 h-5" />,
                       title: 'No autonomous diagnosis',
-                      body: 'The platform interprets and contextualises. It does not diagnose, and it does not prescribe.',
+                      body: 'The platform interprets and contextualises. It is not diagnostic, and it does not prescribe.',
                     },
                     {
                       icon: <CheckCircle2 className="w-5 h-5" />,
@@ -392,7 +392,7 @@ export const ClinicalPage: React.FC = () => {
 
                 <Prose>
                   <p>
-                    Nostavia converts raw sensor data from Apple Watch, Fitbit, Garmin, Oura and WHOOP into composite scores. Each score is built on a published physiological model rather than an invented metric.
+                    Nostavia converts raw sensor data from Apple Health (including Apple Watch) and Google Health Connect into composite scores, with more device feeds in development. Each score is built on a published physiological model rather than an invented metric.
                   </p>
                 </Prose>
 
@@ -657,7 +657,7 @@ export const ClinicalPage: React.FC = () => {
                     </div>
                     <h4 className="font-display font-extrabold text-sm text-[#0F172A]">Habit modelling</h4>
                     <p className="text-xs text-[#64748B] font-body leading-relaxed">
-                      The platform learns individual timing patterns — typical wake, meal and sleep times — using exponentially weighted moving averages, with confidence scores that rise as data accumulates. Below a minimum data threshold, no prediction is made. Gradual drift is detected via linear regression and surfaced when clinically meaningful.
+                      The platform learns individual timing patterns (typical wake, meal and sleep times) using exponentially weighted moving averages, with confidence scores that rise as data accumulates. Below a minimum data threshold, no prediction is made. Gradual drift is detected via linear regression and surfaced when clinically meaningful.
                     </p>
                   </Card>
                   <Card className="space-y-3">
@@ -724,7 +724,7 @@ export const ClinicalPage: React.FC = () => {
                   <ul className="space-y-2">
                     {[
                       'Model outputs are constrained to structured formats and validated before they reach a person',
-                      'Clinical thresholds and reference ranges are held outside the model — a model cannot change what counts as abnormal',
+                      'Clinical thresholds and reference ranges are held outside the model, so a model cannot change what counts as abnormal',
                       'Extracted laboratory values are surfaced for confirmation rather than silently trusted',
                       'Generated protocols respect hard constraints including dietary boundaries and biometric state; where recovery is poor or stress is elevated, intensity is reduced regardless of what the plan called for',
                       'Long-term context is stored as vector embeddings rather than raw conversation text',
@@ -739,7 +739,7 @@ export const ClinicalPage: React.FC = () => {
 
                 <div className="p-4 border-l-4 border-l-[#0F172A] bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px]">
                   <p className="text-xs text-[#475569] font-body leading-relaxed">
-                    <strong className="text-[#0F172A] font-display">What AI does not do.</strong> It does not diagnose. It does not alter a reference range. It does not decide whether a result is abnormal. It does not act on a person's health without a human in the loop.
+                    <strong className="text-[#0F172A] font-display">What AI does not do.</strong> It is not diagnostic. It does not alter a reference range. It does not decide whether a result is abnormal. It does not act on a person's health without a human in the loop.
                   </p>
                 </div>
               </div>
@@ -770,7 +770,7 @@ export const ClinicalPage: React.FC = () => {
                   <Card className="space-y-3 border-t-4 border-t-amber-500">
                     <h3 className="font-display font-extrabold text-lg text-[#0F172A]">Clinical escalation thresholds</h3>
                     <p className="text-xs text-[#64748B] font-body leading-relaxed">
-                      Signals with established clinical significance — blunted heart rate recovery, sustained autonomic suppression, sustained elevation in resting heart rate above personal baseline, and severe sleep deficit — are flagged prominently with a recommendation to consult a qualified clinician.
+                      Signals with established clinical significance (blunted heart rate recovery, sustained autonomic suppression, sustained elevation in resting heart rate above personal baseline, and severe sleep deficit) are flagged prominently with a recommendation to consult a qualified clinician.
                     </p>
                     <p className="text-[10px] text-[#94A3B8] font-body leading-relaxed">
                       The platform escalates. It does not attempt to manage.
@@ -794,7 +794,7 @@ export const ClinicalPage: React.FC = () => {
 
                 <Prose>
                   <p>
-                    <strong className="text-[#0F172A]">Sources:</strong> Apple HealthKit, Google Health Connect, connected wearables, laboratory reports uploaded or integrated directly, food images, and self-reported assessment data.
+                    <strong className="text-[#0F172A]">Sources:</strong> Apple HealthKit, Google Health Connect, laboratory reports uploaded or integrated directly, food images, and self-reported assessment data.
                   </p>
                 </Prose>
 
@@ -860,7 +860,7 @@ export const ClinicalPage: React.FC = () => {
                       We publish the models, the sources, the thresholds and the reasoning. We do not publish the exact weighting coefficients and normalisation constants inside our composite scores.
                     </p>
                     <p>
-                      That is a deliberate line. Those parameters are the product of clinical review and iteration, and they are what a partner is licensing. Publishing them would not make the platform more trustworthy — it would only make it easier to copy.
+                      That is a deliberate line. Those parameters are the product of clinical review and iteration, and they are what a partner is licensing. Publishing them would not make the platform more trustworthy. It would only make it easier to copy.
                     </p>
                     <p>
                       Any partner institution evaluating Nostavia can review the full parameter set under NDA, and any partner clinician can inspect the exact reasoning behind an individual result.
@@ -999,7 +999,7 @@ export const ClinicalPage: React.FC = () => {
 
                 <div className="p-6 sm:p-8 bg-[#FEF2F2] border-2 border-red-200 rounded-[2px] space-y-4">
                   <p className="font-display font-extrabold text-base text-[#0F172A]">
-                    Nostavia Health is not a medical device. It is not intended to diagnose, treat, cure or prevent any disease.
+                    All platform outputs are decision support. They are not diagnostic, are not a medical device, and are not a substitute for professional medical judgement.
                   </p>
                   <div className="space-y-3 text-xs text-[#475569] font-body leading-relaxed">
                     <p>
@@ -1007,7 +1007,7 @@ export const ClinicalPage: React.FC = () => {
                     </p>
                     <ul className="space-y-2 pl-1">
                       {[
-                        'Biological age is an estimate derived from biomarker deviation modelling. It is not a clinically validated measurement of epigenetic age.',
+                        'Biological age is derived from biomarker deviation modelling. It is an estimate, not a measurement of epigenetic age.',
                         'Wearable-derived scores are approximations based on published physiological models, not direct medical measurements.',
                         'AI-generated explanations, nutrition analysis and protocol suggestions may contain errors.',
                         'Emergency language detection is a supplementary safety feature and must never be relied upon as a primary emergency system. In an emergency, contact your local emergency services immediately.',
@@ -1040,7 +1040,7 @@ export const ClinicalPage: React.FC = () => {
 
                 <Card className="space-y-2">
                   <p className="text-xs text-[#475569] font-body leading-relaxed">
-                    This document is reviewed alongside material changes to the platform's clinical logic. Questions about any algorithm, threshold or reference described here — including from clinicians evaluating Nostavia on behalf of an institution — can be directed to our clinical team.
+                    This document is reviewed alongside material changes to the platform's clinical logic. Questions about any algorithm, threshold or reference described here, including from clinicians evaluating Nostavia on behalf of an institution, can be directed to our clinical team.
                   </p>
                   <div className="flex flex-wrap items-center gap-3 pt-2 font-mono text-xs text-[#64748B]">
                     <span className="font-bold text-[#0F172A]">Version 1.0</span>

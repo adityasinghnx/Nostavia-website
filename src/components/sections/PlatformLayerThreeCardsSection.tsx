@@ -1,48 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Code, Layers, Smartphone, Cpu, Volume2 } from 'lucide-react';
+import { Code, Layers, Hammer } from 'lucide-react';
 
 export const PlatformLayerThreeCardsSection: React.FC = () => {
   const cards = [
     {
-      title: 'Intelligence SDK',
-      subtitle: 'Lab parsing, food scans & AI concierge',
-      description: 'For platforms that already run an application. Decoding, protocols, the concierge and all intelligence modules embed into your existing product. Your user experience is unchanged.',
-      linkText: 'View SDK →',
-      linkUrl: '/solutions/gravity',
-      icon: <Code className="w-5 h-5 text-[#0F172A]" />,
+      title: 'Custom Build',
+      subtitle: 'Designed and built from scratch, around your workflow',
+      description: 'Our core offering. Tell us the product you want (a patient app, an AI agent, a hospital programme, a clinic platform or something entirely new) and our founding engineering team designs, builds, launches and runs it for you, on the same engine that powers everything we make.',
+      price: 'From $7,500 one-time + $750/mo',
+      linkText: 'View Custom Build →',
+      linkUrl: '/solutions/engineering',
+      icon: <Hammer className="w-5 h-5 text-[#0F172A]" />,
     },
     {
-      title: 'Wearables SDK',
-      subtitle: 'Single API for Apple, Oura, WHOOP and more',
-      description: 'One integration normalises every major device — replacing a dozen separate provider integrations and the custom parsing that comes with each.',
-      linkText: 'View SDK →',
-      linkUrl: '/solutions/galaxy',
+      title: 'White Label',
+      subtitle: 'Our ready-made products, launched as yours',
+      description: 'For labs, clinics and hospitals that want a proven product live in weeks: a branded patient app, smart reports & re-test recall, an AI front-desk agent or hospital patient programmes. Your name on it. We launch, host and run it.',
+      price: 'From $1,500 one-time + $399/mo',
+      linkText: 'View White Label →',
+      linkUrl: '/solutions/storyhealth',
       icon: <Layers className="w-5 h-5 text-[#0F172A]" />,
     },
     {
-      title: 'White-Label App',
-      subtitle: 'Complete iOS & Android app under your brand',
-      description: 'For labs and clinics with no application of their own. Your name on the store listing. All technology, AI routing and device handling operated by us. No engineering team required on your side.',
-      linkText: 'View white-label →',
-      linkUrl: '/solutions/storyhealth',
-      icon: <Smartphone className="w-5 h-5 text-[#0F172A]" />,
-    },
-    {
-      title: 'AI Agents (including voice)',
-      subtitle: 'Always-on patient support & voice booking agent',
-      description: 'Nostavia Front Desk answers every call in local languages, names a specific doctor, and turns an enquiry into a booked visit across phone, WhatsApp & web under your brand.',
-      linkText: 'View AI Agents →',
-      linkUrl: '/solutions/front-desk',
-      icon: <Volume2 className="w-5 h-5 text-[#0F172A]" />,
-    },
-    {
-      title: 'Hospital Patient Front Door',
-      subtitle: 'Branded 5-module platform & recovery engine',
-      description: 'The complete enterprise front door for hospitals: preventive smart reports, discharge-to-recovery engine, leakage audit and live attribution dashboard.',
-      linkText: 'View Platform →',
-      linkUrl: '/solutions/hospitals',
-      icon: <Cpu className="w-5 h-5 text-[#0F172A]" />,
+      title: 'SDK',
+      subtitle: 'Add health AI to the app you already have',
+      description: 'For wellness, fitness, insurance and health platforms with their own app. Lab decoding for 100+ biomarkers, Apple Health and Google Health Connect data (more device feeds in development), food scanning and an AI health companion, inside your product. Your user experience is unchanged.',
+      price: 'From $999 one-time + $399/mo',
+      linkText: 'View SDK →',
+      linkUrl: '/solutions/gravity',
+      icon: <Code className="w-5 h-5 text-[#0F172A]" />,
     },
   ];
 
@@ -53,14 +40,14 @@ export const PlatformLayerThreeCardsSection: React.FC = () => {
         {/* Header Section */}
         <div className="max-w-3xl space-y-3">
           <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            EMBEDDABLE PLATFORM & SDKS
+            OUR PRODUCTS
           </div>
           <h2 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-[54px] text-[#0F172A] tracking-tight leading-[1.05]">
-            Five ways in. Pick the one that matches what you already have.
+            Built from scratch for you, or from our proven products.
           </h2>
         </div>
 
-        {/* 5 Cards Grid */}
+        {/* Product Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {cards.map((c, idx) => (
             <div
@@ -86,7 +73,8 @@ export const PlatformLayerThreeCardsSection: React.FC = () => {
                 </p>
               </div>
 
-              <div className="pt-2 border-t border-slate-200/80">
+              <div className="pt-2 border-t border-slate-200/80 space-y-2">
+                <div className="text-xs font-mono font-bold text-[#0F172A]">{c.price}</div>
                 <Link
                   to={c.linkUrl}
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0F172A] hover:text-[#2563EB] transition-colors"

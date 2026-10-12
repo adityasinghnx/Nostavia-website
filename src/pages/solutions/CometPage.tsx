@@ -130,7 +130,7 @@ export const CometPage: React.FC = () => {
             },
             {
               q: "How does pricing work for Smart Report as a Service?",
-              a: "Smart Reports are billed on a simple per-report consumption model with tiered volume discounts for high-throughput diagnostic networks."
+              a: "Smart Reports is a White Label product: a one-time setup from $1,500 plus a monthly plan from $399, depending on report volumes and branches. You get a fixed quote after a free call."
             }
           ].map((faq, idx) => (
             <div key={idx} className="border border-[#E2E8F0] rounded-[2px] overflow-hidden bg-white shadow-none">

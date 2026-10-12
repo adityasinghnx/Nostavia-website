@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { HUMAN_OS_PATH, systemPath, systems } from '../content/human-os';
 import { ShieldCheck, Lock, Globe, ArrowUpRight } from 'lucide-react';
 
 export const Footer: React.FC = () => {
@@ -7,9 +8,9 @@ export const Footer: React.FC = () => {
     <footer className="bg-[#F8FAFC] border-t border-[#E5E7EB] pt-16 pb-12 font-body text-xs text-[#475569]">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
         
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 pb-12 border-b border-[#E2E8F0]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-10 pb-12 border-b border-[#E2E8F0]">
           
-          <div className="md:col-span-2 flex flex-col gap-4">
+          <div className="sm:col-span-2 md:col-span-2 flex flex-col gap-4">
             <Link to="/" className="flex items-center">
               <img
                 src="/logo.png"
@@ -18,7 +19,7 @@ export const Footer: React.FC = () => {
               />
             </Link>
             <p className="text-xs text-[#64748B] max-w-sm leading-relaxed">
-              Nostavia is the intelligence layer health companies embed inside their own products. Continuous biomarker interpretation, SOMA dual-brain architecture, and adaptive clinical protocols.
+              Nostavia builds health AI products for labs, clinics, hospitals and health apps, as a Custom Build, a White Label product or an SDK, all under your brand.
             </p>
             <div className="flex flex-col gap-1 text-[11px] font-mono text-[#94A3B8]">
               <span>Nostavia Technologies Pvt. Ltd.</span>
@@ -82,12 +83,22 @@ export const Footer: React.FC = () => {
           </div>
 
           <div className="flex flex-col gap-3">
-            <div className="font-display font-bold text-xs text-[#0F172A] uppercase tracking-wider">PLATFORM</div>
-            <Link to="/platform#intelligence-sdk" className="hover:text-[#2563EB] transition-colors">Intelligence SDK</Link>
-            <Link to="/platform#wearables-sdk" className="hover:text-[#2563EB] transition-colors">Wearables SDK</Link>
-            <Link to="/platform#white-label-app" className="hover:text-[#2563EB] transition-colors">White-Label App</Link>
-            <Link to="/solutions/front-desk" className="hover:text-[#2563EB] transition-colors">AI Agents (Voice & Chat)</Link>
-            <Link to="/platform#services" className="hover:text-[#2563EB] transition-colors">Specialised Services</Link>
+            <div className="font-display font-bold text-xs text-[#0F172A] uppercase tracking-wider">PRODUCTS</div>
+            <Link to="/solutions/engineering" className="hover:text-[#2563EB] transition-colors">Custom Build</Link>
+            <Link to="/solutions/storyhealth" className="hover:text-[#2563EB] transition-colors">White Label</Link>
+            <Link to="/solutions/gravity" className="hover:text-[#2563EB] transition-colors">SDK</Link>
+            <Link to="/solutions/front-desk" className="hover:text-[#2563EB] transition-colors">AI Front Desk Agent</Link>
+            <Link to="/platform" className="hover:text-[#2563EB] transition-colors">Technology</Link>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            <div className="font-display font-bold text-xs text-[#0F172A] uppercase tracking-wider">HUMAN OS</div>
+            <Link to={HUMAN_OS_PATH} className="hover:text-[#2563EB] transition-colors font-semibold text-[#0F172A]">Human OS overview</Link>
+            {systems.map((system) => (
+              <Link key={system.slug} to={systemPath(system.slug)} className="hover:text-[#2563EB] transition-colors">
+                {system.name}
+              </Link>
+            ))}
           </div>
 
           <div className="flex flex-col gap-3">

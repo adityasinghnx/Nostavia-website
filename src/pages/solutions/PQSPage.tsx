@@ -21,11 +21,11 @@ export const PQSPage: React.FC = () => {
           </div>
 
           <h1 className="font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl text-[#0F172A] tracking-tight max-w-4xl leading-[1.02]">
-            Private by design: Personal data never leaves the device.
+            Private by design: built to keep personal data on the device.
           </h1>
 
           <p className="text-base sm:text-xl text-[#64748B] max-w-3xl leading-relaxed font-body">
-            Handling laboratory, wearable, and clinical data across global markets makes compliance a design constraint. SOMA Dual-Brain strips personally identifiable information on-device, sending only de-identified clinical briefs to our 70B cloud reasoning model.
+            Handling laboratory, wearable, and clinical data across global markets makes compliance a design constraint. SOMA Dual-Brain is being built to strip personally identifiable information on-device, sending only de-identified clinical briefs to our 70B cloud reasoning model. Its on-device brain, SOMA-1B, is in development.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 pt-4">
@@ -42,7 +42,7 @@ export const PQSPage: React.FC = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-[#E2E8F0] font-mono text-xs text-[#0F172A]">
             <div>
               <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">100%</div>
-              <div className="text-[#64748B] font-semibold mt-1">On-Device Privacy</div>
+              <div className="text-[#64748B] font-semibold mt-1">On-Device Privacy (In Development)</div>
             </div>
             <div>
               <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">DPDP 2023</div>
@@ -54,7 +54,7 @@ export const PQSPage: React.FC = () => {
             </div>
             <div>
               <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">Zero PHI</div>
-              <div className="text-[#64748B] font-semibold mt-1">Cloud Exposure</div>
+              <div className="text-[#64748B] font-semibold mt-1">Cloud Exposure (Design Goal)</div>
             </div>
           </div>
 
@@ -78,10 +78,10 @@ export const PQSPage: React.FC = () => {
               1
             </div>
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-              SOMA-1B (On-Device Domain Brain)
+              SOMA-1B (On-Device Domain Brain, In Development)
             </h3>
             <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              A specialized 1B-parameter model running directly on the user's phone. It ingests native lab PDFs, handles digital signatures, and strips all personal health identifiers locally.
+              A specialized 1B-parameter model being built to run directly on the user's phone. It is designed to ingest native lab PDFs, handle digital signatures, and strip all personal health identifiers locally.
             </p>
           </div>
 
@@ -114,7 +114,7 @@ export const PQSPage: React.FC = () => {
           {[
             {
               q: "Does any patient PHI ever touch cloud servers?",
-              a: "No. Nostavia de-identifies all data locally on-device. Cloud reasoning models receive exclusively anonymized biomarker vectors."
+              a: "The SOMA Dual-Brain is designed so it does not: data is de-identified locally on-device and cloud reasoning models receive only anonymized biomarker vectors. The on-device brain, SOMA-1B, is in development."
             },
             {
               q: "Can enterprise partners deploy SOMA cloud models in their own private cloud?",

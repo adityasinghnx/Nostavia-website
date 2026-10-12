@@ -30,7 +30,7 @@ export const ArchitectureDiagram: React.FC = () => {
       status: "Live" as const,
       color: "border-[#A7F3D0] bg-[#ECFDF5]",
       items: [
-        "Digital Twin & Predictive Simulation",
+        "Trajectory Engine & Predictive Simulation",
         "Biological Age & Pace of Aging Engine",
         "Whole-body Biomarker Correlation Core",
         "Adaptive Clinical Protocol Engine",
@@ -64,11 +64,11 @@ export const ArchitectureDiagram: React.FC = () => {
       items: [
         "Native Lab PDF Parser (Digital Signatures)",
         "Apple HealthKit & Google Health Connect Pipeline",
-        "Oura, WHOOP, Fitbit, Garmin API Normalizer",
+        "Further Device Feeds (In Development)",
         "Food Photo & Barcode Scanning Engine",
         "Manual Diagnostic Panel Entry"
       ],
-      description: "Ingests messy real-world health data — from signed PDFs to continuous 1Hz wearable pulse rates — and normalizes them into structured clinical entities."
+      description: "Ingests messy real-world health data, from signed PDFs to continuous 1Hz wearable pulse rates, and normalizes them into structured clinical entities."
     }
   ];
 

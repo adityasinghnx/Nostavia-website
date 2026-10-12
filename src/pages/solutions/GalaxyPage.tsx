@@ -17,15 +17,15 @@ export const GalaxyPage: React.FC = () => {
         <div className="p-8 sm:p-14 lg:p-16 bg-white border border-[#E2E8F0] rounded-[2px] space-y-8 shadow-none relative overflow-hidden">
           
           <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            WEARABLES SDK — ONE NORMALIZED API
+            WEARABLES SDK: ONE NORMALIZED API
           </div>
 
           <h1 className="font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl text-[#0F172A] tracking-tight max-w-4xl leading-[1.02]">
-            One SDK to normalize every wearable device on the market.
+            One SDK to normalize wearable health data.
           </h1>
 
           <p className="text-base sm:text-xl text-[#64748B] max-w-3xl leading-relaxed font-body">
-            For any product requiring wearable telemetry. A single integration normalizes Apple Watch, Oura Ring, WHOOP, Fitbit, and Continuous Glucose Monitors (CGM), replacing a dozen separate provider integrations and custom parsing pipelines.
+            For any product requiring wearable telemetry. A single integration normalizes Apple Health and Google Health Connect data today, with more device feeds in development, replacing separate provider integrations and custom parsing pipelines.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 pt-4">
@@ -42,7 +42,7 @@ export const GalaxyPage: React.FC = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-[#E2E8F0] font-mono text-xs text-[#0F172A]">
             <div>
               <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">1 SDK</div>
-              <div className="text-[#64748B] font-semibold mt-1">Replaces 12 Provider APIs</div>
+              <div className="text-[#64748B] font-semibold mt-1">Apple Health & Health Connect</div>
             </div>
             <div>
               <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">12–18 Mos</div>
@@ -68,7 +68,7 @@ export const GalaxyPage: React.FC = () => {
             DEVICE INTEGRATION ECOSYSTEM
           </div>
           <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
-            Supported devices & continuous telemetry
+            Supported sources & telemetry
           </h2>
         </div>
 
@@ -78,10 +78,10 @@ export const GalaxyPage: React.FC = () => {
               1
             </div>
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-              Smartwatches & Bands
+              Apple Health (iOS)
             </h3>
             <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              Apple Watch, WHOOP 4.0, Garmin, and Fitbit continuous heart-rate variability (HRV), resting heart rate, and sleep architecture feeds.
+              Apple Watch and iPhone data via Apple Health: heart-rate variability (HRV), resting heart rate, activity and sleep.
             </p>
           </div>
 
@@ -90,10 +90,10 @@ export const GalaxyPage: React.FC = () => {
               2
             </div>
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-              Smart Rings & Recovery
+              Google Health Connect (Android)
             </h3>
             <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              Oura Ring 3/4 continuous skin temperature deviation, respiratory rate, and sleep stage normalization.
+              Android wearable data via Google Health Connect: heart rate, activity and sleep, normalized to one schema.
             </p>
           </div>
 
@@ -102,10 +102,10 @@ export const GalaxyPage: React.FC = () => {
               3
             </div>
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-              Continuous Glucose Monitors
+              More Device Feeds (In Development)
             </h3>
             <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              Abbott FreeStyle Libre and Dexcom CGM glucose spike detection, area-under-the-curve (AUC) modeling, and glycemic variability.
+              Further direct device feeds are in development, including continuous glucose data for the upcoming Metabolic Intelligence module.
             </p>
           </div>
         </div>
@@ -126,7 +126,7 @@ export const GalaxyPage: React.FC = () => {
           {[
             {
               q: "Does Wearables SDK replace Terra or Vital?",
-              a: "Yes. Nostavia provides a single normalized wearable telemetry API tuned for metabolic health, eliminating third-party per-device subscription costs."
+              a: "For Apple Health and Google Health Connect data, yes. Nostavia provides a single normalized wearable telemetry API tuned for metabolic health. More device feeds are in development."
             },
             {
               q: "How are wearable data streams normalized?",

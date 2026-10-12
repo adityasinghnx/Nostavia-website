@@ -18,7 +18,7 @@ export const GravityPage: React.FC = () => {
         <div className="p-8 sm:p-14 lg:p-16 bg-white border border-[#E2E8F0] rounded-[2px] space-y-8 shadow-none relative overflow-hidden">
           
           <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            INTELLIGENCE SDK — EMBEDDABLE HEALTH AI
+            SDK: ADD HEALTH AI TO THE APP YOU ALREADY HAVE
           </div>
 
           <h1 className="font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl text-[#0F172A] tracking-tight max-w-4xl leading-[1.02]">
@@ -26,7 +26,7 @@ export const GravityPage: React.FC = () => {
           </h1>
 
           <p className="text-base sm:text-xl text-[#64748B] max-w-3xl leading-relaxed font-body">
-            For diagnostic networks, longevity clinics, and wellness platforms that already operate a web or mobile application. Embed 100+ biomarker decoding, food scanning, adaptive protocols, and the AI concierge with zero change to your UI or user experience.
+            For diagnostic networks, longevity clinics, and wellness platforms that already operate a web or mobile application. Embed 100+ biomarker decoding, wearable data from Apple Health and Google Health Connect (more device feeds in development), food scanning, adaptive protocols, and the AI concierge with zero change to your UI or user experience. Our engineer integrates it alongside your team.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 pt-4">
@@ -42,8 +42,8 @@ export const GravityPage: React.FC = () => {
           {/* Key Metrics Banner */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-[#E2E8F0] font-mono text-xs text-[#0F172A]">
             <div>
-              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">&lt;800ms</div>
-              <div className="text-[#64748B] font-semibold mt-1">Lab Ingestion Latency</div>
+              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">$999+</div>
+              <div className="text-[#64748B] font-semibold mt-1">One-Time Integration</div>
             </div>
             <div>
               <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">100+</div>
@@ -54,8 +54,8 @@ export const GravityPage: React.FC = () => {
               <div className="text-[#64748B] font-semibold mt-1">UI / UX Disruption</div>
             </div>
             <div>
-              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">REST & GraphQL</div>
-              <div className="text-[#64748B] font-semibold mt-1">Developer Endpoints</div>
+              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">$399+/mo</div>
+              <div className="text-[#64748B] font-semibold mt-1">Monthly Plan</div>
             </div>
           </div>
 

@@ -57,7 +57,7 @@ export const PlatformPage: React.FC = () => {
             </div>
             <div>
               <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">SOMA-1B</div>
-              <div className="text-[#64748B] font-semibold mt-1">On-Device Privacy Brain</div>
+              <div className="text-[#64748B] font-semibold mt-1">On-Device Privacy Brain (In Development)</div>
             </div>
           </div>
 
@@ -89,7 +89,7 @@ export const PlatformPage: React.FC = () => {
             <div className="font-mono text-xs font-bold text-cyan-400">LAYER 1</div>
             <h3 className="font-display font-extrabold text-xl mt-2">L1: Ingestion</h3>
             <p className={`text-xs mt-2 leading-relaxed font-body ${activeTab === 'l1' ? 'text-slate-300' : 'text-[#64748B]'}`}>
-              Native lab-PDF parsing, digital-signature handling, and multi-device wearable data pipelines.
+              Native lab-PDF parsing, digital-signature handling, and wearable data pipelines via Apple Health and Google Health Connect.
             </p>
           </div>
 
@@ -115,7 +115,7 @@ export const PlatformPage: React.FC = () => {
             <div className="font-mono text-xs font-bold text-cyan-400">LAYER 3</div>
             <h3 className="font-display font-extrabold text-xl mt-2">L3: Intelligence Core</h3>
             <p className={`text-xs mt-2 leading-relaxed font-body ${activeTab === 'l3' ? 'text-slate-300' : 'text-[#64748B]'}`}>
-              SOMA Dual-Brain reasoning, digital twin simulation, whole-body correlation, protocol engine, AI concierge.
+              SOMA Dual-Brain reasoning (SOMA-1B in development), Trajectory Engine simulation, whole-body correlation, protocol engine, AI concierge.
             </p>
           </div>
 
@@ -150,7 +150,7 @@ export const PlatformPage: React.FC = () => {
               SOMA Dual-Brain: Private by design
             </h2>
             <p className="text-base text-slate-300 leading-relaxed font-body">
-              Personal data is understood and stripped on-device. Only a de-identified clinical brief reaches the cloud model. This architecture makes the system private by design and allows margin to expand with scale.
+              The architecture is designed so personal data is understood and stripped on-device, and only a de-identified clinical brief reaches the cloud model. The on-device brain, SOMA-1B, is in development. This design keeps the system private and allows margin to expand with scale.
             </p>
           </div>
 
@@ -210,7 +210,7 @@ export const PlatformPage: React.FC = () => {
             </div>
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">2. Wearables SDK</h3>
             <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              For any product requiring wearable data. A single integration normalizes Apple Watch, Oura, WHOOP, and Fitbit, replacing a dozen provider API integrations.
+              For any product requiring wearable data. A single integration normalizes Apple Health and Google Health Connect data today, with more device feeds in development.
             </p>
           </div>
 
@@ -260,14 +260,14 @@ export const PlatformPage: React.FC = () => {
               <tr className="hover:bg-slate-50 transition-colors">
                 <td className="p-5 font-bold">Food bio-impact modelling</td>
                 <td className="p-5 font-bold text-emerald-600">Yes</td>
-                <td className="p-5 text-slate-400">—</td>
-                <td className="p-5 text-slate-400">—</td>
-                <td className="p-5 text-slate-400">—</td>
+                <td className="p-5 text-slate-400">No</td>
+                <td className="p-5 text-slate-400">No</td>
+                <td className="p-5 text-slate-400">No</td>
               </tr>
               <tr className="hover:bg-slate-50 transition-colors">
                 <td className="p-5 font-bold">Wearables: one normalised SDK</td>
                 <td className="p-5 font-bold text-emerald-600">Yes</td>
-                <td className="p-5 text-slate-400">—</td>
+                <td className="p-5 text-slate-400">No</td>
                 <td className="p-5 text-[#64748B]">Yes</td>
                 <td className="p-5 text-[#64748B] font-mono text-xs">12–18 mo</td>
               </tr>
@@ -275,29 +275,29 @@ export const PlatformPage: React.FC = () => {
                 <td className="p-5 font-bold">Adaptive, personalised protocols</td>
                 <td className="p-5 font-bold text-emerald-600">Yes</td>
                 <td className="p-5 text-[#64748B]">Yes</td>
-                <td className="p-5 text-slate-400">—</td>
+                <td className="p-5 text-slate-400">No</td>
                 <td className="p-5 text-[#64748B] font-mono text-xs">12–18 mo</td>
               </tr>
               <tr className="hover:bg-slate-50 transition-colors">
                 <td className="p-5 font-bold">AI concierge on personal biomarkers</td>
                 <td className="p-5 font-bold text-emerald-600">Yes</td>
                 <td className="p-5 text-[#64748B]">Yes</td>
-                <td className="p-5 text-slate-400">—</td>
+                <td className="p-5 text-slate-400">No</td>
                 <td className="p-5 text-[#64748B] font-mono text-xs">12–18 mo</td>
               </tr>
               <tr className="hover:bg-slate-50 transition-colors bg-slate-50/80">
                 <td className="p-5 font-bold text-[#0F172A]">Delivered under partner's brand</td>
                 <td className="p-5 font-bold text-[#0F172A]">Yes (100% White-label)</td>
-                <td className="p-5 text-slate-400">— (Direct-to-consumer)</td>
-                <td className="p-5 text-slate-400">—</td>
+                <td className="p-5 text-slate-400">No (Direct-to-consumer)</td>
+                <td className="p-5 text-slate-400">No</td>
                 <td className="p-5 text-[#64748B] font-mono text-xs">12–18 mo</td>
               </tr>
               <tr className="hover:bg-slate-50 transition-colors">
                 <td className="p-5 font-bold">Cross-partner data network effect</td>
                 <td className="p-5 font-bold text-emerald-600">Yes</td>
-                <td className="p-5 text-slate-400">—</td>
-                <td className="p-5 text-slate-400">—</td>
-                <td className="p-5 text-slate-400">—</td>
+                <td className="p-5 text-slate-400">No</td>
+                <td className="p-5 text-slate-400">No</td>
+                <td className="p-5 text-slate-400">No</td>
               </tr>
             </tbody>
           </table>

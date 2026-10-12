@@ -8,6 +8,8 @@ import {
   Monitor,
 } from 'lucide-react';
 import { ArchitectureDiagram } from '../../components/ArchitectureDiagram';
+import { HospitalProgrammesSection } from '../../components/human-os/HospitalProgrammesSection';
+import { SystemsToStartWith } from '../../components/human-os/BuyerMapping';
 
 export const HospitalsPlatformPage: React.FC = () => {
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
@@ -34,7 +36,7 @@ export const HospitalsPlatformPage: React.FC = () => {
           </h1>
 
           <p className="text-base sm:text-xl text-[#64748B] max-w-3xl leading-relaxed font-body">
-            Three mechanisms that make ROI undeniable — a Leakage Audit that proves the problem, a pilot that proves the fix, and a live Attribution Engine that proves the value — layered on top of four embeddable patient programs and a direct engineering service.
+            Three mechanisms that make ROI undeniable (a Leakage Audit that proves the problem, a pilot that proves the fix, and an Attribution Engine that proves the value), layered on top of four embeddable patient programs and a direct engineering service.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 pt-2">
@@ -76,7 +78,10 @@ export const HospitalsPlatformPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. THREE MECHANISMS — THE NERVOUS SYSTEM */}
+      {/* 1B. HUMAN OS: THE FIVE PROGRAMMES AND THE SYSTEMS BEHIND THEM */}
+      <HospitalProgrammesSection />
+
+      {/* 2. THREE MECHANISMS: THE NERVOUS SYSTEM */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
         <div className="space-y-3">
           <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
@@ -86,7 +91,7 @@ export const HospitalsPlatformPage: React.FC = () => {
             The nervous system that makes every program provable
           </h2>
           <p className="text-base text-[#64748B] max-w-3xl leading-relaxed font-body">
-            Programs are the muscles. These three mechanisms are the nervous system — they open the door, price the value, and accumulate intelligence that compounds over time.
+            Programs are the muscles. These three mechanisms are the nervous system: they open the door, price the value, and accumulate intelligence that compounds over time.
           </p>
         </div>
 
@@ -100,10 +105,10 @@ export const HospitalsPlatformPage: React.FC = () => {
             <div className="font-mono text-xs font-bold text-cyan-400">MECHANISM 01</div>
             <h3 className="font-display font-extrabold text-2xl text-white">Leakage Audit</h3>
             <p className="text-sm text-slate-300 leading-relaxed font-body flex-1">
-              Free pre-contract analysis. The hospital provides 12–24 months of anonymized historical data under a signed data-handling agreement. We return a Leakage Report showing the rupee value of leaked checkup customers, discharged patients who never returned, and dormant chronics who stopped engaging. No HIS vendor offers this — running it requires an analytical engine, not a records system.
+              Free pre-contract analysis. The hospital provides 12–24 months of anonymized historical data under a signed data-handling agreement. We return a Leakage Report showing the rupee value of leaked checkup customers, discharged patients who never returned, and dormant chronics who stopped engaging. No HIS vendor offers this. Running it requires an analytical engine, not a records system.
             </p>
             <div className="pt-2 border-t border-[#1E293B] space-y-2 font-mono text-[11px] text-slate-400">
-              <div className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />Anonymized data only — signed DHA</div>
+              <div className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />Anonymized data only, signed DHA</div>
               <div className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />Rupee-value leakage quantification</div>
               <div className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />Delivered in 2 weeks, zero integration</div>
             </div>
@@ -117,11 +122,11 @@ export const HospitalsPlatformPage: React.FC = () => {
             <div className="font-mono text-xs font-bold text-cyan-400">MECHANISM 02</div>
             <h3 className="font-display font-extrabold text-2xl text-white">Attribution Engine</h3>
             <p className="text-sm text-slate-300 leading-relaxed font-body flex-1">
-              Every re-test, follow-up OPD visit, and package renewal is tagged, attributed, and priced in a live CFO dashboard. ROI as a number on a screen, not a claim in a slide deck. Makes performance-based pricing possible because the value is always visible.
+              Every re-test, follow-up OPD visit, and package renewal is tagged, attributed, and priced in a dashboard the CFO owns. ROI as a number on a screen, not a claim in a slide deck. Makes performance-based pricing possible because the value is always visible.
             </p>
             <div className="pt-2 border-t border-[#1E293B] space-y-2 font-mono text-[11px] text-slate-400">
               <div className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />Real-time attribution tagging</div>
-              <div className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />Live CFO revenue dashboard</div>
+              <div className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />CFO revenue dashboard</div>
               <div className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />Enables performance-based pricing</div>
             </div>
           </div>
@@ -134,7 +139,7 @@ export const HospitalsPlatformPage: React.FC = () => {
             <div className="font-mono text-xs font-bold text-cyan-400">MECHANISM 03</div>
             <h3 className="font-display font-extrabold text-2xl text-white">Command Center</h3>
             <p className="text-sm text-slate-300 leading-relaxed font-body flex-1">
-              Hospital-side population intelligence: drift lists showing which chronic patients are deteriorating on which markers, cohort risk maps, program performance analytics, and department-level demand signals. The medical director's morning screen. Gets sharper the longer it runs — six months in, the drift detection knows your patient population, not a generic one.
+              Hospital-side population intelligence: drift lists showing which chronic patients are deteriorating on which markers, cohort risk maps, program performance analytics, and department-level demand signals. The medical director's morning screen. Gets sharper the longer it runs: six months in, the drift detection knows your patient population, not a generic one.
             </p>
             <div className="pt-2 border-t border-[#1E293B] space-y-2 font-mono text-[11px] text-slate-400">
               <div className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />Patient drift & deterioration alerts</div>
@@ -166,7 +171,7 @@ export const HospitalsPlatformPage: React.FC = () => {
             <div className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 01</div>
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">Preventive Program Engine</h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-body">
-              Converts health checkups from static PDFs into interactive Smart Reports with biological age, pace of aging, digital twin simulation, wearable connection, and automated re-test recall schedules.
+              Converts health checkups from static PDFs into interactive Smart Reports with biological age, disease-risk scores, the Trajectory Engine, wearable data, and automated re-test recall schedules.
             </p>
           </div>
 
@@ -182,7 +187,7 @@ export const HospitalsPlatformPage: React.FC = () => {
             <div className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 03</div>
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">Chronic Care Subscription Programs</h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-body">
-              Turnkey program management for subscription diabetes, cardiac, and metabolic clinics. Integrates Dexcom CGMs, wearable feeds, adaptive protocol updates, and care-team dashboards.
+              Turnkey program management for subscription diabetes, cardiac, and metabolic clinics. CGM and wearable integration, adaptive protocol updates, and care-team dashboards.
             </p>
           </div>
 
@@ -237,6 +242,9 @@ export const HospitalsPlatformPage: React.FC = () => {
         </div>
       </section>
 
+      {/* 3B. HUMAN OS: SYSTEMS TO START WITH */}
+      <SystemsToStartWith buyerId="hospitals" />
+
       {/* 4. DUAL-BRAIN ARCHITECTURE & DIAGRAM */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
         <div className="space-y-3">
@@ -284,11 +292,11 @@ export const HospitalsPlatformPage: React.FC = () => {
             {[
               {
                 q: "What data does the Leakage Audit require and is it safe?",
-                a: "The Leakage Audit uses 12–24 months of anonymized historical data — checkup volumes, discharge records, and chronic-patient visit frequencies. Records are anonymized before export. We never receive names, contact details, MRNs, or any identifier that maps back to a patient — only visit patterns, package types, and dates. All data is handled under a signed data-handling agreement. We return a Leakage Report quantifying leaked revenue in rupees across checkup customers, discharged patients, and dormant chronics."
+                a: "The Leakage Audit uses 12–24 months of anonymized historical data: checkup volumes, discharge records, and chronic-patient visit frequencies. Records are anonymized before export. We never receive names, contact details, MRNs, or any identifier that maps back to a patient; only visit patterns, package types, and dates. All data is handled under a signed data-handling agreement. We return a Leakage Report quantifying leaked revenue in rupees across checkup customers, discharged patients, and dormant chronics."
               },
               {
                 q: "How does the Attribution Engine track ROI?",
-                a: "Every re-test booking, follow-up OPD visit, and package renewal generated through Nostavia programs is tagged and attributed back to the originating program and patient cohort. The Attribution Engine surfaces this as a live CFO dashboard — revenue generated, cost per recaptured patient, and program-level ROI. It makes performance-based pricing possible because the value is always visible."
+                a: "Every re-test booking, follow-up OPD visit, and package renewal generated through Nostavia programs is tagged and attributed back to the originating program and patient cohort. The Attribution Engine surfaces this in a dashboard the CFO owns: revenue generated, cost per recaptured patient, and program-level ROI. It makes performance-based pricing possible because the value is always visible."
               },
               {
                 q: "Does Nostavia replace our hospital's existing HIS or EMR system?",
@@ -296,15 +304,15 @@ export const HospitalsPlatformPage: React.FC = () => {
               },
               {
                 q: "Where is patient data processed and stored?",
-                a: "Personal data is processed on-device via our SOMA-1B privacy layer before de-identified clinical briefs reach our cloud reasoning model. All infrastructure complies with India's DPDP 2023 act and UAE health data laws."
+                a: "SOMA-1B, our on-device privacy layer (in development), is being built to process personal data on-device so that only de-identified clinical briefs reach our cloud reasoning model. All infrastructure complies with India's DPDP 2023 act and UAE health data laws."
               },
               {
                 q: "What is the deployment guarantee for a hospital chain?",
-                a: "Program 1 (Smart Reports on the health-check counter) deploys in days with zero integration. The complete patient front door — including Command Center, Attribution Engine, and all four programs — deploys in 60 days. We guarantee the timeline contractually."
+                a: "Program 1 (Smart Reports on the health-check counter) deploys in days with zero integration. The complete patient front door (including Command Center, Attribution Engine, and all four programs) deploys in 60 days. We guarantee the timeline contractually."
               },
               {
                 q: "What does the Command Center show?",
-                a: "The Command Center is the medical director's morning screen: drift lists showing which chronic patients are deteriorating on which markers, cohort risk maps, program performance analytics, and department-level demand signals. It gets sharper the longer it runs — six months in, the drift detection knows your patient population, not a generic one."
+                a: "The Command Center is the medical director's morning screen: drift lists showing which chronic patients are deteriorating on which markers, cohort risk maps, program performance analytics, and department-level demand signals. It gets sharper the longer it runs: six months in, the drift detection knows your patient population, not a generic one."
               }
             ].map((faq, idx) => {
               const isOpen = activeFaq === idx;

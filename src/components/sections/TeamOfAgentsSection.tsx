@@ -5,10 +5,10 @@ import { Activity, Clock, Zap, ShieldAlert, Layers, Cpu, Sparkles, HeartPulse } 
 export const TeamOfAgentsSection: React.FC = () => {
   const modulesColumn1 = [
     {
-      title: 'Digital Twin',
+      title: 'Trajectory Engine',
       type: 'INTELLIGENCE MODULE',
       icon: <Activity className="w-4 h-4 text-[#0F172A]" />,
-      desc: "A high-fidelity model of the person's health that shows their future self under current habits.",
+      desc: 'Projects health under current habits across horizons from three hours to ten years ahead.',
     },
     {
       title: 'Biological Age',
@@ -23,7 +23,7 @@ export const TeamOfAgentsSection: React.FC = () => {
       title: 'Pace of Aging',
       type: 'INTELLIGENCE MODULE',
       icon: <Zap className="w-4 h-4 text-[#0F172A]" />,
-      desc: "How fast it's wearing right now. 0.8× or 1.2× — a rate, not a static score.",
+      desc: "How fast it's wearing right now. 0.8× or 1.2×: a rate, not a static score.",
     },
     {
       title: 'Disease Risk',
@@ -38,7 +38,7 @@ export const TeamOfAgentsSection: React.FC = () => {
       title: 'Health Domain Scoring',
       type: 'INTELLIGENCE MODULE',
       icon: <Layers className="w-4 h-4 text-[#0F172A]" />,
-      desc: 'Cellular, metabolic, inflammatory and more — each scored and status-flagged independently.',
+      desc: 'Cellular, metabolic, inflammatory and more, each scored and status-flagged independently.',
     },
     {
       title: 'Correlation Engine',

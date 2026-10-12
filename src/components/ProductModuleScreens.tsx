@@ -32,7 +32,7 @@ export const ProductModuleScreens: React.FC = () => {
           }`}
         >
           <Sparkles className="w-3.5 h-3.5" />
-          <span>Digital Twin</span>
+          <span>Trajectory Engine</span>
         </button>
 
         <button
@@ -99,13 +99,13 @@ export const ProductModuleScreens: React.FC = () => {
       {/* Screen Render Container */}
       <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-[8px] p-6 shadow-inner">
         
-        {/* TAB 1: DIGITAL TWIN */}
+        {/* TAB 1: TRAJECTORY ENGINE */}
         {activeTab === 'twin' && (
           <div className="space-y-6">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-[#E2E8F0] pb-4">
               <div>
                 <span className="eyebrow text-[#2563EB]">PREDICTIVE SIMULATION</span>
-                <h4 className="font-display font-bold text-xl text-[#0F172A]">High-Fidelity Patient Digital Twin</h4>
+                <h4 className="font-display font-bold text-xl text-[#0F172A]">Trajectory Engine</h4>
               </div>
               <div className="font-mono text-xs text-[#059669] bg-[#ECFDF5] px-3 py-1 rounded border border-[#A7F3D0] font-semibold">
                 Simulation Accuracy: 98.4%
@@ -285,7 +285,7 @@ export const ProductModuleScreens: React.FC = () => {
                 <span>Correlation ID #CR-882: Sleep Recovery Decline → Fasting Glucose Spike</span>
               </div>
               <p className="text-[#475569] leading-relaxed">
-                The engine detected that a 14% drop in deep sleep (Oura ring signal over 14 days) correlated with a 9 mg/dL elevation in morning fasting glucose on the subsequent lab panel.
+                The engine detected that a 14% drop in deep sleep (wearable signal over 14 days) correlated with a 9 mg/dL elevation in morning fasting glucose on the subsequent lab panel.
               </p>
               <div className="p-3 bg-[#ECFDF5] border border-[#A7F3D0] rounded font-mono text-[11px] text-[#059669] font-semibold">
                 Suggested Protocol Adjustment: 15-min post-dinner walk + Magnesium Glycinate 300mg before bedtime.

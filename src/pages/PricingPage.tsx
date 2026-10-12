@@ -14,10 +14,10 @@ export const PricingPage: React.FC = () => {
           PRICING & COMMERCIAL MODELS
         </div>
         <h1 className="font-display font-extrabold text-4xl sm:text-6xl text-[#0F172A] tracking-tight leading-[1.05]">
-          Two distinct products. Clear, transparent pricing for both.
+          Simple pricing: build it once, then we run it.
         </h1>
         <p className="text-base sm:text-lg text-[#64748B] leading-relaxed font-body">
-          Select your deployment model below — self-serve developer SDKs for digital health apps or full-service turnkey patient programs for hospitals.
+          Every project has a one-time build fee and a monthly plan. White Label from $1,500, SDK from $999, Custom Build from $7,500 — the monthly plan covers hosting, AI, updates and support.
         </p>
 
         {/* PRODUCT MODEL BRIDGE SELECTOR */}
@@ -28,9 +28,9 @@ export const PricingPage: React.FC = () => {
               <span className="px-2 py-0.5 bg-amber-400 text-[#0F172A] font-mono text-[10px] font-bold uppercase rounded">
                 YOU ARE VIEWING
               </span>
-              <div className="font-display font-extrabold text-lg text-white">Developer & App Builder SDKs</div>
+              <div className="font-display font-extrabold text-lg text-white">Custom Build, White Label & SDK</div>
               <p className="text-xs text-slate-300">
-                For healthtech startups, lab networks & app developers embedding API/SDK components. Tiered monthly platform fee based on Monthly Active Users (MAU).
+                For labs, clinics, health apps and platforms. A one-time build fee plus a monthly plan covering hosting, AI, updates and support. No per-user fees.
               </p>
             </div>
 
@@ -48,7 +48,7 @@ export const PricingPage: React.FC = () => {
               </div>
               <div className="font-display font-extrabold text-lg text-[#0F172A]">Hospitals & Health Systems</div>
               <p className="text-xs text-[#64748B]">
-                For hospitals deploying white-labelled patient programs, Leakage Audit & Attribution Engine. Performance-linked Partner pricing (base + % attributed revenue) or flat rates.
+                Five patient programmes under your hospital's brand, from $5,000 one-time + $999/mo. Starts with a free Leakage Audit; 60-day launch guarantee.
               </p>
             </Link>
 
@@ -63,10 +63,10 @@ export const PricingPage: React.FC = () => {
       <div className="space-y-6 pt-6">
         <div className="space-y-2">
           <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            PAY-PER-USE EXTENSIONS
+            PRICE LIST
           </div>
           <h2 className="font-display font-extrabold text-3xl text-[#0F172A]">
-            Specialised Services (Priced Separately)
+            Products & starting prices
           </h2>
         </div>
 
@@ -74,41 +74,65 @@ export const PricingPage: React.FC = () => {
           <table className="w-full min-w-[600px] text-left border-collapse font-body text-sm">
             <thead>
               <tr className="bg-[#F8FAFC] border-b border-[#E2E8F0] font-mono text-xs uppercase tracking-wider text-[#64748B]">
-                <th className="p-4 sm:p-5 font-bold">SERVICE</th>
-                <th className="p-4 sm:p-5 font-bold">PRICING MODEL</th>
-                <th className="p-4 sm:p-5 font-bold">DESCRIPTION</th>
+                <th className="p-4 sm:p-5 font-bold">PRODUCT</th>
+                <th className="p-4 sm:p-5 font-bold">ONE-TIME + MONTHLY</th>
+                <th className="p-4 sm:p-5 font-bold">WHAT IT IS</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#E2E8F0] text-[#0F172A]">
               <tr className="hover:bg-slate-50 transition-colors">
-                <td className="p-4 sm:p-5 font-bold font-display">Smart Report as a Service</td>
-                <td className="p-4 sm:p-5 font-mono text-xs text-[#0F172A] font-bold">Per report</td>
-                <td className="p-4 sm:p-5 text-[#64748B] text-xs">The interpretation a clinician would spend 20 minutes writing, generated for every routine panel.</td>
+                <td className="p-4 sm:p-5 font-bold font-display">Custom Build</td>
+                <td className="p-4 sm:p-5 font-mono text-xs text-[#0F172A] font-bold">$7,500 – $25,000 + $750 – $2,000/mo</td>
+                <td className="p-4 sm:p-5 text-[#64748B] text-xs">Our core offering. A new product designed and built from scratch around your workflow, then launched and run by us.</td>
               </tr>
               <tr className="hover:bg-slate-50 transition-colors">
-                <td className="p-4 sm:p-5 font-bold font-display">Clinical Intake Briefs</td>
-                <td className="p-4 sm:p-5 font-mono text-xs text-[#0F172A] font-bold">Per consult</td>
-                <td className="p-4 sm:p-5 text-[#64748B] text-xs">The unpaid chart review before every new-patient consult, done by the engine.</td>
+                <td className="p-4 sm:p-5 font-bold font-display">White Label</td>
+                <td className="p-4 sm:p-5 font-mono text-xs text-[#0F172A] font-bold">From $1,500 + $399/mo</td>
+                <td className="p-4 sm:p-5 text-[#64748B] text-xs">One of our ready-made products, launched under your brand. Live in 2–8 weeks.</td>
               </tr>
               <tr className="hover:bg-slate-50 transition-colors">
-                <td className="p-4 sm:p-5 font-bold font-display">Re-Test Recall Campaigns</td>
-                <td className="p-4 sm:p-5 font-mono text-xs text-[#0F172A] font-bold">Per campaign or re-test</td>
-                <td className="p-4 sm:p-5 text-[#64748B] text-xs">Find which dormant patients are due for a re-test and re-engage them under your brand.</td>
+                <td className="p-4 sm:p-5 font-bold font-display">SDK</td>
+                <td className="p-4 sm:p-5 font-mono text-xs text-[#0F172A] font-bold">From $999 + $399/mo</td>
+                <td className="p-4 sm:p-5 text-[#64748B] text-xs">Add lab decoding, wearables, food scanning and an AI health companion to the app you already have. Up to $999/mo at scale.</td>
               </tr>
               <tr className="hover:bg-slate-50 transition-colors">
-                <td className="p-4 sm:p-5 font-bold font-display">Solutions Engineering</td>
-                <td className="p-4 sm:p-5 font-mono text-xs text-[#0F172A] font-bold">Per engagement</td>
-                <td className="p-4 sm:p-5 text-[#64748B] text-xs">Custom intelligence work on your data by the core engineering team.</td>
+                <td className="p-4 sm:p-5 font-bold font-display">AI Front Desk Agent</td>
+                <td className="p-4 sm:p-5 font-mono text-xs text-[#0F172A] font-bold">From $1,500 + $399/mo</td>
+                <td className="p-4 sm:p-5 text-[#64748B] text-xs">White Label. Answers every call 24/7 in local languages and books the visit. High call volumes billed per minute.</td>
+              </tr>
+              <tr className="hover:bg-slate-50 transition-colors">
+                <td className="p-4 sm:p-5 font-bold font-display">Smart Reports & Re-Test Recall</td>
+                <td className="p-4 sm:p-5 font-mono text-xs text-[#0F172A] font-bold">From $1,500 + $399/mo</td>
+                <td className="p-4 sm:p-5 text-[#64748B] text-xs">White Label. Branded smart reports for every panel, plus recall campaigns.</td>
+              </tr>
+              <tr className="hover:bg-slate-50 transition-colors">
+                <td className="p-4 sm:p-5 font-bold font-display">Branded Patient App</td>
+                <td className="p-4 sm:p-5 font-mono text-xs text-[#0F172A] font-bold">From $2,500 + $499/mo</td>
+                <td className="p-4 sm:p-5 text-[#64748B] text-xs">White Label. Your own iOS & Android app with an AI health companion.</td>
+              </tr>
+              <tr className="hover:bg-slate-50 transition-colors">
+                <td className="p-4 sm:p-5 font-bold font-display">Clinic & Longevity Platform</td>
+                <td className="p-4 sm:p-5 font-mono text-xs text-[#0F172A] font-bold">From $2,500 + $499/mo</td>
+                <td className="p-4 sm:p-5 text-[#64748B] text-xs">White Label. Intake briefs, biological age, adaptive protocols and monitoring.</td>
+              </tr>
+              <tr className="hover:bg-slate-50 transition-colors">
+                <td className="p-4 sm:p-5 font-bold font-display">Hospital Patient Programmes</td>
+                <td className="p-4 sm:p-5 font-mono text-xs text-[#0F172A] font-bold">From $5,000 + $999/mo</td>
+                <td className="p-4 sm:p-5 text-[#64748B] text-xs">White Label. Five patient programmes, free Leakage Audit, 60-day launch guarantee.</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
 
+      <p className="-mt-10 text-xs text-[#94A3B8] font-body">
+        All prices in USD, excluding applicable taxes. INR and AED quotes are available on request. Final pricing depends on scope — you get a fixed quote after a free call.
+      </p>
+
       {/* FOOTER CTA */}
       <div className="p-8 sm:p-16 lg:p-20 bg-[#0F172A] text-white rounded-[2px] border border-[#1E293B] shadow-2xl text-center flex flex-col items-center gap-6 sm:gap-8">
         <h2 className="font-display font-extrabold text-2xl sm:text-4xl lg:text-5xl text-white max-w-3xl leading-tight">
-          Ready to deploy white-labeled health intelligence?
+          Get a fixed quote for your product.
         </h2>
         <Link
           to="/demo"

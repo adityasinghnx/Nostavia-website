@@ -33,6 +33,17 @@ export default {
         },
         optimal: '#059669',
         'in-range': '#64748B',
+        /* Human OS reference palette. hos-yellow is for fills and rules only, never text on white. */
+        hos: {
+          black: '#0A0A0B',
+          navy: '#121A31',
+          yellow: '#F5D97B',
+          amber: '#8A6511',
+          hairline: '#E6E3DA',
+          card: '#F6F5F1',
+          cream: '#FDF6E1',
+          grey: '#57534E',
+        },
         outlier: '#D97706',
         text: {
           DEFAULT: '#0F172A',

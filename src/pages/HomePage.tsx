@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 
 import { LogoTrustBar } from '../components/LogoTrustBar';
 import { WorkflowAutonomousAgentsSection } from '../components/sections/WorkflowAutonomousAgentsSection';
-import { TeamOfAgentsSection } from '../components/sections/TeamOfAgentsSection';
+import { HumanOsHomeSection } from '../components/sections/HumanOsHomeSection';
 import { PlatformLayerThreeCardsSection } from '../components/sections/PlatformLayerThreeCardsSection';
 import { ProductizedServicesRowsSection } from '../components/sections/ProductizedServicesRowsSection';
 import { RealOutcomesCaseStudySection } from '../components/sections/RealOutcomesCaseStudySection';
@@ -101,7 +101,7 @@ export const HomePage: React.FC<{ onOpenDemo?: () => void }> = () => {
               {/* Left Subtext & CTA */}
               <div className="lg:col-span-5 space-y-6 pt-2">
                 <p className="text-base sm:text-lg text-[#64748B] font-body leading-relaxed max-w-sm">
-                  The intelligence layer for the health economy. Ingest lab reports, wearable telemetry, and nutrition data into continuous, white-labeled AI companion infrastructure.
+                  We design and build custom health AI products for labs, clinics, hospitals and health apps, from scratch or on top of our White Label products and SDK. All under your brand.
                 </p>
 
                 <div>
@@ -158,9 +158,9 @@ export const HomePage: React.FC<{ onOpenDemo?: () => void }> = () => {
       <PlatformLayerThreeCardsSection />
 
       {/* ========================================================================= */}
-      {/* 5. INTELLIGENCE MODULES (TEAM OF AGENTS MARQUEE SECTION) */}
+      {/* 5. HUMAN OS (SEVEN SYSTEMS IN TWO RINGS, REPLACES FLAT MODULE LIST) */}
       {/* ========================================================================= */}
-      <TeamOfAgentsSection />
+      <HumanOsHomeSection />
 
       {/* ========================================================================= */}
       {/* 5.5. BUILD & PRICE YOUR STACK (MERGED MODULE CONFIGURATOR + PRICING) */}
@@ -196,11 +196,11 @@ export const HomePage: React.FC<{ onOpenDemo?: () => void }> = () => {
         <div className="p-12 sm:p-16 lg:p-20 bg-[#0F172A] text-white rounded-[2px] border border-[#1E293B] shadow-2xl text-center flex flex-col items-center gap-8">
           
           <h2 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-[54px] text-white max-w-4xl leading-[1.05] tracking-tight">
-            Integrate once. Your users never see us.
+            Launch under your brand. Your users never see us.
           </h2>
 
           <p className="text-base sm:text-lg text-slate-300 font-body max-w-2xl leading-relaxed">
-            Thirty minutes on live product, not slides. Send a sample lab report in advance and we'll run it through the engine and show you the output on your own panel.
+            Thirty minutes on live product, not slides. Tell us what you want built. We'll scope a Custom Build, or show you the White Label product or SDK that already fits.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
@@ -212,10 +212,10 @@ export const HomePage: React.FC<{ onOpenDemo?: () => void }> = () => {
               <ArrowRight className="w-4 h-4 text-[#0F172A]" />
             </Link>
             <Link
-              to="/company"
+              to="/pricing"
               className="bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 font-display text-xs font-bold uppercase tracking-wider px-9 py-4 rounded-[2px] transition-all"
             >
-              Read the docs
+              See pricing
             </Link>
           </div>
 

@@ -5,6 +5,8 @@ import { Footer } from './components/Footer';
 import { DemoModal } from './components/DemoModal';
 import { HomePage } from './pages/HomePage';
 import { PlatformPage } from './pages/PlatformPage';
+import { HumanOsPage } from './pages/HumanOsPage';
+import { HumanOsSystemPage } from './pages/HumanOsSystemPage';
 
 // Industries
 import { ProviderPage } from './pages/industries/ProviderPage';
@@ -41,9 +43,11 @@ export const App: React.FC = () => {
   const [demoModalOpen, setDemoModalOpen] = React.useState(false);
   const location = useLocation();
 
-  // Scroll to top on route change
+  // Scroll to top on route change, or to the anchor when the URL has a hash
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const target = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+    if (target) target.scrollIntoView();
+    else window.scrollTo(0, 0);
   }, [location.pathname]);
 
   return (
@@ -54,6 +58,10 @@ export const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<HomePage onOpenDemo={() => setDemoModalOpen(true)} />} />
             <Route path="/platform" element={<PlatformPage />} />
+
+            {/* Human OS */}
+            <Route path="/human-os" element={<HumanOsPage />} />
+            <Route path="/human-os/:slug" element={<HumanOsSystemPage />} />
             
             {/* Industries Routes */}
             <Route path="/industries/provider" element={<ProviderPage />} />

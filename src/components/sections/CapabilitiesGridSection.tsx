@@ -4,7 +4,7 @@ export const CapabilitiesGridSection: React.FC = () => {
   const capabilities = [
     {
       label: '100+ biomarkers',
-      description: 'Classified optimal, in range or outlier against a personalised baseline — not a generic population range.',
+      description: 'Classified optimal, in range or outlier against a personalised baseline, not a generic population range.',
     },
     {
       label: 'Native lab PDFs',
@@ -16,7 +16,7 @@ export const CapabilitiesGridSection: React.FC = () => {
     },
     {
       label: 'Wearable fusion',
-      description: 'Apple Health, Google Health Connect, Oura, WHOOP, Fitbit, Garmin, Withings, Polar, Dexcom.',
+      description: 'Apple Health and Google Health Connect today. More device feeds in development.',
     },
     {
       label: 'Whole-body correlation',

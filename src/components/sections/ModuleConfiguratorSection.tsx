@@ -7,7 +7,7 @@ import {
 
 const modules = [
   { id: 'smart-reports', name: 'Smart Reports', desc: 'Lab PDF parsing & biomarker decoding', icon: FileText, defaultActive: true },
-  { id: 'wearable-telemetry', name: 'Wearable Telemetry', desc: 'Apple, Oura, WHOOP, Garmin fusion', icon: Watch, defaultActive: true },
+  { id: 'wearable-telemetry', name: 'Wearable Telemetry', desc: 'Apple Health & Google Health Connect', icon: Watch, defaultActive: true },
   { id: 'ai-companion', name: 'AI Health Companion', desc: 'Conversational health AI concierge', icon: Bot, defaultActive: true },
   { id: 'retest-recall', name: 'Re-Test Recall Engine', desc: 'Automated 90-day re-test campaigns', icon: RefreshCw, defaultActive: true },
   
@@ -21,7 +21,7 @@ const modules = [
   { id: 'intake-briefs', name: 'Clinical Intake Briefs', desc: 'Pre-consultation chart synthesis', icon: ClipboardList, defaultActive: false },
   { id: 'adaptive-protocols', name: 'Adaptive Protocols', desc: 'Condition-aware care pathways', icon: GitBranch, defaultActive: false },
 
-  { id: 'digital-twin', name: 'Digital Twin', desc: 'Future-self model under current habits', icon: Users, defaultActive: false },
+  { id: 'digital-twin', name: 'Trajectory Engine', desc: 'Future-self model under current habits', icon: Users, defaultActive: false },
   { id: 'biological-age', name: 'Biological Age', desc: 'Real body age vs chronological scoring', icon: Clock, defaultActive: false },
   { id: 'disease-risk', name: 'Disease Risk Engine', desc: 'Metabolic & cardiovascular risk scoring', icon: ShieldAlert, defaultActive: false },
   { id: 'correlation-engine', name: 'Correlation Engine', desc: 'Cross-domain marker relationships', icon: Zap, defaultActive: false },
@@ -59,7 +59,7 @@ export const ModuleConfiguratorSection: React.FC = () => {
           <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#64748B]">MODULAR BY DESIGN</span>
           <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight mt-4">Build your Nostavia stack. Module by module.</h2>
           <p className="text-base sm:text-lg text-[#475569] font-body leading-relaxed max-w-2xl mt-4">
-            Activate only what you need. Ship it under your brand. Add more as you grow — the intelligence underneath stays one.
+            Activate only what you need. Ship it under your brand. Add more as you grow. The intelligence underneath stays one.
           </p>
         </div>
 

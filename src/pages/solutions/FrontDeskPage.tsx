@@ -15,6 +15,7 @@ import {
   Calendar
 } from 'lucide-react';
 import { FaqSection } from '../../components/sections/FaqSection';
+import { submitLead, newRefId, CALENDAR_URL } from '../../lib/leads';
 
 export const FrontDeskPage: React.FC = () => {
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
@@ -35,12 +36,24 @@ export const FrontDeskPage: React.FC = () => {
     setActiveFaq(activeFaq === index ? null : index);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.hospitalName && formData.yourName && formData.contactNumber) {
+      const refId = newRefId();
+      await submitLead(`NEW FRONT DESK ENQUIRY [${refId}]: ${formData.yourName} - ${formData.hospitalName}`, {
+        refId,
+        interest: 'AI Front Desk Agent',
+        company: formData.hospitalName,
+        name: formData.yourName,
+        role: formData.role,
+        phone: formData.contactNumber,
+        email: formData.email,
+        city: formData.city,
+        preferredTimes: formData.preferredTimes,
+      });
       setSubmitted(true);
       setTimeout(() => {
-        window.location.href = 'https://calendar.app.google/cysR8LF2gMtuneNs9';
+        window.location.href = CALENDAR_URL;
       }, 500);
     }
   };
@@ -740,6 +753,10 @@ export const FrontDeskPage: React.FC = () => {
           {
             q: "Can the agent integrate into our hospital line without replacing our phone system?",
             a: "Yes. Nostavia Front Desk operates via direct call-forwarding or SIP trunking from your existing hospital PBX. Unanswered or after-hours calls redirect seamlessly."
+          },
+          {
+            q: "How much does Nostavia Front Desk cost?",
+            a: "It is a White Label product: a one-time setup from $1,500 plus a monthly plan from $399, depending on languages and departments. Very high call volumes are billed per minute. Most hospitals are live in 2–4 weeks."
           },
           {
             q: "What happens when a caller requires an immediate human handoff?",

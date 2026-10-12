@@ -17,15 +17,15 @@ export const StoryHealthPage: React.FC = () => {
         <div className="p-8 sm:p-14 lg:p-16 bg-white border border-[#E2E8F0] rounded-[2px] space-y-8 shadow-none relative overflow-hidden">
           
           <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            TURNKEY WHITE-LABEL MOBILE APP (iOS & ANDROID)
+            WHITE LABEL — OUR READY-MADE PRODUCTS, UNDER YOUR BRAND
           </div>
 
           <h1 className="font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl text-[#0F172A] tracking-tight max-w-4xl leading-[1.02]">
-            Launch a complete health app under your brand in 2 weeks.
+            Launch a ready-made health product under your brand — in weeks.
           </h1>
 
           <p className="text-base sm:text-xl text-[#64748B] max-w-3xl leading-relaxed font-body">
-            For diagnostic laboratories and clinics with no software application of their own. A complete, fully branded iOS and Android application carrying your name, with all biomarker decoding, AI routing, and wearable handling operated by Nostavia. No engineering team required.
+            For labs, clinics and hospitals that want a proven product without building from scratch: a branded iOS & Android app, smart reports & re-test recall, an AI front-desk agent or hospital patient programmes. Your name on it — biomarker decoding, AI routing and wearable handling operated by Nostavia. No engineering team required.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 pt-4">
@@ -41,20 +41,20 @@ export const StoryHealthPage: React.FC = () => {
           {/* Key Metrics Banner */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-[#E2E8F0] font-mono text-xs text-[#0F172A]">
             <div>
-              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">2 Weeks</div>
-              <div className="text-[#64748B] font-semibold mt-1">Turnkey Launch Speed</div>
+              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">$1,500+</div>
+              <div className="text-[#64748B] font-semibold mt-1">One-Time Setup</div>
+            </div>
+            <div>
+              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">$399+/mo</div>
+              <div className="text-[#64748B] font-semibold mt-1">Monthly Plan</div>
+            </div>
+            <div>
+              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">2–8 Weeks</div>
+              <div className="text-[#64748B] font-semibold mt-1">Time to Launch</div>
             </div>
             <div>
               <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">Zero</div>
               <div className="text-[#64748B] font-semibold mt-1">Engineers Needed</div>
-            </div>
-            <div>
-              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">100%</div>
-              <div className="text-[#64748B] font-semibold mt-1">Branded App Stores</div>
-            </div>
-            <div>
-              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">iOS & Android</div>
-              <div className="text-[#64748B] font-semibold mt-1">Native App Support</div>
             </div>
           </div>
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ShieldCheck } from 'lucide-react';
 import { ReferenceBand } from '../../components/ReferenceBand';
+import { SystemsToStartWith } from '../../components/human-os/BuyerMapping';
 
 export const SupplementsPage: React.FC = () => {
   return (
@@ -16,7 +17,7 @@ export const SupplementsPage: React.FC = () => {
           Recommend from biology, not from browsing history.
         </h1>
         <p className="text-base sm:text-xl text-[#64748B] leading-relaxed max-w-3xl font-body">
-          Supplement commerce runs on quiz funnels and lookalike audiences. Nostavia lets you recommend from a customer's actual bloodwork, wearable trend and diet — and know when they'll need the next bottle.
+          Supplement commerce runs on quiz funnels and lookalike audiences. Nostavia lets you recommend from a customer's actual bloodwork, wearable trend and diet, and know when they'll need the next bottle.
         </p>
       </div>
 
@@ -28,6 +29,9 @@ export const SupplementsPage: React.FC = () => {
         </div>
         <ReferenceBand valuePosition={64} valueLabel="64% Repeat Purchase Rate" sublabel="Tuned for Biomarker-Guided Commerce Brands" />
       </div>
+
+      {/* HUMAN OS: SYSTEMS TO START WITH */}
+      <SystemsToStartWith buyerId="wellness" inset={false} />
 
       {/* CLINICAL & CONSENT GUARDRAILS */}
       <section className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4">

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronDown, ChevronUp, FileText, RefreshCw, Layers, ShieldCheck, Zap, BarChart3, Clock, Database, Sparkles, CheckCircle2 } from 'lucide-react';
 import { FaqSection } from '../../components/sections/FaqSection';
+import { SystemsToStartWith } from '../../components/human-os/BuyerMapping';
 
 export const DiagnosticLabsPage: React.FC = () => {
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
@@ -67,6 +68,9 @@ export const DiagnosticLabsPage: React.FC = () => {
 
         </div>
       </section>
+
+      {/* 1B. HUMAN OS: SYSTEMS TO START WITH */}
+      <SystemsToStartWith buyerId="labs" />
 
       {/* 2. THE DIAGNOSTIC INDUSTRY OPPORTUNITY & PROBLEM */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
@@ -145,7 +149,7 @@ export const DiagnosticLabsPage: React.FC = () => {
                 <span className="px-2.5 py-1 bg-cyan-950 text-cyan-400 border border-cyan-800 font-mono text-[10px] font-bold uppercase rounded-[2px]">
                   SERVICE #1
                 </span>
-                <span className="font-mono text-xs text-slate-400">Priced per report</span>
+                <span className="font-mono text-xs text-slate-400">White Label · from $1,500 + $399/mo</span>
               </div>
               <h3 className="font-display font-extrabold text-2xl text-white">
                 Smart Report as a Service
@@ -175,7 +179,7 @@ export const DiagnosticLabsPage: React.FC = () => {
                 <span className="px-2.5 py-1 bg-emerald-950 text-emerald-400 border border-emerald-800 font-mono text-[10px] font-bold uppercase rounded-[2px]">
                   SERVICE #2
                 </span>
-                <span className="font-mono text-xs text-slate-400">Priced per converted re-test</span>
+                <span className="font-mono text-xs text-slate-400">Included with Smart Reports</span>
               </div>
               <h3 className="font-display font-extrabold text-2xl text-white">
                 Re-Test Recall Campaigns
@@ -212,11 +216,11 @@ export const DiagnosticLabsPage: React.FC = () => {
               DEPLOYMENT CASE STUDY
             </div>
             <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
-              Live 360° — Smart Report as a Service
+              Live 360°: Smart Report as a Service
             </h2>
             <p className="text-base text-[#64748B] max-w-3xl leading-relaxed font-body">
               <strong>Problem:</strong> Every diagnostics business has the same structural leak. The test is run, the report is delivered, the customer reads it once, and the relationship ends. The document is technically accurate and practically useless.<br/><br/>
-              <strong>Solution:</strong> Smart Report as a Service — a report intelligence layer that sits on top of the existing reporting pipeline rather than replacing it.
+              <strong>Solution:</strong> Smart Report as a Service, a report intelligence layer that sits on top of the existing reporting pipeline rather than replacing it.
             </p>
           </div>
           <div className="p-4 bg-white border border-[#E2E8F0] border-l-4 border-l-[#0F172A] rounded-[2px] font-mono text-xs text-[#0F172A] inline-block">
@@ -297,7 +301,7 @@ export const DiagnosticLabsPage: React.FC = () => {
             SOMA Dual-Brain: On-device privacy, cloud reasoning
           </h2>
           <p className="text-base text-[#64748B] max-w-3xl leading-relaxed font-body">
-            Handling patient lab data across international markets makes privacy a design constraint. Nostavia's SOMA architecture strips personally identifiable information (PII) on-device before cloud inference.
+            Handling patient lab data across international markets makes privacy a design constraint. Nostavia's SOMA architecture is designed to strip personally identifiable information (PII) on-device before cloud inference.
           </p>
         </div>
 
@@ -307,10 +311,10 @@ export const DiagnosticLabsPage: React.FC = () => {
               1
             </div>
             <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-              SOMA-1B (On-Device Domain Brain)
+              SOMA-1B (On-Device Domain Brain, in development)
             </h3>
             <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              A specialized small language model running on-device. It parses native lab PDFs, handles digital signatures, strips PII, and distils raw panel data into a focused, de-identified clinical brief.
+              A specialized small language model being built to run on-device. It is designed to parse native lab PDFs, handle digital signatures, strip PII, and distil raw panel data into a focused, de-identified clinical brief.
             </p>
           </div>
 

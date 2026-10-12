@@ -1,4 +1,10 @@
 {
+  "redirects": [
+    { "source": "/modules", "destination": "/human-os", "statusCode": 301 },
+    { "source": "/modules/:path*", "destination": "/human-os", "statusCode": 301 },
+    { "source": "/intelligence-modules", "destination": "/human-os", "statusCode": 301 },
+    { "source": "/platform/modules", "destination": "/human-os", "statusCode": 301 }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",

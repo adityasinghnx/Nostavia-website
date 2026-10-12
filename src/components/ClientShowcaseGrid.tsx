@@ -19,8 +19,8 @@ export const ClientShowcaseGrid: React.FC = () => {
     {
       title: 'Continuous Telemetry & Wearable SDK',
       category: 'Device Streaming',
-      description: 'Unified REST & GraphQL telemetry streaming integrating Apple Watch, Oura Ring 3/4, WHOOP 4.0, and Continuous Glucose Monitors (CGM).',
-      deliverables: ['Wearable Data Normalizer', 'Continuous HRV Streaming', 'CGM Spike Alerts'],
+      description: 'Unified REST & GraphQL telemetry streaming from Apple Health and Google Health Connect today, with more device feeds in development.',
+      deliverables: ['Wearable Data Normalizer', 'Continuous HRV Streaming', 'Sleep & Activity Feeds'],
       timeline: '2-Week Deployment',
     },
     {

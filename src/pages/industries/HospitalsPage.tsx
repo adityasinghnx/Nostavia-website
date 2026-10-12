@@ -28,6 +28,8 @@ import {
   LayoutDashboard
 } from 'lucide-react';
 import { FaqSection } from '../../components/sections/FaqSection';
+import { HospitalProgrammesSection } from '../../components/human-os/HospitalProgrammesSection';
+import { SystemsToStartWith } from '../../components/human-os/BuyerMapping';
 
 export const HospitalsPage: React.FC = () => {
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
@@ -54,7 +56,7 @@ export const HospitalsPage: React.FC = () => {
           </h1>
 
           <p className="text-base sm:text-xl text-[#64748B] max-w-3xl leading-relaxed font-body">
-            We white-label predictive patient programs onto your existing checkup, discharge and chronic volume — under your brand, live in 60 days. Then we show you, in rupees, exactly what they brought back.
+            We white-label predictive patient programs onto your existing checkup, discharge and chronic volume, under your brand, live in 60 days. Then we show you, in rupees, exactly what they brought back.
           </p>
 
           <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-4 pt-2">
@@ -84,7 +86,7 @@ export const HospitalsPage: React.FC = () => {
               <div className="text-[#64748B] font-semibold mt-1">Guaranteed Deployment</div>
             </div>
             <div>
-              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">Live ROI</div>
+              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">Tracked ROI</div>
               <div className="text-[#64748B] font-semibold mt-1">CFO Attribution Dashboard</div>
             </div>
             <div>
@@ -96,7 +98,10 @@ export const HospitalsPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. THE LEAKAGE AUDIT — THE FREE WEAPON */}
+      {/* 1B. HUMAN OS: THE FIVE PROGRAMMES AND THE SYSTEMS BEHIND THEM */}
+      <HospitalProgrammesSection />
+
+      {/* 2. THE LEAKAGE AUDIT: THE FREE WEAPON */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full">
         <div className="p-8 sm:p-12 bg-[#0F172A] text-white rounded-[2px] border border-[#1E293B] shadow-xl space-y-6">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
@@ -104,14 +109,14 @@ export const HospitalsPage: React.FC = () => {
               <div className="flex items-center gap-3">
                 <FileSearch className="w-5 h-5 text-cyan-400" />
                 <span className="font-mono text-xs text-cyan-400 font-bold uppercase tracking-widest">
-                  THE LEAKAGE AUDIT — FREE, BEFORE ANY CONTRACT
+                  THE LEAKAGE AUDIT: FREE, BEFORE ANY CONTRACT
                 </span>
               </div>
               <h2 className="font-display font-extrabold text-2xl sm:text-4xl text-white leading-tight">
                 How much repeat revenue did you leak last year? Most hospitals have never been able to answer that question.
               </h2>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-body">
-                Before any contract, share 12–24 months of anonymized historical data — checkup transactions, OPD visits, discharge records. We return a <span className="text-white font-bold">Leakage Report</span> within two weeks: how many checkup customers never returned, how many discharged patients had no follow-up, how many chronic patients went dormant — and the rupee value of each bucket, computed on your own price list. Anonymized data only, processed under a signed data-handling agreement, deleted after the audit.
+                Before any contract, share 12–24 months of anonymized historical data: checkup transactions, OPD visits, discharge records. We return a <span className="text-white font-bold">Leakage Report</span> within two weeks: how many checkup customers never returned, how many discharged patients had no follow-up, how many chronic patients went dormant, and the rupee value of each bucket, computed on your own price list. Anonymized data only, processed under a signed data-handling agreement, deleted after the audit.
               </p>
             </div>
             <Link
@@ -126,7 +131,7 @@ export const HospitalsPage: React.FC = () => {
             <div className="p-4 bg-slate-900/60 rounded-[2px] border border-slate-800">
               <div className="font-display font-extrabold text-xl text-cyan-400">1.</div>
               <div className="font-display font-bold text-sm text-white mt-1">Share Anonymized Data</div>
-              <div className="text-[11px] text-slate-400 mt-1 font-body">CSV, Excel, or even PDF dumps — our parser handles any HIS export format.</div>
+              <div className="text-[11px] text-slate-400 mt-1 font-body">CSV, Excel, or even PDF dumps. Our parser handles any HIS export format.</div>
             </div>
             <div className="p-4 bg-slate-900/60 rounded-[2px] border border-slate-800">
               <div className="font-display font-extrabold text-xl text-cyan-400">2.</div>
@@ -142,7 +147,7 @@ export const HospitalsPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. THREE MECHANISMS — THE NERVOUS SYSTEM */}
+      {/* 3. THREE MECHANISMS: THE NERVOUS SYSTEM */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
         <div className="space-y-3">
           <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
@@ -165,11 +170,11 @@ export const HospitalsPage: React.FC = () => {
                 Leakage Audit
               </h3>
               <p className="text-xs text-[#64748B] leading-relaxed font-body">
-                Free pre-contract analysis using 12–24 months of anonymized hospital data. Returns a rupee-valued leakage report showing exactly where patients drop off — checkup non-renewals, missed follow-ups, dormant chronics. The first meeting becomes their own number on a page.
+                Free pre-contract analysis using 12–24 months of anonymized hospital data. Returns a rupee-valued leakage report showing exactly where patients drop off: checkup non-renewals, missed follow-ups, dormant chronics. The first meeting becomes their own number on a page.
               </p>
             </div>
             <div className="pt-4 border-t border-[#E2E8F0] font-mono text-[11px] text-[#475569]">
-              No HIS vendor offers this — running it requires an analytical engine, not a records system.
+              No HIS vendor offers this. Running it requires an analytical engine, not a records system.
             </div>
           </div>
 
@@ -180,7 +185,7 @@ export const HospitalsPage: React.FC = () => {
                 Attribution Engine
               </h3>
               <p className="text-xs text-[#64748B] leading-relaxed font-body">
-                Every re-test booked from a recall, every follow-up OPD captured from a discharge protocol, every package renewal from a Smart Report journey — tagged, attributed, and priced in a live dashboard the CFO owns. Platform-attributed revenue vs. platform cost, updated daily.
+                Every re-test booked from a recall, every follow-up OPD captured from a discharge protocol, every package renewal from a Smart Report journey: tagged, attributed, and priced in a dashboard the CFO owns. Platform-attributed revenue vs. platform cost, updated daily.
               </p>
             </div>
             <div className="pt-4 border-t border-[#E2E8F0] font-mono text-[11px] text-[#475569]">
@@ -199,14 +204,14 @@ export const HospitalsPage: React.FC = () => {
               </p>
             </div>
             <div className="pt-4 border-t border-[#E2E8F0] font-mono text-[11px] text-[#475569]">
-              Gets sharper the longer it runs. Six months in, the drift detection knows your patient population — not a generic one.
+              Gets sharper the longer it runs. Six months in, the drift detection knows your patient population, not a generic one.
             </div>
           </div>
 
         </div>
       </section>
 
-      {/* 4. THE FOUR PROGRAMS — THE MUSCLES */}
+      {/* 4. THE FOUR PROGRAMS: THE MUSCLES */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
         <div className="space-y-3">
           <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
@@ -230,7 +235,7 @@ export const HospitalsPage: React.FC = () => {
                 Preventive Program Engine
               </h3>
               <p className="text-xs text-[#64748B] leading-relaxed font-body">
-                Upgrades your hospital's health-check packages from a raw PDF transaction to an annual membership under your brand. Includes Smart Reports, biological age, pace of aging, disease-risk scores, digital twin, wearable fusion, AI concierge, and an automated re-test recall engine.
+                Upgrades your hospital's health-check packages from a raw PDF transaction to an annual membership under your brand. Includes Smart Reports, biological age, disease-risk scores, the Trajectory Engine, wearable data, AI concierge, and an automated re-test recall engine.
               </p>
             </div>
             <div className="pt-4 border-t border-[#E2E8F0] font-mono text-[11px] text-[#475569]">
@@ -263,7 +268,7 @@ export const HospitalsPage: React.FC = () => {
                 Chronic Care Programs
               </h3>
               <p className="text-xs text-[#64748B] leading-relaxed font-body">
-                Infrastructure for your hospital to run subscription diabetes, cardiac, and metabolic clinics without needing an expensive pharma JV: enrolment, Dexcom CGM & wearable integration, adaptive protocols, care-team dashboard, and concierge.
+                Infrastructure for your hospital to run subscription diabetes, cardiac, and metabolic clinics without needing an expensive pharma JV: enrolment, CGM & wearable integration, adaptive protocols, care-team dashboard, and concierge.
               </p>
             </div>
             <div className="pt-4 border-t border-[#E2E8F0] font-mono text-[11px] text-[#475569]">
@@ -287,7 +292,7 @@ export const HospitalsPage: React.FC = () => {
             </div>
           </div>
 
-          {/* PROGRAM 05 — FRONT DESK AI VOICE & PATIENT SUPPORT AGENT */}
+          {/* PROGRAM 05: FRONT DESK AI VOICE & PATIENT SUPPORT AGENT */}
           <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-5 hover:border-[#CBD5E1] transition-all flex flex-col justify-between md:col-span-2">
             <div className="space-y-4">
               <div className="flex flex-wrap items-center justify-between gap-3">
@@ -336,6 +341,9 @@ export const HospitalsPage: React.FC = () => {
         </div>
       </section>
 
+      {/* 4A. HUMAN OS: SYSTEMS TO START WITH */}
+      <SystemsToStartWith buyerId="hospitals" />
+
       {/* 4B. CASE STUDY */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
         <div className="space-y-3">
@@ -343,7 +351,7 @@ export const HospitalsPage: React.FC = () => {
             DEPLOYMENT CASE STUDY · TERTIARY CARE
           </div>
           <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
-            AI Voice Agent & Contactless Vitals — Deployed in a Working Hospital
+            AI Voice Agent & Contactless Vitals: Deployed in a Working Hospital
           </h2>
           <p className="text-xs text-[#64748B] font-mono">
             Client named on request, under NDA
@@ -356,7 +364,7 @@ export const HospitalsPage: React.FC = () => {
               System One: AI Voice Agent
             </h3>
             <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              Conversational voice agent handling inbound patient calls end-to-end. Handles local language code-switching mid-sentence, family members speaking on behalf of patients, and hands off to a human when calls leave the routine envelope. Not a decision tree — built for real conversational patterns.
+              Conversational voice agent handling inbound patient calls end-to-end. Handles local language code-switching mid-sentence, family members speaking on behalf of patients, and hands off to a human when calls leave the routine envelope. Not a decision tree: built for real conversational patterns.
             </p>
           </div>
 
@@ -378,7 +386,7 @@ export const HospitalsPage: React.FC = () => {
             HOW EVERY ENGAGEMENT BEGINS
           </div>
           <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-[#0F172A] tracking-tight">
-            Audit → Pilot → Platform — each step self-funding
+            Audit → Pilot → Platform, each step self-funding
           </h2>
         </div>
 
@@ -403,7 +411,7 @@ export const HospitalsPage: React.FC = () => {
             <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center font-bold font-mono">3</div>
             <h3 className="font-display font-extrabold text-lg text-[#0F172A]">Platform Contract</h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-body">
-              Choose Partner pricing (pay on attributed value) or Flat pricing. Attribution Engine live from day one.
+              A fixed quote: one-time build fee plus a monthly plan, with the Attribution Engine included.
             </p>
           </div>
 
@@ -411,33 +419,33 @@ export const HospitalsPage: React.FC = () => {
             <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center font-bold font-mono">4</div>
             <h3 className="font-display font-extrabold text-lg text-[#0F172A]">60-Day Guarantee</h3>
             <p className="text-xs text-[#64748B] leading-relaxed font-body">
-              Full front-door deployment in 60 days or one month of base fees credited per month of delay.
+              Full front-door deployment in 60 days or one month of your monthly plan credited per month of delay.
             </p>
           </div>
         </div>
       </section>
 
-      {/* 6. TWO-DOOR PRICING */}
+      {/* 6. PRICING */}
       <section id="pricing" className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10 scroll-mt-24">
         <div className="space-y-3">
           <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
             HOSPITAL FRONT-DOOR PLATFORM PRICING
           </div>
           <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
-            We only win big when you do
+            One build fee. One monthly plan. A guaranteed launch.
           </h2>
           <p className="text-base text-[#64748B] max-w-3xl leading-relaxed font-body">
-            Hospital platform deployment includes turnkey white-labelled patient programs, the Leakage Audit, Attribution Engine, and Command Center. (For self-serve developer SDK component pricing for healthtech startups, <Link to="/pricing" className="text-[#2563EB] font-bold underline">see developer SDK tiers</Link>).
+            Hospital platform deployment includes turnkey white-labelled patient programs, the Leakage Audit, Attribution Engine, and Command Center. All prices in USD, excluding applicable taxes. (For SDK, White Label and Custom Build pricing, <Link to="/pricing" className="text-[#2563EB] font-bold underline">see all pricing</Link>).
           </p>
         </div>
 
-        {/* DOOR A - PARTNER PRICING */}
+        {/* FULL FRONT DOOR PRICING */}
         <div className="space-y-4">
           <div className="flex items-center gap-3">
             <span className="px-3 py-1.5 bg-[#0F172A] text-white font-mono text-[11px] font-bold uppercase rounded-[2px]">
-              DOOR A · PARTNER PRICING
+              FULL PATIENT FRONT DOOR
             </span>
-            <span className="text-xs text-[#64748B] font-body">Low base + share of attributed revenue (recommended)</span>
+            <span className="text-xs text-[#64748B] font-body">All five programmes · one-time build + monthly plan</span>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-body">
@@ -445,10 +453,10 @@ export const HospitalsPage: React.FC = () => {
               <div className="space-y-3">
                 <div className="font-mono text-xs font-bold text-[#64748B] uppercase">COMMUNITY HOSPITALS</div>
                 <div className="space-y-1">
-                  <div className="font-display font-extrabold text-3xl text-[#0F172A]">₹14,999 <span className="text-xs font-normal text-[#64748B]">base / mo</span></div>
-                  <div className="font-mono text-xs font-semibold text-[#2563EB]">+ 8% attributed revenue · capped at 3× base</div>
+                  <div className="font-display font-extrabold text-3xl text-[#0F172A]">$5,000 <span className="text-xs font-normal text-[#64748B]">one-time</span></div>
+                  <div className="font-mono text-xs font-semibold text-[#2563EB]">+ $999 / mo monthly plan</div>
                 </div>
-                <p className="text-xs text-[#64748B]">Under 100 beds. Your downside is a modest SaaS fee; upside is shared, bounded, and visible.</p>
+                <p className="text-xs text-[#64748B]">Under 100 beds. Single site, core programmes and the Front Desk Agent.</p>
               </div>
             </div>
 
@@ -459,10 +467,10 @@ export const HospitalsPage: React.FC = () => {
               <div className="space-y-3">
                 <div className="font-mono text-xs font-bold text-amber-400 uppercase">REGIONAL CHAINS & MULTISPECIALTY</div>
                 <div className="space-y-1">
-                  <div className="font-display font-extrabold text-3xl text-white">₹34,999 <span className="text-xs font-normal text-slate-300">base / mo</span></div>
-                  <div className="font-mono text-xs font-semibold text-amber-400">+ 7% attributed revenue · capped at 3× base</div>
+                  <div className="font-display font-extrabold text-3xl text-white">$8,000 <span className="text-xs font-normal text-slate-300">one-time</span></div>
+                  <div className="font-mono text-xs font-semibold text-amber-400">+ $1,499 / mo monthly plan</div>
                 </div>
-                <p className="text-xs text-slate-300">100–300 beds. A hospital attributing ₹8L/month of recovered revenue pays ≈ ₹91K/month — and every rupee above base is provably earned.</p>
+                <p className="text-xs text-slate-300">100–300 beds. All five programmes, HIS integration, Attribution Engine and Command Center.</p>
               </div>
             </div>
 
@@ -470,47 +478,47 @@ export const HospitalsPage: React.FC = () => {
               <div className="space-y-3">
                 <div className="font-mono text-xs font-bold text-[#64748B] uppercase">ENTERPRISE CHAINS & GCC</div>
                 <div className="space-y-1">
-                  <div className="font-display font-extrabold text-3xl text-[#0F172A]">₹74,999 <span className="text-xs font-normal text-[#64748B]">base / mo</span></div>
-                  <div className="font-mono text-xs font-semibold text-[#2563EB]">+ 5% attributed revenue · capped at 3× base · multi-site</div>
+                  <div className="font-display font-extrabold text-3xl text-[#0F172A]">$12,000 <span className="text-xs font-normal text-[#64748B]">one-time</span></div>
+                  <div className="font-mono text-xs font-semibold text-[#2563EB]">+ $1,799 / mo monthly plan · multi-site</div>
                 </div>
                 <p className="text-xs text-[#64748B]">300+ beds, multi-hospital groups with custom workflows.</p>
               </div>
             </div>
           </div>
-          {/* DOOR A PRICING HONESTY LINE */}
+          {/* WHAT YOU PAY FOR */}
           <div className="p-5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] font-body text-xs text-[#475569] leading-relaxed">
-            <span className="font-bold text-[#0F172A]">A note on the arithmetic:</span> Partner pricing costs more than flat pricing when the platform performs well — that's the point. Choose it if you want your downside capped at ₹34,999. Choose flat if you'd rather cap the upside.
+            <span className="font-bold text-[#0F172A]">What you pay for:</span> the one-time fee covers HIS integration, branding, programme setup, clinical review and staff training. The monthly plan covers hosting, AI, the Attribution Engine, updates, support and a named success manager. The Leakage Audit before any contract is free.
           </div>
         </div>
 
-        {/* DOOR B - FLAT PRICING */}
+        {/* START WITH ONE PROGRAMME */}
         <div className="space-y-4">
           <div className="flex items-center gap-3">
             <span className="px-3 py-1.5 bg-[#F8FAFC] text-[#0F172A] border border-[#E2E8F0] font-mono text-[11px] font-bold uppercase rounded-[2px]">
-              DOOR B · FLAT PRICING
+              START WITH ONE PROGRAMME
             </span>
-            <span className="text-xs text-[#64748B] font-body">For procurement teams that prefer predictable billing</span>
+            <span className="text-xs text-[#64748B] font-body">Prove value on one revenue line first, then add the rest</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 font-body">
             <div className="p-6 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] flex items-center justify-between">
               <div>
-                <div className="font-mono text-[10px] font-bold text-[#64748B] uppercase">COMMUNITY</div>
-                <div className="font-display font-extrabold text-xl text-[#0F172A] mt-1">₹24,999 <span className="text-xs font-normal text-[#64748B]">/ mo</span></div>
+                <div className="font-mono text-[10px] font-bold text-[#64748B] uppercase">FRONT DESK AGENT</div>
+                <div className="font-display font-extrabold text-xl text-[#0F172A] mt-1">$1,500 <span className="text-xs font-normal text-[#64748B]">+ $399 / mo</span></div>
               </div>
               <CheckCircle2 className="w-5 h-5 text-emerald-600" />
             </div>
             <div className="p-6 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] flex items-center justify-between">
               <div>
-                <div className="font-mono text-[10px] font-bold text-[#64748B] uppercase">REGIONAL</div>
-                <div className="font-display font-extrabold text-xl text-[#0F172A] mt-1">₹59,999 <span className="text-xs font-normal text-[#64748B]">/ mo</span></div>
+                <div className="font-mono text-[10px] font-bold text-[#64748B] uppercase">PREVENTIVE PROGRAM ENGINE</div>
+                <div className="font-display font-extrabold text-xl text-[#0F172A] mt-1">$3,000 <span className="text-xs font-normal text-[#64748B]">+ $699 / mo</span></div>
               </div>
               <CheckCircle2 className="w-5 h-5 text-emerald-600" />
             </div>
             <div className="p-6 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] flex items-center justify-between">
               <div>
-                <div className="font-mono text-[10px] font-bold text-[#64748B] uppercase">ENTERPRISE</div>
-                <div className="font-display font-extrabold text-xl text-[#0F172A] mt-1">₹1,29,999 <span className="text-xs font-normal text-[#64748B]">/ mo</span></div>
+                <div className="font-mono text-[10px] font-bold text-[#64748B] uppercase">DISCHARGE-TO-RECOVERY</div>
+                <div className="font-display font-extrabold text-xl text-[#0F172A] mt-1">$3,000 <span className="text-xs font-normal text-[#64748B]">+ $699 / mo</span></div>
               </div>
               <CheckCircle2 className="w-5 h-5 text-emerald-600" />
             </div>
@@ -528,19 +536,19 @@ export const HospitalsPage: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 font-body">
             <div className="p-6 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px]">
-              <div className="font-mono text-[10px] font-bold text-[#64748B] uppercase">GULF — STANDARD</div>
-              <div className="font-display font-extrabold text-xl text-[#0F172A] mt-1">AED 5,500 <span className="text-xs font-normal text-[#64748B]">/ mo flat</span></div>
-              <div className="text-[11px] text-[#64748B] mt-1">Or base + 6% attributed (Partner)</div>
+              <div className="font-mono text-[10px] font-bold text-[#64748B] uppercase">GULF · STANDARD</div>
+              <div className="font-display font-extrabold text-xl text-[#0F172A] mt-1">AED 5,500 <span className="text-xs font-normal text-[#64748B]">/ mo</span></div>
+              <div className="text-[11px] text-[#64748B] mt-1">+ one-time build, quoted in AED</div>
             </div>
             <div className="p-6 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px]">
-              <div className="font-mono text-[10px] font-bold text-[#64748B] uppercase">GULF — MULTISPECIALTY</div>
-              <div className="font-display font-extrabold text-xl text-[#0F172A] mt-1">AED 12,000 <span className="text-xs font-normal text-[#64748B]">/ mo flat</span></div>
-              <div className="text-[11px] text-[#64748B] mt-1">Or base + 6% attributed (Partner)</div>
+              <div className="font-mono text-[10px] font-bold text-[#64748B] uppercase">GULF · MULTISPECIALTY</div>
+              <div className="font-display font-extrabold text-xl text-[#0F172A] mt-1">AED 12,000 <span className="text-xs font-normal text-[#64748B]">/ mo</span></div>
+              <div className="text-[11px] text-[#64748B] mt-1">+ one-time build, quoted in AED</div>
             </div>
             <div className="p-6 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px]">
-              <div className="font-mono text-[10px] font-bold text-[#64748B] uppercase">GULF — ENTERPRISE</div>
-              <div className="font-display font-extrabold text-xl text-[#0F172A] mt-1">AED 25,000+ <span className="text-xs font-normal text-[#64748B]">/ mo flat</span></div>
-              <div className="text-[11px] text-[#64748B] mt-1">Or base + 6% attributed (Partner)</div>
+              <div className="font-mono text-[10px] font-bold text-[#64748B] uppercase">GULF · ENTERPRISE</div>
+              <div className="font-display font-extrabold text-xl text-[#0F172A] mt-1">AED 25,000+ <span className="text-xs font-normal text-[#64748B]">/ mo</span></div>
+              <div className="text-[11px] text-[#64748B] mt-1">+ one-time build, quoted in AED</div>
             </div>
           </div>
         </div>
@@ -554,7 +562,7 @@ export const HospitalsPage: React.FC = () => {
               WHAT YOUR TEAM HAS TO DO
             </div>
             <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-[#0F172A]">
-              Minimal effort from your side — no new headcount
+              Minimal effort from your side, no new headcount
             </h2>
           </div>
 
@@ -587,7 +595,7 @@ export const HospitalsPage: React.FC = () => {
               OUR ARCHITECTURAL DISCIPLINE
             </div>
             <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-[#0F172A]">
-              What we do NOT sell — clear boundaries for hospital IT & clinical leads
+              What we do NOT sell: clear boundaries for hospital IT & clinical leads
             </h2>
           </div>
 
@@ -604,12 +612,12 @@ export const HospitalsPage: React.FC = () => {
 
             <div className="p-5 bg-white border border-[#E2E8F0] rounded-[2px] space-y-2">
               <div className="font-display font-bold text-sm text-[#0F172A]">We are NOT autonomous diagnosis</div>
-              <div>Clinician-supervised decision support with advisory-bench validation — keeping deployments strictly outside high-risk device classification.</div>
+              <div>Clinician-supervised decision support with advisory-bench validation, keeping deployments strictly outside high-risk device classification.</div>
             </div>
 
             <div className="p-5 bg-white border border-[#E2E8F0] rounded-[2px] space-y-2">
               <div className="font-display font-bold text-sm text-[#0F172A]">No unmeasured clinical claims</div>
-              <div>Published peer-reviewed literature carries category claims. The Attribution Engine carries our hospital numbers — which is precisely why it exists.</div>
+              <div>Published peer-reviewed literature carries category claims. The Attribution Engine carries our hospital numbers, which is precisely why it exists.</div>
             </div>
           </div>
         </div>
@@ -651,7 +659,7 @@ export const HospitalsPage: React.FC = () => {
               <div className="leading-relaxed">
                 <span className="font-mono text-[10px] font-bold uppercase text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">PRODUCTION CONNECTOR</span>
                 <p className="mt-1">
-                  Plugs directly into your hospital's existing HIS or EMR via standard REST APIs, HL7, or FHIR feeds — reading appointment schedules and writing back clinical intake briefs with zero workflow disruption.
+                  Plugs directly into your hospital's existing HIS or EMR via standard REST APIs, HL7, or FHIR feeds, reading appointment schedules and writing back clinical intake briefs with zero workflow disruption.
                 </p>
               </div>
             </div>
@@ -659,7 +667,7 @@ export const HospitalsPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 8B. CREDIBILITY — WHO ELSE USES THIS */}
+      {/* 8B. CREDIBILITY: WHO ELSE USES THIS */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-8">
         <div className="p-8 sm:p-12 bg-[#0F172A] text-white rounded-[2px] border border-[#1E293B] shadow-xl space-y-6">
           <div className="space-y-2">
@@ -682,7 +690,7 @@ export const HospitalsPage: React.FC = () => {
             </div>
             <div className="p-5 bg-slate-900/60 border border-slate-800 rounded-[2px] space-y-2">
               <div className="font-display font-bold text-sm text-white">Clinical governance</div>
-              <div className="text-xs text-slate-300 leading-relaxed font-body">Six-member advisory bench — GMC-registered physicians, a senior IISc scientist, UCL-trained clinical nutrition. Protocol outputs validated before they reach any partner.</div>
+              <div className="text-xs text-slate-300 leading-relaxed font-body">Six-member advisory bench: GMC-registered physicians, a senior IISc scientist, UCL-trained clinical nutrition. Protocol outputs validated before they reach any partner.</div>
             </div>
             <div className="p-5 bg-slate-900/60 border border-slate-800 rounded-[2px] space-y-2">
               <div className="font-display font-bold text-sm text-white">Programmes</div>
@@ -690,7 +698,7 @@ export const HospitalsPage: React.FC = () => {
             </div>
             <div className="p-5 bg-slate-900/60 border border-slate-800 rounded-[2px] space-y-2 sm:col-span-2">
               <div className="font-display font-bold text-sm text-white">Hospitals: you'd be early</div>
-              <div className="text-xs text-slate-300 leading-relaxed font-body">We'll say so plainly — and the free audit, the credited pilot, and the deployment guarantee exist because of it.</div>
+              <div className="text-xs text-slate-300 leading-relaxed font-body">We'll say so plainly, and the free audit, the credited pilot, and the deployment guarantee exist because of it.</div>
             </div>
           </div>
         </div>
@@ -703,19 +711,19 @@ export const HospitalsPage: React.FC = () => {
         faqs={[
           {
             q: "What does the free Leakage Audit actually show us?",
-            a: "A rupee-valued report computed on your own price list: how many checkup customers never returned, how many discharged patients had no follow-up visit, how many chronic patients went dormant — with the revenue value of each bucket. Anonymized data only, processed under a signed data-handling agreement."
+            a: "A rupee-valued report computed on your own price list: how many checkup customers never returned, how many discharged patients had no follow-up visit, how many chronic patients went dormant, with the revenue value of each bucket. Anonymized data only, processed under a signed data-handling agreement."
           },
           {
             q: "What happens if the 90-day pilot doesn't move our numbers?",
-            a: "The pilot fee is credited in full against any future contract — or you simply walk. We control the variables enough to offer this with confidence."
+            a: "The pilot fee is credited in full against any future contract, or you simply walk. We control the variables enough to offer this with confidence."
           },
           {
             q: "How does the Attribution Engine work?",
-            a: "Every re-test, follow-up OPD, and package renewal generated through Nostavia is tagged and priced in a live dashboard your CFO owns. Platform-attributed revenue vs. platform cost, updated daily. ROI as a number on a screen, not a claim in a renewal deck."
+            a: "Every re-test, follow-up OPD, and package renewal generated through Nostavia is tagged and priced in a dashboard your CFO owns. Platform-attributed revenue vs. platform cost, updated daily. ROI as a number on a screen, not a claim in a renewal deck."
           },
           {
             q: "What is the 60-day deployment guarantee?",
-            a: "Full patient front-door deployment in 60 days or one month of base fees credited per month of delay. We are fast — and we should be penalized when we aren't."
+            a: "Full patient front-door deployment in 60 days or one month of your monthly plan credited per month of delay. We are fast, and we should be penalized when we aren't."
           }
         ]}
       />

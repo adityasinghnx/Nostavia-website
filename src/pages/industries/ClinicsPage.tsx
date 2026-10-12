@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, Clock, ChevronDown, ChevronUp, Stethoscope, Activity, Users } from 'lucide-react';
 import { FaqSection } from '../../components/sections/FaqSection';
+import { SystemsToStartWith } from '../../components/human-os/BuyerMapping';
 
 export const ClinicsPage: React.FC = () => {
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
@@ -61,12 +62,15 @@ export const ClinicsPage: React.FC = () => {
             </div>
             <div>
               <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">SOMA-1B</div>
-              <div className="text-[#64748B] font-semibold mt-1">On-Device Privacy Brain</div>
+              <div className="text-[#64748B] font-semibold mt-1">On-Device Privacy Brain (In Development)</div>
             </div>
           </div>
 
         </div>
       </section>
+
+      {/* 1B. HUMAN OS: SYSTEMS TO START WITH */}
+      <SystemsToStartWith buyerId="clinics" />
 
       {/* 2. THE CLINICAL BOTTLENECK & SOLUTION */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
@@ -103,7 +107,7 @@ export const ClinicsPage: React.FC = () => {
               Fragmented Wearable Telemetry
             </h3>
             <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              Patients present Oura, Apple Health, WHOOP, and CGM data in isolated apps. Nostavia normalizes continuous signals into single clinical trends.
+              Patients bring wearable and CGM data scattered across isolated apps. Nostavia normalizes Apple Health and Google Health Connect signals into single clinical trends.
             </p>
           </div>
 
@@ -176,7 +180,7 @@ export const ClinicsPage: React.FC = () => {
             a: "Nostavia integrates via lightweight REST APIs, FHIR standards, or our Intelligence SDK. Intake Briefs can also be delivered as instant 1-page PDF briefs directly to the physician's tablet."
           },
           {
-            q: "Does Nostavia diagnose diseases autonomously?",
+            q: "Does Nostavia make diagnostic decisions on its own?",
             a: "No. Nostavia operates as a clinician-supervised decision support tool. All protocol recommendations and intake summaries are presented for physician review and final sign-off."
           },
           {

@@ -30,7 +30,7 @@ const WL_DEFAULT_IDS = new Set([
 /* ── Module definitions ── */
 const modules = [
   { id: 'smart-reports', name: 'Smart Reports', desc: 'Lab PDF parsing & biomarker decoding', icon: FileText, defaultActive: true },
-  { id: 'wearable-telemetry', name: 'Wearable Telemetry', desc: 'Apple, Oura, WHOOP, Garmin fusion', icon: Watch, defaultActive: true },
+  { id: 'wearable-telemetry', name: 'Wearable Telemetry', desc: 'Apple Health & Google Health Connect', icon: Watch, defaultActive: true },
   { id: 'ai-companion', name: 'AI Health Companion', desc: 'Conversational health AI concierge', icon: Bot, defaultActive: true },
   { id: 'personalisation-engine', name: 'Personalisation Engine', desc: 'Adaptive habit & intervention tailoring', icon: Sparkles, defaultActive: true },
   { id: 'food-intelligence', name: 'Food Intelligence', desc: 'Glycemic bio-impact & meal scanning', icon: Apple, defaultActive: true },
@@ -44,7 +44,7 @@ const modules = [
   { id: 'intake-briefs', name: 'Clinical Intake Briefs', desc: 'Pre-consultation chart synthesis', icon: ClipboardList, defaultActive: false },
   { id: 'adaptive-protocols', name: 'Adaptive Protocols', desc: 'Condition-aware care pathways', icon: GitBranch, defaultActive: false },
 
-  { id: 'digital-twin', name: 'Digital Twin', desc: 'Future-self model under current habits', icon: Users, defaultActive: false },
+  { id: 'digital-twin', name: 'Trajectory Engine', desc: 'Future-self model under current habits', icon: Users, defaultActive: false },
   { id: 'biological-age', name: 'Biological Age', desc: 'Real body age vs chronological scoring', icon: Clock, defaultActive: false },
   { id: 'disease-risk', name: 'Disease Risk Engine', desc: 'Metabolic & cardiovascular risk scoring', icon: ShieldAlert, defaultActive: false },
   { id: 'correlation-engine', name: 'Correlation Engine', desc: 'Cross-domain marker relationships', icon: Zap, defaultActive: false },
@@ -55,64 +55,48 @@ const modules = [
   { id: 'b2b-analytics', name: 'B2B Analytics Dashboard', desc: 'Cohort risk insights & executive reporting', icon: BarChart3, defaultActive: false },
 ];
 
-/* ── Tier pricing table ── */
+/* ── Tier pricing table: one-time build + monthly plan ── */
 type Currency = 'USD' | 'AED' | 'INR';
 
 interface TierInfo {
   name: string;
   tagline: string;
   features: string[];
+  setupPrices: Record<Currency, number>;
   basePrices: Record<Currency, number>;
   premiumSurcharge: Record<Currency, number>;
-  mau: string;
   currencyPrefix: Record<Currency, string>;
 }
 
 const tiers: Record<string, TierInfo> = {
-  starter: {
-    name: 'Starter SDK',
-    tagline: 'Core infrastructure for up to 4 modules',
+  sdk: {
+    name: 'SDK',
+    tagline: 'Add health AI to the app you already have',
     features: [
-      'Up to 5,000 MAU',
-      'Core infrastructure',
-      'Up to four modules',
-      'API documentation',
-      '48-hour support SLAs',
+      'Intelligence SDK + Wearables SDK',
+      'Embeds into your iOS, Android or web app',
+      'Integration engineer alongside your team',
+      'Live in 3–6 weeks',
+      'Monthly plan: hosting, AI, updates & support',
     ],
-    basePrices: { USD: 99, AED: 365, INR: 8290 },
-    premiumSurcharge: { USD: 0, AED: 0, INR: 0 },
-    mau: '5,000 MAU',
-    currencyPrefix: { USD: '$', AED: 'AED ', INR: '₹' },
-  },
-  growth: {
-    name: 'Growth SDK',
-    tagline: 'All modules unlocked with population analytics',
-    features: [
-      'Up to 50,000 MAU',
-      'All modules unlocked',
-      'Population analytics',
-      'Custom co-branding',
-      '4-hour support SLAs',
-      'Dedicated integration engineer',
-    ],
-    basePrices: { USD: 199, AED: 730, INR: 16590 },
-    premiumSurcharge: { USD: 0, AED: 0, INR: 0 },
-    mau: '50,000 MAU',
+    setupPrices: { USD: 999, AED: 3670, INR: 83000 },
+    basePrices: { USD: 399, AED: 1470, INR: 33000 },
+    premiumSurcharge: { USD: 50, AED: 185, INR: 4170 },
     currencyPrefix: { USD: '$', AED: 'AED ', INR: '₹' },
   },
   whitelabel: {
-    name: 'White-Label Pro',
-    tagline: 'Your fully branded iOS & Android health app',
+    name: 'White Label',
+    tagline: 'A ready-made product, launched under your brand',
     features: [
-      'Unlimited MAU',
-      'Fully branded iOS & Android app',
-      'All base modules included',
-      'Priority 2-hour support',
-      'No upfront cost on annual plan',
+      'Branded iOS & Android app, reports or AI agent',
+      'Your name, logo and colours on everything',
+      'We launch it, host it and run it',
+      'Live in 2–8 weeks',
+      'Monthly plan: hosting, AI, updates & support',
     ],
-    basePrices: { USD: 299, AED: 1100, INR: 24990 },
+    setupPrices: { USD: 1500, AED: 5500, INR: 125000 },
+    basePrices: { USD: 399, AED: 1470, INR: 33000 },
     premiumSurcharge: { USD: 50, AED: 185, INR: 4170 },
-    mau: 'Unlimited MAU',
     currencyPrefix: { USD: '$', AED: 'AED ', INR: '₹' },
   },
 };
@@ -163,24 +147,19 @@ export const StackPricingCalculatorSection: React.FC = () => {
   /* ── Derived state ── */
   const count = activeModules.size;
 
-  const tierKey: string = whitelabelOn
-    ? 'whitelabel'
-    : count > 4
-      ? 'growth'
-      : 'starter';
+  const tierKey: string = whitelabelOn ? 'whitelabel' : 'sdk';
 
   const currentTier = tiers[tierKey];
 
-  // Count premium modules active (only matters for white-label)
-  const activePremiumCount = whitelabelOn
-    ? [...activeModules].filter(id => PREMIUM_MODULE_IDS.has(id)).length
-    : 0;
+  // Count premium modules active (each adds to the monthly plan)
+  const activePremiumCount = [...activeModules].filter(id => PREMIUM_MODULE_IDS.has(id)).length;
 
   // Calculate total price
   const basePrice = currentTier.basePrices[currency];
   const surchargePerModule = currentTier.premiumSurcharge[currency];
   const totalSurcharge = surchargePerModule * activePremiumCount;
   const totalPrice = basePrice + totalSurcharge;
+  const setupPrice = currentTier.setupPrices[currency];
   const prefix = currentTier.currencyPrefix[currency];
 
   /* On desktop 3 cols → 12 cards for 4 rows */
@@ -200,8 +179,8 @@ export const StackPricingCalculatorSection: React.FC = () => {
             Build your stack. See your price.
           </h2>
           <p className="text-sm sm:text-base lg:text-lg text-[#475569] font-body leading-relaxed max-w-2xl mt-3">
-            Activate modules, toggle white-label — the pricing updates in real time.
-            Ship it under your brand. Add more as you grow.
+            Activate modules, choose SDK or White Label — your estimate updates in real time:
+            a one-time build fee plus a monthly plan. Ship it under your brand. Add more as you grow.
           </p>
         </div>
 
@@ -266,17 +245,17 @@ export const StackPricingCalculatorSection: React.FC = () => {
                         <Check className="w-3 h-3" />
                       </div>
                     )}
-                    {isPremium && !isActive && whitelabelOn && (
+                    {isPremium && !isActive && (
                       <div className="absolute top-3 right-3">
                         <span className="text-[8px] font-mono font-bold uppercase tracking-wider bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-[2px]">
-                          +{prefix}{surchargePerModule}/mo
+                          +{formatPrice(surchargePerModule, currency, prefix)}/mo
                         </span>
                       </div>
                     )}
-                    {isPremium && isActive && whitelabelOn && (
+                    {isPremium && isActive && (
                       <div className="absolute top-3 left-3">
                         <span className="text-[8px] font-mono font-bold uppercase tracking-wider bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-[2px]">
-                          +{prefix}{surchargePerModule}
+                          +{formatPrice(surchargePerModule, currency, prefix)}
                         </span>
                       </div>
                     )}
@@ -325,20 +304,18 @@ export const StackPricingCalculatorSection: React.FC = () => {
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-24 space-y-5">
 
-              {/* ── Special Offer Banner ── */}
-              {whitelabelOn && (
-                <div className="p-4 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-[4px] space-y-1.5">
-                  <div className="flex items-center gap-2">
-                    <BadgePercent className="w-4 h-4 text-amber-600" />
-                    <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-amber-700">
-                      LIMITED-PERIOD OFFER
-                    </span>
-                  </div>
-                  <p className="text-xs text-amber-800 font-body leading-relaxed">
-                    White-Label Pro at <span className="font-bold">$299/mo</span> — no upfront cost on annual plan. Lock this rate before it reverts.
-                  </p>
+              {/* ── How pricing works ── */}
+              <div className="p-4 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-[4px] space-y-1.5">
+                <div className="flex items-center gap-2">
+                  <BadgePercent className="w-4 h-4 text-amber-600" />
+                  <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-amber-700">
+                    HOW PRICING WORKS
+                  </span>
                 </div>
-              )}
+                <p className="text-xs text-amber-800 font-body leading-relaxed">
+                  A <span className="font-bold">one-time build fee</span> plus a <span className="font-bold">monthly plan</span>. White Label from $1,500, SDK from $999, Custom Build from $7,500 — you get a fixed quote after a free call.
+                </p>
+              </div>
 
               {/* ── Pricing Card ── */}
               <div className="bg-[#0F172A] text-white rounded-[4px] border border-[#1E293B] shadow-xl overflow-hidden">
@@ -346,7 +323,7 @@ export const StackPricingCalculatorSection: React.FC = () => {
                 {/* Tier header */}
                 <div className="p-6 pb-0 space-y-1">
                   <div className="font-mono text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                    {whitelabelOn ? 'YOUR WHITE-LABEL ESTIMATE' : 'RECOMMENDED TIER'}
+                    {whitelabelOn ? 'YOUR WHITE LABEL ESTIMATE' : 'YOUR SDK ESTIMATE'}
                   </div>
                   <div className="font-display font-extrabold text-xl text-white transition-all duration-300">
                     {currentTier.name}
@@ -359,15 +336,19 @@ export const StackPricingCalculatorSection: React.FC = () => {
                 {/* Price display */}
                 <div className="px-6 pt-5 pb-4">
                   <div className="font-display font-extrabold text-4xl sm:text-5xl text-white transition-all duration-300">
-                    {formatPrice(totalPrice, currency, prefix)}
+                    {formatPrice(setupPrice, currency, prefix)}
+                    <span className="text-sm font-mono font-normal text-slate-400 ml-1">one-time</span>
+                  </div>
+                  <div className="font-display font-extrabold text-xl text-white mt-1">
+                    + {formatPrice(totalPrice, currency, prefix)}
                     <span className="text-sm font-mono font-normal text-slate-400 ml-1">/ mo</span>
                   </div>
 
-                  {/* Price breakdown for White-Label with premium modules */}
-                  {whitelabelOn && activePremiumCount > 0 && (
+                  {/* Monthly breakdown when premium modules are active */}
+                  {activePremiumCount > 0 && (
                     <div className="mt-2 space-y-0.5">
                       <div className="flex items-center justify-between text-[10px] font-mono text-slate-400">
-                        <span>Base platform</span>
+                        <span>Monthly plan</span>
                         <span>{formatPrice(basePrice, currency, prefix)}</span>
                       </div>
                       <div className="flex items-center justify-between text-[10px] font-mono text-amber-400">
@@ -406,14 +387,12 @@ export const StackPricingCalculatorSection: React.FC = () => {
                       <span className="text-xs text-slate-300 font-body leading-relaxed">{f}</span>
                     </div>
                   ))}
-                  {whitelabelOn && (
-                    <div className="flex items-start gap-2.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0" />
-                      <span className="text-xs text-slate-300 font-body leading-relaxed">
-                        Premium intelligence modules at {prefix}{surchargePerModule}/mo each
-                      </span>
-                    </div>
-                  )}
+                  <div className="flex items-start gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0" />
+                    <span className="text-xs text-slate-300 font-body leading-relaxed">
+                      Premium intelligence modules at {formatPrice(surchargePerModule, currency, prefix)}/mo each
+                    </span>
+                  </div>
                 </div>
 
                 {/* Divider */}
@@ -431,10 +410,10 @@ export const StackPricingCalculatorSection: React.FC = () => {
                       </div>
                       <div>
                         <div className="text-sm font-display font-bold text-white">
-                          White-Label App
+                          White Label
                         </div>
                         <div className="text-xs text-slate-400 font-body">
-                          Branded iOS & Android
+                          Ready-made product, your brand
                         </div>
                       </div>
                     </div>
@@ -453,11 +432,11 @@ export const StackPricingCalculatorSection: React.FC = () => {
                   </div>
 
                   {/* Tier upgrade nudge (only when White-Label is off) */}
-                  {!whitelabelOn && count <= 4 && (
+                  {!whitelabelOn && (
                     <div className="p-3 bg-slate-800/60 rounded-[2px] border border-slate-700">
                       <p className="text-[10px] text-slate-400 font-body leading-relaxed">
-                        <span className="text-amber-400 font-bold">Tip:</span> Activate a 5th module to unlock
-                        <span className="text-white font-bold"> Growth SDK</span> — all 20 modules, population analytics, and a dedicated engineer.
+                        <span className="text-amber-400 font-bold">Tip:</span> Want more than an SDK? With a
+                        <span className="text-white font-bold"> Custom Build</span> we design and build the whole product for you, from scratch.
                       </p>
                     </div>
                   )}
@@ -469,7 +448,7 @@ export const StackPricingCalculatorSection: React.FC = () => {
                     to="/demo"
                     className="w-full py-3.5 bg-white text-[#0F172A] font-display text-xs font-bold uppercase tracking-wider text-center rounded-[2px] flex items-center justify-center gap-2 hover:bg-slate-100 transition-all"
                   >
-                    {whitelabelOn ? 'Deploy your white-label app' : 'Request a demo'}
+                    {whitelabelOn ? 'Get a White Label quote' : 'Get an SDK quote'}
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
@@ -478,17 +457,17 @@ export const StackPricingCalculatorSection: React.FC = () => {
               {/* ── Enterprise link ── */}
               <div className="p-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-1.5">
                 <div className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#64748B]">
-                  ENTERPRISE
+                  CUSTOM BUILD
                 </div>
                 <p className="text-xs text-[#64748B] font-body leading-relaxed">
-                  Custom AI training on your data, on-site onboarding, and unlimited scale.
-                  Starting from $2,499/mo.
+                  Want it built exactly your way? Our founding engineers design and build your product from scratch, then run it for you.
+                  From $7,500 one-time + $750/mo — a fraction of a typical agency build, because we start from our engine.
                 </p>
                 <Link
-                  to="/demo"
+                  to="/solutions/engineering"
                   className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-[#0F172A] hover:text-[#64748B] transition-colors"
                 >
-                  Contact Enterprise sales →
+                  Start a Custom Build →
                 </Link>
               </div>
 
@@ -499,7 +478,7 @@ export const StackPricingCalculatorSection: React.FC = () => {
                   HOSPITAL & HEALTH SYSTEMS
                 </div>
                 <p className="text-xs text-[#64748B] font-body leading-relaxed">
-                  Performance-linked partner pricing with the Leakage Audit and Attribution Engine.
+                  Five patient programmes from $5,000 one-time + $999/mo, starting with a free Leakage Audit.
                 </p>
                 <Link
                   to="/industries/hospitals#pricing"
@@ -522,8 +501,8 @@ export const StackPricingCalculatorSection: React.FC = () => {
             {count} Modules · {currentTier.name}
           </div>
           <div className="font-display font-extrabold text-lg text-white leading-none">
-            {formatPrice(totalPrice, currency, prefix)}
-            <span className="text-[10px] font-mono font-normal text-slate-400 ml-1">/mo</span>
+            {formatPrice(setupPrice, currency, prefix)}
+            <span className="text-[10px] font-mono font-normal text-slate-400 ml-1">+ {formatPrice(totalPrice, currency, prefix)}/mo</span>
           </div>
         </div>
 
@@ -531,7 +510,7 @@ export const StackPricingCalculatorSection: React.FC = () => {
           to="/demo"
           className="bg-white text-[#0F172A] font-display text-[11px] font-bold uppercase tracking-wider px-4 py-2.5 rounded-[2px] shrink-0 flex items-center gap-1 hover:bg-slate-100 transition-colors"
         >
-          Deploy
+          Get quote
           <ArrowRight className="w-3.5 h-3.5" />
         </Link>
       </div>

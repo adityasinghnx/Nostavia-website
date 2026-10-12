@@ -129,8 +129,8 @@ export const CuredPage: React.FC = () => {
               a: "Briefs can be embedded directly into your EHR consultation screen, viewed on Nostavia's web portal, or exported as a clean 1-page PDF."
             },
             {
-              q: "Is pricing per consult or per month?",
-              a: "Clinical Intake Briefs are priced on a transparent per-consultation basis with tiered monthly volume options."
+              q: "How is it priced?",
+              a: "Clinical Intake Briefs come with the Clinic & Longevity Platform: a one-time setup from $2,500 plus a monthly plan from $499, depending on consult volumes and locations."
             }
           ].map((faq, idx) => (
             <div key={idx} className="border border-[#E2E8F0] rounded-[2px] overflow-hidden bg-white shadow-none">

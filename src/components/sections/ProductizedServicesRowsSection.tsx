@@ -4,28 +4,40 @@ import { Link } from 'react-router-dom';
 export const ProductizedServicesRowsSection: React.FC = () => {
   const services = [
     {
-      title: 'Smart Report as a Service',
-      description: 'The interpretation a clinician would spend twenty minutes writing, generated for every routine panel, under your brand.',
-      pricingModel: 'Per report.',
+      title: 'Custom Build',
+      description: 'Not on this list, or want it your way? We design and build your product from scratch around your patients, staff and systems — then launch and run it.',
+      pricingModel: 'From $7,500 + $750/mo',
+      linkUrl: '/solutions/engineering',
+    },
+    {
+      title: 'AI Front Desk Agent',
+      description: 'Answers every patient call 24/7 in local languages, names the right doctor and books the visit — on your phone line, WhatsApp and website.',
+      pricingModel: 'From $1,500 + $399/mo',
+      linkUrl: '/solutions/front-desk',
+    },
+    {
+      title: 'Smart Reports & Re-Test Recall',
+      description: 'Every lab report becomes a branded, plain-language health report — and dormant patients due for a re-test are brought back in your name.',
+      pricingModel: 'From $1,500 + $399/mo',
       linkUrl: '/solutions/comet',
     },
     {
-      title: 'Clinical Intake Briefs',
-      description: 'The unpaid chart review before every new-patient consult, done by the engine: reports parsed, outliers flagged, history to one page.',
-      pricingModel: 'Per consult.',
-      linkUrl: '/solutions/cured',
+      title: 'Branded Patient App',
+      description: 'Your own iOS & Android app: reports explained, wearables and food scanning, an AI health companion and bookings — with your name on the store listing.',
+      pricingModel: 'From $2,500 + $499/mo',
+      linkUrl: '/solutions/storyhealth',
     },
     {
-      title: 'Re-Test Recall Campaigns',
-      description: 'We find which of your dormant patients are due for a re-test and why, from your own historical data, and re-engage them in your name.',
-      pricingModel: 'Per campaign or per converted re-test.',
-      linkUrl: '/solutions/humbi',
+      title: 'Clinic & Longevity Platform',
+      description: 'Intake briefs before every consult, biological age, adaptive protocols and a dashboard of who is drifting between visits.',
+      pricingModel: 'From $2,500 + $499/mo',
+      linkUrl: '/industries/clinics',
     },
     {
-      title: 'Solutions Engineering',
-      description: 'Custom intelligence work on your data, by the team that built the core.',
-      pricingModel: 'Per engagement.',
-      linkUrl: '/solutions/supplements',
+      title: 'Hospital Patient Programmes',
+      description: 'Five programmes that bring patients back after health checks, after discharge and between chronic-care visits — starting with a free Leakage Audit.',
+      pricingModel: 'From $5,000 + $999/mo',
+      linkUrl: '/solutions/hospitals',
     },
   ];
 
@@ -36,14 +48,14 @@ export const ProductizedServicesRowsSection: React.FC = () => {
         {/* Header */}
         <div className="max-w-3xl space-y-3">
           <div className="eyebrow text-[#B45309] font-bold text-xs uppercase tracking-widest font-mono">
-            SPECIALISED SERVICES
+            CUSTOM BUILD & WHITE LABEL
           </div>
           <h2 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-[54px] text-[#0F172A] tracking-tight leading-[1.08]">
-            Four things you currently pay people to do — or don't do at all.
+            Built from scratch for you — or ready-made, under your brand.
           </h2>
         </div>
 
-        {/* 4 Compact Horizontal Rows matching Copy v2 spec */}
+        {/* Compact Horizontal Rows matching Copy v2 spec */}
         <div className="divide-y divide-[#E2E8F0] border-y border-[#E2E8F0]">
           {services.map((s, idx) => (
             <div

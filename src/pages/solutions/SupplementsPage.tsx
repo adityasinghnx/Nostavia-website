@@ -12,15 +12,15 @@ export const SupplementsPage: React.FC = () => {
         <div className="p-8 sm:p-14 lg:p-16 bg-white border border-[#E2E8F0] rounded-[2px] space-y-8 shadow-none relative overflow-hidden">
           
           <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            SPECIALISED SERVICE #4 — SOLUTIONS ENGINEERING & CUSTOM DEPLOYMENTS
+            CUSTOM BUILD — OUR CORE OFFERING, BUILT FROM SCRATCH
           </div>
 
           <h1 className="font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl text-[#0F172A] tracking-tight max-w-4xl leading-[1.02]">
-            Custom health AI deployments built by our founding engineers.
+            Something new in mind? Our founding engineers build it from scratch.
           </h1>
 
           <p className="text-base sm:text-xl text-[#64748B] max-w-3xl leading-relaxed font-body">
-            For diagnostic networks, hospital chains, longevity clinics, and wellness brands requiring custom AI intelligence modules, bespoke report design, EHR integrations, or clinic dashboards built directly by our founding team.
+            For hospital groups, diagnostic networks, insurers, public-health programmes and founders who need a product that does not exist yet — custom apps, platforms, dashboards, AI agents and integrations, built on the Nostavia engine so you never pay to reinvent the AI.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 pt-4">
@@ -40,16 +40,16 @@ export const SupplementsPage: React.FC = () => {
               <div className="text-[#64748B] font-semibold mt-1">Direct Engineering Access</div>
             </div>
             <div>
-              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">2 Weeks</div>
-              <div className="text-[#64748B] font-semibold mt-1">Custom Deployment Speed</div>
+              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">$7,500+</div>
+              <div className="text-[#64748B] font-semibold mt-1">One-Time Build</div>
             </div>
             <div>
-              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">100%</div>
-              <div className="text-[#64748B] font-semibold mt-1">IP & Brand Customization</div>
+              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">$750+/mo</div>
+              <div className="text-[#64748B] font-semibold mt-1">Monthly Plan</div>
             </div>
             <div>
-              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">Global</div>
-              <div className="text-[#64748B] font-semibold mt-1">Tech Partner Backing</div>
+              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">8–12 Weeks</div>
+              <div className="text-[#64748B] font-semibold mt-1">Time to Launch</div>
             </div>
           </div>
 
@@ -115,7 +115,7 @@ export const SupplementsPage: React.FC = () => {
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full pt-4">
         <div className="p-12 sm:p-16 lg:p-20 bg-[#0F172A] text-white rounded-[2px] border border-[#1E293B] shadow-2xl text-center flex flex-col items-center gap-8">
           <h2 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-[54px] text-white max-w-4xl leading-[1.05] tracking-tight">
-            Discuss custom solutions engineering with our founding team
+            Discuss a custom build with our founding team
           </h2>
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
             <Link

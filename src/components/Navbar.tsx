@@ -1,13 +1,14 @@
 import React, { useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Activity, Stethoscope, Smartphone, Layers, Cpu, ShieldCheck, FileText, RefreshCw, Code, Heart, Sparkles, Building2, Volume2, ArrowUpRight } from 'lucide-react';
+import { HUMAN_OS_PATH, hospitalProgrammes, numberWord, rings, systemPath, systemsInRing, totalSystems } from '../content/human-os';
+import { Menu, X, ChevronDown, Activity, Stethoscope, Smartphone, Layers, Cpu, ShieldCheck, FileText, RefreshCw, Code, Heart, Sparkles, Building2, Volume2, ArrowUpRight } from 'lucide-react';
 
 interface NavbarProps {
   onOpenDemo?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
-  const [activeMenu, setActiveMenu] = useState<'solutions' | 'customers' | 'stories' | 'resources' | 'company' | null>(null);
+  const [activeMenu, setActiveMenu] = useState<'solutions' | 'customers' | 'humanos' | 'stories' | 'resources' | 'company' | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -18,7 +19,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
     setMobileMenuOpen(false);
   };
 
-  const handleMouseEnter = (menu: 'solutions' | 'customers') => {
+  const handleMouseEnter = (menu: 'solutions' | 'customers' | 'humanos') => {
     if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
     setActiveMenu(menu);
   };
@@ -50,7 +51,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
                 </h2>
 
                 <p className="text-xs sm:text-base text-[#475569] font-semibold max-w-2xl px-2">
-                  Nostavia Front Desk — answers every call in local languages, names a specific doctor, rules out emergencies, and captures late-night bookings under your hospital's brand.
+                  Nostavia Front Desk: answers every call in local languages, names a specific doctor, rules out emergencies, and captures late-night bookings under your hospital's brand.
                 </p>
 
                 <div className="pt-3">
@@ -131,9 +132,40 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
                     : 'hover:text-[#0F172A] hover:bg-[#F8FAFC]'
                 }`}
               >
-                PLATFORM & SERVICES
+                PRODUCTS
               </button>
             </div>
+
+            <div
+              className="relative py-3"
+              onMouseEnter={() => handleMouseEnter('humanos')}
+              onMouseLeave={handleMouseLeave}
+            >
+              <button
+                onClick={() => setActiveMenu(activeMenu === 'humanos' ? null : 'humanos')}
+                onKeyDown={(e) => e.key === 'Escape' && setActiveMenu(null)}
+                aria-expanded={activeMenu === 'humanos'}
+                aria-controls="human-os-menu"
+                className={`px-3.5 py-2 rounded-[4px] flex items-center gap-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hos-amber ${
+                  activeMenu === 'humanos' || location.pathname.startsWith(HUMAN_OS_PATH)
+                    ? 'text-[#0F172A] bg-[#E5E7EB] font-extrabold'
+                    : 'hover:text-[#0F172A] hover:bg-[#F8FAFC]'
+                }`}
+              >
+                HUMAN OS
+                <ChevronDown aria-hidden="true" className={`w-3.5 h-3.5 transition-transform ${activeMenu === 'humanos' ? 'rotate-180' : ''}`} />
+              </button>
+            </div>
+
+            <Link
+              to="/pricing"
+              onClick={closeMenus}
+              className={`px-3.5 py-2 rounded-[4px] transition-colors ${
+                location.pathname === '/pricing' ? 'text-[#0F172A] bg-[#E5E7EB] font-extrabold' : 'hover:text-[#0F172A] hover:bg-[#F8FAFC]'
+              }`}
+            >
+              PRICING
+            </Link>
 
             <Link
               to="/clinical"
@@ -264,7 +296,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
                       </div>
                       <div>
                         <div className="font-display font-bold text-sm text-[#0F172A]">Hospitals & Health Systems</div>
-                        <div className="text-[11px] text-[#64748B]">5-Module Patient Front Door</div>
+                        <div className="text-[11px] text-[#64748B]">{hospitalProgrammes.length} patient programmes</div>
                       </div>
                     </div>
                     <span className="text-[#0F172A] text-xs font-bold">▶</span>
@@ -275,25 +307,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
 
               {/* SECOND SECTION: NOSTAVIA PLATFORM & INTEGRATION MODES */}
               <div className="pt-2 border-t border-[#E5E7EB]">
-                <div className="eyebrow text-[#94A3B8] mb-3 text-[10px] uppercase tracking-widest font-mono font-bold">EMBEDDABLE PLATFORM & SDKs</div>
+                <div className="eyebrow text-[#94A3B8] mb-3 text-[10px] uppercase tracking-widest font-mono font-bold">PRODUCTS: CUSTOM BUILD · WHITE LABEL · SDK</div>
                 <div className="grid grid-cols-5 gap-3">
-                  <Link to="/solutions/gravity" onClick={closeMenus} className="p-3 border border-[#E5E7EB] rounded-[8px] bg-white hover:border-[#2563EB] flex items-center gap-2.5 transition-all shadow-sm group">
-                    <div className="w-8 h-8 rounded-full bg-blue-500/10 text-[#2563EB] flex items-center justify-center font-bold shrink-0">
-                      <Code className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">Intelligence SDK</div>
-                      <div className="text-[10px] text-[#64748B] leading-tight">Lab parsing & AI concierge</div>
-                    </div>
-                  </Link>
-
-                  <Link to="/solutions/galaxy" onClick={closeMenus} className="p-3 border border-[#E5E7EB] rounded-[8px] bg-white hover:border-[#2563EB] flex items-center gap-2.5 transition-all shadow-sm group">
+                  <Link to="/solutions/engineering" onClick={closeMenus} className="p-3 border border-[#E5E7EB] rounded-[8px] bg-white hover:border-[#2563EB] flex items-center gap-2.5 transition-all shadow-sm group">
                     <div className="w-8 h-8 rounded-full bg-purple-500/10 text-purple-600 flex items-center justify-center font-bold shrink-0">
                       <Layers className="w-4 h-4" />
                     </div>
                     <div>
-                      <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">Wearables SDK</div>
-                      <div className="text-[10px] text-[#64748B] leading-tight">Unified API for Apple & Oura</div>
+                      <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">Custom Build</div>
+                      <div className="text-[10px] text-[#64748B] leading-tight">Built from scratch for you</div>
                     </div>
                   </Link>
 
@@ -302,8 +324,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
                       <Smartphone className="w-4 h-4" />
                     </div>
                     <div>
-                      <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">White-Label App</div>
-                      <div className="text-[10px] text-[#64748B] leading-tight">Complete iOS & Android app</div>
+                      <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">White Label</div>
+                      <div className="text-[10px] text-[#64748B] leading-tight">Ready-made, your brand</div>
+                    </div>
+                  </Link>
+
+                  <Link to="/solutions/gravity" onClick={closeMenus} className="p-3 border border-[#E5E7EB] rounded-[8px] bg-white hover:border-[#2563EB] flex items-center gap-2.5 transition-all shadow-sm group">
+                    <div className="w-8 h-8 rounded-full bg-blue-500/10 text-[#2563EB] flex items-center justify-center font-bold shrink-0">
+                      <Code className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">SDK</div>
+                      <div className="text-[10px] text-[#64748B] leading-tight">Health AI for your own app</div>
                     </div>
                   </Link>
 
@@ -312,8 +344,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
                       <Volume2 className="w-4 h-4" />
                     </div>
                     <div>
-                      <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">AI Agents (incl. voice)</div>
-                      <div className="text-[10px] text-[#64748B] leading-tight">Always-on Front Desk agent</div>
+                      <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">AI Front Desk Agent</div>
+                      <div className="text-[10px] text-[#64748B] leading-tight">White Label · voice & WhatsApp</div>
                     </div>
                   </Link>
 
@@ -322,8 +354,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
                       <Building2 className="w-4 h-4" />
                     </div>
                     <div>
-                      <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">Hospital Patient Front Door</div>
-                      <div className="text-[10px] text-[#64748B] leading-tight">5-module platform & recovery</div>
+                      <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">Hospital Programmes</div>
+                      <div className="text-[10px] text-[#64748B] leading-tight">White Label · {hospitalProgrammes.length} programmes</div>
                     </div>
                   </Link>
                 </div>
@@ -331,37 +363,37 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
 
               {/* THIRD SECTION: SPECIALISED SERVICES */}
               <div className="space-y-3 pt-2 border-t border-[#E5E7EB]">
-                <div className="eyebrow text-[#94A3B8] mb-3 text-[10px] uppercase tracking-widest font-mono font-bold">SPECIALISED SERVICES</div>
+                <div className="eyebrow text-[#94A3B8] mb-3 text-[10px] uppercase tracking-widest font-mono font-bold">MORE WHITE LABEL PRODUCTS</div>
                 <div className="grid grid-cols-4 gap-y-3 gap-x-8 text-xs font-display font-medium text-[#334155]">
                   
                   <Link to="/solutions/comet" onClick={closeMenus} className="flex items-center justify-between hover:text-[#2563EB] py-1.5 border-b border-slate-100">
                     <span className="flex items-center gap-2">
                       <FileText className="w-3.5 h-3.5 text-[#2563EB]" />
-                      Smart Report as a Service
+                      Smart Reports & Re-Test Recall
                     </span>
                     <span className="text-[10px] text-[#0F172A]">▶</span>
                   </Link>
 
-                  <Link to="/solutions/comet" onClick={closeMenus} className="flex items-center justify-between hover:text-[#2563EB] py-1.5 border-b border-slate-100">
+                  <Link to="/industries/clinics" onClick={closeMenus} className="flex items-center justify-between hover:text-[#2563EB] py-1.5 border-b border-slate-100">
                     <span className="flex items-center gap-2">
                       <Stethoscope className="w-3.5 h-3.5 text-[#059669]" />
-                      Clinical Intake Briefs
+                      Clinic & Longevity Platform
                     </span>
                     <span className="text-[10px] text-[#0F172A]">▶</span>
                   </Link>
 
-                  <Link to="/solutions/cured" onClick={closeMenus} className="flex items-center justify-between hover:text-[#2563EB] py-1.5 border-b border-slate-100">
+                  <Link to="/solutions/storyhealth" onClick={closeMenus} className="flex items-center justify-between hover:text-[#2563EB] py-1.5 border-b border-slate-100">
                     <span className="flex items-center gap-2">
-                      <RefreshCw className="w-3.5 h-3.5 text-[#D97706]" />
-                      Re-Test Recall Campaigns
+                      <Smartphone className="w-3.5 h-3.5 text-[#D97706]" />
+                      Branded Patient App
                     </span>
                     <span className="text-[10px] text-[#0F172A]">▶</span>
                   </Link>
 
-                  <Link to="/solutions/gravity" onClick={closeMenus} className="flex items-center justify-between hover:text-[#2563EB] py-1.5 border-b border-slate-100">
+                  <Link to="/pricing" onClick={closeMenus} className="flex items-center justify-between hover:text-[#2563EB] py-1.5 border-b border-slate-100">
                     <span className="flex items-center gap-2">
                       <Sparkles className="w-3.5 h-3.5 text-[#9333EA]" />
-                      Solutions Engineering
+                      Pricing
                     </span>
                     <span className="text-[10px] text-[#0F172A]">▶</span>
                   </Link>
@@ -372,6 +404,59 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
             </div>
           </div>
         )}
+        {/* ========================================================================= */}
+        {/* HUMAN OS DROPDOWN: SEVEN SYSTEMS GROUPED BY RING */}
+        {/* ========================================================================= */}
+        {activeMenu === 'humanos' && (
+          <div
+            id="human-os-menu"
+            className="hidden lg:block absolute top-full left-0 w-full bg-white border-b border-[#E5E7EB] shadow-2xl z-50 before:content-[''] before:absolute before:-top-4 before:h-4 before:w-full before:left-0"
+            onMouseEnter={() => handleMouseEnter('humanos')}
+            onMouseLeave={handleMouseLeave}
+            onKeyDown={(e) => e.key === 'Escape' && setActiveMenu(null)}
+          >
+            <div className="max-w-[1280px] mx-auto p-8 grid grid-cols-12 gap-8 font-body">
+              <div className="col-span-3 space-y-3 border-r border-hos-hairline pr-8">
+                <div className="font-mono text-[10px] font-bold uppercase tracking-widest text-hos-amber">Human OS</div>
+                <p className="font-display font-bold text-lg text-[#0F172A] leading-snug">
+                  {numberWord(totalSystems)} systems, one integration.
+                </p>
+                <Link
+                  to={HUMAN_OS_PATH}
+                  onClick={closeMenus}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#0F172A] hover:text-hos-amber focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hos-amber"
+                >
+                  Human OS overview <span aria-hidden="true">▶</span>
+                </Link>
+              </div>
+              {rings.map((ring) => (
+                <div key={ring.id} className={ring.id === 'person' ? 'col-span-5' : 'col-span-4'}>
+                  <div className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#64748B] mb-3">
+                    {ring.name} · {ring.audience}
+                  </div>
+                  <ul className={`grid gap-2 ${ring.id === 'person' ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                    {systemsInRing(ring.id).map((system) => (
+                      <li key={system.slug}>
+                        <Link
+                          to={systemPath(system.slug)}
+                          onClick={closeMenus}
+                          className="block p-3 rounded-[6px] hover:bg-hos-card border border-transparent hover:border-hos-hairline transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hos-amber"
+                        >
+                          <span className="flex items-center gap-2 font-display font-bold text-sm text-[#0F172A]">
+                            <span className="font-mono text-[10px] text-hos-amber">{system.number}</span>
+                            {system.name}
+                          </span>
+                          <span className="block text-[11px] text-[#64748B] mt-0.5">{system.promise}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* ========================================================================= */}
         {/* RESPONSIVE MOBILE NAVIGATION DRAWER */}
         {/* ========================================================================= */}
@@ -393,24 +478,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
               {/* Main Nav Links */}
               <div className="space-y-4">
                 <div>
-                  <div className="eyebrow text-[#94A3B8] mb-2 text-[10px] uppercase tracking-widest font-mono font-bold">PLATFORM & SERVICES</div>
+                  <div className="eyebrow text-[#94A3B8] mb-2 text-[10px] uppercase tracking-widest font-mono font-bold">PRODUCTS</div>
                   <div className="grid grid-cols-1 gap-2">
-                    <Link to="/solutions/gravity" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <Code className="w-4 h-4 text-[#2563EB]" />
-                        <div>
-                          <div className="font-display font-bold text-xs text-[#0F172A]">Intelligence SDK</div>
-                          <div className="text-[10px] text-[#64748B]">Lab parsing & AI concierge</div>
-                        </div>
-                      </div>
-                      <span className="text-xs text-[#64748B]">▶</span>
-                    </Link>
-                    <Link to="/solutions/galaxy" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
+                    <Link to="/solutions/engineering" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <Layers className="w-4 h-4 text-purple-600" />
                         <div>
-                          <div className="font-display font-bold text-xs text-[#0F172A]">Wearables SDK</div>
-                          <div className="text-[10px] text-[#64748B]">Unified API for Apple & Oura</div>
+                          <div className="font-display font-bold text-xs text-[#0F172A]">Custom Build</div>
+                          <div className="text-[10px] text-[#64748B]">Designed and built from scratch for you</div>
                         </div>
                       </div>
                       <span className="text-xs text-[#64748B]">▶</span>
@@ -419,8 +494,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
                       <div className="flex items-center gap-3">
                         <Smartphone className="w-4 h-4 text-emerald-600" />
                         <div>
-                          <div className="font-display font-bold text-xs text-[#0F172A]">White-Label App</div>
-                          <div className="text-[10px] text-[#64748B]">Complete iOS & Android app under your brand</div>
+                          <div className="font-display font-bold text-xs text-[#0F172A]">White Label</div>
+                          <div className="text-[10px] text-[#64748B]">Our ready-made products, launched as yours</div>
+                        </div>
+                      </div>
+                      <span className="text-xs text-[#64748B]">▶</span>
+                    </Link>
+                    <Link to="/solutions/gravity" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <Code className="w-4 h-4 text-[#2563EB]" />
+                        <div>
+                          <div className="font-display font-bold text-xs text-[#0F172A]">SDK</div>
+                          <div className="text-[10px] text-[#64748B]">Add health AI to the app you already have</div>
                         </div>
                       </div>
                       <span className="text-xs text-[#64748B]">▶</span>
@@ -429,8 +514,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
                       <div className="flex items-center gap-3">
                         <Volume2 className="w-4 h-4 text-amber-600" />
                         <div>
-                          <div className="font-display font-bold text-xs text-[#0F172A]">AI Agents (including voice)</div>
-                          <div className="text-[10px] text-[#64748B]">Always-on patient support & voice booking agent</div>
+                          <div className="font-display font-bold text-xs text-[#0F172A]">AI Front Desk Agent</div>
+                          <div className="text-[10px] text-[#64748B]">White Label · always-on voice & WhatsApp agent</div>
                         </div>
                       </div>
                       <span className="text-xs text-[#64748B]">▶</span>
@@ -439,8 +524,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
                       <div className="flex items-center gap-3">
                         <Building2 className="w-4 h-4 text-[#2563EB]" />
                         <div>
-                          <div className="font-display font-bold text-xs text-[#0F172A]">Hospital Patient Front Door</div>
-                          <div className="text-[10px] text-[#64748B]">5-module platform for hospital systems</div>
+                          <div className="font-display font-bold text-xs text-[#0F172A]">Hospital Programmes</div>
+                          <div className="text-[10px] text-[#64748B]">White Label · {hospitalProgrammes.length} patient programmes</div>
                         </div>
                       </div>
                       <span className="text-xs text-[#64748B]">▶</span>
@@ -449,8 +534,40 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
                 </div>
 
                 <div>
+                  <div className="eyebrow text-[#94A3B8] mb-2 text-[10px] uppercase tracking-widest font-mono font-bold">HUMAN OS</div>
+                  <Link to={HUMAN_OS_PATH} onClick={closeMenus} className="mb-2 p-3 bg-hos-cream border border-hos-yellow rounded-[6px] flex items-center justify-between">
+                    <div>
+                      <div className="font-display font-bold text-xs text-[#0F172A]">Human OS overview</div>
+                      <div className="text-[10px] text-[#64748B]">{numberWord(totalSystems)} systems, one integration</div>
+                    </div>
+                    <span className="text-xs text-[#64748B]" aria-hidden="true">▶</span>
+                  </Link>
+                  {rings.map((ring) => (
+                    <div key={ring.id} className="mt-3">
+                      <div className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#64748B] mb-1 px-3">{ring.name}</div>
+                      <div className="flex flex-col">
+                        {systemsInRing(ring.id).map((system) => (
+                          <Link
+                            key={system.slug}
+                            to={systemPath(system.slug)}
+                            onClick={closeMenus}
+                            className="py-2 px-3 hover:bg-[#F8FAFC] rounded-[4px] flex items-center gap-2 text-sm font-display font-semibold text-[#334155]"
+                          >
+                            <span className="font-mono text-[10px] text-hos-amber">{system.number}</span>
+                            {system.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div>
                   <div className="eyebrow text-[#94A3B8] mb-2 text-[10px] uppercase tracking-widest font-mono font-bold">COMPANY & RESOURCES</div>
                   <div className="flex flex-col gap-1 text-sm font-display font-semibold text-[#334155]">
+                    <Link to="/pricing" onClick={closeMenus} className="py-2 px-3 hover:bg-[#F8FAFC] rounded-[4px]">
+                      Pricing
+                    </Link>
                     <Link to="/clinical" onClick={closeMenus} className="py-2 px-3 hover:bg-[#F8FAFC] rounded-[4px]">
                       Clinical Evidence
                     </Link>
