@@ -1,0 +1,4 @@
+Contact: mailto:contact@nostaviahealth.com
+Expires: 2027-10-13T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://www.nostaviahealth.com/.well-known/security.txt

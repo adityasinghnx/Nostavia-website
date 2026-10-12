@@ -10,6 +10,7 @@ import { ProductizedServicesRowsSection } from '../components/sections/Productiz
 import { RealOutcomesCaseStudySection } from '../components/sections/RealOutcomesCaseStudySection';
 import { SecurityComplianceBandSection } from '../components/sections/SecurityComplianceBandSection';
 import { ProofSection } from '../components/sections/ProofSection';
+import { TrustStripSection } from '../components/sections/TrustStripSection';
 import { MarketRealitySection } from '../components/sections/MarketRealitySection';
 import { StackPricingCalculatorSection } from '../components/sections/StackPricingCalculatorSection';
 
@@ -186,6 +187,11 @@ export const HomePage: React.FC<{ onOpenDemo?: () => void }> = () => {
       {/* 8. PROOF (PROOF SECTION) */}
       {/* ========================================================================= */}
       <ProofSection />
+
+      {/* ========================================================================= */}
+      {/* 9. TRUST STRIP (INFRASTRUCTURE, PROGRAMS, PRACTICES FROM trust.config) */}
+      {/* ========================================================================= */}
+      <TrustStripSection />
 
 
 

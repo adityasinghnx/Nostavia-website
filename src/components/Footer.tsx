@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { HUMAN_OS_PATH, systemPath, systems } from '../content/human-os';
+import { trustFooterLine } from '../content/trust.config';
 import { ShieldCheck, Lock, Globe, ArrowUpRight } from 'lucide-react';
 
 export const Footer: React.FC = () => {
@@ -112,7 +113,7 @@ export const Footer: React.FC = () => {
           <div className="flex flex-col gap-3">
             <div className="font-display font-bold text-xs text-[#0F172A] uppercase tracking-wider">COMPANY</div>
             <Link to="/pricing" className="hover:text-[#2563EB] transition-colors">Pricing</Link>
-            <Link to="/security" className="hover:text-[#2563EB] transition-colors">Security & Privacy</Link>
+            <Link to="/security" className="hover:text-[#2563EB] transition-colors">Security</Link>
             <Link to="/clinical" className="hover:text-[#2563EB] transition-colors">Clinical Governance</Link>
             <Link to="/company" className="hover:text-[#2563EB] transition-colors">About & Founders</Link>
             <Link to="/demo" className="hover:text-[#2563EB] transition-colors">Book a Demo</Link>
@@ -130,7 +131,10 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[11px] text-[#94A3B8]">
-          <div>© 2026 Nostavia Technologies Pvt. Ltd. All rights reserved.</div>
+          <div className="flex flex-col items-center sm:items-start gap-1 text-center sm:text-left">
+            <div>© 2026 Nostavia Technologies Pvt. Ltd. All rights reserved.</div>
+            <div className="text-[#64748B]">{trustFooterLine}</div>
+          </div>
           <div>Built for precision longevity & population health.</div>
         </div>
 

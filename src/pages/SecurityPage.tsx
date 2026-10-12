@@ -1,121 +1,79 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { ShieldCheck, Lock, Globe, FileCode, CheckCircle2, ArrowRight } from 'lucide-react';
+import { TRUST_CONTACT, trustGroups, trustPick } from '../content/trust.config';
+import { useSeo } from '../lib/useSeo';
+import { InfrastructureGroup, PracticeChips, ProductionGroup, ProgramsGroup } from '../components/trust/TrustElements';
+
+const Section: React.FC<{ id: string; title: string; children: React.ReactNode }> = ({ id, title, children }) => (
+  <section aria-labelledby={id} className="space-y-6 border-t border-[#E2E8F0] pt-10">
+    <h2 id={id} className="font-display font-extrabold text-2xl sm:text-3xl text-[#0F172A] tracking-tight">
+      {title}
+    </h2>
+    {children}
+  </section>
+);
+
+const ContactLink: React.FC = () => (
+  <a
+    href={`mailto:${TRUST_CONTACT}`}
+    className="font-semibold text-[#0F172A] underline underline-offset-4 decoration-[#CBD5E1] hover:decoration-[#0F172A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F172A] focus-visible:ring-offset-2"
+  >
+    {TRUST_CONTACT}
+  </a>
+);
 
 export const SecurityPage: React.FC = () => {
+  useSeo({
+    title: 'Security and Compliance | Nostavia Health',
+    description: 'How Nostavia protects laboratory, wearable and clinical data for partners across India, the UAE and beyond.',
+    path: '/security',
+  });
+
   return (
-    <div className="flex flex-col gap-16 py-10 max-w-[1280px] mx-auto px-4 sm:px-6 font-body text-[#0F172A] bg-white">
-      
-      {/* HEADER HERO */}
-      <div className="space-y-4 max-w-4xl">
-        <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-          SECURITY, PRIVACY & COMPLIANCE
-        </div>
+    <div className="flex flex-col gap-12 py-10 max-w-[1280px] mx-auto px-4 sm:px-6 font-body text-[#0F172A] bg-white">
+      <header className="space-y-5 max-w-4xl">
         <h1 className="font-display font-extrabold text-4xl sm:text-6xl text-[#0F172A] tracking-tight leading-[1.05]">
-          Health data is regulated. We built for that first, not afterwards.
+          Security and Compliance
         </h1>
-        <p className="text-base sm:text-xl text-[#64748B] max-w-3xl leading-relaxed font-body">
-          Security and privacy are architectural invariants at Nostavia. From SOMA edge de-identification to DPDP compliance and global health-data residency rules.
+        <p className="text-base sm:text-xl text-[#475569] max-w-3xl leading-relaxed">
+          Partners trust us with laboratory, wearable and clinical data. We treat that as a design constraint from the first line of code. This page sets out what is in place today, and which certifications are held by our infrastructure providers rather than by us.
         </p>
-      </div>
+      </header>
 
-      {/* SIX COMPLIANCE BLOCKS */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        
-        <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
-          <div className="space-y-3">
-            <div className="w-10 h-10 rounded-[2px] bg-white border border-[#E2E8F0] flex items-center justify-center">
-              <Lock className="w-5 h-5 text-[#0F172A]" />
-            </div>
-            <h3 className="font-display font-extrabold text-xl text-[#0F172A]">Privacy at the Edge</h3>
-            <p className="text-xs text-[#64748B] leading-relaxed font-body">
-              Personally identifiable information is stripped on-device before any cloud inference. Nostavia's SOMA edge architecture is designed to keep personal data local.
-            </p>
-          </div>
-        </div>
+      <Section id="infrastructure" title="Infrastructure">
+        <InfrastructureGroup lazy={false} />
+      </Section>
 
-        <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
-          <div className="space-y-3">
-            <div className="w-10 h-10 rounded-[2px] bg-white border border-[#E2E8F0] flex items-center justify-center">
-              <ShieldCheck className="w-5 h-5 text-[#0F172A]" />
-            </div>
-            <h3 className="font-display font-extrabold text-xl text-[#0F172A]">DPDP-Aligned by Design</h3>
-            <p className="text-xs text-[#64748B] leading-relaxed font-body">
-              India's Digital Personal Data Protection Act, 2023 — explicit consent, purpose limitation and data minimisation are built into the pipeline rather than bolted onto it.
-            </p>
-          </div>
-        </div>
+      <Section id="protect-data" title="How we protect data">
+        <PracticeChips items={trustPick(['encryption', 'tenant-isolation', 'audit-logged', 'no-keys-on-device'])} />
+      </Section>
 
-        <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
-          <div className="space-y-3">
-            <div className="w-10 h-10 rounded-[2px] bg-white border border-[#E2E8F0] flex items-center justify-center">
-              <Globe className="w-5 h-5 text-[#0F172A]" />
-            </div>
-            <h3 className="font-display font-extrabold text-xl text-[#0F172A]">Global & Cross-Border Ready</h3>
-            <p className="text-xs text-[#64748B] leading-relaxed font-body">
-              In-region data handling aligned to US, European, Indian, and UAE health-data residency rules.
-            </p>
-          </div>
-        </div>
+      <Section id="clinical-governance" title="Clinical governance">
+        <PracticeChips items={trustPick(['clinical-bench', 'decision-support'])} />
+      </Section>
 
-        <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
-          <div className="space-y-3">
-            <div className="w-10 h-10 rounded-[2px] bg-white border border-[#E2E8F0] flex items-center justify-center">
-              <FileCode className="w-5 h-5 text-[#0F172A]" />
-            </div>
-            <h3 className="font-display font-extrabold text-xl text-[#0F172A]">Infrastructure, Not a Device</h3>
-            <p className="text-xs text-[#64748B] leading-relaxed font-body">
-              We position as clinician-supervised decision support and as infrastructure — outside high-risk autonomous medical-device classification.
-            </p>
-          </div>
-        </div>
+      <Section id="india-readiness" title="India readiness">
+        <PracticeChips items={trustPick(['dpdp', 'abdm'])} />
+      </Section>
 
-        <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
-          <div className="space-y-3">
-            <div className="w-10 h-10 rounded-[2px] bg-white border border-[#E2E8F0] flex items-center justify-center">
-              <CheckCircle2 className="w-5 h-5 text-[#0F172A]" />
-            </div>
-            <h3 className="font-display font-extrabold text-xl text-[#0F172A]">You Own the Data</h3>
-            <p className="text-xs text-[#64748B] leading-relaxed font-body">
-              The partner owns the customer relationship and the data. Nostavia operates the intelligence. We never own or monetise your users.
-            </p>
-          </div>
-        </div>
+      <Section id="production" title={trustGroups.production.heading}>
+        <ProductionGroup />
+      </Section>
 
-        <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
-          <div className="space-y-3">
-            <div className="w-10 h-10 rounded-[2px] bg-white border border-[#E2E8F0] flex items-center justify-center">
-              <Lock className="w-5 h-5 text-[#0F172A]" />
-            </div>
-            <h3 className="font-display font-extrabold text-xl text-[#0F172A]">Contracts and IP</h3>
-            <p className="text-xs text-[#64748B] leading-relaxed font-body">
-              Standardised licensing and data-processing agreements per partner. IP filings underway for core algorithms.
-            </p>
-          </div>
-        </div>
+      <Section id="supported-by" title={trustGroups.programs.heading}>
+        <ProgramsGroup showHeading={false} />
+      </Section>
 
-      </div>
+      <Section id="documentation" title="Documentation">
+        <p className="text-base text-[#475569] leading-relaxed max-w-3xl">
+          Our Data Processing Agreement, sub-processor list and security documentation are shared with partners at technical scoping. Write to <ContactLink />.
+        </p>
+      </Section>
 
-      {/* FOOTER BANNER */}
-      <div className="p-12 sm:p-16 lg:p-20 bg-[#0F172A] text-white rounded-[2px] border border-[#1E293B] shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8">
-        <div className="space-y-2 max-w-2xl text-center md:text-left">
-          <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-white">
-            Need a custom DPA or Security Questionnaire?
-          </h3>
-          <p className="text-sm text-slate-300 font-body leading-relaxed">
-            Our compliance team provides standard DPDP and UAE DPA documentation within 24 hours.
-          </p>
-        </div>
-
-        <Link
-          to="/demo"
-          className="bg-white hover:bg-slate-100 text-[#0F172A] font-display text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-[2px] shadow-md transition-all inline-flex items-center gap-2 shrink-0"
-        >
-          Request Security DPA
-          <ArrowRight className="w-4 h-4 text-[#0F172A]" />
-        </Link>
-      </div>
-
+      <Section id="disclosure" title="Responsible disclosure">
+        <p className="text-base text-[#475569] leading-relaxed max-w-3xl">
+          If you believe you have found a security issue, write to <ContactLink />. We review every report.
+        </p>
+      </Section>
     </div>
   );
 };
