@@ -87,23 +87,39 @@ export const ProductionGroup: React.FC = () => {
           const label = storeLabel[item.id] ?? { pre: '', name: item.name };
           return (
             <li key={item.id}>
-              <a
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`inline-flex items-center gap-3 px-4 h-12 rounded-[4px] bg-[#0F172A] hover:bg-black text-white transition-colors ${focusRing}`}
-              >
-                {item.logo ? (
-                  <img src={item.logo} alt={`${label.pre} ${label.name}`} width={item.logoWidth} height={item.logoHeight} loading="lazy" className="h-8 w-auto" />
-                ) : (
+              {item.logo ? (
+                /* Official badge artwork, shown unmodified. Google's PNG carries built-in clear space, so it is drawn taller to match Apple's 40px badge. */
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex items-center h-12 rounded-[8px] ${focusRing}`}
+                >
+                  <img
+                    src={item.logo}
+                    alt={`${label.pre} ${label.name}`}
+                    width={item.logoWidth}
+                    height={item.logoHeight}
+                    loading="lazy"
+                    className={item.logoWidth && item.logoHeight && item.logoWidth / item.logoHeight < 3 ? 'h-[60px] w-auto -my-[6px]' : 'h-10 w-auto'}
+                  />
+                  <span className="sr-only">(opens in a new tab)</span>
+                </a>
+              ) : (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex items-center gap-3 px-4 h-12 rounded-[4px] bg-[#0F172A] hover:bg-black text-white transition-colors ${focusRing}`}
+                >
                   <span className="flex flex-col leading-none text-left">
                     <span className="text-[10px] uppercase tracking-wider text-slate-300">{label.pre}</span>
                     <span className="text-sm font-display font-bold mt-0.5">{label.name}</span>
                   </span>
-                )}
-                <span className="sr-only">(opens in a new tab)</span>
-                <ArrowUpRight aria-hidden="true" className="w-3.5 h-3.5 text-slate-300" />
-              </a>
+                  <span className="sr-only">(opens in a new tab)</span>
+                  <ArrowUpRight aria-hidden="true" className="w-3.5 h-3.5 text-slate-300" />
+                </a>
+              )}
             </li>
           );
         })}

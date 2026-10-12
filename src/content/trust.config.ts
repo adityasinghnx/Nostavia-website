@@ -48,8 +48,8 @@ export const trustGroups = {
 
 export const trustItems: TrustItem[] = [
   /* ── Group A: Infrastructure ── */
-  // TODO(logo): official file pending at /logos/trust/supabase.svg
-  { id: 'supabase', group: 'infrastructure', name: 'Supabase', descriptor: 'Database and authentication. SOC 2 Type II', enabled: true },
+  // Official wordmark (light-background version) from supabase.com/brand-assets
+  { id: 'supabase', group: 'infrastructure', name: 'Supabase', logo: '/logos/trust/supabase.svg', logoWidth: 581, logoHeight: 113, descriptor: 'Database and authentication. SOC 2 Type II', enabled: true },
   // TODO(logo): official file pending at /logos/trust/microsoft-azure.svg
   { id: 'azure', group: 'infrastructure', name: 'Microsoft Azure', descriptor: 'Cloud AI infrastructure. SOC 2 Type II and ISO/IEC 27001', enabled: true },
   // Pending internal confirmation. Do not render. Logo pending at /logos/trust/google-cloud.svg
@@ -66,10 +66,10 @@ export const trustItems: TrustItem[] = [
   { id: 'elevenlabs-grants', group: 'programs', name: 'ElevenLabs Grants', enabled: true },
 
   /* ── Group C: Live in production (store links reused from the footer) ── */
-  // TODO(logo): official Apple "Download on the App Store" badge artwork
-  { id: 'app-store', group: 'production', name: 'App Store', href: 'https://apps.apple.com/us/app/nostavia-health/id6760108353', enabled: true },
-  // TODO(logo): official Google "Get it on Google Play" badge artwork
-  { id: 'google-play', group: 'production', name: 'Google Play', href: 'https://play.google.com/store/apps/details?id=com.nostavia.nostavia_health&hl=en_IN', enabled: true },
+  // Official badge from Apple's marketing toolbox (developer.apple.com/app-store/marketing/guidelines)
+  { id: 'app-store', group: 'production', name: 'App Store', logo: '/logos/trust/app-store-badge.svg', logoWidth: 120, logoHeight: 40, href: 'https://apps.apple.com/us/app/nostavia-health/id6760108353', enabled: true },
+  // Official badge from play.google.com/intl/en_us/badges (artwork includes Google's required clear space)
+  { id: 'google-play', group: 'production', name: 'Google Play', logo: '/logos/trust/google-play-badge.png', logoWidth: 646, logoHeight: 250, href: 'https://play.google.com/store/apps/details?id=com.nostavia.nostavia_health&hl=en_IN', enabled: true },
 
   /* ── Group D: Our own practices ── */
   { id: 'dpdp', group: 'practices', icon: 'consent', name: 'DPDP Act 2023 aligned', descriptor: 'Explicit consent, purpose limitation and data minimisation are built into the pipeline.', enabled: true },
