@@ -35,13 +35,13 @@ export const ClientShowcaseGrid: React.FC = () => {
   return (
     <div className="space-y-10 font-body">
       <div className="max-w-3xl space-y-3">
-        <div className="eyebrow text-[#B45309] font-bold text-xs uppercase tracking-widest font-mono">
+        <div className="eyebrow text-hos-yellow font-bold text-xs uppercase tracking-widest font-mono">
           SOLUTIONS ENGINEERING TRACK RECORD
         </div>
-        <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
+        <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-white tracking-tight">
           Custom health AI deployment tracks
         </h2>
-        <p className="text-base text-[#64748B] leading-relaxed font-body">
+        <p className="text-base text-white/55 leading-relaxed font-body">
           Bespoke health intelligence modules, LIS/EHR data pipelines, and custom clinical dashboards engineered directly by our founding team.
         </p>
       </div>
@@ -50,34 +50,34 @@ export const ClientShowcaseGrid: React.FC = () => {
         {deploymentTracks.map((track, idx) => (
           <div
             key={idx}
-            className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-6 hover:border-[#CBD5E1] transition-all flex flex-col justify-between"
+            className="p-8 bg-white/[0.03] border border-white/[0.08] rounded-[2px] space-y-6 hover:border-white/25 transition-all flex flex-col justify-between"
           >
             <div className="space-y-4">
               <div className="flex items-center justify-between font-mono text-xs">
-                <span className="px-3 py-1 bg-[#FFF7ED] text-[#9A3412] font-bold rounded-[2px] border border-[#FED7AA]">
+                <span className="px-3 py-1 bg-amber-400/10 text-amber-300 font-bold rounded-[2px] border border-amber-300/30">
                   {track.category}
                 </span>
-                <span className="text-[#0F172A] font-bold">
+                <span className="text-white font-bold">
                   {track.timeline}
                 </span>
               </div>
 
-              <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
+              <h3 className="font-display font-extrabold text-2xl text-white">
                 {track.title}
               </h3>
 
-              <p className="text-sm text-[#64748B] leading-relaxed font-body">
+              <p className="text-sm text-white/55 leading-relaxed font-body">
                 {track.description}
               </p>
             </div>
 
-            <div className="pt-4 border-t border-[#E2E8F0] space-y-2">
-              <div className="font-mono text-xs font-bold text-[#0F172A] uppercase tracking-wider">
+            <div className="pt-4 border-t border-white/[0.08] space-y-2">
+              <div className="font-mono text-xs font-bold text-white uppercase tracking-wider">
                 Core Deliverables:
               </div>
               <div className="flex flex-wrap gap-2">
                 {track.deliverables.map((item, dIdx) => (
-                  <span key={dIdx} className="px-2.5 py-1 bg-white text-[#64748B] border border-[#E2E8F0] rounded-[2px] font-mono text-xs">
+                  <span key={dIdx} className="px-2.5 py-1 bg-white/[0.03] text-white/55 border border-white/[0.08] rounded-[2px] font-mono text-xs">
                     {item}
                   </span>
                 ))}

@@ -62,36 +62,36 @@ export const PricingSection: React.FC = () => {
   ];
 
   return (
-    <section className="w-full font-body text-[#0F172A] py-12 bg-white">
+    <section className="w-full font-body text-white py-12 bg-white/[0.03]">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 space-y-10">
         
         {/* Header */}
-        <div className="border-b border-[#E2E8F0] pb-4 space-y-3">
-          <div className="eyebrow text-[#B45309] font-bold text-xs uppercase tracking-widest font-mono">
+        <div className="border-b border-white/[0.08] pb-4 space-y-3">
+          <div className="eyebrow text-hos-yellow font-bold text-xs uppercase tracking-widest font-mono">
             DEVELOPER & HEALTHTECH SDK PRICING
           </div>
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-[54px] text-[#0F172A] tracking-tight leading-[1.05]">
+          <h2 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-[54px] text-white tracking-tight leading-[1.05]">
             One monthly platform fee, tiered by scale.
           </h2>
-          <p className="text-sm text-[#64748B] max-w-3xl leading-relaxed font-body">
+          <p className="text-sm text-white/55 max-w-3xl leading-relaxed font-body">
             For digital health apps, lab chains, and startups embedding Nostavia AI modules via API & SDKs.
           </p>
         </div>
 
         {/* Hospital Platform Bridge Callout */}
-        <div className="p-5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div className="p-5 bg-white/[0.03] border border-white/[0.08] rounded-[2px] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="space-y-1">
-            <div className="font-mono text-xs font-bold text-[#0F172A] uppercase flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#2563EB]"></span>
+            <div className="font-mono text-xs font-bold text-white uppercase flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-hos-yellow"></span>
               Looking for Hospital & Health System Front-Door Pricing?
             </div>
-            <p className="text-xs text-[#64748B] font-body">
+            <p className="text-xs text-white/55 font-body">
               Hospitals deploy turnkey white-labelled patient programs, the Leakage Audit, and Attribution Engine under performance-linked partner pricing (base + % of attributed revenue) or flat commercial licensing (in INR / AED).
             </p>
           </div>
           <Link
             to="/industries/hospitals#pricing"
-            className="shrink-0 text-xs font-bold font-display uppercase tracking-wider text-[#2563EB] hover:text-[#1D4ED8] underline"
+            className="shrink-0 text-xs font-bold font-display uppercase tracking-wider text-hos-yellow hover:text-[#1D4ED8] underline"
           >
             View Hospital Platform Pricing →
           </Link>
@@ -104,8 +104,8 @@ export const PricingSection: React.FC = () => {
               key={idx}
               className={`p-6 sm:p-8 rounded-[2px] border space-y-6 flex flex-col justify-between transition-all ${
                 t.isPopular
-                  ? 'bg-[#0F172A] text-white border-[#0F172A] shadow-xl'
-                  : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#0F172A] hover:border-[#CBD5E1]'
+                  ? 'bg-ink-800 text-white border-[#0F172A] shadow-xl'
+                  : 'bg-white/[0.03] border-white/[0.08] text-white hover:border-white/25'
               }`}
             >
               <div className="space-y-4">
@@ -122,7 +122,7 @@ export const PricingSection: React.FC = () => {
 
                 <div className="font-display font-extrabold text-3xl sm:text-4xl">
                   {t.price}
-                  <span className={`text-xs font-mono font-normal ${t.isPopular ? 'text-slate-400' : 'text-[#64748B]'}`}>
+                  <span className={`text-xs font-mono font-normal ${t.isPopular ? 'text-white/50' : 'text-white/55'}`}>
                     {t.unit}
                   </span>
                 </div>
@@ -131,7 +131,7 @@ export const PricingSection: React.FC = () => {
                   {t.features.map((f, fIdx) => (
                     <div key={fIdx} className="flex items-center gap-2">
                       <span className={`w-1.5 h-1.5 rounded-full ${t.isPopular ? 'bg-amber-400' : 'bg-[#B45309]'}`} />
-                      <span className={t.isPopular ? 'text-slate-300' : 'text-[#64748B]'}>{f}</span>
+                      <span className={t.isPopular ? 'text-slate-300' : 'text-white/55'}>{f}</span>
                     </div>
                   ))}
                 </div>
@@ -142,8 +142,8 @@ export const PricingSection: React.FC = () => {
                   to="/demo"
                   className={`w-full py-3 px-4 rounded-[2px] font-display text-xs font-bold uppercase tracking-wider text-center block transition-all ${
                     t.isPopular
-                      ? 'bg-white text-[#0F172A] hover:bg-slate-100'
-                      : 'bg-[#0F172A] text-white hover:bg-[#1E293B]'
+                      ? 'bg-white/[0.03] text-white hover:bg-slate-100'
+                      : 'bg-ink-800 text-white hover:bg-[#1E293B]'
                   }`}
                 >
                   {t.ctaText}

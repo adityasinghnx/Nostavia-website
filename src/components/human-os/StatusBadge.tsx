@@ -3,8 +3,8 @@ import { ModuleStatus, statusDefinitions } from '../../content/human-os';
 
 const styles: Record<ModuleStatus, string> = {
   live: '',
-  next: 'bg-hos-card text-hos-grey border border-hos-hairline',
-  vision: 'bg-white text-hos-grey border border-dashed border-[#78716C]',
+  next: 'bg-white/[0.04] text-white/55 border border-white/[0.08]',
+  vision: 'bg-white/[0.03] text-white/55 border border-dashed border-white/40',
 };
 
 /**

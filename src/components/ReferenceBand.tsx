@@ -63,7 +63,7 @@ export const ReferenceBand: React.FC<ReferenceBandProps> = ({
           className="absolute -translate-x-1/2 transition-all duration-700 ease-out flex flex-col items-center"
           style={{ left: `${animatedPos}%` }}
         >
-          <span className="bg-[#0F172A] text-white px-2.5 py-0.5 rounded-[2px] text-[11px] font-mono font-bold border border-[#1E293B] shadow-sm whitespace-nowrap">
+          <span className="bg-ink-800 text-white px-2.5 py-0.5 rounded-[2px] text-[11px] font-mono font-bold border border-white/10 shadow-sm whitespace-nowrap">
             {isAnimatedHero ? currentMonth : valueLabel}
           </span>
           <div className="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[5px] border-t-[#0F172A]" />
@@ -71,10 +71,10 @@ export const ReferenceBand: React.FC<ReferenceBandProps> = ({
       </div>
 
       {/* SVG Reference Band Bar */}
-      <div className="relative w-full h-3 rounded-sm overflow-hidden bg-[#F1F5F9] border border-[#E2E8F0] flex items-center">
+      <div className="relative w-full h-3 rounded-sm overflow-hidden bg-white/[0.05] border border-white/[0.08] flex items-center">
         {/* Outlier Low Zone */}
         <div
-          className="h-full bg-[#FEF3C7] border-r border-[#E2E8F0] flex items-center justify-center text-[8px] text-[#D97706] uppercase tracking-widest font-mono font-medium"
+          className="h-full bg-[#FEF3C7] border-r border-white/[0.08] flex items-center justify-center text-[8px] text-amber-300 uppercase tracking-widest font-mono font-medium"
           style={{ width: `${outlierLowWidth}%` }}
         >
           <span className="hidden sm:inline">Low</span>
@@ -82,7 +82,7 @@ export const ReferenceBand: React.FC<ReferenceBandProps> = ({
 
         {/* Optimal Zone */}
         <div
-          className="h-full bg-[#D1FAE5] border-r border-[#E2E8F0] flex items-center justify-center text-[9px] text-[#059669] uppercase tracking-widest font-mono font-semibold"
+          className="h-full bg-[#D1FAE5] border-r border-white/[0.08] flex items-center justify-center text-[9px] text-emerald-300 uppercase tracking-widest font-mono font-semibold"
           style={{ width: `${optimalWidth}%` }}
         >
           <span>OPTIMAL RANGE</span>
@@ -90,7 +90,7 @@ export const ReferenceBand: React.FC<ReferenceBandProps> = ({
 
         {/* Outlier High Zone */}
         <div
-          className="h-full bg-[#FEF3C7] flex items-center justify-center text-[8px] text-[#D97706] uppercase tracking-widest font-mono font-medium"
+          className="h-full bg-[#FEF3C7] flex items-center justify-center text-[8px] text-amber-300 uppercase tracking-widest font-mono font-medium"
           style={{ width: `${outlierHighWidth}%` }}
         >
           <span className="hidden sm:inline">High</span>
@@ -98,15 +98,15 @@ export const ReferenceBand: React.FC<ReferenceBandProps> = ({
 
         {/* Marker vertical indicator */}
         <div
-          className="absolute top-0 bottom-0 w-[3px] bg-[#2563EB] shadow-[0_0_8px_rgba(37,99,235,0.4)] transition-all duration-700 ease-out z-10 -translate-x-1/2"
+          className="absolute top-0 bottom-0 w-[3px] bg-hos-yellow shadow-[0_0_8px_rgba(37,99,235,0.4)] transition-all duration-700 ease-out z-10 -translate-x-1/2"
           style={{ left: `${animatedPos}%` }}
         />
       </div>
 
       {sublabel && (
-        <div className="flex justify-between items-center text-[10px] text-[#64748B] mt-1.5 font-mono">
+        <div className="flex justify-between items-center text-[10px] text-white/55 mt-1.5 font-mono">
           <span>Outlier Low</span>
-          <span className="text-[#0F172A] font-medium">{sublabel}</span>
+          <span className="text-white font-medium">{sublabel}</span>
           <span>Outlier High</span>
         </div>
       )}

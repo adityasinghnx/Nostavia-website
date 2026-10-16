@@ -50,17 +50,17 @@ import { useSeo } from '../../lib/useSeo';
 
 /** Sample layout of the Leakage Report. Deliberately carries no figures: every number in a real report comes from the hospital's own data. */
 const LeakageReportPreview: React.FC = () => (
-  <div className="hos-anim w-full max-w-[380px] rounded-2xl bg-white text-hos-black p-5 shadow-[0_24px_60px_-20px_rgba(10,10,11,0.45)]">
+  <div className="hos-anim w-full max-w-[380px] rounded-2xl bg-white/[0.03] text-white p-5 shadow-[0_24px_60px_-20px_rgba(10,10,11,0.45)]">
     <div className="flex items-center justify-between gap-3">
       <div className="flex items-center gap-2 min-w-0">
-        <span className="w-8 h-8 shrink-0 rounded-lg bg-hos-mist border border-hos-hairline flex items-center justify-center">
+        <span className="w-8 h-8 shrink-0 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center">
           <FileSearch className="w-4 h-4" />
         </span>
         <span className="text-xs font-bold truncate">Leakage Report</span>
       </div>
-      <span className="text-[10px] font-bold uppercase tracking-wider text-hos-grey">Sample layout</span>
+      <span className="text-[10px] font-bold uppercase tracking-wider text-white/55">Sample layout</span>
     </div>
-    <p className="mt-3 text-[11px] text-hos-grey">12 to 24 months of anonymized history, priced on your own list</p>
+    <p className="mt-3 text-[11px] text-white/55">12 to 24 months of anonymized history, priced on your own list</p>
     <ul className="mt-4 space-y-3.5">
       {(
         [
@@ -72,18 +72,18 @@ const LeakageReportPreview: React.FC = () => (
         <li key={label}>
           <div className="flex items-center justify-between gap-3 text-[11px]">
             <span className="font-semibold">{label}</span>
-            <span className="text-hos-grey whitespace-nowrap">₹ value</span>
+            <span className="text-white/55 whitespace-nowrap">₹ value</span>
           </div>
-          <div className="mt-1.5 h-2 rounded-full bg-hos-mist overflow-hidden">
+          <div className="mt-1.5 h-2 rounded-full bg-white/[0.04] overflow-hidden">
             <span
-              className={`block h-full rounded-full origin-left ${i === 0 ? 'bg-hos-yellow' : 'bg-hos-navy'}`}
+              className={`block h-full rounded-full origin-left ${i === 0 ? 'bg-hos-yellow' : 'bg-ink-800'}`}
               style={{ width: `${width}%`, animation: `hos-grow 1s cubic-bezier(0.2,0.7,0.2,1) ${0.2 + i * 0.18}s both` }}
             />
           </div>
         </li>
       ))}
     </ul>
-    <div className="mt-4 pt-3 border-t border-hos-hairline text-[11px] text-hos-grey">Returned within two weeks. Data deleted after the audit.</div>
+    <div className="mt-4 pt-3 border-t border-white/[0.08] text-[11px] text-white/55">Returned within two weeks. Data deleted after the audit.</div>
   </div>
 );
 
@@ -133,11 +133,11 @@ const gulfPlans = [
 
 const GroupLabel: React.FC<{ label: string; note: string }> = ({ label, note }) => (
   <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-    <span className="inline-flex w-fit items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-widest text-hos-black">
+    <span className="inline-flex w-fit items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-widest text-white">
       <span aria-hidden="true" className="w-4 h-[3px] bg-hos-yellow" />
       {label}
     </span>
-    <span className="text-sm text-[#475569]">{note}</span>
+    <span className="text-sm text-white/60">{note}</span>
   </div>
 );
 
@@ -153,7 +153,7 @@ export const HospitalsPage: React.FC = () => {
   const practices = trustPick(['dpdp', 'abdm', 'no-keys-on-device']);
 
   return (
-    <div className="flex flex-col font-body text-hos-black bg-white overflow-x-clip">
+    <div className="flex flex-col font-body text-white bg-white/[0.03] overflow-x-clip">
       {/* 1. Hero */}
       <PageHero
         eyebrow="Nostavia for hospitals and health systems"
@@ -248,7 +248,7 @@ export const HospitalsPage: React.FC = () => {
       />
 
       {/* 5. The five programmes and the Human OS systems behind them */}
-      <div className="bg-white py-20 sm:py-28">
+      <div className="bg-ink-950 py-20 sm:py-28">
         <HospitalProgrammesSection />
       </div>
 
@@ -263,19 +263,19 @@ export const HospitalsPage: React.FC = () => {
           action={{ to: '/solutions/hospitals', label: 'See how each programme works' }}
         />
         <Reveal>
-          <ol className="rounded-[16px] border border-hos-hairline bg-white divide-y divide-hos-hairline overflow-hidden">
+          <ol className="rounded-[16px] border border-white/[0.08] bg-white/[0.03] divide-y divide-white/[0.08] overflow-hidden">
             {hospitalProgrammes.map((p, i) => (
               <li key={p.name} className="grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-6 p-5 sm:p-6 md:items-center">
-                <span className="md:col-span-1 font-mono text-xs font-bold tracking-widest text-hos-amber">{String(i + 1).padStart(2, '0')}</span>
-                <h3 className="md:col-span-4 font-display font-bold text-lg text-hos-black leading-snug">{p.name}</h3>
-                <p className="md:col-span-5 text-sm text-[#475569] leading-relaxed">
-                  <span className="font-semibold text-hos-black">Revenue it moves: </span>
+                <span className="md:col-span-1 font-mono text-xs font-bold tracking-widest text-hos-yellow">{String(i + 1).padStart(2, '0')}</span>
+                <h3 className="md:col-span-4 font-display font-bold text-lg text-white leading-snug">{p.name}</h3>
+                <p className="md:col-span-5 text-sm text-white/60 leading-relaxed">
+                  <span className="font-semibold text-white">Revenue it moves: </span>
                   {revenueLine[p.name]}
                 </p>
                 <div className="md:col-span-2 md:text-right">
                   <Link
                     to={p.name === 'Front Desk Agent' ? '/solutions/front-desk' : '/solutions/hospitals'}
-                    className={`inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-hos-black hover:text-hos-amber ${focusRing}`}
+                    className={`inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-white hover:text-hos-yellow ${focusRing}`}
                   >
                     Details
                     <span className="sr-only"> about {p.name}</span>
@@ -312,7 +312,7 @@ export const HospitalsPage: React.FC = () => {
       </Section>
 
       {/* 7. Human OS: systems to start with */}
-      <div className="bg-white py-20 sm:py-28">
+      <div className="bg-ink-950 py-20 sm:py-28">
         <SystemsToStartWith buyerId="hospitals" />
       </div>
 
@@ -354,7 +354,7 @@ export const HospitalsPage: React.FC = () => {
               body: (
                 <>
                   Smart Reports on the checkup counter and recall on one dormant cohort. One metric, agreed up front.{' '}
-                  <strong className="text-hos-black">If the metric does not move, the pilot fee is credited in full.</strong>
+                  <strong className="text-white">If the metric does not move, the pilot fee is credited in full.</strong>
                 </>
               ),
             },
@@ -406,26 +406,26 @@ export const HospitalsPage: React.FC = () => {
                 <Reveal delay={i * 100} className="h-full">
                   <div
                     className={`h-full rounded-[16px] p-6 sm:p-8 flex flex-col gap-5 border ${
-                      t.featured ? 'bg-hos-navy border-hos-navy text-white shadow-[0_30px_70px_-40px_rgba(18,26,49,0.8)]' : 'bg-white border-hos-hairline'
+                      t.featured ? 'bg-ink-800 border-white/10 text-white shadow-[0_30px_70px_-40px_rgba(18,26,49,0.8)]' : 'bg-white/[0.03] border-white/[0.08]'
                     }`}
                   >
                     <span aria-hidden="true" className="h-[3px] w-10 bg-hos-yellow" />
-                    <h3 className={`font-mono text-xs font-bold uppercase tracking-widest ${t.featured ? 'text-hos-yellow' : 'text-hos-amber'}`}>{t.name}</h3>
+                    <h3 className={`font-mono text-xs font-bold uppercase tracking-widest ${t.featured ? 'text-hos-yellow' : 'text-hos-yellow'}`}>{t.name}</h3>
                     <div className="space-y-1.5">
-                      <p className={`font-display font-semibold text-4xl tracking-tight ${t.featured ? 'text-white' : 'text-hos-black'}`}>
-                        {t.oneTime} <span className={`text-sm font-normal ${t.featured ? 'text-slate-300' : 'text-[#475569]'}`}>one-time</span>
+                      <p className={`font-display font-semibold text-4xl tracking-tight ${t.featured ? 'text-white' : 'text-white'}`}>
+                        {t.oneTime} <span className={`text-sm font-normal ${t.featured ? 'text-slate-300' : 'text-white/60'}`}>one-time</span>
                       </p>
-                      <p className={`text-sm font-semibold ${t.featured ? 'text-hos-yellow' : 'text-hos-amber'}`}>{t.monthly}</p>
+                      <p className={`text-sm font-semibold ${t.featured ? 'text-hos-yellow' : 'text-hos-yellow'}`}>{t.monthly}</p>
                     </div>
-                    <p className={`text-sm leading-relaxed ${t.featured ? 'text-slate-300' : 'text-[#475569]'}`}>{t.fit}</p>
+                    <p className={`text-sm leading-relaxed ${t.featured ? 'text-slate-300' : 'text-white/60'}`}>{t.fit}</p>
                   </div>
                 </Reveal>
               </li>
             ))}
           </ul>
           <Reveal>
-            <div className="rounded-[12px] bg-hos-mist border border-hos-hairline p-5 sm:p-6 text-sm text-[#334155] leading-relaxed">
-              <span className="font-semibold text-hos-black">What you pay for: </span>
+            <div className="rounded-[12px] bg-white/[0.04] border border-white/[0.08] p-5 sm:p-6 text-sm text-white/70 leading-relaxed">
+              <span className="font-semibold text-white">What you pay for: </span>
               the one-time fee covers HIS integration, branding, programme setup, clinical review and staff training. The monthly plan covers hosting, AI,
               updates, support and a named success manager. The Leakage Audit before any contract is free.
             </div>
@@ -440,15 +440,15 @@ export const HospitalsPage: React.FC = () => {
                 <Reveal delay={i * 100} className="h-full">
                   <Link
                     to={s.to}
-                    className={`group h-full flex items-end justify-between gap-4 rounded-[16px] border border-hos-hairline bg-white p-6 hover:border-hos-navy hover:-translate-y-0.5 transition-all duration-300 ${focusRing}`}
+                    className={`group h-full flex items-end justify-between gap-4 rounded-[16px] border border-white/[0.08] bg-white/[0.03] p-6 hover:border-white/25 hover:-translate-y-0.5 transition-all duration-300 ${focusRing}`}
                   >
                     <span className="space-y-2">
-                      <span className="block font-mono text-[11px] font-bold uppercase tracking-widest text-hos-grey">{s.name}</span>
-                      <span className="block font-display font-semibold text-2xl text-hos-black tracking-tight">
-                        {s.oneTime} <span className="text-sm font-normal text-[#475569]">{s.monthly}</span>
+                      <span className="block font-mono text-[11px] font-bold uppercase tracking-widest text-white/55">{s.name}</span>
+                      <span className="block font-display font-semibold text-2xl text-white tracking-tight">
+                        {s.oneTime} <span className="text-sm font-normal text-white/60">{s.monthly}</span>
                       </span>
                     </span>
-                    <ArrowRight aria-hidden="true" className="w-4 h-4 shrink-0 text-hos-grey group-hover:text-hos-black transition-colors" />
+                    <ArrowRight aria-hidden="true" className="w-4 h-4 shrink-0 text-white/55 group-hover:text-white transition-colors" />
                   </Link>
                 </Reveal>
               </li>
@@ -462,12 +462,12 @@ export const HospitalsPage: React.FC = () => {
             {gulfPlans.map((g, i) => (
               <li key={g.name}>
                 <Reveal delay={i * 100} className="h-full">
-                  <div className="h-full rounded-[16px] border border-hos-hairline bg-hos-mist p-6 space-y-2">
-                    <h3 className="font-mono text-[11px] font-bold uppercase tracking-widest text-hos-grey">{g.name}</h3>
-                    <p className="font-display font-semibold text-2xl text-hos-black tracking-tight">
-                      {g.monthly} <span className="text-sm font-normal text-[#475569]">/ mo</span>
+                  <div className="h-full rounded-[16px] border border-white/[0.08] bg-white/[0.04] p-6 space-y-2">
+                    <h3 className="font-mono text-[11px] font-bold uppercase tracking-widest text-white/55">{g.name}</h3>
+                    <p className="font-display font-semibold text-2xl text-white tracking-tight">
+                      {g.monthly} <span className="text-sm font-normal text-white/60">/ mo</span>
                     </p>
-                    <p className="text-sm text-[#475569]">+ one-time build, quoted in AED</p>
+                    <p className="text-sm text-white/60">+ one-time build, quoted in AED</p>
                   </div>
                 </Reveal>
               </li>
@@ -523,13 +523,13 @@ export const HospitalsPage: React.FC = () => {
           <Reveal className="h-full">
             <Panel className="h-full space-y-4">
               <div className="flex items-center gap-3">
-                <span className="w-10 h-10 rounded-[10px] bg-hos-mist border border-hos-hairline flex items-center justify-center">
+                <span className="w-10 h-10 rounded-[10px] bg-white/[0.04] border border-white/[0.08] flex items-center justify-center">
                   <Database aria-hidden="true" className="w-5 h-5" />
                 </span>
                 <h3 className="font-display font-bold text-lg">HIS integration</h3>
               </div>
-              <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-widest text-hos-amber">Production connector</span>
-              <p className="text-sm text-[#475569] leading-relaxed">
+              <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-widest text-hos-yellow">Production connector</span>
+              <p className="text-sm text-white/60 leading-relaxed">
                 Plugs into your hospital’s existing HIS or EMR through standard REST APIs, HL7 or FHIR feeds, reading appointment schedules and writing back clinical
                 intake briefs without disrupting your workflow.
               </p>
@@ -538,13 +538,13 @@ export const HospitalsPage: React.FC = () => {
           <Reveal delay={100} className="h-full">
             <Panel className="h-full space-y-4">
               <div className="flex items-center gap-3">
-                <span className="w-10 h-10 rounded-[10px] bg-hos-mist border border-hos-hairline flex items-center justify-center">
+                <span className="w-10 h-10 rounded-[10px] bg-white/[0.04] border border-white/[0.08] flex items-center justify-center">
                   <Network aria-hidden="true" className="w-5 h-5" />
                 </span>
                 <h3 className="font-display font-bold text-lg">ABDM and ABHA data architecture</h3>
               </div>
-              <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-widest text-hos-amber">Architecture ready · certification not yet completed</span>
-              <p className="text-sm text-[#475569] leading-relaxed">
+              <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-widest text-hos-yellow">Architecture ready · certification not yet completed</span>
+              <p className="text-sm text-white/60 leading-relaxed">
                 Engineered to FHIR R4 and ABDM M1 to M3 data specifications. Records are structured to FHIR R4 so that ABDM linking is a configuration step, not a
                 rebuild, once our certification completes.
               </p>
@@ -571,11 +571,11 @@ export const HospitalsPage: React.FC = () => {
             {practices.map((item, i) => (
               <li key={item.id}>
                 <Reveal delay={i * 90} className="h-full">
-                  <div className="h-full flex items-start gap-4 rounded-[16px] border border-hos-hairline bg-white p-5 sm:p-6">
+                  <div className="h-full flex items-start gap-4 rounded-[16px] border border-white/[0.08] bg-white/[0.03] p-5 sm:p-6">
                     <span aria-hidden="true" className="mt-1 w-4 h-[3px] shrink-0 bg-hos-yellow" />
                     <div>
-                      <h3 className="font-display font-bold text-base text-hos-black">{item.name}</h3>
-                      <p className="text-sm text-[#475569] leading-relaxed mt-1">{item.descriptor}</p>
+                      <h3 className="font-display font-bold text-base text-white">{item.name}</h3>
+                      <p className="text-sm text-white/60 leading-relaxed mt-1">{item.descriptor}</p>
                     </div>
                   </div>
                 </Reveal>
@@ -615,7 +615,7 @@ export const HospitalsPage: React.FC = () => {
                 <>
                   Protocol outputs are reviewed before release to any partner by our licensed clinical advisory bench, including GMC-registered physicians, a senior
                   IISc scientist and UCL-trained clinical nutrition.{' '}
-                  <Link to="/company" className={`font-semibold text-hos-black underline underline-offset-4 decoration-hos-yellow ${focusRing}`}>
+                  <Link to="/company" className={`font-semibold text-white underline underline-offset-4 decoration-hos-yellow ${focusRing}`}>
                     Meet the bench
                   </Link>
                 </>

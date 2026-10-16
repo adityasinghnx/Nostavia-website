@@ -30,8 +30,8 @@ const useSequence = (count: number, start: boolean, stepMs = 650) => {
 };
 
 const Toggle: React.FC<{ on: boolean }> = ({ on }) => (
-  <span aria-hidden="true" className={`relative inline-flex w-9 h-5 rounded-full transition-colors duration-500 ${on ? 'bg-hos-navy' : 'bg-hos-hairline'}`}>
-    <span className={`absolute top-0.5 w-4 h-4 rounded-full bg-white shadow transition-all duration-500 ${on ? 'left-[18px]' : 'left-0.5'}`} />
+  <span aria-hidden="true" className={`relative inline-flex w-9 h-5 rounded-full transition-colors duration-500 ${on ? 'bg-ink-800' : 'bg-hos-hairline'}`}>
+    <span className={`absolute top-0.5 w-4 h-4 rounded-full bg-white/[0.03] shadow transition-all duration-500 ${on ? 'left-[18px]' : 'left-0.5'}`} />
   </span>
 );
 
@@ -43,7 +43,7 @@ export const PortalSection: React.FC = () => {
   const on = useSequence(toggles.length, inView);
 
   return (
-    <section aria-labelledby="home-portal-heading" className="relative overflow-hidden bg-white py-20 sm:py-28">
+    <section aria-labelledby="home-portal-heading" className="relative overflow-hidden bg-ink-950 py-20 sm:py-28">
       <Container className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         <Reveal className="lg:col-span-4 space-y-6">
           {/* TODO(copy): section heading and intro */}
@@ -56,7 +56,7 @@ export const PortalSection: React.FC = () => {
         </Reveal>
 
         <Reveal delay={150} className="lg:col-span-8">
-          <div ref={ref} aria-hidden="true" className="hos-anim rounded-[18px] bg-hos-navy p-2 shadow-[0_40px_90px_-40px_rgba(18,26,49,0.6)]">
+          <div ref={ref} aria-hidden="true" className="hos-anim rounded-[18px] bg-ink-800 p-2 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.75)]">
             {/* window chrome */}
             <div className="flex items-center gap-1.5 px-3 py-2">
               <span className="w-2.5 h-2.5 rounded-full bg-white/20" />
@@ -66,12 +66,12 @@ export const PortalSection: React.FC = () => {
               <span className="ml-auto text-[10px] text-slate-400">Sample data</span>
             </div>
 
-            <div className="grid grid-cols-12 rounded-[12px] bg-hos-mist overflow-hidden min-h-[400px]">
+            <div className="grid grid-cols-12 rounded-[12px] bg-white/[0.04] overflow-hidden min-h-[400px]">
               {/* sidebar */}
-              <div className="hidden sm:flex col-span-3 flex-col gap-1 bg-white border-r border-hos-hairline p-3">
+              <div className="hidden sm:flex col-span-3 flex-col gap-1 bg-white/[0.03] border-r border-white/[0.08] p-3">
                 <div className="flex items-center gap-2 px-2 py-2 mb-2">
                   <span className="w-7 h-7 rounded-lg bg-[#0F766E] text-white text-[10px] font-bold flex items-center justify-center">YL</span>
-                  <span className="text-xs font-bold text-hos-black">Your Lab</span>
+                  <span className="text-xs font-bold text-white">Your Lab</span>
                 </div>
                 {[
                   [LayoutGrid, 'Modules', true],
@@ -82,7 +82,7 @@ export const PortalSection: React.FC = () => {
                 ].map(([Icon, label, active]) => {
                   const I = Icon as React.FC<{ className?: string }>;
                   return (
-                    <div key={label as string} className={`flex items-center gap-2 rounded-lg px-2 py-2 text-[11px] font-semibold ${active ? 'bg-hos-navy text-white' : 'text-hos-grey'}`}>
+                    <div key={label as string} className={`flex items-center gap-2 rounded-lg px-2 py-2 text-[11px] font-semibold ${active ? 'bg-ink-800 text-white' : 'text-white/55'}`}>
                       <I className="w-3.5 h-3.5" />
                       {label as string}
                     </div>
@@ -93,8 +93,8 @@ export const PortalSection: React.FC = () => {
               {/* main */}
               <div className="col-span-12 sm:col-span-9 p-4 sm:p-5 space-y-4">
                 <div className="flex items-center justify-between">
-                  <div className="text-sm font-bold text-hos-black">Modules</div>
-                  <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-emerald-700">
+                  <div className="text-sm font-bold text-white">Modules</div>
+                  <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-emerald-300">
                     <LiveDot />
                     All systems running
                   </span>
@@ -105,10 +105,10 @@ export const PortalSection: React.FC = () => {
                     const mod = findModule(name)!;
                     const isOn = i < on;
                     return (
-                      <li key={name} className={`flex items-center justify-between gap-3 rounded-xl bg-white border px-3 py-2.5 transition-colors duration-500 ${isOn ? 'border-hos-navy/30' : 'border-hos-hairline'}`}>
+                      <li key={name} className={`flex items-center justify-between gap-3 rounded-xl bg-white/[0.03] border px-3 py-2.5 transition-colors duration-500 ${isOn ? 'border-white/20' : 'border-white/[0.08]'}`}>
                         <span className="min-w-0">
-                          <span className="block text-[12px] font-bold text-hos-black truncate">{name}</span>
-                          <span className="block text-[10px] text-hos-grey">{mod.system.name}</span>
+                          <span className="block text-[12px] font-bold text-white truncate">{name}</span>
+                          <span className="block text-[10px] text-white/55">{mod.system.name}</span>
                         </span>
                         <span className="flex items-center gap-2">
                           <Toggle on={isOn} />
@@ -120,10 +120,10 @@ export const PortalSection: React.FC = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                   {/* area chart */}
-                  <div className="md:col-span-2 rounded-xl bg-white border border-hos-hairline p-3">
+                  <div className="md:col-span-2 rounded-xl bg-white/[0.03] border border-white/[0.08] p-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-bold text-hos-black">Reports delivered</span>
-                      <span className="text-[10px] text-hos-grey">Last 30 days</span>
+                      <span className="text-[11px] font-bold text-white">Reports delivered</span>
+                      <span className="text-[10px] text-white/55">Last 30 days</span>
                     </div>
                     <svg viewBox="0 0 320 130" className="mt-2 w-full h-32">
                       <defs>
@@ -150,18 +150,18 @@ export const PortalSection: React.FC = () => {
 
                   {/* KPI tiles */}
                   <div className="grid grid-cols-2 md:grid-cols-1 gap-3">
-                    <div className="rounded-xl bg-white border border-hos-hairline p-3">
-                      <div className="text-[10px] text-hos-grey">Patients recalled</div>
-                      <div className="text-2xl font-display font-semibold text-hos-black">
+                    <div className="rounded-xl bg-white/[0.03] border border-white/[0.08] p-3">
+                      <div className="text-[10px] text-white/55">Patients recalled</div>
+                      <div className="text-2xl font-display font-semibold text-white">
                         <CountUp to={312} />
                       </div>
                       <div className="mt-2 flex items-end gap-1 h-6">
                         {[30, 45, 38, 60, 52, 75, 90].map((h, i) => (
-                          <span key={i} className="flex-1 rounded-sm bg-hos-navy origin-bottom" style={{ height: `${h}%`, animation: inView ? `hos-rise 0.7s ease ${0.3 + i * 0.06}s both` : undefined, transform: inView ? undefined : 'scaleY(0)' }} />
+                          <span key={i} className="flex-1 rounded-sm bg-ink-800 origin-bottom" style={{ height: `${h}%`, animation: inView ? `hos-rise 0.7s ease ${0.3 + i * 0.06}s both` : undefined, transform: inView ? undefined : 'scaleY(0)' }} />
                         ))}
                       </div>
                     </div>
-                    <div className="rounded-xl bg-hos-navy text-white p-3">
+                    <div className="rounded-xl bg-ink-800 text-white p-3">
                       <div className="text-[10px] text-slate-300">Calls answered by the agent</div>
                       <div className="text-2xl font-display font-semibold">
                         <CountUp to={1284} />

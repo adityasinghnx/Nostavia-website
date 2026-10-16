@@ -1,86 +1,42 @@
 import React from 'react';
 
-export const LogoTrustBar: React.FC = () => {
-  // Optically balanced, alternating visual weights (emblem -> wordmark -> crest -> tech mark)
-  const clientLogos = [
-    {
-      name: '360 ATHLETIX',
-      src: '/client_logos/X logo black.png 1.png',
-      className: 'h-8 sm:h-9 w-auto object-contain',
-    },
-    {
-      name: 'ClinicX',
-      src: '/client_logos/clinicx_clean.png',
-      className: 'h-7 sm:h-8 w-auto object-contain',
-    },
-    {
-      name: 'TBI',
-      src: '/client_logos/logo_tbi.e78b7546c7bb1d87e9f2 (1).png',
-      className: 'h-11 sm:h-12 w-auto object-contain',
-    },
-    {
-      name: 'Kiosk Health',
-      src: '/client_logos/kiosk_health_clean.png',
-      className: 'h-8 sm:h-9 w-auto object-contain',
-    },
-    {
-      name: 'Live 360',
-      src: '/client_logos/snksn-removebg-preview 1.png',
-      className: 'h-9 sm:h-10 w-auto object-contain',
-    },
-    {
-      name: 'Atmaram Healthcare',
-      src: '/client_logos/atmaram_healthcare.png',
-      className: 'h-8 sm:h-9 w-auto object-contain',
-    },
-    {
-      name: 'ETLAWM',
-      src: '/client_logos/Screenshot_2025-11-06_at_6.15.42_PM-removebg-preview 1.png',
-      className: 'h-6 sm:h-7 w-auto object-contain',
-    },
-  ];
+/* Client logos, rendered as white monochrome marks for the dark theme. */
+export const clientLogos = [
+  { name: '360 ATHLETIX', src: '/client_logos/X logo black.png 1.png', className: 'h-8 sm:h-9' },
+  { name: 'ClinicX', src: '/client_logos/clinicx_clean.png', className: 'h-7 sm:h-8' },
+  { name: 'TBI', src: '/client_logos/logo_tbi.e78b7546c7bb1d87e9f2 (1).png', className: 'h-11 sm:h-12' },
+  { name: 'Kiosk Health', src: '/client_logos/kiosk_health_clean.png', className: 'h-8 sm:h-9' },
+  { name: 'Live 360', src: '/client_logos/snksn-removebg-preview 1.png', className: 'h-9 sm:h-10' },
+  { name: 'Atmaram Healthcare', src: '/client_logos/atmaram_healthcare.png', className: 'h-8 sm:h-9' },
+  { name: 'ETLAWM', src: '/client_logos/Screenshot_2025-11-06_at_6.15.42_PM-removebg-preview 1.png', className: 'h-6 sm:h-7' },
+];
 
-  // Two identical halves for a 100% seamless infinite translateX(-50%) marquee loop
-  const singleTrack = [...clientLogos, ...clientLogos];
-  const marqueeLogos = [...singleTrack, ...singleTrack];
+export const LogoTrustBar: React.FC = () => {
+  // Two identical halves so translateX(-50%) loops seamlessly
+  const track = [...clientLogos, ...clientLogos, ...clientLogos, ...clientLogos];
 
   return (
-    <div className="w-full py-7 border-y border-[#E2E8F0] bg-white font-body overflow-hidden select-none">
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 flex flex-col md:flex-row md:items-center justify-between gap-6">
-        
-        {/* Left Eyebrow Label */}
-        <div className="shrink-0">
-          <span className="font-mono text-xs font-bold text-[#64748B] uppercase tracking-widest">
-            POWERING LEADING HEALTH CLIENTS
-          </span>
-        </div>
-
-        {/* Right Marquee Ticker Track */}
-        <div className="relative overflow-hidden flex-1 max-w-full md:max-w-[70%] lg:max-w-[75%]">
-          {/* Gradient Mask Overlays on Edges */}
-          <div className="absolute top-0 bottom-0 left-0 w-16 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-          <div className="absolute top-0 bottom-0 right-0 w-16 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-
-          <div className="flex w-max items-center gap-16 sm:gap-20 animate-marquee-left hover:[animation-play-state:paused]">
-            {marqueeLogos.map((item, idx) => (
-              <div
-                key={idx}
-                className="flex items-center justify-center shrink-0 h-12 px-2 opacity-75 hover:opacity-100 transition-all cursor-pointer grayscale hover:grayscale-0"
-              >
+    <div className="relative w-full py-10 border-y border-white/[0.06] bg-ink-950 overflow-hidden select-none">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+        <p className="shrink-0 text-xs font-semibold uppercase tracking-[0.18em] text-white/50">Powering leading health brands</p>
+        <div className="relative overflow-hidden flex-1 hos-anim">
+          <div aria-hidden="true" className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-ink-950 to-transparent z-10 pointer-events-none" />
+          <div aria-hidden="true" className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-ink-950 to-transparent z-10 pointer-events-none" />
+          <ul className="flex w-max items-center gap-14 sm:gap-20 hover:[animation-play-state:paused]" style={{ animation: 'dk-marquee 40s linear infinite' }}>
+            {track.map((logo, i) => (
+              <li key={i} className="flex items-center justify-center shrink-0 h-12" aria-hidden={i >= clientLogos.length ? true : undefined}>
                 <img
-                  src={item.src}
-                  alt={item.name}
-                  className={item.className}
+                  src={logo.src}
+                  alt={i < clientLogos.length ? logo.name : ''}
                   loading="lazy"
+                  decoding="async"
+                  className={`${logo.className} w-auto object-contain brightness-0 invert opacity-55 hover:opacity-100 transition-opacity`}
                 />
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
-
       </div>
     </div>
   );
 };
-
-

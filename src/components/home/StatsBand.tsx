@@ -12,7 +12,7 @@ const stats = [
 ];
 
 export const StatsBand: React.FC = () => (
-  <section aria-labelledby="home-stats-heading" className="bg-hos-navy text-white py-20 sm:py-24">
+  <section aria-labelledby="home-stats-heading" className="bg-ink-800 text-white py-20 sm:py-24">
     <Container className="space-y-12">
       <Reveal className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
         <div className="space-y-4 max-w-2xl">

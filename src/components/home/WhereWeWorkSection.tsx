@@ -96,7 +96,7 @@ export const WhereWeWorkSection: React.FC = () => {
   };
 
   return (
-    <section aria-labelledby="home-where-heading" className="bg-hos-mist py-20 sm:py-28">
+    <section aria-labelledby="home-where-heading" className="bg-ink-900 border-y border-white/[0.06] py-20 sm:py-28">
       <Container className="space-y-10">
         {/* TODO(copy): section heading */}
         <Reveal>
@@ -104,8 +104,8 @@ export const WhereWeWorkSection: React.FC = () => {
         </Reveal>
 
         <Reveal delay={120}>
-        <div className="rounded-[16px] bg-white border border-hos-hairline overflow-hidden shadow-[0_30px_80px_-40px_rgba(18,26,49,0.35)]">
-          <div className="border-b border-hos-hairline overflow-x-auto scrollbar-none">
+        <div className="rounded-[16px] bg-white/[0.03] border border-white/[0.08] overflow-hidden shadow-[0_30px_80px_-40px_rgba(0,0,0,0.6)]">
+          <div className="border-b border-white/[0.08] overflow-x-auto scrollbar-none">
             <div role="tablist" aria-label="Health businesses" className="flex min-w-max px-2 sm:px-4" onKeyDown={onKeyDown}>
               {buyers.map((b, i) => {
                 const selected = b.id === activeId;
@@ -120,7 +120,7 @@ export const WhereWeWorkSection: React.FC = () => {
                     tabIndex={selected ? 0 : -1}
                     onClick={() => setActiveId(b.id)}
                     className={`relative px-4 sm:px-5 py-4 text-sm font-semibold whitespace-nowrap transition-colors ${focusRing} ${
-                      selected ? 'text-hos-black' : 'text-hos-grey hover:text-hos-black'
+                      selected ? 'text-white' : 'text-white/55 hover:text-white'
                     }`}
                   >
                     {panels[b.id].tab}
@@ -133,10 +133,10 @@ export const WhereWeWorkSection: React.FC = () => {
 
           <div role="tabpanel" id={`where-panel-${activeId}`} aria-labelledby={`where-tab-${activeId}`} className="grid grid-cols-1 lg:grid-cols-2">
             <div className="p-6 sm:p-10 lg:p-12 flex flex-col gap-6">
-              <h3 className="font-display font-semibold text-2xl sm:text-3xl text-hos-black leading-snug tracking-tight">{panel.headline}</h3>
-              <p className="text-base text-[#475569] leading-relaxed">{panel.body}</p>
+              <h3 className="font-display font-semibold text-2xl sm:text-3xl text-white leading-snug tracking-tight">{panel.headline}</h3>
+              <p className="text-base text-white/60 leading-relaxed">{panel.body}</p>
 
-              <ul className="divide-y divide-hos-hairline border-y border-hos-hairline">
+              <ul className="divide-y divide-white/[0.08] border-y border-white/[0.08]">
                 {panel.modules.map((name) => {
                   const mod = findModule(name)!;
                   return (
@@ -145,8 +145,8 @@ export const WhereWeWorkSection: React.FC = () => {
                         to={systemPath(mod.system.slug)}
                         className={`group flex items-center justify-between gap-3 py-3 text-sm ${focusRing}`}
                       >
-                        <span className="font-semibold text-hos-black group-hover:underline underline-offset-4">{name}</span>
-                        <ArrowRight aria-hidden="true" className="w-4 h-4 text-hos-grey group-hover:text-hos-black transition-colors" />
+                        <span className="font-semibold text-white group-hover:underline underline-offset-4">{name}</span>
+                        <ArrowRight aria-hidden="true" className="w-4 h-4 text-white/55 group-hover:text-white transition-colors" />
                       </Link>
                     </li>
                   );
@@ -155,14 +155,14 @@ export const WhereWeWorkSection: React.FC = () => {
 
               <Link
                 to={panel.cta.to}
-                className={`mt-auto inline-flex items-center gap-2 text-sm font-bold text-hos-black underline underline-offset-4 decoration-hos-yellow decoration-2 hover:decoration-hos-amber ${focusRing}`}
+                className={`mt-auto inline-flex items-center gap-2 text-sm font-bold text-white underline underline-offset-4 decoration-hos-yellow decoration-2 hover:decoration-white ${focusRing}`}
               >
                 {panel.cta.label}
                 <ArrowRight aria-hidden="true" className="w-4 h-4" />
               </Link>
             </div>
 
-            <div className="relative min-h-[420px] lg:min-h-[540px] bg-hos-navy overflow-hidden">
+            <div className="relative min-h-[420px] lg:min-h-[540px] bg-ink-800 overflow-hidden">
               <img
                 key={panel.image}
                 src={panel.image}
@@ -174,7 +174,7 @@ export const WhereWeWorkSection: React.FC = () => {
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{ animation: 'hos-fade-up 0.7s ease both' }}
               />
-              <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-hos-black/60 via-transparent to-transparent" />
+              <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink-950/75 via-transparent to-transparent" />
               {/* Sample live product screen for this business */}
               <div className="absolute left-4 right-4 bottom-4 sm:left-6 sm:right-auto sm:bottom-6" aria-hidden="true">
                 <LiveCard key={activeId} />

@@ -1,24 +1,391 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
+  ArrowDown,
   ArrowRight,
-  ChevronDown,
-  ChevronUp,
+  Ban,
+  BookOpen,
+  Calendar,
+  Check,
   CheckCircle2,
-  Phone,
-  MessageSquare,
-  Globe,
-  Lock,
-  Building2,
+  Database,
+  Languages,
+  MessageSquareQuote,
+  PhoneForwarded,
+  PhoneIncoming,
+  ShieldCheck,
+  Siren,
   UserCheck,
-  Volume2,
-  Calendar
+  Users,
 } from 'lucide-react';
-import { FaqSection } from '../../components/sections/FaqSection';
+import { CtaBand, FaqList, Panel, Section, SectionHead, primaryBtn, secondaryBtn, textLink } from '../../components/page/PageKit';
+import { Container, Eyebrow, SectionHeading, focusRing } from '../../components/home/shared';
+import { Reveal, Waveform, useInView } from '../../components/home/motion';
+import { VoiceCallCard } from '../../components/home/LiveCards';
+import { Disclaimer } from '../../components/human-os/Disclaimer';
 import { submitLead, newRefId, CALENDAR_URL } from '../../lib/leads';
+import { useSeo } from '../../lib/useSeo';
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * AI Front Desk Agent (routes /solutions/front-desk, /solutions/ai-agents and
+ * /solutions/voice-agents). Phone only: chat channels are not live and are not
+ * mentioned. Facts come from this page's previous copy, the AI Voice Agent module
+ * in human-os.ts, the pricing page and the hospitals overview. Prices are exact.
+ * ──────────────────────────────────────────────────────────────────────────── */
+
+const pad = (n: number) => String(n).padStart(2, '0');
+const prefersReducedMotion = () => typeof window !== 'undefined' && !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+const fadeUp = (delay: number): React.CSSProperties => ({ animation: `hos-fade-up 0.5s cubic-bezier(0.2,0.7,0.2,1) ${delay}s both` });
+
+/* ── How a call flows: a sample call, step by step (Romanized Hindi with an English line under each) ── */
+
+interface Line {
+  who: 'agent' | 'caller';
+  text: string;
+  en: string;
+}
+
+interface FlowStep {
+  title: string;
+  body: string;
+  lines: Line[];
+  chip?: string;
+}
+
+/* TODO(copy): call-flow step titles and bodies */
+const flow: FlowStep[] = [
+  {
+    title: 'Answers as your hospital',
+    body: "Every inbound call is picked up under your hospital's name, including outside OPD hours and at peak load when the desk cannot pick up.",
+    lines: [{ who: 'agent', text: 'Namaste, [Your Hospital]. Bataiye, main kya madad kar sakti hoon?', en: 'Hello, [Your Hospital]. How can I help?' }],
+  },
+  {
+    title: 'Listens, then reflects it back',
+    body: 'It lets the caller finish, then repeats the complaint back so they know they were heard. Family members speaking for a patient are handled the same way.',
+    lines: [
+      { who: 'caller', text: "Papa ko teen din se fever hai, and he's coughing a lot.", en: "My father has had a fever for three days, and he's coughing a lot." },
+      { who: 'agent', text: 'Samajh gayi. Teen din se bukhar aur khansi.', en: 'Understood. Three days of fever and cough.' },
+    ],
+  },
+  {
+    title: 'Rules out an emergency',
+    body: 'Before any booking, it checks for warning signs. If it hears an emergency, booking stops and the call is handled as one.',
+    lines: [
+      { who: 'agent', text: 'Kya unhe abhi saans lene mein takleef ya seene mein dard hai?', en: 'Is he having trouble breathing or chest pain right now?' },
+      { who: 'caller', text: 'Nahi, bas bukhar aur khansi.', en: 'No, just the fever and cough.' },
+    ],
+    chip: 'Emergency check: clear',
+  },
+  {
+    title: 'Names a doctor and a time',
+    body: 'Never a department, always a person: a named doctor, their designation and experience, and the day and time they will be in.',
+    lines: [
+      {
+        who: 'agent',
+        text: 'Iske liye Dr. [name] hain, Senior Physician, unnees saal ka experience. Wo kal subah nau se ek baje tak rahenge. Main gyarah baje ka slot de doon?',
+        en: "Dr. [name], Senior Physician, 19 years' experience, is in tomorrow from 9 to 1. Shall I give you the 11 o'clock slot?",
+      },
+    ],
+  },
+  {
+    title: 'Books the visit',
+    body: "It takes the patient's name, age and mobile number and places the appointment. If the caller hesitates, it removes the specific friction instead of repeating itself.",
+    lines: [
+      { who: 'caller', text: 'Haan, kar dijiye.', en: 'Yes, please book it.' },
+      { who: 'agent', text: 'Ho gaya. Kal subah gyarah baje, Dr. [name].', en: 'Done. Tomorrow at 11 AM with Dr. [name].' },
+    ],
+    chip: 'Visit booked',
+  },
+];
+
+const STEP_MS = 4200;
+
+const Bubble: React.FC<{ line: Line; delay: number }> = ({ line, delay }) => {
+  const agent = line.who === 'agent';
+  return (
+    <div className={`max-w-[90%] ${agent ? 'self-start' : 'self-end'}`} style={fadeUp(delay)}>
+      <div className={`mb-1 text-[10px] font-semibold uppercase tracking-[0.14em] ${agent ? 'text-hos-yellow' : 'text-white/50 text-right'}`}>{agent ? 'Agent' : 'Caller'}</div>
+      <div className={`rounded-2xl px-3.5 py-2.5 ${agent ? 'rounded-tl-sm bg-white/[0.07] ring-1 ring-white/10' : 'rounded-tr-sm bg-hos-yellow/[0.12] ring-1 ring-hos-yellow/25'}`}>
+        <p className="text-[13px] text-white leading-relaxed">{line.text}</p>
+        <p className="mt-1 text-[11px] text-white/55 leading-relaxed">{line.en}</p>
+      </div>
+    </div>
+  );
+};
+
+const CallFlow: React.FC = () => {
+  const [reduced] = useState(prefersReducedMotion);
+  const [active, setActive] = useState(() => (prefersReducedMotion() ? flow.length - 1 : 0));
+  const [paused, setPaused] = useState(false);
+  const { ref, inView } = useInView<HTMLDivElement>(0.3);
+  const running = inView && !paused && !reduced;
+
+  useEffect(() => {
+    if (!running) return;
+    const id = window.setTimeout(() => setActive((a) => (a + 1) % flow.length), active === flow.length - 1 ? STEP_MS * 1.6 : STEP_MS);
+    return () => window.clearTimeout(id);
+  }, [active, running]);
+
+  const transcript: React.ReactNode[] = [];
+  flow.slice(0, active + 1).forEach((step, si) => {
+    step.lines.forEach((line, li) => transcript.push(<Bubble key={`${si}-${li}`} line={line} delay={li * 0.6} />));
+    if (step.chip) {
+      transcript.push(
+        <div
+          key={`${si}-chip`}
+          className="self-center inline-flex items-center gap-1.5 rounded-full bg-emerald-400/15 text-emerald-300 px-3 py-1 text-[11px] font-semibold"
+          style={fadeUp(step.lines.length * 0.6)}
+        >
+          {si === flow.length - 1 ? <CheckCircle2 aria-hidden="true" className="w-3.5 h-3.5" /> : <ShieldCheck aria-hidden="true" className="w-3.5 h-3.5" />}
+          {step.chip}
+        </div>
+      );
+    }
+  });
+
+  return (
+    <div
+      ref={ref}
+      className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+    >
+      <ol className="lg:col-span-5 space-y-1.5" aria-label="Steps in a call">
+        {flow.map((step, i) => {
+          const isActive = i === active;
+          const done = i < active;
+          return (
+            <li key={step.title}>
+              <button
+                type="button"
+                aria-current={isActive ? 'step' : undefined}
+                onClick={() => setActive(i)}
+                className={`w-full text-left rounded-[16px] p-4 sm:p-5 border transition-colors ${focusRing} ${
+                  isActive ? 'bg-white/[0.06] border-white/20' : 'border-transparent hover:bg-white/[0.03]'
+                }`}
+              >
+                <span className="flex items-center gap-3">
+                  <span
+                    className={`w-8 h-8 shrink-0 rounded-full flex items-center justify-center text-xs font-mono font-semibold transition-colors ${
+                      isActive ? 'bg-hos-yellow text-ink-950' : done ? 'bg-white/10 text-white' : 'ring-1 ring-white/15 text-white/60'
+                    }`}
+                  >
+                    {done ? <Check aria-hidden="true" className="w-3.5 h-3.5" /> : pad(i + 1)}
+                  </span>
+                  <span className="font-display font-semibold text-base text-white">{step.title}</span>
+                </span>
+                <span className={isActive ? 'block mt-2 pl-11 text-sm text-white/60 leading-relaxed' : 'sr-only'}>{step.body}</span>
+                {isActive && running && (
+                  <span aria-hidden="true" className="hos-anim block mt-3 ml-11 h-[2px] rounded-full bg-white/10 overflow-hidden">
+                    <span
+                      key={active}
+                      className="block h-full bg-hos-yellow origin-left"
+                      style={{ animation: `hos-grow ${active === flow.length - 1 ? STEP_MS * 1.6 : STEP_MS}ms linear both` }}
+                    />
+                  </span>
+                )}
+              </button>
+            </li>
+          );
+        })}
+      </ol>
+
+      <div className="lg:col-span-7 rounded-[24px] p-1.5 dk-card shadow-[0_60px_140px_-50px_rgba(0,0,0,0.9)]">
+        <div className="rounded-[19px] bg-ink-900 ring-1 ring-white/[0.06] overflow-hidden">
+          <div className="flex items-center gap-3 px-4 py-3 border-b border-white/[0.06]">
+            <span className="w-8 h-8 shrink-0 rounded-full bg-hos-yellow/15 ring-1 ring-hos-yellow/40 text-hos-yellow flex items-center justify-center">
+              <PhoneIncoming aria-hidden="true" className="w-4 h-4" />
+            </span>
+            <span className="min-w-0">
+              <span className="block text-xs font-semibold text-white truncate">Inbound call · Your Hospital</span>
+              <span className="block text-[11px] text-white/55 truncate">Hindi and English · sample call</span>
+            </span>
+            <Waveform bars={14} height={22} className="ml-auto w-24 hidden sm:flex" />
+          </div>
+          <div className="hos-anim relative h-[460px] sm:h-[430px] p-4 sm:p-6 flex flex-col justify-end gap-3 overflow-hidden">
+            <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-ink-900 to-transparent z-10" />
+            {transcript}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ── What it handles: bento visuals ── */
+
+const VagueToNamed: React.FC = () => (
+  <div className="w-full space-y-2">
+    <div className="w-fit max-w-full rounded-full bg-white/[0.06] ring-1 ring-white/10 px-3 py-1.5 text-xs text-white/75" style={fadeUp(0.1)}>
+      “Fever and cough for three days”
+    </div>
+    <ArrowDown aria-hidden="true" className="w-3.5 h-3.5 ml-4 text-white/50" />
+    <div className="w-fit max-w-full rounded-xl bg-white/[0.04] ring-1 ring-hos-yellow/30 px-3.5 py-2.5 text-xs text-white" style={fadeUp(0.5)}>
+      <span className="font-semibold">Dr. [name]</span> · Senior Physician · 19 years
+      <span className="block mt-0.5 text-white/60">Tomorrow, 11:00 AM</span>
+    </div>
+  </div>
+);
+
+const HoldTheSlot: React.FC = () => (
+  <div className="w-full rounded-2xl rounded-tl-sm bg-white/[0.07] ring-1 ring-white/10 px-3.5 py-2.5" style={fadeUp(0.2)}>
+    <p className="text-[12px] text-white leading-relaxed">“Bilkul, koi jaldi nahi. Par main slot hold kar deti hoon.”</p>
+    <p className="mt-1 text-[11px] text-white/55">“Of course, no rush. But let me hold the slot for you.”</p>
+  </div>
+);
+
+const LobbyBoard: React.FC = () => (
+  <ul className="w-full flex flex-wrap gap-1.5">
+    {['Doctor schedules', 'Fees', 'Departments', 'Test prices', 'Tariffs', 'Policies'].map((t, i) => (
+      <li key={t} className="rounded-full bg-white/[0.06] ring-1 ring-white/10 px-2.5 py-1 text-[11px] text-white/80" style={fadeUp(0.1 + i * 0.08)}>
+        {t}
+      </li>
+    ))}
+  </ul>
+);
+
+const PeakChart: React.FC = () => (
+  <div className="w-full">
+    <div className="flex items-end gap-1.5 h-24">
+      {[8, 14, 58, 94, 80, 56, 42, 48, 36, 22, 12, 6].map((h, i) => (
+        <span
+          key={i}
+          className={`flex-1 rounded-t origin-bottom ${i === 3 ? 'bg-hos-yellow' : 'bg-white/15'}`}
+          style={{ height: `${h}%`, animation: `hos-rise 0.8s cubic-bezier(0.2,0.7,0.2,1) ${i * 0.05}s both` }}
+        />
+      ))}
+    </div>
+    <div className="mt-2 flex justify-between gap-2 text-[10px] font-mono text-white/50">
+      <span>Early morning</span>
+      <span>OPD opens</span>
+      <span>Night</span>
+    </div>
+  </div>
+);
+
+/* TODO(copy): bento tile headlines */
+const handles: { title: string; body: string; visual: React.ReactNode; span: string; note?: string }[] = [
+  {
+    title: "The caller who can't name the problem",
+    body: 'It turns a vague symptom into a named doctor and a specific time, after ruling out an emergency.',
+    visual: <VagueToNamed />,
+    span: 'lg:col-span-2',
+  },
+  {
+    title: 'The caller who will “think about it”',
+    body: "The most expensive sentence on a hospital line. The agent doesn't argue or repeat itself. It removes the real friction: cost, waiting time, distance or doubt that the doctor will be there.",
+    visual: <HoldTheSlot />,
+    span: '',
+  },
+  {
+    title: 'Questions about your hospital',
+    body: 'Everything you would print on a board in your lobby, answered the same way every time.',
+    visual: <LobbyBoard />,
+    span: '',
+  },
+  {
+    title: 'Peak hours and after hours',
+    body: 'Calls arrive in bursts around OPD opening and fall away at night. Staffing for the peak means paying for the trough. The agent takes the repeatable calls, and it is as unhurried on the fortieth call of the hour as on the first.',
+    visual: <PeakChart />,
+    span: 'lg:col-span-2',
+    note: 'Illustrative',
+  },
+];
+
+/* ── Languages visual: one code-switched sentence, understood ── */
+
+const tokens: [string, 'hi' | 'en'][] = [
+  ['Papa ko', 'hi'],
+  ['teen din se', 'hi'],
+  ['fever', 'en'],
+  ['hai,', 'hi'],
+  ["and he's coughing", 'en'],
+  ['a lot.', 'en'],
+];
+
+const CodeSwitchCard: React.FC = () => (
+  <div className="hos-anim w-full max-w-[440px] rounded-[22px] p-1.5 dk-card">
+    <div className="rounded-[17px] bg-ink-900 ring-1 ring-white/[0.06] p-5 sm:p-6">
+      <div className="flex items-center justify-between gap-3">
+        <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/55">Sample utterance</span>
+        <span className="flex items-center gap-3 text-[10px] text-white/55">
+          <span className="flex items-center gap-1.5">
+            <span className="w-2.5 h-2.5 rounded-sm bg-white/20" />
+            Hindi
+          </span>
+          <span className="flex items-center gap-1.5">
+            <span className="w-2.5 h-2.5 rounded-sm ring-1 ring-hos-yellow bg-hos-yellow/15" />
+            English
+          </span>
+        </span>
+      </div>
+      <p className="mt-5 flex flex-wrap gap-1.5">
+        {tokens.map(([t, lang], i) => (
+          <span
+            key={t}
+            className={`rounded-md px-2 py-1 text-sm ${lang === 'en' ? 'bg-hos-yellow/15 ring-1 ring-hos-yellow/50 text-white' : 'bg-white/[0.1] text-white'}`}
+            style={fadeUp(0.15 + i * 0.18)}
+          >
+            {t}
+          </span>
+        ))}
+      </p>
+      <Waveform className="mt-5" height={26} />
+      <div className="mt-5 pt-4 border-t border-white/[0.08]">
+        <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-hos-yellow">Understood as</div>
+        <dl className="mt-3 space-y-2 text-[12px]">
+          {[
+            ['Caller', 'Family member, for their father'],
+            ['Complaint', 'Fever for three days, cough'],
+            ['Next', 'Rule out an emergency'],
+          ].map(([k, v], i) => (
+            <div key={k} className="flex items-start justify-between gap-4 rounded-lg bg-white/[0.04] ring-1 ring-white/[0.06] px-3 py-2" style={fadeUp(1.3 + i * 0.15)}>
+              <dt className="text-white/55">{k}</dt>
+              <dd className="text-right text-white">{v}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+);
+
+/* ── Safety: what it will never do (enforced at the system level) ── */
+
+const nevers: { title: string; body: string }[] = [
+  { title: 'No medical advice, medicine names or dosages.', body: 'It routes to a doctor. It never stands in for one, however simple the question sounds.' },
+  { title: 'No reading or interpreting test reports.', body: 'What the numbers mean is a consultation, not a phone call.' },
+  { title: 'No patient information over the phone.', body: 'It will not confirm whether a named person is admitted, their room or their condition, to any caller.' },
+  { title: 'No payment credentials.', body: 'Card numbers, CVV, UPI PIN and OTP are never requested or accepted on a call.' },
+  {
+    title: 'No guaranteed costs or approvals.',
+    body: "Estimates are always approximate and subject to the doctor's assessment. Cashless approval is the insurer's decision, never the hospital's.",
+  },
+  { title: 'No manufactured urgency.', body: 'It may not imply a condition will worsen to secure a booking. It asks twice, then accepts the answer.' },
+  { title: 'No invented facts.', body: 'If something is outside the knowledge base, it says so and transfers, rather than guessing a timing or a price.' },
+];
+
+/* ── Setup steps ── */
+
+const setup: { title: string; body: string }[] = [
+  { title: 'We learn your hospital', body: 'Departments, doctor schedules, fees, test prices and policies go into the knowledge base the agent answers from.' },
+  { title: 'We connect your line', body: 'Call forwarding or SIP trunking from your existing PBX. Unanswered or after-hours calls redirect to the agent.' },
+  { title: 'You hear it on your calls', body: 'We build a working version against your actual departments and doctor schedules, and walk you through it.' },
+  { title: 'It starts taking calls', body: 'Most hospitals are live in 2 to 4 weeks, with warm transfers to your reception desk or call centre line.' },
+];
+
+const inputClass = `w-full rounded-xl bg-white/[0.03] border border-white/[0.12] hover:border-white/25 focus:border-hos-yellow/70 px-4 py-3 text-sm text-white placeholder:text-white/50 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-hos-yellow/40`;
+const labelClass = 'block mb-1.5 text-xs font-semibold text-white/70';
 
 export const FrontDeskPage: React.FC = () => {
-  const [activeFaq, setActiveFaq] = useState<number | null>(0);
+  useSeo({
+    title: 'AI Front Desk Agent | Nostavia Health',
+    description:
+      "An AI voice agent that answers every inbound hospital call in local languages, rules out emergencies, names a specific doctor and books the visit, under your hospital's name.",
+    path: '/solutions/front-desk',
+  });
 
   // Form State
   const [submitted, setSubmitted] = useState(false);
@@ -29,12 +396,8 @@ export const FrontDeskPage: React.FC = () => {
     contactNumber: '',
     email: '',
     city: '',
-    preferredTimes: ''
+    preferredTimes: '',
   });
-
-  const toggleFaq = (index: number) => {
-    setActiveFaq(activeFaq === index ? null : index);
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,736 +421,547 @@ export const FrontDeskPage: React.FC = () => {
     }
   };
 
-  const scrollToWalkthrough = () => {
-    const el = document.getElementById('walkthrough-section');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const scrollToRefusal = () => {
-    const el = document.getElementById('refusal-section');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+  const scrollToId = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
   };
 
   return (
-    <div className="flex flex-col gap-20 py-10 font-body text-[#0F172A] bg-white">
-      
-      {/* ========================================================================= */}
-      {/* 1. HERO EXECUTIVE SECTION */}
-      {/* ========================================================================= */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full pt-4">
-        <div className="p-8 sm:p-14 lg:p-16 bg-white border border-[#E2E8F0] rounded-[2px] space-y-8 shadow-none relative overflow-hidden">
-          
-          <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            FOR HOSPITALS AND CLINICS — NOSTAVIA FRONT DESK
-          </div>
-
-          <h1 className="font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl text-[#0F172A] tracking-tight max-w-4xl leading-[1.02]">
-            The front desk is where hospitals lose patients.
-          </h1>
-
-          <p className="text-base sm:text-xl text-[#64748B] max-w-3xl leading-relaxed font-body">
-            Nostavia Front Desk is an always-on patient support agent that answers every call in local languages, names a specific doctor, and turns an enquiry into a booked visit. It runs under your hospital's name.
-          </p>
-
-          <div className="flex flex-wrap items-center gap-4 pt-4">
-            <button
-              onClick={scrollToWalkthrough}
-              className="bg-[#000000] hover:bg-[#1A1A1A] text-white font-display text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-[2px] shadow-sm transition-all inline-flex items-center gap-2"
-            >
-              Request a walkthrough
-              <ArrowRight className="w-4 h-4" />
-            </button>
-
-            <button
-              onClick={scrollToRefusal}
-              className="bg-white hover:bg-slate-50 text-[#0F172A] border border-[#CBD5E1] font-display text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-[2px] transition-all"
-            >
-              See what it will not do
-            </button>
-          </div>
-
-          {/* Key Metrics Banner */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-[#E2E8F0] font-mono text-xs text-[#0F172A]">
-            <div>
-              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">Multilingual</div>
-              <div className="text-[#64748B] font-semibold mt-1">Native Voice Conversational</div>
-            </div>
-            <div>
-              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">0 Leakage</div>
-              <div className="text-[#64748B] font-semibold mt-1">Named Doctors + Specific Slots</div>
-            </div>
-            <div>
-              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">100%</div>
-              <div className="text-[#64748B] font-semibold mt-1">Calls Answered Immediately</div>
-            </div>
-            <div>
-              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">White-Label</div>
-              <div className="text-[#64748B] font-semibold mt-1">Under Your Hospital's Name</div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 2. THE CORE PROBLEM */}
-      {/* ========================================================================= */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
-        <div className="space-y-3">
-          <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            THE FRONT DESK BOTTLENECK
-          </div>
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
-            Your doctors are available. Your phone is the bottleneck.
-          </h2>
-          <p className="text-base text-[#64748B] max-w-3xl leading-relaxed font-body">
-            A patient calls with a complaint they cannot name. What happens in the next ninety seconds decides whether they arrive at your hospital or somewhere else. Three things break at that moment, and none of them are clinical.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center font-bold font-mono text-sm">
-                1
-              </div>
-              <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-                They are not told who to meet
-              </h3>
-              <p className="text-sm text-[#64748B] leading-relaxed font-body">
-                A caller who hears the name of a department has been given a category. A caller who hears the name of a doctor, their designation and their years of experience has been given a reason to travel.
-              </p>
-            </div>
-          </div>
-
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center font-bold font-mono text-sm">
-                2
-              </div>
-              <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-                They are not told the doctor will be there
-              </h3>
-              <p className="text-sm text-[#64748B] leading-relaxed font-body">
-                The fear of travelling and finding nobody is the most common unspoken objection on a hospital call. It is almost never addressed out loud.
-              </p>
-            </div>
-          </div>
-
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center font-bold font-mono text-sm">
-                3
-              </div>
-              <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-                They are handled badly
-              </h3>
-              <p className="text-sm text-[#64748B] leading-relaxed font-body">
-                Not out of malice. A desk handling forty calls in an hour, with patients queuing in front of it, will get short with the tenth person asking the same question. That is a staffing problem, not an attitude problem.
-              </p>
-            </div>
-          </div>
-
-        </div>
-
-        {/* Peak Load Explanation Banner */}
-        <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-2 font-body text-sm text-[#64748B] leading-relaxed">
-          <p>
-            Calls arrive in bursts, cluster around OPD opening, and fall to nothing at night. Staffing for the peak means paying for the trough. Nostavia Front Desk takes the repeatable questions off the desk entirely, so the people at your counter are free for the ones that need a human.
-          </p>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 3. FOUR CALLS, FOUR BEHAVIOURS */}
-      {/* ========================================================================= */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
-        <div className="space-y-3">
-          <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            AGENT BEHAVIOURS
-          </div>
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
-            Four calls, four behaviours
-          </h2>
-          <p className="text-base text-[#64748B] max-w-3xl leading-relaxed font-body">
-            Not a feature list. What the agent actually does when the phone rings.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          
-          {/* Scenario 01 */}
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-5 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="font-mono text-xs font-bold text-[#64748B] uppercase tracking-wider">
-                SCENARIO 01 · UNCERTAIN COMPLAINT
-              </div>
-              <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-                The caller who cannot name their problem
-              </h3>
-              <p className="text-sm text-[#64748B] leading-relaxed font-body">
-                The agent lets them finish, reflects the complaint back so they know they were heard, rules out an emergency, then converts a vague symptom into a named doctor and a specific time.
-              </p>
-            </div>
-
-            <div className="p-4 bg-white border border-[#E2E8F0] border-l-4 border-l-[#0F172A] rounded-[2px] space-y-1">
-              <div className="font-mono text-[10px] font-bold text-[#64748B] uppercase tracking-wider">
-                WHAT THE CALLER HEARS:
-              </div>
-              <p className="text-sm text-[#0F172A] font-medium italic">
-                "Iske liye Dr. [name] hain, Senior Physician, unnees saal ka experience. Wo kal subah nau se ek baje tak rahenge. Main gyarah baje ka slot de doon?"
-              </p>
-            </div>
-          </div>
-
-          {/* Scenario 02 */}
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-5 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="font-mono text-xs font-bold text-[#64748B] uppercase tracking-wider">
-                SCENARIO 02 · FRICTION REMOVAL
-              </div>
-              <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-                The caller who says they will think about it
-              </h3>
-              <p className="text-sm text-[#64748B] leading-relaxed font-body">
-                The most expensive sentence on a hospital phone line. The agent does not argue and does not repeat itself. It removes the specific friction: cost, waiting time, distance, or doubt about whether the doctor will show up.
-              </p>
-            </div>
-
-            <div className="p-4 bg-white border border-[#E2E8F0] border-l-4 border-l-[#0F172A] rounded-[2px] space-y-1">
-              <div className="font-mono text-[10px] font-bold text-[#64748B] uppercase tracking-wider">
-                WHAT THE CALLER HEARS:
-              </div>
-              <p className="text-sm text-[#0F172A] font-medium italic">
-                "Bilkul, koi jaldi nahi. Par main slot hold kar deti hoon, na aa payein to phone kar dijiyega, cancel karne ka koi charge nahi hai."
-              </p>
-            </div>
-          </div>
-
-          {/* Scenario 03 */}
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-5 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="font-mono text-xs font-bold text-red-600 uppercase tracking-wider">
-                SCENARIO 03 · EMERGENCY PROTOCOL
-              </div>
-              <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-                The emergency call
-              </h3>
-              <p className="text-sm text-[#64748B] leading-relaxed font-body">
-                Chest pain, breathlessness, bleeding, seizure, trauma. Every booking behaviour switches off instantly. The agent stops handling the call as an enquiry and starts handling it as a dispatch.
-              </p>
-            </div>
-
-            <div className="p-4 bg-white border border-[#E2E8F0] border-l-4 border-l-red-600 rounded-[2px] space-y-1">
-              <div className="font-mono text-[10px] font-bold text-red-600 uppercase tracking-wider">
-                WHAT THE CALLER HEARS:
-              </div>
-              <p className="text-sm text-[#0F172A] font-medium italic">
-                "Ye emergency hai. Turant ambulance bulaiye, ya line par rahiye. Address aur landmark bataiye."
-              </p>
-            </div>
-          </div>
-
-          {/* Scenario 04 */}
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-5 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="font-mono text-xs font-bold text-[#64748B] uppercase tracking-wider">
-                SCENARIO 04 · STRICT REFUSAL
-              </div>
-              <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-                The question that must be refused
-              </h3>
-              <p className="text-sm text-[#64748B] leading-relaxed font-body">
-                A caller asking what their test report says, or whether a relative has been admitted. The agent refuses, but never leaves the caller stranded. A refusal always ends with a route forward.
-              </p>
-            </div>
-
-            <div className="p-4 bg-white border border-[#E2E8F0] border-l-4 border-l-[#0F172A] rounded-[2px] space-y-1">
-              <div className="font-mono text-[10px] font-bold text-[#64748B] uppercase tracking-wider">
-                WHAT THE CALLER HEARS:
-              </div>
-              <p className="text-sm text-[#0F172A] font-medium italic">
-                "Main report phone par nahi padh sakti. Link aapke number par bhej di hai, iska matlab doctor hi theek se batayenge. Follow-up ka time de doon?"
-              </p>
-            </div>
-          </div>
-
-        </div>
-
-        {/* Underlying Mechanic Note */}
-        <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-2">
-          <div className="font-mono text-xs font-bold text-[#0F172A] uppercase tracking-wider">
-            THE MECHANIC UNDERNEATH ALL FOUR
-          </div>
-          <p className="text-sm text-[#64748B] leading-relaxed font-body">
-            Never a department, always a person. Never "kabhi bhi aa jaiye", always a day and a time. The agent is unhurried on the fortieth call of the hour in exactly the way it was on the first.
-          </p>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 3B. DEPLOYMENT PROOF */}
-      {/* ========================================================================= */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
-        <div className="space-y-3">
-          <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            DEPLOYED IN PRODUCTION
-          </div>
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
-            Running inside a tertiary care cardiology hospital in Kanpur
-          </h2>
-          <p className="text-xs text-[#64748B] font-mono">
-            Client named on request, under NDA.
-          </p>
-        </div>
-
-        <div className="p-4 bg-white border border-[#E2E8F0] border-l-4 border-l-[#0F172A] rounded-[2px] font-mono text-xs text-[#0F172A] leading-relaxed">
-          "This is not a demo. The voice agent handles real inbound patient calls against real hospital flow. Callers code-switch between Hindi and English mid-sentence. Family members speak on behalf of the patient. The actual question is frequently not the one asked first. The agent is built for that conversational pattern, and hands off to a human when the call leaves the routine envelope."
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 4. ONE AGENT, THREE CHANNELS */}
-      {/* ========================================================================= */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
-        <div className="space-y-3">
-          <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            OMNICHANNEL ARCHITECTURE
-          </div>
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
-            One agent, three channels
-          </h2>
-          <p className="text-base text-[#64748B] max-w-3xl leading-relaxed font-body">
-            One knowledge base behind all of them. A patient gets the same answer whether they dial, message, or open your website. Nothing is maintained three times.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
-            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center font-bold font-mono text-sm">
-              1
-            </div>
-            <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-              Telephony
-            </h3>
-            <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              The primary channel. The agent answers your hospital line directly, including outside OPD hours and during peak load when the desk cannot pick up. Calls that need a person are handed off, not dropped.
+    <div className="flex flex-col font-body text-white bg-ink-950 overflow-x-clip">
+      {/* 1. Hero: photo with the call in progress */}
+      <section className="relative overflow-hidden bg-ink-950 -mt-16 pt-24 sm:pt-32 pb-16 sm:pb-24">
+        <div aria-hidden="true" className="absolute inset-0 dk-grid dk-fade-mask" />
+        <div aria-hidden="true" className="absolute left-0 -top-48 w-[1000px] max-w-[160vw] h-[620px] bg-[radial-gradient(closest-side,rgba(245,217,123,0.13),transparent)]" />
+        <Container className="relative grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          <Reveal className="lg:col-span-6 space-y-6">
+            <Eyebrow>AI Front Desk Agent</Eyebrow>
+            {/* TODO(copy): hero headline, intro and points */}
+            <h1 className="font-display font-semibold text-4xl sm:text-6xl tracking-[-0.03em] leading-[1.04] pb-1">
+              <span className="dk-text-gradient">Every call answered. </span>
+              <span className="dk-text-sun">In their language.</span>
+            </h1>
+            <p className="text-lg sm:text-xl text-white/60 leading-relaxed max-w-xl">
+              An AI voice agent on your hospital line. It names a specific doctor, rules out emergencies and books the visit, all under your hospital's name.
             </p>
-          </div>
-
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
-            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center font-bold font-mono text-sm">
-              2
-            </div>
-            <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-              WhatsApp
-            </h3>
-            <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              Calls and messaging through a WhatsApp Business number. Appointment requests, timings and directions handled in text, which suits younger patients and attendants coordinating from out of town.
-            </p>
-          </div>
-
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
-            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center font-bold font-mono text-sm">
-              3
-            </div>
-            <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-              Website widget
-            </h3>
-            <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              An embeddable chat widget on your site. Captures the visitor comparing options late at night who would otherwise leave without contact.
-            </p>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 5. WHAT IT WILL NEVER DO (REFUSALS) */}
-      {/* ========================================================================= */}
-      <section id="refusal-section" className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
-        <div className="space-y-3">
-          <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            SYSTEM-LEVEL SAFEGUARDS
-          </div>
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
-            What it will never do
-          </h2>
-          <p className="text-base text-[#64748B] max-w-3xl leading-relaxed font-body">
-            A support agent for a hospital is only as valuable as the things it refuses to do. These are enforced at the system level, not left to the model's judgement on the day.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {[
-            {
-              num: "01",
-              title: "No medical advice, diagnosis, medicine name or dosage.",
-              desc: "The agent routes to a doctor. It never substitutes for one, however simple the question sounds."
-            },
-            {
-              num: "02",
-              title: "No reading or interpreting test reports.",
-              desc: "It confirms a report is ready and sends the link. What the numbers mean is a consultation, not a phone call."
-            },
-            {
-              num: "03",
-              title: "No patient information over the phone.",
-              desc: "It will not confirm whether a named person is admitted, their room, or their condition, to any caller."
-            },
-            {
-              num: "04",
-              title: "No payment credentials.",
-              desc: "Card numbers, CVV, UPI PIN and OTP are never requested or accepted on a call."
-            },
-            {
-              num: "05",
-              title: "No guaranteed costs or approvals.",
-              desc: "Estimates are always framed as approximate and subject to the doctor's assessment. Cashless approval is stated as the insurer's decision, never the hospital's."
-            },
-            {
-              num: "06",
-              title: "No manufactured urgency.",
-              desc: "The agent is not permitted to imply a condition will worsen in order to secure a booking. That is a clinical claim. It asks twice, then accepts the answer."
-            },
-            {
-              num: "07",
-              title: "No invented facts.",
-              desc: "If something is outside the knowledge base, the agent says so and transfers, rather than guessing at a timing or a price."
-            }
-          ].map((item, idx) => (
-            <div key={idx} className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-2 hover:border-[#CBD5E1] transition-all">
-              <div className="font-display font-extrabold text-lg text-[#0F172A]">
-                <span className="font-mono text-[#64748B] text-sm mr-2">{item.num} ·</span>
-                {item.title}
-              </div>
-              <p className="text-sm text-[#64748B] leading-relaxed font-body">
-                {item.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 6. NARROW BY DESIGN */}
-      {/* ========================================================================= */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
-        <div className="space-y-3">
-          <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            SECURITY & SCOPING
-          </div>
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
-            Narrow by design
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
-            <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-              No patient database
-            </h3>
-            <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              The agent has no connection to hospital records and no ability to look up an individual patient. It cannot leak what it cannot reach.
-            </p>
-          </div>
-
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
-            <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-              Operational information only
-            </h3>
-            <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              Doctor schedules, fees, department lists, test prices, tariffs and policies. Information you would print on a board in your lobby.
-            </p>
-          </div>
-
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
-            <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-              Caller details are used for the booking
-            </h3>
-            <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              Name, age and mobile number are collected to place an appointment. Not used for profiling, marketing, or resale.
-            </p>
-          </div>
-
-        </div>
-
-        <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-2 font-body text-xs text-[#64748B] leading-relaxed">
-          <p>
-            <strong className="text-[#0F172A]">Records integration stays out of scope until you ask for it.</strong> Live slot booking and record lookup are separate conversations with their own data agreement. A data processing addendum covering retention, call recording and access control is issued with every engagement. Nothing on this page is a compliance certification.
-          </p>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 7. PRODUCT ROADMAP */}
-      {/* ========================================================================= */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
-        <div className="space-y-3">
-          <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            ROADMAP & EXPANSION
-          </div>
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
-            The desk today, the whole patient conversation next
-          </h2>
-          <p className="text-base text-[#64748B] max-w-3xl leading-relaxed font-body">
-            What goes live first is deliberately the smallest useful version. The same layer supports more once it has earned your trust.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-3 hover:border-[#CBD5E1] transition-all">
-            <h3 className="font-display font-extrabold text-xl text-[#0F172A]">
-              Appointment reminders
-            </h3>
-            <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              A call the evening before every booked slot, so a booked patient becomes an arriving patient.
-            </p>
-          </div>
-
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-3 hover:border-[#CBD5E1] transition-all">
-            <h3 className="font-display font-extrabold text-xl text-[#0F172A]">
-              Post-discharge follow-up
-            </h3>
-            <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              A structured check-in call after discharge, routing anything concerning back to the treating department.
-            </p>
-          </div>
-
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-3 hover:border-[#CBD5E1] transition-all">
-            <h3 className="font-display font-extrabold text-xl text-[#0F172A]">
-              Reason-for-call analytics
-            </h3>
-            <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              Every call tagged by what it was about, so you learn what your phone actually demands.
-            </p>
-          </div>
-
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-3 hover:border-[#CBD5E1] transition-all">
-            <h3 className="font-display font-extrabold text-xl text-[#0F172A]">
-              Campaign calling
-            </h3>
-            <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              Camp invitations, vaccination reminders and checkup drives, run as batches against a list.
-            </p>
-          </div>
-
-        </div>
-
-        <div className="text-xs text-[#64748B] font-mono">
-          * These are on the roadmap. None of them are part of an initial deployment, and each is scoped separately.
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 8. INTERACTIVE WALKTHROUGH REQUEST FORM */}
-      {/* ========================================================================= */}
-      <section id="walkthrough-section" className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
-        <div className="space-y-3">
-          <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            REQUEST A WALKTHROUGH
-          </div>
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
-            See it handle your calls
-          </h2>
-          <p className="text-base text-[#64748B] max-w-3xl leading-relaxed font-body">
-            The fastest way to judge this is to hear it answer a call the way your patients would. We will build a working version against your actual departments and doctor schedules, and walk you through it.
-          </p>
-        </div>
-
-        <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] p-8 sm:p-12 shadow-none max-w-4xl">
-          {submitted ? (
-            <div className="py-8 flex flex-col items-center text-center space-y-4 font-body">
-              <div className="w-14 h-14 rounded-full bg-[#ECFDF5] border border-[#A7F3D0] flex items-center justify-center mb-1">
-                <CheckCircle2 className="w-8 h-8 text-[#059669]" />
-              </div>
-
-              <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-                Walkthrough Request Confirmed
-              </h3>
-
-              <p className="text-sm text-[#64748B] max-w-lg leading-relaxed">
-                Thank you. We have logged your request. We are redirecting you to select a suitable time on Google Calendar.
-              </p>
-
-              <div className="bg-[#EFF6FF] border border-[#BFDBFE] rounded-[2px] p-4 text-center w-full max-w-md space-y-2 my-2">
-                <p className="text-xs text-[#1E40AF] font-medium">
-                  Redirecting you to Google Calendar to select your demo slot...
-                </p>
-                <a
-                  href="https://calendar.app.google/cysR8LF2gMtuneNs9"
-                  className="inline-flex items-center justify-center gap-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-[2px] transition-all cursor-pointer shadow-sm w-full"
-                >
-                  <Calendar className="w-4 h-4" />
-                  PICK A TIME ON GOOGLE CALENDAR →
-                </a>
-              </div>
-
-              <button
-                onClick={() => setSubmitted(false)}
-                className="mt-4 bg-white hover:bg-[#F1F5F9] text-[#0F172A] border border-[#CBD5E1] font-display text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-[2px] transition-all cursor-pointer"
-              >
-                Submit Another Request
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-5 text-xs font-body">
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-[#0F172A] mb-1.5 font-mono text-[11px] font-bold uppercase">HOSPITAL NAME *</label>
-                  <input
-                    required
-                    type="text"
-                    placeholder="e.g. City Care Super Specialty Hospital"
-                    value={formData.hospitalName}
-                    onChange={(e) => setFormData({ ...formData, hospitalName: e.target.value })}
-                    className="w-full bg-white border border-[#E2E8F0] focus:border-[#0F172A] rounded-[2px] px-4 py-3 text-[#0F172A] outline-none font-body text-sm"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[#0F172A] mb-1.5 font-mono text-[11px] font-bold uppercase">YOUR NAME *</label>
-                  <input
-                    required
-                    type="text"
-                    placeholder="e.g. Dr. Rajesh Kumar"
-                    value={formData.yourName}
-                    onChange={(e) => setFormData({ ...formData, yourName: e.target.value })}
-                    className="w-full bg-white border border-[#E2E8F0] focus:border-[#0F172A] rounded-[2px] px-4 py-3 text-[#0F172A] outline-none font-body text-sm"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-[#0F172A] mb-1.5 font-mono text-[11px] font-bold uppercase">ROLE</label>
-                  <input
-                    type="text"
-                    placeholder="e.g. Medical Director / Operations Head"
-                    value={formData.role}
-                    onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                    className="w-full bg-white border border-[#E2E8F0] focus:border-[#0F172A] rounded-[2px] px-4 py-3 text-[#0F172A] outline-none font-body text-sm"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[#0F172A] mb-1.5 font-mono text-[11px] font-bold uppercase">PHONE OR WHATSAPP NUMBER *</label>
-                  <input
-                    required
-                    type="tel"
-                    placeholder="Enter your phone or WhatsApp number"
-                    value={formData.contactNumber}
-                    onChange={(e) => setFormData({ ...formData, contactNumber: e.target.value })}
-                    className="w-full bg-white border border-[#E2E8F0] focus:border-[#0F172A] rounded-[2px] px-4 py-3 text-[#0F172A] outline-none font-body text-sm"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-[#0F172A] mb-1.5 font-mono text-[11px] font-bold uppercase">EMAIL</label>
-                  <input
-                    type="email"
-                    placeholder="admin@hospital.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-white border border-[#E2E8F0] focus:border-[#0F172A] rounded-[2px] px-4 py-3 text-[#0F172A] outline-none font-body text-sm"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[#0F172A] mb-1.5 font-mono text-[11px] font-bold uppercase">CITY</label>
-                  <input
-                    type="text"
-                    placeholder="e.g. Mumbai / New Delhi / Bengaluru"
-                    value={formData.city}
-                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    className="w-full bg-white border border-[#E2E8F0] focus:border-[#0F172A] rounded-[2px] px-4 py-3 text-[#0F172A] outline-none font-body text-sm"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-[#0F172A] mb-1.5 font-mono text-[11px] font-bold uppercase">WHICH DAYS AND TIMES SUIT YOU FOR A 20 MINUTE CALL?</label>
-                <textarea
-                  rows={2}
-                  placeholder="e.g. Tuesday or Thursday morning around 11 AM"
-                  value={formData.preferredTimes}
-                  onChange={(e) => setFormData({ ...formData, preferredTimes: e.target.value })}
-                  className="w-full bg-white border border-[#E2E8F0] focus:border-[#0F172A] rounded-[2px] px-4 py-3 text-[#0F172A] outline-none font-body text-sm"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full sm:w-auto bg-[#000000] hover:bg-[#1A1A1A] text-white font-display text-xs font-bold uppercase tracking-wider px-9 py-4 rounded-[2px] shadow-sm transition-all inline-flex items-center justify-center gap-2 mt-2"
-              >
+            <ul className="space-y-2 pt-1">
+              {['Local languages, even Hindi and English in one sentence', 'Rules out emergencies before anything else', 'Hands over to your team when a call needs a person'].map((p) => (
+                <li key={p} className="flex items-start gap-3 text-base text-white">
+                  <span aria-hidden="true" className="mt-2.5 w-4 h-[3px] shrink-0 bg-hos-yellow" />
+                  {p}
+                </li>
+              ))}
+            </ul>
+            <div className="flex flex-wrap gap-3 pt-2">
+              <button type="button" onClick={() => scrollToId('walkthrough')} className={primaryBtn}>
                 Request a walkthrough
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight aria-hidden="true" className="w-4 h-4" />
               </button>
-
-            </form>
-          )}
-        </div>
+              <button type="button" onClick={() => scrollToId('safety')} className={secondaryBtn}>
+                See what it won't do
+              </button>
+            </div>
+          </Reveal>
+          <Reveal delay={150} className="lg:col-span-6">
+            <div className="relative min-h-[440px] sm:min-h-[520px] rounded-[20px] overflow-hidden bg-ink-800 ring-1 ring-white/10 shadow-[0_40px_90px_-45px_rgba(0,0,0,0.75)]">
+              <img
+                src="/photos/home-frontdesk-staff.jpg"
+                alt="Hospital staff working at a front desk"
+                width={1600}
+                height={1067}
+                decoding="async"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/45 to-ink-950/10" />
+              <div aria-hidden="true" className="absolute top-4 right-4 sm:top-6 sm:right-6 inline-flex items-center gap-1.5 rounded-full bg-ink-950/80 ring-1 ring-white/15 px-3 py-1.5 text-[11px] text-white/80">
+                <PhoneIncoming className="w-3.5 h-3.5 text-hos-yellow" />
+                Answering as Your Hospital
+              </div>
+              <div aria-hidden="true" className="absolute left-4 right-4 bottom-4 sm:left-6 sm:right-auto sm:bottom-6">
+                <VoiceCallCard />
+              </div>
+            </div>
+          </Reveal>
+        </Container>
       </section>
 
-      {/* ========================================================================= */}
-      {/* 9. FREQUENTLY ASKED QUESTIONS */}
-      {/* ========================================================================= */}
-      <FaqSection
-        title="Everything hospital operations leaders ask about Nostavia Front Desk"
-        faqs={[
+      {/* 2. Deployment case study */}
+      <Section bg="mist" labelledBy="fd-proof-heading">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+          <Reveal className="lg:col-span-5 space-y-5">
+            {/* TODO(copy): case study heading and intro */}
+            <SectionHeading
+              id="fd-proof-heading"
+              eyebrow="Running in a hospital today"
+              title="Real patients. Real calls. Not a demo."
+              intro="The agent handles real inbound patient calls at a tertiary-care cardiology hospital, against real hospital flow."
+            />
+            <p className="text-sm text-white/55">Client named on request, under NDA.</p>
+          </Reveal>
+          <ul className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {[
+              { icon: Languages, title: 'Code-switching, mid-sentence', body: 'Callers move between Hindi and English inside a single sentence. The agent follows them.' },
+              { icon: Users, title: 'Family members speak for the patient', body: "A son calls for his father, a daughter for her mother. The agent is built for callers speaking on a patient's behalf." },
+              { icon: MessageSquareQuote, title: 'The real question comes later', body: 'What a caller asks first is often not what they need. The agent is built for that conversational pattern.' },
+              { icon: PhoneForwarded, title: 'A person when it leaves the routine', body: 'When a call goes outside the routine envelope, the agent hands it to a human.' },
+            ].map(({ icon: Icon, title, body }, i) => (
+              <li key={title}>
+                <Reveal delay={(i % 2) * 90} className="h-full">
+                  <div className="h-full rounded-[20px] dk-card p-6 flex flex-col gap-3">
+                    <span className="w-10 h-10 rounded-[10px] bg-white/[0.05] ring-1 ring-white/10 text-hos-yellow flex items-center justify-center">
+                      <Icon aria-hidden="true" className="w-5 h-5" />
+                    </span>
+                    <h3 className="font-display font-semibold text-lg text-white leading-snug">{title}</h3>
+                    <p className="text-sm text-white/60 leading-relaxed">{body}</p>
+                  </div>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Section>
+
+      {/* 3. How a call flows */}
+      <Section labelledBy="fd-flow-heading">
+        {/* TODO(copy): call flow heading and intro */}
+        <SectionHead
+          id="fd-flow-heading"
+          eyebrow="How a call flows"
+          title="From hello to a booked visit."
+          intro="A sample call, step by step. Pick a step to see that moment of the conversation."
+        />
+        <Reveal>
+          <CallFlow />
+        </Reveal>
+      </Section>
+
+      {/* 4. What it handles */}
+      <Section bg="mist" labelledBy="fd-handles-heading">
+        {/* TODO(copy): handles heading and intro */}
+        <SectionHead
+          id="fd-handles-heading"
+          eyebrow="What it handles"
+          title="The calls your desk finds hardest."
+          intro="Not a feature list. What the agent actually does when the phone rings."
+        />
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {handles.map((t, i) => (
+            <li key={t.title} className={t.span}>
+              <Reveal delay={(i % 3) * 80} className="h-full">
+                <div className="group relative flex flex-col h-full min-h-[300px] rounded-[20px] dk-card p-6 overflow-hidden">
+                  <span aria-hidden="true" className="absolute -right-16 -top-16 w-48 h-48 bg-[radial-gradient(closest-side,rgba(245,217,123,0.10),transparent)]" />
+                  <h3 className="relative text-xl font-semibold text-white leading-snug">{t.title}</h3>
+                  <p className="relative mt-2 text-sm text-white/60 leading-relaxed">{t.body}</p>
+                  <div aria-hidden="true" className="hos-anim relative mt-auto pt-6">
+                    {t.note && <div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/50">{t.note}</div>}
+                    {t.visual}
+                  </div>
+                </div>
+              </Reveal>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      {/* 5. Languages */}
+      <section aria-labelledby="fd-lang-heading" className="bg-ink-950 py-20 sm:py-28">
+        <Container className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <Reveal className="space-y-6">
+            {/* TODO(copy): languages heading and intro */}
+            <SectionHeading
+              id="fd-lang-heading"
+              eyebrow="Languages"
+              title="Speaks the way your callers do."
+              intro="Callers switch languages mid-sentence, use regional words for symptoms and rarely lead with the real question. The agent is built for exactly that."
+            />
+            <ul className="divide-y divide-white/[0.08] border-y border-white/[0.08]">
+              {[
+                'Answers in local languages, set up for your deployment',
+                'Follows Hindi and English code-switching mid-sentence',
+                'Understands regional variations in medical terms',
+                'Built for natural Indian dialect patterns',
+              ].map((b) => (
+                <li key={b} className="flex items-start gap-3 py-3 text-base text-white/70">
+                  <span aria-hidden="true" className="mt-2.5 w-4 h-[3px] shrink-0 bg-hos-yellow" />
+                  {b}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+          <Reveal delay={150} className="flex justify-center lg:justify-end">
+            <CodeSwitchCard />
+          </Reveal>
+        </Container>
+      </section>
+
+      {/* 6. Safety */}
+      <Section id="safety" bg="navy" labelledBy="fd-safety-heading" className="scroll-mt-20">
+        {/* TODO(copy): safety heading and intro */}
+        <SectionHead
+          id="fd-safety-heading"
+          eyebrow="Safety"
+          title="Emergencies first. A human when it matters."
+          intro="A hospital agent is only as valuable as what it refuses to do. These rules are enforced at the system level, not left to the model's judgement on the day."
+        />
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <Reveal className="h-full">
+            <div className="h-full rounded-[20px] dk-card p-6 sm:p-8 flex flex-col gap-4">
+              <span className="w-10 h-10 rounded-[10px] bg-rose-400/10 ring-1 ring-rose-300/30 text-rose-300 flex items-center justify-center">
+                <Siren aria-hidden="true" className="w-5 h-5" />
+              </span>
+              <h3 className="font-display font-semibold text-2xl text-white tracking-tight">It rules out emergencies first</h3>
+              <p className="text-sm sm:text-base text-white/60 leading-relaxed">
+                Chest pain, breathlessness, bleeding, seizure, trauma. Every booking behaviour switches off at once, and the call is handled as a dispatch, not an
+                enquiry.
+              </p>
+              <div className="mt-auto rounded-xl bg-white/[0.04] border-l-2 border-rose-300/70 px-4 py-3">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-rose-300">What the caller hears</div>
+                <p className="mt-1.5 text-sm text-white leading-relaxed">“Ye emergency hai. Turant ambulance bulaiye, ya line par rahiye. Address aur landmark bataiye.”</p>
+                <p className="mt-1 text-xs text-white/55 leading-relaxed">“This is an emergency. Call an ambulance now, or stay on the line. Tell me the address and a landmark.”</p>
+              </div>
+            </div>
+          </Reveal>
+          <Reveal delay={100} className="h-full">
+            <div className="h-full rounded-[20px] dk-card p-6 sm:p-8 flex flex-col gap-4">
+              <span className="w-10 h-10 rounded-[10px] bg-white/[0.05] ring-1 ring-white/10 text-hos-yellow flex items-center justify-center">
+                <PhoneForwarded aria-hidden="true" className="w-5 h-5" />
+              </span>
+              <h3 className="font-display font-semibold text-2xl text-white tracking-tight">It hands over to your team</h3>
+              <p className="text-sm sm:text-base text-white/60 leading-relaxed">
+                If a caller asks for a person, or the call needs coordination beyond the routine, the agent places a warm transfer to your reception desk or call
+                centre line. Calls that need a person are handed off, not dropped.
+              </p>
+              <div aria-hidden="true" className="hos-anim mt-auto flex items-center gap-3 rounded-xl bg-white/[0.04] ring-1 ring-white/[0.06] px-4 py-3 text-xs">
+                <span className="rounded-full bg-white/10 px-2.5 py-1 text-white">Agent</span>
+                <span className="relative flex-1 h-px bg-white/20">
+                  {['0%', '33%', '66%'].map((left, i) => (
+                    <span
+                      key={left}
+                      className="absolute -top-[2.5px] w-1.5 h-1.5 rounded-full bg-hos-yellow"
+                      style={{ left, animation: `hos-flow 2.1s linear ${i * 0.7}s infinite both` }}
+                    />
+                  ))}
+                </span>
+                <span className="rounded-full bg-hos-yellow/15 ring-1 ring-hos-yellow/40 px-2.5 py-1 text-white">Reception desk</span>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+          <Reveal className="lg:col-span-7 h-full">
+            <Panel className="h-full">
+              <h3 className="font-display font-semibold text-xl text-white">What it will never do</h3>
+              <p className="mt-2 text-sm text-white/60">A refusal always ends with a route forward, never a stranded caller.</p>
+              <ul className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
+                {nevers.map((n) => (
+                  <li key={n.title} className="flex items-start gap-3">
+                    <Ban aria-hidden="true" className="w-4 h-4 mt-0.5 shrink-0 text-hos-yellow" />
+                    <span>
+                      <span className="block text-sm font-semibold text-white leading-snug">{n.title}</span>
+                      <span className="block mt-1 text-sm text-white/60 leading-relaxed">{n.body}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </Panel>
+          </Reveal>
+          <Reveal delay={100} className="lg:col-span-5 h-full">
+            <Panel dark className="h-full flex flex-col gap-5">
+              <h3 className="font-display font-semibold text-xl text-white">Narrow by design</h3>
+              <ul className="space-y-4">
+                {[
+                  { icon: Database, title: 'No patient database', body: 'No connection to hospital records and no way to look up an individual patient. It cannot leak what it cannot reach.' },
+                  { icon: BookOpen, title: 'Operational information only', body: 'Doctor schedules, fees, department lists, test prices, tariffs and policies.' },
+                  { icon: UserCheck, title: 'Caller details for the booking only', body: 'Name, age and mobile number, collected to place an appointment. Never used for profiling, marketing or resale.' },
+                ].map(({ icon: Icon, title, body }) => (
+                  <li key={title} className="flex items-start gap-3 border-t border-white/10 pt-4">
+                    <Icon aria-hidden="true" className="w-4 h-4 mt-0.5 shrink-0 text-hos-yellow" />
+                    <span>
+                      <span className="block text-sm font-semibold text-white">{title}</span>
+                      <span className="block mt-1 text-sm text-white/60 leading-relaxed">{body}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-auto text-xs text-white/55 leading-relaxed">
+                A data processing addendum covering retention, call recording and access control is issued with every engagement. Records integration and live slot
+                booking are scoped separately, with their own data agreement. Nothing on this page is a compliance certification.
+              </p>
+            </Panel>
+          </Reveal>
+        </div>
+        <Disclaimer />
+      </Section>
+
+      {/* 7. Setup and pricing */}
+      <Section labelledBy="fd-setup-heading">
+        {/* TODO(copy): setup heading and intro */}
+        <SectionHead
+          id="fd-setup-heading"
+          eyebrow="Setup and pricing"
+          title="On your existing line in weeks."
+          intro="No new phone system and no records integration to start. We build it around your departments and doctor schedules."
+        />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start">
+          <ol className="lg:col-span-7 space-y-0">
+            {setup.map((s, i) => (
+              <li key={s.title}>
+                <Reveal delay={i * 90} className="relative flex gap-5 pb-8 last:pb-0">
+                  {i < setup.length - 1 && <span aria-hidden="true" className="absolute left-[17px] top-10 bottom-0 w-px bg-gradient-to-b from-hos-yellow/50 to-white/[0.06]" />}
+                  <span className="relative w-9 h-9 shrink-0 rounded-full ring-1 ring-hos-yellow/50 bg-ink-950 text-hos-yellow text-xs font-mono font-semibold flex items-center justify-center">
+                    <span className="sr-only">Step </span>
+                    {i + 1}
+                  </span>
+                  <span className="pt-1.5">
+                    <h3 className="font-display font-semibold text-lg text-white">{s.title}</h3>
+                    <p className="mt-1.5 text-sm text-white/60 leading-relaxed max-w-lg">{s.body}</p>
+                  </span>
+                </Reveal>
+              </li>
+            ))}
+          </ol>
+
+          <Reveal delay={120} className="lg:col-span-5">
+            <div className="relative overflow-hidden rounded-[22px] dk-card dk-ring-sun p-6 sm:p-8">
+              <span aria-hidden="true" className="absolute -right-20 -top-20 w-56 h-56 bg-[radial-gradient(closest-side,rgba(245,217,123,0.14),transparent)]" />
+              <div className="relative space-y-6">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-hos-yellow">AI Front Desk Agent</span>
+                  <span className="rounded-full bg-white/[0.06] ring-1 ring-white/10 px-2.5 py-1 text-[11px] text-white/80">White Label</span>
+                </div>
+                <dl className="space-y-4">
+                  <div>
+                    <dt className="text-sm text-white/55">One-time setup</dt>
+                    <dd className="mt-1 font-display font-semibold text-4xl text-white tracking-tight">
+                      <span className="text-base font-normal text-white/60">from </span>$1,500
+                    </dd>
+                  </div>
+                  <div className="border-t border-white/[0.08] pt-4">
+                    <dt className="text-sm text-white/55">Monthly plan</dt>
+                    <dd className="mt-1 font-display font-semibold text-4xl text-white tracking-tight">
+                      <span className="text-base font-normal text-white/60">from </span>$399<span className="text-base font-normal text-white/60">/mo</span>
+                    </dd>
+                  </div>
+                </dl>
+                <p className="text-sm text-white/60 leading-relaxed">Depending on languages and departments. Very high call volumes are billed per minute.</p>
+                <div className="flex flex-col gap-3">
+                  <Link to="/pricing" className={textLink}>
+                    See all pricing
+                    <ArrowRight aria-hidden="true" className="w-4 h-4" />
+                  </Link>
+                  <Link to="/solutions/hospitals" className={textLink}>
+                    Part of Hospital Programmes
+                    <ArrowRight aria-hidden="true" className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* 8. Walkthrough request form */}
+      <section id="walkthrough" aria-labelledby="fd-walkthrough-heading" className="scroll-mt-20 bg-ink-900 border-y border-white/[0.06] py-20 sm:py-28">
+        <Container className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+          <Reveal className="lg:col-span-5 space-y-6">
+            {/* TODO(copy): walkthrough heading and intro */}
+            <SectionHeading
+              id="fd-walkthrough-heading"
+              eyebrow="Request a walkthrough"
+              title="Hear it answer your calls."
+              intro="The fastest way to judge it is to hear it take a call the way your patients would. We build a working version against your actual departments and doctor schedules, then walk you through it in a 20-minute call."
+            />
+          </Reveal>
+
+          <Reveal delay={120} className="lg:col-span-7">
+            <div className="rounded-[22px] dk-card p-6 sm:p-10">
+              {submitted ? (
+                <div role="status" className="py-6 flex flex-col items-center text-center gap-4">
+                  <span className="w-14 h-14 rounded-full bg-emerald-400/15 ring-1 ring-emerald-300/40 flex items-center justify-center">
+                    <CheckCircle2 aria-hidden="true" className="w-7 h-7 text-emerald-300" />
+                  </span>
+                  <h3 className="font-display font-semibold text-2xl text-white">Request received</h3>
+                  <p className="text-sm text-white/60 max-w-md leading-relaxed">
+                    Thank you. We have logged your request and are taking you to Google Calendar to pick a time for your walkthrough.
+                  </p>
+                  <a href={CALENDAR_URL} className={primaryBtn}>
+                    <Calendar aria-hidden="true" className="w-4 h-4" />
+                    Pick a time on Google Calendar
+                  </a>
+                  <button type="button" onClick={() => setSubmitted(false)} className={secondaryBtn}>
+                    Submit another request
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                      <label htmlFor="fd-hospital" className={labelClass}>
+                        Hospital name *
+                      </label>
+                      <input
+                        id="fd-hospital"
+                        required
+                        type="text"
+                        autoComplete="organization"
+                        placeholder="e.g. City Care Super Specialty Hospital"
+                        value={formData.hospitalName}
+                        onChange={(e) => setFormData({ ...formData, hospitalName: e.target.value })}
+                        className={inputClass}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="fd-name" className={labelClass}>
+                        Your name *
+                      </label>
+                      <input
+                        id="fd-name"
+                        required
+                        type="text"
+                        autoComplete="name"
+                        placeholder="e.g. Dr. Rajesh Kumar"
+                        value={formData.yourName}
+                        onChange={(e) => setFormData({ ...formData, yourName: e.target.value })}
+                        className={inputClass}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                      <label htmlFor="fd-role" className={labelClass}>
+                        Role
+                      </label>
+                      <input
+                        id="fd-role"
+                        type="text"
+                        autoComplete="organization-title"
+                        placeholder="e.g. Medical Director / Operations Head"
+                        value={formData.role}
+                        onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                        className={inputClass}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="fd-phone" className={labelClass}>
+                        Phone number *
+                      </label>
+                      <input
+                        id="fd-phone"
+                        required
+                        type="tel"
+                        autoComplete="tel"
+                        placeholder="Your phone number"
+                        value={formData.contactNumber}
+                        onChange={(e) => setFormData({ ...formData, contactNumber: e.target.value })}
+                        className={inputClass}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                      <label htmlFor="fd-email" className={labelClass}>
+                        Email
+                      </label>
+                      <input
+                        id="fd-email"
+                        type="email"
+                        autoComplete="email"
+                        placeholder="admin@hospital.com"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className={inputClass}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="fd-city" className={labelClass}>
+                        City
+                      </label>
+                      <input
+                        id="fd-city"
+                        type="text"
+                        autoComplete="address-level2"
+                        placeholder="e.g. Mumbai / New Delhi / Bengaluru"
+                        value={formData.city}
+                        onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                        className={inputClass}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="fd-times" className={labelClass}>
+                      Which days and times suit you for a 20-minute call?
+                    </label>
+                    <textarea
+                      id="fd-times"
+                      rows={2}
+                      placeholder="e.g. Tuesday or Thursday morning around 11 AM"
+                      value={formData.preferredTimes}
+                      onChange={(e) => setFormData({ ...formData, preferredTimes: e.target.value })}
+                      className={inputClass}
+                    />
+                  </div>
+
+                  <button type="submit" className={`${primaryBtn} w-full sm:w-auto`}>
+                    Request a walkthrough
+                    <ArrowRight aria-hidden="true" className="w-4 h-4" />
+                  </button>
+                </form>
+              )}
+            </div>
+          </Reveal>
+        </Container>
+      </section>
+
+      {/* 9. FAQ */}
+      <FaqList
+        id="fd-faq-heading"
+        bg="white"
+        title="What operations leaders ask"
+        items={[
           {
-            q: "How does Nostavia Front Desk handle local languages and accent variations?",
-            a: "Nostavia Front Desk uses specialized conversational models trained on natural Indian dialect patterns, code-switching between Hindi and English, and regional medical term variations."
+            q: 'Which languages does it speak?',
+            a: 'Local languages, set up for your deployment. It is built for natural Indian dialect patterns, Hindi and English code-switching mid-sentence, and regional variations in medical terms.',
           },
           {
-            q: "Can the agent integrate into our hospital line without replacing our phone system?",
-            a: "Yes. Nostavia Front Desk operates via direct call-forwarding or SIP trunking from your existing hospital PBX. Unanswered or after-hours calls redirect seamlessly."
+            q: 'Do we need to replace our phone system?',
+            a: 'No. It runs through call forwarding or SIP trunking from your existing hospital PBX. Unanswered or after-hours calls redirect to the agent.',
           },
           {
-            q: "How much does Nostavia Front Desk cost?",
-            a: "It is a White Label product: a one-time setup from $1,500 plus a monthly plan from $399, depending on languages and departments. Very high call volumes are billed per minute. Most hospitals are live in 2–4 weeks."
+            q: 'What happens when a caller needs a person?',
+            a: 'If a caller asks for a human, or needs coordination outside the routine, the agent places a warm transfer to your reception desk or call centre line.',
           },
           {
-            q: "What happens when a caller requires an immediate human handoff?",
-            a: "If a caller asks for a human or requires complex coordination outside operational bounds, the agent places a warm transfer directly to your reception desk or call center line."
-          }
+            q: 'What happens on an emergency call?',
+            a: 'Every booking behaviour switches off. The agent tells the caller to call an ambulance or stay on the line, and asks for the address and a landmark.',
+          },
+          {
+            q: 'Can it look up patients or read reports?',
+            a: 'No. It has no connection to hospital records, will not read or interpret test reports, and will not confirm whether a named person is admitted. Every refusal ends with a route forward, such as a follow-up slot with a doctor.',
+          },
+          {
+            q: 'What caller data does it collect?',
+            a: 'Name, age and mobile number, collected to place the appointment and never used for profiling, marketing or resale. A data processing addendum covering retention, call recording and access control is issued with every engagement.',
+          },
+          {
+            q: 'How much does it cost?',
+            a: 'It is a White Label product: a one-time setup from $1,500 plus a monthly plan from $399, depending on languages and departments. Very high call volumes are billed per minute. Most hospitals are live in 2 to 4 weeks.',
+          },
         ]}
       />
 
-      {/* ========================================================================= */}
-      {/* 10. FINAL ENTERPRISE CTA BANNER */}
-      {/* ========================================================================= */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full pt-4">
-        <div className="p-12 sm:p-16 lg:p-20 bg-[#0F172A] text-white rounded-[2px] border border-[#1E293B] shadow-2xl text-center flex flex-col items-center gap-8">
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-[54px] text-white max-w-4xl leading-[1.05] tracking-tight">
-            Deploy Nostavia Front Desk for your hospital
-          </h2>
-          <p className="text-base sm:text-lg text-slate-300 font-body max-w-2xl leading-relaxed">
-            See it answer calls against your doctor schedule and department listings in a live 20-minute walkthrough.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-            <button
-              onClick={scrollToWalkthrough}
-              className="bg-white hover:bg-slate-100 text-[#0F172A] font-display text-xs font-bold uppercase tracking-wider px-9 py-4 rounded-[2px] shadow-md transition-all inline-flex items-center gap-2"
-            >
-              Request a walkthrough
-              <ArrowRight className="w-4 h-4 text-[#0F172A]" />
-            </button>
-          </div>
-        </div>
-      </section>
-
+      {/* 10. Closing CTA */}
+      {/* TODO(copy): closing headline and body */}
+      <CtaBand
+        title="Let your front desk"
+        highlight="answer every call."
+        body="See it answer calls against your doctor schedule and department listings in a 20-minute walkthrough."
+        primary={{ to: '/demo', label: 'Request a demo' }}
+        secondary={{ to: '/solutions/hospitals', label: 'All hospital programmes' }}
+      />
     </div>
   );
 };

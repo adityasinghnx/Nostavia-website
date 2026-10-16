@@ -48,14 +48,14 @@ import { useSeo } from '../../lib/useSeo';
  * ──────────────────────────────────────────────────────────────────────────── */
 
 const MONO = 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
-const inlineLink = `font-semibold text-hos-black underline underline-offset-4 decoration-hos-yellow decoration-2 hover:decoration-hos-amber ${focusRing}`;
+const inlineLink = `font-semibold text-white underline underline-offset-4 decoration-hos-yellow decoration-2 hover:decoration-white ${focusRing}`;
 
 const fadeUp = (i: number): React.CSSProperties => ({ animation: `hos-fade-up 0.6s cubic-bezier(0.2,0.7,0.2,1) ${0.2 + i * 0.15}s both` });
 
 /* ── Hero visual: an SDK call returning decoded markers into the partner's own UI (sample values) ── */
 const SdkCallCard: React.FC = () => (
   <div
-    className="hos-anim w-[300px] max-w-full rounded-2xl p-4 bg-hos-navy/95 text-white ring-1 ring-white/10 backdrop-blur-md shadow-[0_24px_60px_-20px_rgba(10,10,11,0.45)]"
+    className="hos-anim w-[300px] max-w-full rounded-2xl p-4 bg-ink-850/95 text-white ring-1 ring-white/10 backdrop-blur-md shadow-[0_24px_60px_-20px_rgba(10,10,11,0.45)]"
     style={{ animation: 'hos-fade-up 0.6s cubic-bezier(0.2,0.7,0.2,1) both' }}
   >
     <div className="flex items-center justify-between gap-3 mb-3">
@@ -65,15 +65,15 @@ const SdkCallCard: React.FC = () => (
         </span>
         <span className="truncate">Your app · SDK call</span>
       </span>
-      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Illustrative</span>
+      <span className="text-[10px] font-bold uppercase tracking-wider text-white/50">Illustrative</span>
     </div>
-    <div className="rounded-lg bg-hos-black/40 px-3 py-2 text-[11px] text-slate-300" style={{ fontFamily: MONO, ...fadeUp(0) }}>
+    <div className="rounded-lg bg-ink-950/60 px-3 py-2 text-[11px] text-slate-300" style={{ fontFamily: MONO, ...fadeUp(0) }}>
       <span className="text-hos-yellow">await</span> health.reports.<span className="text-white font-semibold">decode</span>(pdf)
     </div>
     <ul className="mt-3 space-y-1.5">
       {(
         [
-          ['HbA1c', 'Optimal', 'bg-hos-yellow text-hos-black'],
+          ['HbA1c', 'Optimal', 'bg-hos-yellow text-ink-950'],
           ['Vitamin D', 'Outlier', 'border border-hos-yellow text-hos-yellow'],
           ['LDL', 'In range', 'bg-white/10 text-slate-200'],
         ] as [string, string, string][]
@@ -122,13 +122,13 @@ const SdkLoop: React.FC = () => {
               <Reveal delay={i * 90} className="h-full">
                 <div className={`h-full rounded-[16px] border p-5 flex flex-col gap-3 transition-colors duration-500 ${on ? 'bg-white/10 border-hos-yellow/60' : 'bg-white/5 border-white/10'}`}>
                   <span
-                    className={`relative z-10 w-11 h-11 rounded-[10px] flex items-center justify-center ring-4 ring-hos-navy transition-colors duration-500 ${
-                      on ? 'bg-hos-yellow text-hos-black' : 'bg-[#1C2542] text-hos-yellow'
+                    className={`relative z-10 w-11 h-11 rounded-[10px] flex items-center justify-center ring-4 ring-ink-900 transition-colors duration-500 ${
+                      on ? 'bg-hos-yellow text-ink-950' : 'bg-[#1C2542] text-hos-yellow'
                     }`}
                   >
                     <Icon aria-hidden="true" className="w-5 h-5" />
                   </span>
-                  <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                  <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-white/50">
                     <span className="sr-only">Step </span>
                     {String(i + 1).padStart(2, '0')}
                   </span>
@@ -161,7 +161,7 @@ const SdkLoop: React.FC = () => {
 /* ── Illustrative code sample. Generic calls only: no real package, key or endpoint. ── */
 type Tok = 'c' | 'k' | 'f' | 's' | 'p';
 const tokClass: Record<Tok, string> = {
-  c: 'text-slate-500 italic',
+  c: 'text-white/55 italic',
   k: 'text-hos-yellow',
   f: 'text-white font-semibold',
   s: 'text-hos-cream',
@@ -188,7 +188,7 @@ const CODE: [Tok, string][][] = [
 ];
 
 const CodeSample: React.FC = () => (
-  <figure className="rounded-[18px] bg-hos-navy p-2 shadow-[0_40px_90px_-40px_rgba(18,26,49,0.6)]">
+  <figure className="rounded-[18px] bg-ink-800 p-2 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.75)]">
     <div aria-hidden="true" className="flex items-center gap-1.5 px-3 py-2">
       <span className="w-2.5 h-2.5 rounded-full bg-white/20" />
       <span className="w-2.5 h-2.5 rounded-full bg-white/20" />
@@ -198,11 +198,11 @@ const CodeSample: React.FC = () => (
       </span>
       <span className="ml-auto text-[10px] font-bold uppercase tracking-wider text-hos-yellow">Illustrative</span>
     </div>
-    <pre className="rounded-[12px] bg-hos-black/50 p-4 sm:p-5 text-[12px] sm:text-[13px] leading-6 whitespace-pre-wrap break-words" style={{ fontFamily: MONO }}>
+    <pre className="rounded-[12px] bg-ink-950/70 p-4 sm:p-5 text-[12px] sm:text-[13px] leading-6 whitespace-pre-wrap break-words" style={{ fontFamily: MONO }}>
       <code>
         {CODE.map((line, i) => (
           <span key={i} className="grid grid-cols-[1.75rem_minmax(0,1fr)] min-h-[1.5rem]">
-            <span aria-hidden="true" className="select-none text-right pr-3 text-slate-600">
+            <span aria-hidden="true" className="select-none text-right pr-3 text-white/70">
               {i + 1}
             </span>
             <span>
@@ -217,7 +217,7 @@ const CodeSample: React.FC = () => (
       </code>
     </pre>
     <div className="px-3 pt-3 pb-2 space-y-2">
-      <div className="font-mono text-[10px] font-bold uppercase tracking-widest text-slate-400">Sample output, in your UI</div>
+      <div className="font-mono text-[10px] font-bold uppercase tracking-widest text-white/50">Sample output, in your UI</div>
       <ul className="flex flex-wrap gap-2">
         {(
           [
@@ -242,22 +242,22 @@ const CodeSample: React.FC = () => (
 /* ── Your app on top, the SDKs in the middle, Human OS underneath ── */
 const AppStack: React.FC = () => (
   <div className="w-full max-w-md space-y-2">
-    <div className="rounded-[14px] bg-white border border-hos-hairline p-4 sm:p-5 shadow-sm" style={fadeUp(0)}>
+    <div className="rounded-[14px] bg-white/[0.03] border border-white/[0.08] p-4 sm:p-5 shadow-sm" style={fadeUp(0)}>
       <div className="flex items-center justify-between gap-3">
-        <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-hos-amber">Your app</span>
-        <span className="rounded-full bg-hos-mist border border-hos-hairline px-2 py-0.5 text-[10px] font-bold text-hos-black">Unchanged</span>
+        <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-hos-yellow">Your app</span>
+        <span className="rounded-full bg-white/[0.04] border border-white/[0.08] px-2 py-0.5 text-[10px] font-bold text-white">Unchanged</span>
       </div>
-      <div className="mt-2 font-display font-bold text-hos-black">Your screens, brand and user experience</div>
+      <div className="mt-2 font-display font-bold text-white">Your screens, brand and user experience</div>
       <div className="mt-3 grid grid-cols-3 gap-2">
         {[0, 1, 2].map((i) => (
-          <span key={i} className="h-8 rounded-md bg-hos-mist border border-hos-hairline" />
+          <span key={i} className="h-8 rounded-md bg-white/[0.04] border border-white/[0.08]" />
         ))}
       </div>
     </div>
     <div className="flex justify-center">
       <span className="h-5 w-px bg-hos-amber/60" />
     </div>
-    <div className="rounded-[14px] bg-hos-navy text-white p-4 sm:p-5" style={fadeUp(1)}>
+    <div className="rounded-[14px] bg-ink-800 text-white p-4 sm:p-5" style={fadeUp(1)}>
       <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-hos-yellow">Integrated once</span>
       <div className="mt-3 grid grid-cols-2 gap-2">
         <span className="rounded-lg bg-white/10 px-3 py-2 text-xs font-bold">Intelligence SDK</span>
@@ -267,14 +267,14 @@ const AppStack: React.FC = () => (
     <div className="flex justify-center">
       <span className="h-5 w-px bg-hos-amber/60" />
     </div>
-    <div className="rounded-[14px] bg-white border border-hos-hairline border-l-4 border-l-hos-yellow p-4 sm:p-5" style={fadeUp(2)}>
-      <div className="font-display font-bold text-hos-black">Human OS</div>
-      <div className="text-xs text-[#475569] mt-0.5">
+    <div className="rounded-[14px] bg-white/[0.03] border border-white/[0.08] border-l-4 border-l-hos-yellow p-4 sm:p-5" style={fadeUp(2)}>
+      <div className="font-display font-bold text-white">Human OS</div>
+      <div className="text-xs text-white/60 mt-0.5">
         {numberWord(totalSystems)} systems · {totalLive} live modules, run by Nostavia
       </div>
       <div className="mt-3 flex flex-wrap gap-1.5">
         {systems.map((s) => (
-          <span key={s.slug} className="rounded-md bg-hos-mist border border-hos-hairline px-2 py-1 text-[10px] font-bold text-hos-black">
+          <span key={s.slug} className="rounded-md bg-white/[0.04] border border-white/[0.08] px-2 py-1 text-[10px] font-bold text-white">
             {s.number}
           </span>
         ))}
@@ -298,16 +298,16 @@ const LaunchOptions: React.FC<{ highlight: LaunchId; tag: string; linkHighlight?
       const body = (
         <>
           <span className="flex items-center justify-between gap-3">
-            <span className={`w-10 h-10 rounded-[10px] flex items-center justify-center ${on ? 'bg-white/10 text-hos-yellow' : 'bg-hos-mist border border-hos-hairline text-hos-black'}`}>
+            <span className={`w-10 h-10 rounded-[10px] flex items-center justify-center ${on ? 'bg-white/10 text-hos-yellow' : 'bg-white/[0.04] border border-white/[0.08] text-white'}`}>
               <Icon aria-hidden="true" className="w-5 h-5" />
             </span>
             {on && <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-hos-yellow">{tag}</span>}
           </span>
-          <h3 className={`font-display font-bold text-xl ${on ? 'text-white' : 'text-hos-black'}`}>{name}</h3>
-          <p className={`text-sm leading-relaxed ${on ? 'text-slate-200' : 'text-[#334155]'}`}>{line}</p>
-          <p className={`text-sm leading-relaxed ${on ? 'text-slate-300' : 'text-[#475569]'}`}>{fit}</p>
+          <h3 className={`font-display font-bold text-xl ${on ? 'text-white' : 'text-white'}`}>{name}</h3>
+          <p className={`text-sm leading-relaxed ${on ? 'text-slate-200' : 'text-white/70'}`}>{line}</p>
+          <p className={`text-sm leading-relaxed ${on ? 'text-slate-300' : 'text-white/60'}`}>{fit}</p>
           {(!on || linkHighlight) && (
-            <span className={`mt-auto pt-2 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider ${on ? 'text-white' : 'text-hos-black'}`}>
+            <span className={`mt-auto pt-2 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider ${on ? 'text-white' : 'text-white'}`}>
               Explore {name}
               <ArrowRight aria-hidden="true" className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
             </span>
@@ -315,7 +315,7 @@ const LaunchOptions: React.FC<{ highlight: LaunchId; tag: string; linkHighlight?
         </>
       );
       const cls = `group flex flex-col gap-3 h-full rounded-[16px] p-6 sm:p-7 border transition-all duration-300 ${
-        on ? 'bg-hos-navy border-hos-navy' : 'bg-white border-hos-hairline'
+        on ? 'bg-ink-800 border-white/10' : 'bg-white/[0.03] border-white/[0.08]'
       }`;
       return (
         <li key={id}>
@@ -323,7 +323,7 @@ const LaunchOptions: React.FC<{ highlight: LaunchId; tag: string; linkHighlight?
             {on && !linkHighlight ? (
               <div className={cls}>{body}</div>
             ) : (
-              <Link to={to} className={`${cls} hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-24px_rgba(18,26,49,0.45)] ${on ? '' : 'hover:border-hos-navy'} ${focusRing}`}>
+              <Link to={to} className={`${cls} hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-24px_rgba(0,0,0,0.7)] ${on ? '' : 'hover:border-white/25'} ${focusRing}`}>
                 {body}
               </Link>
             )}
@@ -428,7 +428,7 @@ export const GravityPage: React.FC = () => {
   });
 
   return (
-    <div className="flex flex-col font-body text-hos-black bg-white overflow-x-clip">
+    <div className="flex flex-col font-body text-white bg-white/[0.03] overflow-x-clip">
       <PageHero
         eyebrow="SDK: add health AI to the app you already have"
         title="Embed whole-body health intelligence directly into your existing app."
@@ -482,17 +482,17 @@ export const GravityPage: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Reveal className="h-full">
             <Panel className="h-full space-y-4">
-              <span className="w-10 h-10 rounded-[10px] bg-hos-navy text-hos-yellow flex items-center justify-center">
+              <span className="w-10 h-10 rounded-[10px] bg-ink-800 text-hos-yellow flex items-center justify-center">
                 <Code2 aria-hidden="true" className="w-5 h-5" />
               </span>
-              <h3 className="font-display font-bold text-2xl text-hos-black">Intelligence SDK</h3>
+              <h3 className="font-display font-bold text-2xl text-white">Intelligence SDK</h3>
               {/* TODO(copy) */}
-              <p className="text-base text-[#475569] leading-relaxed">
+              <p className="text-base text-white/60 leading-relaxed">
                 100+ biomarker decoding, food scanning, adaptive protocols and the AI concierge, called from your app and shown in your own screens.
               </p>
               <ul className="flex flex-wrap gap-2">
                 {['Smart Reports', 'Food Intelligence', 'Adaptive Protocols', 'AI Health Companion'].map((m) => (
-                  <li key={m} className="rounded-full bg-hos-mist border border-hos-hairline px-3 py-1 text-xs font-semibold text-hos-black">
+                  <li key={m} className="rounded-full bg-white/[0.04] border border-white/[0.08] px-3 py-1 text-xs font-semibold text-white">
                     {m}
                   </li>
                 ))}
@@ -501,16 +501,16 @@ export const GravityPage: React.FC = () => {
           </Reveal>
           <Reveal delay={120} className="h-full">
             <Panel className="h-full space-y-4">
-              <span className="w-10 h-10 rounded-[10px] bg-hos-navy text-hos-yellow flex items-center justify-center">
+              <span className="w-10 h-10 rounded-[10px] bg-ink-800 text-hos-yellow flex items-center justify-center">
                 <Activity aria-hidden="true" className="w-5 h-5" />
               </span>
-              <h3 className="font-display font-bold text-2xl text-hos-black">Wearables SDK</h3>
-              <p className="text-base text-[#475569] leading-relaxed">
+              <h3 className="font-display font-bold text-2xl text-white">Wearables SDK</h3>
+              <p className="text-base text-white/60 leading-relaxed">
                 Wearable data normalised into one schema, with recovery, sleep and biometric summaries. Apple Health and Google Health Connect today, more device feeds in development.
               </p>
               <ul className="flex flex-wrap gap-2">
                 {['Apple Health', 'Google Health Connect', 'Wearable Telemetry'].map((m) => (
-                  <li key={m} className="rounded-full bg-hos-mist border border-hos-hairline px-3 py-1 text-xs font-semibold text-hos-black">
+                  <li key={m} className="rounded-full bg-white/[0.04] border border-white/[0.08] px-3 py-1 text-xs font-semibold text-white">
                     {m}
                   </li>
                 ))}
@@ -521,15 +521,15 @@ export const GravityPage: React.FC = () => {
 
         <div className="space-y-5">
           <Reveal>
-            <h3 className="font-display font-semibold text-2xl sm:text-3xl text-hos-black tracking-tight">Modules in the SDK</h3>
+            <h3 className="font-display font-semibold text-2xl sm:text-3xl text-white tracking-tight">Modules in the SDK</h3>
           </Reveal>
           <ModuleCards modules={coreModules} />
         </div>
 
         <div className="space-y-5">
           <Reveal className="space-y-2">
-            <h3 className="font-display font-semibold text-2xl sm:text-3xl text-hos-black tracking-tight">Switch on more as you grow</h3>
-            <p className="text-base text-[#475569] leading-relaxed max-w-2xl">
+            <h3 className="font-display font-semibold text-2xl sm:text-3xl text-white tracking-tight">Switch on more as you grow</h3>
+            <p className="text-base text-white/60 leading-relaxed max-w-2xl">
               Add modules as the programme matures. Every module can be tried in a sandbox with fictional data first.
             </p>
           </Reveal>
@@ -561,13 +561,13 @@ export const GravityPage: React.FC = () => {
               title="A few calls, not a rebuild"
               intro="Your app keeps its screens. It asks the SDK for decoded results, wearable summaries and the next step in a member's plan, then shows them in your own components."
             />
-            <ul className="divide-y divide-hos-hairline border-y border-hos-hairline">
+            <ul className="divide-y divide-white/[0.08] border-y border-white/[0.08]">
               {[
                 'All AI requests run through a secure server-side proxy. No API keys ship inside any app.',
                 'Every module can be tried in a sandbox with fictional data first.',
                 'Improvements ship server-side, with no app update for you.',
               ].map((b) => (
-                <li key={b} className="flex items-start gap-3 py-3 text-base text-[#334155]">
+                <li key={b} className="flex items-start gap-3 py-3 text-base text-white/70">
                   <span aria-hidden="true" className="mt-2.5 w-4 h-[3px] shrink-0 bg-hos-yellow" />
                   <span>{b}</span>
                 </li>
@@ -634,9 +634,9 @@ export const GravityPage: React.FC = () => {
           </Reveal>
           <Reveal delay={120} className="lg:col-span-5 h-full">
             <Panel className="h-full space-y-4">
-              <h3 className="font-display font-bold text-lg text-hos-black">What the monthly plan covers</h3>
-              <p className="text-sm text-[#475569] leading-relaxed">Hosting, AI, updates and support.</p>
-              <p className="text-sm text-[#475569] leading-relaxed">All prices in USD, excluding applicable taxes. INR and AED quotes are available on request.</p>
+              <h3 className="font-display font-bold text-lg text-white">What the monthly plan covers</h3>
+              <p className="text-sm text-white/60 leading-relaxed">Hosting, AI, updates and support.</p>
+              <p className="text-sm text-white/60 leading-relaxed">All prices in USD, excluding applicable taxes. INR and AED quotes are available on request.</p>
               <Link to="/pricing" className={`${inlineLink} inline-flex items-center gap-2 text-sm`}>
                 Compare all products and prices
                 <ArrowRight aria-hidden="true" className="w-4 h-4" />
@@ -646,7 +646,7 @@ export const GravityPage: React.FC = () => {
         </div>
         <div className="space-y-5">
           <Reveal>
-            <h3 className="font-display font-semibold text-2xl sm:text-3xl text-hos-black tracking-tight">Three ways to launch</h3>
+            <h3 className="font-display font-semibold text-2xl sm:text-3xl text-white tracking-tight">Three ways to launch</h3>
           </Reveal>
           <LaunchOptions highlight="sdk" tag="This page" />
         </div>
@@ -665,17 +665,17 @@ export const GravityPage: React.FC = () => {
         <Reveal>
           <Panel className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div className="space-y-4">
-              <h3 className="font-mono text-[11px] font-bold uppercase tracking-widest text-hos-grey">{trustGroups.infrastructure.heading}</h3>
+              <h3 className="font-mono text-[11px] font-bold uppercase tracking-widest text-white/55">{trustGroups.infrastructure.heading}</h3>
               <ul className="flex flex-wrap gap-x-10 gap-y-4">
                 {trustGroup('infrastructure').map((item) => (
                   <li key={item.id}>
-                    <span className="block font-display font-bold text-hos-black">{item.name}</span>
-                    <span className="block text-xs text-[#475569] mt-0.5">{item.descriptor}</span>
+                    <span className="block font-display font-bold text-white">{item.name}</span>
+                    <span className="block text-xs text-white/60 mt-0.5">{item.descriptor}</span>
                   </li>
                 ))}
               </ul>
             </div>
-            <p className="text-xs text-[#475569] leading-relaxed lg:max-w-xs">{trustGroups.infrastructure.caption}</p>
+            <p className="text-xs text-white/60 leading-relaxed lg:max-w-xs">{trustGroups.infrastructure.caption}</p>
           </Panel>
         </Reveal>
         <Disclaimer />

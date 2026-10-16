@@ -1,146 +1,114 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
 import { HUMAN_OS_PATH, systemPath, systems } from '../content/human-os';
 import { trustFooterLine } from '../content/trust.config';
-import { ShieldCheck, Lock, Globe, ArrowUpRight } from 'lucide-react';
 
-export const Footer: React.FC = () => {
-  return (
-    <footer className="bg-[#F8FAFC] border-t border-[#E5E7EB] pt-16 pb-12 font-body text-xs text-[#475569]">
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-10 pb-12 border-b border-[#E2E8F0]">
-          
-          <div className="sm:col-span-2 md:col-span-2 flex flex-col gap-4">
-            <Link to="/" className="flex items-center">
-              <img
-                src="/logo.png"
-                alt="Nostavia Health"
-                className="h-8 w-auto object-contain"
-              />
-            </Link>
-            <p className="text-xs text-[#64748B] max-w-sm leading-relaxed">
-              Nostavia builds health AI products for labs, clinics, hospitals and health apps, as a Custom Build, a White Label product or an SDK, all under your brand.
-            </p>
-            <div className="flex flex-col gap-1 text-[11px] font-mono text-[#94A3B8]">
-              <span>Nostavia Technologies Pvt. Ltd.</span>
-              <span>Headquartered in Lucknow, India · Serving India & UAE</span>
-            </div>
-            
-            {/* Compliance Badges */}
-            <div className="flex flex-wrap gap-2 mt-1">
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded border border-[#E2E8F0] bg-white font-mono text-[10px] text-[#059669] shadow-sm">
-                <Lock className="w-3 h-3 text-[#059669]" />
-                SOMA Edge Privacy
-              </span>
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded border border-[#E2E8F0] bg-white font-mono text-[10px] text-[#2563EB] shadow-sm">
-                <ShieldCheck className="w-3 h-3 text-[#2563EB]" />
-                DPDP 2023 Aligned
-              </span>
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded border border-[#E2E8F0] bg-white font-mono text-[10px] text-[#334155] shadow-sm">
-                <Globe className="w-3 h-3" />
-                Dubai Law 17/2026 Ready
-              </span>
-            </div>
+const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hos-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950 rounded';
 
-            {/* Mobile App Store & Google Play Badges */}
-            <div className="pt-2 space-y-2">
-              <div className="eyebrow text-[#94A3B8] text-[10px] uppercase tracking-widest font-mono font-bold">
-                GET THE NOSTAVIA HEALTH APP
-              </div>
-              <div className="flex flex-wrap items-center gap-3">
-                <a
-                  href="https://apps.apple.com/us/app/nostavia-health/id6760108353"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-[4px] bg-[#0F172A] hover:bg-black text-white transition-all shadow-sm group"
-                >
-                  <svg className="w-4 h-4 fill-current shrink-0 text-white" viewBox="0 0 24 24">
-                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.32c.67-.82 1.13-1.97.99-3.12-.98.04-2.18.66-2.87 1.46-.62.72-1.16 1.89-.99 3.01 1.1.09 2.22-.53 2.87-1.35z"/>
-                  </svg>
-                  <div className="flex flex-col text-left leading-none font-body">
-                    <span className="text-[9px] uppercase tracking-wider text-slate-400 font-mono font-medium">Download on the</span>
-                    <span className="text-xs font-bold font-display text-white mt-0.5">App Store</span>
-                  </div>
-                </a>
+const columns: { title: string; links: { to: string; label: string; external?: boolean }[] }[] = [
+  {
+    title: 'Products',
+    links: [
+      { to: '/solutions/engineering', label: 'Custom Build' },
+      { to: '/solutions/storyhealth', label: 'White Label' },
+      { to: '/solutions/gravity', label: 'SDK' },
+      { to: '/solutions/front-desk', label: 'AI Front Desk Agent' },
+      { to: '/solutions/hospitals', label: 'Hospital Programmes' },
+      { to: '/platform', label: 'Technology' },
+    ],
+  },
+  {
+    title: 'Human OS',
+    links: [{ to: HUMAN_OS_PATH, label: 'Overview' }, ...systems.map((s) => ({ to: systemPath(s.slug), label: s.name }))],
+  },
+  {
+    title: 'Industries',
+    links: [
+      { to: '/industries/diagnostic-labs', label: 'Diagnostic Labs' },
+      { to: '/industries/clinics', label: 'Clinics & Longevity' },
+      { to: '/industries/hospitals', label: 'Hospitals' },
+      { to: '/industries/supplements', label: 'Wellness & Apps' },
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
+      { to: '/company', label: 'About & Founders' },
+      { to: '/pricing', label: 'Pricing' },
+      { to: '/security', label: 'Security' },
+      { to: '/clinical', label: 'Clinical Governance' },
+      { to: '/demo', label: 'Book a Demo' },
+      { to: 'https://www.crunchbase.com/organization/nostavia-health', label: 'Crunchbase', external: true },
+    ],
+  },
+];
 
-                <a
-                  href="https://play.google.com/store/apps/details?id=com.nostavia.nostavia_health&hl=en_IN"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-[4px] bg-[#0F172A] hover:bg-black text-white transition-all shadow-sm group"
-                >
-                  <svg className="w-4 h-4 fill-current shrink-0 text-white" viewBox="0 0 512 512">
-                    <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/>
-                  </svg>
-                  <div className="flex flex-col text-left leading-none font-body">
-                    <span className="text-[9px] uppercase tracking-wider text-slate-400 font-mono font-medium">GET IT ON</span>
-                    <span className="text-xs font-bold font-display text-white mt-0.5">Google Play</span>
-                  </div>
-                </a>
-              </div>
-            </div>
-
+export const Footer: React.FC = () => (
+  <footer className="relative bg-ink-950 border-t border-white/[0.08] text-white/60 overflow-hidden">
+    <span aria-hidden="true" className="absolute left-1/2 -translate-x-1/2 -top-40 w-[1000px] max-w-[160vw] h-[360px] bg-[radial-gradient(closest-side,rgba(245,217,123,0.08),transparent)] pointer-events-none" />
+    <div className="relative max-w-[1280px] mx-auto px-4 sm:px-6 pt-16 pb-10">
+      <div className="grid grid-cols-2 md:grid-cols-6 gap-10 pb-12 border-b border-white/[0.08]">
+        <div className="col-span-2 flex flex-col gap-5">
+          <Link to="/" className={`self-start ${focusRing}`}>
+            <img src="/logo.png" alt="Nostavia Health" width={140} height={36} loading="lazy" className="h-8 w-auto object-contain brightness-0 invert" />
+          </Link>
+          <p className="text-sm text-white/55 max-w-sm leading-relaxed">
+            Nostavia builds health AI products for labs, clinics, hospitals and health apps, as a Custom Build, a White Label product or an SDK, all under your brand.
+          </p>
+          <div className="text-xs text-white/50 leading-relaxed">
+            <div>Nostavia Technologies Pvt. Ltd.</div>
+            <div>Headquartered in Lucknow, India · Serving India & UAE</div>
           </div>
-
-          <div className="flex flex-col gap-3">
-            <div className="font-display font-bold text-xs text-[#0F172A] uppercase tracking-wider">PRODUCTS</div>
-            <Link to="/solutions/engineering" className="hover:text-[#2563EB] transition-colors">Custom Build</Link>
-            <Link to="/solutions/storyhealth" className="hover:text-[#2563EB] transition-colors">White Label</Link>
-            <Link to="/solutions/gravity" className="hover:text-[#2563EB] transition-colors">SDK</Link>
-            <Link to="/solutions/front-desk" className="hover:text-[#2563EB] transition-colors">AI Front Desk Agent</Link>
-            <Link to="/platform" className="hover:text-[#2563EB] transition-colors">Technology</Link>
-          </div>
-
-          <div className="flex flex-col gap-3">
-            <div className="font-display font-bold text-xs text-[#0F172A] uppercase tracking-wider">HUMAN OS</div>
-            <Link to={HUMAN_OS_PATH} className="hover:text-[#2563EB] transition-colors font-semibold text-[#0F172A]">Human OS overview</Link>
-            {systems.map((system) => (
-              <Link key={system.slug} to={systemPath(system.slug)} className="hover:text-[#2563EB] transition-colors">
-                {system.name}
-              </Link>
+          <div className="flex flex-wrap gap-2 pt-1">
+            {[
+              { href: 'https://apps.apple.com/us/app/nostavia-health/id6760108353', pre: 'Download on the', name: 'App Store' },
+              { href: 'https://play.google.com/store/apps/details?id=com.nostavia.nostavia_health&hl=en_IN', pre: 'Get it on', name: 'Google Play' },
+            ].map((s) => (
+              <a
+                key={s.name}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex flex-col leading-none rounded-lg dk-card px-3.5 py-2 hover:border-white/20 transition-colors ${focusRing}`}
+              >
+                <span className="text-[9px] uppercase tracking-wider text-white/50">{s.pre}</span>
+                <span className="text-xs font-semibold text-white mt-0.5">{s.name}</span>
+                <span className="sr-only">(opens in a new tab)</span>
+              </a>
             ))}
           </div>
-
-          <div className="flex flex-col gap-3">
-            <div className="font-display font-bold text-xs text-[#0F172A] uppercase tracking-wider">INDUSTRIES</div>
-            <Link to="/industries/diagnostic-labs" className="hover:text-[#2563EB] transition-colors">Diagnostic Labs</Link>
-            <Link to="/industries/clinics" className="hover:text-[#2563EB] transition-colors">Clinics & Longevity</Link>
-            <Link to="/industries/hospitals" className="hover:text-[#2563EB] transition-colors">Hospitals</Link>
-            <Link to="/industries/supplements" className="hover:text-[#2563EB] transition-colors">Supplements</Link>
-          </div>
-
-          <div className="flex flex-col gap-3">
-            <div className="font-display font-bold text-xs text-[#0F172A] uppercase tracking-wider">COMPANY</div>
-            <Link to="/pricing" className="hover:text-[#2563EB] transition-colors">Pricing</Link>
-            <Link to="/security" className="hover:text-[#2563EB] transition-colors">Security</Link>
-            <Link to="/clinical" className="hover:text-[#2563EB] transition-colors">Clinical Governance</Link>
-            <Link to="/company" className="hover:text-[#2563EB] transition-colors">About & Founders</Link>
-            <Link to="/demo" className="hover:text-[#2563EB] transition-colors">Book a Demo</Link>
-            <a
-              href="https://www.crunchbase.com/organization/nostavia-health"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#2563EB] transition-colors inline-flex items-center gap-1 group"
-            >
-              <span>Crunchbase</span>
-              <ArrowUpRight className="w-3 h-3 text-[#94A3B8] group-hover:text-[#2563EB] transition-colors" />
-            </a>
-          </div>
-
         </div>
 
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[11px] text-[#94A3B8]">
-          <div className="flex flex-col items-center sm:items-start gap-1 text-center sm:text-left">
-            <div>© 2026 Nostavia Technologies Pvt. Ltd. All rights reserved.</div>
-            <div className="text-[#64748B]">{trustFooterLine}</div>
+        {columns.map((col) => (
+          <div key={col.title} className="flex flex-col gap-3">
+            <div className="text-[11px] font-semibold uppercase tracking-widest text-white">{col.title}</div>
+            {col.links.map((l) =>
+              l.external ? (
+                <a key={l.to} href={l.to} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-1 text-sm hover:text-white transition-colors ${focusRing}`}>
+                  {l.label}
+                  <ArrowUpRight aria-hidden="true" className="w-3 h-3" />
+                  <span className="sr-only">(opens in a new tab)</span>
+                </a>
+              ) : (
+                <Link key={l.to} to={l.to} className={`text-sm hover:text-white transition-colors ${focusRing}`}>
+                  {l.label}
+                </Link>
+              )
+            )}
           </div>
-          <div>Built for precision longevity & population health.</div>
-        </div>
-
+        ))}
       </div>
-    </footer>
-  );
-};
+
+      <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/50">
+        <div>© 2026 Nostavia Technologies Pvt. Ltd. All rights reserved.</div>
+        <div className="inline-flex items-center gap-2">
+          <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-hos-yellow" />
+          {trustFooterLine}
+        </div>
+      </div>
+    </div>
+  </footer>
+);
 
 export default Footer;

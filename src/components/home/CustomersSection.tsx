@@ -12,11 +12,11 @@ const KIOSK_LOGO = '/client_logos/kiosk_health_clean.png';
 
 const linkStyle = (dark = false) =>
   `mt-auto inline-flex items-center gap-2 text-sm font-bold underline underline-offset-4 decoration-2 ${
-    dark ? 'text-white decoration-hos-yellow hover:decoration-white' : 'text-hos-black decoration-hos-yellow hover:decoration-hos-amber'
+    dark ? 'text-white decoration-hos-yellow hover:decoration-white' : 'text-white decoration-hos-yellow hover:decoration-white'
   } ${focusRing}`;
 
 export const CustomersSection: React.FC = () => (
-  <section aria-labelledby="home-customers-heading" className="bg-white py-20 sm:py-28">
+  <section aria-labelledby="home-customers-heading" className="bg-ink-950 py-20 sm:py-28">
     <Container className="space-y-12">
       {/* TODO(copy): section heading */}
       <Reveal>
@@ -31,7 +31,7 @@ export const CustomersSection: React.FC = () => (
       <Reveal delay={100}>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4">
         {/* Hospital */}
-        <article className="lg:col-span-5 rounded-[16px] bg-hos-navy text-white p-6 sm:p-8 flex flex-col gap-5">
+        <article className="lg:col-span-5 rounded-[16px] bg-ink-800 text-white p-6 sm:p-8 flex flex-col gap-5">
           <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-hos-yellow">Tertiary-care cardiology hospital</span>
           <h3 className="font-display font-semibold text-2xl leading-snug">An AI voice agent on the hospital phone line, against real patient flow.</h3>
           <p className="text-sm text-slate-300 leading-relaxed">
@@ -54,31 +54,31 @@ export const CustomersSection: React.FC = () => (
             decoding="async"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-hos-black/70 via-transparent to-transparent" />
+          <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-transparent to-transparent" />
           <div className="absolute left-4 right-4 bottom-4" aria-hidden="true">
             <VoiceCallCard className="w-full" />
           </div>
         </div>
 
         {/* Live 360 stat */}
-        <article className="md:col-span-2 lg:col-span-3 rounded-[16px] bg-hos-mist border border-hos-hairline p-6 flex flex-col gap-3">
-          <span className="font-display font-semibold text-4xl tracking-tight text-hos-black">Any format</span>
-          <p className="text-sm text-[#475569] leading-relaxed">Lab PDF extraction regardless of layout.</p>
+        <article className="md:col-span-2 lg:col-span-3 rounded-[16px] bg-white/[0.04] border border-white/[0.08] p-6 flex flex-col gap-3">
+          <span className="font-display font-semibold text-4xl tracking-tight text-white">Any format</span>
+          <p className="text-sm text-white/60 leading-relaxed">Lab PDF extraction regardless of layout.</p>
           <img src={LIVE360_LOGO} alt="Live 360° Diagnostics logo" width={160} height={48} loading="lazy" className="mt-auto h-9 w-auto self-start object-contain" />
         </article>
 
         {/* Live 360 story */}
-        <article className="lg:col-span-5 rounded-[16px] border border-hos-hairline bg-white p-6 sm:p-8 flex flex-col gap-5">
-          <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-hos-amber">Live 360° Diagnostics</span>
-          <h3 className="font-display font-semibold text-2xl leading-snug text-hos-black">Smart Reports, white-labelled and running under their brand.</h3>
-          <p className="text-sm text-[#475569] leading-relaxed">
+        <article className="lg:col-span-5 rounded-[16px] border border-white/[0.08] bg-white/[0.03] p-6 sm:p-8 flex flex-col gap-5">
+          <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-hos-yellow">Live 360° Diagnostics</span>
+          <h3 className="font-display font-semibold text-2xl leading-snug text-white">Smart Reports, white-labelled and running under their brand.</h3>
+          <p className="text-sm text-white/60 leading-relaxed">
             The Smart Report layer sits on top of their existing lab reporting pipeline, normalises every marker against source-specific reference ranges and keeps results for longitudinal trends. The report itself becomes the retention mechanism.
           </p>
           {/* The same panel, as a trend: sample values */}
-          <div aria-hidden="true" className="hos-anim rounded-xl bg-hos-mist border border-hos-hairline p-4">
+          <div aria-hidden="true" className="hos-anim rounded-xl bg-white/[0.04] border border-white/[0.08] p-4">
             <div className="flex items-center justify-between text-[11px]">
-              <span className="font-semibold text-hos-black">The same panel, as a trend</span>
-              <span className="text-hos-grey">HbA1c · 4 reports</span>
+              <span className="font-semibold text-white">The same panel, as a trend</span>
+              <span className="text-white/55">HbA1c · 4 reports</span>
             </div>
             <svg viewBox="0 0 300 84" className="mt-2 w-full h-20">
               <rect x="0" y="40" width="300" height="22" rx="4" fill="#F5D97B" fillOpacity="0.35" />
@@ -101,10 +101,10 @@ export const CustomersSection: React.FC = () => (
         </article>
 
         {/* Kiosk story */}
-        <article className="lg:col-span-4 rounded-[16px] border border-hos-hairline bg-white p-6 sm:p-8 flex flex-col gap-5">
+        <article className="lg:col-span-4 rounded-[16px] border border-white/[0.08] bg-white/[0.03] p-6 sm:p-8 flex flex-col gap-5">
           <img src={KIOSK_LOGO} alt="Kiosk Health logo" width={160} height={48} loading="lazy" className="h-9 w-auto self-start object-contain" />
-          <h3 className="font-display font-semibold text-xl leading-snug text-hos-black">Offline-first village health kiosks across four Uttar Pradesh districts.</h3>
-          <p className="text-sm text-[#475569] leading-relaxed">
+          <h3 className="font-display font-semibold text-xl leading-snug text-white">Offline-first village health kiosks across four Uttar Pradesh districts.</h3>
+          <p className="text-sm text-white/60 leading-relaxed">
             A Hindi voice copilot, decoded diagnostics spoken aloud and a chronic disease registry with automated recall, on a single tablet at each kiosk.
           </p>
           <ul className="mt-auto grid grid-cols-2 gap-2">
@@ -116,8 +116,8 @@ export const CustomersSection: React.FC = () => (
             ].map(([Icon, label]) => {
               const I = Icon as React.FC<{ className?: string }>;
               return (
-                <li key={label as string} className="flex items-center gap-2 rounded-lg bg-hos-mist border border-hos-hairline px-2.5 py-2 text-[11px] font-semibold text-hos-black">
-                  <I aria-hidden="true" className="w-3.5 h-3.5 shrink-0 text-hos-amber" />
+                <li key={label as string} className="flex items-center gap-2 rounded-lg bg-white/[0.04] border border-white/[0.08] px-2.5 py-2 text-[11px] font-semibold text-white">
+                  <I aria-hidden="true" className="w-3.5 h-3.5 shrink-0 text-hos-yellow" />
                   {label as string}
                 </li>
               );
@@ -126,7 +126,7 @@ export const CustomersSection: React.FC = () => (
         </article>
 
         {/* Kiosk stat */}
-        <article className="lg:col-span-3 rounded-[16px] bg-hos-black text-white p-6 flex flex-col gap-3">
+        <article className="lg:col-span-3 rounded-[16px] bg-ink-950 text-white p-6 flex flex-col gap-3">
           <div className="flex items-baseline gap-2">
             <span className="font-display font-semibold text-5xl tracking-tight">4</span>
             <span className="text-base font-semibold">districts</span>

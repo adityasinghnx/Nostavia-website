@@ -28,7 +28,7 @@ const faqs: { q: string; a: React.ReactNode }[] = [
     a: (
       <>
         Nostavia runs on infrastructure certified to SOC 2 Type II and ISO/IEC 27001, with partner data isolated, encrypted and handled in line with India's DPDP Act. Certifications are held by our infrastructure providers, not by Nostavia Technologies.{' '}
-        <Link to="/security" className={`font-semibold text-hos-black underline underline-offset-4 decoration-hos-yellow ${focusRing}`}>
+        <Link to="/security" className={`font-semibold text-white underline underline-offset-4 decoration-hos-yellow ${focusRing}`}>
           Security and compliance
         </Link>
       </>
@@ -43,7 +43,7 @@ const faqs: { q: string; a: React.ReactNode }[] = [
     a: (
       <>
         A one-time build fee plus a monthly plan.{' '}
-        <Link to="/pricing" className={`font-semibold text-hos-black underline underline-offset-4 decoration-hos-yellow ${focusRing}`}>
+        <Link to="/pricing" className={`font-semibold text-white underline underline-offset-4 decoration-hos-yellow ${focusRing}`}>
           See pricing
         </Link>
       </>
@@ -54,12 +54,12 @@ const faqs: { q: string; a: React.ReactNode }[] = [
 export const HomeFaqSection: React.FC = () => {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section aria-labelledby="home-faq-heading" className="bg-hos-mist py-20 sm:py-28">
+    <section aria-labelledby="home-faq-heading" className="bg-ink-900 border-y border-white/[0.06] py-20 sm:py-28">
       <Container className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <Reveal className="lg:col-span-4">
           <SectionHeading id="home-faq-heading" eyebrow="FAQ" title="Questions buyers ask us" />
         </Reveal>
-        <div className="lg:col-span-8 divide-y divide-hos-hairline border-y border-hos-hairline">
+        <div className="lg:col-span-8 divide-y divide-white/[0.08] border-y border-white/[0.08]">
           {faqs.map((f, i) => {
             const isOpen = open === i;
             return (
@@ -71,10 +71,10 @@ export const HomeFaqSection: React.FC = () => {
                     aria-controls={`faq-panel-${i}`}
                     id={`faq-button-${i}`}
                     onClick={() => setOpen(isOpen ? null : i)}
-                    className={`w-full flex items-center justify-between gap-6 py-5 text-left font-display font-semibold text-lg text-hos-black ${focusRing}`}
+                    className={`w-full flex items-center justify-between gap-6 py-5 text-left font-display font-semibold text-lg text-white ${focusRing}`}
                   >
                     {f.q}
-                    <span className={`w-8 h-8 shrink-0 rounded-full border flex items-center justify-center transition-all duration-300 ${isOpen ? 'rotate-45 bg-hos-navy border-hos-navy text-hos-yellow' : 'border-hos-hairline text-hos-black'}`}>
+                    <span className={`w-8 h-8 shrink-0 rounded-full border flex items-center justify-center transition-all duration-300 ${isOpen ? 'rotate-45 bg-ink-800 border-white/10 text-hos-yellow' : 'border-white/[0.08] text-white'}`}>
                       <Plus aria-hidden="true" className="w-4 h-4" />
                     </span>
                   </button>
@@ -84,7 +84,7 @@ export const HomeFaqSection: React.FC = () => {
                   role="region"
                   aria-labelledby={`faq-button-${i}`}
                   hidden={!isOpen}
-                  className="pb-6 pr-14 text-base text-[#475569] leading-relaxed"
+                  className="pb-6 pr-14 text-base text-white/60 leading-relaxed"
                 >
                   {f.a}
                 </div>

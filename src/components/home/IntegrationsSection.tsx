@@ -24,15 +24,15 @@ const deliveredAs = [
 const Tile: React.FC<{ name: string; line: string; icon: React.FC<{ className?: string }>; dark?: boolean }> = ({ name, line, icon: Icon, dark }) => (
   <li
     className={`flex items-start gap-3 rounded-[12px] p-4 border transition-colors ${
-      dark ? 'bg-white/5 border-white/10 hover:border-hos-yellow/50' : 'bg-white border-hos-hairline hover:border-hos-navy'
+      dark ? 'bg-white/5 border-white/10 hover:border-hos-yellow/50' : 'bg-white/[0.03] border-white/[0.08] hover:border-white/25'
     }`}
   >
-    <span className={`w-9 h-9 shrink-0 rounded-[10px] flex items-center justify-center ${dark ? 'bg-hos-yellow text-hos-black' : 'bg-hos-mist border border-hos-hairline text-hos-black'}`}>
+    <span className={`w-9 h-9 shrink-0 rounded-[10px] flex items-center justify-center ${dark ? 'bg-hos-yellow text-white' : 'bg-white/[0.04] border border-white/[0.08] text-white'}`}>
       <Icon aria-hidden="true" className="w-4 h-4" />
     </span>
     <span>
-      <span className={`block font-display font-bold text-sm ${dark ? 'text-white' : 'text-hos-black'}`}>{name}</span>
-      <span className={`block text-xs leading-relaxed mt-0.5 ${dark ? 'text-slate-300' : 'text-[#475569]'}`}>{line}</span>
+      <span className={`block font-display font-bold text-sm ${dark ? 'text-white' : 'text-white'}`}>{name}</span>
+      <span className={`block text-xs leading-relaxed mt-0.5 ${dark ? 'text-slate-300' : 'text-white/60'}`}>{line}</span>
     </span>
   </li>
 );
@@ -43,11 +43,11 @@ const FlowHub: React.FC = () => (
     {/* desktop: horizontal streams */}
     <div className="hidden lg:flex flex-col gap-5">
       {[0, 1, 2, 3].map((row) => (
-        <div key={row} className="relative w-16 h-px bg-hos-navy/15 overflow-visible">
+        <div key={row} className="relative w-16 h-px bg-white/15 overflow-visible">
           {[0, 1].map((d) => (
             <span
               key={d}
-              className="absolute -top-[3px] left-0 w-1.5 h-1.5 rounded-full bg-hos-amber"
+              className="absolute -top-[3px] left-0 w-1.5 h-1.5 rounded-full bg-hos-yellow"
               style={{ animation: `hos-flow 2.4s linear ${row * 0.35 + d * 1.2}s infinite` }}
             />
           ))}
@@ -55,12 +55,12 @@ const FlowHub: React.FC = () => (
       ))}
     </div>
     {/* mobile: vertical stream */}
-    <div className="lg:hidden relative h-12 w-px bg-hos-navy/15">
+    <div className="lg:hidden relative h-12 w-px bg-white/15">
       {[0, 1].map((d) => (
-        <span key={d} className="absolute -left-[3px] top-0 w-1.5 h-1.5 rounded-full bg-hos-amber" style={{ animation: `hos-flow-y 1.8s linear ${d * 0.9}s infinite` }} />
+        <span key={d} className="absolute -left-[3px] top-0 w-1.5 h-1.5 rounded-full bg-hos-yellow" style={{ animation: `hos-flow-y 1.8s linear ${d * 0.9}s infinite` }} />
       ))}
     </div>
-    <span className="order-first lg:order-none w-14 h-14 rounded-2xl bg-hos-navy flex items-center justify-center shadow-lg ring-4 ring-white">
+    <span className="order-first lg:order-none w-14 h-14 rounded-2xl bg-ink-800 flex items-center justify-center shadow-lg ring-4 ring-ink-950">
       <svg viewBox="0 0 40 40" className="w-8 h-8">
         <polygon points="20,8 34,16 20,24 6,16" fill="#F5D97B" />
         <polygon points="6,16 20,24 34,16 34,19 20,27 6,19" fill="#C9A94F" />
@@ -69,9 +69,9 @@ const FlowHub: React.FC = () => (
     </span>
     <div className="hidden lg:flex flex-col gap-5">
       {[0, 1, 2, 3].map((row) => (
-        <div key={row} className="relative w-16 h-px bg-hos-navy/15 overflow-visible">
+        <div key={row} className="relative w-16 h-px bg-white/15 overflow-visible">
           <span
-            className="absolute -top-[3px] left-0 w-1.5 h-1.5 rounded-full bg-hos-navy"
+            className="absolute -top-[3px] left-0 w-1.5 h-1.5 rounded-full bg-ink-800"
             style={{ animation: `hos-flow 2.4s linear ${0.6 + row * 0.35}s infinite` }}
           />
         </div>
@@ -81,7 +81,7 @@ const FlowHub: React.FC = () => (
 );
 
 export const IntegrationsSection: React.FC = () => (
-  <section aria-labelledby="home-integrations-heading" className="bg-hos-mist py-20 sm:py-28">
+  <section aria-labelledby="home-integrations-heading" className="bg-ink-900 border-y border-white/[0.06] py-20 sm:py-28">
     <Container className="space-y-12">
       <Reveal>
         {/* TODO(copy): section heading and intro */}
@@ -95,8 +95,8 @@ export const IntegrationsSection: React.FC = () => (
 
       <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,7fr)_auto_minmax(0,5fr)] gap-4 items-stretch">
         <Reveal className="h-full">
-          <div className="h-full rounded-[16px] bg-white border border-hos-hairline p-6 sm:p-8 space-y-5">
-            <h3 className="font-mono text-[11px] font-bold uppercase tracking-widest text-hos-grey">Data in</h3>
+          <div className="h-full rounded-[16px] bg-white/[0.03] border border-white/[0.08] p-6 sm:p-8 space-y-5">
+            <h3 className="font-mono text-[11px] font-bold uppercase tracking-widest text-white/55">Data in</h3>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {dataIn.map((t) => (
                 <Tile key={t.name} {...t} />
@@ -106,7 +106,7 @@ export const IntegrationsSection: React.FC = () => (
         </Reveal>
         <FlowHub />
         <Reveal delay={150} className="h-full">
-          <div className="h-full rounded-[16px] bg-hos-navy p-6 sm:p-8 space-y-5">
+          <div className="h-full rounded-[16px] bg-ink-800 p-6 sm:p-8 space-y-5">
             <h3 className="font-mono text-[11px] font-bold uppercase tracking-widest text-hos-yellow">Delivered as</h3>
             <ul className="grid grid-cols-1 gap-3">
               {deliveredAs.map((t) => (

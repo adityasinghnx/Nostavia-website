@@ -48,8 +48,8 @@ export const trustGroups = {
 
 export const trustItems: TrustItem[] = [
   /* ── Group A: Infrastructure ── */
-  // Official wordmark (light-background version) from supabase.com/brand-assets
-  { id: 'supabase', group: 'infrastructure', name: 'Supabase', logo: '/logos/trust/supabase.svg', logoWidth: 581, logoHeight: 113, descriptor: 'Database and authentication. SOC 2 Type II', enabled: true },
+  // Official wordmark from supabase.com/brand-assets, dark-background (white text) version for the dark theme
+  { id: 'supabase', group: 'infrastructure', name: 'Supabase', logo: '/logos/trust/supabase-dark.svg', logoWidth: 581, logoHeight: 113, descriptor: 'Database and authentication. SOC 2 Type II', enabled: true },
   // TODO(logo): official file pending at /logos/trust/microsoft-azure.svg
   { id: 'azure', group: 'infrastructure', name: 'Microsoft Azure', descriptor: 'Cloud AI infrastructure. SOC 2 Type II and ISO/IEC 27001', enabled: true },
   // Pending internal confirmation. Do not render. Logo pending at /logos/trust/google-cloud.svg

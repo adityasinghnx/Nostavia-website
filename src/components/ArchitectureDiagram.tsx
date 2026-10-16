@@ -28,7 +28,7 @@ export const ArchitectureDiagram: React.FC = () => {
       title: "Dual-Brain & Reasoning Engine",
       icon: Brain,
       status: "Live" as const,
-      color: "border-[#A7F3D0] bg-[#ECFDF5]",
+      color: "border-[#A7F3D0] bg-emerald-400/15",
       items: [
         "Trajectory Engine & Predictive Simulation",
         "Biological Age & Pace of Aging Engine",
@@ -44,7 +44,7 @@ export const ArchitectureDiagram: React.FC = () => {
       title: "Biomarker Classification & Normalization",
       icon: Cpu,
       status: "Live" as const,
-      color: "border-[#FDE68A] bg-[#FFFBEB]",
+      color: "border-[#FDE68A] bg-amber-400/10",
       items: [
         "100+ Biomarker Range Classification (Optimal vs In-Range vs Outlier)",
         "Personalized Baseline Calibration",
@@ -60,7 +60,7 @@ export const ArchitectureDiagram: React.FC = () => {
       title: "Multi-Source Data Ingestion Rails",
       icon: Database,
       status: "Live" as const,
-      color: "border-[#E2E8F0] bg-[#F8FAFC]",
+      color: "border-white/[0.08] bg-white/[0.03]",
       items: [
         "Native Lab PDF Parser (Digital Signatures)",
         "Apple HealthKit & Google Health Connect Pipeline",
@@ -73,16 +73,16 @@ export const ArchitectureDiagram: React.FC = () => {
   ];
 
   return (
-    <div className="w-full bg-white border border-[#E5E7EB] rounded-[12px] p-6 sm:p-8 shadow-card font-body">
+    <div className="w-full bg-white/[0.03] border border-white/[0.08] rounded-[12px] p-6 sm:p-8 shadow-card font-body">
       
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8 pb-6 border-b border-[#E5E7EB]">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8 pb-6 border-b border-white/[0.08]">
         <div>
           <div className="eyebrow mb-1">THE NOSTAVIA ARCHITECTURE</div>
-          <h3 className="font-display font-bold text-2xl text-[#0F172A]">
+          <h3 className="font-display font-bold text-2xl text-white">
             Four Layers. One Un-Forkable Core.
           </h3>
         </div>
-        <div className="text-xs font-mono text-[#64748B] flex items-center gap-2 bg-[#F8FAFC] px-3 py-1.5 rounded border border-[#E2E8F0]">
+        <div className="text-xs font-mono text-white/55 flex items-center gap-2 bg-white/[0.03] px-3 py-1.5 rounded border border-white/[0.08]">
           <span className="w-2 h-2 rounded-full bg-[#059669] animate-pulse" />
           <span>Interactive Architecture Stack</span>
         </div>
@@ -103,19 +103,19 @@ export const ArchitectureDiagram: React.FC = () => {
                 className={`w-full text-left p-4 rounded-[8px] border transition-all relative group ${
                   isSelected
                     ? `${layer.color} border-[#2563EB] ring-2 ring-[#2563EB]/20 shadow-sm`
-                    : 'bg-[#F8FAFC] border-[#E5E7EB] hover:border-[#CBD5E1] hover:bg-white'
+                    : 'bg-white/[0.03] border-white/[0.08] hover:border-white/25 hover:bg-white'
                 }`}
               >
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <div className={`p-2.5 rounded-[6px] ${isSelected ? 'bg-[#2563EB] text-white shadow-sm' : 'bg-white text-[#475569] border border-[#E2E8F0]'}`}>
+                    <div className={`p-2.5 rounded-[6px] ${isSelected ? 'bg-hos-yellow text-white shadow-sm' : 'bg-white/[0.03] text-white/60 border border-white/[0.08]'}`}>
                       <Icon className="w-4 h-4" />
                     </div>
                     <div>
-                      <div className="font-mono text-[10px] text-[#2563EB] font-bold tracking-wider">
+                      <div className="font-mono text-[10px] text-hos-yellow font-bold tracking-wider">
                         {layer.tag}
                       </div>
-                      <div className="font-display font-semibold text-base text-[#0F172A]">
+                      <div className="font-display font-semibold text-base text-white">
                         {layer.title}
                       </div>
                     </div>
@@ -128,7 +128,7 @@ export const ArchitectureDiagram: React.FC = () => {
         </div>
 
         {/* Selected Layer Details Panel */}
-        <div className="lg:col-span-5 bg-[#F8FAFC] border border-[#E5E7EB] rounded-[10px] p-6 flex flex-col justify-between min-h-[360px] shadow-sm">
+        <div className="lg:col-span-5 bg-white/[0.03] border border-white/[0.08] rounded-[10px] p-6 flex flex-col justify-between min-h-[360px] shadow-sm">
           {(() => {
             const current = layers.find((l) => l.id === activeLayer) || layers[1];
             const Icon = current.icon;
@@ -136,32 +136,32 @@ export const ArchitectureDiagram: React.FC = () => {
               <>
                 <div>
                   <div className="flex items-center gap-2 mb-3">
-                    <Icon className="w-5 h-5 text-[#2563EB]" />
-                    <span className="font-mono text-xs text-[#2563EB] font-bold uppercase tracking-wider">{current.tag}</span>
+                    <Icon className="w-5 h-5 text-hos-yellow" />
+                    <span className="font-mono text-xs text-hos-yellow font-bold uppercase tracking-wider">{current.tag}</span>
                   </div>
                   
-                  <h4 className="font-display font-bold text-xl text-[#0F172A] mb-3">
+                  <h4 className="font-display font-bold text-xl text-white mb-3">
                     {current.title}
                   </h4>
 
-                  <p className="text-xs text-[#475569] leading-relaxed mb-6">
+                  <p className="text-xs text-white/60 leading-relaxed mb-6">
                     {current.description}
                   </p>
 
-                  <div className="eyebrow text-[#64748B] mb-3">KEY COMPONENTS INCLUDED</div>
-                  <div className="flex flex-col gap-2 font-mono text-xs text-[#0F172A]">
+                  <div className="eyebrow text-white/55 mb-3">KEY COMPONENTS INCLUDED</div>
+                  <div className="flex flex-col gap-2 font-mono text-xs text-white">
                     {current.items.map((item, idx) => (
                       <div key={idx} className="flex items-start gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#059669] shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-300 shrink-0 mt-0.5" />
                         <span className="text-xs">{item}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-[#E2E8F0] flex items-center justify-between text-xs text-[#64748B] font-mono">
+                <div className="mt-6 pt-4 border-t border-white/[0.08] flex items-center justify-between text-xs text-white/55 font-mono">
                   <span>Integrates via Nostavia SDK</span>
-                  <span className="text-[#2563EB] flex items-center gap-1 font-semibold">
+                  <span className="text-hos-yellow flex items-center gap-1 font-semibold">
                     Explore API <ArrowRight className="w-3 h-3" />
                   </span>
                 </div>

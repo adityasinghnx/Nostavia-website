@@ -1,452 +1,284 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import {
+  Menu,
+  X,
+  ChevronDown,
+  ArrowRight,
+  ArrowUpRight,
+  Activity,
+  Stethoscope,
+  Smartphone,
+  Building2,
+  Layers,
+  Code2,
+  Headset,
+  FileText,
+} from 'lucide-react';
 import { HUMAN_OS_PATH, hospitalProgrammes, numberWord, rings, systemPath, systemsInRing, totalSystems } from '../content/human-os';
-import { Menu, X, ChevronDown, Activity, Stethoscope, Smartphone, Layers, Cpu, ShieldCheck, FileText, RefreshCw, Code, Heart, Sparkles, Building2, Volume2, ArrowUpRight } from 'lucide-react';
 
 interface NavbarProps {
   onOpenDemo?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
-  const [activeMenu, setActiveMenu] = useState<'solutions' | 'customers' | 'humanos' | 'stories' | 'resources' | 'company' | null>(null);
+type MenuId = 'products' | 'humanos' | null;
+
+const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hos-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950';
+
+const industries = [
+  { to: '/industries/diagnostic-labs', label: 'Diagnostic Labs', line: 'Smart Reports and re-test recall', icon: Activity },
+  { to: '/industries/clinics', label: 'Clinics & Longevity', line: 'Intake briefs and biological age', icon: Stethoscope },
+  { to: '/industries/supplements', label: 'Wellness & Apps', line: 'Wearables and food scanning', icon: Smartphone },
+  { to: '/industries/hospitals', label: 'Hospitals & Health Systems', line: `${hospitalProgrammes.length} patient programmes`, icon: Building2 },
+];
+
+const products = [
+  { to: '/solutions/engineering', label: 'Custom Build', line: 'Designed and built from scratch for you', icon: Layers },
+  { to: '/solutions/storyhealth', label: 'White Label', line: 'Our ready-made products, launched as yours', icon: Smartphone },
+  { to: '/solutions/gravity', label: 'SDK', line: 'Add health AI to the app you already have', icon: Code2 },
+  { to: '/solutions/front-desk', label: 'AI Front Desk Agent', line: 'Answers every call and books the visit', icon: Headset },
+  { to: '/solutions/hospitals', label: 'Hospital Programmes', line: `${hospitalProgrammes.length} white-label patient programmes`, icon: Building2 },
+  { to: '/solutions/comet', label: 'Smart Reports & Re-Test Recall', line: 'Branded reports that bring patients back', icon: FileText },
+];
+
+const links = [
+  { to: '/pricing', label: 'Pricing' },
+  { to: '/clinical', label: 'Clinical' },
+  { to: '/security', label: 'Security' },
+  { to: '/company', label: 'Company' },
+];
+
+export const Navbar: React.FC<NavbarProps> = () => {
+  const [activeMenu, setActiveMenu] = useState<MenuId>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    setActiveMenu(null);
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
 
   const closeMenus = () => {
     if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
     setActiveMenu(null);
     setMobileMenuOpen(false);
   };
-
-  const handleMouseEnter = (menu: 'solutions' | 'customers' | 'humanos') => {
+  const open = (menu: MenuId) => {
     if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
     setActiveMenu(menu);
   };
-
-  const handleMouseLeave = () => {
+  const scheduleClose = () => {
     if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
-    hoverTimeoutRef.current = setTimeout(() => {
-      setActiveMenu(null);
-    }, 200);
+    hoverTimeoutRef.current = setTimeout(() => setActiveMenu(null), 180);
   };
+
+  const frontDeskBanner = ['front-desk', 'ai-agents', 'voice-agents', 'hospitals'].some((p) => location.pathname.includes(p));
+  const isActive = (to: string) => location.pathname === to || location.pathname.startsWith(`${to}/`);
+  const productsActive = location.pathname.startsWith('/solutions') || location.pathname.startsWith('/industries') || location.pathname === '/platform';
+
+  const navBtn = (active: boolean) =>
+    `inline-flex items-center gap-1 px-3 py-2 rounded-full text-[13px] font-medium transition-colors ${focusRing} ${
+      active ? 'text-white bg-white/[0.08]' : 'text-white/65 hover:text-white hover:bg-white/[0.05]'
+    }`;
 
   return (
     <>
-      {/* ========================================================================= */}
-      {/* TOP HERO ANNOUNCEMENT BANNER */}
-      {/* ========================================================================= */}
-      <div className="w-full bg-white font-body">
-        <div className="relative overflow-hidden bg-[linear-gradient(90deg,#FFF7ED_0%,#FFEDD5_35%,#FED7AA_70%,#FDE68A_100%)] pt-16 pb-24 px-4 sm:px-6 text-center select-none">
-          
-          {/* Soft Ambient Glow Overlay */}
-          <div className="absolute -top-36 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] bg-amber-200/40 blur-3xl pointer-events-none rounded-full" />
-
-          <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center gap-3">
-            {location.pathname.includes('front-desk') || location.pathname.includes('ai-agents') || location.pathname.includes('voice-agents') || location.pathname.includes('hospitals') ? (
-              <>
-                <h2 className="font-display font-bold text-2xl sm:text-4xl lg:text-5xl text-[#0F172A] tracking-tight leading-[1.15]">
-                  Always-on AI Voice & Support Agent. <br className="hidden sm:inline" />
-                  Turn hospital phone enquiries into booked visits.
-                </h2>
-
-                <p className="text-xs sm:text-base text-[#475569] font-semibold max-w-2xl px-2">
-                  Nostavia Front Desk: answers every call in local languages, names a specific doctor, rules out emergencies, and captures late-night bookings under your hospital's brand.
-                </p>
-
-                <div className="pt-3">
-                  <Link
-                    to="/solutions/front-desk"
-                    className="inline-block bg-[#0F172A] hover:bg-black text-white font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-widest px-5 sm:px-6 py-2.5 rounded-[2px] transition-all shadow-md"
-                  >
-                    EXPLORE FRONT DESK VOICE AGENT
-                  </Link>
-                </div>
-              </>
-            ) : (
-              <>
-                <h2 className="font-display font-bold text-2xl sm:text-4xl lg:text-5xl text-[#0F172A] tracking-tight leading-[1.15]">
-                  Nostavia Health raises ₹50 Lakh in funding.
-                </h2>
-
-                <p className="text-xs sm:text-base text-[#475569] font-semibold max-w-2xl px-2">
-                  Building the intelligence infrastructure for the next generation of preventive healthcare, embedded into the diagnostic labs and clinics people already trust.
-                </p>
-
-                <div className="pt-3">
-                  <a
-                    href="https://lnkd.in/p/dBqTFF95"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-[#0F172A] hover:bg-black text-white font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-widest px-6 py-3 rounded-[2px] transition-all shadow-md group"
-                  >
-                    <span>READ FULL STORY</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </a>
-                </div>
-              </>
-            )}
-          </div>
-
-          {/* SMOOTH SINE WAVE / ECG PEAK SVG BOTTOM EDGE */}
-          <div className="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none pointer-events-none">
-            <svg
-              className="relative block w-full h-10 sm:h-16 text-white"
-              viewBox="0 0 1200 120"
-              preserveAspectRatio="none"
-              fill="currentColor"
+      {/* Announcement bar */}
+      <div className="relative z-50 bg-ink-950 border-b border-white/[0.06]">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-center gap-3 text-center">
+          {frontDeskBanner ? (
+            <Link to="/solutions/front-desk" className={`group inline-flex items-center gap-2 text-xs sm:text-[13px] text-white/75 hover:text-white ${focusRing} rounded`}>
+              <span className="w-1.5 h-1.5 rounded-full bg-hos-yellow shrink-0" aria-hidden="true" />
+              <span>
+                <span className="font-semibold text-white">Nostavia Front Desk:</span> an always-on voice agent that turns hospital phone enquiries into booked visits
+              </span>
+              <ArrowRight aria-hidden="true" className="w-3.5 h-3.5 shrink-0 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+          ) : (
+            <a
+              href="https://lnkd.in/p/dBqTFF95"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`group inline-flex items-center gap-2 text-xs sm:text-[13px] text-white/75 hover:text-white ${focusRing} rounded`}
             >
-              <path d="M0,40 C150,90 350,10 500,60 C650,110 850,20 1000,70 C1100,95 1150,50 1200,30 L1200,120 L0,120 Z" />
-            </svg>
-          </div>
+              <span className="hidden sm:inline-flex items-center rounded-full border border-hos-yellow/40 bg-hos-yellow/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-hos-yellow">
+                News
+              </span>
+              <span>
+                <span className="font-semibold text-white">Nostavia Health raises ₹50 Lakh in funding.</span> Read the full story
+              </span>
+              <ArrowUpRight aria-hidden="true" className="w-3.5 h-3.5 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
+          )}
         </div>
       </div>
 
-      {/* ========================================================================= */}
-      {/* STICKY MAIN NAVIGATION HEADER */}
-      {/* ========================================================================= */}
-      <header className="sticky top-0 z-50 bg-white border-b border-[#E5E7EB] font-body shadow-sm">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          
-          {/* Official Brand Logo Image */}
-          <Link to="/" onClick={closeMenus} className="flex items-center group shrink-0">
-            <img
-              src="/logo.png"
-              alt="Nostavia Health"
-              className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105"
-            />
+      {/* Sticky header */}
+      <header
+        className={`sticky top-0 z-50 transition-colors duration-300 ${
+          scrolled || activeMenu || mobileMenuOpen ? 'bg-ink-950/85 backdrop-blur-xl border-b border-white/[0.08]' : 'bg-ink-950/0 border-b border-transparent'
+        }`}
+      >
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-6">
+          <Link to="/" onClick={closeMenus} className={`flex items-center shrink-0 rounded ${focusRing}`}>
+            {/* The wordmark file is dark; render it white for the dark theme */}
+            <img src="/logo.png" alt="Nostavia Health" width={140} height={36} className="h-7 sm:h-8 w-auto object-contain brightness-0 invert" />
           </Link>
 
-          {/* Nav Items */}
-          <div className="hidden lg:flex items-center gap-1 font-display text-xs font-bold uppercase tracking-wider text-[#334155]">
-            <div
-              className="relative py-3"
-              onMouseEnter={() => handleMouseEnter('solutions')}
-              onMouseLeave={handleMouseLeave}
-            >
+          <nav aria-label="Main" className="hidden lg:flex items-center gap-1">
+            <div onMouseEnter={() => open('products')} onMouseLeave={scheduleClose}>
               <button
-                onClick={() => setActiveMenu(activeMenu === 'solutions' ? null : 'solutions')}
-                className={`px-3.5 py-2 rounded-[4px] flex items-center gap-1 transition-colors ${
-                  activeMenu === 'solutions' || location.pathname.startsWith('/solutions') || location.pathname === '/platform'
-                    ? 'text-[#0F172A] bg-[#E5E7EB] font-extrabold'
-                    : 'hover:text-[#0F172A] hover:bg-[#F8FAFC]'
-                }`}
+                type="button"
+                onClick={() => setActiveMenu(activeMenu === 'products' ? null : 'products')}
+                onKeyDown={(e) => e.key === 'Escape' && setActiveMenu(null)}
+                aria-expanded={activeMenu === 'products'}
+                aria-controls="products-menu"
+                className={navBtn(activeMenu === 'products' || productsActive)}
               >
-                PRODUCTS
+                Products
+                <ChevronDown aria-hidden="true" className={`w-3.5 h-3.5 transition-transform ${activeMenu === 'products' ? 'rotate-180' : ''}`} />
               </button>
             </div>
-
-            <div
-              className="relative py-3"
-              onMouseEnter={() => handleMouseEnter('humanos')}
-              onMouseLeave={handleMouseLeave}
-            >
+            <div onMouseEnter={() => open('humanos')} onMouseLeave={scheduleClose}>
               <button
+                type="button"
                 onClick={() => setActiveMenu(activeMenu === 'humanos' ? null : 'humanos')}
                 onKeyDown={(e) => e.key === 'Escape' && setActiveMenu(null)}
                 aria-expanded={activeMenu === 'humanos'}
                 aria-controls="human-os-menu"
-                className={`px-3.5 py-2 rounded-[4px] flex items-center gap-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hos-amber ${
-                  activeMenu === 'humanos' || location.pathname.startsWith(HUMAN_OS_PATH)
-                    ? 'text-[#0F172A] bg-[#E5E7EB] font-extrabold'
-                    : 'hover:text-[#0F172A] hover:bg-[#F8FAFC]'
-                }`}
+                className={navBtn(activeMenu === 'humanos' || location.pathname.startsWith(HUMAN_OS_PATH))}
               >
-                HUMAN OS
+                Human OS
                 <ChevronDown aria-hidden="true" className={`w-3.5 h-3.5 transition-transform ${activeMenu === 'humanos' ? 'rotate-180' : ''}`} />
               </button>
             </div>
+            {links.map((l) => (
+              <Link key={l.to} to={l.to} onClick={closeMenus} className={navBtn(isActive(l.to))}>
+                {l.label}
+              </Link>
+            ))}
+          </nav>
 
-            <Link
-              to="/pricing"
-              onClick={closeMenus}
-              className={`px-3.5 py-2 rounded-[4px] transition-colors ${
-                location.pathname === '/pricing' ? 'text-[#0F172A] bg-[#E5E7EB] font-extrabold' : 'hover:text-[#0F172A] hover:bg-[#F8FAFC]'
-              }`}
-            >
-              PRICING
-            </Link>
-
-            <Link
-              to="/clinical"
-              onClick={closeMenus}
-              className={`px-3.5 py-2 rounded-[4px] transition-colors ${
-                location.pathname === '/clinical' ? 'text-[#0F172A] bg-[#E5E7EB] font-extrabold' : 'hover:text-[#0F172A] hover:bg-[#F8FAFC]'
-              }`}
-            >
-              CLINICAL EVIDENCE
-            </Link>
-
-            <Link
-              to="/security"
-              onClick={closeMenus}
-              className={`px-3.5 py-2 rounded-[4px] transition-colors ${
-                location.pathname === '/security' ? 'text-[#0F172A] bg-[#E5E7EB] font-extrabold' : 'hover:text-[#0F172A] hover:bg-[#F8FAFC]'
-              }`}
-            >
-              SECURITY & PRIVACY
-            </Link>
-
-            <Link
-              to="/company"
-              onClick={closeMenus}
-              className={`px-3.5 py-2 rounded-[4px] transition-colors ${
-                location.pathname === '/company' ? 'text-[#0F172A] bg-[#E5E7EB] font-extrabold' : 'hover:text-[#0F172A] hover:bg-[#F8FAFC]'
-              }`}
-            >
-              COMPANY
-            </Link>
-          </div>
-
-          {/* Right Action Buttons */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <Link
               to="/demo"
               onClick={closeMenus}
-              className="hidden sm:inline-flex bg-[#000000] hover:bg-[#1A1A1A] text-white font-display text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-[4px] transition-all shadow-sm"
+              className={`hidden sm:inline-flex items-center gap-1.5 bg-white hover:bg-hos-yellow text-ink-950 text-[13px] font-semibold px-4 py-2 rounded-full transition-colors ${focusRing}`}
             >
-              REQUEST A DEMO
+              Request a demo
+              <ArrowRight aria-hidden="true" className="w-3.5 h-3.5" />
             </Link>
-
             <button
+              type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 text-[#334155] hover:text-[#0F172A] bg-[#F8FAFC] border border-[#E2E8F0] rounded-[4px]"
-              aria-label="Toggle navigation menu"
+              className={`lg:hidden p-2 rounded-full text-white/80 hover:text-white hover:bg-white/[0.06] ${focusRing}`}
+              aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
 
-        {/* ========================================================================= */}
-        {/* EXACT REPLICATION: NOSTAVIA HEALTH INFRASTRUCTURE MEGAMENU DROPDOWN */}
-        {/* ========================================================================= */}
-        {(activeMenu === 'solutions' || activeMenu === 'customers') && (
+        {/* Products mega menu */}
+        {activeMenu === 'products' && (
           <div
-            className="hidden lg:block absolute top-full left-0 w-full bg-white border-b border-[#E5E7EB] shadow-2xl transition-all duration-200 z-50 before:content-[''] before:absolute before:-top-4 before:h-4 before:w-full before:left-0"
-            onMouseEnter={() => handleMouseEnter(activeMenu || 'solutions')}
-            onMouseLeave={handleMouseLeave}
+            id="products-menu"
+            className="hidden lg:block absolute top-full inset-x-0 border-b border-white/[0.08] bg-ink-950/95 backdrop-blur-xl"
+            onMouseEnter={() => open('products')}
+            onMouseLeave={scheduleClose}
+            onKeyDown={(e) => e.key === 'Escape' && setActiveMenu(null)}
           >
-            <div className="max-w-[1280px] mx-auto p-8 space-y-8 font-body">
-              
-              {/* TOP SECTION: TARGET BUYERS & INDUSTRIES (4 Main Pillars) */}
-              <div>
-                <div className="eyebrow text-[#94A3B8] mb-3 text-[10px] uppercase tracking-widest font-mono font-bold">TARGET BUYERS & SECTORS</div>
-                <div className="grid grid-cols-4 gap-4">
-                  
-                  <Link
-                    to="/industries/diagnostic-labs"
-                    onClick={closeMenus}
-                    className="p-3.5 bg-[#F1F5F9] rounded-[6px] hover:bg-[#E2E8F0] transition-all flex items-center justify-between group border border-transparent"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-[4px] bg-[#2563EB] text-white flex items-center justify-center font-bold shadow-sm">
-                        <Activity className="w-4 h-4 text-white" />
-                      </div>
-                      <div>
-                        <div className="font-display font-bold text-sm text-[#0F172A]">Diagnostic Labs</div>
-                        <div className="text-[11px] text-[#64748B]">Smart Reports & Re-Test Recall</div>
-                      </div>
-                    </div>
-                    <span className="text-[#0F172A] text-xs font-bold">▶</span>
-                  </Link>
-
-                  <Link
-                    to="/industries/clinics"
-                    onClick={closeMenus}
-                    className="p-3.5 bg-[#F1F5F9] rounded-[6px] hover:bg-[#E2E8F0] transition-all flex items-center justify-between group border border-transparent"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-[4px] bg-[#4ADE80] text-white flex items-center justify-center font-bold shadow-sm">
-                        <Stethoscope className="w-4 h-4 text-white" />
-                      </div>
-                      <div>
-                        <div className="font-display font-bold text-sm text-[#0F172A]">Clinics & Longevity</div>
-                        <div className="text-[11px] text-[#64748B]">Dubai Law 17/2026 Protocols</div>
-                      </div>
-                    </div>
-                    <span className="text-[#0F172A] text-xs font-bold">▶</span>
-                  </Link>
-
-                  <Link
-                    to="/industries/supplements"
-                    onClick={closeMenus}
-                    className="p-3.5 bg-[#F1F5F9] rounded-[6px] hover:bg-[#E2E8F0] transition-all flex items-center justify-between group border border-transparent"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-[4px] bg-[#EC4899] text-white flex items-center justify-center font-bold shadow-sm">
-                        <Smartphone className="w-4 h-4 text-white" />
-                      </div>
-                      <div>
-                        <div className="font-display font-bold text-sm text-[#0F172A]">Wellness & Apps</div>
-                        <div className="text-[11px] text-[#64748B]">Wearables & Food Scanning</div>
-                      </div>
-                    </div>
-                    <span className="text-[#0F172A] text-xs font-bold">▶</span>
-                  </Link>
-
-                  <Link
-                    to="/industries/hospitals"
-                    onClick={closeMenus}
-                    className="p-3.5 bg-[#F1F5F9] rounded-[6px] hover:bg-[#E2E8F0] transition-all flex items-center justify-between group border border-transparent"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-[4px] bg-[#0F172A] text-white flex items-center justify-center font-bold shadow-sm">
-                        <Building2 className="w-4 h-4 text-white" />
-                      </div>
-                      <div>
-                        <div className="font-display font-bold text-sm text-[#0F172A]">Hospitals & Health Systems</div>
-                        <div className="text-[11px] text-[#64748B]">{hospitalProgrammes.length} patient programmes</div>
-                      </div>
-                    </div>
-                    <span className="text-[#0F172A] text-xs font-bold">▶</span>
-                  </Link>
-
-                </div>
+            <div className="max-w-[1280px] mx-auto px-6 py-8 grid grid-cols-12 gap-8">
+              <div className="col-span-5">
+                <div className="text-[11px] font-semibold uppercase tracking-widest text-white/50 mb-3">Who it's for</div>
+                <ul className="grid grid-cols-1 gap-1">
+                  {industries.map(({ to, label, line, icon: Icon }) => (
+                    <li key={to}>
+                      <Link to={to} onClick={closeMenus} className={`group flex items-center gap-3 rounded-xl p-3 hover:bg-white/[0.05] transition-colors ${focusRing}`}>
+                        <span className="w-9 h-9 rounded-lg dk-card flex items-center justify-center text-hos-yellow">
+                          <Icon aria-hidden="true" className="w-4 h-4" />
+                        </span>
+                        <span>
+                          <span className="block text-sm font-semibold text-white">{label}</span>
+                          <span className="block text-xs text-white/50">{line}</span>
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
-
-              {/* SECOND SECTION: NOSTAVIA PLATFORM & INTEGRATION MODES */}
-              <div className="pt-2 border-t border-[#E5E7EB]">
-                <div className="eyebrow text-[#94A3B8] mb-3 text-[10px] uppercase tracking-widest font-mono font-bold">PRODUCTS: CUSTOM BUILD · WHITE LABEL · SDK</div>
-                <div className="grid grid-cols-5 gap-3">
-                  <Link to="/solutions/engineering" onClick={closeMenus} className="p-3 border border-[#E5E7EB] rounded-[8px] bg-white hover:border-[#2563EB] flex items-center gap-2.5 transition-all shadow-sm group">
-                    <div className="w-8 h-8 rounded-full bg-purple-500/10 text-purple-600 flex items-center justify-center font-bold shrink-0">
-                      <Layers className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">Custom Build</div>
-                      <div className="text-[10px] text-[#64748B] leading-tight">Built from scratch for you</div>
-                    </div>
+              <div className="col-span-7">
+                <div className="text-[11px] font-semibold uppercase tracking-widest text-white/50 mb-3">Products</div>
+                <ul className="grid grid-cols-2 gap-1">
+                  {products.map(({ to, label, line, icon: Icon }) => (
+                    <li key={to}>
+                      <Link to={to} onClick={closeMenus} className={`group flex items-center gap-3 rounded-xl p-3 hover:bg-white/[0.05] transition-colors ${focusRing}`}>
+                        <span className="w-9 h-9 rounded-lg dk-card flex items-center justify-center text-white/80 group-hover:text-hos-yellow transition-colors">
+                          <Icon aria-hidden="true" className="w-4 h-4" />
+                        </span>
+                        <span>
+                          <span className="block text-sm font-semibold text-white">{label}</span>
+                          <span className="block text-xs text-white/50">{line}</span>
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-4 flex items-center gap-4 border-t border-white/[0.08] pt-4 text-xs">
+                  <Link to="/platform" onClick={closeMenus} className={`inline-flex items-center gap-1.5 text-white/60 hover:text-white rounded ${focusRing}`}>
+                    Technology <ArrowRight aria-hidden="true" className="w-3 h-3" />
                   </Link>
-
-                  <Link to="/solutions/storyhealth" onClick={closeMenus} className="p-3 border border-[#E5E7EB] rounded-[8px] bg-white hover:border-[#2563EB] flex items-center gap-2.5 transition-all shadow-sm group">
-                    <div className="w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-bold shrink-0">
-                      <Smartphone className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">White Label</div>
-                      <div className="text-[10px] text-[#64748B] leading-tight">Ready-made, your brand</div>
-                    </div>
-                  </Link>
-
-                  <Link to="/solutions/gravity" onClick={closeMenus} className="p-3 border border-[#E5E7EB] rounded-[8px] bg-white hover:border-[#2563EB] flex items-center gap-2.5 transition-all shadow-sm group">
-                    <div className="w-8 h-8 rounded-full bg-blue-500/10 text-[#2563EB] flex items-center justify-center font-bold shrink-0">
-                      <Code className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">SDK</div>
-                      <div className="text-[10px] text-[#64748B] leading-tight">Health AI for your own app</div>
-                    </div>
-                  </Link>
-
-                  <Link to="/solutions/front-desk" onClick={closeMenus} className="p-3 border border-[#E5E7EB] rounded-[8px] bg-white hover:border-[#2563EB] flex items-center gap-2.5 transition-all shadow-sm group">
-                    <div className="w-8 h-8 rounded-full bg-amber-500/10 text-amber-600 flex items-center justify-center font-bold shrink-0">
-                      <Volume2 className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">AI Front Desk Agent</div>
-                      <div className="text-[10px] text-[#64748B] leading-tight">White Label · voice & WhatsApp</div>
-                    </div>
-                  </Link>
-
-                  <Link to="/solutions/hospitals" onClick={closeMenus} className="p-3 border border-[#E5E7EB] rounded-[8px] bg-white hover:border-[#2563EB] flex items-center gap-2.5 transition-all shadow-sm group">
-                    <div className="w-8 h-8 rounded-full bg-blue-500/10 text-[#2563EB] flex items-center justify-center font-bold shrink-0">
-                      <Building2 className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="font-display font-bold text-xs text-[#0F172A] group-hover:text-[#2563EB]">Hospital Programmes</div>
-                      <div className="text-[10px] text-[#64748B] leading-tight">White Label · {hospitalProgrammes.length} programmes</div>
-                    </div>
+                  <Link to="/pricing" onClick={closeMenus} className={`inline-flex items-center gap-1.5 text-white/60 hover:text-white rounded ${focusRing}`}>
+                    Pricing <ArrowRight aria-hidden="true" className="w-3 h-3" />
                   </Link>
                 </div>
               </div>
-
-              {/* THIRD SECTION: SPECIALISED SERVICES */}
-              <div className="space-y-3 pt-2 border-t border-[#E5E7EB]">
-                <div className="eyebrow text-[#94A3B8] mb-3 text-[10px] uppercase tracking-widest font-mono font-bold">MORE WHITE LABEL PRODUCTS</div>
-                <div className="grid grid-cols-4 gap-y-3 gap-x-8 text-xs font-display font-medium text-[#334155]">
-                  
-                  <Link to="/solutions/comet" onClick={closeMenus} className="flex items-center justify-between hover:text-[#2563EB] py-1.5 border-b border-slate-100">
-                    <span className="flex items-center gap-2">
-                      <FileText className="w-3.5 h-3.5 text-[#2563EB]" />
-                      Smart Reports & Re-Test Recall
-                    </span>
-                    <span className="text-[10px] text-[#0F172A]">▶</span>
-                  </Link>
-
-                  <Link to="/industries/clinics" onClick={closeMenus} className="flex items-center justify-between hover:text-[#2563EB] py-1.5 border-b border-slate-100">
-                    <span className="flex items-center gap-2">
-                      <Stethoscope className="w-3.5 h-3.5 text-[#059669]" />
-                      Clinic & Longevity Platform
-                    </span>
-                    <span className="text-[10px] text-[#0F172A]">▶</span>
-                  </Link>
-
-                  <Link to="/solutions/storyhealth" onClick={closeMenus} className="flex items-center justify-between hover:text-[#2563EB] py-1.5 border-b border-slate-100">
-                    <span className="flex items-center gap-2">
-                      <Smartphone className="w-3.5 h-3.5 text-[#D97706]" />
-                      Branded Patient App
-                    </span>
-                    <span className="text-[10px] text-[#0F172A]">▶</span>
-                  </Link>
-
-                  <Link to="/pricing" onClick={closeMenus} className="flex items-center justify-between hover:text-[#2563EB] py-1.5 border-b border-slate-100">
-                    <span className="flex items-center gap-2">
-                      <Sparkles className="w-3.5 h-3.5 text-[#9333EA]" />
-                      Pricing
-                    </span>
-                    <span className="text-[10px] text-[#0F172A]">▶</span>
-                  </Link>
-
-                </div>
-              </div>
-
             </div>
           </div>
         )}
-        {/* ========================================================================= */}
-        {/* HUMAN OS DROPDOWN: SEVEN SYSTEMS GROUPED BY RING */}
-        {/* ========================================================================= */}
+
+        {/* Human OS menu: seven systems grouped by ring */}
         {activeMenu === 'humanos' && (
           <div
             id="human-os-menu"
-            className="hidden lg:block absolute top-full left-0 w-full bg-white border-b border-[#E5E7EB] shadow-2xl z-50 before:content-[''] before:absolute before:-top-4 before:h-4 before:w-full before:left-0"
-            onMouseEnter={() => handleMouseEnter('humanos')}
-            onMouseLeave={handleMouseLeave}
+            className="hidden lg:block absolute top-full inset-x-0 border-b border-white/[0.08] bg-ink-950/95 backdrop-blur-xl"
+            onMouseEnter={() => open('humanos')}
+            onMouseLeave={scheduleClose}
             onKeyDown={(e) => e.key === 'Escape' && setActiveMenu(null)}
           >
-            <div className="max-w-[1280px] mx-auto p-8 grid grid-cols-12 gap-8 font-body">
-              <div className="col-span-3 space-y-3 border-r border-hos-hairline pr-8">
-                <div className="font-mono text-[10px] font-bold uppercase tracking-widest text-hos-amber">Human OS</div>
-                <p className="font-display font-bold text-lg text-[#0F172A] leading-snug">
-                  {numberWord(totalSystems)} systems, one integration.
-                </p>
-                <Link
-                  to={HUMAN_OS_PATH}
-                  onClick={closeMenus}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#0F172A] hover:text-hos-amber focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hos-amber"
-                >
-                  Human OS overview <span aria-hidden="true">▶</span>
+            <div className="max-w-[1280px] mx-auto px-6 py-8 grid grid-cols-12 gap-8">
+              <div className="col-span-3 space-y-3 border-r border-white/[0.08] pr-8">
+                <div className="text-[11px] font-semibold uppercase tracking-widest text-hos-yellow">Human OS</div>
+                <p className="text-lg font-semibold text-white leading-snug">{numberWord(totalSystems)} systems, one integration.</p>
+                <Link to={HUMAN_OS_PATH} onClick={closeMenus} className={`inline-flex items-center gap-1.5 text-sm text-white/70 hover:text-white rounded ${focusRing}`}>
+                  Human OS overview <ArrowRight aria-hidden="true" className="w-3.5 h-3.5" />
                 </Link>
               </div>
               {rings.map((ring) => (
                 <div key={ring.id} className={ring.id === 'person' ? 'col-span-5' : 'col-span-4'}>
-                  <div className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#64748B] mb-3">
+                  <div className="text-[11px] font-semibold uppercase tracking-widest text-white/50 mb-3">
                     {ring.name} · {ring.audience}
                   </div>
-                  <ul className={`grid gap-2 ${ring.id === 'person' ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                  <ul className={`grid gap-1 ${ring.id === 'person' ? 'grid-cols-2' : 'grid-cols-1'}`}>
                     {systemsInRing(ring.id).map((system) => (
                       <li key={system.slug}>
-                        <Link
-                          to={systemPath(system.slug)}
-                          onClick={closeMenus}
-                          className="block p-3 rounded-[6px] hover:bg-hos-card border border-transparent hover:border-hos-hairline transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hos-amber"
-                        >
-                          <span className="flex items-center gap-2 font-display font-bold text-sm text-[#0F172A]">
-                            <span className="font-mono text-[10px] text-hos-amber">{system.number}</span>
+                        <Link to={systemPath(system.slug)} onClick={closeMenus} className={`block rounded-xl p-3 hover:bg-white/[0.05] transition-colors ${focusRing}`}>
+                          <span className="flex items-center gap-2 text-sm font-semibold text-white">
+                            <span className="font-mono text-[10px] text-hos-yellow">{system.number}</span>
                             {system.name}
                           </span>
-                          <span className="block text-[11px] text-[#64748B] mt-0.5">{system.promise}</span>
+                          <span className="block text-xs text-white/50 mt-0.5">{system.promise}</span>
                         </Link>
                       </li>
                     ))}
@@ -457,130 +289,62 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
           </div>
         )}
 
-        {/* ========================================================================= */}
-        {/* RESPONSIVE MOBILE NAVIGATION DRAWER */}
-        {/* ========================================================================= */}
+        {/* Mobile drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-white border-b border-[#E5E7EB] shadow-2xl max-h-[calc(100vh-4rem)] overflow-y-auto font-body">
-            <div className="px-4 py-6 space-y-6">
-              
-              {/* Quick Action Buttons */}
-              <div className="flex flex-col gap-2.5 pb-4 border-b border-[#E2E8F0]">
-                <Link
-                  to="/demo"
-                  onClick={closeMenus}
-                  className="w-full text-center bg-[#000000] hover:bg-[#1A1A1A] text-white font-display text-xs font-bold uppercase tracking-wider py-3 rounded-[4px] shadow-sm"
-                >
-                  REQUEST A DEMO
+          <div className="lg:hidden border-t border-white/[0.08] bg-ink-950 max-h-[calc(100vh-4rem)] overflow-y-auto">
+            <div className="px-4 py-6 space-y-7">
+              <Link to="/demo" onClick={closeMenus} className={`flex items-center justify-center gap-2 w-full bg-white text-ink-950 text-sm font-semibold py-3 rounded-full ${focusRing}`}>
+                Request a demo <ArrowRight aria-hidden="true" className="w-4 h-4" />
+              </Link>
+
+              {[
+                { title: "Who it's for", items: industries },
+                { title: 'Products', items: products },
+              ].map((group) => (
+                <div key={group.title}>
+                  <div className="text-[11px] font-semibold uppercase tracking-widest text-white/50 mb-2 px-1">{group.title}</div>
+                  <ul className="space-y-1">
+                    {group.items.map(({ to, label, line, icon: Icon }) => (
+                      <li key={to}>
+                        <Link to={to} onClick={closeMenus} className={`flex items-center gap-3 rounded-xl p-3 hover:bg-white/[0.05] ${focusRing}`}>
+                          <Icon aria-hidden="true" className="w-4 h-4 text-hos-yellow shrink-0" />
+                          <span>
+                            <span className="block text-sm font-semibold text-white">{label}</span>
+                            <span className="block text-xs text-white/50">{line}</span>
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+
+              <div>
+                <div className="text-[11px] font-semibold uppercase tracking-widest text-white/50 mb-2 px-1">Human OS</div>
+                <Link to={HUMAN_OS_PATH} onClick={closeMenus} className={`block rounded-xl p-3 dk-card mb-2 ${focusRing}`}>
+                  <span className="block text-sm font-semibold text-white">Human OS overview</span>
+                  <span className="block text-xs text-white/50">{numberWord(totalSystems)} systems, one integration</span>
                 </Link>
+                {rings.map((ring) => (
+                  <div key={ring.id} className="mt-2">
+                    <div className="text-[10px] font-semibold uppercase tracking-widest text-white/50 px-3 mb-1">{ring.name}</div>
+                    {systemsInRing(ring.id).map((system) => (
+                      <Link key={system.slug} to={systemPath(system.slug)} onClick={closeMenus} className={`flex items-center gap-2 rounded-lg py-2 px-3 text-sm text-white/80 hover:bg-white/[0.05] ${focusRing}`}>
+                        <span className="font-mono text-[10px] text-hos-yellow">{system.number}</span>
+                        {system.name}
+                      </Link>
+                    ))}
+                  </div>
+                ))}
               </div>
 
-              {/* Main Nav Links */}
-              <div className="space-y-4">
-                <div>
-                  <div className="eyebrow text-[#94A3B8] mb-2 text-[10px] uppercase tracking-widest font-mono font-bold">PRODUCTS</div>
-                  <div className="grid grid-cols-1 gap-2">
-                    <Link to="/solutions/engineering" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <Layers className="w-4 h-4 text-purple-600" />
-                        <div>
-                          <div className="font-display font-bold text-xs text-[#0F172A]">Custom Build</div>
-                          <div className="text-[10px] text-[#64748B]">Designed and built from scratch for you</div>
-                        </div>
-                      </div>
-                      <span className="text-xs text-[#64748B]">▶</span>
-                    </Link>
-                    <Link to="/solutions/storyhealth" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <Smartphone className="w-4 h-4 text-emerald-600" />
-                        <div>
-                          <div className="font-display font-bold text-xs text-[#0F172A]">White Label</div>
-                          <div className="text-[10px] text-[#64748B]">Our ready-made products, launched as yours</div>
-                        </div>
-                      </div>
-                      <span className="text-xs text-[#64748B]">▶</span>
-                    </Link>
-                    <Link to="/solutions/gravity" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <Code className="w-4 h-4 text-[#2563EB]" />
-                        <div>
-                          <div className="font-display font-bold text-xs text-[#0F172A]">SDK</div>
-                          <div className="text-[10px] text-[#64748B]">Add health AI to the app you already have</div>
-                        </div>
-                      </div>
-                      <span className="text-xs text-[#64748B]">▶</span>
-                    </Link>
-                    <Link to="/solutions/front-desk" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <Volume2 className="w-4 h-4 text-amber-600" />
-                        <div>
-                          <div className="font-display font-bold text-xs text-[#0F172A]">AI Front Desk Agent</div>
-                          <div className="text-[10px] text-[#64748B]">White Label · always-on voice & WhatsApp agent</div>
-                        </div>
-                      </div>
-                      <span className="text-xs text-[#64748B]">▶</span>
-                    </Link>
-                    <Link to="/solutions/hospitals" onClick={closeMenus} className="p-3 bg-[#F8FAFC] rounded-[6px] flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <Building2 className="w-4 h-4 text-[#2563EB]" />
-                        <div>
-                          <div className="font-display font-bold text-xs text-[#0F172A]">Hospital Programmes</div>
-                          <div className="text-[10px] text-[#64748B]">White Label · {hospitalProgrammes.length} patient programmes</div>
-                        </div>
-                      </div>
-                      <span className="text-xs text-[#64748B]">▶</span>
-                    </Link>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="eyebrow text-[#94A3B8] mb-2 text-[10px] uppercase tracking-widest font-mono font-bold">HUMAN OS</div>
-                  <Link to={HUMAN_OS_PATH} onClick={closeMenus} className="mb-2 p-3 bg-hos-cream border border-hos-yellow rounded-[6px] flex items-center justify-between">
-                    <div>
-                      <div className="font-display font-bold text-xs text-[#0F172A]">Human OS overview</div>
-                      <div className="text-[10px] text-[#64748B]">{numberWord(totalSystems)} systems, one integration</div>
-                    </div>
-                    <span className="text-xs text-[#64748B]" aria-hidden="true">▶</span>
+              <div className="grid grid-cols-2 gap-2 border-t border-white/[0.08] pt-5">
+                {[...links, { to: '/platform', label: 'Technology' }].map((l) => (
+                  <Link key={l.to} to={l.to} onClick={closeMenus} className={`rounded-lg py-2 px-3 text-sm text-white/80 hover:bg-white/[0.05] ${focusRing}`}>
+                    {l.label}
                   </Link>
-                  {rings.map((ring) => (
-                    <div key={ring.id} className="mt-3">
-                      <div className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#64748B] mb-1 px-3">{ring.name}</div>
-                      <div className="flex flex-col">
-                        {systemsInRing(ring.id).map((system) => (
-                          <Link
-                            key={system.slug}
-                            to={systemPath(system.slug)}
-                            onClick={closeMenus}
-                            className="py-2 px-3 hover:bg-[#F8FAFC] rounded-[4px] flex items-center gap-2 text-sm font-display font-semibold text-[#334155]"
-                          >
-                            <span className="font-mono text-[10px] text-hos-amber">{system.number}</span>
-                            {system.name}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div>
-                  <div className="eyebrow text-[#94A3B8] mb-2 text-[10px] uppercase tracking-widest font-mono font-bold">COMPANY & RESOURCES</div>
-                  <div className="flex flex-col gap-1 text-sm font-display font-semibold text-[#334155]">
-                    <Link to="/pricing" onClick={closeMenus} className="py-2 px-3 hover:bg-[#F8FAFC] rounded-[4px]">
-                      Pricing
-                    </Link>
-                    <Link to="/clinical" onClick={closeMenus} className="py-2 px-3 hover:bg-[#F8FAFC] rounded-[4px]">
-                      Clinical Evidence
-                    </Link>
-                    <Link to="/security" onClick={closeMenus} className="py-2 px-3 hover:bg-[#F8FAFC] rounded-[4px]">
-                      Security & Privacy
-                    </Link>
-                    <Link to="/company" onClick={closeMenus} className="py-2 px-3 hover:bg-[#F8FAFC] rounded-[4px]">
-                      Company
-                    </Link>
-                  </div>
-                </div>
+                ))}
               </div>
-
             </div>
           </div>
         )}

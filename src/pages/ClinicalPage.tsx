@@ -101,7 +101,7 @@ const jumpTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
    ───────────────────────────────────────────── */
 
 const InDevelopment: React.FC = () => (
-  <span className="inline-flex items-center rounded-full border border-hos-amber/40 px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-widest text-hos-amber">
+  <span className="inline-flex items-center rounded-full border border-hos-amber/40 px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-widest text-hos-yellow">
     In development
   </span>
 );
@@ -109,9 +109,9 @@ const InDevelopment: React.FC = () => (
 const Mark: React.FC<{ dark?: boolean }> = () => <span aria-hidden="true" className="mt-2.5 w-4 h-[3px] shrink-0 bg-hos-yellow" />;
 
 const BulletList: React.FC<{ items: React.ReactNode[]; dark?: boolean }> = ({ items, dark = false }) => (
-  <ul className={`divide-y border-y ${dark ? 'divide-white/10 border-white/10' : 'divide-hos-hairline border-hos-hairline'}`}>
+  <ul className={`divide-y border-y ${dark ? 'divide-white/10 border-white/10' : 'divide-white/[0.08] border-white/[0.08]'}`}>
     {items.map((item, i) => (
-      <li key={i} className={`flex items-start gap-3 py-3 text-base leading-relaxed ${dark ? 'text-slate-200' : 'text-[#334155]'}`}>
+      <li key={i} className={`flex items-start gap-3 py-3 text-base leading-relaxed ${dark ? 'text-slate-200' : 'text-white/70'}`}>
         <Mark />
         <span>{item}</span>
       </li>
@@ -122,7 +122,7 @@ const BulletList: React.FC<{ items: React.ReactNode[]; dark?: boolean }> = ({ it
 const Chips: React.FC<{ items: string[] }> = ({ items }) => (
   <ul className="flex flex-wrap gap-2">
     {items.map((item) => (
-      <li key={item} className="rounded-full border border-hos-hairline bg-white px-3 py-1.5 text-sm text-hos-black">
+      <li key={item} className="rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1.5 text-sm text-white">
         {item}
       </li>
     ))}
@@ -132,11 +132,11 @@ const Chips: React.FC<{ items: string[] }> = ({ items }) => (
 const Callout: React.FC<{ title: string; children: React.ReactNode; dark?: boolean }> = ({ title, children, dark = false }) => (
   <div
     className={`rounded-[16px] border-l-[3px] border-l-hos-yellow p-6 sm:p-7 ${
-      dark ? 'bg-white/5 border border-white/10' : 'bg-white border border-hos-hairline'
+      dark ? 'bg-white/5 border border-white/10' : 'bg-white/[0.03] border border-white/[0.08]'
     }`}
   >
-    <h3 className={`font-display font-bold text-lg ${dark ? 'text-white' : 'text-hos-black'}`}>{title}</h3>
-    <div className={`mt-2 text-base leading-relaxed ${dark ? 'text-slate-300' : 'text-[#475569]'}`}>{children}</div>
+    <h3 className={`font-display font-bold text-lg ${dark ? 'text-white' : 'text-white'}`}>{title}</h3>
+    <div className={`mt-2 text-base leading-relaxed ${dark ? 'text-slate-300' : 'text-white/60'}`}>{children}</div>
   </div>
 );
 
@@ -150,30 +150,30 @@ const DataTable: React.FC<{
   cellClass?: (col: number) => string;
 }> = ({ label, columns, rows, minWidth = 'min-w-[640px]', highlightCol, cellClass }) => (
   <div>
-    <p className="sm:hidden mb-3 text-xs text-hos-grey">Scroll sideways to see every column.</p>
-    <div role="region" aria-label={label} tabIndex={0} className={`overflow-x-auto rounded-[12px] border border-hos-hairline bg-white ${focusRing}`}>
+    <p className="sm:hidden mb-3 text-xs text-white/55">Scroll sideways to see every column.</p>
+    <div role="region" aria-label={label} tabIndex={0} className={`overflow-x-auto rounded-[12px] border border-white/[0.08] bg-white/[0.03] ${focusRing}`}>
       <table className={`w-full ${minWidth} border-collapse text-left text-sm`}>
         <caption className="sr-only">{label}</caption>
-        <thead className="bg-hos-mist">
+        <thead className="bg-white/[0.04]">
           <tr>
             {columns.map((c, i) => (
-              <th key={c} scope="col" className="px-4 py-3 align-bottom font-mono text-[11px] font-bold uppercase tracking-widest text-hos-grey whitespace-nowrap">
+              <th key={c} scope="col" className="px-4 py-3 align-bottom font-mono text-[11px] font-bold uppercase tracking-widest text-white/55 whitespace-nowrap">
                 {c}
                 {i === highlightCol && <span aria-hidden="true" className="block mt-1.5 h-[3px] w-6 bg-hos-yellow" />}
               </th>
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-hos-hairline">
+        <tbody className="divide-y divide-white/[0.08]">
           {rows.map((row, r) => (
-            <tr key={r} className="hover:bg-hos-mist/60 transition-colors">
+            <tr key={r} className="hover:bg-white/[0.03] transition-colors">
               {row.map((cell, c) =>
                 c === 0 ? (
-                  <th key={c} scope="row" className="px-4 py-3 align-top font-semibold text-hos-black whitespace-nowrap">
+                  <th key={c} scope="row" className="px-4 py-3 align-top font-semibold text-white whitespace-nowrap">
                     {cell}
                   </th>
                 ) : (
-                  <td key={c} className={`px-4 py-3 align-top text-[#475569] ${cellClass ? cellClass(c) : ''}`}>
+                  <td key={c} className={`px-4 py-3 align-top text-white/60 ${cellClass ? cellClass(c) : ''}`}>
                     {cell}
                   </td>
                 )
@@ -195,9 +195,9 @@ const fadeUp = (i: number): React.CSSProperties => ({ animation: `hos-fade-up 0.
 type Grade = 'optimal' | 'normal' | 'outside';
 
 const gradeChip: Record<Grade, { label: string; cls: string }> = {
-  optimal: { label: 'Optimal', cls: 'bg-hos-mist text-hos-black' },
-  normal: { label: 'Normal, not optimal', cls: 'border border-hos-amber/40 text-hos-amber' },
-  outside: { label: 'Escalated', cls: 'bg-hos-black text-white' },
+  optimal: { label: 'Optimal', cls: 'bg-white/[0.04] text-white' },
+  normal: { label: 'Normal, not optimal', cls: 'border border-hos-amber/40 text-hos-yellow' },
+  outside: { label: 'Escalated', cls: 'bg-ink-950 text-white' },
 };
 
 /* Sample values on scales built from the reference table below (positions in %). */
@@ -209,31 +209,31 @@ const gradingRows: { name: string; value: string; grade: Grade; std: [number, nu
 
 /** Hero card: one marker graded against both the standard and the optimal range. */
 const DualGradingCard: React.FC = () => (
-  <div className="hos-anim w-[300px] max-w-full rounded-2xl bg-white/95 p-4 text-hos-black ring-1 ring-black/5 shadow-[0_24px_60px_-20px_rgba(10,10,11,0.45)] backdrop-blur-md" style={fadeUp(0)}>
+  <div className="hos-anim w-[300px] max-w-full rounded-2xl bg-ink-850/95 p-4 text-white ring-1 ring-white/10 shadow-[0_24px_60px_-20px_rgba(10,10,11,0.45)] backdrop-blur-md" style={fadeUp(0)}>
     <div className="flex items-center justify-between gap-3 mb-3">
       <span className="text-xs font-bold">Dual grading</span>
-      <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-hos-grey">Sample</span>
+      <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-white/55">Sample</span>
     </div>
     <ul className="space-y-3">
       {gradingRows.map((row, i) => (
         <li key={row.name} style={fadeUp(i + 1)}>
           <div className="flex items-center justify-between gap-2 text-[11px]">
             <span className="font-semibold">
-              {row.name} <span className="font-normal text-hos-grey">{row.value}</span>
+              {row.name} <span className="font-normal text-white/55">{row.value}</span>
             </span>
             <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${gradeChip[row.grade].cls}`}>{gradeChip[row.grade].label}</span>
           </div>
-          <div className="relative mt-1.5 h-2 rounded-full bg-hos-mist ring-1 ring-hos-hairline">
-            <span className="absolute inset-y-0 rounded-full bg-hos-navy/15" style={{ left: `${row.std[0]}%`, right: `${100 - row.std[1]}%` }} />
+          <div className="relative mt-1.5 h-2 rounded-full bg-white/[0.04] ring-1 ring-white/10">
+            <span className="absolute inset-y-0 rounded-full bg-white/15" style={{ left: `${row.std[0]}%`, right: `${100 - row.std[1]}%` }} />
             <span className="absolute inset-y-0 rounded-full bg-hos-yellow" style={{ left: `${row.opt[0]}%`, right: `${100 - row.opt[1]}%` }} />
-            <span className="absolute top-1/2 w-3 h-3 -mt-1.5 -ml-1.5 rounded-full bg-hos-black ring-2 ring-white" style={{ left: `${row.pos}%`, ...fadeUp(i + 2) }} />
+            <span className="absolute top-1/2 w-3 h-3 -mt-1.5 -ml-1.5 rounded-full bg-ink-950 ring-2 ring-ink-950" style={{ left: `${row.pos}%`, ...fadeUp(i + 2) }} />
           </div>
         </li>
       ))}
     </ul>
-    <div className="mt-3 pt-3 border-t border-hos-hairline flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] text-hos-grey" style={fadeUp(5)}>
+    <div className="mt-3 pt-3 border-t border-white/[0.08] flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] text-white/55" style={fadeUp(5)}>
       <span className="flex items-center gap-1">
-        <span className="w-3 h-1.5 rounded-full bg-hos-navy/15" />
+        <span className="w-3 h-1.5 rounded-full bg-white/15" />
         Standard
       </span>
       <span className="flex items-center gap-1">
@@ -254,25 +254,25 @@ const BaselineChart: React.FC = () => {
   return (
     <figure className="space-y-4">
       <div className="flex items-center justify-between gap-3">
-        <span className="text-sm font-bold text-hos-black">Resting heart rate vs personal baseline</span>
-        <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-hos-grey">Illustrative</span>
+        <span className="text-sm font-bold text-white">Resting heart rate vs personal baseline</span>
+        <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-white/55">Illustrative</span>
       </div>
       <svg viewBox="0 0 320 140" className="hos-anim w-full h-auto" aria-hidden="true">
-        <rect x="16" y={y(63)} width="288" height={y(56) - y(63)} rx="6" fill="#121A31" fillOpacity="0.08" />
-        <line x1="16" x2="304" y1={y(59.5)} y2={y(59.5)} stroke="#121A31" strokeOpacity="0.25" strokeDasharray="3 4" />
-        <path d={line} fill="none" stroke="#0A0A0B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" pathLength={400} strokeDasharray="400" style={{ animation: 'hos-draw 1.8s ease 0.2s both' }} />
+        <rect x="16" y={y(63)} width="288" height={y(56) - y(63)} rx="6" fill="#FFFFFF" fillOpacity="0.06" />
+        <line x1="16" x2="304" y1={y(59.5)} y2={y(59.5)} stroke="#FFFFFF" strokeOpacity="0.3" strokeDasharray="3 4" />
+        <path d={line} fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" pathLength={400} strokeDasharray="400" style={{ animation: 'hos-draw 1.8s ease 0.2s both' }} />
         {pts.map((v, i) =>
-          v > 63 ? <circle key={i} cx={x(i)} cy={y(v)} r="4" fill="#F5D97B" stroke="#0A0A0B" strokeWidth="1.5" style={fadeUp(i - 8)} /> : null
+          v > 63 ? <circle key={i} cx={x(i)} cy={y(v)} r="4" fill="#F5D97B" stroke="#07080A" strokeWidth="1.5" style={fadeUp(i - 8)} /> : null
         )}
-        <line x1="16" x2="304" y1="132" y2="132" stroke="#E6E3DA" />
+        <line x1="16" x2="304" y1="132" y2="132" stroke="rgba(255,255,255,0.12)" />
       </svg>
-      <figcaption className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-hos-grey">
+      <figcaption className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-white/55">
         <span className="flex items-center gap-1.5">
-          <span aria-hidden="true" className="w-3 h-2 rounded-sm bg-hos-navy/10" />
+          <span aria-hidden="true" className="w-3 h-2 rounded-sm bg-white/10" />
           Personal rolling baseline
         </span>
         <span className="flex items-center gap-1.5">
-          <span aria-hidden="true" className="w-2.5 h-2.5 rounded-full bg-hos-yellow ring-1 ring-hos-black" />
+          <span aria-hidden="true" className="w-2.5 h-2.5 rounded-full bg-hos-yellow ring-1 ring-ink-950" />
           Sustained elevation above baseline
         </span>
       </figcaption>
@@ -422,7 +422,7 @@ export const ClinicalPage: React.FC = () => {
   });
 
   return (
-    <div className="font-body bg-white text-hos-black overflow-x-clip">
+    <div className="font-body bg-white/[0.03] text-white overflow-x-clip">
       {/* ═══ HERO ═══ */}
       <PageHero
         eyebrow="Clinical and algorithmic transparency"
@@ -440,15 +440,15 @@ export const ClinicalPage: React.FC = () => {
       />
 
       {/* ═══ CONTENTS + DISCLAIMER ═══ */}
-      <section id="contents" aria-labelledby="contents-heading" className={`bg-hos-mist py-16 sm:py-20 ${anchorClass}`}>
+      <section id="contents" aria-labelledby="contents-heading" className={`bg-white/[0.04] py-16 sm:py-20 ${anchorClass}`}>
         <Container className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
           <Reveal className="lg:col-span-4 space-y-6">
             <Eyebrow>On this page</Eyebrow>
-            <h2 id="contents-heading" className="font-display font-semibold text-3xl sm:text-4xl tracking-tight leading-[1.1] text-hos-black">
+            <h2 id="contents-heading" className="font-display font-semibold text-3xl sm:text-4xl tracking-tight leading-[1.1] text-white">
               Contents
             </h2>
             {/* TODO(copy): contents intro */}
-            <p className="text-base text-[#475569] leading-relaxed">
+            <p className="text-base text-white/60 leading-relaxed">
               Sixteen sections, from the philosophy behind our ranges to the literature behind every model. Written for clinicians and for the teams evaluating Nostavia on behalf of an institution.
             </p>
             <dl className="grid grid-cols-3 gap-3">
@@ -457,15 +457,15 @@ export const ClinicalPage: React.FC = () => {
                 ['Issued', 'August 2026'],
                 ['Status', 'Public'],
               ].map(([k, v]) => (
-                <div key={k} className="rounded-[12px] border border-hos-hairline bg-white px-3 py-3">
-                  <dt className="font-mono text-[10px] font-bold uppercase tracking-widest text-hos-grey">{k}</dt>
-                  <dd className="mt-1 text-sm font-semibold text-hos-black">{v}</dd>
+                <div key={k} className="rounded-[12px] border border-white/[0.08] bg-white/[0.03] px-3 py-3">
+                  <dt className="font-mono text-[10px] font-bold uppercase tracking-widest text-white/55">{k}</dt>
+                  <dd className="mt-1 text-sm font-semibold text-white">{v}</dd>
                 </div>
               ))}
             </dl>
-            <div className="rounded-[16px] border border-hos-hairline border-l-[3px] border-l-hos-yellow bg-white p-5 space-y-2">
-              <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-hos-black">Medical disclaimer</p>
-              <Disclaimer className="!text-sm !text-[#334155]" />
+            <div className="rounded-[16px] border border-white/[0.08] border-l-[3px] border-l-hos-yellow bg-white/[0.03] p-5 space-y-2">
+              <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-white">Medical disclaimer</p>
+              <Disclaimer className="!text-sm !text-white/70" />
               <a href="#disclaimer" onClick={(e) => jumpTo(e, 'disclaimer')} className={`${textLink} !text-xs`}>
                 Read the full notice
               </a>
@@ -480,16 +480,16 @@ export const ClinicalPage: React.FC = () => {
                     <a
                       href={`#${t.id}`}
                       onClick={(e) => jumpTo(e, t.id)}
-                      className={`group flex items-center gap-4 h-full rounded-[12px] border border-hos-hairline bg-white px-4 py-3 hover:border-hos-navy transition-colors ${focusRing}`}
+                      className={`group flex items-center gap-4 h-full rounded-[12px] border border-white/[0.08] bg-white/[0.03] px-4 py-3 hover:border-white/25 transition-colors ${focusRing}`}
                     >
-                      <span className="w-6 shrink-0 font-mono text-xs font-bold text-hos-amber">{String(i + 1).padStart(2, '0')}</span>
-                      <span className="text-sm font-semibold text-hos-black leading-snug">{t.label}</span>
-                      <ArrowDown aria-hidden="true" className="ml-auto w-4 h-4 shrink-0 text-hos-grey group-hover:text-hos-black transition-colors" />
+                      <span className="w-6 shrink-0 font-mono text-xs font-bold text-hos-yellow">{String(i + 1).padStart(2, '0')}</span>
+                      <span className="text-sm font-semibold text-white leading-snug">{t.label}</span>
+                      <ArrowDown aria-hidden="true" className="ml-auto w-4 h-4 shrink-0 text-white/55 group-hover:text-white transition-colors" />
                     </a>
                   </li>
                 ))}
               </ol>
-              <p className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[#475569]">
+              <p className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/60">
                 <span>Also on this page:</span>
                 <a href="#methods-in-product" onClick={(e) => jumpTo(e, 'methods-in-product')} className={textLink}>
                   Where these methods run
@@ -515,35 +515,35 @@ export const ClinicalPage: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Reveal className="h-full">
             <Panel className="h-full space-y-3">
-              <h3 className="font-display font-bold text-xl text-hos-black">Normal ranges</h3>
-              <p className="text-base text-[#475569] leading-relaxed">
+              <h3 className="font-display font-bold text-xl text-white">Normal ranges</h3>
+              <p className="text-base text-white/60 leading-relaxed">
                 Normal ranges are derived from the general population, including people with unrecognised chronic disease. A result inside a normal range means you are statistically unremarkable. It does not mean you are well.
               </p>
             </Panel>
           </Reveal>
           <Reveal delay={100} className="h-full">
             <Panel className="h-full space-y-3 border-t-[3px] border-t-hos-yellow">
-              <h3 className="font-display font-bold text-xl text-hos-black">Optimal ranges</h3>
-              <p className="text-base text-[#475569] leading-relaxed">
+              <h3 className="font-display font-bold text-xl text-white">Optimal ranges</h3>
+              <p className="text-base text-white/60 leading-relaxed">
                 Optimal ranges are derived from longevity research, centenarian cohorts, cardiovascular outcome trials and performance physiology. They describe the physiological state associated with the lowest long-term risk.
               </p>
             </Panel>
           </Reveal>
         </div>
         <Reveal>
-          <p className="max-w-3xl text-lg text-[#334155] leading-relaxed">
+          <p className="max-w-3xl text-lg text-white/70 leading-relaxed">
             Every interpretation the platform produces is graded against both. A result can be normal and still be flagged for attention. A result outside the normal range is always escalated, never softened.
           </p>
         </Reveal>
         <Reveal>
           <Panel className="space-y-5">
-            <h3 className="font-display font-bold text-xl text-hos-black">Conventional software compared with Nostavia</h3>
+            <h3 className="font-display font-bold text-xl text-white">Conventional software compared with Nostavia</h3>
             <DataTable
               label="Capabilities: conventional software compared with Nostavia"
               columns={['Capability', 'Conventional', 'Nostavia']}
               rows={philosophyRows}
               highlightCol={2}
-              cellClass={(c) => (c === 2 ? '!text-hos-black font-medium' : '')}
+              cellClass={(c) => (c === 2 ? '!text-white font-medium' : '')}
             />
           </Panel>
         </Reveal>
@@ -596,8 +596,8 @@ export const ClinicalPage: React.FC = () => {
           intro="Nostavia estimates biological age using a biomarker deviation model, in the tradition of PhenoAge (Levine et al., 2018) and the Klemera-Doubal method (2006)."
         />
         <Reveal>
-          <p className="max-w-3xl text-base text-[#334155] leading-relaxed">
-            <strong className="text-hos-black">Method.</strong> Each biomarker&apos;s distance from its optimal range is converted into an aging surplus or deficit expressed in years, weighted by the strength of that marker&apos;s association with mortality and healthspan in the literature, and combined with chronological age.
+          <p className="max-w-3xl text-base text-white/70 leading-relaxed">
+            <strong className="text-white">Method.</strong> Each biomarker&apos;s distance from its optimal range is converted into an aging surplus or deficit expressed in years, weighted by the strength of that marker&apos;s association with mortality and healthspan in the literature, and combined with chronological age.
           </p>
         </Reveal>
         {/* TODO(copy): step titles group the method and its three safeguards */}
@@ -607,7 +607,7 @@ export const ClinicalPage: React.FC = () => {
               title: 'Check the data',
               body: (
                 <>
-                  <strong className="text-hos-black">Safeguard.</strong> A minimum number of valid biomarkers is required before any estimate is produced. Sparse data returns no result rather than a confident guess.
+                  <strong className="text-white">Safeguard.</strong> A minimum number of valid biomarkers is required before any estimate is produced. Sparse data returns no result rather than a confident guess.
                 </>
               ),
             },
@@ -619,7 +619,7 @@ export const ClinicalPage: React.FC = () => {
               title: 'Weight and cap',
               body: (
                 <>
-                  Each marker is weighted by the strength of its association with mortality and healthspan. <strong className="text-hos-black">Safeguard.</strong> Each individual marker’s contribution is capped, so no single abnormal value can dominate the estimate.
+                  Each marker is weighted by the strength of its association with mortality and healthspan. <strong className="text-white">Safeguard.</strong> Each individual marker’s contribution is capped, so no single abnormal value can dominate the estimate.
                 </>
               ),
             },
@@ -627,7 +627,7 @@ export const ClinicalPage: React.FC = () => {
               title: 'Combine and bound',
               body: (
                 <>
-                  The result is combined with chronological age. <strong className="text-hos-black">Safeguard.</strong> The final output is bounded relative to chronological age to prevent implausible results.
+                  The result is combined with chronological age. <strong className="text-white">Safeguard.</strong> The final output is bounded relative to chronological age to prevent implausible results.
                 </>
               ),
             },
@@ -636,7 +636,7 @@ export const ClinicalPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           <Reveal className="h-full">
             <Panel className="h-full space-y-4">
-              <h3 className="font-display font-bold text-lg text-hos-black">Contributing markers</h3>
+              <h3 className="font-display font-bold text-lg text-white">Contributing markers</h3>
               <Chips items={['Fasting glucose', 'HbA1c', 'HDL cholesterol', 'LDL cholesterol', 'Triglycerides', 'Creatinine', 'ALT', 'Haemoglobin', 'TSH', 'Vitamin D']} />
             </Panel>
           </Reveal>
@@ -648,10 +648,10 @@ export const ClinicalPage: React.FC = () => {
           <Reveal delay={180} className="h-full">
             <Panel className="h-full space-y-3">
               <div className="flex flex-wrap items-center gap-3">
-                <h3 className="font-display font-bold text-lg text-hos-black">Epigenetic clocks</h3>
+                <h3 className="font-display font-bold text-lg text-white">Epigenetic clocks</h3>
                 <InDevelopment />
               </div>
-              <p className="text-base text-[#475569] leading-relaxed">
+              <p className="text-base text-white/60 leading-relaxed">
                 Epigenetic clock tracking is in development and is not part of the platform today. It is designed to display and track results from validated third-party epigenetic testing rather than recompute them: Horvath, Hannum, PhenoAge, GrimAge and DunedinPACE.
               </p>
             </Panel>
@@ -679,12 +679,12 @@ export const ClinicalPage: React.FC = () => {
         </div>
         <Reveal>
           <Panel className="space-y-5">
-            <h3 className="font-display font-bold text-xl text-hos-black">Scores and their underlying models</h3>
+            <h3 className="font-display font-bold text-xl text-white">Scores and their underlying models</h3>
             <DataTable
               label="Wearable scores, underlying models and sources"
               columns={['Score', 'Underlying model', 'Source']}
               rows={wearableRows}
-              cellClass={(c) => (c === 2 ? 'text-xs !text-hos-grey' : '')}
+              cellClass={(c) => (c === 2 ? 'text-xs !text-white/55' : '')}
             />
           </Panel>
         </Reveal>
@@ -730,15 +730,15 @@ export const ClinicalPage: React.FC = () => {
         </Reveal>
         <Reveal>
           <Panel className="space-y-5">
-            <h3 className="font-display font-bold text-xl text-hos-black">Optimal vs standard ranges</h3>
+            <h3 className="font-display font-bold text-xl text-white">Optimal vs standard ranges</h3>
             <DataTable
               label="Optimal and standard reference ranges by biomarker"
               columns={['Biomarker', 'Standard', 'Optimal', 'Basis']}
               rows={biomarkerRows}
               highlightCol={2}
-              cellClass={(c) => (c === 1 ? 'whitespace-nowrap tabular-nums' : c === 2 ? 'whitespace-nowrap tabular-nums !text-hos-black font-semibold' : 'text-xs !text-hos-grey')}
+              cellClass={(c) => (c === 1 ? 'whitespace-nowrap tabular-nums' : c === 2 ? 'whitespace-nowrap tabular-nums !text-white font-semibold' : 'text-xs !text-white/55')}
             />
-            <p className="text-sm text-hos-grey leading-relaxed">
+            <p className="text-sm text-white/55 leading-relaxed">
               Partner institutions can override any of these ranges to match their own clinical protocols or local laboratory standards.
             </p>
           </Panel>
@@ -785,7 +785,7 @@ export const ClinicalPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
           <Reveal className="lg:col-span-7 h-full">
             <Panel className="h-full space-y-4">
-              <h3 className="font-display font-bold text-xl text-hos-black">Relationships the engine tests</h3>
+              <h3 className="font-display font-bold text-xl text-white">Relationships the engine tests</h3>
               <BulletList
                 items={[
                   'Sleep duration against next-day HRV and resting heart rate',
@@ -816,7 +816,7 @@ export const ClinicalPage: React.FC = () => {
               title="More than a calorie estimate."
               intro="Nostavia analyses food from a photograph and returns more than a calorie estimate: predicted metabolic response, degree of processing, appropriateness for the time of day, and effect on nutrient absorption."
             />
-            <ul className="divide-y divide-hos-hairline border-y border-hos-hairline">
+            <ul className="divide-y divide-white/[0.08] border-y border-white/[0.08]">
               {[
                 {
                   icon: Utensils,
@@ -836,12 +836,12 @@ export const ClinicalPage: React.FC = () => {
               ].map(({ icon: Icon, title, body }, i) => (
                 <li key={title}>
                   <Reveal delay={i * 90} className="flex gap-4 py-5">
-                    <span className="w-10 h-10 shrink-0 rounded-[10px] bg-hos-mist border border-hos-hairline text-hos-black flex items-center justify-center">
+                    <span className="w-10 h-10 shrink-0 rounded-[10px] bg-white/[0.04] border border-white/[0.08] text-white flex items-center justify-center">
                       <Icon aria-hidden="true" className="w-5 h-5" />
                     </span>
                     <div className="space-y-1.5">
-                      <h3 className="font-display font-bold text-lg text-hos-black">{title}</h3>
-                      <p className="text-sm text-[#475569] leading-relaxed">{body}</p>
+                      <h3 className="font-display font-bold text-lg text-white">{title}</h3>
+                      <p className="text-sm text-white/60 leading-relaxed">{body}</p>
                     </div>
                   </Reveal>
                 </li>
@@ -849,7 +849,7 @@ export const ClinicalPage: React.FC = () => {
             </ul>
           </div>
           <Reveal delay={150}>
-            <div className="relative min-h-[380px] sm:min-h-[480px] rounded-[20px] overflow-hidden bg-hos-navy">
+            <div className="relative min-h-[380px] sm:min-h-[480px] rounded-[20px] overflow-hidden bg-ink-800">
               <img
                 src="/photos/home-problem-glucose.jpg"
                 alt="Finger-prick glucose test"
@@ -859,7 +859,7 @@ export const ClinicalPage: React.FC = () => {
                 decoding="async"
                 className="absolute inset-0 w-full h-full object-cover"
               />
-              <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-hos-black/60 via-transparent to-transparent" />
+              <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink-950/75 via-transparent to-transparent" />
               <div aria-hidden="true" className="absolute left-4 right-4 bottom-4 sm:left-6 sm:right-auto sm:bottom-6">
                 <FoodScanCard />
               </div>
@@ -964,8 +964,8 @@ export const ClinicalPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
           <Reveal className="lg:col-span-7 h-full">
             <Panel className="h-full space-y-5 border-t-[3px] border-t-hos-yellow">
-              <h3 className="font-display font-bold text-xl text-hos-black">Clinical escalation thresholds</h3>
-              <p className="text-base text-[#475569] leading-relaxed">
+              <h3 className="font-display font-bold text-xl text-white">Clinical escalation thresholds</h3>
+              <p className="text-base text-white/60 leading-relaxed">
                 Signals with established clinical significance are flagged prominently with a recommendation to consult a qualified clinician:
               </p>
               <Chips
@@ -976,19 +976,19 @@ export const ClinicalPage: React.FC = () => {
                   'Severe sleep deficit',
                 ]}
               />
-              <p className="text-sm text-hos-grey">The platform escalates. It does not attempt to manage.</p>
+              <p className="text-sm text-white/55">The platform escalates. It does not attempt to manage.</p>
             </Panel>
           </Reveal>
           <Reveal delay={120} className="lg:col-span-5 h-full">
             <Panel className="h-full space-y-4">
               <div className="flex flex-wrap items-center gap-3">
-                <h3 className="font-display font-bold text-xl text-hos-black">Emergency language screening</h3>
+                <h3 className="font-display font-bold text-xl text-white">Emergency language screening</h3>
                 <InDevelopment />
               </div>
-              <p className="text-base text-[#475569] leading-relaxed">
+              <p className="text-base text-white/60 leading-relaxed">
                 Screening of member messages for language indicating a medical or psychological emergency is in development and is not part of the platform today. As designed, it runs before any AI processing, returns emergency contact guidance and a direction to seek immediate help, and bypasses the ordinary response path entirely.
               </p>
-              <p className="text-sm text-hos-grey leading-relaxed">
+              <p className="text-sm text-white/55 leading-relaxed">
                 It is designed as a supplementary safeguard. It is not an emergency service, it is not a substitute for one, and we do not present it as one.
               </p>
             </Panel>
@@ -1038,7 +1038,7 @@ export const ClinicalPage: React.FC = () => {
         <Reveal>
           <Panel className="space-y-6">
             <InfrastructureGroup />
-            <p className="pt-5 border-t border-hos-hairline text-sm text-[#475569] leading-relaxed">
+            <p className="pt-5 border-t border-white/[0.08] text-sm text-white/60 leading-relaxed">
               Partner-specific security documentation, including current certification status and sub-processor detail, is available under NDA to institutions in active evaluation.
             </p>
           </Panel>
@@ -1052,19 +1052,19 @@ export const ClinicalPage: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Reveal className="h-full">
             <Panel className="h-full space-y-4 border-t-[3px] border-t-hos-yellow">
-              <h3 className="font-display font-bold text-lg text-hos-black">Published on this page</h3>
+              <h3 className="font-display font-bold text-lg text-white">Published on this page</h3>
               <BulletList items={['The models', 'The sources', 'The thresholds', 'The reasoning']} />
             </Panel>
           </Reveal>
           <Reveal delay={100} className="h-full">
             <Panel className="h-full space-y-4">
-              <h3 className="font-display font-bold text-lg text-hos-black">Available under NDA</h3>
+              <h3 className="font-display font-bold text-lg text-white">Available under NDA</h3>
               <BulletList items={['The exact weighting coefficients inside our composite scores', 'The normalisation constants inside our composite scores']} />
             </Panel>
           </Reveal>
         </div>
         <Reveal>
-          <div className="max-w-3xl space-y-4 text-base sm:text-lg text-[#334155] leading-relaxed">
+          <div className="max-w-3xl space-y-4 text-base sm:text-lg text-white/70 leading-relaxed">
             <p>
               We publish the models, the sources, the thresholds and the reasoning. We do not publish the exact weighting coefficients and normalisation constants inside our composite scores.
             </p>
@@ -1132,13 +1132,13 @@ export const ClinicalPage: React.FC = () => {
         />
         <Reveal>
           <Panel>
-            <ol className="grid grid-cols-1 md:grid-cols-2 gap-x-10 divide-y divide-hos-hairline md:divide-y-0">
+            <ol className="grid grid-cols-1 md:grid-cols-2 gap-x-10 divide-y divide-white/[0.08] md:divide-y-0">
               {references.map(([domain, ref], i) => (
-                <li key={`${domain}-${i}`} className="flex gap-4 py-4 md:border-b md:border-hos-hairline">
-                  <span className="w-7 shrink-0 font-mono text-xs font-bold text-hos-amber tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+                <li key={`${domain}-${i}`} className="flex gap-4 py-4 md:border-b md:border-white/[0.08]">
+                  <span className="w-7 shrink-0 font-mono text-xs font-bold text-hos-yellow tabular-nums">{String(i + 1).padStart(2, '0')}</span>
                   <div className="min-w-0 space-y-1">
-                    <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-hos-grey">{domain}</p>
-                    <p className="text-sm text-hos-black leading-relaxed break-words">{ref}</p>
+                    <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-white/55">{domain}</p>
+                    <p className="text-sm text-white leading-relaxed break-words">{ref}</p>
                   </div>
                 </li>
               ))}
@@ -1182,7 +1182,7 @@ export const ClinicalPage: React.FC = () => {
         <Reveal>
           <Panel className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             <div className="lg:col-span-8 space-y-5">
-              <p className="text-base text-[#334155] leading-relaxed">
+              <p className="text-base text-white/70 leading-relaxed">
                 This document is reviewed alongside material changes to the platform&apos;s clinical logic. Questions about any algorithm, threshold or reference described here, including from clinicians evaluating Nostavia on behalf of an institution, can be directed to our clinical team.
               </p>
               <Link to="/demo" className={textLink}>
@@ -1190,15 +1190,15 @@ export const ClinicalPage: React.FC = () => {
                 <ArrowRight aria-hidden="true" className="w-4 h-4" />
               </Link>
             </div>
-            <dl className="lg:col-span-4 divide-y divide-hos-hairline border-y border-hos-hairline text-sm">
+            <dl className="lg:col-span-4 divide-y divide-white/[0.08] border-y border-white/[0.08] text-sm">
               {[
                 ['Version', '1.0'],
                 ['Issued', 'August 2026'],
                 ['Owner', '© 2026 Nostavia Technologies Pvt. Ltd.'],
               ].map(([k, v]) => (
                 <div key={k} className="flex justify-between gap-4 py-3">
-                  <dt className="font-mono text-[11px] font-bold uppercase tracking-widest text-hos-grey">{k}</dt>
-                  <dd className="text-right font-semibold text-hos-black">{v}</dd>
+                  <dt className="font-mono text-[11px] font-bold uppercase tracking-widest text-white/55">{k}</dt>
+                  <dd className="text-right font-semibold text-white">{v}</dd>
                 </div>
               ))}
             </dl>

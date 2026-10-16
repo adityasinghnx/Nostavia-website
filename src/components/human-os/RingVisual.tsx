@@ -15,19 +15,19 @@ const RingPanel: React.FC<{ ring: HumanOsRing; compact: boolean }> = ({ ring, co
   return (
     <div
       className={`rounded-[16px] border p-4 sm:p-6 lg:p-8 ${
-        dark ? 'bg-hos-navy border-hos-navy' : 'bg-hos-cream border-hos-yellow'
+        dark ? 'bg-ink-800 border-white/10' : 'bg-white/[0.04] border-hos-yellow'
       }`}
     >
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 sm:gap-6 mb-4 sm:mb-6">
         <div className="flex items-center gap-3">
           <RingGlyph tone={dark ? 'dark' : 'light'} />
           <div>
-            <h3 className={`font-display font-extrabold text-lg sm:text-xl ${dark ? 'text-white' : 'text-hos-black'}`}>{ring.name}</h3>
-            <p className={`text-sm font-semibold ${dark ? 'text-[#F5D97B]' : 'text-hos-amber'}`}>{ring.audience}</p>
+            <h3 className={`font-display font-extrabold text-lg sm:text-xl ${dark ? 'text-white' : 'text-white'}`}>{ring.name}</h3>
+            <p className={`text-sm font-semibold ${dark ? 'text-[#F5D97B]' : 'text-hos-yellow'}`}>{ring.audience}</p>
           </div>
         </div>
         {!compact && (
-          <p className={`text-sm leading-relaxed max-w-xl ${dark ? 'text-slate-300' : 'text-[#475569]'}`}>{ring.summary}</p>
+          <p className={`text-sm leading-relaxed max-w-xl ${dark ? 'text-slate-300' : 'text-white/60'}`}>{ring.summary}</p>
         )}
       </div>
       <div className={`grid grid-cols-1 gap-3 sm:gap-4 ${ring.id === 'person' ? 'sm:grid-cols-2' : 'md:grid-cols-3'}`}>
@@ -54,7 +54,7 @@ export const RingVisual: React.FC<{ compact?: boolean; id?: string }> = ({ compa
       <div aria-hidden="true" className="flex flex-col items-center py-1">
         <span className="w-px h-4 bg-hos-yellow" />
         {/* TODO(copy): connector label between the rings */}
-        <span className="px-3 py-1 rounded-full bg-hos-yellow text-hos-black font-mono text-[10px] font-bold uppercase tracking-widest">
+        <span className="px-3 py-1 rounded-full bg-hos-yellow text-white font-mono text-[10px] font-bold uppercase tracking-widest">
           One integration
         </span>
         <span className="w-px h-4 bg-hos-yellow" />

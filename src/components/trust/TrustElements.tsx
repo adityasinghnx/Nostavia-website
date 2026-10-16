@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowUpRight, Boxes, FileCheck2, Info, KeyRound, Lock, Network, ScrollText, Stethoscope } from 'lucide-react';
 import { TrustIcon, TrustItem, trustGroup, trustGroups } from '../../content/trust.config';
 
-const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F172A] focus-visible:ring-offset-2';
+const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hos-yellow focus-visible:ring-offset-2';
 
 const icons: Record<TrustIcon, React.FC<{ className?: string }>> = {
   consent: FileCheck2,
@@ -20,7 +20,7 @@ const icons: Record<TrustIcon, React.FC<{ className?: string }>> = {
  * the site's typography. Logos are never links.
  */
 export const LogoTile: React.FC<{ item: TrustItem; lazy?: boolean }> = ({ item, lazy = true }) => (
-  <div className="h-14 sm:h-16 min-w-[140px] px-5 inline-flex items-center justify-center rounded-[2px] border border-[#E2E8F0] bg-white">
+  <div className="h-14 sm:h-16 min-w-[140px] px-5 inline-flex items-center justify-center rounded-xl border border-white/[0.08] bg-white/[0.03]">
     {item.logo ? (
       <img
         src={item.logo}
@@ -32,13 +32,13 @@ export const LogoTile: React.FC<{ item: TrustItem; lazy?: boolean }> = ({ item, 
         className="h-7 sm:h-8 w-auto object-contain"
       />
     ) : (
-      <span className="font-display font-bold text-sm sm:text-base text-[#0F172A] tracking-tight whitespace-nowrap">{item.name}</span>
+      <span className="font-display font-bold text-sm sm:text-base text-white tracking-tight whitespace-nowrap">{item.name}</span>
     )}
   </div>
 );
 
 const GroupLabel: React.FC<{ children: React.ReactNode; as?: 'h3' | 'div' }> = ({ children, as: Tag = 'h3' }) => (
-  <Tag className="font-mono text-[11px] font-bold uppercase tracking-widest text-[#475569]">{children}</Tag>
+  <Tag className="font-mono text-[11px] font-bold uppercase tracking-widest text-white/60">{children}</Tag>
 );
 
 /** Group A. The provider caption always renders directly beneath it. */
@@ -49,11 +49,11 @@ export const InfrastructureGroup: React.FC<{ showHeading?: boolean; lazy?: boole
       {trustGroup('infrastructure').map((item) => (
         <li key={item.id} className="flex flex-col gap-2 max-w-[260px]">
           <LogoTile item={item} lazy={lazy} />
-          {item.descriptor && <p className="text-xs text-[#475569] leading-relaxed">{item.descriptor}</p>}
+          {item.descriptor && <p className="text-xs text-white/60 leading-relaxed">{item.descriptor}</p>}
         </li>
       ))}
     </ul>
-    <p className="text-xs text-[#475569] leading-relaxed">{trustGroups.infrastructure.caption}</p>
+    <p className="text-xs text-white/60 leading-relaxed">{trustGroups.infrastructure.caption}</p>
   </div>
 );
 
@@ -110,7 +110,7 @@ export const ProductionGroup: React.FC = () => {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-3 px-4 h-12 rounded-[4px] bg-[#0F172A] hover:bg-black text-white transition-colors ${focusRing}`}
+                  className={`inline-flex items-center gap-3 px-4 h-12 rounded-xl bg-white/[0.06] ring-1 ring-white/10 hover:bg-white/10 text-white transition-colors ${focusRing}`}
                 >
                   <span className="flex flex-col leading-none text-left">
                     <span className="text-[10px] uppercase tracking-wider text-slate-300">{label.pre}</span>
@@ -124,7 +124,7 @@ export const ProductionGroup: React.FC = () => {
           );
         })}
       </ul>
-      <p className="text-sm text-[#475569] leading-relaxed max-w-2xl">{trustGroups.production.line}</p>
+      <p className="text-sm text-white/60 leading-relaxed max-w-2xl">{trustGroups.production.line}</p>
     </div>
   );
 };
@@ -133,13 +133,13 @@ export const ProductionGroup: React.FC = () => {
 export const PracticeChip: React.FC<{ item: TrustItem }> = ({ item }) => {
   const Icon = item.icon ? icons[item.icon] : Info;
   return (
-    <div className="flex items-start gap-3 h-full p-4 sm:p-5 rounded-[2px] border border-[#E2E8F0] bg-[#F8FAFC]">
-      <span className="w-9 h-9 shrink-0 rounded-[2px] bg-white border border-[#E2E8F0] flex items-center justify-center">
-        <Icon aria-hidden="true" className="w-4 h-4 text-[#0F172A]" />
+    <div className="flex items-start gap-3 h-full p-4 sm:p-5 rounded-2xl border border-white/[0.08] bg-white/[0.03]">
+      <span className="w-9 h-9 shrink-0 rounded-xl bg-hos-yellow/10 ring-1 ring-hos-yellow/30 flex items-center justify-center">
+        <Icon aria-hidden="true" className="w-4 h-4 text-hos-yellow" />
       </span>
       <div className="space-y-1">
-        <h3 className="font-display font-bold text-sm sm:text-base text-[#0F172A] leading-snug">{item.name}</h3>
-        <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">{item.descriptor}</p>
+        <h3 className="font-display font-bold text-sm sm:text-base text-white leading-snug">{item.name}</h3>
+        <p className="text-xs sm:text-sm text-white/60 leading-relaxed">{item.descriptor}</p>
       </div>
     </div>
   );

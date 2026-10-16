@@ -51,9 +51,9 @@ import { useSeo } from '../../lib/useSeo';
 type Verdict = 'Optimal' | 'In range' | 'Outlier';
 
 const verdictChip: Record<Verdict, string> = {
-  Optimal: 'bg-hos-navy text-white',
-  'In range': 'bg-hos-mist text-hos-grey border border-hos-hairline',
-  Outlier: 'bg-hos-cream text-hos-amber border border-hos-yellow',
+  Optimal: 'bg-ink-800 text-white',
+  'In range': 'bg-white/[0.04] text-white/55 border border-white/[0.08]',
+  Outlier: 'bg-white/[0.04] text-hos-yellow border border-hos-yellow',
 };
 
 const sampleMarkers: { name: string; value: string; flag: string; verdict: Verdict; pos: number }[] = [
@@ -67,14 +67,14 @@ const fadeUp = (i: number): React.CSSProperties => ({ animation: `hos-fade-up 0.
 /** A static PDF row set next to the same markers as a Smart Report. Sample values. */
 const ReportCompare: React.FC = () => (
   <div className="hos-anim w-full max-w-[440px] space-y-3">
-    <div className="rounded-xl bg-white border border-hos-hairline p-4">
-      <div className="flex items-center justify-between font-mono text-[10px] font-bold uppercase tracking-widest text-hos-grey">
+    <div className="rounded-xl bg-white/[0.03] border border-white/[0.08] p-4">
+      <div className="flex items-center justify-between font-mono text-[10px] font-bold uppercase tracking-widest text-white/55">
         <span>Standard PDF report</span>
         <span>Read once</span>
       </div>
-      <table className="mt-3 w-full text-[11px] text-hos-grey">
+      <table className="mt-3 w-full text-[11px] text-white/55">
         <thead>
-          <tr className="text-left border-b border-hos-hairline">
+          <tr className="text-left border-b border-white/[0.08]">
             <th className="py-1.5 font-semibold">Test</th>
             <th className="py-1.5 font-semibold">Result</th>
             <th className="py-1.5 font-semibold text-right">Flag</th>
@@ -82,7 +82,7 @@ const ReportCompare: React.FC = () => (
         </thead>
         <tbody>
           {sampleMarkers.map((m) => (
-            <tr key={m.name} className="border-b border-hos-hairline last:border-0">
+            <tr key={m.name} className="border-b border-white/[0.08] last:border-0">
               <td className="py-1.5">{m.name}</td>
               <td className="py-1.5">{m.value}</td>
               <td className="py-1.5 text-right font-bold">{m.flag}</td>
@@ -93,34 +93,34 @@ const ReportCompare: React.FC = () => (
     </div>
 
     <div className="flex justify-center">
-      <span className="w-9 h-9 rounded-full bg-hos-navy text-hos-yellow flex items-center justify-center">
+      <span className="w-9 h-9 rounded-full bg-ink-800 text-hos-yellow flex items-center justify-center">
         <ArrowDown className="w-4 h-4" />
       </span>
     </div>
 
-    <div className="rounded-xl bg-white border border-hos-hairline p-4 shadow-[0_24px_60px_-30px_rgba(18,26,49,0.45)]">
+    <div className="rounded-xl bg-white/[0.03] border border-white/[0.08] p-4 shadow-[0_24px_60px_-30px_rgba(0,0,0,0.7)]">
       <div className="flex items-center justify-between gap-3">
-        <span className="text-xs font-bold text-hos-black">Your Lab · Smart Report</span>
-        <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-hos-amber">Your brand</span>
+        <span className="text-xs font-bold text-white">Your Lab · Smart Report</span>
+        <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-hos-yellow">Your brand</span>
       </div>
       <ul className="mt-3 space-y-2.5">
         {sampleMarkers.map((m, i) => (
           <li key={m.name} style={fadeUp(i)}>
             <div className="flex items-center justify-between text-[11px]">
-              <span className="font-semibold text-hos-black">
-                {m.name} <span className="font-normal text-hos-grey">{m.value}</span>
+              <span className="font-semibold text-white">
+                {m.name} <span className="font-normal text-white/55">{m.value}</span>
               </span>
               <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${verdictChip[m.verdict]}`}>{m.verdict}</span>
             </div>
-            <div className="relative mt-1.5 h-1.5 rounded-full bg-hos-mist">
+            <div className="relative mt-1.5 h-1.5 rounded-full bg-white/[0.04]">
               <span className="absolute inset-y-0 left-[30%] right-[30%] rounded-full bg-hos-yellow" />
-              <span className="absolute top-1/2 w-3 h-3 -mt-1.5 -ml-1.5 rounded-full bg-hos-black ring-2 ring-white" style={{ left: `${m.pos}%` }} />
+              <span className="absolute top-1/2 w-3 h-3 -mt-1.5 -ml-1.5 rounded-full bg-ink-950 ring-2 ring-ink-950" style={{ left: `${m.pos}%` }} />
             </div>
           </li>
         ))}
       </ul>
-      <div className="mt-3 pt-3 border-t border-hos-hairline flex items-center gap-1.5 text-[11px] text-hos-grey" style={fadeUp(3)}>
-        <TrendingUp className="w-3.5 h-3.5 text-hos-amber" />
+      <div className="mt-3 pt-3 border-t border-white/[0.08] flex items-center gap-1.5 text-[11px] text-white/55" style={fadeUp(3)}>
+        <TrendingUp className="w-3.5 h-3.5 text-hos-yellow" />
         Kept for the next panel, so results become a trend
       </div>
     </div>
@@ -169,7 +169,7 @@ const RecallTimeline: React.FC = () => {
       <div className="grid grid-cols-4 gap-1.5 -mt-[9px]">
         {points.map(([when, what], i) => (
           <div key={when} className="flex flex-col items-center text-center gap-2" style={fadeUp(i + 1)}>
-            <span className={`w-4 h-4 rounded-full ring-4 ring-hos-navy ${i === points.length - 1 ? 'bg-hos-yellow' : 'bg-white'}`} />
+            <span className={`w-4 h-4 rounded-full ring-4 ring-ink-900 ${i === points.length - 1 ? 'bg-hos-yellow' : 'bg-white'}`} />
             <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-hos-yellow">{when}</span>
             <span className="text-[11px] text-slate-300 leading-tight">{what}</span>
           </div>
@@ -317,7 +317,7 @@ export const DiagnosticLabsPage: React.FC = () => {
   });
 
   return (
-    <div className="flex flex-col font-body text-hos-black bg-white overflow-x-clip">
+    <div className="flex flex-col font-body text-white bg-white/[0.03] overflow-x-clip">
       {/* 1. Hero */}
       <PageHero
         eyebrow="For diagnostic labs and lab chains"
@@ -331,7 +331,7 @@ export const DiagnosticLabsPage: React.FC = () => {
       />
 
       {/* 2. Key figures, all from human-os.ts */}
-      <div className="bg-white pb-20 sm:pb-24">
+      <div className="bg-white/[0.03] pb-20 sm:pb-24">
         <Container>
           <StatRow
             items={[
@@ -444,7 +444,7 @@ export const DiagnosticLabsPage: React.FC = () => {
       </Section>
 
       {/* 7. Human OS: systems to start with */}
-      <div className="bg-white py-20 sm:py-28">
+      <div className="bg-ink-950 py-20 sm:py-28">
         <SystemsToStartWith buyerId="labs" />
       </div>
 
@@ -465,14 +465,14 @@ export const DiagnosticLabsPage: React.FC = () => {
                 className="h-10 w-auto self-start object-contain"
               />
               <div className="space-y-2">
-                <h3 className="font-display font-bold text-lg text-hos-black">The problem</h3>
-                <p className="text-base text-[#475569] leading-relaxed">
+                <h3 className="font-display font-bold text-lg text-white">The problem</h3>
+                <p className="text-base text-white/60 leading-relaxed">
                   Every diagnostics business has the same structural leak. The test is run, the report is delivered, the customer reads it once, and the relationship ends. The document is technically accurate and practically useless.
                 </p>
               </div>
               <div className="space-y-2">
-                <h3 className="font-display font-bold text-lg text-hos-black">The solution</h3>
-                <p className="text-base text-[#475569] leading-relaxed">
+                <h3 className="font-display font-bold text-lg text-white">The solution</h3>
+                <p className="text-base text-white/60 leading-relaxed">
                   Smart Report as a Service, a report intelligence layer that sits on top of the existing reporting pipeline rather than replacing it.
                 </p>
               </div>
@@ -481,9 +481,9 @@ export const DiagnosticLabsPage: React.FC = () => {
                   ['Category', 'Health and diagnostics'],
                   ['Scope', 'Web presence and report intelligence'],
                 ].map(([k, v]) => (
-                  <div key={k} className="rounded-[12px] bg-hos-mist border border-hos-hairline px-4 py-3">
-                    <dt className="font-mono text-[10px] font-bold uppercase tracking-widest text-hos-grey">{k}</dt>
-                    <dd className="mt-1 text-sm font-semibold text-hos-black">{v}</dd>
+                  <div key={k} className="rounded-[12px] bg-white/[0.04] border border-white/[0.08] px-4 py-3">
+                    <dt className="font-mono text-[10px] font-bold uppercase tracking-widest text-white/55">{k}</dt>
+                    <dd className="mt-1 text-sm font-semibold text-white">{v}</dd>
                   </div>
                 ))}
               </dl>
@@ -507,20 +507,20 @@ export const DiagnosticLabsPage: React.FC = () => {
         <div className="space-y-6">
           <Reveal>
             {/* TODO(copy) */}
-            <h3 className="font-display font-semibold text-2xl sm:text-3xl tracking-tight text-hos-black">Five steps from any report to a trend</h3>
+            <h3 className="font-display font-semibold text-2xl sm:text-3xl tracking-tight text-white">Five steps from any report to a trend</h3>
           </Reveal>
           <ol className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            <span aria-hidden="true" className="hidden lg:block absolute left-10 right-10 top-[46px] h-px bg-gradient-to-r from-hos-yellow via-hos-amber/40 to-hos-yellow" />
+            <span aria-hidden="true" className="hidden lg:block absolute left-10 right-10 top-[46px] h-px bg-gradient-to-r from-hos-yellow via-hos-yellow/30 to-hos-yellow" />
             {pipeline.map((p, i) => (
               <li key={p.title} className="relative">
                 <Reveal delay={i * 100} className="h-full">
-                  <div className="h-full rounded-[16px] bg-white border border-hos-hairline p-6 flex flex-col gap-3">
-                    <span className="relative z-10 w-12 h-12 rounded-full bg-hos-navy text-white flex items-center justify-center font-display font-semibold ring-8 ring-white">
+                  <div className="h-full rounded-[16px] bg-white/[0.03] border border-white/[0.08] p-6 flex flex-col gap-3">
+                    <span className="relative z-10 w-12 h-12 rounded-full bg-ink-800 text-white flex items-center justify-center font-display font-semibold ring-8 ring-ink-950">
                       <span className="sr-only">Step </span>
                       {i + 1}
                     </span>
-                    <h4 className="font-display font-bold text-lg text-hos-black">{p.title}</h4>
-                    <p className="text-sm text-[#475569] leading-relaxed">{p.body}</p>
+                    <h4 className="font-display font-bold text-lg text-white">{p.title}</h4>
+                    <p className="text-sm text-white/60 leading-relaxed">{p.body}</p>
                   </div>
                 </Reveal>
               </li>
@@ -558,7 +558,7 @@ export const DiagnosticLabsPage: React.FC = () => {
               <Reveal delay={i * 100} className="h-full">
                 <Link
                   to={to}
-                  className={`group flex flex-col h-full rounded-[16px] bg-white border border-hos-hairline overflow-hidden hover:border-hos-navy hover:shadow-[0_18px_40px_-24px_rgba(18,26,49,0.45)] transition-all duration-300 ${focusRing}`}
+                  className={`group flex flex-col h-full rounded-[16px] bg-white/[0.03] border border-white/[0.08] overflow-hidden hover:border-white/25 hover:shadow-[0_18px_40px_-24px_rgba(0,0,0,0.7)] transition-all duration-300 ${focusRing}`}
                 >
                   <div className="overflow-hidden">
                     <img
@@ -573,14 +573,14 @@ export const DiagnosticLabsPage: React.FC = () => {
                   </div>
                   <div className="flex flex-col gap-3 p-6 flex-1">
                     <div className="flex items-center gap-3">
-                      <span className="w-9 h-9 rounded-[10px] bg-hos-mist border border-hos-hairline flex items-center justify-center">
-                        <Icon aria-hidden="true" className="w-4 h-4 text-hos-black" />
+                      <span className="w-9 h-9 rounded-[10px] bg-white/[0.04] border border-white/[0.08] flex items-center justify-center">
+                        <Icon aria-hidden="true" className="w-4 h-4 text-white" />
                       </span>
-                      <h3 className="font-display font-bold text-lg text-hos-black">{name}</h3>
+                      <h3 className="font-display font-bold text-lg text-white">{name}</h3>
                     </div>
-                    <p className="text-sm font-semibold text-hos-black leading-relaxed">{line}</p>
-                    <p className="text-sm text-[#475569] leading-relaxed">{detail}</p>
-                    <span className="mt-auto pt-2 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-hos-black">
+                    <p className="text-sm font-semibold text-white leading-relaxed">{line}</p>
+                    <p className="text-sm text-white/60 leading-relaxed">{detail}</p>
+                    <span className="mt-auto pt-2 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-white">
                       Explore {name}
                       <ArrowRight aria-hidden="true" className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
                     </span>
@@ -605,18 +605,18 @@ export const DiagnosticLabsPage: React.FC = () => {
           <Reveal className="h-full">
             <Panel className="h-full flex flex-col gap-6">
               <div className="flex items-center gap-3">
-                <span className="w-10 h-10 rounded-[10px] bg-hos-navy text-hos-yellow flex items-center justify-center">
+                <span className="w-10 h-10 rounded-[10px] bg-ink-800 text-hos-yellow flex items-center justify-center">
                   <Stethoscope aria-hidden="true" className="w-5 h-5" />
                 </span>
-                <h3 className="font-display font-bold text-xl text-hos-black">Clinical governance</h3>
+                <h3 className="font-display font-bold text-xl text-white">Clinical governance</h3>
               </div>
-              <ul className="divide-y divide-hos-hairline border-y border-hos-hairline">
+              <ul className="divide-y divide-white/[0.08] border-y border-white/[0.08]">
                 {[
                   'Nostavia functions as a clinician-supervised decision support layer. It drafts Smart Reports for pathologist review.',
                   'Protocol outputs are reviewed by our licensed clinical advisory bench before release to any partner.',
                   'Every module can be tried in a sandbox with fictional data before it reaches a patient.',
                 ].map((t) => (
-                  <li key={t} className="flex items-start gap-3 py-3 text-sm text-[#334155] leading-relaxed">
+                  <li key={t} className="flex items-start gap-3 py-3 text-sm text-white/70 leading-relaxed">
                     <span aria-hidden="true" className="mt-2 w-4 h-[3px] shrink-0 bg-hos-yellow" />
                     {t}
                   </li>
@@ -639,20 +639,20 @@ export const DiagnosticLabsPage: React.FC = () => {
           <Reveal delay={120} className="h-full">
             <Panel className="h-full flex flex-col gap-6">
               <div className="flex items-center gap-3">
-                <span className="w-10 h-10 rounded-[10px] bg-hos-navy text-hos-yellow flex items-center justify-center">
+                <span className="w-10 h-10 rounded-[10px] bg-ink-800 text-hos-yellow flex items-center justify-center">
                   <ShieldCheck aria-hidden="true" className="w-5 h-5" />
                 </span>
-                <h3 className="font-display font-bold text-xl text-hos-black">Security and data protection</h3>
+                <h3 className="font-display font-bold text-xl text-white">Security and data protection</h3>
               </div>
               <ul className="space-y-3">
                 {practices.map((p) => {
                   const Icon = (p.icon && practiceIcon[p.icon]) || ShieldCheck;
                   return (
-                    <li key={p.id} className="flex items-start gap-3 rounded-[12px] bg-hos-mist border border-hos-hairline p-4">
-                      <Icon aria-hidden="true" className="w-4 h-4 mt-0.5 shrink-0 text-hos-amber" />
+                    <li key={p.id} className="flex items-start gap-3 rounded-[12px] bg-white/[0.04] border border-white/[0.08] p-4">
+                      <Icon aria-hidden="true" className="w-4 h-4 mt-0.5 shrink-0 text-hos-yellow" />
                       <span>
-                        <span className="block font-display font-bold text-sm text-hos-black">{p.name}</span>
-                        <span className="block text-sm text-[#475569] leading-relaxed mt-0.5">{p.descriptor}</span>
+                        <span className="block font-display font-bold text-sm text-white">{p.name}</span>
+                        <span className="block text-sm text-white/60 leading-relaxed mt-0.5">{p.descriptor}</span>
                       </span>
                     </li>
                   );

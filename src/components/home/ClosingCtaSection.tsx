@@ -61,7 +61,7 @@ export const LayerStack: React.FC = () => {
 
 /** Dark close, styled after the deck cover. */
 export const ClosingCtaSection: React.FC = () => (
-  <section aria-labelledby="home-close-heading" className="relative overflow-hidden bg-hos-black text-white py-24 sm:py-32">
+  <section aria-labelledby="home-close-heading" className="relative overflow-hidden bg-ink-950 text-white py-24 sm:py-32">
     <span aria-hidden="true" className="absolute right-0 top-0 w-[60%] h-full bg-[radial-gradient(ellipse_at_center,rgba(245,217,123,0.10),transparent_60%)] pointer-events-none" />
 
     <Container className="relative grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -75,14 +75,14 @@ export const ClosingCtaSection: React.FC = () => (
         <div className="flex flex-wrap gap-3 pt-2">
           <Link
             to="/demo"
-            className="inline-flex items-center gap-2 bg-white hover:bg-hos-mist text-hos-black font-display text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-[2px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hos-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-hos-black"
+            className="inline-flex items-center gap-2 bg-white hover:bg-hos-yellow text-ink-950 text-sm font-semibold px-6 py-3.5 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hos-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950"
           >
             Request a demo
             <ArrowRight aria-hidden="true" className="w-4 h-4" />
           </Link>
           <Link
             to="/pricing"
-            className="inline-flex items-center gap-2 border border-white/25 hover:border-white text-white font-display text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-[2px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hos-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-hos-black"
+            className="inline-flex items-center gap-2 border border-white/25 hover:border-white text-white text-sm font-semibold px-6 py-3.5 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hos-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950"
           >
             See pricing
           </Link>

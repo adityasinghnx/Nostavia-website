@@ -15,18 +15,18 @@ export const SystemCard: React.FC<SystemCardProps> = ({ system, as: Heading = 'h
   <Link
     to={systemPath(system.slug)}
     aria-label={`${system.name}, system ${system.number}. ${system.promise} ${countLine(system)}.`}
-    className={`group flex flex-col h-full rounded-[10px] border border-hos-hairline bg-white transition-all hover:border-hos-amber hover:shadow-card ${
+    className={`group flex flex-col h-full rounded-[10px] border border-white/[0.08] bg-white/[0.03] transition-all hover:border-hos-yellow/60 hover:shadow-card ${
       compact ? 'p-4 sm:p-5' : 'p-5 sm:p-6'
     } ${focusRing}`}
   >
     <div className="flex items-center justify-between gap-3">
-      <span className="font-mono text-xs font-bold tracking-widest text-hos-amber">{system.number}</span>
-      <span className="text-[11px] font-semibold text-hos-grey whitespace-nowrap">{countLine(system)}</span>
+      <span className="font-mono text-xs font-bold tracking-widest text-hos-yellow">{system.number}</span>
+      <span className="text-[11px] font-semibold text-white/55 whitespace-nowrap">{countLine(system)}</span>
     </div>
-    <Heading className={`font-display font-extrabold text-hos-black mt-2.5 ${compact ? 'text-lg' : 'text-xl'}`}>{system.name}</Heading>
-    <p className="mt-1.5 text-sm text-[#475569] leading-relaxed">{system.promise}</p>
+    <Heading className={`font-display font-extrabold text-white mt-2.5 ${compact ? 'text-lg' : 'text-xl'}`}>{system.name}</Heading>
+    <p className="mt-1.5 text-sm text-white/60 leading-relaxed">{system.promise}</p>
     {!compact && (
-      <span className="mt-auto pt-4 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-hos-black">
+      <span className="mt-auto pt-4 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-white">
         Explore {system.name}
         <ArrowRight aria-hidden="true" className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
       </span>

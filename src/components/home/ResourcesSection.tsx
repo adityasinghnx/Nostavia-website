@@ -30,7 +30,7 @@ const Pattern: React.FC<{ tone: 'navy' | 'white' | 'black' }> = ({ tone }) => (
 );
 
 export const ResourcesSection: React.FC = () => (
-  <section aria-labelledby="home-resources-heading" className="bg-white py-20 sm:py-28">
+  <section aria-labelledby="home-resources-heading" className="bg-ink-950 py-20 sm:py-28">
     <Container className="space-y-12">
       <Reveal>
         <SectionHeading id="home-resources-heading" eyebrow="Go deeper" title="Everything your team needs to evaluate Nostavia" />
@@ -43,13 +43,13 @@ export const ResourcesSection: React.FC = () => (
               <Reveal delay={i * 90} className="h-full">
                 <Link
                   to={r.to}
-                  className={`group flex flex-col h-full rounded-[16px] overflow-hidden border transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-28px_rgba(18,26,49,0.5)] ${focusRing} ${
-                    r.tone === 'navy' ? 'bg-hos-navy border-hos-navy text-white' : r.tone === 'black' ? 'bg-hos-black border-hos-black text-white' : 'bg-white border-hos-hairline text-hos-black'
+                  className={`group flex flex-col h-full rounded-[16px] overflow-hidden border transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-28px_rgba(0,0,0,0.7)] ${focusRing} ${
+                    r.tone === 'navy' ? 'bg-ink-800 border-white/10 text-white' : r.tone === 'black' ? 'bg-ink-950 border-white text-white' : 'bg-white/[0.03] border-white/[0.08] text-white'
                   }`}
                 >
                   <Pattern tone={r.tone} />
                   <span className="flex flex-col gap-3 p-6 pt-2 flex-1">
-                    <span className={`font-mono text-[11px] font-bold uppercase tracking-widest ${dark ? 'text-hos-yellow' : 'text-hos-amber'}`}>{r.kind}</span>
+                    <span className={`font-mono text-[11px] font-bold uppercase tracking-widest ${dark ? 'text-hos-yellow' : 'text-hos-yellow'}`}>{r.kind}</span>
                     <span className="font-display font-semibold text-lg leading-snug">{r.title}</span>
                     <ArrowUpRight aria-hidden="true" className="mt-auto w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </span>

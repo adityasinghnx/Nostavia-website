@@ -132,7 +132,7 @@ export const CompanyPage: React.FC = () => {
   });
 
   return (
-    <div className="flex flex-col font-body text-hos-black bg-white overflow-x-clip">
+    <div className="flex flex-col font-body text-white bg-white/[0.03] overflow-x-clip">
       <PageHero
         eyebrow="About Nostavia Technologies"
         title="Building the intelligence layer the health economy is missing."
@@ -187,17 +187,17 @@ export const CompanyPage: React.FC = () => {
           {buyers.map((b, i) => (
             <li key={b.id}>
               <Reveal delay={(i % 3) * 90} className="h-full">
-                <div className="h-full rounded-[16px] bg-white border border-hos-hairline p-6 sm:p-7 flex flex-col gap-4">
+                <div className="h-full rounded-[16px] bg-white/[0.03] border border-white/[0.08] p-6 sm:p-7 flex flex-col gap-4">
                   <span aria-hidden="true" className="h-[3px] w-10 bg-hos-yellow" />
-                  <h3 className="font-display font-bold text-lg text-hos-black">{b.buyer}</h3>
-                  <p className="text-sm text-[#475569] leading-relaxed">
+                  <h3 className="font-display font-bold text-lg text-white">{b.buyer}</h3>
+                  <p className="text-sm text-white/60 leading-relaxed">
                     Runs on {b.systems.map((s) => getSystem(s)?.name).filter(Boolean).join(', ')}.
                   </p>
                   <div className="mt-auto space-y-2">
-                    <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-hos-grey">Usually starts with</p>
+                    <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-white/55">Usually starts with</p>
                     <ul className="flex flex-wrap gap-1.5">
                       {b.firstModules.map((m) => (
-                        <li key={m} className="text-[11px] font-semibold rounded-full px-2.5 py-1 border border-hos-hairline bg-hos-mist text-hos-black">
+                        <li key={m} className="text-[11px] font-semibold rounded-full px-2.5 py-1 border border-white/[0.08] bg-white/[0.04] text-white">
                           {m}
                         </li>
                       ))}
@@ -251,20 +251,20 @@ export const CompanyPage: React.FC = () => {
           {founders.map((f, i) => (
             <li key={f.name}>
               <Reveal delay={i * 100} className="h-full">
-                <div className="h-full rounded-[20px] border border-hos-hairline bg-white p-6 sm:p-9 flex flex-col gap-6 hover:border-hos-navy transition-colors">
+                <div className="h-full rounded-[20px] border border-white/[0.08] bg-white/[0.03] p-6 sm:p-9 flex flex-col gap-6 hover:border-white/25 transition-colors">
                   <div className="flex items-center gap-5">
                     <span
                       aria-hidden="true"
-                      className="w-16 h-16 shrink-0 rounded-full bg-hos-navy text-hos-yellow font-display font-semibold text-xl flex items-center justify-center ring-4 ring-hos-mist"
+                      className="w-16 h-16 shrink-0 rounded-full bg-ink-800 text-hos-yellow font-display font-semibold text-xl flex items-center justify-center ring-4 ring-hos-mist"
                     >
                       {initials(f.name)}
                     </span>
                     <div>
-                      <h3 className="font-display font-semibold text-2xl tracking-tight text-hos-black">{f.name}</h3>
-                      <p className="mt-1 font-mono text-[11px] font-bold uppercase tracking-widest text-hos-amber">{f.role}</p>
+                      <h3 className="font-display font-semibold text-2xl tracking-tight text-white">{f.name}</h3>
+                      <p className="mt-1 font-mono text-[11px] font-bold uppercase tracking-widest text-hos-yellow">{f.role}</p>
                     </div>
                   </div>
-                  <p className="text-base text-[#475569] leading-relaxed border-t border-hos-hairline pt-6">{f.bio}</p>
+                  <p className="text-base text-white/60 leading-relaxed border-t border-white/[0.08] pt-6">{f.bio}</p>
                 </div>
               </Reveal>
             </li>
@@ -273,7 +273,7 @@ export const CompanyPage: React.FC = () => {
       </Section>
 
       {/* Clinical and scientific advisory bench */}
-      <section aria-labelledby="company-bench-heading" className="bg-hos-mist py-20 sm:py-28">
+      <section aria-labelledby="company-bench-heading" className="bg-ink-900 border-y border-white/[0.06] py-20 sm:py-28">
         <Container className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           <Reveal className="lg:col-span-5 space-y-6">
             <SectionHeading
@@ -282,7 +282,7 @@ export const CompanyPage: React.FC = () => {
               title="Supervised by medical leaders and research scientists"
               intro="Protocol outputs are reviewed by our licensed clinical advisory bench before release to any partner."
             />
-            <div className="relative min-h-[260px] rounded-[20px] overflow-hidden bg-hos-navy">
+            <div className="relative min-h-[260px] rounded-[20px] overflow-hidden bg-ink-800">
               <img
                 src="/photos/home-safety-consult.jpg"
                 alt="A doctor reviewing results on a tablet with an older couple"
@@ -293,24 +293,24 @@ export const CompanyPage: React.FC = () => {
                 className="absolute inset-0 w-full h-full object-cover"
               />
             </div>
-            <Disclaimer className="pt-4 border-t border-hos-hairline" />
+            <Disclaimer className="pt-4 border-t border-white/[0.08]" />
           </Reveal>
 
           <ul className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3 content-start">
             {bench.map((b, i) => (
               <li key={b.name}>
                 <Reveal delay={(i % 2) * 100} className="h-full">
-                  <div className="h-full flex flex-col gap-4 rounded-[14px] bg-white border border-hos-hairline p-5 sm:p-6 hover:border-hos-navy transition-colors">
+                  <div className="h-full flex flex-col gap-4 rounded-[14px] bg-white/[0.03] border border-white/[0.08] p-5 sm:p-6 hover:border-white/25 transition-colors">
                     <div className="flex items-center gap-4">
-                      <span aria-hidden="true" className="w-12 h-12 shrink-0 rounded-full bg-hos-navy text-hos-yellow font-display font-semibold flex items-center justify-center">
+                      <span aria-hidden="true" className="w-12 h-12 shrink-0 rounded-full bg-ink-800 text-hos-yellow font-display font-semibold flex items-center justify-center">
                         {initials(b.name)}
                       </span>
                       <div>
-                        <h3 className="font-display font-bold text-base text-hos-black">{b.name}</h3>
-                        <p className="text-xs font-semibold text-hos-amber mt-0.5">{b.credential}</p>
+                        <h3 className="font-display font-bold text-base text-white">{b.name}</h3>
+                        <p className="text-xs font-semibold text-hos-yellow mt-0.5">{b.credential}</p>
                       </div>
                     </div>
-                    <p className="text-sm text-[#475569] leading-relaxed">{b.detail}</p>
+                    <p className="text-sm text-white/60 leading-relaxed">{b.detail}</p>
                   </div>
                 </Reveal>
               </li>
@@ -332,8 +332,8 @@ export const CompanyPage: React.FC = () => {
             <FeatureGrid items={kioskFeatures} columns={2} />
           </div>
           <Reveal delay={150} className="lg:col-span-4">
-            <div className="h-full rounded-[16px] bg-hos-black text-white p-6 sm:p-7 flex flex-col gap-4">
-              <div className="rounded-[10px] bg-white px-4 py-3 self-start">
+            <div className="h-full rounded-[16px] bg-ink-950 text-white p-6 sm:p-7 flex flex-col gap-4">
+              <div className="rounded-[10px] bg-white/[0.03] px-4 py-3 self-start">
                 <img src={KIOSK_LOGO} alt="Kiosk Health logo" width={812} height={309} loading="lazy" decoding="async" className="h-8 w-auto object-contain" />
               </div>
               <DistrictMap />
@@ -356,8 +356,8 @@ export const CompanyPage: React.FC = () => {
           <Reveal className="h-full">
             <Panel className="h-full space-y-4">
               {/* TODO(copy): consumer reference app heading */}
-              <h3 className="font-display font-bold text-xl text-hos-black">Our own consumer reference app</h3>
-              <p className="text-sm text-[#475569] leading-relaxed">
+              <h3 className="font-display font-bold text-xl text-white">Our own consumer reference app</h3>
+              <p className="text-sm text-white/60 leading-relaxed">
                 Nostavia's consumer reference app runs on iOS and Android, serving as proof-of-concept for enterprise partner integrations.
               </p>
               <ProductionGroup />
@@ -365,8 +365,8 @@ export const CompanyPage: React.FC = () => {
           </Reveal>
           <Reveal delay={120} className="h-full">
             <Panel className="h-full space-y-4">
-              <h3 className="font-display font-bold text-xl text-hos-black">Reference clients</h3>
-              <p className="text-sm text-[#475569] leading-relaxed">Active reference clients include incubator IIHMF.</p>
+              <h3 className="font-display font-bold text-xl text-white">Reference clients</h3>
+              <p className="text-sm text-white/60 leading-relaxed">Active reference clients include incubator IIHMF.</p>
             </Panel>
           </Reveal>
         </div>
@@ -397,7 +397,7 @@ export const CompanyPage: React.FC = () => {
             Talk to the founding team. Thirty minutes on live product, not slides, or write to us at{' '}
             <a
               href={`mailto:${TRUST_CONTACT}`}
-              className="text-white underline underline-offset-4 decoration-hos-yellow decoration-2 hover:decoration-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hos-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-hos-black"
+              className="text-white underline underline-offset-4 decoration-hos-yellow decoration-2 hover:decoration-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hos-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950"
             >
               {TRUST_CONTACT}
             </a>

@@ -34,6 +34,16 @@ export default {
         optimal: '#059669',
         'in-range': '#64748B',
         /* Human OS reference palette. hos-yellow is for fills and rules only, never text on white. */
+        /* Dark theme surfaces (dark-redesign). Text uses white with opacity; accent is hos.yellow. */
+        ink: {
+          DEFAULT: '#07080A',
+          950: '#07080A',
+          900: '#0C0D10',
+          850: '#101115',
+          800: '#15171C',
+          700: '#1D2027',
+          600: '#2A2E37',
+        },
         hos: {
           black: '#0A0A0B',
           navy: '#121A31',

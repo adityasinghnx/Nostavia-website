@@ -45,28 +45,28 @@ const launchOptions = [
 ];
 
 export const ProductsSection: React.FC = () => (
-  <section aria-labelledby="home-products-heading" className="bg-white py-20 sm:py-28">
+  <section aria-labelledby="home-products-heading" className="bg-ink-950 py-20 sm:py-28">
     <Container className="space-y-16">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
         <div className="lg:col-span-4 space-y-5 lg:sticky lg:top-24 self-start">
           <Eyebrow>Products</Eyebrow>
           {/* TODO(copy): products heading and intro */}
-          <h2 id="home-products-heading" className="font-display font-semibold text-3xl sm:text-5xl tracking-tight leading-[1.08] text-hos-black">
+          <h2 id="home-products-heading" className="font-display font-semibold text-3xl sm:text-5xl tracking-tight leading-[1.08] text-white">
             Health AI your customers see as yours.
           </h2>
-          <p className="text-base sm:text-lg text-[#475569] leading-relaxed">
+          <p className="text-base sm:text-lg text-white/60 leading-relaxed">
             Pick the products that fit your business and switch them on from one console. Every one runs under your brand.
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <Link
               to="/demo"
-              className={`inline-flex items-center justify-center bg-hos-black hover:bg-black text-white font-display text-xs font-bold uppercase tracking-wider px-6 py-3.5 rounded-[2px] transition-colors ${focusRing}`}
+              className={`inline-flex items-center justify-center bg-white hover:bg-hos-yellow text-ink-950 text-sm font-semibold px-6 py-3.5 rounded-full transition-colors ${focusRing}`}
             >
               Request a demo
             </Link>
             <Link
               to="/human-os"
-              className={`inline-flex items-center justify-center gap-2 border border-hos-hairline hover:border-hos-black text-hos-black font-display text-xs font-bold uppercase tracking-wider px-6 py-3.5 rounded-[2px] transition-colors ${focusRing}`}
+              className={`inline-flex items-center justify-center gap-2 border border-white/[0.08] hover:border-white/40 text-white text-sm font-semibold px-6 py-3.5 rounded-full transition-colors ${focusRing}`}
             >
               All products
               <ArrowRight aria-hidden="true" className="w-3.5 h-3.5" />
@@ -82,18 +82,18 @@ export const ProductsSection: React.FC = () => (
                 <Reveal delay={(i % 3) * 90} className="h-full">
                 <Link
                   to={systemPath(mod.system.slug)}
-                  className={`group flex flex-col gap-3 h-full rounded-[12px] border border-hos-hairline bg-white p-5 hover:border-hos-navy hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-24px_rgba(18,26,49,0.45)] transition-all duration-300 ${focusRing}`}
+                  className={`group flex flex-col gap-3 h-full rounded-[12px] border border-white/[0.08] bg-white/[0.03] p-5 hover:border-white/25 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-24px_rgba(0,0,0,0.7)] transition-all duration-300 ${focusRing}`}
                 >
                   <span className="flex items-center justify-between">
-                    <span className="w-9 h-9 rounded-[10px] bg-hos-mist border border-hos-hairline flex items-center justify-center transition-colors duration-300 group-hover:bg-hos-navy group-hover:border-hos-navy">
-                      <Icon aria-hidden="true" className="w-4 h-4 text-hos-black transition-colors duration-300 group-hover:text-hos-yellow" />
+                    <span className="w-9 h-9 rounded-[10px] bg-white/[0.04] border border-white/[0.08] flex items-center justify-center transition-colors duration-300 group-hover:bg-hos-yellow group-hover:border-hos-yellow/40">
+                      <Icon aria-hidden="true" className="w-4 h-4 text-white transition-colors duration-300 group-hover:text-ink-950" />
                     </span>
                   </span>
                   <span>
-                    <span className="block font-display font-bold text-base text-hos-black">{name}</span>
-                    <span className="block font-mono text-[10px] font-bold uppercase tracking-widest text-hos-grey mt-0.5">{mod.system.name}</span>
+                    <span className="block font-display font-bold text-base text-white">{name}</span>
+                    <span className="block font-mono text-[10px] font-bold uppercase tracking-widest text-white/55 mt-0.5">{mod.system.name}</span>
                   </span>
-                  <span className="text-sm text-[#475569] leading-relaxed">{firstSentence(mod.description)}</span>
+                  <span className="text-sm text-white/60 leading-relaxed">{firstSentence(mod.description)}</span>
                 </Link>
                 </Reveal>
               </li>
@@ -104,10 +104,10 @@ export const ProductsSection: React.FC = () => (
 
       <div className="space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
-          <h3 className="font-display font-semibold text-2xl sm:text-3xl text-hos-black tracking-tight">Launch it your way</h3>
+          <h3 className="font-display font-semibold text-2xl sm:text-3xl text-white tracking-tight">Launch it your way</h3>
           <Link
             to="/pricing"
-            className={`inline-flex items-center gap-1.5 text-sm font-bold text-hos-black underline underline-offset-4 decoration-hos-yellow decoration-2 hover:decoration-hos-amber ${focusRing}`}
+            className={`inline-flex items-center gap-1.5 text-sm font-bold text-white underline underline-offset-4 decoration-hos-yellow decoration-2 hover:decoration-white ${focusRing}`}
           >
             See pricing
             <ArrowRight aria-hidden="true" className="w-4 h-4" />
@@ -119,7 +119,7 @@ export const ProductsSection: React.FC = () => (
               <Reveal delay={i * 100} className="h-full">
               <Link
                 to={to}
-                className={`group flex flex-col h-full rounded-[16px] bg-white border border-hos-hairline overflow-hidden hover:border-hos-amber hover:shadow-card transition-all ${focusRing}`}
+                className={`group flex flex-col h-full rounded-[16px] bg-white/[0.03] border border-white/[0.08] overflow-hidden hover:border-hos-yellow/60 hover:shadow-card transition-all ${focusRing}`}
               >
                 <span className="block overflow-hidden">
                   <img
@@ -134,13 +134,13 @@ export const ProductsSection: React.FC = () => (
                 </span>
                 <span className="flex flex-col gap-3 p-6 flex-1">
                   <span className="flex items-center gap-3">
-                    <span className="w-9 h-9 rounded-[10px] bg-hos-mist border border-hos-hairline flex items-center justify-center">
-                      <Icon aria-hidden="true" className="w-4 h-4 text-hos-black" />
+                    <span className="w-9 h-9 rounded-[10px] bg-white/[0.04] border border-white/[0.08] flex items-center justify-center">
+                      <Icon aria-hidden="true" className="w-4 h-4 text-white" />
                     </span>
-                    <span className="font-display font-bold text-lg text-hos-black">{name}</span>
+                    <span className="font-display font-bold text-lg text-white">{name}</span>
                   </span>
-                  <span className="text-sm text-[#475569] leading-relaxed">{line}</span>
-                  <span className="mt-auto pt-2 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-hos-black">
+                  <span className="text-sm text-white/60 leading-relaxed">{line}</span>
+                  <span className="mt-auto pt-2 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-white">
                     Explore {name}
                     <ArrowRight aria-hidden="true" className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
                   </span>

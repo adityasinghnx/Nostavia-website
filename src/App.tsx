@@ -1,43 +1,43 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { DemoModal } from './components/DemoModal';
 import { HomePage } from './pages/HomePage';
-import { PlatformPage } from './pages/PlatformPage';
-import { HumanOsPage } from './pages/HumanOsPage';
-import { HumanOsSystemPage } from './pages/HumanOsSystemPage';
+const PlatformPage = lazy(() => import('./pages/PlatformPage').then((m) => ({ default: m.PlatformPage })));
+const HumanOsPage = lazy(() => import('./pages/HumanOsPage').then((m) => ({ default: m.HumanOsPage })));
+const HumanOsSystemPage = lazy(() => import('./pages/HumanOsSystemPage').then((m) => ({ default: m.HumanOsSystemPage })));
 
 // Industries
-import { ProviderPage } from './pages/industries/ProviderPage';
-import { PayerPage } from './pages/industries/PayerPage';
-import { PublicSectorPage } from './pages/industries/PublicSectorPage';
-import { LifeSciencesPage } from './pages/industries/LifeSciencesPage';
-import { DiagnosticLabsPage } from './pages/industries/DiagnosticLabsPage';
-import { ClinicsPage } from './pages/industries/ClinicsPage';
-import { HospitalsPage } from './pages/industries/HospitalsPage';
-import { SupplementsPage } from './pages/industries/SupplementsPage';
+const ProviderPage = lazy(() => import('./pages/industries/ProviderPage').then((m) => ({ default: m.ProviderPage })));
+const PayerPage = lazy(() => import('./pages/industries/PayerPage').then((m) => ({ default: m.PayerPage })));
+const PublicSectorPage = lazy(() => import('./pages/industries/PublicSectorPage').then((m) => ({ default: m.PublicSectorPage })));
+const LifeSciencesPage = lazy(() => import('./pages/industries/LifeSciencesPage').then((m) => ({ default: m.LifeSciencesPage })));
+const DiagnosticLabsPage = lazy(() => import('./pages/industries/DiagnosticLabsPage').then((m) => ({ default: m.DiagnosticLabsPage })));
+const ClinicsPage = lazy(() => import('./pages/industries/ClinicsPage').then((m) => ({ default: m.ClinicsPage })));
+const HospitalsPage = lazy(() => import('./pages/industries/HospitalsPage').then((m) => ({ default: m.HospitalsPage })));
+const SupplementsPage = lazy(() => import('./pages/industries/SupplementsPage').then((m) => ({ default: m.SupplementsPage })));
 
 // Solutions
-import { GravityPage } from './pages/solutions/GravityPage';
-import { FlowPage } from './pages/solutions/FlowPage';
-import { AtlasPage } from './pages/solutions/AtlasPage';
-import { GalaxyPage } from './pages/solutions/GalaxyPage';
-import { CuredPage } from './pages/solutions/CuredPage';
-import { CometPage } from './pages/solutions/CometPage';
-import { PQSPage } from './pages/solutions/PQSPage';
-import { StoryHealthPage } from './pages/solutions/StoryHealthPage';
-import { HospitalsPlatformPage } from './pages/solutions/HospitalsPlatformPage';
-import { HumbiPage } from './pages/solutions/HumbiPage';
-import { SupplementsPage as SolutionsEngineeringPage } from './pages/solutions/SupplementsPage';
-import { FrontDeskPage } from './pages/solutions/FrontDeskPage';
+const GravityPage = lazy(() => import('./pages/solutions/GravityPage').then((m) => ({ default: m.GravityPage })));
+const FlowPage = lazy(() => import('./pages/solutions/FlowPage').then((m) => ({ default: m.FlowPage })));
+const AtlasPage = lazy(() => import('./pages/solutions/AtlasPage').then((m) => ({ default: m.AtlasPage })));
+const GalaxyPage = lazy(() => import('./pages/solutions/GalaxyPage').then((m) => ({ default: m.GalaxyPage })));
+const CuredPage = lazy(() => import('./pages/solutions/CuredPage').then((m) => ({ default: m.CuredPage })));
+const CometPage = lazy(() => import('./pages/solutions/CometPage').then((m) => ({ default: m.CometPage })));
+const PQSPage = lazy(() => import('./pages/solutions/PQSPage').then((m) => ({ default: m.PQSPage })));
+const StoryHealthPage = lazy(() => import('./pages/solutions/StoryHealthPage').then((m) => ({ default: m.StoryHealthPage })));
+const HospitalsPlatformPage = lazy(() => import('./pages/solutions/HospitalsPlatformPage').then((m) => ({ default: m.HospitalsPlatformPage })));
+const HumbiPage = lazy(() => import('./pages/solutions/HumbiPage').then((m) => ({ default: m.HumbiPage })));
+const SolutionsEngineeringPage = lazy(() => import('./pages/solutions/SupplementsPage').then((m) => ({ default: m.SupplementsPage })));
+const FrontDeskPage = lazy(() => import('./pages/solutions/FrontDeskPage').then((m) => ({ default: m.FrontDeskPage })));
 
 // Core Pages
-import { PricingPage } from './pages/PricingPage';
-import { SecurityPage } from './pages/SecurityPage';
-import { ClinicalPage } from './pages/ClinicalPage';
-import { CompanyPage } from './pages/CompanyPage';
-import { DemoPage } from './pages/DemoPage';
+const PricingPage = lazy(() => import('./pages/PricingPage').then((m) => ({ default: m.PricingPage })));
+const SecurityPage = lazy(() => import('./pages/SecurityPage').then((m) => ({ default: m.SecurityPage })));
+const ClinicalPage = lazy(() => import('./pages/ClinicalPage').then((m) => ({ default: m.ClinicalPage })));
+const CompanyPage = lazy(() => import('./pages/CompanyPage').then((m) => ({ default: m.CompanyPage })));
+const DemoPage = lazy(() => import('./pages/DemoPage').then((m) => ({ default: m.DemoPage })));
 
 export const App: React.FC = () => {
   const [demoModalOpen, setDemoModalOpen] = React.useState(false);
@@ -51,10 +51,11 @@ export const App: React.FC = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen bg-white text-[#0F172A] flex flex-col justify-between selection:bg-[#2563EB] selection:text-white">
+    <div className="min-h-screen bg-ink-950 text-white flex flex-col justify-between">
       <div>
         <Navbar onOpenDemo={() => setDemoModalOpen(true)} />
         <main className="w-full">
+          <Suspense fallback={<div className="min-h-[70vh]" aria-busy="true" />}>
           <Routes>
             <Route path="/" element={<HomePage onOpenDemo={() => setDemoModalOpen(true)} />} />
             <Route path="/platform" element={<PlatformPage />} />
@@ -102,6 +103,7 @@ export const App: React.FC = () => {
             {/* Fallback */}
             <Route path="*" element={<HomePage onOpenDemo={() => setDemoModalOpen(true)} />} />
           </Routes>
+          </Suspense>
         </main>
       </div>
 

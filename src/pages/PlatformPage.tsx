@@ -61,14 +61,14 @@ const RingBlock: React.FC<{ id: RingId }> = ({ id }) => {
   const ringSystems = systemsInRing(id);
   return (
     <Reveal>
-      <div className={`rounded-[20px] p-5 sm:p-8 border ${dark ? 'bg-hos-navy border-hos-navy text-white' : 'bg-white border-hos-hairline'}`}>
+      <div className={`rounded-[20px] p-5 sm:p-8 border ${dark ? 'bg-ink-800 border-white/10 text-white' : 'bg-white/[0.03] border-white/[0.08]'}`}>
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-3 lg:gap-10 mb-6">
           <div className="space-y-1.5">
             <span aria-hidden="true" className="block h-[3px] w-10 bg-hos-yellow mb-4" />
-            <h3 className={`font-display font-semibold text-2xl tracking-tight ${dark ? 'text-white' : 'text-hos-black'}`}>{ring.name}</h3>
-            <p className={`text-sm font-semibold ${dark ? 'text-hos-yellow' : 'text-hos-amber'}`}>{ring.audience}</p>
+            <h3 className={`font-display font-semibold text-2xl tracking-tight ${dark ? 'text-white' : 'text-white'}`}>{ring.name}</h3>
+            <p className={`text-sm font-semibold ${dark ? 'text-hos-yellow' : 'text-hos-yellow'}`}>{ring.audience}</p>
           </div>
-          <p className={`text-sm leading-relaxed max-w-xl ${dark ? 'text-slate-300' : 'text-[#475569]'}`}>{ring.summary}</p>
+          <p className={`text-sm leading-relaxed max-w-xl ${dark ? 'text-slate-300' : 'text-white/60'}`}>{ring.summary}</p>
         </div>
         <ul className={`grid grid-cols-1 sm:grid-cols-2 ${ringSystems.length === 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-4'} gap-3`}>
           {ringSystems.map((system) => {
@@ -77,25 +77,25 @@ const RingBlock: React.FC<{ id: RingId }> = ({ id }) => {
               <li key={system.slug}>
                 <div
                   className={`h-full flex flex-col gap-3 rounded-[14px] p-5 border ${
-                    dark ? 'bg-white/5 border-white/10' : 'bg-hos-mist border-hos-hairline'
+                    dark ? 'bg-white/5 border-white/10' : 'bg-white/[0.04] border-white/[0.08]'
                   }`}
                 >
-                  <span className={`font-mono text-xs font-bold tracking-widest ${dark ? 'text-hos-yellow' : 'text-hos-amber'}`}>{system.number}</span>
+                  <span className={`font-mono text-xs font-bold tracking-widest ${dark ? 'text-hos-yellow' : 'text-hos-yellow'}`}>{system.number}</span>
                   <h4 className="font-display font-bold text-lg leading-snug">
                     <Link
                       to={systemPath(system.slug)}
-                      className={`underline-offset-4 hover:underline ${dark ? 'text-white decoration-hos-yellow' : 'text-hos-black decoration-hos-amber'} ${focusRing}`}
+                      className={`underline-offset-4 hover:underline ${dark ? 'text-white decoration-hos-yellow' : 'text-white decoration-hos-amber'} ${focusRing}`}
                     >
                       {system.name}
                     </Link>
                   </h4>
-                  <p className={`text-sm leading-relaxed ${dark ? 'text-slate-300' : 'text-[#475569]'}`}>{system.promise}</p>
+                  <p className={`text-sm leading-relaxed ${dark ? 'text-slate-300' : 'text-white/60'}`}>{system.promise}</p>
                   <ul className="mt-auto pt-2 flex flex-wrap gap-1.5" aria-label={`${system.name} modules available today`}>
                     {live.map((m) => (
                       <li
                         key={m.name}
                         className={`text-[11px] font-semibold rounded-full px-2.5 py-1 border ${
-                          dark ? 'border-white/15 text-slate-200' : 'border-hos-hairline bg-white text-hos-black'
+                          dark ? 'border-white/15 text-slate-200' : 'border-white/[0.08] bg-white/[0.03] text-white'
                         }`}
                       >
                         {m.name}
@@ -221,27 +221,27 @@ const LayerExplorer: React.FC = () => {
                 onKeyDown={(e) => onKeyDown(e, i)}
                 className={`group relative w-full text-left rounded-[14px] border p-5 transition-all duration-300 motion-reduce:transition-none ${
                   selected
-                    ? 'bg-hos-navy border-hos-navy text-white shadow-[0_24px_50px_-28px_rgba(18,26,49,0.7)] lg:translate-x-3'
-                    : 'bg-white border-hos-hairline text-hos-black hover:border-hos-navy'
+                    ? 'bg-ink-800 border-white/10 text-white shadow-[0_24px_50px_-28px_rgba(18,26,49,0.7)] lg:translate-x-3'
+                    : 'bg-white/[0.03] border-white/[0.08] text-white hover:border-white/25'
                 } ${focusRing}`}
               >
                 <span className="flex items-center gap-4">
                   <span
                     className={`w-11 h-11 shrink-0 rounded-full flex items-center justify-center font-display font-semibold text-sm ${
-                      selected ? 'bg-hos-yellow text-hos-black' : 'bg-hos-mist border border-hos-hairline text-hos-black'
+                      selected ? 'bg-hos-yellow text-ink-950' : 'bg-white/[0.04] border border-white/[0.08] text-white'
                     }`}
                   >
                     {l.number}
                   </span>
                   <span className="min-w-0">
-                    <span className={`block font-mono text-[10px] font-bold uppercase tracking-widest ${selected ? 'text-hos-yellow' : 'text-hos-amber'}`}>
+                    <span className={`block font-mono text-[10px] font-bold uppercase tracking-widest ${selected ? 'text-hos-yellow' : 'text-hos-yellow'}`}>
                       Layer {i + 1}
                     </span>
                     <span className="block font-display font-bold text-lg leading-snug">{l.name}</span>
                   </span>
                   <ArrowRight
                     aria-hidden="true"
-                    className={`ml-auto w-4 h-4 shrink-0 transition-transform motion-reduce:transition-none ${selected ? 'text-hos-yellow translate-x-0.5' : 'text-hos-grey'}`}
+                    className={`ml-auto w-4 h-4 shrink-0 transition-transform motion-reduce:transition-none ${selected ? 'text-hos-yellow translate-x-0.5' : 'text-white/55'}`}
                   />
                 </span>
               </button>
@@ -254,25 +254,25 @@ const LayerExplorer: React.FC = () => {
           id={`layer-panel-${layer.id}`}
           aria-labelledby={`layer-tab-${layer.id}`}
           tabIndex={0}
-          className={`lg:col-span-7 rounded-[20px] bg-white border border-hos-hairline p-6 sm:p-9 flex flex-col gap-6 ${focusRing}`}
+          className={`lg:col-span-7 rounded-[20px] bg-white/[0.03] border border-white/[0.08] p-6 sm:p-9 flex flex-col gap-6 ${focusRing}`}
         >
           <div key={layer.id} className="hos-anim space-y-6" style={{ animation: 'hos-fade-up 0.45s cubic-bezier(0.2,0.7,0.2,1) both' }}>
             <div className="space-y-3">
-              <span className="font-mono text-xs font-bold uppercase tracking-widest text-hos-amber">
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-hos-yellow">
                 {layer.number} · {layer.name}
               </span>
-              <h3 className="font-display font-semibold text-2xl sm:text-3xl tracking-tight text-hos-black">{layer.summary}</h3>
+              <h3 className="font-display font-semibold text-2xl sm:text-3xl tracking-tight text-white">{layer.summary}</h3>
             </div>
-            <ul className="divide-y divide-hos-hairline border-y border-hos-hairline">
+            <ul className="divide-y divide-white/[0.08] border-y border-white/[0.08]">
               {layer.items.map((item) => (
-                <li key={item} className="flex items-start gap-3 py-3 text-base text-[#334155]">
+                <li key={item} className="flex items-start gap-3 py-3 text-base text-white/70">
                   <span aria-hidden="true" className="mt-2.5 w-4 h-[3px] shrink-0 bg-hos-yellow" />
                   {item}
                 </li>
               ))}
             </ul>
             <div className="space-y-3">
-              <h4 className="font-mono text-[11px] font-bold uppercase tracking-widest text-hos-grey">Modules working at this layer</h4>
+              <h4 className="font-mono text-[11px] font-bold uppercase tracking-widest text-white/55">Modules working at this layer</h4>
               <ul className="flex flex-wrap gap-2">
                 {layer.modules.map((name) => {
                   const mod = findModule(name);
@@ -281,7 +281,7 @@ const LayerExplorer: React.FC = () => {
                     <li key={name}>
                       <Link
                         to={systemPath(mod.system.slug)}
-                        className={`inline-flex items-center gap-1.5 rounded-full border border-hos-hairline bg-hos-mist hover:border-hos-navy px-3 py-1.5 text-xs font-semibold text-hos-black transition-colors ${focusRing}`}
+                        className={`inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.04] hover:border-white/25 px-3 py-1.5 text-xs font-semibold text-white transition-colors ${focusRing}`}
                       >
                         {name}
                       </Link>
@@ -379,9 +379,9 @@ const DataFlow: React.FC = () => (
     <Stream />
 
     <Reveal delay={120} className="h-full">
-      <div className="h-full rounded-[16px] bg-white text-hos-black p-5 sm:p-6 flex flex-col gap-4 shadow-[0_30px_70px_-30px_rgba(0,0,0,0.6)]">
+      <div className="h-full rounded-[16px] bg-white/[0.03] text-white p-5 sm:p-6 flex flex-col gap-4 shadow-[0_30px_70px_-30px_rgba(0,0,0,0.6)]">
         <div className="flex items-center gap-3">
-          <span aria-hidden="true" className="w-11 h-11 rounded-[12px] bg-hos-navy flex items-center justify-center">
+          <span aria-hidden="true" className="w-11 h-11 rounded-[12px] bg-ink-800 flex items-center justify-center">
             <svg viewBox="0 0 40 40" className="w-7 h-7">
               <polygon points="20,8 34,16 20,24 6,16" fill="#F5D97B" />
               <polygon points="6,16 20,24 34,16 34,19 20,27 6,19" fill="#C9A94F" />
@@ -390,19 +390,19 @@ const DataFlow: React.FC = () => (
           </span>
           <div>
             <h3 className="font-display font-bold text-lg leading-tight">Human OS</h3>
-            <p className="text-xs text-hos-grey">Invisible to your users</p>
+            <p className="text-xs text-white/55">Invisible to your users</p>
           </div>
         </div>
         <ol className="relative space-y-2">
-          <span aria-hidden="true" className="absolute left-[15px] top-4 bottom-4 w-px bg-hos-hairline" />
+          <span aria-hidden="true" className="absolute left-[15px] top-4 bottom-4 w-px bg-white/10" />
           {stages.map((s, i) => (
             <li key={s.name} className="relative flex items-start gap-3 rounded-[10px] p-2">
-              <span className="relative z-10 w-8 h-8 shrink-0 rounded-full bg-hos-mist border border-hos-hairline flex items-center justify-center font-display font-semibold text-xs">
+              <span className="relative z-10 w-8 h-8 shrink-0 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center font-display font-semibold text-xs">
                 {i + 1}
               </span>
               <span>
                 <span className="block font-display font-bold text-sm">{s.name}</span>
-                <span className="block text-xs text-[#475569] leading-relaxed">{s.line}</span>
+                <span className="block text-xs text-white/60 leading-relaxed">{s.line}</span>
               </span>
             </li>
           ))}
@@ -514,7 +514,7 @@ const faqs: { q: string; a: React.ReactNode }[] = [
     a: (
       <>
         A one-time build fee plus a monthly plan.{' '}
-        <Link to="/pricing" className={`font-semibold text-hos-black underline underline-offset-4 decoration-hos-yellow ${focusRing}`}>
+        <Link to="/pricing" className={`font-semibold text-white underline underline-offset-4 decoration-hos-yellow ${focusRing}`}>
           See pricing
         </Link>
       </>
@@ -531,7 +531,7 @@ export const PlatformPage: React.FC = () => {
   });
 
   return (
-    <div className="flex flex-col font-body text-hos-black bg-white overflow-x-clip">
+    <div className="flex flex-col font-body text-white bg-white/[0.03] overflow-x-clip">
       <PageHero
         eyebrow="Technology"
         title="The whole-body health-intelligence layer for the health economy."
@@ -576,7 +576,7 @@ export const PlatformPage: React.FC = () => {
           <RingBlock id="person" />
           <div aria-hidden="true" className="flex flex-col items-center">
             <span className="w-px h-5 bg-hos-yellow" />
-            <span className="px-3 py-1 rounded-full border border-hos-hairline bg-white font-mono text-[10px] font-bold uppercase tracking-widest text-hos-black">
+            <span className="px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.03] font-mono text-[10px] font-bold uppercase tracking-widest text-white">
               One integration
             </span>
             <span className="w-px h-5 bg-hos-yellow" />
@@ -620,7 +620,7 @@ export const PlatformPage: React.FC = () => {
         />
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
           <Reveal className="lg:col-span-5">
-            <div className="relative h-full min-h-[420px] rounded-[20px] overflow-hidden bg-hos-navy">
+            <div className="relative h-full min-h-[420px] rounded-[20px] overflow-hidden bg-ink-800">
               <img
                 src="/photos/home-sdk-developer.jpg"
                 alt="A developer writing code at a desk"
@@ -630,7 +630,7 @@ export const PlatformPage: React.FC = () => {
                 decoding="async"
                 className="absolute inset-0 w-full h-full object-cover"
               />
-              <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-hos-black/60 via-transparent to-transparent" />
+              <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink-950/75 via-transparent to-transparent" />
               <div aria-hidden="true" className="absolute left-4 right-4 bottom-4 sm:left-6 sm:right-auto sm:bottom-6">
                 <FoodScanCard />
               </div>
@@ -690,7 +690,7 @@ export const PlatformPage: React.FC = () => {
           action={{ to: '/security', label: 'Security and compliance' }}
         />
         <Reveal>
-          <div className="rounded-[20px] bg-white border border-hos-hairline p-6 sm:p-10 space-y-10">
+          <div className="rounded-[20px] bg-white/[0.03] border border-white/[0.08] p-6 sm:p-10 space-y-10">
             <InfrastructureGroup />
             <PracticeChips items={trustPick(['dpdp', 'abdm', 'encryption', 'tenant-isolation', 'audit-logged', 'no-keys-on-device'])} columns={3} />
           </div>
@@ -712,7 +712,7 @@ export const PlatformPage: React.FC = () => {
           </Panel>
         </Reveal>
         <Reveal>
-          <p className="text-sm text-[#475569]">
+          <p className="text-sm text-white/60">
             Security questions or a questionnaire to complete?{' '}
             <a href={`mailto:${TRUST_CONTACT}`} className={textLink}>
               {TRUST_CONTACT}

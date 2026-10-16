@@ -9,10 +9,10 @@ import { Reveal, Waveform } from './motion';
 
 const ChatVisual: React.FC = () => (
   <div className="hos-anim space-y-2" aria-hidden="true">
-    <div className="ml-auto w-fit max-w-[85%] rounded-2xl rounded-br-sm bg-hos-navy text-white text-[11px] px-3 py-2" style={{ animation: 'hos-fade-up 0.6s ease 0.2s both' }}>
+    <div className="ml-auto w-fit max-w-[85%] rounded-2xl rounded-br-sm bg-ink-800 text-white text-[11px] px-3 py-2" style={{ animation: 'hos-fade-up 0.6s ease 0.2s both' }}>
       Why is my vitamin D flagged?
     </div>
-    <div className="w-fit max-w-[90%] rounded-2xl rounded-bl-sm bg-white border border-hos-hairline text-[11px] px-3 py-2 text-hos-black" style={{ animation: 'hos-fade-up 0.6s ease 0.8s both' }}>
+    <div className="w-fit max-w-[90%] rounded-2xl rounded-bl-sm bg-white/[0.03] border border-white/[0.08] text-[11px] px-3 py-2 text-white" style={{ animation: 'hos-fade-up 0.6s ease 0.8s both' }}>
       It's below your optimal range. Here's a two-week plan to bring it up.
     </div>
   </div>
@@ -25,9 +25,9 @@ const BriefVisual: React.FC = () => (
       ['Vitamin D', 'Low'],
       ['HbA1c', 'Optimal'],
     ].map(([m, v], i) => (
-      <div key={m} className="flex items-center justify-between rounded-lg bg-white border border-hos-hairline px-3 py-1.5 text-[11px]" style={{ animation: `hos-fade-up 0.5s ease ${0.2 + i * 0.15}s both` }}>
-        <span className="font-semibold text-hos-black">{m}</span>
-        <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${v === 'Optimal' ? 'bg-emerald-50 text-emerald-700' : v === 'High' ? 'bg-rose-50 text-rose-700' : 'bg-amber-50 text-amber-700'}`}>{v}</span>
+      <div key={m} className="flex items-center justify-between rounded-lg bg-white/[0.03] border border-white/[0.08] px-3 py-1.5 text-[11px]" style={{ animation: `hos-fade-up 0.5s ease ${0.2 + i * 0.15}s both` }}>
+        <span className="font-semibold text-white">{m}</span>
+        <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${v === 'Optimal' ? 'bg-emerald-400/15 text-emerald-300' : v === 'High' ? 'bg-rose-400/15 text-rose-300' : 'bg-amber-400/15 text-amber-300'}`}>{v}</span>
       </div>
     ))}
   </div>
@@ -36,7 +36,7 @@ const BriefVisual: React.FC = () => (
 const BarsVisual: React.FC = () => (
   <div className="hos-anim flex items-end gap-2 h-16" aria-hidden="true">
     {[40, 62, 48, 80, 56, 92, 70].map((h, i) => (
-      <span key={i} className={`flex-1 rounded-t origin-bottom ${i === 5 ? 'bg-hos-yellow' : 'bg-hos-navy'}`} style={{ height: `${h}%`, animation: `hos-rise 0.8s cubic-bezier(0.2,0.7,0.2,1) ${0.1 + i * 0.07}s both` }} />
+      <span key={i} className={`flex-1 rounded-t origin-bottom ${i === 5 ? 'bg-hos-yellow' : 'bg-ink-800'}`} style={{ height: `${h}%`, animation: `hos-rise 0.8s cubic-bezier(0.2,0.7,0.2,1) ${0.1 + i * 0.07}s both` }} />
     ))}
   </div>
 );
@@ -74,7 +74,7 @@ const teams: { audience: string; system: SystemSlug; headline: string; modules: 
 ];
 
 export const TeamsSection: React.FC = () => (
-  <section aria-labelledby="home-teams-heading" className="bg-hos-mist py-20 sm:py-28">
+  <section aria-labelledby="home-teams-heading" className="bg-ink-900 border-y border-white/[0.06] py-20 sm:py-28">
     <Container className="space-y-12">
       <Reveal>
         {/* TODO(copy): section heading and intro */}
@@ -92,26 +92,26 @@ export const TeamsSection: React.FC = () => (
           return (
             <li key={t.audience}>
               <Reveal delay={(i % 2) * 120} className="h-full">
-                <article className="h-full rounded-[16px] bg-white border border-hos-hairline p-6 sm:p-8 grid grid-cols-1 sm:grid-cols-5 gap-6">
+                <article className="h-full rounded-[16px] bg-white/[0.03] border border-white/[0.08] p-6 sm:p-8 grid grid-cols-1 sm:grid-cols-5 gap-6">
                   <div className="sm:col-span-3 flex flex-col gap-4">
                     <div className="flex items-center gap-2">
-                      <span className="w-7 h-7 rounded-full bg-hos-navy text-white font-mono text-[10px] font-bold flex items-center justify-center">{system.number}</span>
-                      <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-hos-amber">{t.audience}</span>
+                      <span className="w-7 h-7 rounded-full bg-ink-800 text-white font-mono text-[10px] font-bold flex items-center justify-center">{system.number}</span>
+                      <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-hos-yellow">{t.audience}</span>
                     </div>
-                    <h3 className="font-display font-semibold text-xl sm:text-2xl text-hos-black leading-snug">{t.headline}</h3>
+                    <h3 className="font-display font-semibold text-xl sm:text-2xl text-white leading-snug">{t.headline}</h3>
                     <ul className="space-y-2">
                       {t.modules.map((m) => (
-                        <li key={m} className="flex items-center justify-between gap-3 text-sm border-b border-hos-hairline pb-2 last:border-0">
-                          <span className="font-semibold text-hos-black">{m}</span>
+                        <li key={m} className="flex items-center justify-between gap-3 text-sm border-b border-white/[0.08] pb-2 last:border-0">
+                          <span className="font-semibold text-white">{m}</span>
                         </li>
                       ))}
                     </ul>
-                    <Link to={systemPath(system.slug)} className={`mt-auto inline-flex items-center gap-2 text-sm font-bold text-hos-black underline underline-offset-4 decoration-hos-yellow decoration-2 hover:decoration-hos-amber ${focusRing}`}>
+                    <Link to={systemPath(system.slug)} className={`mt-auto inline-flex items-center gap-2 text-sm font-bold text-white underline underline-offset-4 decoration-hos-yellow decoration-2 hover:decoration-white ${focusRing}`}>
                       Explore {system.name}
                       <ArrowRight aria-hidden="true" className="w-4 h-4" />
                     </Link>
                   </div>
-                  <div className="sm:col-span-2 rounded-xl bg-hos-mist border border-hos-hairline p-4 flex items-center">
+                  <div className="sm:col-span-2 rounded-xl bg-white/[0.04] border border-white/[0.08] p-4 flex items-center">
                     <div className="w-full">{t.visual}</div>
                   </div>
                 </article>

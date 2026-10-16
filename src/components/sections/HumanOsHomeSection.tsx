@@ -57,45 +57,45 @@ const RingsDiagram: React.FC = () => {
 
 /** "What it runs on": the Human OS platform under every product. */
 export const HumanOsHomeSection: React.FC = () => (
-  <section aria-labelledby="home-platform-heading" className="bg-white py-20 sm:py-28">
+  <section aria-labelledby="home-platform-heading" className="bg-ink-950 py-20 sm:py-28">
     <Container>
       <Reveal>
-      <div className="grid grid-cols-1 lg:grid-cols-2 rounded-[16px] overflow-hidden border border-hos-hairline bg-white shadow-[0_30px_80px_-40px_rgba(18,26,49,0.35)]">
+      <div className="grid grid-cols-1 lg:grid-cols-2 rounded-[16px] overflow-hidden border border-white/[0.08] bg-white/[0.03] shadow-[0_30px_80px_-40px_rgba(0,0,0,0.6)]">
         <div className="p-6 sm:p-10 lg:p-14 flex flex-col gap-6">
           <Eyebrow>What it runs on</Eyebrow>
-          <h2 id="home-platform-heading" className="font-display font-semibold text-3xl sm:text-5xl tracking-tight leading-[1.08] text-hos-black">
+          <h2 id="home-platform-heading" className="font-display font-semibold text-3xl sm:text-5xl tracking-tight leading-[1.08] text-white">
             Human OS, the platform under every product
           </h2>
-          <p className="text-base sm:text-lg text-[#475569] leading-relaxed">
+          <p className="text-base sm:text-lg text-white/60 leading-relaxed">
             {numberWord(totalSystems)} systems and {totalModules} modules, delivered through one integration, entirely under your brand.
           </p>
           <div>
             <Link
               to={HUMAN_OS_PATH}
-              className={`inline-flex items-center gap-2 border border-hos-hairline hover:border-hos-black text-hos-black font-display text-xs font-bold uppercase tracking-wider px-6 py-3.5 rounded-[2px] transition-colors ${focusRing}`}
+              className={`inline-flex items-center gap-2 border border-white/[0.08] hover:border-white/40 text-white text-sm font-semibold px-6 py-3.5 rounded-full transition-colors ${focusRing}`}
             >
               Explore Human OS
               <ArrowRight aria-hidden="true" className="w-3.5 h-3.5" />
             </Link>
           </div>
-          <dl className="mt-auto grid grid-cols-2 gap-6 pt-8 border-t border-hos-hairline">
+          <dl className="mt-auto grid grid-cols-2 gap-6 pt-8 border-t border-white/[0.08]">
             <div>
               <dt className="sr-only">Live modules</dt>
-              <dd className="font-display font-semibold text-5xl sm:text-6xl tracking-tight text-hos-black">
+              <dd className="font-display font-semibold text-5xl sm:text-6xl tracking-tight text-white">
                 <CountUp to={totalLive} />
               </dd>
-              <dd className="mt-2 text-sm text-[#475569]">Live modules, switchable today</dd>
+              <dd className="mt-2 text-sm text-white/60">Live modules, switchable today</dd>
             </div>
             <div>
               <dt className="sr-only">Biomarkers</dt>
-              <dd className="font-display font-semibold text-5xl sm:text-6xl tracking-tight text-hos-black">
+              <dd className="font-display font-semibold text-5xl sm:text-6xl tracking-tight text-white">
                 <CountUp to={100} suffix="+" />
               </dd>
-              <dd className="mt-2 text-sm text-[#475569]">Biomarkers decoded against locally calibrated ranges</dd>
+              <dd className="mt-2 text-sm text-white/60">Biomarkers decoded against locally calibrated ranges</dd>
             </div>
           </dl>
         </div>
-        <div className="relative bg-hos-navy p-8 sm:p-12 flex items-center justify-center">
+        <div className="relative bg-ink-800 p-8 sm:p-12 flex items-center justify-center">
           <span className="absolute top-5 left-5 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-[11px] font-semibold text-white">
             <LiveDot />
             {totalLive} modules live
