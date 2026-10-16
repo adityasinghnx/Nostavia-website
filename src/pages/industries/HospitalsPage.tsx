@@ -1,754 +1,680 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  ArrowRight, 
-  Building2, 
-  Activity, 
-  Stethoscope, 
-  HeartPulse, 
-  Globe, 
-  ShieldCheck, 
-  CheckCircle2, 
-  Clock, 
-  TrendingUp, 
-  Award, 
-  Zap, 
-  ChevronDown, 
-  ChevronUp, 
-  Layers,
-  Sparkles,
+import {
+  Activity,
+  ArrowRight,
+  Ban,
+  Clock,
   Database,
-  Lock,
-  Code,
-  Wrench,
-  BarChart3,
-  Search,
-  Target,
   FileSearch,
-  LayoutDashboard
+  FileText,
+  HeartPulse,
+  Network,
+  PhoneCall,
+  PhoneOff,
+  Repeat,
+  Server,
+  ShieldCheck,
+  Stethoscope,
+  Users,
+  Wrench,
 } from 'lucide-react';
-import { FaqSection } from '../../components/sections/FaqSection';
+import {
+  CtaBand,
+  FaqList,
+  FeatureGrid,
+  PageHero,
+  Panel,
+  Section,
+  SectionHead,
+  SplitSection,
+  StatRow,
+  StepList,
+  textLink,
+} from '../../components/page/PageKit';
+import { Eyebrow, focusRing } from '../../components/home/shared';
+import { Reveal } from '../../components/home/motion';
+import { CohortRiskCard, VoiceCallCard } from '../../components/home/LiveCards';
 import { HospitalProgrammesSection } from '../../components/human-os/HospitalProgrammesSection';
 import { SystemsToStartWith } from '../../components/human-os/BuyerMapping';
+import { Disclaimer } from '../../components/human-os/Disclaimer';
+import { DISCLAIMER, hospitalProgrammes } from '../../content/human-os';
+import { trustGroup, trustGroups, trustPick } from '../../content/trust.config';
+import { useSeo } from '../../lib/useSeo';
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Buyer overview for hospitals and health systems (/industries/hospitals, also
+ * /industries/payer and /industries/payers). The product deep-dive for the five
+ * programmes lives on /solutions/hospitals.
+ * ──────────────────────────────────────────────────────────────────────────── */
+
+/** Sample layout of the Leakage Report. Deliberately carries no figures: every number in a real report comes from the hospital's own data. */
+const LeakageReportPreview: React.FC = () => (
+  <div className="hos-anim w-full max-w-[380px] rounded-2xl bg-white text-hos-black p-5 shadow-[0_24px_60px_-20px_rgba(10,10,11,0.45)]">
+    <div className="flex items-center justify-between gap-3">
+      <div className="flex items-center gap-2 min-w-0">
+        <span className="w-8 h-8 shrink-0 rounded-lg bg-hos-mist border border-hos-hairline flex items-center justify-center">
+          <FileSearch className="w-4 h-4" />
+        </span>
+        <span className="text-xs font-bold truncate">Leakage Report</span>
+      </div>
+      <span className="text-[10px] font-bold uppercase tracking-wider text-hos-grey">Sample layout</span>
+    </div>
+    <p className="mt-3 text-[11px] text-hos-grey">12 to 24 months of anonymized history, priced on your own list</p>
+    <ul className="mt-4 space-y-3.5">
+      {(
+        [
+          ['Checkup customers who never returned', 72],
+          ['Discharged patients with no follow-up', 54],
+          ['Chronic patients who went dormant', 63],
+        ] as [string, number][]
+      ).map(([label, width], i) => (
+        <li key={label}>
+          <div className="flex items-center justify-between gap-3 text-[11px]">
+            <span className="font-semibold">{label}</span>
+            <span className="text-hos-grey whitespace-nowrap">₹ value</span>
+          </div>
+          <div className="mt-1.5 h-2 rounded-full bg-hos-mist overflow-hidden">
+            <span
+              className={`block h-full rounded-full origin-left ${i === 0 ? 'bg-hos-yellow' : 'bg-hos-navy'}`}
+              style={{ width: `${width}%`, animation: `hos-grow 1s cubic-bezier(0.2,0.7,0.2,1) ${0.2 + i * 0.18}s both` }}
+            />
+          </div>
+        </li>
+      ))}
+    </ul>
+    <div className="mt-4 pt-3 border-t border-hos-hairline text-[11px] text-hos-grey">Returned within two weeks. Data deleted after the audit.</div>
+  </div>
+);
+
+/** What each programme moves on the hospital's own revenue lines. Keyed by the programme names in human-os.ts. */
+const revenueLine: Record<string, string> = {
+  'Preventive Program Engine': 'Package renewal rate and OPD conversion from checkups.',
+  'Discharge-to-Recovery': 'Follow-up OPD capture rate.',
+  'Chronic Care Programs': 'Chronic patient lifetime value retained at your facility.',
+  'International Patient Continuity': 'International referral and return visit revenue.',
+  'Front Desk Agent': 'Inbound call booking conversion and peak load retention.',
+};
+
+/* Pricing. Every amount, tier name and inclusion is carried over from the previous version of this page. */
+const tiers = [
+  {
+    name: 'Community Hospitals',
+    oneTime: '$5,000',
+    monthly: '+ $999 / mo monthly plan',
+    fit: 'Under 100 beds. Single site, core programmes and the Front Desk Agent.',
+  },
+  {
+    name: 'Regional Chains & Multispecialty',
+    oneTime: '$8,000',
+    monthly: '+ $1,499 / mo monthly plan',
+    fit: '100 to 300 beds. All five programmes, HIS integration and the B2B Analytics Dashboard.',
+    featured: true,
+  },
+  {
+    name: 'Enterprise Chains & GCC',
+    oneTime: '$12,000',
+    monthly: '+ $1,799 / mo monthly plan · multi-site',
+    fit: '300+ beds, multi-hospital groups with custom workflows.',
+  },
+];
+
+const singleProgrammes = [
+  { name: 'Front Desk Agent', oneTime: '$1,500', monthly: '+ $399 / mo', to: '/solutions/front-desk' },
+  { name: 'Preventive Program Engine', oneTime: '$3,000', monthly: '+ $699 / mo', to: '/solutions/hospitals' },
+  { name: 'Discharge-to-Recovery', oneTime: '$3,000', monthly: '+ $699 / mo', to: '/solutions/hospitals' },
+];
+
+const gulfPlans = [
+  { name: 'Gulf · Standard', monthly: 'AED 5,500' },
+  { name: 'Gulf · Multispecialty', monthly: 'AED 12,000' },
+  { name: 'Gulf · Enterprise', monthly: 'AED 25,000+' },
+];
+
+const GroupLabel: React.FC<{ label: string; note: string }> = ({ label, note }) => (
+  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+    <span className="inline-flex w-fit items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-widest text-hos-black">
+      <span aria-hidden="true" className="w-4 h-[3px] bg-hos-yellow" />
+      {label}
+    </span>
+    <span className="text-sm text-[#475569]">{note}</span>
+  </div>
+);
 
 export const HospitalsPage: React.FC = () => {
-  const [activeFaq, setActiveFaq] = useState<number | null>(0);
+  useSeo({
+    title: 'Hospitals and Health Systems | Nostavia Health',
+    description:
+      'Five white-label patient programmes for hospitals, running on top of your existing HIS under your brand. Starts with a free Leakage Audit on your own data, with full deployment in 60 days.',
+    path: '/industries/hospitals',
+  });
 
-  const toggleFaq = (index: number) => {
-    setActiveFaq(activeFaq === index ? null : index);
-  };
+  const infrastructure = trustGroup('infrastructure');
+  const practices = trustPick(['dpdp', 'abdm', 'no-keys-on-device']);
 
   return (
-    <div className="flex flex-col gap-16 py-8 font-body text-[#0F172A] bg-white">
-      
-      {/* 1. HERO EXECUTIVE SECTION */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full pt-4">
-        <div className="p-6 sm:p-14 lg:p-16 bg-white border border-[#E2E8F0] rounded-[2px] space-y-8 shadow-none relative overflow-hidden">
-          
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-              NOSTAVIA FOR HOSPITALS & HEALTH SYSTEMS
-            </span>
-          </div>
-
-          <h1 className="font-display font-extrabold text-3xl sm:text-6xl lg:text-7xl text-[#0F172A] tracking-tight max-w-4xl leading-[1.05]">
-            Your HIS runs the hospital. Nostavia runs the relationship.
-          </h1>
-
-          <p className="text-base sm:text-xl text-[#64748B] max-w-3xl leading-relaxed font-body">
-            We white-label predictive patient programs onto your existing checkup, discharge and chronic volume, under your brand, live in 60 days. Then we show you, in rupees, exactly what they brought back.
-          </p>
-
-          <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-4 pt-2">
-            <Link
-              to="/demo"
-              className="bg-[#000000] hover:bg-[#1A1A1A] text-white font-display text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-[2px] shadow-sm transition-all inline-flex items-center justify-center gap-2 text-center"
-            >
-              Request a free Leakage Audit
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              to="/solutions/hospitals"
-              className="bg-white hover:bg-slate-50 text-[#0F172A] border border-[#CBD5E1] font-display text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-[2px] transition-all text-center"
-            >
-              Explore Front Door Platform
-            </Link>
-          </div>
-
-          {/* Key Hospital Metrics Bar */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-[#E2E8F0] font-mono text-xs text-[#0F172A]">
-            <div>
-              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">Free</div>
-              <div className="text-[#64748B] font-semibold mt-1">Leakage Audit · No Commitment</div>
-            </div>
-            <div>
-              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">60 Days</div>
-              <div className="text-[#64748B] font-semibold mt-1">Guaranteed Deployment</div>
-            </div>
-            <div>
-              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">Tracked ROI</div>
-              <div className="text-[#64748B] font-semibold mt-1">CFO Attribution Dashboard</div>
-            </div>
-            <div>
-              <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0F172A]">Pay on Value</div>
-              <div className="text-[#64748B] font-semibold mt-1">Performance-Linked Pricing</div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* 1B. HUMAN OS: THE FIVE PROGRAMMES AND THE SYSTEMS BEHIND THEM */}
-      <HospitalProgrammesSection />
-
-      {/* 2. THE LEAKAGE AUDIT: THE FREE WEAPON */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full">
-        <div className="p-8 sm:p-12 bg-[#0F172A] text-white rounded-[2px] border border-[#1E293B] shadow-xl space-y-6">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div className="space-y-4 max-w-3xl">
-              <div className="flex items-center gap-3">
-                <FileSearch className="w-5 h-5 text-cyan-400" />
-                <span className="font-mono text-xs text-cyan-400 font-bold uppercase tracking-widest">
-                  THE LEAKAGE AUDIT: FREE, BEFORE ANY CONTRACT
-                </span>
-              </div>
-              <h2 className="font-display font-extrabold text-2xl sm:text-4xl text-white leading-tight">
-                How much repeat revenue did you leak last year? Most hospitals have never been able to answer that question.
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-body">
-                Before any contract, share 12–24 months of anonymized historical data: checkup transactions, OPD visits, discharge records. We return a <span className="text-white font-bold">Leakage Report</span> within two weeks: how many checkup customers never returned, how many discharged patients had no follow-up, how many chronic patients went dormant, and the rupee value of each bucket, computed on your own price list. Anonymized data only, processed under a signed data-handling agreement, deleted after the audit.
-              </p>
-            </div>
-            <Link
-              to="/demo"
-              className="shrink-0 bg-white text-[#0F172A] hover:bg-slate-100 font-display text-xs font-bold uppercase tracking-wider px-6 py-3.5 rounded-[2px] transition-all text-center"
-            >
-              Request Free Audit
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-800">
-            <div className="p-4 bg-slate-900/60 rounded-[2px] border border-slate-800">
-              <div className="font-display font-extrabold text-xl text-cyan-400">1.</div>
-              <div className="font-display font-bold text-sm text-white mt-1">Share Anonymized Data</div>
-              <div className="text-[11px] text-slate-400 mt-1 font-body">CSV, Excel, or even PDF dumps. Our parser handles any HIS export format.</div>
-            </div>
-            <div className="p-4 bg-slate-900/60 rounded-[2px] border border-slate-800">
-              <div className="font-display font-extrabold text-xl text-cyan-400">2.</div>
-              <div className="font-display font-bold text-sm text-white mt-1">Receive Leakage Report</div>
-              <div className="text-[11px] text-slate-400 mt-1 font-body">Patient-level breakdown with rupee value of each revenue leak bucket in two weeks.</div>
-            </div>
-            <div className="p-4 bg-slate-900/60 rounded-[2px] border border-slate-800">
-              <div className="font-display font-extrabold text-xl text-cyan-400">3.</div>
-              <div className="font-display font-bold text-sm text-white mt-1">Decide With Your Own Numbers</div>
-              <div className="text-[11px] text-slate-400 mt-1 font-body">No pitch deck. Your own data, your own price list, your own leaked crores on a page.</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. THREE MECHANISMS: THE NERVOUS SYSTEM */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
-        <div className="space-y-3">
-          <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            THE THREE MECHANISMS
-          </div>
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
-            The nervous system that makes value undeniable
-          </h2>
-          <p className="text-base text-[#64748B] max-w-3xl leading-relaxed font-body">
-            The four programs are the muscles. These three mechanisms are why a hospital feels the value instead of taking our word for it.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-5 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
-            <div className="space-y-4">
-              <FileSearch className="w-8 h-8 text-[#2563EB]" />
-              <h3 className="font-display font-extrabold text-xl text-[#0F172A]">
-                Leakage Audit
-              </h3>
-              <p className="text-xs text-[#64748B] leading-relaxed font-body">
-                Free pre-contract analysis using 12–24 months of anonymized hospital data. Returns a rupee-valued leakage report showing exactly where patients drop off: checkup non-renewals, missed follow-ups, dormant chronics. The first meeting becomes their own number on a page.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-[#E2E8F0] font-mono text-[11px] text-[#475569]">
-              No HIS vendor offers this. Running it requires an analytical engine, not a records system.
-            </div>
-          </div>
-
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-5 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
-            <div className="space-y-4">
-              <BarChart3 className="w-8 h-8 text-[#2563EB]" />
-              <h3 className="font-display font-extrabold text-xl text-[#0F172A]">
-                Attribution Engine
-              </h3>
-              <p className="text-xs text-[#64748B] leading-relaxed font-body">
-                Every re-test booked from a recall, every follow-up OPD captured from a discharge protocol, every package renewal from a Smart Report journey: tagged, attributed, and priced in a dashboard the CFO owns. Platform-attributed revenue vs. platform cost, updated daily.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-[#E2E8F0] font-mono text-[11px] text-[#475569]">
-              ROI as a number on a screen, not a claim in a slide deck.
-            </div>
-          </div>
-
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-5 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
-            <div className="space-y-4">
-              <LayoutDashboard className="w-8 h-8 text-[#2563EB]" />
-              <h3 className="font-display font-extrabold text-xl text-[#0F172A]">
-                Command Center
-              </h3>
-              <p className="text-xs text-[#64748B] leading-relaxed font-body">
-                The hospital's population intelligence brain: drift lists (which chronic patients are deteriorating on which markers, ranked by urgency), cohort risk maps, program performance, department-level demand signals. The medical director's morning screen.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-[#E2E8F0] font-mono text-[11px] text-[#475569]">
-              Gets sharper the longer it runs. Six months in, the drift detection knows your patient population, not a generic one.
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* 4. THE FOUR PROGRAMS: THE MUSCLES */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
-        <div className="space-y-3">
-          <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            THE FOUR PROGRAMS
-          </div>
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
-            White-labelled under your brand, attributed in your dashboard
-          </h2>
-          <p className="text-base text-[#64748B] max-w-3xl leading-relaxed font-body">
-            Each program generates revenue that the Attribution Engine tracks to the transaction. The value is never a debate.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          
-          {/* PROGRAM 1 */}
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-5 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 01</div>
-              <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-                Preventive Program Engine
-              </h3>
-              <p className="text-xs text-[#64748B] leading-relaxed font-body">
-                Upgrades your hospital's health-check packages from a raw PDF transaction to an annual membership under your brand. Includes Smart Reports, biological age, disease-risk scores, the Trajectory Engine, wearable data, AI concierge, and an automated re-test recall engine.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-[#E2E8F0] font-mono text-[11px] text-[#475569]">
-              <span className="font-bold text-[#0F172A]">Revenue it moves:</span> Package renewal rate, OPD conversion from checkups.
-            </div>
-          </div>
-
-          {/* PROGRAM 2 */}
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-5 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 02</div>
-              <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-                Discharge-to-Recovery
-              </h3>
-              <p className="text-xs text-[#64748B] leading-relaxed font-body">
-                Continuity of care layer for every discharged patient: plain-language recovery protocol, medication adherence tracking, wearable telemetry, symptom check-ins, care-team escalation flags, and auto-scheduled follow-up OPD bookings.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-[#E2E8F0] space-y-1 font-mono text-[11px] text-[#475569]">
-              <div><span className="font-bold text-[#0F172A]">Revenue it moves:</span> Follow-up OPD capture rate.</div>
-              <div className="text-[10px] italic">Published evidence: structured post-discharge care cuts all-cause CHF mortality by ~27% (PMC meta-analysis).</div>
-            </div>
-          </div>
-
-          {/* PROGRAM 3 */}
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-5 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 03</div>
-              <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-                Chronic Care Programs
-              </h3>
-              <p className="text-xs text-[#64748B] leading-relaxed font-body">
-                Infrastructure for your hospital to run subscription diabetes, cardiac, and metabolic clinics without needing an expensive pharma JV: enrolment, CGM & wearable integration, adaptive protocols, care-team dashboard, and concierge.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-[#E2E8F0] font-mono text-[11px] text-[#475569]">
-              <span className="font-bold text-[#0F172A]">Revenue it moves:</span> Chronic patient LTV retained at your facility.
-            </div>
-          </div>
-
-          {/* PROGRAM 4 */}
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-5 hover:border-[#CBD5E1] transition-all flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 04</div>
-              <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-                International Patient Continuity
-              </h3>
-              <p className="text-xs text-[#64748B] leading-relaxed font-body">
-                Post-treatment layer for medical-tourism (India–UAE corridor): format-agnostic home-country lab PDF parser, remote monitoring, teleconsult scheduling, and treating-surgeon dashboard. Solves international patient non-return.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-[#E2E8F0] font-mono text-[11px] text-[#475569]">
-              <span className="font-bold text-[#0F172A]">Revenue it moves:</span> International referral & return visit revenue.
-            </div>
-          </div>
-
-          {/* PROGRAM 05: FRONT DESK AI VOICE & PATIENT SUPPORT AGENT */}
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-5 hover:border-[#CBD5E1] transition-all flex flex-col justify-between md:col-span-2">
-            <div className="space-y-4">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <div className="font-mono text-xs font-bold text-[#2563EB]">PROGRAM 05 · VOICE & CHAT</div>
-                <Link
-                  to="/solutions/front-desk"
-                  className="font-mono text-xs font-bold text-[#0F172A] hover:text-[#2563EB] inline-flex items-center gap-1.5 underline"
-                >
-                  View Front Desk Agent Copy & Walkthrough →
-                </Link>
-              </div>
-              <h3 className="font-display font-extrabold text-2xl text-[#0F172A]">
-                Nostavia Front Desk Agent (Multilingual Voice & Patient Support)
-              </h3>
-              <p className="text-xs text-[#64748B] leading-relaxed font-body max-w-4xl">
-                Always-on patient support agent that answers every phone call in local languages, names a specific doctor with experience, rules out emergencies, and turns enquiries into booked visits. Operates seamlessly across telephony, WhatsApp, and website chat under your hospital's brand.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-[#E2E8F0] flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] text-[#475569]">
-              <div><span className="font-bold text-[#0F172A]">Revenue it moves:</span> Inbound call booking conversion & peak load retention.</div>
-              <Link
-                to="/solutions/front-desk"
-                className="bg-[#0F172A] hover:bg-black text-white px-4 py-2 rounded-[2px] text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1"
-              >
-                See how Front Desk works →
-              </Link>
-            </div>
-          </div>
-
-        </div>
-
-        {/* BUILT-FOR-YOU */}
-        <div className="p-8 bg-[#0F172A] text-white rounded-[2px] border border-[#1E293B] space-y-5 hover:border-cyan-800 transition-all shadow-xl">
-          <div className="space-y-4">
-            <span className="font-mono text-xs font-bold text-cyan-400">ENGINEERING SERVICE</span>
-            <h3 className="font-display font-extrabold text-2xl text-white">
-              Built-For-You: Direct Founder Engineering
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-body">
-              Our founding engineers build hospital-specific technology on top of our core engine: custom department triage flows, bariatric/cardiac rehab surfaces, camp screening tools, or custom HIS connectors. Scoped, priced per engagement, delivered in 2–4 weeks.
-            </p>
-          </div>
-          <div className="pt-4 border-t border-slate-800 font-mono text-xs text-white">
-            <span className="font-bold text-cyan-400">Our Promise:</span> "You will never file a ticket into a vendor queue. You talk directly to the founders who built the engine."
-          </div>
-        </div>
-      </section>
-
-      {/* 4A. HUMAN OS: SYSTEMS TO START WITH */}
-      <SystemsToStartWith buyerId="hospitals" />
-
-      {/* 4B. CASE STUDY */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10">
-        <div className="space-y-3">
-          <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            DEPLOYMENT CASE STUDY · TERTIARY CARE
-          </div>
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
-            AI Voice Agent & Contactless Vitals: Deployed in a Working Hospital
-          </h2>
-          <p className="text-xs text-[#64748B] font-mono">
-            Client named on request, under NDA
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
-            <h3 className="font-display font-extrabold text-xl text-[#0F172A]">
-              System One: AI Voice Agent
-            </h3>
-            <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              Conversational voice agent handling inbound patient calls end-to-end. Handles local language code-switching mid-sentence, family members speaking on behalf of patients, and hands off to a human when calls leave the routine envelope. Not a decision tree: built for real conversational patterns.
-            </p>
-          </div>
-
-          <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-4 hover:border-[#CBD5E1] transition-all">
-            <h3 className="font-display font-extrabold text-xl text-[#0F172A]">
-              System Two: Contactless Vitals (rPPG)
-            </h3>
-            <p className="text-sm text-[#64748B] leading-relaxed font-body">
-              Remote photoplethysmography returning 12 parameters from facial video. HR, BP systolic/diastolic, SpO2, respiration rate, HRV (SDNN, RMSSD), stress index, HbA1c, cholesterol, haemoglobin, pulse respiration quotient. No contact, no cuff, no device, no consumable.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. THE ENTRY SEQUENCE */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-8">
-        <div className="space-y-3">
-          <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            HOW EVERY ENGAGEMENT BEGINS
-          </div>
-          <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-[#0F172A] tracking-tight">
-            Audit → Pilot → Platform, each step self-funding
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="p-6 bg-white border border-[#E2E8F0] rounded-[2px] space-y-3">
-            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center font-bold font-mono">1</div>
-            <h3 className="font-display font-extrabold text-lg text-[#0F172A]">Leakage Audit</h3>
-            <p className="text-xs text-[#64748B] leading-relaxed font-body">
-              Free, two weeks, your own data. We show you the crores you're leaking before you pay anything.
-            </p>
-          </div>
-
-          <div className="p-6 bg-white border border-[#E2E8F0] rounded-[2px] space-y-3">
-            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center font-bold font-mono">2</div>
-            <h3 className="font-display font-extrabold text-lg text-[#0F172A]">90-Day Proof Pilot</h3>
-            <p className="text-xs text-[#64748B] leading-relaxed font-body">
-              Smart Reports on the checkup counter + recall on one dormant cohort. One metric, pre-agreed. <span className="font-bold text-[#0F172A]">If the metric doesn't move, the pilot fee is credited in full.</span>
-            </p>
-          </div>
-
-          <div className="p-6 bg-white border border-[#E2E8F0] rounded-[2px] space-y-3">
-            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center font-bold font-mono">3</div>
-            <h3 className="font-display font-extrabold text-lg text-[#0F172A]">Platform Contract</h3>
-            <p className="text-xs text-[#64748B] leading-relaxed font-body">
-              A fixed quote: one-time build fee plus a monthly plan, with the Attribution Engine included.
-            </p>
-          </div>
-
-          <div className="p-6 bg-white border border-[#E2E8F0] rounded-[2px] space-y-3">
-            <div className="w-10 h-10 rounded-[2px] bg-[#0F172A] text-white flex items-center justify-center font-bold font-mono">4</div>
-            <h3 className="font-display font-extrabold text-lg text-[#0F172A]">60-Day Guarantee</h3>
-            <p className="text-xs text-[#64748B] leading-relaxed font-body">
-              Full front-door deployment in 60 days or one month of your monthly plan credited per month of delay.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. PRICING */}
-      <section id="pricing" className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-10 scroll-mt-24">
-        <div className="space-y-3">
-          <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-            HOSPITAL FRONT-DOOR PLATFORM PRICING
-          </div>
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#0F172A] tracking-tight">
-            One build fee. One monthly plan. A guaranteed launch.
-          </h2>
-          <p className="text-base text-[#64748B] max-w-3xl leading-relaxed font-body">
-            Hospital platform deployment includes turnkey white-labelled patient programs, the Leakage Audit, Attribution Engine, and Command Center. All prices in USD, excluding applicable taxes. (For SDK, White Label and Custom Build pricing, <Link to="/pricing" className="text-[#2563EB] font-bold underline">see all pricing</Link>).
-          </p>
-        </div>
-
-        {/* FULL FRONT DOOR PRICING */}
-        <div className="space-y-4">
-          <div className="flex items-center gap-3">
-            <span className="px-3 py-1.5 bg-[#0F172A] text-white font-mono text-[11px] font-bold uppercase rounded-[2px]">
-              FULL PATIENT FRONT DOOR
-            </span>
-            <span className="text-xs text-[#64748B] font-body">All five programmes · one-time build + monthly plan</span>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-body">
-            <div className="p-8 bg-white border border-[#E2E8F0] rounded-[2px] space-y-4 flex flex-col justify-between">
-              <div className="space-y-3">
-                <div className="font-mono text-xs font-bold text-[#64748B] uppercase">COMMUNITY HOSPITALS</div>
-                <div className="space-y-1">
-                  <div className="font-display font-extrabold text-3xl text-[#0F172A]">$5,000 <span className="text-xs font-normal text-[#64748B]">one-time</span></div>
-                  <div className="font-mono text-xs font-semibold text-[#2563EB]">+ $999 / mo monthly plan</div>
-                </div>
-                <p className="text-xs text-[#64748B]">Under 100 beds. Single site, core programmes and the Front Desk Agent.</p>
-              </div>
-            </div>
-
-            <div className="p-8 bg-[#0F172A] text-white border border-[#1E293B] rounded-[2px] space-y-4 flex flex-col justify-between shadow-xl relative">
-              <div className="absolute -top-3 right-6 px-3 py-1 bg-amber-400 text-[#0F172A] font-mono text-[10px] font-bold uppercase rounded-[2px]">
-                MOST POPULAR
-              </div>
-              <div className="space-y-3">
-                <div className="font-mono text-xs font-bold text-amber-400 uppercase">REGIONAL CHAINS & MULTISPECIALTY</div>
-                <div className="space-y-1">
-                  <div className="font-display font-extrabold text-3xl text-white">$8,000 <span className="text-xs font-normal text-slate-300">one-time</span></div>
-                  <div className="font-mono text-xs font-semibold text-amber-400">+ $1,499 / mo monthly plan</div>
-                </div>
-                <p className="text-xs text-slate-300">100–300 beds. All five programmes, HIS integration, Attribution Engine and Command Center.</p>
-              </div>
-            </div>
-
-            <div className="p-8 bg-white border border-[#E2E8F0] rounded-[2px] space-y-4 flex flex-col justify-between">
-              <div className="space-y-3">
-                <div className="font-mono text-xs font-bold text-[#64748B] uppercase">ENTERPRISE CHAINS & GCC</div>
-                <div className="space-y-1">
-                  <div className="font-display font-extrabold text-3xl text-[#0F172A]">$12,000 <span className="text-xs font-normal text-[#64748B]">one-time</span></div>
-                  <div className="font-mono text-xs font-semibold text-[#2563EB]">+ $1,799 / mo monthly plan · multi-site</div>
-                </div>
-                <p className="text-xs text-[#64748B]">300+ beds, multi-hospital groups with custom workflows.</p>
-              </div>
-            </div>
-          </div>
-          {/* WHAT YOU PAY FOR */}
-          <div className="p-5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] font-body text-xs text-[#475569] leading-relaxed">
-            <span className="font-bold text-[#0F172A]">What you pay for:</span> the one-time fee covers HIS integration, branding, programme setup, clinical review and staff training. The monthly plan covers hosting, AI, the Attribution Engine, updates, support and a named success manager. The Leakage Audit before any contract is free.
-          </div>
-        </div>
-
-        {/* START WITH ONE PROGRAMME */}
-        <div className="space-y-4">
-          <div className="flex items-center gap-3">
-            <span className="px-3 py-1.5 bg-[#F8FAFC] text-[#0F172A] border border-[#E2E8F0] font-mono text-[11px] font-bold uppercase rounded-[2px]">
-              START WITH ONE PROGRAMME
-            </span>
-            <span className="text-xs text-[#64748B] font-body">Prove value on one revenue line first, then add the rest</span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 font-body">
-            <div className="p-6 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] flex items-center justify-between">
-              <div>
-                <div className="font-mono text-[10px] font-bold text-[#64748B] uppercase">FRONT DESK AGENT</div>
-                <div className="font-display font-extrabold text-xl text-[#0F172A] mt-1">$1,500 <span className="text-xs font-normal text-[#64748B]">+ $399 / mo</span></div>
-              </div>
-              <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-            </div>
-            <div className="p-6 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] flex items-center justify-between">
-              <div>
-                <div className="font-mono text-[10px] font-bold text-[#64748B] uppercase">PREVENTIVE PROGRAM ENGINE</div>
-                <div className="font-display font-extrabold text-xl text-[#0F172A] mt-1">$3,000 <span className="text-xs font-normal text-[#64748B]">+ $699 / mo</span></div>
-              </div>
-              <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-            </div>
-            <div className="p-6 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] flex items-center justify-between">
-              <div>
-                <div className="font-mono text-[10px] font-bold text-[#64748B] uppercase">DISCHARGE-TO-RECOVERY</div>
-                <div className="font-display font-extrabold text-xl text-[#0F172A] mt-1">$3,000 <span className="text-xs font-normal text-[#64748B]">+ $699 / mo</span></div>
-              </div>
-              <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-            </div>
-          </div>
-        </div>
-
-        {/* GULF PRICING */}
-        <div className="space-y-4">
-          <div className="flex items-center gap-3">
-            <span className="px-3 py-1.5 bg-[#F8FAFC] text-[#0F172A] border border-[#E2E8F0] font-mono text-[11px] font-bold uppercase rounded-[2px]">
-              GULF & UAE PRICING
-            </span>
-            <span className="text-xs text-[#64748B] font-body">Anchored to Gulf hospital procurement standards</span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 font-body">
-            <div className="p-6 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px]">
-              <div className="font-mono text-[10px] font-bold text-[#64748B] uppercase">GULF · STANDARD</div>
-              <div className="font-display font-extrabold text-xl text-[#0F172A] mt-1">AED 5,500 <span className="text-xs font-normal text-[#64748B]">/ mo</span></div>
-              <div className="text-[11px] text-[#64748B] mt-1">+ one-time build, quoted in AED</div>
-            </div>
-            <div className="p-6 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px]">
-              <div className="font-mono text-[10px] font-bold text-[#64748B] uppercase">GULF · MULTISPECIALTY</div>
-              <div className="font-display font-extrabold text-xl text-[#0F172A] mt-1">AED 12,000 <span className="text-xs font-normal text-[#64748B]">/ mo</span></div>
-              <div className="text-[11px] text-[#64748B] mt-1">+ one-time build, quoted in AED</div>
-            </div>
-            <div className="p-6 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px]">
-              <div className="font-mono text-[10px] font-bold text-[#64748B] uppercase">GULF · ENTERPRISE</div>
-              <div className="font-display font-extrabold text-xl text-[#0F172A] mt-1">AED 25,000+ <span className="text-xs font-normal text-[#64748B]">/ mo</span></div>
-              <div className="text-[11px] text-[#64748B] mt-1">+ one-time build, quoted in AED</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 6B. WHAT YOUR TEAM HAS TO DO */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-8">
-        <div className="p-8 sm:p-12 bg-white border border-[#E2E8F0] rounded-[2px] space-y-6">
-          <div className="space-y-2">
-            <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-              WHAT YOUR TEAM HAS TO DO
-            </div>
-            <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-[#0F172A]">
-              Minimal effort from your side, no new headcount
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="p-5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-2">
-              <div className="font-display font-bold text-sm text-[#0F172A]">Leakage Audit</div>
-              <div className="text-xs text-[#64748B] leading-relaxed font-body">One data export from your HIS team. No meetings required.</div>
-            </div>
-            <div className="p-5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-2">
-              <div className="font-display font-bold text-sm text-[#0F172A]">Pilot</div>
-              <div className="text-xs text-[#64748B] leading-relaxed font-body">One point of contact, roughly two hours a week.</div>
-            </div>
-            <div className="p-5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-2">
-              <div className="font-display font-bold text-sm text-[#0F172A]">Deployment</div>
-              <div className="text-xs text-[#64748B] leading-relaxed font-body">Your brand assets, one IT contact for the connector. We do the rest.</div>
-            </div>
-            <div className="p-5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-2">
-              <div className="font-display font-bold text-sm text-[#0F172A]">Ongoing</div>
-              <div className="text-xs text-[#64748B] leading-relaxed font-body">No new headcount. The Command Center is designed for staff you already have.</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 7. WHAT WE DO NOT SELL */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-8">
-        <div className="p-8 sm:p-12 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-6">
-          <div className="space-y-2">
-            <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-              OUR ARCHITECTURAL DISCIPLINE
-            </div>
-            <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-[#0F172A]">
-              What we do NOT sell: clear boundaries for hospital IT & clinical leads
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-[#64748B] leading-relaxed font-body">
-            <div className="p-5 bg-white border border-[#E2E8F0] rounded-[2px] space-y-2">
-              <div className="font-display font-bold text-sm text-[#0F172A]">We are NOT an HIS replacement</div>
-              <div>Forty HIS vendors fight over EMR and billing at collapsing prices. Nostavia sits on top: different budget, different buyer, different job. Our booking ships only where no digital front door exists.</div>
-            </div>
-
-            <div className="p-5 bg-white border border-[#E2E8F0] rounded-[2px] space-y-2">
-              <div className="font-display font-bold text-sm text-[#0F172A]">We are NOT an RPM device company</div>
-              <div>Partner devices produce the telemetry; Nostavia is strictly the software interpretation layer. Zero hardware liability, zero logistics.</div>
-            </div>
-
-            <div className="p-5 bg-white border border-[#E2E8F0] rounded-[2px] space-y-2">
-              <div className="font-display font-bold text-sm text-[#0F172A]">We are NOT autonomous diagnosis</div>
-              <div>Clinician-supervised decision support with advisory-bench validation, keeping deployments strictly outside high-risk device classification.</div>
-            </div>
-
-            <div className="p-5 bg-white border border-[#E2E8F0] rounded-[2px] space-y-2">
-              <div className="font-display font-bold text-sm text-[#0F172A]">No unmeasured clinical claims</div>
-              <div>Published peer-reviewed literature carries category claims. The Attribution Engine carries our hospital numbers, which is precisely why it exists.</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 8. ENTERPRISE ARCHITECTURE & DATA COMPLIANCE */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-8">
-        <div className="p-8 sm:p-10 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2px] space-y-6">
-          <div className="space-y-2">
-            <div className="eyebrow text-[#64748B] font-bold text-xs uppercase tracking-widest font-mono">
-              ENTERPRISE ARCHITECTURE & COMPLIANCE
-            </div>
-            <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-[#0F172A]">
-              Built for HIPAA, DPDP 2023, and ABDM Data Readiness
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-[#64748B] font-body">
-            <div className="p-5 bg-white border border-[#E2E8F0] rounded-[2px] space-y-2">
-              <div className="font-display font-bold text-sm text-[#0F172A] flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-amber-600" />
-                ABDM & ABHA Data Architecture
-              </div>
-              <div className="leading-relaxed">
-                <span className="font-mono text-[10px] font-bold uppercase text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
-                  ARCHITECTURE READY · CERTIFICATION NOT YET COMPLETED
-                </span>
-                <p className="mt-1">
-                  Engineered to FHIR R4 and ABDM M1–M3 data specifications. Records are structured to FHIR R4 so that ABDM linking is a configuration step, not a re-build, once our certification completes.
-                </p>
-              </div>
-            </div>
-
-            <div className="p-5 bg-white border border-[#E2E8F0] rounded-[2px] space-y-2">
-              <div className="font-display font-bold text-sm text-[#0F172A] flex items-center gap-2">
-                <Database className="w-4 h-4 text-blue-600" />
-                Zero-Friction HIS Integrations
-              </div>
-              <div className="leading-relaxed">
-                <span className="font-mono text-[10px] font-bold uppercase text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">PRODUCTION CONNECTOR</span>
-                <p className="mt-1">
-                  Plugs directly into your hospital's existing HIS or EMR via standard REST APIs, HL7, or FHIR feeds, reading appointment schedules and writing back clinical intake briefs with zero workflow disruption.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 8B. CREDIBILITY: WHO ELSE USES THIS */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-8">
-        <div className="p-8 sm:p-12 bg-[#0F172A] text-white rounded-[2px] border border-[#1E293B] shadow-xl space-y-6">
-          <div className="space-y-2">
-            <div className="font-mono text-xs text-cyan-400 font-bold uppercase tracking-widest">
-              WHERE WE STAND TODAY
-            </div>
-            <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-white">
-              Early. And we'll say so plainly.
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div className="p-5 bg-slate-900/60 border border-slate-800 rounded-[2px] space-y-2">
-              <div className="font-display font-bold text-sm text-white">Live in production</div>
-              <div className="text-xs text-slate-300 leading-relaxed font-body">Full stack running today. Our reference app is on both stores with 2,000+ users.</div>
-            </div>
-            <div className="p-5 bg-slate-900/60 border border-slate-800 rounded-[2px] space-y-2">
-              <div className="font-display font-bold text-sm text-white">A paying client</div>
-              <div className="text-xs text-slate-300 leading-relaxed font-body">Live360Degrees runs its smart-report engine on Nostavia. Available as a reference.</div>
-            </div>
-            <div className="p-5 bg-slate-900/60 border border-slate-800 rounded-[2px] space-y-2">
-              <div className="font-display font-bold text-sm text-white">Clinical governance</div>
-              <div className="text-xs text-slate-300 leading-relaxed font-body">Six-member advisory bench: GMC-registered physicians, a senior IISc scientist, UCL-trained clinical nutrition. Protocol outputs validated before they reach any partner.</div>
-            </div>
-            <div className="p-5 bg-slate-900/60 border border-slate-800 rounded-[2px] space-y-2">
-              <div className="font-display font-bold text-sm text-white">Programmes</div>
-              <div className="text-xs text-slate-300 leading-relaxed font-body">NVIDIA Inception · Google for Startups · Microsoft for Startups.</div>
-            </div>
-            <div className="p-5 bg-slate-900/60 border border-slate-800 rounded-[2px] space-y-2 sm:col-span-2">
-              <div className="font-display font-bold text-sm text-white">Hospitals: you'd be early</div>
-              <div className="text-xs text-slate-300 leading-relaxed font-body">We'll say so plainly, and the free audit, the credited pilot, and the deployment guarantee exist because of it.</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 9. HOSPITAL LEADERSHIP FAQ */}
-      <FaqSection
-        title="Hospital Leadership FAQ"
-        description="Everything you need to know about the Leakage Audit, Attribution Engine, deployment guarantees, and our engineering capabilities."
-        faqs={[
-          {
-            q: "What does the free Leakage Audit actually show us?",
-            a: "A rupee-valued report computed on your own price list: how many checkup customers never returned, how many discharged patients had no follow-up visit, how many chronic patients went dormant, with the revenue value of each bucket. Anonymized data only, processed under a signed data-handling agreement."
-          },
-          {
-            q: "What happens if the 90-day pilot doesn't move our numbers?",
-            a: "The pilot fee is credited in full against any future contract, or you simply walk. We control the variables enough to offer this with confidence."
-          },
-          {
-            q: "How does the Attribution Engine work?",
-            a: "Every re-test, follow-up OPD, and package renewal generated through Nostavia is tagged and priced in a dashboard your CFO owns. Platform-attributed revenue vs. platform cost, updated daily. ROI as a number on a screen, not a claim in a renewal deck."
-          },
-          {
-            q: "What is the 60-day deployment guarantee?",
-            a: "Full patient front-door deployment in 60 days or one month of your monthly plan credited per month of delay. We are fast, and we should be penalized when we aren't."
-          }
+    <div className="flex flex-col font-body text-hos-black bg-white overflow-x-clip">
+      {/* 1. Hero */}
+      <PageHero
+        eyebrow="Nostavia for hospitals and health systems"
+        title="Your HIS runs the hospital. Nostavia runs the relationship."
+        intro="We white-label patient programmes onto your existing checkup, discharge and chronic volume, under your brand, live in 60 days."
+        primary={{ to: '/demo', label: 'Request a free Leakage Audit' }}
+        secondary={{ to: '/solutions/hospitals', label: 'Explore Hospital Programmes' }}
+        photo={{ src: '/payers-bg.jpg', w: 1800, h: 1200, alt: 'A green medical cross sign on the front of a hospital building' }}
+        visual={<CohortRiskCard />}
+        points={[
+          'A free Leakage Audit on your own data, before any contract',
+          'Five programmes under your brand, on top of your existing HIS',
+          'Full deployment in 60 days, guaranteed in the contract',
         ]}
       />
 
-      {/* 10. FOOTER CTA BANNER */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full pt-4">
-        <div className="p-12 sm:p-16 lg:p-20 bg-[#0F172A] text-white rounded-[2px] border border-[#1E293B] shadow-2xl text-center flex flex-col items-center gap-8">
-          <h2 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-[54px] text-white max-w-4xl leading-[1.05] tracking-tight">
-            See your own leaked revenue before you pay a rupee
-          </h2>
-          <p className="text-base sm:text-lg text-slate-300 max-w-2xl font-body leading-relaxed">
-            Request a free Leakage Audit. Two weeks, your own data, your own numbers. Then decide.
-          </p>
-          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 pt-2">
-            <Link
-              to="/demo"
-              className="bg-white hover:bg-slate-100 text-[#0F172A] font-display text-xs font-bold uppercase tracking-wider px-9 py-4 rounded-[2px] shadow-md transition-all inline-flex items-center gap-2"
-            >
-              Request free Leakage Audit
-              <ArrowRight className="w-4 h-4 text-[#0F172A]" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* 2. The engagement in numbers */}
+      <Section bg="mist" labelledBy="hosp-numbers-heading">
+        {/* TODO(copy): numbers band heading */}
+        <SectionHead
+          id="hosp-numbers-heading"
+          eyebrow="How an engagement runs"
+          title="Your own numbers first. A guaranteed launch after."
+        />
+        <StatRow
+          items={[
+            { value: 2, label: 'Weeks to your Leakage Report, free and before any contract.' },
+            { value: 90, label: 'Day proof pilot, measured on one metric agreed up front.' },
+            { value: 60, label: 'Days to full front-door deployment, or plan fees credited.' },
+            { value: hospitalProgrammes.length, label: 'White-label programmes, all under your brand.' },
+          ]}
+        />
+      </Section>
 
+      {/* 3. The problem */}
+      <Section labelledBy="hosp-problem-heading">
+        {/* TODO(copy): problem section heading */}
+        <SectionHead
+          id="hosp-problem-heading"
+          eyebrow="Where hospital revenue leaks"
+          title="The visit ends. The relationship should not."
+          intro="How much repeat revenue did you leak last year? Most hospitals have never been able to answer that question. It leaks in the same few places."
+        />
+        <FeatureGrid
+          columns={2}
+          items={[
+            {
+              icon: Repeat,
+              title: 'Checkup customers who never return',
+              body: 'A health check sold as a one-off PDF gives the customer no reason to come back. Next year’s package is bought somewhere else.',
+            },
+            {
+              icon: HeartPulse,
+              title: 'Discharged patients with no follow-up',
+              body: 'The patient goes home with instructions. Without follow-through, the follow-up OPD visit happens at another facility, or not at all.',
+            },
+            {
+              icon: Activity,
+              title: 'Chronic patients who go dormant',
+              body: 'Diabetes and cardiac patients need years of care. When engagement stops, that lifetime value leaves with them.',
+            },
+            {
+              icon: PhoneOff,
+              title: 'Enquiries lost on the phone',
+              body: 'The front desk is where hospitals lose patients. A caller who is not told which doctor to see, or when, books elsewhere.',
+            },
+          ]}
+        />
+      </Section>
+
+      {/* 4. The free Leakage Audit */}
+      <SplitSection
+        id="hosp-audit-heading"
+        bg="navy"
+        eyebrow="The Leakage Audit: free, before any contract"
+        title="How much repeat revenue did you leak last year?"
+        intro="Share 12 to 24 months of anonymized historical data: checkup transactions, OPD visits and discharge records. Within two weeks we return a Leakage Report: how many checkup customers never returned, how many discharged patients had no follow-up, how many chronic patients went dormant, and the rupee value of each bucket, computed on your own price list."
+        bullets={[
+          <>
+            <strong className="text-white">Share anonymized data.</strong> CSV, Excel or even PDF exports. Our parser handles any HIS export format.
+          </>,
+          <>
+            <strong className="text-white">Receive your Leakage Report.</strong> A patient-level breakdown with the rupee value of each bucket, in two weeks.
+          </>,
+          <>
+            <strong className="text-white">Decide with your own numbers.</strong> No pitch deck. Your data, your price list, your leakage on a page.
+          </>,
+          'Anonymized data only, processed under a signed data-handling agreement and deleted after the audit.',
+        ]}
+        visual={<LeakageReportPreview />}
+        cta={{ to: '/demo', label: 'Request a free Leakage Audit' }}
+      />
+
+      {/* 5. The five programmes and the Human OS systems behind them */}
+      <div className="bg-white py-20 sm:py-28">
+        <HospitalProgrammesSection />
+      </div>
+
+      {/* 6. What each programme moves, plus Built-For-You */}
+      <Section bg="mist" labelledBy="hosp-revenue-heading">
+        {/* TODO(copy): revenue lines heading and intro */}
+        <SectionHead
+          id="hosp-revenue-heading"
+          eyebrow="What each programme moves"
+          title="Every programme is tied to a revenue line you already report"
+          intro="Run one programme or all five. Each one is aimed at a line your finance team already tracks, so you can judge it on your own numbers."
+          action={{ to: '/solutions/hospitals', label: 'See how each programme works' }}
+        />
+        <Reveal>
+          <ol className="rounded-[16px] border border-hos-hairline bg-white divide-y divide-hos-hairline overflow-hidden">
+            {hospitalProgrammes.map((p, i) => (
+              <li key={p.name} className="grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-6 p-5 sm:p-6 md:items-center">
+                <span className="md:col-span-1 font-mono text-xs font-bold tracking-widest text-hos-amber">{String(i + 1).padStart(2, '0')}</span>
+                <h3 className="md:col-span-4 font-display font-bold text-lg text-hos-black leading-snug">{p.name}</h3>
+                <p className="md:col-span-5 text-sm text-[#475569] leading-relaxed">
+                  <span className="font-semibold text-hos-black">Revenue it moves: </span>
+                  {revenueLine[p.name]}
+                </p>
+                <div className="md:col-span-2 md:text-right">
+                  <Link
+                    to={p.name === 'Front Desk Agent' ? '/solutions/front-desk' : '/solutions/hospitals'}
+                    className={`inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-hos-black hover:text-hos-amber ${focusRing}`}
+                  >
+                    Details
+                    <span className="sr-only"> about {p.name}</span>
+                    <ArrowRight aria-hidden="true" className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
+
+        <Reveal>
+          <Panel dark className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div className="lg:col-span-7 space-y-4">
+              <Eyebrow tone="dark">Engineering service</Eyebrow>
+              <h3 className="font-display font-semibold text-2xl sm:text-3xl tracking-tight leading-snug">Built-For-You: direct founder engineering</h3>
+              <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+                Our founding engineers build hospital-specific technology on top of the core engine: custom department triage flows, bariatric and cardiac rehab
+                surfaces, camp screening tools or custom HIS connectors. Scoped, priced per engagement, delivered in 2 to 4 weeks.
+              </p>
+            </div>
+            <div className="lg:col-span-5 rounded-[12px] bg-white/5 border border-white/10 p-5 sm:p-6 space-y-3">
+              <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-hos-yellow">Our promise</span>
+              <p className="font-display text-lg leading-snug text-white">
+                You will never file a ticket into a vendor queue. You talk directly to the founders who built the engine.
+              </p>
+              <Link to="/solutions/engineering" className={`${textLink} text-white`}>
+                Solutions Engineering
+                <ArrowRight aria-hidden="true" className="w-4 h-4" />
+              </Link>
+            </div>
+          </Panel>
+        </Reveal>
+      </Section>
+
+      {/* 7. Human OS: systems to start with */}
+      <div className="bg-white py-20 sm:py-28">
+        <SystemsToStartWith buyerId="hospitals" />
+      </div>
+
+      {/* 8. Case study */}
+      <SplitSection
+        id="hosp-case-heading"
+        bg="navy"
+        reverse
+        eyebrow="Deployment case study · Tertiary-care cardiology hospital"
+        title="An AI voice agent on a working hospital’s phone line"
+        intro="A conversational voice agent handling inbound patient calls end to end, against real hospital flow. Not a decision tree: it is built for the way patients actually talk. Client named on request, under NDA."
+        bullets={[
+          'Handles local-language code-switching mid-sentence.',
+          'Handles family members speaking on behalf of the patient.',
+          'Hands off to a human when a call leaves the routine envelope.',
+          'Contactless vitals from a short face scan also run in this hospital deployment.',
+        ]}
+        photo={{ src: '/photos/home-frontdesk-staff.jpg', w: 1600, h: 1067, alt: 'Hospital staff working at a front desk' }}
+        visual={<VoiceCallCard />}
+        cta={{ to: '/solutions/front-desk', label: 'See the AI Front Desk Agent' }}
+      />
+
+      {/* 9. Entry sequence */}
+      <Section labelledBy="hosp-entry-heading">
+        {/* TODO(copy): entry sequence heading */}
+        <SectionHead
+          id="hosp-entry-heading"
+          eyebrow="How every engagement begins"
+          title="Audit, then pilot, then platform. Each step earns the next."
+        />
+        <StepList
+          steps={[
+            {
+              title: 'Leakage Audit',
+              body: 'Free, two weeks, your own data. We show you what you are leaking before you pay anything.',
+            },
+            {
+              title: '90-Day Proof Pilot',
+              body: (
+                <>
+                  Smart Reports on the checkup counter and recall on one dormant cohort. One metric, agreed up front.{' '}
+                  <strong className="text-hos-black">If the metric does not move, the pilot fee is credited in full.</strong>
+                </>
+              ),
+            },
+            {
+              title: 'Platform Contract',
+              body: 'A fixed quote: a one-time build fee plus a monthly plan.',
+            },
+            {
+              title: '60-Day Guarantee',
+              body: 'Full front-door deployment in 60 days, or one month of your monthly plan credited per month of delay.',
+            },
+          ]}
+        />
+      </Section>
+
+      {/* 10. What your team has to do */}
+      <Section bg="mist" labelledBy="hosp-team-heading">
+        <SectionHead
+          id="hosp-team-heading"
+          eyebrow="What your team has to do"
+          title="Minimal effort from your side, no new headcount"
+        />
+        <FeatureGrid
+          columns={4}
+          items={[
+            { icon: FileSearch, title: 'Leakage Audit', body: 'One data export from your HIS team. No meetings required.' },
+            { icon: Users, title: 'Pilot', body: 'One point of contact, roughly two hours a week.' },
+            { icon: Wrench, title: 'Deployment', body: 'Your brand assets and one IT contact for the connector. We do the rest.' },
+            { icon: Clock, title: 'Ongoing', body: 'No new headcount. Everything is designed for staff you already have.' },
+          ]}
+        />
+      </Section>
+
+      {/* 11. Pricing */}
+      <Section id="pricing" labelledBy="hosp-pricing-heading" className="scroll-mt-24">
+        <SectionHead
+          id="hosp-pricing-heading"
+          eyebrow="Hospital front-door platform pricing"
+          title="One build fee. One monthly plan. A guaranteed launch."
+          intro="Hospital platform deployment includes turnkey white-labelled patient programmes and the free Leakage Audit. All prices in USD, excluding applicable taxes."
+          action={{ to: '/pricing', label: 'SDK, White Label and Custom Build pricing' }}
+        />
+
+        <div className="space-y-5">
+          <GroupLabel label="Full patient front door" note="All five programmes · one-time build + monthly plan" />
+          <ul className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {tiers.map((t, i) => (
+              <li key={t.name}>
+                <Reveal delay={i * 100} className="h-full">
+                  <div
+                    className={`h-full rounded-[16px] p-6 sm:p-8 flex flex-col gap-5 border ${
+                      t.featured ? 'bg-hos-navy border-hos-navy text-white shadow-[0_30px_70px_-40px_rgba(18,26,49,0.8)]' : 'bg-white border-hos-hairline'
+                    }`}
+                  >
+                    <span aria-hidden="true" className="h-[3px] w-10 bg-hos-yellow" />
+                    <h3 className={`font-mono text-xs font-bold uppercase tracking-widest ${t.featured ? 'text-hos-yellow' : 'text-hos-amber'}`}>{t.name}</h3>
+                    <div className="space-y-1.5">
+                      <p className={`font-display font-semibold text-4xl tracking-tight ${t.featured ? 'text-white' : 'text-hos-black'}`}>
+                        {t.oneTime} <span className={`text-sm font-normal ${t.featured ? 'text-slate-300' : 'text-[#475569]'}`}>one-time</span>
+                      </p>
+                      <p className={`text-sm font-semibold ${t.featured ? 'text-hos-yellow' : 'text-hos-amber'}`}>{t.monthly}</p>
+                    </div>
+                    <p className={`text-sm leading-relaxed ${t.featured ? 'text-slate-300' : 'text-[#475569]'}`}>{t.fit}</p>
+                  </div>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+          <Reveal>
+            <div className="rounded-[12px] bg-hos-mist border border-hos-hairline p-5 sm:p-6 text-sm text-[#334155] leading-relaxed">
+              <span className="font-semibold text-hos-black">What you pay for: </span>
+              the one-time fee covers HIS integration, branding, programme setup, clinical review and staff training. The monthly plan covers hosting, AI,
+              updates, support and a named success manager. The Leakage Audit before any contract is free.
+            </div>
+          </Reveal>
+        </div>
+
+        <div className="space-y-5">
+          <GroupLabel label="Start with one programme" note="Prove value on one revenue line first, then add the rest" />
+          <ul className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {singleProgrammes.map((s, i) => (
+              <li key={s.name}>
+                <Reveal delay={i * 100} className="h-full">
+                  <Link
+                    to={s.to}
+                    className={`group h-full flex items-end justify-between gap-4 rounded-[16px] border border-hos-hairline bg-white p-6 hover:border-hos-navy hover:-translate-y-0.5 transition-all duration-300 ${focusRing}`}
+                  >
+                    <span className="space-y-2">
+                      <span className="block font-mono text-[11px] font-bold uppercase tracking-widest text-hos-grey">{s.name}</span>
+                      <span className="block font-display font-semibold text-2xl text-hos-black tracking-tight">
+                        {s.oneTime} <span className="text-sm font-normal text-[#475569]">{s.monthly}</span>
+                      </span>
+                    </span>
+                    <ArrowRight aria-hidden="true" className="w-4 h-4 shrink-0 text-hos-grey group-hover:text-hos-black transition-colors" />
+                  </Link>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="space-y-5">
+          <GroupLabel label="Gulf & UAE pricing" note="Anchored to Gulf hospital procurement standards" />
+          <ul className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {gulfPlans.map((g, i) => (
+              <li key={g.name}>
+                <Reveal delay={i * 100} className="h-full">
+                  <div className="h-full rounded-[16px] border border-hos-hairline bg-hos-mist p-6 space-y-2">
+                    <h3 className="font-mono text-[11px] font-bold uppercase tracking-widest text-hos-grey">{g.name}</h3>
+                    <p className="font-display font-semibold text-2xl text-hos-black tracking-tight">
+                      {g.monthly} <span className="text-sm font-normal text-[#475569]">/ mo</span>
+                    </p>
+                    <p className="text-sm text-[#475569]">+ one-time build, quoted in AED</p>
+                  </div>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Section>
+
+      {/* 12. What we do not sell */}
+      <Section bg="mist" labelledBy="hosp-boundaries-heading">
+        <SectionHead
+          id="hosp-boundaries-heading"
+          eyebrow="Our architectural discipline"
+          title="What we do not sell: clear boundaries for hospital IT and clinical leads"
+        />
+        <FeatureGrid
+          columns={2}
+          items={[
+            {
+              icon: Server,
+              title: 'We are not an HIS replacement',
+              body: 'HIS vendors compete on EMR and billing. Nostavia sits on top: different budget, different buyer, different job. Our booking ships only where no digital front door exists.',
+            },
+            {
+              icon: Ban,
+              title: 'We are not a device company',
+              body: 'Partner devices produce the data. Nostavia is strictly the software interpretation layer: no hardware liability, no logistics.',
+            },
+            {
+              icon: Stethoscope,
+              title: 'We are not autonomous clinical decision-making',
+              body: 'Clinician-supervised decision support, reviewed by our clinical advisory bench. Not a medical device, and never a substitute for your doctors’ judgement.',
+            },
+            {
+              icon: FileText,
+              title: 'No unmeasured clinical claims',
+              body: 'Published peer-reviewed literature carries category claims. Your hospital’s numbers come from your own Leakage Audit and the pilot metric we agree with you up front.',
+            },
+          ]}
+        />
+      </Section>
+
+      {/* 13. Enterprise architecture and data */}
+      <Section labelledBy="hosp-architecture-heading">
+        <SectionHead
+          id="hosp-architecture-heading"
+          eyebrow="Enterprise architecture and data"
+          title="Built to sit on your HIS, aligned with DPDP and ready for ABDM"
+          intro="Nostavia reads from the systems you already run and writes back to your care team. Nothing in your HIS codebase changes."
+          action={{ to: '/security', label: 'Security and compliance' }}
+        />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <Reveal className="h-full">
+            <Panel className="h-full space-y-4">
+              <div className="flex items-center gap-3">
+                <span className="w-10 h-10 rounded-[10px] bg-hos-mist border border-hos-hairline flex items-center justify-center">
+                  <Database aria-hidden="true" className="w-5 h-5" />
+                </span>
+                <h3 className="font-display font-bold text-lg">HIS integration</h3>
+              </div>
+              <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-widest text-hos-amber">Production connector</span>
+              <p className="text-sm text-[#475569] leading-relaxed">
+                Plugs into your hospital’s existing HIS or EMR through standard REST APIs, HL7 or FHIR feeds, reading appointment schedules and writing back clinical
+                intake briefs without disrupting your workflow.
+              </p>
+            </Panel>
+          </Reveal>
+          <Reveal delay={100} className="h-full">
+            <Panel className="h-full space-y-4">
+              <div className="flex items-center gap-3">
+                <span className="w-10 h-10 rounded-[10px] bg-hos-mist border border-hos-hairline flex items-center justify-center">
+                  <Network aria-hidden="true" className="w-5 h-5" />
+                </span>
+                <h3 className="font-display font-bold text-lg">ABDM and ABHA data architecture</h3>
+              </div>
+              <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-widest text-hos-amber">Architecture ready · certification not yet completed</span>
+              <p className="text-sm text-[#475569] leading-relaxed">
+                Engineered to FHIR R4 and ABDM M1 to M3 data specifications. Records are structured to FHIR R4 so that ABDM linking is a configuration step, not a
+                rebuild, once our certification completes.
+              </p>
+            </Panel>
+          </Reveal>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+          <Reveal className="lg:col-span-5 h-full">
+            <Panel dark className="h-full space-y-5">
+              <h3 className="font-display font-bold text-lg text-white">{trustGroups.infrastructure.heading}</h3>
+              <ul className="space-y-4">
+                {infrastructure.map((item) => (
+                  <li key={item.id} className="border-t border-white/10 pt-4">
+                    <span className="block font-display font-semibold text-white">{item.name}</span>
+                    {item.descriptor && <span className="block text-sm text-slate-300 leading-relaxed mt-1">{item.descriptor}</span>}
+                  </li>
+                ))}
+              </ul>
+              <p className="text-xs text-slate-300 leading-relaxed">{trustGroups.infrastructure.caption}</p>
+            </Panel>
+          </Reveal>
+          <ul className="lg:col-span-7 grid grid-cols-1 gap-4">
+            {practices.map((item, i) => (
+              <li key={item.id}>
+                <Reveal delay={i * 90} className="h-full">
+                  <div className="h-full flex items-start gap-4 rounded-[16px] border border-hos-hairline bg-white p-5 sm:p-6">
+                    <span aria-hidden="true" className="mt-1 w-4 h-[3px] shrink-0 bg-hos-yellow" />
+                    <div>
+                      <h3 className="font-display font-bold text-base text-hos-black">{item.name}</h3>
+                      <p className="text-sm text-[#475569] leading-relaxed mt-1">{item.descriptor}</p>
+                    </div>
+                  </div>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <Disclaimer />
+      </Section>
+
+      {/* 14. Proof */}
+      <Section bg="mist" labelledBy="hosp-proof-heading">
+        {/* TODO(copy): proof section heading and intro */}
+        <SectionHead
+          id="hosp-proof-heading"
+          eyebrow="Where we stand today"
+          title="Proof you can check before you sign"
+          intro="We would rather you judge us on your own numbers than on our word."
+        />
+        <FeatureGrid
+          columns={2}
+          items={[
+            {
+              icon: PhoneCall,
+              title: 'Running in a hospital today',
+              body: 'The AI voice agent handles real inbound patient calls at a tertiary-care cardiology hospital. Client named on request, under NDA.',
+            },
+            {
+              icon: FileText,
+              title: 'A lab partner you can call',
+              body: 'Live 360° Diagnostics runs Smart Reports on Nostavia under its own brand, and is available as a reference.',
+            },
+            {
+              icon: Stethoscope,
+              title: 'Clinical governance',
+              body: (
+                <>
+                  Protocol outputs are reviewed before release to any partner by our licensed clinical advisory bench, including GMC-registered physicians, a senior
+                  IISc scientist and UCL-trained clinical nutrition.{' '}
+                  <Link to="/company" className={`font-semibold text-hos-black underline underline-offset-4 decoration-hos-yellow ${focusRing}`}>
+                    Meet the bench
+                  </Link>
+                </>
+              ),
+            },
+            {
+              icon: ShieldCheck,
+              title: 'Why the guarantees exist',
+              body: 'The audit is free, the pilot fee is credited if the metric does not move, and the launch date is in the contract. Each one lets you test us before you commit.',
+            },
+          ]}
+        />
+      </Section>
+
+      {/* 15. FAQ */}
+      <FaqList
+        id="hosp-faq-heading"
+        bg="white"
+        title="Hospital leadership FAQ"
+        items={[
+          {
+            q: 'What does the free Leakage Audit actually show us?',
+            a: 'A rupee-valued report computed on your own price list: how many checkup customers never returned, how many discharged patients had no follow-up visit, how many chronic patients went dormant, with the revenue value of each bucket. Anonymized data only, processed under a signed data-handling agreement.',
+          },
+          {
+            q: 'What happens if the 90-day pilot does not move our numbers?',
+            a: 'The pilot fee is credited in full against any future contract, or you simply walk.',
+          },
+          {
+            q: 'What is the 60-day deployment guarantee?',
+            a: 'Full patient front-door deployment in 60 days, or one month of your monthly plan credited per month of delay. We are fast, and we should be penalised when we are not.',
+          },
+          {
+            q: 'How do we see what the programmes are doing?',
+            a: 'During the pilot, progress is measured against the single metric agreed with you up front. Leadership also gets the B2B Analytics Dashboard: cohort risk insights and executive reporting across your whole patient population.',
+          },
+          {
+            q: 'Do we have to replace our HIS?',
+            a: 'No. Nostavia sits on top of your existing HIS or EMR through standard REST APIs, HL7 or FHIR feeds, or a plain export from your HIS team. Nothing in your HIS codebase changes.',
+          },
+          {
+            q: 'What does it cost?',
+            a: 'The full patient front door starts at $5,000 one-time plus $999 a month for community hospitals under 100 beds. A single programme starts at $1,500 one-time plus $399 a month for the Front Desk Agent. All prices in USD, excluding applicable taxes, and the Leakage Audit is free.',
+          },
+          {
+            q: 'Is Nostavia a medical device?',
+            a: DISCLAIMER,
+          },
+        ]}
+      />
+
+      {/* 16. Closing CTA */}
+      <CtaBand
+        title="See your own leaked revenue"
+        highlight="before you pay a rupee."
+        body="Request a free Leakage Audit. Two weeks, your own data, your own numbers. Then decide."
+        primary={{ to: '/demo', label: 'Request a free Leakage Audit' }}
+        secondary={{ to: '/solutions/hospitals', label: 'Explore Hospital Programmes' }}
+      />
     </div>
   );
 };

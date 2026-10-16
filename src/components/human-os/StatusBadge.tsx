@@ -2,13 +2,17 @@ import React from 'react';
 import { ModuleStatus, statusDefinitions } from '../../content/human-os';
 
 const styles: Record<ModuleStatus, string> = {
-  live: 'bg-hos-cream text-hos-amber border border-hos-yellow',
+  live: '',
   next: 'bg-hos-card text-hos-grey border border-hos-hairline',
   vision: 'bg-white text-hos-grey border border-dashed border-[#78716C]',
 };
 
-/** Always renders the status word; colour is never the only signal. */
+/**
+ * Tags modules that are not live yet (Next, Vision), always with the status word.
+ * Live modules carry no tag: the owner wants anything untagged to read as available today.
+ */
 export const StatusBadge: React.FC<{ status: ModuleStatus; className?: string }> = ({ status, className = '' }) => {
+  if (status === 'live') return null;
   const label = statusDefinitions.find((d) => d.status === status)!.label;
   return (
     <span

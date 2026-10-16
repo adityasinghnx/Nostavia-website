@@ -120,8 +120,11 @@ export const HumanOsPage: React.FC = () => {
       {/* Status legend */}
       <section aria-labelledby="status-heading" className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-8">
         <SectionHeader id="status-heading" eyebrowText="Status legend" title="What each status means" />
-        <dl className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {statusDefinitions.map((d) => (
+        <p className="text-base text-[#475569] leading-relaxed max-w-2xl">
+          Modules without a tag are live: shipped and switchable from the Partner Portal today.
+        </p>
+        <dl className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {statusDefinitions.filter((d) => d.status !== 'live').map((d) => (
             <div key={d.status} className="flex flex-col gap-3 rounded-[10px] border border-hos-hairline bg-white p-5 sm:p-6">
               <dt>
                 <StatusBadge status={d.status} />

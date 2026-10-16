@@ -3,14 +3,18 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { trustPick } from '../../content/trust.config';
 import { InfrastructureGroup, PracticeChips, ProgramsGroup } from '../trust/TrustElements';
+import { Container, Eyebrow } from '../home/shared';
+import { Reveal } from '../home/motion';
 
 /** Homepage trust strip. All logos and chips come from trust.config. */
 export const TrustStripSection: React.FC = () => (
-  <section aria-labelledby="trust-strip-heading" className="w-full font-body text-[#0F172A] bg-white">
-    <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
-      <div className="border border-[#E2E8F0] rounded-[2px] p-6 sm:p-10 lg:p-12 space-y-10">
-        <div className="space-y-3 max-w-3xl">
-          <h2 id="trust-strip-heading" className="font-display font-extrabold text-3xl sm:text-4xl text-[#0F172A] tracking-tight leading-[1.08]">
+  <section aria-labelledby="trust-strip-heading" className="w-full font-body text-hos-black bg-white py-20 sm:py-28">
+    <Container>
+      <Reveal>
+      <div className="rounded-[16px] bg-white border border-hos-hairline p-6 sm:p-10 lg:p-12 space-y-10 shadow-[0_30px_80px_-40px_rgba(18,26,49,0.25)]">
+        <div className="space-y-4 max-w-3xl">
+          <Eyebrow>Security and compliance</Eyebrow>
+          <h2 id="trust-strip-heading" className="font-display font-semibold text-3xl sm:text-5xl text-hos-black tracking-tight leading-[1.08]">
             Built for health data from day one
           </h2>
           <p className="text-base sm:text-lg text-[#475569] leading-relaxed">
@@ -27,13 +31,14 @@ export const TrustStripSection: React.FC = () => (
 
         <Link
           to="/security"
-          className="inline-flex items-center gap-2 font-display text-sm font-bold text-[#0F172A] underline underline-offset-4 decoration-[#CBD5E1] hover:decoration-[#0F172A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F172A] focus-visible:ring-offset-2"
+          className="inline-flex items-center gap-2 font-display text-sm font-bold text-hos-black underline underline-offset-4 decoration-hos-yellow decoration-2 hover:decoration-hos-amber focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hos-amber focus-visible:ring-offset-2"
         >
           Security and compliance
           <ArrowRight aria-hidden="true" className="w-4 h-4" />
         </Link>
       </div>
-    </div>
+      </Reveal>
+    </Container>
   </section>
 );
 

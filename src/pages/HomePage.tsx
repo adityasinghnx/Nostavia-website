@@ -1,23 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
 
 import { LogoTrustBar } from '../components/LogoTrustBar';
-import { WorkflowAutonomousAgentsSection } from '../components/sections/WorkflowAutonomousAgentsSection';
+import { WhereWeWorkSection } from '../components/home/WhereWeWorkSection';
+import { StatsBand } from '../components/home/StatsBand';
+import { ProductsSection } from '../components/home/ProductsSection';
+import { TeamsSection } from '../components/home/TeamsSection';
 import { HumanOsHomeSection } from '../components/sections/HumanOsHomeSection';
-import { PlatformLayerThreeCardsSection } from '../components/sections/PlatformLayerThreeCardsSection';
-import { ProductizedServicesRowsSection } from '../components/sections/ProductizedServicesRowsSection';
-import { RealOutcomesCaseStudySection } from '../components/sections/RealOutcomesCaseStudySection';
-import { SecurityComplianceBandSection } from '../components/sections/SecurityComplianceBandSection';
-import { ProofSection } from '../components/sections/ProofSection';
+import { HowItWorksSection } from '../components/home/HowItWorksSection';
+import { PortalSection } from '../components/home/PortalSection';
+import { IntegrationsSection } from '../components/home/IntegrationsSection';
+import { CustomersSection } from '../components/home/CustomersSection';
+import { ClinicalBenchSection } from '../components/home/ClinicalBenchSection';
 import { TrustStripSection } from '../components/sections/TrustStripSection';
-import { MarketRealitySection } from '../components/sections/MarketRealitySection';
-import { StackPricingCalculatorSection } from '../components/sections/StackPricingCalculatorSection';
+import { HomeFaqSection } from '../components/home/HomeFaqSection';
+import { ResourcesSection } from '../components/home/ResourcesSection';
+import { ClosingCtaSection } from '../components/home/ClosingCtaSection';
 
 export const HomePage: React.FC<{ onOpenDemo?: () => void }> = () => {
   return (
-    <div className="flex flex-col gap-20 sm:gap-24 pb-12 font-body text-[#0F172A] overflow-x-clip bg-white">
-      
+    <div className="flex flex-col font-body text-[#0F172A] overflow-x-clip bg-white">
+      <h1 className="sr-only">Nostavia Health: enabling autonomous intelligence for healthcare</h1>
+
       {/* ========================================================================= */}
       {/* 1. HERO SECTION & LOGO TRUST BAR */}
       {/* ========================================================================= */}
@@ -144,90 +148,22 @@ export const HomePage: React.FC<{ onOpenDemo?: () => void }> = () => {
       </div>
 
       {/* ========================================================================= */}
-      {/* 2.5. MARKET REALITY (BIG STAT + 3 PROBLEM CARDS) */}
+      {/* BELOW THE LOGOS: CUSTOMER-FOCUSED, STRUCTURED AFTER INNOVACCER           */}
       {/* ========================================================================= */}
-      <MarketRealitySection />
-
-      {/* ========================================================================= */}
-      {/* 3. SECTOR SELECTOR (WORKFLOW AUTONOMOUS AGENTS SECTION) */}
-      {/* ========================================================================= */}
-      <WorkflowAutonomousAgentsSection />
-
-      {/* ========================================================================= */}
-      {/* 4. THE PLATFORM (PLATFORM LAYER THREE CARDS SECTION) */}
-      {/* ========================================================================= */}
-      <PlatformLayerThreeCardsSection />
-
-      {/* ========================================================================= */}
-      {/* 5. HUMAN OS (SEVEN SYSTEMS IN TWO RINGS, REPLACES FLAT MODULE LIST) */}
-      {/* ========================================================================= */}
-      <HumanOsHomeSection />
-
-      {/* ========================================================================= */}
-      {/* 5.5. BUILD & PRICE YOUR STACK (MERGED MODULE CONFIGURATOR + PRICING) */}
-      {/* ========================================================================= */}
-      <StackPricingCalculatorSection />
-
-      {/* ========================================================================= */}
-      {/* 6. SPECIALISED SERVICES (PRODUCTIZED SERVICES ROWS SECTION) */}
-      {/* ========================================================================= */}
-      <ProductizedServicesRowsSection />
-
-      {/* ========================================================================= */}
-      {/* 6.5. REAL OUTCOMES (CASE STUDY CAROUSEL SECTION) */}
-      {/* ========================================================================= */}
-      <RealOutcomesCaseStudySection />
-
-      {/* ========================================================================= */}
-      {/* 7. SECURITY & COMPLIANCE (SECURITY COMPLIANCE BAND SECTION) */}
-      {/* ========================================================================= */}
-      <SecurityComplianceBandSection />
-
-      {/* ========================================================================= */}
-      {/* 8. PROOF (PROOF SECTION) */}
-      {/* ========================================================================= */}
-      <ProofSection />
-
-      {/* ========================================================================= */}
-      {/* 9. TRUST STRIP (INFRASTRUCTURE, PROGRAMS, PRACTICES FROM trust.config) */}
-      {/* ========================================================================= */}
-      <TrustStripSection />
-
-
-
-      {/* ========================================================================= */}
-      {/* 10. CLOSE (FINAL ENTERPRISE CTA SECTION) */}
-      {/* ========================================================================= */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full pt-4">
-        <div className="p-12 sm:p-16 lg:p-20 bg-[#0F172A] text-white rounded-[2px] border border-[#1E293B] shadow-2xl text-center flex flex-col items-center gap-8">
-          
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-[54px] text-white max-w-4xl leading-[1.05] tracking-tight">
-            Launch under your brand. Your users never see us.
-          </h2>
-
-          <p className="text-base sm:text-lg text-slate-300 font-body max-w-2xl leading-relaxed">
-            Thirty minutes on live product, not slides. Tell us what you want built. We'll scope a Custom Build, or show you the White Label product or SDK that already fits.
-          </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-            <Link
-              to="/demo"
-              className="bg-white hover:bg-slate-100 text-[#0F172A] font-display text-xs font-bold uppercase tracking-wider px-9 py-4 rounded-[2px] shadow-md transition-all inline-flex items-center gap-2"
-            >
-              Book a demo
-              <ArrowRight className="w-4 h-4 text-[#0F172A]" />
-            </Link>
-            <Link
-              to="/pricing"
-              className="bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 font-display text-xs font-bold uppercase tracking-wider px-9 py-4 rounded-[2px] transition-all"
-            >
-              See pricing
-            </Link>
-          </div>
-
-        </div>
-      </section>
-
+      <WhereWeWorkSection />    {/* who we serve, tabbed by business */}
+      <StatsBand />             {/* Nostavia today, in numbers */}
+      <ProductsSection />       {/* the products customers switch on */}
+      <TeamsSection />          {/* what each team gets */}
+      <HumanOsHomeSection />    {/* the platform they run on */}
+      <HowItWorksSection />     {/* from first call to live */}
+      <PortalSection />         {/* the Partner Portal, animated */}
+      <IntegrationsSection />   {/* data in, delivered as */}
+      <CustomersSection />      {/* live deployments */}
+      <ClinicalBenchSection />  {/* clinical governance */}
+      <TrustStripSection />     {/* security and compliance */}
+      <HomeFaqSection />        {/* buyer questions */}
+      <ResourcesSection />      {/* go deeper */}
+      <ClosingCtaSection />
     </div>
   );
 };

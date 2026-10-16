@@ -42,6 +42,7 @@ export default {
           hairline: '#E6E3DA',
           card: '#F6F5F1',
           cream: '#FDF6E1',
+          mist: '#F4F5F7',
           grey: '#57534E',
         },
         outlier: '#D97706',
