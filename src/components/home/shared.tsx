@@ -16,7 +16,6 @@ type Tone = 'light' | 'dark';
 /** Small label above a heading. `tone` is kept for API compatibility; the theme is always dark. */
 export const Eyebrow: React.FC<{ children: React.ReactNode; tone?: Tone }> = ({ children }) => (
   <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-hos-yellow">
-    <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-hos-yellow shadow-[0_0_12px_2px_rgba(245,217,123,0.6)]" />
     {children}
   </div>
 );
