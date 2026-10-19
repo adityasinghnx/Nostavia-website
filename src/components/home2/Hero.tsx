@@ -26,8 +26,8 @@ export const Hero: React.FC = () => (
 
         <Reveal delay={80}>
           {/* TODO(copy): subhead below is new */}
-          <h1 className="mt-8 font-display font-semibold text-[46px] leading-[1.14] sm:text-7xl sm:leading-[1.12] lg:text-[92px] lg:leading-[1.12] tracking-[-0.04em] max-w-5xl pb-2">
-            <span className="block sm:whitespace-nowrap">
+          <h1 className="mt-8 font-display font-semibold text-[46px] leading-[1.14] sm:text-[56px] sm:leading-[1.12] lg:text-7xl xl:text-[92px] tracking-[-0.04em] max-w-6xl pb-2">
+            <span className="block md:whitespace-nowrap">
               <span className="dk-text-gradient">Enabling </span>
               <span className="dk-text-sun">super intelligence</span>
             </span>
