@@ -8,6 +8,8 @@ export const clientLogos = [
   { name: 'Live 360', src: '/client_logos/snksn-removebg-preview 1.png', className: 'h-9 sm:h-10' },
   { name: 'Atmaram Healthcare', src: '/client_logos/atmaram_healthcare.png', className: 'h-8 sm:h-9' },
   { name: 'Aging Tachometer', src: '/client_logos/aging_tachometer.png', className: 'h-[22px] sm:h-[26px]' },
+  // TODO(name): confirm the client's name for this mark's alt text
+  { name: 'Client logo', src: '/client_logos/z_dna_mark.png', className: 'h-9 sm:h-10' },
   { name: 'ETLAWM', src: '/client_logos/Screenshot_2025-11-06_at_6.15.42_PM-removebg-preview 1.png', className: 'h-6 sm:h-7' },
 ];
 
