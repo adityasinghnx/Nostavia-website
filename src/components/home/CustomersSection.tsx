@@ -6,7 +6,7 @@ import { cn } from '../../lib/cn';
 import { Label, TextLink } from '../ui/primitives';
 import { EASE, Reveal, SplitHeading } from '../ui/motion';
 import { BeeAvatar } from '../hive/HiveConsole';
-import { BottomBlur } from '../ui/effects';
+import { PhotoBlur } from '../ui/effects';
 
 export const PanelBody: React.FC<{ c: CustomerType }> = ({ c }) => (
   <>
@@ -65,8 +65,8 @@ export const CustomersSection: React.FC = () => {
                 className={cn('group relative overflow-hidden rounded-[20px] text-left', open ? 'flex-[4]' : 'flex-[1]')}
               >
                 <img src={c.photo} alt="" loading="lazy" decoding="async" className={cn('photo absolute inset-0 h-full w-full object-cover', open ? 'scale-100' : 'scale-110')} />
+                <PhotoBlur src={c.photo} className={open ? 'scale-100' : 'scale-110'} />
                 <div className={cn('absolute inset-0 transition-colors duration-700', open ? 'bg-black/10' : 'bg-black/45')} />
-                <BottomBlur className={cn('transition-opacity duration-700', open ? 'h-[62%] opacity-100' : 'h-[40%] opacity-60')} />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 via-45% to-black/5" />
                 <span className="absolute left-5 top-5 font-mono text-[12px] text-honey">{String(i + 1).padStart(2, '0')}</span>
                 {!open && (
@@ -99,7 +99,7 @@ export const CustomersSection: React.FC = () => {
           {customerTypes.map((c, i) => (
             <li key={c.id} className="snap-start shrink-0 w-[84vw] sm:w-[60vw] relative overflow-hidden rounded-[18px] min-h-[580px] flex flex-col justify-end">
               <img src={c.photo} alt="" loading="lazy" decoding="async" className="photo absolute inset-0 h-full w-full object-cover" />
-              <BottomBlur className="h-[70%]" />
+              <PhotoBlur src={c.photo} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 via-50% to-black/10" />
               <span className="absolute left-5 top-5 font-mono text-[12px] text-honey">{String(i + 1).padStart(2, '0')}</span>
               <div className="relative p-6">

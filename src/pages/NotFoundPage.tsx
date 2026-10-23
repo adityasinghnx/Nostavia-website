@@ -10,7 +10,7 @@ const NotFoundPage: React.FC = () => {
 
   return (
     <section data-theme="ink" aria-labelledby="page-title" className="relative min-h-[100svh] overflow-hidden flex items-end">
-      <HiveSwarm anchor={{ x: 0.72, y: 0.42 }} mobileAnchor={{ x: 0.5, y: 0.3 }} scale={0.12} jobs={false} />
+      <HiveSwarm anchor={{ x: 0.72, y: 0.42 }} mobileAnchor={{ x: 0.5, y: 0.3 }} scale={0.12} />
       <div className="wrap relative pb-20 pt-[45vh] md:pt-40">
         <p className="t-label text-accent">404</p>
         <SplitHeading id="page-title" as="h1" trigger="mount" className="t-display mt-6 max-w-[10ch]" text="This cell is *empty.*" />

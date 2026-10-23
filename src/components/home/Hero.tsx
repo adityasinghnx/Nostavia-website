@@ -27,7 +27,7 @@ export const Hero: React.FC = () => {
       <div aria-hidden="true" className="absolute inset-0 grid-lines opacity-60 mask-fade-b" />
 
       <motion.div style={reduce ? undefined : { y: swarmY, opacity: swarmOpacity }} className="absolute inset-0">
-        <HiveSwarm anchor={{ x: 0.78, y: 0.36 }} mobileAnchor={{ x: 0.5, y: 0.24 }} scale={0.12} avoidLeft={0.5} />
+        <HiveSwarm anchor={{ x: 0.78, y: 0.36 }} mobileAnchor={{ x: 0.5, y: 0.24 }} scale={0.12} />
       </motion.div>
 
       <motion.div style={reduce ? undefined : { y: copyY }} className="wrap relative flex-1 flex flex-col justify-end pt-[44vh] md:pt-40 pb-12 md:pb-16">

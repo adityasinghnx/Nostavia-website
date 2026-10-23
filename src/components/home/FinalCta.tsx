@@ -14,7 +14,7 @@ export const FinalCta: React.FC<{ title?: string; body?: string }> = ({
   <section data-theme="ink" aria-labelledby="cta-title" className="relative overflow-hidden border-t border-fg/[0.07]">
     <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(50%_60%_at_50%_100%,rgba(242,210,122,0.12),transparent_70%)]" />
     <div className="absolute inset-0 opacity-70">
-      <HiveSwarm anchor={{ x: 0.5, y: 0.98 }} mobileAnchor={{ x: 0.5, y: 0.98 }} scale={0.2} jobs={false} avoidLeft={0} />
+      <HiveSwarm anchor={{ x: 0.5, y: 0.98 }} mobileAnchor={{ x: 0.5, y: 0.98 }} scale={0.2} />
     </div>
     <div className="wrap relative py-[clamp(7rem,14vw,13rem)] flex flex-col items-center text-center">
       <SplitHeading id="cta-title" className="t-display max-w-[14ch]" text={title} />

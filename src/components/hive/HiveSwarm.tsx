@@ -3,8 +3,7 @@ import { cn } from '../../lib/cn';
 
 /* ─────────────────────────────────────────────────────────────────────────────
  * The Hive, drawn in light: seven honeycomb cells traced by points that breathe
- * slowly and part around the pointer. Now and then a small job label fades in
- * beside an outer cell. Plain canvas 2D. Pauses off-screen and in background
+ * slowly and part around the pointer. Plain canvas 2D. Pauses off-screen and in background
  * tabs; one still frame for reduced motion.
  * ──────────────────────────────────────────────────────────────────────────── */
 
@@ -32,8 +31,6 @@ interface Mote {
   r: number;
   a: number;
 }
-
-const JOBS = ['Report delivered', 'Call answered', 'Re-test booked', 'Brief ready', 'Portal updated', 'Question answered', 'Pickup scheduled'];
 
 const SQ3 = Math.sqrt(3);
 
@@ -104,10 +101,6 @@ export interface HiveSwarmProps {
   mobileAnchor?: { x: number; y: number };
   /** Cell radius as a fraction of the shorter canvas side. */
   scale?: number;
-  /** Small "Report delivered" labels beside the hive, wide screens only. */
-  jobs?: boolean;
-  /** Keep labels out of the left part of the canvas (where the headline sits). */
-  avoidLeft?: number;
 }
 
 export const HiveSwarm: React.FC<HiveSwarmProps> = ({
@@ -115,11 +108,8 @@ export const HiveSwarm: React.FC<HiveSwarmProps> = ({
   anchor = { x: 0.7, y: 0.5 },
   mobileAnchor = { x: 0.5, y: 0.34 },
   scale = 0.15,
-  jobs = true,
-  avoidLeft = 0.42,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const chipLayer = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current!;
@@ -136,7 +126,6 @@ export const HiveSwarm: React.FC<HiveSwarmProps> = ({
     let visible = true;
     let raf = 0;
     let last = performance.now();
-    let labelClock = 0;
     let time = 0;
     const pointer = { x: -9999, y: -9999, px: 0, py: 0, tx: 0, ty: 0 };
 
@@ -188,52 +177,12 @@ export const HiveSwarm: React.FC<HiveSwarmProps> = ({
       });
     };
 
-    /* Job labels: a small pool of DOM chips that fade in beside the hive. */
-    const chips: { el: HTMLDivElement; busy: boolean; x: number; y: number }[] = [];
-    if (jobs && chipLayer.current) {
-      for (let i = 0; i < 2; i++) {
-        const el = document.createElement('div');
-        el.className =
-          'absolute left-0 top-0 flex items-center gap-1.5 whitespace-nowrap rounded-full border border-[rgba(242,237,227,0.12)] bg-[rgba(16,14,12,0.78)] px-2.5 py-1 font-mono text-[10.5px] tracking-[0.02em] text-[rgba(242,237,227,0.82)] opacity-0 transition-[opacity,transform] duration-[900ms] ease-out backdrop-blur';
-        el.innerHTML = '<span style="width:5px;height:5px;border-radius:9px;background:#F2D27A;display:inline-block"></span><span></span>';
-        chipLayer.current.appendChild(el);
-        chips.push({ el, busy: false, x: 0, y: 0 });
-      }
-    }
-    let jobIndex = 0;
-    const showJob = (x: number, y: number) => {
-      // Wide screens only, and only in the clear space above the headline
-      if (!jobs || w < 1100 || y > h * 0.42 || x < w * avoidLeft) return;
-      if (chips.some((c) => c.busy && Math.hypot(c.x - x, c.y - y) < 220)) return;
-      const chip = chips.find((c) => !c.busy);
-      if (!chip) return;
-      chip.busy = true;
-      chip.x = x;
-      chip.y = y;
-      (chip.el.lastChild as HTMLSpanElement).textContent = JOBS[jobIndex++ % JOBS.length];
-      chip.el.style.transform = `translate(${x}px, ${y - 14}px) translate(-50%, -100%)`;
-      requestAnimationFrame(() => {
-        chip.el.style.opacity = '1';
-        chip.el.style.transform = `translate(${x}px, ${y - 20}px) translate(-50%, -100%)`;
-      });
-      window.setTimeout(() => {
-        chip.el.style.opacity = '0';
-        window.setTimeout(() => (chip.busy = false), 900);
-      }, 3200);
-    };
-
     const step = (dt: number) => {
       time += dt;
       pointer.px += (pointer.tx - pointer.px) * Math.min(1, dt * 2);
       pointer.py += (pointer.ty - pointer.py) * Math.min(1, dt * 2);
       place();
 
-      labelClock += dt;
-      if (labelClock > 1.4) {
-        labelClock = 0;
-        const d = dots[Math.floor(Math.random() * dots.length)];
-        if (Math.hypot(d.nx, d.ny) > 1.9) showJob(d.x, d.y);
-      }
 
       for (const d of dots) {
         d.vx += (homeX(d) - d.x) * 7 * dt;
@@ -350,14 +299,12 @@ export const HiveSwarm: React.FC<HiveSwarmProps> = ({
       document.removeEventListener('visibilitychange', onVisibility);
       window.removeEventListener('pointermove', onPointer);
       document.removeEventListener('pointerleave', onLeave);
-      chips.forEach((c) => c.el.remove());
     };
-  }, [anchor.x, anchor.y, mobileAnchor.x, mobileAnchor.y, scale, jobs, avoidLeft]);
+  }, [anchor.x, anchor.y, mobileAnchor.x, mobileAnchor.y, scale]);
 
   return (
     <div className={cn('absolute inset-0', className)} aria-hidden="true">
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
-      <div ref={chipLayer} className="absolute inset-0 pointer-events-none" />
     </div>
   );
 };
