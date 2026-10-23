@@ -54,7 +54,7 @@ No status labels or dates, EHR or LIS, module counts, prices, customer names or 
 
 ## 8. Open items
 
-1. Hero headline and one-liner (drafts in `src/content/site.ts`).
+1. One-liner (draft in `src/content/site.ts`). The hero headline, "Health AI, ready-made or built for you.", was approved on 24 Oct 2026.
 2. Studio name (one constant).
 3. Which Human OS modules can be shown, and their groups (Anushka).
 4. Demo reply time ("within one working day" is still [TO CONFIRM]).

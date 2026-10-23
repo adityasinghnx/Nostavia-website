@@ -20,7 +20,7 @@ export const STUDIO_PATH = '/studio';
 export const ONE_LINER =
   'Nostavia makes health AI for labs, clinics, hospitals and health apps: ready-made modules in Human OS, products built for you by Studio, and Hive, where AI Bees run the routine work while your people stay in charge.';
 
-/** Hero headline, pending a final pick. */
+/** Hero headline, approved by Aditya on 24 Oct 2026. */
 export const HERO_HEADLINE = 'Health AI, ready-made or *built for you.*';
 
 export const HERO_SUB =
