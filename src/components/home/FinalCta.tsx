@@ -1,6 +1,6 @@
 import React from 'react';
 import { CALENDAR_URL, CONTACT_EMAIL } from '../../content/site';
-import { CLOSING } from '../../content/superintelligence';
+import { CLOSING } from '../../content/offer';
 import { HiveSwarm } from '../hive/HiveSwarm';
 import { Button } from '../ui/primitives';
 import { Reveal, SplitHeading } from '../ui/motion';

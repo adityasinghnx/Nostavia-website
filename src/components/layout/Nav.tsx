@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
-import { nav, CONTACT_EMAIL } from '../../content/site';
-import { parts } from '../../content/superintelligence';
+import { nav, CONTACT_EMAIL, FLAGS } from '../../content/site';
+import { families, HUMAN_OS_PATH } from '../../content/human-os';
 import { useLenis } from '../../lib/smooth-scroll';
 import { cn } from '../../lib/cn';
 import { Arrow, Button } from '../ui/primitives';
@@ -18,40 +18,45 @@ const toneUnder = (bar: HTMLElement | null): Tone => {
   return host?.getAttribute('data-theme') === 'paper' ? 'paper' : 'ink';
 };
 
-const SuperMenu: React.FC<{ onNavigate: () => void }> = ({ onNavigate }) => (
+const HumanOsMenu: React.FC<{ onNavigate: () => void }> = ({ onNavigate }) => (
   <motion.div
     initial={{ opacity: 0, y: -8 }}
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -6, transition: { duration: 0.18 } }}
     transition={{ duration: 0.45, ease: EASE }}
     style={{ x: '-50%' }}
-    className="fixed left-1/2 top-[56px] pt-3 w-[min(880px,calc(100vw-2rem))]"
+    className="fixed left-1/2 top-[56px] pt-3 w-[min(920px,calc(100vw-2rem))]"
   >
-    <div data-theme="ink" className="rounded-2xl border border-fg/10 !bg-ink-900/95 backdrop-blur-xl shadow-[0_40px_80px_-30px_rgba(0,0,0,0.8)] p-2 grid grid-cols-[1.1fr_1fr_1fr_1fr] gap-2">
+    <div data-theme="ink" className="rounded-2xl border border-fg/10 !bg-ink-900/95 backdrop-blur-xl shadow-[0_40px_80px_-30px_rgba(0,0,0,0.8)] p-2 grid grid-cols-[1fr_2.4fr] gap-2">
       <Link
-        to="/superintelligence"
+        to={HUMAN_OS_PATH}
         onClick={onNavigate}
-        className="group relative overflow-hidden rounded-xl bg-[radial-gradient(120%_90%_at_0%_0%,rgba(242,210,122,0.16),transparent_60%)] border border-fg/[0.07] p-5 flex flex-col justify-between min-h-[210px]"
+        className="group relative overflow-hidden rounded-xl bg-[radial-gradient(120%_90%_at_0%_0%,rgba(242,210,122,0.16),transparent_60%)] border border-fg/[0.07] p-5 flex flex-col justify-between min-h-[250px]"
       >
         <div>
-          <p className="t-label text-accent">Nostavia</p>
-          <p className="mt-3 text-[22px] leading-tight tracking-[-0.02em]">Superintelligence</p>
-          <p className="mt-2 text-[13.5px] text-fg/55 leading-relaxed">One intelligence across your whole health business.</p>
+          <p className="t-label text-accent">Human OS</p>
+          <p className="mt-3 text-[22px] leading-tight tracking-[-0.02em]">
+            Ready-made <span className="em">health AI</span>
+          </p>
+          <p className="mt-2 text-[13.5px] text-fg/55 leading-relaxed">Modules for your customers and your care team. Switch one on without a new app release.</p>
         </div>
         <span className="inline-flex items-center gap-2 text-[13.5px] text-fg/80 group-hover:text-accent transition-colors">
-          How it fits together <Arrow className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+          Explore Human OS <Arrow className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
         </span>
       </Link>
-      {parts.map((p) => (
-        <Link key={p.id} to={p.to} onClick={onNavigate} className="group rounded-xl p-4 flex flex-col justify-between hover:bg-fg/[0.05] transition-colors">
-          <div>
-            <p className="t-label text-fg/45">{p.verb}</p>
-            <p className="mt-3 text-[17px] tracking-[-0.015em]">{p.name}</p>
-            <p className="mt-2 text-[13px] text-fg/50 leading-snug">{p.headline}</p>
-          </div>
-          <Arrow className="w-3.5 h-3.5 text-fg/30 group-hover:text-accent transition-colors" />
-        </Link>
-      ))}
+      <ul className="grid grid-cols-2 gap-1 p-2">
+        {families.map((f) => (
+          <li key={f.id}>
+            <Link to={`${HUMAN_OS_PATH}#${f.id}`} onClick={onNavigate} className="group flex h-full flex-col rounded-lg px-3 py-2.5 hover:bg-fg/[0.05] transition-colors">
+              <span className="flex items-baseline gap-2.5">
+                <span className="font-mono text-[10.5px] text-accent">{f.number}</span>
+                <span className="text-[14px] text-fg/90 group-hover:text-fg">{f.name}</span>
+              </span>
+              <span className="mt-1 pl-[1.6rem] text-[12.5px] text-fg/45 leading-snug">{FLAGS.SHOW_MODULE_NAMES ? f.modules.map((m) => m.name).join(' · ') : f.does}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   </motion.div>
 );
@@ -134,7 +139,7 @@ export const Nav: React.FC = () => {
           <nav aria-label="Main" className="hidden lg:block absolute left-1/2 -translate-x-1/2">
             <ul className="flex items-center" onMouseLeave={() => setHover(null)}>
               {nav.map((item) => {
-                const hasMenu = item.to === '/superintelligence';
+                const hasMenu = item.to === HUMAN_OS_PATH;
                 return (
                   <li
                     key={item.to}
@@ -156,7 +161,7 @@ export const Nav: React.FC = () => {
                         )
                       }
                     >
-                      {hasMenu && <HiveMark className="w-3.5 h-3.5 text-accent" />}
+                      {item.to === '/hive' && <HiveMark className="w-3.5 h-3.5 text-accent" />}
                       {item.label}
                       {location.pathname.startsWith(item.to) && (
                         <span aria-hidden="true" className="absolute left-1/2 -bottom-1 h-[3px] w-[3px] -translate-x-1/2 rounded-full bg-accent" />
@@ -165,7 +170,7 @@ export const Nav: React.FC = () => {
                     {hover === item.to && (
                       <motion.span layoutId="nav-hover" aria-hidden="true" transition={{ type: 'spring', stiffness: 420, damping: 36 }} className="absolute inset-0 rounded-full bg-fg/[0.07]" />
                     )}
-                    <AnimatePresence>{hasMenu && menu && <SuperMenu onNavigate={() => setMenu(false)} />}</AnimatePresence>
+                    <AnimatePresence>{hasMenu && menu && <HumanOsMenu onNavigate={() => setMenu(false)} />}</AnimatePresence>
                   </li>
                 );
               })}

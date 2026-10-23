@@ -68,7 +68,7 @@ const TypeSection: React.FC<{ c: CustomerType; i: number }> = ({ c, i }) => {
 const CustomersPage: React.FC = () => {
   useSeo({
     title: 'Customers: labs, clinics, health apps and hospitals | Nostavia',
-    description: 'What Nostavia Superintelligence helps diagnostic labs, clinics, wellness and health apps, and hospitals with.',
+    description: 'What Human OS, Studio and Hive help diagnostic labs, clinics, wellness and health apps, and hospitals with.',
     path: '/customers',
   });
 
@@ -77,7 +77,7 @@ const CustomersPage: React.FC = () => {
       <PageHero
         label="Customers"
         title="Built for the businesses that keep people healthy."
-        intro="Four kinds of health business, one intelligence. Here is what it helps each with, and the Bees that usually start the work."
+        intro="Four kinds of health business, the same products. Here is what we help each with, and the Bees that usually start the work in Hive."
         aside={
           <nav aria-label="Jump to" className="flex flex-col border-t border-fg/10">
             {customerTypes.map((c, i) => (

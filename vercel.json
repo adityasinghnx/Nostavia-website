@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/superintelligence",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
       "source": "/modules",
       "destination": "/human-os",
       "statusCode": 301
@@ -57,7 +62,7 @@
     },
     {
       "source": "/platform",
-      "destination": "/superintelligence",
+      "destination": "/",
       "statusCode": 301
     },
     {
@@ -67,17 +72,17 @@
     },
     {
       "source": "/company",
-      "destination": "/superintelligence",
+      "destination": "/",
       "statusCode": 301
     },
     {
       "source": "/security",
-      "destination": "/superintelligence#private",
+      "destination": "/#principles",
       "statusCode": 301
     },
     {
       "source": "/clinical",
-      "destination": "/superintelligence",
+      "destination": "/",
       "statusCode": 301
     },
     {

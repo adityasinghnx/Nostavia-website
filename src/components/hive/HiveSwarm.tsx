@@ -2,15 +2,16 @@ import React, { useEffect, useRef } from 'react';
 import { cn } from '../../lib/cn';
 
 /* ─────────────────────────────────────────────────────────────────────────────
- * The Hive, drawn in particles: seven honeycomb cells traced by dots, with Bees
- * that leave the hive, do a job, and come back. Plain canvas 2D, ~600 dots.
- * Pauses off-screen and in background tabs; one still frame for reduced motion.
+ * The Hive, drawn in light: seven honeycomb cells traced by points that breathe
+ * slowly and part around the pointer. Now and then a small job label fades in
+ * beside an outer cell. Plain canvas 2D. Pauses off-screen and in background
+ * tabs; one still frame for reduced motion.
  * ──────────────────────────────────────────────────────────────────────────── */
 
-type State = 0 | 1 | 2 | 3; // home, outbound, working, inbound
+type Kind = 'edge' | 'vertex' | 'fill' | 'core';
 
 interface Dot {
-  nx: number; // home, in hive units
+  nx: number; // home, in cell-radius units
   ny: number;
   x: number;
   y: number;
@@ -21,17 +22,6 @@ interface Dot {
   spin: number;
   size: number;
   alpha: number;
-  state: State;
-  t: number;
-  dur: number;
-  ax: number;
-  ay: number;
-  bx: number;
-  by: number;
-  kx: number;
-  ky: number;
-  trail: number[];
-  canWork: boolean;
 }
 
 interface Mote {
@@ -53,14 +43,14 @@ const hexCorners = (cx: number, cy: number) =>
     return [cx + Math.cos(a), cy + Math.sin(a)] as [number, number];
   });
 
-/** Home positions for the seven-cell honeycomb, in units of cell radius. */
+/** Home positions for the seven-cell honeycomb, in units of cell radius. The centre cell is drawn brighter. */
 const buildHive = (perEdge: number, fill: number) => {
   const centers: [number, number][] = [[0, 0]];
   for (let i = 0; i < 6; i++) {
     const a = (Math.PI / 3) * i;
     centers.push([SQ3 * Math.cos(a), SQ3 * Math.sin(a)]);
   }
-  const homes: { x: number; y: number; kind: 'edge' | 'vertex' | 'fill' | 'core' }[] = [];
+  const homes: { x: number; y: number; kind: Kind }[] = [];
   const seenEdge = new Set<string>();
   const seenVertex = new Set<string>();
   const key = (x: number, y: number) => `${Math.round(x * 100)}:${Math.round(y * 100)}`;
@@ -85,7 +75,6 @@ const buildHive = (perEdge: number, fill: number) => {
     }
   });
 
-  // The centre cell is the intelligence: a denser glow of points inside it
   for (let i = 0; i < 70; i++) {
     const a = Math.random() * Math.PI * 2;
     const r = 0.7 * Math.sqrt(Math.random());
@@ -100,7 +89,12 @@ const buildHive = (perEdge: number, fill: number) => {
   return homes;
 };
 
-const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+const look: Record<Kind, () => { size: number; alpha: number; orbit: number }> = {
+  vertex: () => ({ size: 1.9, alpha: 0.95, orbit: 0.015 + Math.random() * 0.02 }),
+  core: () => ({ size: 1.4 + Math.random() * 0.4, alpha: 0.75 + Math.random() * 0.25, orbit: 0.015 + Math.random() * 0.025 }),
+  edge: () => ({ size: 1.05 + Math.random() * 0.5, alpha: 0.42 + Math.random() * 0.35, orbit: 0.015 + Math.random() * 0.03 }),
+  fill: () => ({ size: 0.7 + Math.random() * 0.6, alpha: 0.14 + Math.random() * 0.2, orbit: 0.05 + Math.random() * 0.08 }),
+};
 
 export interface HiveSwarmProps {
   className?: string;
@@ -110,9 +104,9 @@ export interface HiveSwarmProps {
   mobileAnchor?: { x: number; y: number };
   /** Cell radius as a fraction of the shorter canvas side. */
   scale?: number;
-  /** Small "Report sent" labels where Bees land. */
+  /** Small "Report delivered" labels beside the hive, wide screens only. */
   jobs?: boolean;
-  /** Keep Bees and labels out of the left part of the canvas (where the headline sits). */
+  /** Keep labels out of the left part of the canvas (where the headline sits). */
   avoidLeft?: number;
 }
 
@@ -134,7 +128,6 @@ export const HiveSwarm: React.FC<HiveSwarmProps> = ({
 
     let w = 0;
     let h = 0;
-    let dpr = 1;
     let R = 60;
     let cx = 0;
     let cy = 0;
@@ -143,12 +136,11 @@ export const HiveSwarm: React.FC<HiveSwarmProps> = ({
     let visible = true;
     let raf = 0;
     let last = performance.now();
-    let launchClock = 0;
+    let labelClock = 0;
     let time = 0;
     const pointer = { x: -9999, y: -9999, px: 0, py: 0, tx: 0, ty: 0 };
 
-    const homes = buildHive(9, 110);
-    const dots: Dot[] = homes.map((hm) => ({
+    const dots: Dot[] = buildHive(9, 110).map((hm) => ({
       nx: hm.x,
       ny: hm.y,
       x: 0,
@@ -156,93 +148,53 @@ export const HiveSwarm: React.FC<HiveSwarmProps> = ({
       vx: 0,
       vy: 0,
       phase: Math.random() * Math.PI * 2,
-      orbit: hm.kind === 'fill' ? 0.05 + Math.random() * 0.08 : 0.015 + Math.random() * 0.03,
-      spin: (Math.random() < 0.5 ? -1 : 1) * (0.4 + Math.random() * 0.9),
-      size: hm.kind === 'vertex' ? 1.9 : hm.kind === 'core' ? 1.4 + Math.random() * 0.4 : hm.kind === 'edge' ? 1.05 + Math.random() * 0.5 : 0.7 + Math.random() * 0.6,
-      alpha: hm.kind === 'vertex' ? 0.95 : hm.kind === 'core' ? 0.75 + Math.random() * 0.25 : hm.kind === 'edge' ? 0.42 + Math.random() * 0.35 : 0.14 + Math.random() * 0.2,
-      state: 0,
-      t: 0,
-      dur: 1,
-      ax: 0,
-      ay: 0,
-      bx: 0,
-      by: 0,
-      kx: 0,
-      ky: 0,
-      trail: [],
-      canWork: hm.kind !== 'vertex',
+      spin: (Math.random() < 0.5 ? -1 : 1) * (0.25 + Math.random() * 0.5),
+      ...look[hm.kind](),
     }));
 
-    const motes: Mote[] = Array.from({ length: 70 }, () => ({
+    const motes: Mote[] = Array.from({ length: 60 }, () => ({
       x: Math.random(),
       y: Math.random(),
-      vx: (Math.random() - 0.5) * 0.006,
-      vy: -0.002 - Math.random() * 0.006,
+      vx: (Math.random() - 0.5) * 0.004,
+      vy: -0.0015 - Math.random() * 0.004,
       r: 0.4 + Math.random() * 0.9,
-      a: 0.05 + Math.random() * 0.16,
+      a: 0.05 + Math.random() * 0.14,
     }));
 
     const homeX = (d: Dot) => cx + d.nx * R + Math.cos(time * d.spin + d.phase) * d.orbit * R;
     const homeY = (d: Dot) => cy + d.ny * R + Math.sin(time * d.spin + d.phase) * d.orbit * R;
 
+    const place = () => {
+      const a = narrow ? mobileAnchor : anchor;
+      const breathe = 1 + Math.sin(time * 0.5) * 0.012;
+      cx = w * a.x + pointer.px * 14;
+      cy = h * a.y + pointer.py * 10;
+      R = Math.min(w, h) * (narrow ? scale * 1.1 : scale) * breathe;
+    };
+
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
       w = rect.width;
       h = rect.height;
-      dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
       canvas.width = Math.round(w * dpr);
       canvas.height = Math.round(h * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       narrow = w < 768;
-      const a = narrow ? mobileAnchor : anchor;
-      R = Math.min(w, h) * (narrow ? scale * 1.1 : scale);
-      cx = w * a.x;
-      cy = h * a.y;
+      place();
       dots.forEach((d) => {
-        if (d.state === 0) {
-          d.x = homeX(d);
-          d.y = homeY(d);
-        }
+        d.x = homeX(d);
+        d.y = homeY(d);
       });
     };
 
-    /* Where a Bee goes to work: around the hive, away from the headline. */
-    const pickDestination = () => {
-      for (let i = 0; i < 14; i++) {
-        const ang = Math.random() * Math.PI * 2;
-        const dist = R * (2.6 + Math.random() * 1.6);
-        const x = cx + Math.cos(ang) * dist * 1.25;
-        const y = cy + Math.sin(ang) * dist * 0.85;
-        if (x < 24 || x > w - 24 || y < 90 || y > h - 40) continue;
-        if (!narrow && x < w * avoidLeft) continue;
-        return [x, y] as const;
-      }
-      return null;
-    };
-
-    const curve = (d: Dot, fromX: number, fromY: number, toX: number, toY: number) => {
-      const mx = (fromX + toX) / 2;
-      const my = (fromY + toY) / 2;
-      const dx = toX - fromX;
-      const dy = toY - fromY;
-      const bend = (Math.random() - 0.5) * 0.9;
-      d.ax = fromX;
-      d.ay = fromY;
-      d.bx = toX;
-      d.by = toY;
-      d.kx = mx - dy * bend;
-      d.ky = my + dx * bend;
-      d.t = 0;
-      d.dur = 1.6 + Math.hypot(dx, dy) / 260;
-    };
-
-    /* Job labels: a small pool of DOM chips placed where Bees land. */
+    /* Job labels: a small pool of DOM chips that fade in beside the hive. */
     const chips: { el: HTMLDivElement; busy: boolean; x: number; y: number }[] = [];
     if (jobs && chipLayer.current) {
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 2; i++) {
         const el = document.createElement('div');
         el.className =
-          'absolute left-0 top-0 flex items-center gap-1.5 whitespace-nowrap rounded-full border border-[rgba(242,237,227,0.12)] bg-[rgba(16,14,12,0.78)] px-2.5 py-1 font-mono text-[10.5px] tracking-[0.02em] text-[rgba(242,237,227,0.82)] opacity-0 transition-[opacity,transform] duration-500 ease-out backdrop-blur';
+          'absolute left-0 top-0 flex items-center gap-1.5 whitespace-nowrap rounded-full border border-[rgba(242,237,227,0.12)] bg-[rgba(16,14,12,0.78)] px-2.5 py-1 font-mono text-[10.5px] tracking-[0.02em] text-[rgba(242,237,227,0.82)] opacity-0 transition-[opacity,transform] duration-[900ms] ease-out backdrop-blur';
         el.innerHTML = '<span style="width:5px;height:5px;border-radius:9px;background:#F2D27A;display:inline-block"></span><span></span>';
         chipLayer.current.appendChild(el);
         chips.push({ el, busy: false, x: 0, y: 0 });
@@ -250,108 +202,55 @@ export const HiveSwarm: React.FC<HiveSwarmProps> = ({
     }
     let jobIndex = 0;
     const showJob = (x: number, y: number) => {
-      // Labels only on wide screens, and only in the clear space above the headline
-      if (!jobs || w < 1100 || y > h * 0.42 || x < w * avoidLeft || Math.random() > 0.5) return;
-      if (chips.some((c) => c.busy && Math.hypot(c.x - x, c.y - y) < 150)) return;
+      // Wide screens only, and only in the clear space above the headline
+      if (!jobs || w < 1100 || y > h * 0.42 || x < w * avoidLeft) return;
+      if (chips.some((c) => c.busy && Math.hypot(c.x - x, c.y - y) < 220)) return;
       const chip = chips.find((c) => !c.busy);
       if (!chip) return;
       chip.busy = true;
       chip.x = x;
       chip.y = y;
       (chip.el.lastChild as HTMLSpanElement).textContent = JOBS[jobIndex++ % JOBS.length];
-      chip.el.style.transform = `translate(${x}px, ${y - 18}px) translate(-50%, -100%)`;
+      chip.el.style.transform = `translate(${x}px, ${y - 14}px) translate(-50%, -100%)`;
       requestAnimationFrame(() => {
         chip.el.style.opacity = '1';
-        chip.el.style.transform = `translate(${x}px, ${y - 24}px) translate(-50%, -100%)`;
+        chip.el.style.transform = `translate(${x}px, ${y - 20}px) translate(-50%, -100%)`;
       });
       window.setTimeout(() => {
         chip.el.style.opacity = '0';
-        window.setTimeout(() => (chip.busy = false), 500);
-      }, 1700);
+        window.setTimeout(() => (chip.busy = false), 900);
+      }, 3200);
     };
 
     const step = (dt: number) => {
       time += dt;
-      // Pointer parallax on the hive centre
-      pointer.px += (pointer.tx - pointer.px) * Math.min(1, dt * 2.5);
-      pointer.py += (pointer.ty - pointer.py) * Math.min(1, dt * 2.5);
-      const a = narrow ? mobileAnchor : anchor;
-      const breathe = 1 + Math.sin(time * 0.7) * 0.012;
-      cx = w * a.x + pointer.px * 14;
-      cy = h * a.y + pointer.py * 10;
-      const baseR = Math.min(w, h) * (narrow ? scale * 1.1 : scale);
-      R = baseR * breathe;
+      pointer.px += (pointer.tx - pointer.px) * Math.min(1, dt * 2);
+      pointer.py += (pointer.ty - pointer.py) * Math.min(1, dt * 2);
+      place();
 
-      // Launch Bees
-      launchClock += dt;
-      const working = dots.reduce((n, d) => n + (d.state !== 0 ? 1 : 0), 0);
-      const maxWorking = narrow ? 7 : 15;
-      if (!reduce && launchClock > 0.16 && working < maxWorking) {
-        launchClock = 0;
+      labelClock += dt;
+      if (labelClock > 1.4) {
+        labelClock = 0;
         const d = dots[Math.floor(Math.random() * dots.length)];
-        const dest = d.canWork && d.state === 0 ? pickDestination() : null;
-        if (dest) {
-          curve(d, d.x, d.y, dest[0], dest[1]);
-          d.state = 1;
-          d.trail = [];
-        }
+        if (Math.hypot(d.nx, d.ny) > 1.9) showJob(d.x, d.y);
       }
 
       for (const d of dots) {
-        if (d.state === 0) {
-          const tx = homeX(d);
-          const ty = homeY(d);
-          d.vx += (tx - d.x) * 9 * dt;
-          d.vy += (ty - d.y) * 9 * dt;
-          const dx = d.x - pointer.x;
-          const dy = d.y - pointer.y;
-          const dist2 = dx * dx + dy * dy;
-          if (dist2 < 110 * 110 && dist2 > 0.01) {
-            const dist = Math.sqrt(dist2);
-            const f = (1 - dist / 110) * 1400 * dt;
-            d.vx += (dx / dist) * f;
-            d.vy += (dy / dist) * f;
-          }
-          d.vx *= Math.pow(0.02, dt);
-          d.vy *= Math.pow(0.02, dt);
-          d.x += d.vx * dt;
-          d.y += d.vy * dt;
-        } else if (d.state === 1 || d.state === 3) {
-          d.t += dt / d.dur;
-          if (d.state === 3) {
-            // Home moves with the breathing hive; keep the landing point current
-            d.bx = homeX(d);
-            d.by = homeY(d);
-          }
-          const t = easeInOut(Math.min(1, d.t));
-          const u = 1 - t;
-          d.x = u * u * d.ax + 2 * u * t * d.kx + t * t * d.bx;
-          d.y = u * u * d.ay + 2 * u * t * d.ky + t * t * d.by;
-          d.trail.push(d.x, d.y);
-          if (d.trail.length > 28) d.trail.splice(0, 2);
-          if (d.t >= 1) {
-            if (d.state === 1) {
-              d.state = 2;
-              d.t = 0;
-              d.dur = 0.8 + Math.random() * 0.9;
-              showJob(d.x, d.y);
-            } else {
-              d.state = 0;
-              d.vx = d.vy = 0;
-              d.trail = [];
-            }
-          }
-        } else {
-          d.t += dt / d.dur;
-          d.x += Math.cos(time * 9 + d.phase) * 0.35;
-          d.y += Math.sin(time * 11 + d.phase) * 0.35;
-          if (d.trail.length) d.trail.splice(0, 2);
-          if (d.t >= 1) {
-            curve(d, d.x, d.y, homeX(d), homeY(d));
-            d.state = 3;
-            d.trail = [];
-          }
+        d.vx += (homeX(d) - d.x) * 7 * dt;
+        d.vy += (homeY(d) - d.y) * 7 * dt;
+        const dx = d.x - pointer.x;
+        const dy = d.y - pointer.y;
+        const dist2 = dx * dx + dy * dy;
+        if (dist2 < 100 * 100 && dist2 > 0.01) {
+          const dist = Math.sqrt(dist2);
+          const f = (1 - dist / 100) * 700 * dt;
+          d.vx += (dx / dist) * f;
+          d.vy += (dy / dist) * f;
         }
+        d.vx *= Math.pow(0.02, dt);
+        d.vy *= Math.pow(0.02, dt);
+        d.x += d.vx * dt;
+        d.y += d.vy * dt;
       }
 
       for (const m of motes) {
@@ -369,7 +268,6 @@ export const HiveSwarm: React.FC<HiveSwarmProps> = ({
     const draw = () => {
       ctx.clearRect(0, 0, w, h);
       ctx.globalCompositeOperation = 'source-over';
-
       for (const m of motes) {
         ctx.fillStyle = `rgba(242,237,227,${m.a})`;
         ctx.beginPath();
@@ -378,37 +276,17 @@ export const HiveSwarm: React.FC<HiveSwarmProps> = ({
       }
 
       ctx.globalCompositeOperation = 'lighter';
-
-      // Trails
-      ctx.lineCap = 'round';
       for (const d of dots) {
-        const tr = d.trail;
-        if (tr.length < 4) continue;
-        const n = tr.length / 2;
-        for (let i = 1; i < n; i++) {
-          const a = (i / n) * 0.5;
-          ctx.strokeStyle = `rgba(242,210,122,${a})`;
-          ctx.lineWidth = (i / n) * 1.6;
+        const alpha = d.alpha * (0.85 + Math.sin(time * 0.9 + d.phase) * 0.15);
+        if (d.size > 1.7) {
+          ctx.fillStyle = 'rgba(242,210,122,0.08)';
           ctx.beginPath();
-          ctx.moveTo(tr[(i - 1) * 2], tr[(i - 1) * 2 + 1]);
-          ctx.lineTo(tr[i * 2], tr[i * 2 + 1]);
-          ctx.stroke();
-        }
-      }
-
-      for (const d of dots) {
-        const active = d.state !== 0;
-        const r = active ? 1.9 : d.size;
-        const alpha = active ? 1 : d.alpha * (0.85 + Math.sin(time * 1.4 + d.phase) * 0.15);
-        if (active || d.size > 1.7) {
-          ctx.fillStyle = `rgba(242,210,122,${active ? 0.16 : 0.08})`;
-          ctx.beginPath();
-          ctx.arc(d.x, d.y, r * (active ? 5 : 3.2), 0, Math.PI * 2);
+          ctx.arc(d.x, d.y, d.size * 3.2, 0, Math.PI * 2);
           ctx.fill();
         }
-        ctx.fillStyle = active ? 'rgba(255,236,180,1)' : `rgba(242,210,122,${alpha})`;
+        ctx.fillStyle = `rgba(242,210,122,${alpha})`;
         ctx.beginPath();
-        ctx.arc(d.x, d.y, r, 0, Math.PI * 2);
+        ctx.arc(d.x, d.y, d.size, 0, Math.PI * 2);
         ctx.fill();
       }
       ctx.globalCompositeOperation = 'source-over';
@@ -430,10 +308,6 @@ export const HiveSwarm: React.FC<HiveSwarmProps> = ({
     };
 
     resize();
-    dots.forEach((d) => {
-      d.x = homeX(d);
-      d.y = homeY(d);
-    });
     if (reduce) draw();
     else start();
 

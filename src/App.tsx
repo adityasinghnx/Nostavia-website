@@ -8,7 +8,6 @@ import { STUDIO_PATH } from './content/site';
 import { HomePage } from './pages/HomePage';
 import { Intro } from './components/ui/effects';
 
-const SuperintelligencePage = lazy(() => import('./pages/SuperintelligencePage'));
 const HivePage = lazy(() => import('./pages/HivePage'));
 const HumanOsPage = lazy(() => import('./pages/HumanOsPage'));
 const StudioPage = lazy(() => import('./pages/StudioPage'));
@@ -19,10 +18,11 @@ const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 /* Old routes. Mirrored as 301s in vercel.json. */
 const redirects: [string, string][] = [
-  ['/platform', '/superintelligence'],
+  ['/superintelligence', '/'],
+  ['/platform', '/'],
   ['/human-os/*', '/human-os'],
-  ['/company', '/superintelligence'],
-  ['/security', '/superintelligence#private'],
+  ['/company', '/'],
+  ['/security', '/#principles'],
   ['/industries/*', '/customers'],
   ['/solutions/engineering', STUDIO_PATH],
   ['/solutions/supplements', STUDIO_PATH],
@@ -34,7 +34,7 @@ const redirects: [string, string][] = [
   ['/solutions/hospitals-front-door', '/customers'],
   ['/solutions/*', '/human-os'],
   ['/pricing', '/demo'],
-  ['/clinical', '/superintelligence'],
+  ['/clinical', '/'],
 ];
 
 /** Scrolls to a #hash target once a page has mounted. */
@@ -73,7 +73,6 @@ const Shell: React.FC = () => {
             <Suspense fallback={<div className="min-h-screen" aria-busy="true" />}>
               <Routes location={location}>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/superintelligence" element={<SuperintelligencePage />} />
                 <Route path="/hive" element={<HivePage />} />
                 <Route path="/human-os" element={<HumanOsPage />} />
                 <Route path={STUDIO_PATH} element={<StudioPage />} />

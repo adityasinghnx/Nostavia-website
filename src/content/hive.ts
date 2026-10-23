@@ -1,5 +1,5 @@
 /* ─────────────────────────────────────────────────────────────────────────────
- * Hive: where the Superintelligence works for you. Page copy (B3) and the
+ * Hive: how you run Human OS and your Studio builds. Page copy (B3) and the
  * sample conversation for the illustrative chat-first workspace.
  * Sample data only, labelled inside every view. Bees are named by job.
  * Internal words (coordinator name, approver name, outcome and record names,

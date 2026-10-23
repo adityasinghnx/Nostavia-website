@@ -8,7 +8,7 @@ export interface CustomerType {
   short: string;
   photo: string;
   headline: string;
-  /** What the Superintelligence helps with (B6). */
+  /** What we help with (B6). */
   helps: string[];
   /** Bees most likely in a suggested starting team. */
   bees: BeeId[];

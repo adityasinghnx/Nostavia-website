@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ABOUT, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_HREF, LINKEDIN_URL, company, nav } from '../../content/site';
 import { Arrow } from '../ui/primitives';
-import { HiveMark } from '../ui/marks';
 import { LocalTime } from '../ui/LocalTime';
 
 const linkClass = 'group inline-flex items-center gap-1.5 text-[14.5px] text-fg/60 hover:text-fg transition-colors duration-300';
@@ -15,10 +14,9 @@ export const Footer: React.FC = () => (
     <div className="wrap">
       <div className="grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-12">
         <div className="col-span-2 md:col-span-5 flex flex-col gap-6">
-          <Link to="/superintelligence" className="inline-flex items-center gap-2.5 self-start text-accent">
-            <HiveMark className="w-6 h-6" />
-            <span className="text-fg text-[15px] tracking-[-0.01em]">Nostavia Superintelligence</span>
-          </Link>
+          <p className="text-[clamp(1.5rem,2.4vw,2rem)] leading-[1.1] tracking-[-0.03em] max-w-[18ch]">
+            Health AI, ready-made or <span className="em text-accent">built for you.</span>
+          </p>
           <p className="text-[15px] leading-relaxed text-fg/55 max-w-[46ch]">{ABOUT}</p>
           <div className="flex flex-col gap-2">
             <a href={`mailto:${CONTACT_EMAIL}`} className={linkClass}>

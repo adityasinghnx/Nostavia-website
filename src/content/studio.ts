@@ -1,6 +1,6 @@
-/* Studio: what the Superintelligence builds for you. Outside wording only. */
+/* Studio: what we build for you. Outside wording only. */
 
-export const STUDIO_SUB = 'When the product you need does not exist yet, we build it with you, in your brand, on the same intelligence.';
+export const STUDIO_SUB = 'When the product you need does not exist yet, we build it with you, in your brand, using Human OS wherever it fits.';
 
 export const STUDIO_PROMISE = 'Your brand. Your patients. *Our intelligence behind it.*';
 

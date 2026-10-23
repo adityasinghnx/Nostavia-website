@@ -58,8 +58,6 @@ export default {
         marquee: { from: { transform: 'translateX(0)' }, to: { transform: 'translateX(-50%)' } },
         pulse2: { '0%,100%': { opacity: '1' }, '50%': { opacity: '0.35' } },
         ping2: { '0%': { transform: 'scale(1)', opacity: '0.7' }, '100%': { transform: 'scale(2.6)', opacity: '0' } },
-        lane: { from: { left: '-3%' }, to: { left: '103%' } },
-        bob: { '0%,100%': { transform: 'translateY(-3px)' }, '50%': { transform: 'translateY(3px)' } },
       },
       animation: {
         marquee: 'marquee 48s linear infinite',

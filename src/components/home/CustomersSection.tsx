@@ -34,15 +34,15 @@ export const CustomersSection: React.FC = () => {
   const [active, setActive] = useState(0);
 
   return (
-    <section id="customers" data-theme="paper" aria-labelledby="customers-title" className="relative py-[clamp(6rem,11vw,10.5rem)] overflow-hidden">
+    <section id="customers" data-theme="ink" aria-labelledby="customers-title" className="relative py-[clamp(6rem,11vw,10.5rem)] overflow-hidden">
       <div className="wrap">
         <div className="grid lg:grid-cols-12 gap-10 items-end">
           <div className="lg:col-span-8">
-            <Label index="05">Who we work with</Label>
+            <Label index="07">Who we work with</Label>
             <SplitHeading id="customers-title" className="t-h1 mt-6" text="Built for the businesses that keep people healthy." />
           </div>
           <Reveal className="lg:col-span-4 flex flex-col gap-6">
-            <p className="text-[16px] leading-relaxed text-fg/60">Diagnostic labs, clinics, wellness and health apps, and hospitals. Different work, the same intelligence.</p>
+            <p className="text-[16px] leading-relaxed text-fg/60">Diagnostic labs, clinics, wellness and health apps, and hospitals. Different work, the same products.</p>
             <TextLink to="/customers">See what each one gets</TextLink>
           </Reveal>
         </div>

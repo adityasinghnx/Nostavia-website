@@ -1,11 +1,13 @@
 /* ─────────────────────────────────────────────────────────────────────────────
- * Site-wide content and switches. Source: "Nostavia: Company Description and
- * Website Source" (23 Oct 2026), Part B. Brief: docs/website-structure.md.
+ * Site-wide content and switches. Brief: docs/website-structure.md.
  *
- * Public words: Superintelligence, Hive, Bees, Human OS, Studio. Never on the
- * site: status labels or dates, EHR, LIS, module counts, prices, customer
- * names, certifications, internal Hive words, Bee names, comparisons to other
- * AI products. "Superintelligence" never implies clinical judgement.
+ * Positioning (owner, 23 Oct 2026): the products are Human OS (ready-made) and
+ * Studio (built for you). Hive is how you use them, with AI Bees doing the
+ * routine work; Human OS can also be used inside your own app through the API.
+ *
+ * Never on the site: status labels or dates, EHR, LIS, module counts, prices,
+ * customer names, certifications, internal Hive words, Bee names, comparisons
+ * to other AI products. Nothing implies clinical judgement.
  * ──────────────────────────────────────────────────────────────────────────── */
 
 export const SITE_ORIGIN = 'https://nostaviahealth.com';
@@ -16,24 +18,25 @@ export const STUDIO_PATH = '/studio';
 
 /** Draft one-liner, awaiting approval. */
 export const ONE_LINER =
-  'Nostavia is a healthcare superintelligence: one intelligence that understands health data, runs the routine work through AI Bees, and builds the products health businesses need, while their people stay in charge.';
+  'Nostavia makes health AI for labs, clinics, hospitals and health apps: ready-made modules in Human OS, products built for you by Studio, and Hive, where AI Bees run the routine work while your people stay in charge.';
 
-/** Hero headline: option 1 of 3 in the source doc, pending a final pick. */
-export const HERO_HEADLINE = 'Healthcare’s superintelligence. *Your people stay in charge.*';
+/** Hero headline, pending a final pick. */
+export const HERO_HEADLINE = 'Health AI, ready-made or *built for you.*';
 
 export const HERO_SUB =
-  'Nostavia understands your health data, runs the routine work across your systems and builds the products you need, in your brand. Made for labs, clinics, hospitals and health apps.';
+  'Human OS gives you ready-made health AI modules. Studio builds the apps, portals and voice assistants you need, in your brand. In Hive, AI Bees run the routine work while your people stay in charge.';
 
 export const FLAGS = {
   /** No customer names or logos until each customer gives written permission. */
   SHOW_CLIENT_LOGOS: false,
+  /** Module names inside each Human OS family. Anushka to confirm which modules can be shown; off leaves families only. */
+  SHOW_MODULE_NAMES: true,
 };
 
 export const nav = [
-  { label: 'Superintelligence', to: '/superintelligence' },
-  { label: 'Hive', to: '/hive' },
   { label: 'Human OS', to: '/human-os' },
   { label: STUDIO, to: STUDIO_PATH },
+  { label: 'Hive', to: '/hive' },
   { label: 'Customers', to: '/customers' },
   { label: 'Developers', to: '/developers' },
 ];
@@ -50,10 +53,10 @@ export const company = {
 };
 
 export const ABOUT =
-  "Nostavia Technologies Pvt. Ltd. builds healthcare's superintelligence: one intelligence that understands health data, does the routine work and builds what health businesses need, while their people stay in charge. Founded by Aditya Singh (CEO) and Anushka Gupta (CTO).";
+  'Nostavia Technologies Pvt. Ltd. makes health AI for health businesses: ready-made modules in Human OS, products built for you by Studio, and Hive, where AI Bees run the routine work while your people stay in charge. Founded by Aditya Singh (CEO) and Anushka Gupta (CTO).';
 
-/** Safety line used under any section that describes what the Superintelligence does. */
-export const SAFETY_LINE = 'Nostavia Superintelligence supports your team’s work. It does not make clinical decisions; clinicians do.';
+/** Safety line used under any section that describes what Nostavia does. */
+export const SAFETY_LINE = 'Nostavia supports your team’s work. It does not make clinical decisions; clinicians do.';
 
 /* Kept for when written permission exists. Hidden while FLAGS.SHOW_CLIENT_LOGOS is false. */
 export const clientLogos = [

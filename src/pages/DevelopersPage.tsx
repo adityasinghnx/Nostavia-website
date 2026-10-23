@@ -19,7 +19,7 @@ const portal = [
 const DevelopersPage: React.FC = () => {
   useSeo({
     title: 'Developers: build with Nostavia',
-    description: 'Sign up to the SDK Portal, get your API keys, read the docs and track your usage in one place. Call any part of the Superintelligence from your app and get a result back.',
+    description: 'Sign up to the SDK Portal, get your API keys, read the docs and track your usage in one place. Call any Human OS module from your app and get a result back.',
     path: '/developers',
   });
 
@@ -29,7 +29,7 @@ const DevelopersPage: React.FC = () => {
         label="Developers"
         display
         title="Build with Nostavia."
-        intro="Sign up to the SDK Portal, get your API keys, read the docs and track your usage in one place. Call any part of the Superintelligence from your app and get a result back."
+        intro="Sign up to the SDK Portal, get your API keys, read the docs and track your usage in one place. Call any Human OS module from your app and get a result back."
         actions={
           <>
             <Button to={PORTAL_CTA} size="lg">
@@ -51,19 +51,23 @@ const DevelopersPage: React.FC = () => {
       </PageHero>
 
       <Section theme="paper" labelledBy="portal-title">
-        <div className="wrap">
-          <SectionHead id="portal-title" label="The SDK Portal" title="Everything your engineers need, in one place." />
-          <ul className="grid sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-fg/[0.12]">
+        <div className="wrap grid lg:grid-cols-12 gap-12 lg:gap-10">
+          <div className="lg:col-span-5">
+            <div className="lg:sticky lg:top-32">
+              <SectionHead id="portal-title" label="The SDK Portal" title="Everything your engineers need, in one place." className="lg:block mb-0" />
+            </div>
+          </div>
+          <ol className="lg:col-span-7 border-t border-fg/[0.14]">
             {portal.map((p, i) => (
-              <Reveal as="li" key={p.title} delay={i * 0.06} className="border-r border-b border-fg/[0.12] p-7 md:p-8 min-h-[200px] flex flex-col justify-between gap-8">
-                <span className="font-mono text-[12px] text-accent">{String(i + 1).padStart(2, '0')}</span>
+              <Reveal as="li" key={p.title} delay={i * 0.05} className="grid grid-cols-[3rem_1fr] gap-4 py-9 border-b border-fg/[0.14]">
+                <span className="font-mono text-[12px] text-accent pt-3">{String(i + 1).padStart(2, '0')}</span>
                 <div>
-                  <h3 className="text-[21px] tracking-[-0.02em]">{p.title}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-fg/60">{p.body}</p>
+                  <h3 className="text-[clamp(1.6rem,2.8vw,2.4rem)] leading-[1.05] tracking-[-0.03em]">{p.title}</h3>
+                  <p className="mt-2 text-[16.5px] leading-relaxed text-fg/60">{p.body}</p>
                 </div>
               </Reveal>
             ))}
-          </ul>
+          </ol>
         </div>
       </Section>
 

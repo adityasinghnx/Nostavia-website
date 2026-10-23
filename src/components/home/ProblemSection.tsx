@@ -1,12 +1,12 @@
 import React from 'react';
-import { useReducedMotion } from 'motion/react';
-import { problems } from '../../content/superintelligence';
+import { motion, useReducedMotion } from 'motion/react';
+import { problems } from '../../content/offer';
 import { Label } from '../ui/primitives';
 import { Reveal, SplitHeading } from '../ui/motion';
 
 /* ─────────────────────────────────────────────────────────────────────────────
  * "Your team is the glue": every system wired through one small circle of
- * people, with work moving by hand along every line.
+ * people. The lines draw themselves once, slowly, when the figure arrives.
  * ──────────────────────────────────────────────────────────────────────────── */
 
 const W = 600;
@@ -41,19 +41,19 @@ const Glue: React.FC = () => {
       {crossLinks.map(([a, b], i) => (
         <path key={`x${i}`} d={curve(nodes[a].x, nodes[a].y, nodes[b].x, nodes[b].y, i % 2 ? 0.25 : -0.25)} fill="none" stroke="rgb(var(--fg) / 0.1)" strokeDasharray="3 6" />
       ))}
-      {nodes.map((n, i) => {
-        const d = curve(n.x, n.y, C.x, C.y, i % 2 ? 0.18 : -0.18);
-        return (
-          <g key={n.label}>
-            <path d={d} fill="none" stroke="rgb(var(--fg) / 0.22)" strokeWidth="1" />
-            {!reduce && (
-              <circle r="3" fill="rgb(var(--accent))">
-                <animateMotion dur={`${3.2 + (i % 4) * 0.7}s`} begin={`${(i * 0.37).toFixed(2)}s`} repeatCount="indefinite" path={d} keyPoints={i % 2 ? '0;1' : '1;0'} keyTimes="0;1" calcMode="linear" />
-              </circle>
-            )}
-          </g>
-        );
-      })}
+      {nodes.map((n, i) => (
+        <motion.path
+          key={n.label}
+          d={curve(n.x, n.y, C.x, C.y, i % 2 ? 0.18 : -0.18)}
+          fill="none"
+          stroke="rgb(var(--fg) / 0.25)"
+          strokeWidth="1"
+          initial={reduce ? false : { pathLength: 0 }}
+          whileInView={{ pathLength: 1 }}
+          viewport={{ once: true, margin: '0px 0px -15% 0px' }}
+          transition={{ duration: 1.8, delay: 0.2 + i * 0.08, ease: [0.65, 0, 0.35, 1] }}
+        />
+      ))}
       {nodes.map((n) => {
         const w = n.label.length * 7.2 + 26;
         return (
@@ -67,12 +67,7 @@ const Glue: React.FC = () => {
       })}
       <circle cx={C.x} cy={C.y} r="62" fill="rgb(var(--bg))" />
       <circle cx={C.x} cy={C.y} r="62" fill="rgb(var(--accent) / 0.08)" stroke="rgb(var(--accent) / 0.55)" />
-      {!reduce && (
-        <circle cx={C.x} cy={C.y} r="62" fill="none" stroke="rgb(var(--accent) / 0.4)">
-          <animate attributeName="r" values="62;84" dur="2.6s" repeatCount="indefinite" />
-          <animate attributeName="opacity" values="0.8;0" dur="2.6s" repeatCount="indefinite" />
-        </circle>
-      )}
+      <circle cx={C.x} cy={C.y} r="74" fill="none" stroke="rgb(var(--accent) / 0.25)" strokeDasharray="2 5" />
       <text x={C.x} y={C.y - 4} textAnchor="middle" fontSize="17" fill="rgb(var(--fg))" style={{ fontFamily: 'inherit', letterSpacing: '-0.02em' }}>
         Your team
       </text>
@@ -87,7 +82,7 @@ export const ProblemSection: React.FC = () => (
   <section id="problem" data-theme="paper" aria-labelledby="problem-title" className="relative py-[clamp(6rem,11vw,10.5rem)] overflow-hidden">
     <div className="wrap grid lg:grid-cols-12 gap-14 lg:gap-10 items-center">
       <div className="lg:col-span-5">
-        <Label index="01">The problem</Label>
+        <Label index="02">The problem</Label>
         <SplitHeading id="problem-title" className="t-h2 mt-6" text={problems.heading} />
         <ol className="mt-10 border-t border-fg/[0.12]">
           {problems.items.map((item, i) => (
@@ -99,7 +94,7 @@ export const ProblemSection: React.FC = () => (
         </ol>
       </div>
       <Reveal className="lg:col-span-7 lg:pl-10" delay={0.1}>
-        <p className="t-label text-fg/40 mb-6">Fig. 02 — A normal day</p>
+        <p className="t-label text-fg/40 mb-6">Fig. 01 — A normal day</p>
         <Glue />
       </Reveal>
     </div>

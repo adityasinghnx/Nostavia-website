@@ -1,11 +1,16 @@
 import React, { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
-import { HERO_HEADLINE, HERO_SUB } from '../../content/site';
-import { parts } from '../../content/superintelligence';
+import { HERO_HEADLINE, HERO_SUB, STUDIO } from '../../content/site';
 import { HiveSwarm } from '../hive/HiveSwarm';
 import { Button } from '../ui/primitives';
 import { EASE, SplitHeading } from '../ui/motion';
 import { INTRO_DELAY, Magnetic } from '../ui/effects';
+
+const index = [
+  { name: 'Human OS', line: 'Ready-made', href: '#human-os' },
+  { name: STUDIO, line: 'Built for you', href: '#studio' },
+  { name: 'Hive', line: 'How you run it', href: '#hive' },
+];
 
 export const Hero: React.FC = () => {
   const ref = useRef<HTMLElement>(null);
@@ -32,7 +37,7 @@ export const Hero: React.FC = () => {
           trigger="mount"
           delay={0.25 + INTRO_DELAY}
           stagger={0.06}
-          className="max-w-[10em] text-[clamp(1.9rem,8.4vw,6.4rem)] leading-[0.95] tracking-[-0.045em] font-[480]"
+          className="t-display max-w-[10ch]"
           text={HERO_HEADLINE}
         />
 
@@ -56,7 +61,7 @@ export const Hero: React.FC = () => {
                 Book a demo
               </Button>
             </Magnetic>
-            <Button href="#structure" size="lg" variant="secondary">
+            <Button href="#offer" size="lg" variant="secondary">
               See how it works
             </Button>
           </motion.div>
@@ -72,12 +77,12 @@ export const Hero: React.FC = () => {
         className="relative border-t border-fg/[0.08]"
       >
         <ol className="wrap grid grid-cols-3">
-          {parts.map((p, i) => (
-            <li key={p.id} className={i > 0 ? 'border-l border-fg/[0.08]' : ''}>
-              <a href="#structure" className={`group flex flex-col md:flex-row md:items-center gap-1 md:gap-4 py-4 md:py-5 transition-colors ${i > 0 ? 'pl-3 md:pl-5' : ''}`}>
+          {index.map((p, i) => (
+            <li key={p.name} className={i > 0 ? 'border-l border-fg/[0.08]' : ''}>
+              <a href={p.href} className={`group flex flex-col md:flex-row md:items-center gap-1 md:gap-4 py-4 md:py-5 transition-colors ${i > 0 ? 'pl-3 md:pl-5' : ''}`}>
                 <span className="font-mono text-[11px] text-accent">{String(i + 1).padStart(2, '0')}</span>
                 <span className="text-[14px] md:text-[15px] text-fg/90 group-hover:text-fg">{p.name}</span>
-                <span className="hidden md:inline text-[14px] text-fg/40 group-hover:text-fg/60 transition-colors">{p.verb}</span>
+                <span className="hidden md:inline text-[14px] text-fg/40 group-hover:text-fg/60 transition-colors">{p.line}</span>
               </a>
             </li>
           ))}

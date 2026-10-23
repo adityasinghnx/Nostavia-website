@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { bees, beeImage, type Bee } from '../../content/bees';
-import { BEE_DEFINITION, ways } from '../../content/hive';
 import { cn } from '../../lib/cn';
-import { Label, TextLink } from '../ui/primitives';
-import { EASE, Reveal, SplitHeading } from '../ui/motion';
+import { EASE, Reveal } from '../ui/motion';
 
 /* ─────────────────────────────────────────────────────────────────────────────
  * The Bees on a dark stage: lit like product photography, each with its own
@@ -56,63 +54,35 @@ const BeeFigure: React.FC<{ bee: Bee; i: number; active: boolean; dimmed: boolea
   );
 };
 
-export const BeesSection: React.FC = () => {
+/** The Bees on stage, with the active Bee's job read out underneath. */
+export const BeeStage: React.FC = () => {
   const [active, setActive] = useState(0);
   const bee = bees[active];
 
   return (
-    <section id="bees" data-theme="ink" aria-labelledby="bees-title" className="relative py-[clamp(6rem,11vw,10.5rem)] overflow-hidden">
-      <div aria-hidden="true" className="absolute inset-x-0 top-[28%] h-[60%] bg-[radial-gradient(50%_60%_at_50%_40%,rgba(242,237,227,0.06),transparent_70%)]" />
-      <div className="wrap relative">
-        <div className="grid lg:grid-cols-12 gap-10 items-end">
-          <div className="lg:col-span-7">
-            <Label index="04">Hive · The Bees</Label>
-            <SplitHeading id="bees-title" className="t-h1 mt-6 max-w-[14ch]" text="AI workers with one job each." />
-          </div>
-          <Reveal className="lg:col-span-5 flex flex-col gap-6">
-            <p className="text-[16px] leading-relaxed text-fg/60 text-pretty">{BEE_DEFINITION}</p>
-            <TextLink to="/hive">See how Hive works</TextLink>
-          </Reveal>
-        </div>
+    <Reveal className="relative">
+      <div aria-hidden="true" className="absolute inset-x-0 top-[10%] h-[80%] bg-[radial-gradient(50%_60%_at_50%_40%,rgba(242,237,227,0.06),transparent_70%)]" />
+      <ul className="relative flex lg:wrap gap-2 lg:gap-3 overflow-x-auto lg:overflow-visible snap-x snap-mandatory px-[clamp(1rem,4vw,3rem)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {bees.map((b, i) => (
+          <BeeFigure key={b.id} bee={b} i={i} active={i === active} dimmed={i !== active} onPick={() => setActive(i)} />
+        ))}
+      </ul>
+      <div className="wrap mt-2 min-h-[3.5rem]">
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={bee.id}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.4, ease: EASE }}
+            className="text-center text-[clamp(1.15rem,1.9vw,1.6rem)] tracking-[-0.02em]"
+            aria-live="polite"
+          >
+            <span className="text-fg/45">{bee.job}. </span>
+            {bee.line}
+          </motion.p>
+        </AnimatePresence>
       </div>
-
-      <Reveal className="relative mt-14 md:mt-20">
-        <ul className="flex lg:wrap gap-2 lg:gap-3 overflow-x-auto lg:overflow-visible snap-x snap-mandatory px-[clamp(1rem,4vw,3rem)] lg:px-[clamp(1rem,4vw,3rem)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {bees.map((b, i) => (
-            <BeeFigure key={b.id} bee={b} i={i} active={i === active} dimmed={i !== active} onPick={() => setActive(i)} />
-          ))}
-        </ul>
-        <div className="wrap mt-2 min-h-[3.5rem]">
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={bee.id}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.4, ease: EASE }}
-              className="text-center text-[clamp(1.15rem,1.9vw,1.6rem)] tracking-[-0.02em]"
-              aria-live="polite"
-            >
-              <span className="text-fg/45">{bee.job}. </span>
-              {bee.line}
-            </motion.p>
-          </AnimatePresence>
-          <p className="mt-3 text-center font-mono text-[11px] tracking-[0.04em] text-fg/35">You choose the Bees you need, rename them if you like, and add more as you grow.</p>
-        </div>
-      </Reveal>
-
-      <div className="wrap relative mt-20 md:mt-28">
-        <ul className="grid md:grid-cols-3 border-t border-fg/10">
-          {ways.map((w, i) => (
-            <Reveal as="li" key={w.title} delay={i * 0.06} className={cn('pt-8 pb-4 md:pr-8', i > 0 && 'md:border-l md:border-fg/10 md:pl-8')}>
-              <p className="font-mono text-[12px] text-accent">{String(i + 1).padStart(2, '0')}</p>
-              <h3 className="mt-4 t-h3">{w.title}</h3>
-              <p className="mt-2 text-[15px] text-fg/60">{w.body}</p>
-              <p className="mt-5 rounded-2xl rounded-bl-md bg-fg/[0.05] px-4 py-3 text-[14px] text-fg/80 max-w-[34ch]">“{w.example}”</p>
-            </Reveal>
-          ))}
-        </ul>
-      </div>
-    </section>
+    </Reveal>
   );
 };
