@@ -173,7 +173,7 @@ export const PhoneApp: React.FC<{ brand?: Brand }> = ({ brand = brands[0] }) => 
       </div>
 
       {/* Tab bar */}
-      <div className="absolute inset-x-0 bottom-0 grid h-[84px] grid-cols-4 border-t border-[#15130F]/[0.06] bg-white/90 px-4 pt-2 backdrop-blur-xl">
+      <div className="absolute inset-x-0 bottom-0 grid h-[84px] grid-cols-4 border-t border-[#15130F]/[0.06] bg-white px-4 pt-2">
         {[
           { Icon: Home, label: 'Today' },
           { Icon: FileText, label: 'Results' },
