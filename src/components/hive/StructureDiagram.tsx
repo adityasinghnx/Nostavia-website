@@ -1,4 +1,5 @@
 import React from 'react';
+import { useReducedMotion } from 'motion/react';
 import { STUDIO } from '../../content/site';
 import { cn } from '../../lib/cn';
 import { HiveMark } from '../ui/marks';
@@ -24,7 +25,9 @@ const paths = {
 };
 
 /* Bees travel both ways: Hive runs what sits underneath it. */
-const Connector: React.FC<{ d: string; active: boolean; offset?: number }> = ({ d, active, offset = 0 }) => (
+const Connector: React.FC<{ d: string; active: boolean; offset?: number }> = ({ d, active, offset = 0 }) => {
+  const reduce = useReducedMotion();
+  return (
   <g className={cn('transition-opacity duration-700', active ? 'opacity-100' : 'opacity-25')}>
     <path d={d} fill="none" stroke="rgb(var(--fg) / 0.16)" strokeWidth="1.25" strokeDasharray="2 5" />
     <path d={d} fill="none" stroke="rgb(var(--accent))" strokeWidth="1.25" strokeOpacity={active ? 0.55 : 0} className="transition-[stroke-opacity] duration-700" />
@@ -32,13 +35,16 @@ const Connector: React.FC<{ d: string; active: boolean; offset?: number }> = ({ 
       { begin: 0, up: true },
       { begin: 1.1, up: false },
       { begin: 1.9, up: true },
-    ].map(({ begin, up }) => (
-      <circle key={begin} r="3.2" fill="rgb(var(--accent))" opacity={active ? 1 : 0.5}>
-        <animateMotion dur="2.6s" begin={`${begin + offset}s`} repeatCount="indefinite" path={d} keyPoints={up ? '0;1' : '1;0'} keyTimes="0;1" calcMode="linear" />
-      </circle>
-    ))}
+    ].map(({ begin, up }) =>
+      reduce ? null : (
+        <circle key={begin} r="3.2" fill="rgb(var(--accent))" opacity={active ? 1 : 0.5}>
+          <animateMotion dur="2.6s" begin={`${begin + offset}s`} repeatCount="indefinite" path={d} keyPoints={up ? '0;1' : '1;0'} keyTimes="0;1" calcMode="linear" />
+        </circle>
+      ),
+    )}
   </g>
-);
+  );
+};
 
 const cells = ['Reports', 'Calls', 'Briefs', 'Follow-ups', 'Your build'];
 

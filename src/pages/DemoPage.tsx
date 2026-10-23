@@ -147,7 +147,7 @@ const DemoPage: React.FC = () => {
                       <label htmlFor="business" className="text-[13.5px] text-fg/70">
                         Type of business
                       </label>
-                      <select id="business" name="business" defaultValue="" className={cn(field, 'appearance-none bg-[url("data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%278%27><path d=%27M1 1l5 5 5-5%27 stroke=%27%23F2EDE3%27 stroke-opacity=%27.5%27 fill=%27none%27 stroke-width=%271.5%27/></svg>")] bg-no-repeat bg-[right_1rem_center]')}>
+                      <select id="business" name="business" defaultValue="" style={{ backgroundColor: 'rgb(var(--fg) / 0.03)' }} className={cn(field, 'appearance-none bg-[url("data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%278%27><path d=%27M1 1l5 5 5-5%27 stroke=%27%23F2EDE3%27 stroke-opacity=%27.5%27 fill=%27none%27 stroke-width=%271.5%27/></svg>")] bg-no-repeat bg-[right_1rem_center]')}>
                         <option value="" disabled>
                           Choose one
                         </option>
