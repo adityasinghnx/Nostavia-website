@@ -12,7 +12,7 @@ import { CustomersSection } from '../components/home/CustomersSection';
 import { FinalCta } from '../components/home/FinalCta';
 
 export const HomePage: React.FC = () => {
-  useSeo({ title: 'Nostavia: health AI, ready-made or built for you', description: ONE_LINER, path: '/' });
+  useSeo({ title: 'Nostavia: healthcare’s superintelligence, ready-made or built for you', description: ONE_LINER, path: '/' });
   return (
     <>
       <Hero />

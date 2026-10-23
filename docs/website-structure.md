@@ -14,7 +14,7 @@ Sources: *Nostavia: Company Description and Website Source* (23 Oct 2026) for co
 | **Hive** | How you use them | One workspace where AI Bees run the routine work; your team talks, delegates and approves |
 | API / SDK Portal | The other way to use Human OS | Call any module from your own app |
 
-"Superintelligence" is not presented on the site, in the menu or in the footer.
+"Superintelligence" appears only in the hero headline and page title. It is not a product, a menu item or a page.
 
 ## 2. Menu
 
@@ -54,7 +54,7 @@ No status labels or dates, EHR or LIS, module counts, prices, customer names or 
 
 ## 8. Open items
 
-1. One-liner (draft in `src/content/site.ts`). The hero headline, "Health AI, ready-made or built for you.", was approved on 24 Oct 2026.
+1. One-liner (draft in `src/content/site.ts`). The hero headline is "Healthcare’s superintelligence, ready-made or built for you." (24 Oct 2026); "superintelligence" is used in the headline only.
 2. Studio name (one constant).
 3. Which Human OS modules can be shown, and their groups (Anushka).
 4. Demo reply time ("within one working day" is still [TO CONFIRM]).
