@@ -3,13 +3,13 @@ import { Mic, LayoutDashboard, Globe, Smartphone } from 'lucide-react';
 import { useSeo } from '../lib/useSeo';
 import { STUDIO, STUDIO_PATH } from '../content/site';
 import { STUDIO_PROMISE, STUDIO_SUB, studioBuilds } from '../content/studio';
-import { FigLabel, PageHero, SectionHead } from '../components/page/PageKit';
+import { PageHero, SectionHead } from '../components/page/PageKit';
 import { StudioSteps } from '../components/page/StudioSteps';
 import { FinalCta } from '../components/home/FinalCta';
 import { DeviceStage } from '../components/visuals/DeviceStage';
 import { Button, Section } from '../components/ui/primitives';
 import { Reveal, SplitHeading } from '../components/ui/motion';
-import { BlurIn } from '../components/ui/effects';
+import { BlurIn, BottomBlur } from '../components/ui/effects';
 
 const buildIcons = [Smartphone, LayoutDashboard, Globe, Mic];
 
@@ -33,9 +33,6 @@ const StudioPage: React.FC = () => {
           </Button>
         }
       >
-        <FigLabel n="01" className="mb-6">
-          One client, two builds, one brand
-        </FigLabel>
         <div className="rounded-[28px] bg-bone-100 p-6 sm:p-10 md:p-14">
           <DeviceStage />
         </div>
@@ -81,7 +78,8 @@ const StudioPage: React.FC = () => {
           <BlurIn className="lg:col-span-6">
             <div className="relative overflow-hidden rounded-[24px] aspect-[4/3]">
               <img src="/photos/home-custom-team.jpg" alt="A product team planning a build together around a whiteboard" loading="lazy" decoding="async" className="photo absolute inset-0 h-full w-full object-cover" />
-              <p className="absolute bottom-0 inset-x-0 p-5 t-label text-white/80 bg-gradient-to-t from-black/60 to-transparent">Every build starts with listening</p>
+              <BottomBlur className="h-[35%]" />
+              <p className="absolute bottom-0 inset-x-0 p-5 pt-12 t-label text-white/85 bg-gradient-to-t from-black/60 to-transparent">Every build starts with listening</p>
             </div>
           </BlurIn>
         </div>

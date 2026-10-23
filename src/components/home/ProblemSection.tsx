@@ -94,7 +94,6 @@ export const ProblemSection: React.FC = () => (
         </ol>
       </div>
       <Reveal className="lg:col-span-7 lg:pl-10" delay={0.1}>
-        <p className="t-label text-fg/40 mb-6">Fig. 01 — A normal day</p>
         <Glue />
       </Reveal>
     </div>

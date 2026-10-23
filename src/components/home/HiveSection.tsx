@@ -39,7 +39,6 @@ export const HiveSection: React.FC = () => {
         </div>
 
         <div ref={ref} className="mt-14 md:mt-20" style={{ perspective: 1800 }}>
-          <p className="t-label text-fg/40 mb-5">Fig. 03 — Hive, with sample data</p>
           <motion.div style={reduce ? undefined : { rotateX, scale, y, transformOrigin: '50% 0%' }}>
             <HiveConsole />
           </motion.div>
@@ -60,7 +59,7 @@ export const HiveSection: React.FC = () => {
             <Reveal as="li" key={w.title} delay={i * 0.06} className={cn('pt-8 pb-4 md:pr-8', i > 0 && 'md:border-l md:border-fg/10 md:pl-8')}>
               <h3 className="text-[clamp(1.6rem,2.4vw,2.1rem)] tracking-[-0.03em]">{w.title}</h3>
               <p className="mt-2 text-[15px] text-fg/60">{w.body}</p>
-              <p className="mt-5 rounded-2xl rounded-bl-md bg-fg/[0.05] px-4 py-3 text-[14px] text-fg/80 max-w-[34ch]">“{w.example}”</p>
+              <p className="mt-5 text-[14px] italic text-fg/45 max-w-[34ch]">“{w.example}”</p>
             </Reveal>
           ))}
         </ul>

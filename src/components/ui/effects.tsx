@@ -106,3 +106,20 @@ export const Intro: React.FC = () => {
     </motion.div>
   );
 };
+
+/* ── Progressive blur rising from the bottom of a photo, so text laid over it stays readable ── */
+
+const blurLayers = [
+  { blur: 2, mask: 'linear-gradient(to top, #000 60%, transparent 100%)' },
+  { blur: 8, mask: 'linear-gradient(to top, #000 40%, transparent 80%)' },
+  { blur: 18, mask: 'linear-gradient(to top, #000 20%, transparent 60%)' },
+  { blur: 32, mask: 'linear-gradient(to top, #000 0%, transparent 40%)' },
+];
+
+export const BottomBlur: React.FC<{ className?: string }> = ({ className }) => (
+  <div aria-hidden="true" className={cn('pointer-events-none absolute inset-x-0 bottom-0', className)}>
+    {blurLayers.map(({ blur, mask }) => (
+      <div key={blur} className="absolute inset-0" style={{ backdropFilter: `blur(${blur}px)`, WebkitBackdropFilter: `blur(${blur}px)`, maskImage: mask, WebkitMaskImage: mask }} />
+    ))}
+  </div>
+);

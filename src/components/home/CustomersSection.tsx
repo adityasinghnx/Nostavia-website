@@ -6,14 +6,14 @@ import { cn } from '../../lib/cn';
 import { Label, TextLink } from '../ui/primitives';
 import { EASE, Reveal, SplitHeading } from '../ui/motion';
 import { BeeAvatar } from '../hive/HiveConsole';
+import { BottomBlur } from '../ui/effects';
 
 export const PanelBody: React.FC<{ c: CustomerType }> = ({ c }) => (
   <>
     <h3 className="text-[clamp(1.5rem,2.4vw,2.25rem)] leading-[1.05] tracking-[-0.03em] text-white max-w-[20ch]">{c.headline}</h3>
     <ul className="mt-5 flex flex-col gap-2">
       {c.helps.map((h) => (
-        <li key={h} className="flex items-center gap-2.5 text-[14px] text-white/80">
-          <span aria-hidden="true" className="h-1 w-1 rounded-full bg-honey" />
+        <li key={h} className="text-[14px] text-white/80">
           {h}
         </li>
       ))}
@@ -66,7 +66,8 @@ export const CustomersSection: React.FC = () => {
               >
                 <img src={c.photo} alt="" loading="lazy" decoding="async" className={cn('photo absolute inset-0 h-full w-full object-cover', open ? 'scale-100' : 'scale-110')} />
                 <div className={cn('absolute inset-0 transition-colors duration-700', open ? 'bg-black/10' : 'bg-black/45')} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10" />
+                <BottomBlur className={cn('transition-opacity duration-700', open ? 'h-[62%] opacity-100' : 'h-[40%] opacity-60')} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 via-45% to-black/5" />
                 <span className="absolute left-5 top-5 font-mono text-[12px] text-honey">{String(i + 1).padStart(2, '0')}</span>
                 {!open && (
                   <span className="absolute inset-x-0 bottom-6 flex justify-center">
@@ -98,7 +99,8 @@ export const CustomersSection: React.FC = () => {
           {customerTypes.map((c, i) => (
             <li key={c.id} className="snap-start shrink-0 w-[84vw] sm:w-[60vw] relative overflow-hidden rounded-[18px] min-h-[580px] flex flex-col justify-end">
               <img src={c.photo} alt="" loading="lazy" decoding="async" className="photo absolute inset-0 h-full w-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/15" />
+              <BottomBlur className="h-[70%]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 via-50% to-black/10" />
               <span className="absolute left-5 top-5 font-mono text-[12px] text-honey">{String(i + 1).padStart(2, '0')}</span>
               <div className="relative p-6">
                 <p className="t-label text-honey/90 mb-3">{c.name}</p>

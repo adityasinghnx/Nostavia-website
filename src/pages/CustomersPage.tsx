@@ -39,8 +39,7 @@ const TypeSection: React.FC<{ c: CustomerType; i: number }> = ({ c, i }) => {
                 <p className="t-label text-fg/45">What it helps with</p>
                 <ul className="mt-4 flex flex-col gap-3">
                   {c.helps.map((h) => (
-                    <li key={h} className="flex items-start gap-2.5 text-[15.5px] text-fg/80">
-                      <span aria-hidden="true" className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-accent" />
+                    <li key={h} className="text-[15.5px] text-fg/80">
                       {h}
                     </li>
                   ))}

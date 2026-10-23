@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSeo } from '../lib/useSeo';
 import { CodeWindow } from '../components/hive/CodeWindow';
-import { FigLabel, PageHero, SectionHead } from '../components/page/PageKit';
+import { PageHero, SectionHead } from '../components/page/PageKit';
 import { FinalCta } from '../components/home/FinalCta';
 import { Button, Section } from '../components/ui/primitives';
 import { Reveal } from '../components/ui/motion';
@@ -43,7 +43,7 @@ const DevelopersPage: React.FC = () => {
       >
         <div className="grid lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-4">
-            <FigLabel n="01">Decoding a lab report</FigLabel>
+            <h2 className="text-[19px] tracking-[-0.015em]">Decoding a lab report</h2>
             <p className="mt-4 text-[15px] leading-relaxed text-fg/55 max-w-[36ch]">Send a lab report, get every marker back explained, in your brand.</p>
           </div>
           <CodeWindow className="lg:col-span-8" />

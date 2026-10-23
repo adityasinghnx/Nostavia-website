@@ -30,7 +30,6 @@ export const StudioSection: React.FC = () => (
           </Reveal>
         </div>
         <Reveal className="lg:col-span-7 lg:pl-6" delay={0.1}>
-          <p className="t-label text-fg/40 mb-5">Fig. 02 — One client, two builds, one brand</p>
           <DeviceStage />
         </Reveal>
       </div>

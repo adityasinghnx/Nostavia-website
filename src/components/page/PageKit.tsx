@@ -61,13 +61,6 @@ export const SectionHead: React.FC<{
   </div>
 );
 
-/** Editorial figure label: "Fig. 02 — A Bee, one job" */
-export const FigLabel: React.FC<{ n: string; children: React.ReactNode; className?: string }> = ({ n, children, className }) => (
-  <p className={cn('t-label text-fg/40', className)}>
-    Fig. {n} — {children}
-  </p>
-);
-
 /** Numbered list with hairlines, used for principles and steps. */
 export const RuledList: React.FC<{ items: { title: string; body: string }[]; numbered?: boolean; columns?: 1 | 2 }> = ({ items, numbered = true, columns = 1 }) => (
   <ul className={cn('border-t border-fg/[0.12]', columns === 2 && 'grid md:grid-cols-2 md:gap-x-12')}>

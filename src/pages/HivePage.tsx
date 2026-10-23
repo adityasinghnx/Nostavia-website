@@ -6,7 +6,7 @@ import { STUDIO } from '../content/site';
 import { HiveConsole } from '../components/hive/HiveConsole';
 import { BeeRun } from '../components/hive/BeeRun';
 import { TeamBuilder } from '../components/hive/TeamBuilder';
-import { FigLabel, PageHero, SectionHead } from '../components/page/PageKit';
+import { PageHero, SectionHead } from '../components/page/PageKit';
 import { FinalCta } from '../components/home/FinalCta';
 import { Button, Label, Section } from '../components/ui/primitives';
 import { Reveal, SplitHeading } from '../components/ui/motion';
@@ -70,9 +70,6 @@ const HivePage: React.FC = () => {
           </>
         }
       >
-        <FigLabel n="01" className="mb-6">
-          Hive, with sample data
-        </FigLabel>
         <HiveConsole />
       </PageHero>
 
@@ -125,9 +122,6 @@ const HivePage: React.FC = () => {
       <Section id="bee-run" labelledBy="bee-run-title">
         <div className="wrap">
           <SectionHead id="bee-run-title" label="A Bee at work" title="One job, start to finish." intro="A lab report comes in. Watch what a Bee does with it, and where a person steps in. Pick any step to look closer." />
-          <FigLabel n="02" className="mb-6">
-            A Bee, one job
-          </FigLabel>
           <BeeRun />
         </div>
       </Section>

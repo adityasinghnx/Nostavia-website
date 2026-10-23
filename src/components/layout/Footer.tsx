@@ -91,10 +91,7 @@ export const Footer: React.FC = () => (
           <span>
             © {new Date().getFullYear()} {company.legal}
           </span>
-          <span className="inline-flex items-center gap-2">
-            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-honey animate-pulse2" />
-            <LocalTime />
-          </span>
+          <LocalTime />
         </p>
         <p className="max-w-[60ch] md:text-right">Supports your team’s work. Never makes clinical decisions; clinicians do.</p>
       </div>
