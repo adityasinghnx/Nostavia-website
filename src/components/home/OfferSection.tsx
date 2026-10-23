@@ -32,9 +32,9 @@ const ProductCard: React.FC<{ p: (typeof products)[number]; visual: React.ReactN
           <Arrow className="transition-transform duration-500 ease-out group-hover:translate-x-1" />
         </span>
       </div>
-      {/* The product, on its own stage, cropped by the stage's bottom edge */}
-      <div className="relative mx-2.5 mb-2.5 h-[clamp(300px,30vw,430px)] overflow-hidden rounded-[20px] border border-fg/[0.06] bg-[radial-gradient(70%_60%_at_50%_100%,rgba(242,210,122,0.09),transparent_75%),linear-gradient(180deg,rgb(var(--fg)/0.045),rgb(var(--fg)/0.015))]">
-        <div className="absolute inset-x-0 top-[13%] flex justify-center px-6 transition-transform duration-700 ease-out group-hover:-translate-y-2">{visual}</div>
+      {/* The product, whole, on its own stage */}
+      <div className="relative mx-2.5 mb-2.5 h-[clamp(360px,34vw,480px)] overflow-hidden rounded-[20px] border border-fg/[0.06] bg-[radial-gradient(70%_60%_at_50%_100%,rgba(242,210,122,0.09),transparent_75%),linear-gradient(180deg,rgb(var(--fg)/0.045),rgb(var(--fg)/0.015))]">
+        <div className="absolute inset-0 flex items-center justify-center p-6 md:p-8 [container-type:size] transition-transform duration-700 ease-out group-hover:-translate-y-1.5">{visual}</div>
       </div>
     </Link>
   </Reveal>
@@ -57,7 +57,7 @@ export const OfferSection: React.FC = () => (
         <ProductCard
           p={humanOs}
           visual={
-            <div className="w-full max-w-[460px]">
+            <div className="w-[min(100%,440px,95cqh)]">
               <ReportCard />
             </div>
           }
@@ -66,7 +66,7 @@ export const OfferSection: React.FC = () => (
           p={studio}
           delay={0.08}
           visual={
-            <div className="w-[min(62%,260px)]">
+            <div className="h-full aspect-[414/868]">
               <BrandedApp />
             </div>
           }

@@ -19,7 +19,7 @@ const verdictTone: Record<string, string> = {
 };
 
 export const ReportCard: React.FC<{ className?: string }> = ({ className }) => (
-  <ScaledFrame width={520} height={500} className={className} label="Sample Human OS report: biological age, heart risk and four lab markers, each explained in plain language.">
+  <ScaledFrame width={520} height={548} className={className} label="Sample Human OS report: biological age, heart risk and four lab markers, each explained in plain language.">
     <div className="h-full w-full rounded-[20px] border border-white/[0.09] bg-[#121010] p-6 font-sans text-left shadow-[0_40px_90px_-40px_rgba(0,0,0,0.9)]">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2.5">
