@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { SITE_ORIGIN } from '../content/human-os';
+import { SITE_ORIGIN } from '../content/site';
 
 interface SeoOptions {
   title: string;
@@ -49,7 +49,7 @@ export const useSeo = ({ title, description, path, type = 'website' }: SeoOption
       upsertMeta('property', 'og:description', description),
       upsertMeta('property', 'og:url', url),
       upsertMeta('property', 'og:type', type),
-      upsertMeta('property', 'og:site_name', 'Nostavia Health'),
+      upsertMeta('property', 'og:site_name', 'Nostavia'),
       upsertMeta('name', 'twitter:card', 'summary'),
       upsertMeta('name', 'twitter:title', title),
       upsertMeta('name', 'twitter:description', description),

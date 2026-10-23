@@ -1,28 +1,31 @@
 import React from 'react';
+import { useSeo } from '../lib/useSeo';
+import { ONE_LINER } from '../content/site';
+import { Hero } from '../components/home/Hero';
+import { ConsoleShowcase } from '../components/home/ConsoleShowcase';
+import { LogoStrip } from '../components/home/LogoStrip';
+import { Structure } from '../components/home/Structure';
+import { HumanOsSection } from '../components/home/HumanOsSection';
+import { StudioSection } from '../components/home/StudioSection';
+import { CustomersSection } from '../components/home/CustomersSection';
+import { DevelopersSection } from '../components/home/DevelopersSection';
+import { TrustSection } from '../components/home/TrustSection';
+import { FinalCta } from '../components/home/FinalCta';
 
-import { LogoTrustBar } from '../components/LogoTrustBar';
-import { Hero } from '../components/home2/Hero';
-import { CapabilityBento } from '../components/home2/CapabilityBento';
-import { HumanOsExplorer } from '../components/home2/HumanOsExplorer';
-import { Industries } from '../components/home2/Industries';
-import { ShipItYourWay } from '../components/home2/ShipItYourWay';
-import { Developers } from '../components/home2/Developers';
-import { Customers } from '../components/home2/Customers';
-import { EnterpriseReady } from '../components/home2/EnterpriseReady';
-import { FinalCta } from '../components/home2/FinalCta';
-
-/* Dark redesign: new structure and copy. The light homepage is kept on the light-theme-v1 branch. */
-export const HomePage: React.FC<{ onOpenDemo?: () => void }> = () => (
-  <div className="flex flex-col text-white overflow-x-clip bg-ink-950">
-    <Hero />
-    <LogoTrustBar />
-    <CapabilityBento />
-    <HumanOsExplorer />
-    <Industries />
-    <ShipItYourWay />
-    <Developers />
-    <Customers />
-    <EnterpriseReady />
-    <FinalCta />
-  </div>
-);
+export const HomePage: React.FC = () => {
+  useSeo({ title: 'Nostavia: one place where AI Bees run your health business', description: ONE_LINER, path: '/' });
+  return (
+    <>
+      <Hero />
+      <ConsoleShowcase />
+      <LogoStrip />
+      <Structure />
+      <HumanOsSection />
+      <StudioSection />
+      <CustomersSection />
+      <DevelopersSection />
+      <TrustSection />
+      <FinalCta />
+    </>
+  );
+};

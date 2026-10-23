@@ -1,32 +1,15 @@
 import { defineConfig, Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import { HUMAN_OS_PATH, SITE_ORIGIN, systemPath, systems } from './src/content/human-os';
+import { SITE_ORIGIN, STUDIO_PATH } from './src/content/site';
+import { HUMAN_OS_PATH, systemPath, systems } from './src/content/human-os';
 
-/* Indexable routes. Aliases that render the same page (e.g. /solutions/voice-agents) are left out. */
-const STATIC_ROUTES = [
-  '/',
-  '/platform',
-  '/pricing',
-  '/security',
-  '/clinical',
-  '/company',
-  '/demo',
-  '/industries/diagnostic-labs',
-  '/industries/clinics',
-  '/industries/hospitals',
-  '/industries/supplements',
-  '/solutions/engineering',
-  '/solutions/storyhealth',
-  '/solutions/gravity',
-  '/solutions/front-desk',
-  '/solutions/hospitals',
-  '/solutions/comet',
-];
+/* Indexable routes. Old routes redirect (vercel.json) and are left out. */
+const STATIC_ROUTES = ['/', '/hive', HUMAN_OS_PATH, STUDIO_PATH, '/customers', '/developers', '/company', '/security', '/demo'];
 
 const buildSitemap = () => {
-  // Human OS routes come from the content file so new systems are picked up automatically.
-  const routes = [...STATIC_ROUTES, HUMAN_OS_PATH, ...systems.map((s) => systemPath(s.slug))];
+  // System pages come from the content file so new systems are picked up automatically.
+  const routes = [...STATIC_ROUTES, ...systems.map((s) => systemPath(s.slug))];
   const urls = routes.map((r) => `  <url><loc>${SITE_ORIGIN}${r}</loc></url>`).join('\n');
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
 };

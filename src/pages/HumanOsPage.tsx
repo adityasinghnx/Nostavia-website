@@ -1,171 +1,159 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowDown } from 'lucide-react';
-import {
-  HUMAN_OS_PATH,
-  hospitalProgrammes,
-  numberWord,
-  statusDefinitions,
-  steps,
-  totalModules,
-  totalSystems,
-} from '../content/human-os';
+import { Search } from 'lucide-react';
 import { useSeo } from '../lib/useSeo';
-import { RingVisual } from '../components/human-os/RingVisual';
-import { BuyerGrid } from '../components/human-os/BuyerMapping';
-import { HospitalProgrammes } from '../components/human-os/HospitalProgrammes';
-import { StatusBadge } from '../components/human-os/StatusBadge';
-import { Disclaimer } from '../components/human-os/Disclaimer';
-import { eyebrow, focusRing, primaryCta, secondaryCta } from '../components/human-os/styles';
+import { categories, statusLabel, systemPath, systemsIn, type CategoryId } from '../content/human-os';
+import { DISCLAIMER, FLAGS } from '../content/site';
+import { PageHero, SectionHead } from '../components/page/PageKit';
+import { CategorySwitch } from '../components/home/HumanOsSection';
+import { FinalCta } from '../components/home/FinalCta';
+import { Arrow, Button, Section, StatusDot } from '../components/ui/primitives';
+import { Reveal } from '../components/ui/motion';
+import { cn } from '../lib/cn';
 
-const RINGS_ANCHOR = 'systems';
+const howSteps = [
+  { title: 'Pick modules', body: 'Start with the few that match your business. Add more whenever you like.' },
+  { title: 'Get your keys', body: 'API keys and docs come from the SDK Portal.' },
+  { title: 'Try them first', body: 'Every module can be tried in a sandbox with fictional data.' },
+  { title: 'Bees run them', body: 'Once switched on, they show up in Hive and the Bees run them.' },
+];
 
-const subhead = `${numberWord(totalSystems)} systems and ${totalModules} modules, delivered through one integration, entirely under your brand.`;
-
-const SectionHeader: React.FC<{ id: string; eyebrowText: string; title: string; intro?: string }> = ({ id, eyebrowText, title, intro }) => (
-  <div className="space-y-3 max-w-3xl">
-    <div className={eyebrow}>{eyebrowText}</div>
-    <h2 id={id} className="font-display font-extrabold text-3xl sm:text-5xl text-white tracking-tight leading-[1.05]">
-      {title}
-    </h2>
-    {intro && <p className="text-base sm:text-lg text-white/60 leading-relaxed">{intro}</p>}
-  </div>
-);
-
-export const HumanOsPage: React.FC = () => {
+const HumanOsPage: React.FC = () => {
   useSeo({
-    title: 'Human OS: every body gets an operating system | Nostavia Health',
-    description: subhead,
-    path: HUMAN_OS_PATH,
+    title: "Human OS: what we've built | Nostavia",
+    description: 'Ready-made health AI modules for your customers and for your care team. Pick what you need, get it through the SDK Portal, and run it in Hive.',
+    path: '/human-os',
   });
 
+  const [category, setCategory] = useState<CategoryId>('person');
+  const [query, setQuery] = useState('');
+  const [liveOnly, setLiveOnly] = useState(false);
+
+  const results = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return systemsIn(category)
+      .map((s) => ({
+        system: s,
+        modules: s.modules.filter(
+          (m) => (!liveOnly || m.status === 'live') && (!q || m.name.toLowerCase().includes(q) || m.description.toLowerCase().includes(q) || s.name.toLowerCase().includes(q)),
+        ),
+      }))
+      .filter((r) => r.modules.length > 0);
+  }, [category, query, liveOnly]);
+
   return (
-    <div className="flex flex-col gap-20 sm:gap-28 pb-16 font-body text-white bg-white/[0.03]">
-      {/* Hero */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full pt-12 sm:pt-20">
-        <div className="max-w-4xl space-y-6">
-          <div className={eyebrow}>Human OS</div>
-          <h1 className="font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl text-white tracking-tight leading-[1.02]">
-            Every body gets an operating system.
-          </h1>
-          <div className="w-16 h-1 bg-hos-yellow" aria-hidden="true" />
-          <p className="text-lg sm:text-xl text-white/60 leading-relaxed max-w-2xl">{subhead}</p>
-          <div className="flex flex-wrap gap-3 pt-2">
-            <Link to="/demo" className={primaryCta}>
-              Request a demo
-            </Link>
-            <a href={`#${RINGS_ANCHOR}`} className={secondaryCta}>
-              Explore the systems
-              <ArrowDown aria-hidden="true" className="w-4 h-4" />
-            </a>
-          </div>
-        </div>
-      </section>
+    <>
+      <PageHero
+        label="Human OS"
+        display
+        title="What we've *built.*"
+        intro="Ready-made modules for the people you serve and the team that serves them. Pick the ones you need, get them through the SDK Portal, and the Bees run them in Hive."
+        actions={
+          <>
+            <Button to="/demo" size="lg">
+              Book a demo
+            </Button>
+            <Button to="/developers" size="lg" variant="secondary">
+              For developers
+            </Button>
+          </>
+        }
+        aside={
+          <dl className="grid grid-cols-2 border-t border-fg/10">
+            {categories.map((c, i) => (
+              <div key={c.id} className={cn('pt-5', i > 0 && 'border-l border-fg/10 pl-5')}>
+                <dt className="text-[15px]">{c.name}</dt>
+                <dd className="mt-2 text-[13.5px] leading-relaxed text-fg/50">{c.summary}</dd>
+              </div>
+            ))}
+          </dl>
+        }
+      />
 
-      {/* The two rings */}
-      <section aria-labelledby="rings-heading" className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-8 scroll-mt-24" id={RINGS_ANCHOR}>
-        {/* TODO(copy): heading and intro for the rings section */}
-        <SectionHeader
-          id="rings-heading"
-          eyebrowText="The two rings"
-          title={`${numberWord(totalSystems)} systems in two rings`}
-          intro="Buyers choose systems. Modules sit inside them."
-        />
-        <RingVisual />
-      </section>
-
-      {/* How it works */}
-      <section aria-labelledby="how-heading" className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-8">
-        <SectionHeader id="how-heading" eyebrowText="How it works" title="How it works" />
-        <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {steps.map((step, i) => (
-            <li key={step.title} className="flex flex-col gap-3 rounded-[10px] border border-white/[0.08] bg-white/[0.04] p-5 sm:p-6">
-              <span className="w-9 h-9 rounded-full bg-hos-yellow text-white flex items-center justify-center font-mono text-sm font-bold" aria-hidden="true">
-                {i + 1}
-              </span>
-              <h3 className="font-display font-extrabold text-lg text-white">
-                <span className="sr-only">Step {i + 1}: </span>
-                {step.title}
-              </h3>
-              <p className="text-sm text-white/60 leading-relaxed">{step.body}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      {/* Who it's for */}
-      <section aria-labelledby="who-heading" className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-8">
-        <SectionHeader id="who-heading" eyebrowText="Who it's for" title="Who it's for" />
-        <BuyerGrid />
-      </section>
-
-      {/* For hospitals */}
-      <section aria-labelledby="hospitals-heading" className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-8">
-        {/* TODO(copy): intro line for the hospital programmes section */}
-        <SectionHeader
-          id="hospitals-heading"
-          eyebrowText="For hospitals"
-          title="For hospitals"
-          intro={`${numberWord(hospitalProgrammes.length)} programmes, each powered by the systems listed with it.`}
-        />
-        <HospitalProgrammes />
-        <div>
-          <Link to="/industries/hospitals" className={`inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-white hover:text-hos-yellow ${focusRing}`}>
-            See Human OS for hospitals
-            <ArrowRight aria-hidden="true" className="w-3.5 h-3.5" />
-          </Link>
-        </div>
-      </section>
-
-      {/* Status legend */}
-      <section aria-labelledby="status-heading" className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full space-y-8">
-        <SectionHeader id="status-heading" eyebrowText="Status legend" title="What each status means" />
-        <p className="text-base text-white/60 leading-relaxed max-w-2xl">
-          Modules without a tag are live: shipped and switchable from the Partner Portal today.
-        </p>
-        <dl className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {statusDefinitions.filter((d) => d.status !== 'live').map((d) => (
-            <div key={d.status} className="flex flex-col gap-3 rounded-[10px] border border-white/[0.08] bg-white/[0.03] p-5 sm:p-6">
-              <dt>
-                <StatusBadge status={d.status} />
-              </dt>
-              <dd className="text-sm text-white/60 leading-relaxed">{d.definition}</dd>
+      <Section labelledBy="catalogue" className="!pt-0">
+        <div className="wrap">
+          <h2 id="catalogue" className="sr-only">
+            Module catalogue
+          </h2>
+          <div className="sticky top-[68px] z-20 -mx-[clamp(1rem,4vw,3rem)] px-[clamp(1rem,4vw,3rem)] py-4 bg-bg/85 backdrop-blur-xl border-y border-fg/[0.07] flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <CategorySwitch id="catalogue" value={category} onChange={setCategory} />
+            <div className="flex items-center gap-3">
+              {FLAGS.SHOW_MODULE_STATUS && (
+                <label className="inline-flex items-center gap-2 text-[13.5px] text-fg/60 cursor-pointer select-none">
+                  <input type="checkbox" checked={liveOnly} onChange={(e) => setLiveOnly(e.target.checked)} className="peer sr-only" />
+                  <span className="relative h-5 w-9 rounded-full bg-fg/15 transition-colors peer-checked:bg-honey peer-focus-visible:ring-2 peer-focus-visible:ring-accent after:absolute after:left-0.5 after:top-0.5 after:h-4 after:w-4 after:rounded-full after:bg-bone after:transition-transform peer-checked:after:translate-x-4" />
+                  Live only
+                </label>
+              )}
+              <label className="relative flex-1 md:flex-none">
+                <span className="sr-only">Search modules</span>
+                <Search aria-hidden="true" className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-fg/35" />
+                <input
+                  type="search"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search modules"
+                  className="h-10 w-full md:w-64 rounded-full border border-fg/15 bg-fg/[0.03] pl-10 pr-4 text-[14px] placeholder:text-fg/35 focus:outline-none focus:border-accent/60"
+                />
+              </label>
             </div>
-          ))}
-        </dl>
-      </section>
+          </div>
 
-      {/* Trust strip */}
-      <section aria-labelledby="trust-heading" className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full">
-        <div className="border-y border-white/[0.08] py-8 flex flex-col md:flex-row md:items-center gap-3 md:gap-10">
-          <h2 id="trust-heading" className="font-display font-extrabold text-xl sm:text-2xl text-white shrink-0">
-            Every output is decision support.
-          </h2>
-          <Disclaimer />
+          <div id="catalogue-panel" role="tabpanel" aria-labelledby={`catalogue-tab-${category}`} aria-live="polite">
+            {results.length === 0 && <p className="py-20 text-center text-fg/50">No modules match “{query}”.</p>}
+            {results.map(({ system, modules }) => (
+              <article key={system.slug} className="grid lg:grid-cols-12 gap-x-10 gap-y-6 py-14 border-b border-fg/10">
+                <div className="lg:col-span-4">
+                  <div className="lg:sticky lg:top-44">
+                    <p className="font-mono text-[12px] text-accent">{system.number}</p>
+                    <h3 className="mt-3 text-[clamp(1.75rem,2.6vw,2.4rem)] leading-[1.05] tracking-[-0.03em]">{system.name}</h3>
+                    <p className="mt-3 text-[15px] leading-relaxed text-fg/55 max-w-[36ch]">{system.description}</p>
+                    <p className="mt-4 text-[13px] text-fg/40">Best for: {system.bestFit}</p>
+                    <Link to={systemPath(system.slug)} className="group mt-6 inline-flex items-center gap-2 text-[14px] hover:text-accent transition-colors">
+                      Open {system.name} <Arrow className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+                    </Link>
+                  </div>
+                </div>
+                <ul className="lg:col-span-8 grid sm:grid-cols-2 gap-3">
+                  {modules.map((m) => (
+                    <li key={m.name} className="rounded-2xl border border-fg/10 bg-fg/[0.015] p-6 flex flex-col gap-3 hover:border-fg/25 transition-colors">
+                      <div className="flex items-center justify-between gap-3">
+                        <h4 className="text-[17px] tracking-[-0.015em]">{m.name}</h4>
+                        {FLAGS.SHOW_MODULE_STATUS && (
+                          <span className="inline-flex items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.1em] text-fg/45">
+                            <StatusDot status={m.status} />
+                            {statusLabel[m.status]}
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-[14.5px] leading-relaxed text-fg/60">{m.description}</p>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+          <p className="mt-10 max-w-[80ch] text-[13px] leading-relaxed text-fg/45">{DISCLAIMER}</p>
         </div>
-      </section>
+      </Section>
 
-      {/* Closing CTA */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full">
-        <div className="p-8 sm:p-16 bg-ink-800 text-white rounded-[2px] text-center flex flex-col items-center gap-6">
-          <div className="w-16 h-1 bg-hos-yellow" aria-hidden="true" />
-          {/* TODO(copy): closing CTA heading and line */}
-          <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-white max-w-3xl leading-[1.05] tracking-tight">
-            Start with two or three systems.
-          </h2>
-          <p className="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
-            Try every module in a sandbox with fictional data first, then switch it on from the Partner Portal.
-          </p>
-          <Link
-            to="/demo"
-            className={`bg-white/[0.03] hover:bg-white/[0.06] text-white text-sm font-semibold px-6 py-3.5 rounded-full shadow-md transition-all inline-flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hos-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950`}
-          >
-            Request a demo
-            <ArrowRight aria-hidden="true" className="w-4 h-4" />
-          </Link>
+      <Section theme="paper" labelledBy="hos-how">
+        <div className="wrap">
+          <SectionHead id="hos-how" label="Getting started" title="From picking a module to Bees running it." />
+          <ol className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 border-t border-fg/[0.12] pt-10">
+            {howSteps.map((s, i) => (
+              <Reveal as="li" key={s.title} delay={i * 0.06}>
+                <p className="font-mono text-[12px] text-accent">{String(i + 1).padStart(2, '0')}</p>
+                <h3 className="mt-4 t-h3">{s.title}</h3>
+                <p className="mt-3 text-[15px] leading-relaxed text-fg/60 max-w-[30ch]">{s.body}</p>
+              </Reveal>
+            ))}
+          </ol>
         </div>
-      </section>
-    </div>
+      </Section>
+
+      <FinalCta title="Find the modules that *fit you.*" body="Tell us about your business and we'll show you the few modules worth starting with." />
+    </>
   );
 };
 

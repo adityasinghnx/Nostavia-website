@@ -2,178 +2,199 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Theme. Sections opt in with data-theme; components use bg / fg / surface / accent. ── */
+:root,
+[data-theme='ink'] {
+  --bg: 11 10 8;
+  --fg: 242 237 227;
+  --surface: 22 20 17;
+  --accent: 242 210 122;
+  color-scheme: dark;
+}
+
+[data-theme='paper'] {
+  --bg: 242 237 227;
+  --fg: 22 20 16;
+  --surface: 250 248 243;
+  --accent: 138 101 17;
+  color-scheme: light;
+}
+
+[data-theme] {
+  color: rgb(var(--fg));
+}
+[data-theme]:not(header) {
+  background-color: rgb(var(--bg));
+}
+
 @layer base {
-  :root {
-    --brand-purple: #DFB4FF;
-    --brand-periwinkle: #D1C4FF;
-    --brand-ice: #B8DBFF;
-    --brand-cyan: #92D0EA;
-    --brand-teal: #69C3D3;
-    
-    --page: #07080A;
-    --surface: #F8F9FA;
-    --surface-raised: #FFFFFF;
-    --surface-dark: #000000;
-    --line: #E5E7EB;
-    --line-bright: #D1D5DB;
-    --line-dark: #1F2937;
-    --blue: #69C3D3;
-    --blue-dim: #92D0EA;
-    --blue-wash: #EFF6FF;
-    --optimal: #059669;
-    --in-range: #64748B;
-    --outlier: #D97706;
-    --text: #E9EAEE;
-    --text-muted: #475569;
-    --text-faint: #94A3B8;
-  }
-
-  *, body, button, input, select, textarea, p, span, div, h1, h2, h3, h4, h5, h6, a, label, code, pre {
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
-  }
-
-  /* Code samples only: real monospace, scoped so the site font stays Plus Jakarta Sans */
-  .dk-code, .dk-code * {
-    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace !important;
-    font-variant-ligatures: none;
-  }
-
-  html, body {
-    overflow-x: clip;
-    max-width: 100vw;
-    -webkit-tap-highlight-color: transparent;
+  html {
+    -webkit-text-size-adjust: 100%;
+    background: #0b0a08;
   }
 
   body {
-    background-color: var(--page);
-    color: var(--text);
+    @apply font-sans antialiased;
+    background: #0b0a08;
+    color: rgb(var(--fg));
+    font-feature-settings: 'kern', 'liga', 'calt';
+    text-rendering: optimizeLegibility;
   }
 
   ::selection {
-    background-color: #F5D97B !important;
-    color: #07080A !important;
-  }
-  ::-moz-selection {
-    background-color: #F5D97B !important;
-    color: #07080A !important;
+    background: #f2d27a;
+    color: #0b0a08;
   }
 
-  html {
-    color-scheme: dark;
-    scrollbar-color: #2A2E37 #07080A;
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 3px;
+    border-radius: 6px;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    letter-spacing: -0.025em;
+  img {
+    -webkit-user-drag: none;
   }
-}
 
-/* Custom scrollbar and utilities */
-.scrollbar-none::-webkit-scrollbar {
-  display: none;
-}
-.scrollbar-none {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Infinite Marquee Animations for Agent Cards Mosaic */
-@keyframes marquee-down {
-  0% {
-    transform: translateY(-50%);
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
   }
-  100% {
-    transform: translateY(0%);
+  ::-webkit-scrollbar-track {
+    background: #0b0a08;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2b2620;
+    border-radius: 99px;
+    border: 3px solid #0b0a08;
   }
 }
 
-@keyframes marquee-up {
-  0% {
-    transform: translateY(0%);
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: 1360px;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 3rem);
   }
-  100% {
-    transform: translateY(-50%);
+
+  /* Type scale */
+  .t-display {
+    font-size: clamp(3rem, 8.2vw, 8.5rem);
+    line-height: 0.93;
+    letter-spacing: -0.048em;
+    font-weight: 480;
+  }
+  .t-h1 {
+    font-size: clamp(2.6rem, 6vw, 5.75rem);
+    line-height: 0.96;
+    letter-spacing: -0.042em;
+    font-weight: 480;
+  }
+  .t-h2 {
+    font-size: clamp(2.15rem, 4.3vw, 4.1rem);
+    line-height: 1.01;
+    letter-spacing: -0.036em;
+    font-weight: 480;
+  }
+  .t-h3 {
+    font-size: clamp(1.45rem, 2.1vw, 1.95rem);
+    line-height: 1.12;
+    letter-spacing: -0.026em;
+    font-weight: 500;
+  }
+  .t-lead {
+    font-size: clamp(1.075rem, 1.35vw, 1.3rem);
+    line-height: 1.55;
+    letter-spacing: -0.011em;
+  }
+  .t-body {
+    font-size: 1rem;
+    line-height: 1.65;
+    letter-spacing: -0.006em;
+  }
+  .t-label {
+    @apply font-mono;
+    font-size: 11.5px;
+    line-height: 1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  /* Serif accent inside headings: "run from *one place*." */
+  .em {
+    font-family: 'Instrument Serif', ui-serif, Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.012em;
+    font-size: 1.08em;
+  }
+
+  .hairline {
+    border-color: rgb(var(--fg) / 0.1);
+  }
+
+  /* Warm, consistent treatment for stock photography */
+  .photo {
+    filter: grayscale(1) sepia(0.22) contrast(1.06) brightness(0.82);
+    transition: filter 900ms cubic-bezier(0.22, 1, 0.36, 1), transform 1400ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
   }
 }
 
-.animate-marquee-down {
-  animation: marquee-down 24s linear infinite;
-  will-change: transform;
+/* Film grain over everything. Static, so it costs one paint. No blend mode: it breaks compositing in some engines. */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 80;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
-.animate-marquee-up {
-  animation: marquee-up 24s linear infinite;
-  will-change: transform;
+/* Hairline grid used behind a few sections */
+.grid-lines {
+  background-image: linear-gradient(to right, rgb(var(--fg) / 0.055) 1px, transparent 1px);
+  background-size: calc(100% / 12) 100%;
 }
 
-.group-marquee:hover .animate-marquee-down,
-.group-marquee:hover .animate-marquee-up {
-  animation-play-state: paused;
+.mask-fade-x {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
 }
-
-@keyframes marquee-left {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+.mask-fade-b {
+  -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent);
+  mask-image: linear-gradient(to bottom, #000 60%, transparent);
 }
-
-.animate-marquee-left {
-  animation: marquee-left 30s linear infinite;
-  will-change: transform;
-}
-
-
-/* ── Homepage motion (Human OS palette). Every animation is gated by prefers-reduced-motion. ── */
-@keyframes hos-ping { 0% { transform: scale(1); opacity: 0.75; } 80%, 100% { transform: scale(2.6); opacity: 0; } }
-@keyframes hos-wave { 0%, 100% { transform: scaleY(0.3); } 50% { transform: scaleY(1); } }
-@keyframes hos-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-@keyframes hos-draw { from { stroke-dashoffset: 400; } to { stroke-dashoffset: 0; } }
-@keyframes hos-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@keyframes hos-rise { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-@keyframes hos-fade-up { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-
-.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1); }
-.reveal.is-visible { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
-  .hos-anim, .hos-anim * { animation: none !important; }
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
-@keyframes hos-flow { from { transform: translateX(-12px); opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } to { transform: translateX(60px); opacity: 0; } }
-@keyframes hos-flow-y { from { transform: translateY(-8px); opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } to { transform: translateY(48px); opacity: 0; } }
-/* Animations inside a block wait until it scrolls into view */
-.reveal:not(.is-visible) * { animation-play-state: paused !important; }
-
-/* ── Dark theme utilities ── */
-.dk-grid {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 64px 64px;
-}
-.dk-fade-mask { -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 25%, transparent 72%); mask-image: radial-gradient(ellipse at 50% 30%, #000 25%, transparent 72%); }
-.dk-text-gradient {
-  background: linear-gradient(180deg, #FFFFFF 10%, rgba(255, 255, 255, 0.58) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.dk-text-sun {
-  background: linear-gradient(90deg, #F5D97B 0%, #FFF0BF 55%, #F5D97B 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.dk-card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.015) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-.dk-ring-sun { box-shadow: 0 0 0 1px rgba(245, 217, 123, 0.35), 0 30px 80px -30px rgba(245, 217, 123, 0.35); }
-@keyframes dk-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-/* Product window (hero console) */
-@keyframes pw-slide { from { left: 0%; opacity: 0; } }
-@keyframes pw-draw { from { stroke-dashoffset: 600; } to { stroke-dashoffset: 0; } }
-@keyframes pw-dash { to { stroke-dashoffset: -20; } }

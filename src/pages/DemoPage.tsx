@@ -1,573 +1,204 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Calendar, CheckCircle2, ChevronDown, Clock, FileText, Mail, ShieldCheck, Stethoscope, Upload } from 'lucide-react';
-import { Container, Eyebrow, focusRing } from '../components/home/shared';
-import { Reveal } from '../components/home/motion';
-import { InfrastructureGroup } from '../components/trust/TrustElements';
-import { TRUST_CONTACT, trustPick } from '../content/trust.config';
+import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { AnimatePresence, motion } from 'motion/react';
+import { Check } from 'lucide-react';
 import { useSeo } from '../lib/useSeo';
+import { newRefId, submitLead } from '../lib/leads';
+import { CALENDAR_URL, CONTACT_EMAIL, STUDIO } from '../content/site';
+import { customerTypes } from '../content/customers';
+import { Button, Label } from '../components/ui/primitives';
+import { EASE, Reveal, SplitHeading } from '../components/ui/motion';
+import { cn } from '../lib/cn';
 
-interface DemoRequest {
-  refId: string;
-  name: string;
-  email: string;
-  phone?: string;
-  company: string;
-  role: string;
-  segment: string;
-  market: string;
-  notes: string;
-  sampleFile?: string | null;
-  submittedAt: string;
-}
+const interests = [
+  { id: 'hive', label: 'Hive' },
+  { id: 'human-os', label: 'Human OS' },
+  { id: 'studio', label: STUDIO },
+  { id: 'developers', label: 'SDK Portal' },
+];
 
-export const DemoPage: React.FC = () => {
-  const [submitted, setSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [fileName, setFileName] = useState<string | null>(null);
-  const [fileSize, setFileSize] = useState<string | null>(null);
-  const [refId, setRefId] = useState<string>('');
-  const [showAdmin, setShowAdmin] = useState(false);
-  const [submissions, setSubmissions] = useState<DemoRequest[]>([]);
-  const [web3Key, setWeb3Key] = useState<string>('');
-  const [formspreeId, setFormspreeId] = useState<string>('');
-  
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    company: '',
-    role: '',
-    segment: 'Diagnostic lab network',
-    market: 'UAE & GCC',
-    notes: ''
-  });
+const expect = [
+  { title: 'We listen', body: 'Fifteen minutes on your business and where your team loses time.' },
+  { title: 'We show you Hive', body: 'With the modules that fit you, running on sample data.' },
+  { title: 'You get a plan', body: 'What Bees would take on first, and what we would build.' },
+];
 
-  // Load submissions and API keys on mount
-  useEffect(() => {
-    loadSubmissions();
-    const savedWeb3Key = localStorage.getItem('nostavia_web3forms_key') || '';
-    const savedFormspree = localStorage.getItem('nostavia_formspree_id') || '';
-    setWeb3Key(savedWeb3Key);
-    setFormspreeId(savedFormspree);
-  }, []);
+const field =
+  'w-full h-12 rounded-xl border border-fg/15 bg-fg/[0.03] px-4 text-[15px] text-fg placeholder:text-fg/30 transition-colors focus:outline-none focus:border-accent/70 aria-[invalid=true]:border-signal-alert/70';
 
-  const loadSubmissions = () => {
-    try {
-      const existing = JSON.parse(localStorage.getItem('nostavia_demo_requests') || '[]');
-      setSubmissions(existing);
-    } catch {
-      setSubmissions([]);
-    }
-  };
-
-  const handleSaveWeb3Key = (key: string) => {
-    setWeb3Key(key);
-    localStorage.setItem('nostavia_web3forms_key', key);
-  };
-
-  const handleSaveFormspreeId = (id: string) => {
-    setFormspreeId(id);
-    localStorage.setItem('nostavia_formspree_id', id);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    const generatedRefId = 'NST-' + Math.floor(100000 + Math.random() * 900000);
-    setRefId(generatedRefId);
-
-    const payload: DemoRequest = {
-      ...formData,
-      refId: generatedRefId,
-      sampleFile: fileName,
-      submittedAt: new Date().toLocaleString()
-    };
-
-    try {
-      // 1. Store in browser localStorage
-      const existing = JSON.parse(localStorage.getItem('nostavia_demo_requests') || '[]');
-      const updated = [payload, ...existing];
-      localStorage.setItem('nostavia_demo_requests', JSON.stringify(updated));
-      setSubmissions(updated);
-
-      // 2. Dispatch directly to user's Formspree endpoint (https://formspree.io/f/xbdnezwz)
-      const customFormspreeId = localStorage.getItem('nostavia_formspree_id')?.trim();
-      const formspreeEndpoint = customFormspreeId
-        ? (customFormspreeId.startsWith('http') ? customFormspreeId : `https://formspree.io/f/${customFormspreeId}`)
-        : 'https://formspree.io/f/xbdnezwz';
-
-      await fetch(formspreeEndpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(payload)
-      }).catch(() => null);
-
-      // Dual backup dispatch to FormSubmit.co
-      await fetch('https://formsubmit.co/ajax/contact@nostaviahealth.com', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          _subject: `NEW NOSTAVIA DEMO REQUEST [${generatedRefId}]: ${formData.name} - ${formData.company}`,
-          _template: 'table',
-          _captcha: 'false',
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone || 'N/A',
-          company: formData.company,
-          role: formData.role,
-          segment: formData.segment,
-          market: formData.market,
-          sampleFile: fileName || 'None',
-          notes: formData.notes || 'None',
-          refId: generatedRefId
-        })
-      }).catch(() => null);
-
-      await new Promise((resolve) => setTimeout(resolve, 600));
-    } catch {
-      // Fallback continuation
-    } finally {
-      setIsSubmitting(false);
-      setSubmitted(true);
-      setTimeout(() => {
-        window.location.href = 'https://calendar.app.google/cysR8LF2gMtuneNs9';
-      }, 500);
-    }
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      setFileName(file.name);
-      const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
-      setFileSize(sizeInMB + ' MB');
-    }
-  };
-
-  const clearFile = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setFileName(null);
-    setFileSize(null);
-  };
-
-  const exportToCSV = () => {
-    if (submissions.length === 0) return;
-    const headers = ['Ref ID', 'Date', 'Name', 'Email', 'Phone', 'Company', 'Role', 'Segment', 'Region', 'File', 'Notes'];
-    const rows = submissions.map(s => [
-      s.refId,
-      s.submittedAt,
-      `"${s.name.replace(/"/g, '""')}"`,
-      `"${s.email.replace(/"/g, '""')}"`,
-      `"${(s.phone || '').replace(/"/g, '""')}"`,
-      `"${s.company.replace(/"/g, '""')}"`,
-      `"${s.role.replace(/"/g, '""')}"`,
-      `"${s.segment.replace(/"/g, '""')}"`,
-      `"${s.market.replace(/"/g, '""')}"`,
-      `"${(s.sampleFile || '').replace(/"/g, '""')}"`,
-      `"${(s.notes || '').replace(/"/g, '""')}"`
-    ]);
-    const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement('a');
-    link.setAttribute('href', encodedUri);
-    link.setAttribute('download', `nostavia_demo_requests_${new Date().toISOString().slice(0, 10)}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  const clearSubmissions = () => {
-    if (window.confirm('Are you sure you want to clear all logged submissions?')) {
-      localStorage.removeItem('nostavia_demo_requests');
-      setSubmissions([]);
-    }
-  };
-
+const DemoPage: React.FC = () => {
   useSeo({
-    title: 'Request a Demo | Nostavia Health',
-    description:
-      'Book a 30-minute Nostavia demo on live product, not slides. Send a de-identified sample lab report in advance and see the output on your own panel.',
+    title: 'Book a demo | Nostavia',
+    description: 'See Hive running the work of a business like yours. Thirty minutes with the people who build it.',
     path: '/demo',
   });
 
-  /* Dark field styles. Field attributes, values and handlers are unchanged. */
-  const labelCls = 'block mb-2 text-xs font-semibold text-white/70';
-  const fieldCls =
-    'w-full bg-white/[0.04] border border-white/10 hover:border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/40 outline-none transition-colors focus:border-transparent focus:ring-2 focus:ring-hos-yellow';
-  const req = (
-    <span aria-hidden="true" className="text-hos-yellow">
-      *
-    </span>
-  );
-  const infoHeading = 'text-[11px] font-semibold uppercase tracking-[0.16em] text-hos-yellow';
+  const [params] = useSearchParams();
+  const initial = interests.some((i) => i.id === params.get('interest')) ? [params.get('interest')!] : ['hive'];
+  const [picked, setPicked] = useState<string[]>(initial);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [state, setState] = useState<'idle' | 'sending' | 'done'>('idle');
+  const [ref, setRef] = useState('');
+
+  const toggle = (id: string) => setPicked((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]));
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const values = Object.fromEntries(['name', 'email', 'company', 'business', 'message'].map((k) => [k, String(data.get(k) ?? '').trim()]));
+    const next: Record<string, string> = {};
+    if (!values.name) next.name = 'Please add your name.';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) next.email = 'Please add a valid work email.';
+    if (!values.company) next.company = 'Please add your company.';
+    setErrors(next);
+    if (Object.keys(next).length) {
+      document.getElementById(Object.keys(next)[0])?.focus();
+      return;
+    }
+    const id = newRefId();
+    setState('sending');
+    await submitLead(`Demo request ${id}: ${values.company}`, { ref: id, ...values, interests: picked.join(', '), source: 'Website demo page' });
+    setRef(id);
+    setState('done');
+  };
 
   return (
-    <div className="relative flex flex-col text-white bg-ink-950 overflow-x-clip">
-      <section aria-labelledby="demo-heading" className="relative -mt-16 pt-24 sm:pt-32 pb-24 sm:pb-32">
-        <div aria-hidden="true" className="absolute inset-0 dk-grid dk-fade-mask" />
-        <div aria-hidden="true" className="absolute left-0 -top-48 w-[1000px] max-w-[160vw] h-[620px] bg-[radial-gradient(closest-side,rgba(245,217,123,0.13),transparent)]" />
-
-        <Container className="relative grid grid-cols-1 lg:grid-cols-12 gap-x-14 gap-y-10">
-          {/* Intro */}
-          <Reveal className="lg:col-span-5 lg:col-start-1 lg:row-start-1 space-y-6">
-            <Eyebrow>Request a demo</Eyebrow>
-            <h1 id="demo-heading" className="font-display font-semibold text-4xl sm:text-6xl tracking-[-0.03em] leading-[1.04] dk-text-gradient pb-1">
-              See it on your <span className="dk-text-sun">own data.</span>
-            </h1>
-            <p className="text-lg text-white/60 leading-relaxed max-w-xl">
-              A 30-minute walkthrough on live product, not slides. If you send a sample lab report in advance, we'll run it through the engine and show you the output on your own panel.
+    <section data-theme="ink" aria-labelledby="page-title" className="relative overflow-hidden pt-36 md:pt-44 pb-[clamp(5rem,10vw,9rem)]">
+      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-[700px] bg-[radial-gradient(50%_70%_at_15%_0%,rgba(242,210,122,0.09),transparent_70%)]" />
+      <div className="wrap relative grid lg:grid-cols-12 gap-14 lg:gap-10">
+        <div className="lg:col-span-5">
+          <Label>Book a demo</Label>
+          <SplitHeading id="page-title" as="h1" trigger="mount" delay={0.1} className="t-h1 mt-7 max-w-[11ch]" text="See Hive with *your* work in it." />
+          <Reveal delay={0.4}>
+            <p className="mt-8 t-lead text-fg/60 max-w-[40ch]">Thirty minutes with the people who build it. No slides about the future; the product, on work like yours.</p>
+            <ol className="mt-12 border-t border-fg/10">
+              {expect.map((x, i) => (
+                <li key={x.title} className="grid grid-cols-[2.25rem_1fr] gap-3 py-5 border-b border-fg/10">
+                  <span className="font-mono text-[12px] text-accent pt-1">{String(i + 1).padStart(2, '0')}</span>
+                  <div>
+                    <p className="text-[17px] tracking-[-0.01em]">{x.title}</p>
+                    <p className="mt-1 text-[14.5px] text-fg/55">{x.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <p className="mt-8 text-[14.5px] text-fg/55">
+              Prefer to pick a slot now?{' '}
+              <a href={CALENDAR_URL} target="_blank" rel="noopener noreferrer" className="text-fg underline decoration-fg/30 underline-offset-4 hover:decoration-accent">
+                Open the calendar<span className="sr-only"> (opens in a new tab)</span>
+              </a>
             </p>
           </Reveal>
+        </div>
 
-          {/* Form or success state */}
-          <Reveal delay={120} className="lg:col-span-7 lg:col-start-6 lg:row-start-1 lg:row-span-2">
-            <div className="lg:sticky lg:top-24 rounded-[24px] dk-card p-5 sm:p-8 shadow-[0_60px_140px_-50px_rgba(0,0,0,0.9)]">
-              {submitted ? (
-                <div className="py-4 flex flex-col items-center text-center gap-4">
-                  <span className="w-14 h-14 rounded-full bg-emerald-400/10 ring-1 ring-emerald-300/30 flex items-center justify-center">
-                    <CheckCircle2 aria-hidden="true" className="w-7 h-7 text-emerald-300" />
+        <Reveal className="lg:col-span-6 lg:col-start-7" delay={0.3}>
+          <div className="rounded-[24px] border border-fg/10 bg-surface/60 p-6 sm:p-9">
+            <AnimatePresence mode="wait">
+              {state === 'done' ? (
+                <motion.div key="done" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: EASE }} className="py-10 flex flex-col items-start gap-6" role="status">
+                  <span className="grid h-12 w-12 place-items-center rounded-full bg-honey text-ink">
+                    <Check className="w-5 h-5" />
                   </span>
-
-                  <span className="font-mono text-[11px] font-semibold text-emerald-300 bg-emerald-400/10 ring-1 ring-emerald-300/30 px-3 py-1 rounded-full uppercase tracking-wider">
-                    Ref #{refId} · Confirmed
-                  </span>
-
-                  <h2 className="text-2xl font-semibold text-white">Request received</h2>
-
-                  <p className="text-sm text-white/60 max-w-md leading-relaxed">
-                    Thank you, <strong className="text-white">{formData.name}</strong>. We have logged your request (<span className="font-mono text-white">{formData.email}</span>). Aditya Singh or our solutions team will confirm your meeting time.
+                  <h2 className="t-h2">Thank you. We'll be in touch to set a time.</h2>
+                  <p className="text-fg/60">
+                    Your reference is <span className="font-mono text-fg">{ref}</span>. If anything is urgent, write to{' '}
+                    <a href={`mailto:${CONTACT_EMAIL}`} className="text-fg underline decoration-fg/30 underline-offset-4">
+                      {CONTACT_EMAIL}
+                    </a>
+                    .
                   </p>
-
-                  {fileName && (
-                    <div className="w-full max-w-md rounded-xl bg-white/[0.04] ring-1 ring-white/10 p-3.5 flex items-center justify-between gap-3 text-xs text-white">
-                      <span className="flex items-center gap-2 min-w-0 text-left">
-                        <FileText aria-hidden="true" className="w-4 h-4 text-hos-yellow shrink-0" />
-                        <span className="truncate min-w-0 font-mono">
-                          {fileName} ({fileSize})
-                        </span>
-                      </span>
-                      <span className="shrink-0 text-[10px] font-semibold text-emerald-300 bg-emerald-400/10 px-2 py-0.5 rounded-full">Attached</span>
-                    </div>
-                  )}
-
-                  <div className="w-full max-w-md rounded-2xl bg-white/[0.04] ring-1 ring-white/10 p-4 space-y-3">
-                    <p className="text-xs text-white/60">Redirecting you to Google Calendar to pick your demo slot...</p>
-                    <a
-                      href="https://calendar.app.google/cysR8LF2gMtuneNs9"
-                      className={`w-full inline-flex items-center justify-center gap-2 bg-white hover:bg-hos-yellow text-ink-950 text-sm font-semibold px-6 py-3.5 rounded-full transition-colors ${focusRing}`}
-                    >
-                      <Calendar aria-hidden="true" className="w-4 h-4" />
-                      Pick a time on Google Calendar
-                    </a>
-                  </div>
-
-                  <div className="pt-2 flex flex-wrap justify-center gap-3 w-full">
-                    <a
-                      href={`mailto:contact@nostaviahealth.com,aditya@nostaviacorp.com?subject=${encodeURIComponent(`Platform Demo Request [${refId}]: ${formData.name} - ${formData.company}`)}&body=${encodeURIComponent(`Hi Aditya & Nostavia Team,\n\nI am following up on my demo request (#${refId}).\n\nRequest Details:\n- Name: ${formData.name}\n- Work Email: ${formData.email}\n- Phone: ${formData.phone || 'N/A'}\n- Company: ${formData.company}\n- Role: ${formData.role}\n- Region: ${formData.market}\n- Notes: ${formData.notes || 'N/A'}\n\nLooking forward to scheduling our 30-minute walkthrough.`)}`}
-                      className={`inline-flex items-center justify-center gap-2 dk-card hover:border-white/25 text-white text-sm font-semibold px-5 py-3 rounded-full transition-colors ${focusRing}`}
-                    >
-                      <Mail aria-hidden="true" className="w-4 h-4" />
-                      Send a follow-up email
-                    </a>
-
-                    <button
-                      onClick={() => setSubmitted(false)}
-                      className={`inline-flex items-center justify-center gap-2 dk-card hover:border-white/25 text-white text-sm font-semibold px-5 py-3 rounded-full transition-colors ${focusRing}`}
-                    >
-                      Submit another request
-                    </button>
-                  </div>
-                </div>
+                  <Button href={CALENDAR_URL} variant="secondary">
+                    Pick a time now
+                  </Button>
+                </motion.div>
               ) : (
-                <>
-                  <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-                    <h2 className="text-xl sm:text-2xl font-semibold text-white">Book your demo</h2>
-                    <span className="inline-flex items-center gap-1.5 text-xs text-white/60">
-                      <Clock aria-hidden="true" className="w-3.5 h-3.5 text-hos-yellow" />
-                      30 minutes · live product
-                    </span>
+                <motion.form key="form" noValidate onSubmit={onSubmit} exit={{ opacity: 0, y: -10 }} className="flex flex-col gap-5" aria-describedby="form-note">
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    {[
+                      { id: 'name', label: 'Your name', type: 'text', auto: 'name' },
+                      { id: 'email', label: 'Work email', type: 'email', auto: 'email' },
+                    ].map((f) => (
+                      <div key={f.id} className="flex flex-col gap-2">
+                        <label htmlFor={f.id} className="text-[13.5px] text-fg/70">
+                          {f.label}
+                        </label>
+                        <input id={f.id} name={f.id} type={f.type} autoComplete={f.auto} aria-invalid={!!errors[f.id]} aria-describedby={errors[f.id] ? `${f.id}-error` : undefined} className={field} />
+                        {errors[f.id] && (
+                          <p id={`${f.id}-error`} className="text-[12.5px] text-signal-alert">
+                            {errors[f.id]}
+                          </p>
+                        )}
+                      </div>
+                    ))}
                   </div>
-
-                  <form onSubmit={handleSubmit} className="space-y-5">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <label className="block">
-                        <span className={labelCls}>Name {req}</span>
-                        <input
-                          required
-                          type="text"
-                          placeholder="Dr. Sarah Al-Mansoor"
-                          value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          className={fieldCls}
-                        />
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="company" className="text-[13.5px] text-fg/70">
+                        Company
                       </label>
-
-                      <label className="block">
-                        <span className={labelCls}>Work email {req}</span>
-                        <input
-                          required
-                          type="email"
-                          placeholder="sarah@healthsystem.com"
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className={fieldCls}
-                        />
-                      </label>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <label className="block">
-                        <span className={labelCls}>Phone {req}</span>
-                        <input
-                          required
-                          type="tel"
-                          placeholder="Enter your phone or WhatsApp number"
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          className={fieldCls}
-                        />
-                      </label>
-
-                      <label className="block">
-                        <span className={labelCls}>Company {req}</span>
-                        <input
-                          required
-                          type="text"
-                          placeholder="Apex Health Network"
-                          value={formData.company}
-                          onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                          className={fieldCls}
-                        />
-                      </label>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <label className="block">
-                        <span className={labelCls}>Role {req}</span>
-                        <input
-                          required
-                          type="text"
-                          placeholder="Head of Digital Health / Medical Director"
-                          value={formData.role}
-                          onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                          className={fieldCls}
-                        />
-                      </label>
-
-                      <label className="block">
-                        <span className={labelCls}>Industry segment {req}</span>
-                        <span className="relative block">
-                          <select
-                            value={formData.segment}
-                            onChange={(e) => setFormData({ ...formData, segment: e.target.value })}
-                            className={`${fieldCls} appearance-none pr-10 cursor-pointer [color-scheme:dark]`}
-                          >
-                            <option value="Diagnostic lab network">Diagnostic lab network</option>
-                            <option value="Longevity & preventative clinic">Longevity & preventative clinic</option>
-                            <option value="Hospital system">Hospital system</option>
-                            <option value="Health insurer / Payer">Health insurer / Payer</option>
-                            <option value="Digital health platform">Digital health platform</option>
-                          </select>
-                          <ChevronDown aria-hidden="true" className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/55" />
-                        </span>
-                      </label>
-                    </div>
-
-                    <label className="block">
-                      <span className={labelCls}>Primary region {req}</span>
-                      <span className="relative block">
-                        <select
-                          value={formData.market}
-                          onChange={(e) => setFormData({ ...formData, market: e.target.value })}
-                          className={`${fieldCls} appearance-none pr-10 cursor-pointer [color-scheme:dark]`}
-                        >
-                          <option value="Global / Multi-region">Global / Multi-region</option>
-                          <option value="UAE & GCC">UAE & GCC</option>
-                          <option value="India">India</option>
-                          <option value="US / Europe">US / Europe</option>
-                        </select>
-                        <ChevronDown aria-hidden="true" className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/55" />
-                      </span>
-                    </label>
-
-                    <label className="block">
-                      <span className={labelCls}>
-                        Sample report <span className="font-normal text-white/55">(optional, PDF)</span>
-                      </span>
-                      <span className="relative block rounded-xl border border-dashed border-white/15 bg-white/[0.02] p-5 text-center cursor-pointer hover:border-white/30 transition-colors focus-within:border-transparent focus-within:ring-2 focus-within:ring-hos-yellow">
-                        <input
-                          type="file"
-                          accept=".pdf,.png,.jpg"
-                          onChange={handleFileChange}
-                          className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
-                        />
-                        <span className="flex flex-col items-center gap-2 text-xs text-white/60">
-                          <Upload aria-hidden="true" className="w-5 h-5 text-hos-yellow" />
-                          {fileName ? (
-                            <span className="flex items-center gap-2 max-w-full font-mono text-white">
-                              <span className="truncate min-w-0">
-                                {fileName} ({fileSize})
-                              </span>
-                              <button
-                                type="button"
-                                onClick={clearFile}
-                                className={`relative z-10 shrink-0 text-[11px] font-semibold text-rose-300 hover:underline rounded ${focusRing}`}
-                              >
-                                Remove
-                              </button>
-                            </span>
-                          ) : (
-                            <span>Drop a sample PDF or click to browse (de-identified sample)</span>
-                          )}
-                        </span>
-                      </span>
-                    </label>
-
-                    <label className="block">
-                      <span className={labelCls}>What are you building?</span>
-                      <textarea
-                        rows={3}
-                        placeholder="Tell us about your patient volume, existing app stack, or white-label requirements..."
-                        value={formData.notes}
-                        onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                        className={`${fieldCls} resize-y`}
-                      />
-                    </label>
-
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className={`w-full inline-flex items-center justify-center gap-2 bg-white hover:bg-hos-yellow text-ink-950 text-sm font-semibold px-6 py-3.5 rounded-full transition-colors mt-2 disabled:opacity-70 ${focusRing}`}
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <span aria-hidden="true" className="w-4 h-4 border-2 border-ink-950 border-t-transparent rounded-full animate-spin" />
-                          Sending your request...
-                        </>
-                      ) : (
-                        <>
-                          Request my demo
-                          <ArrowRight aria-hidden="true" className="w-4 h-4" />
-                        </>
+                      <input id="company" name="company" type="text" autoComplete="organization" aria-invalid={!!errors.company} aria-describedby={errors.company ? 'company-error' : undefined} className={field} />
+                      {errors.company && (
+                        <p id="company-error" className="text-[12.5px] text-signal-alert">
+                          {errors.company}
+                        </p>
                       )}
-                    </button>
-
-                    <p className="text-xs text-white/55 text-center">After you submit, you pick a time on our calendar.</p>
-                  </form>
-                </>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="business" className="text-[13.5px] text-fg/70">
+                        Type of business
+                      </label>
+                      <select id="business" name="business" defaultValue="" className={cn(field, 'appearance-none bg-[url("data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%278%27><path d=%27M1 1l5 5 5-5%27 stroke=%27%23F2EDE3%27 stroke-opacity=%27.5%27 fill=%27none%27 stroke-width=%271.5%27/></svg>")] bg-no-repeat bg-[right_1rem_center]')}>
+                        <option value="" disabled>
+                          Choose one
+                        </option>
+                        {customerTypes.map((c) => (
+                          <option key={c.id} value={c.name} className="bg-ink-900">
+                            {c.name}
+                          </option>
+                        ))}
+                        <option value="Other" className="bg-ink-900">
+                          Something else
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <fieldset className="flex flex-col gap-3">
+                    <legend className="text-[13.5px] text-fg/70 mb-2">Interested in</legend>
+                    <div className="flex flex-wrap gap-2">
+                      {interests.map((i) => {
+                        const on = picked.includes(i.id);
+                        return (
+                          <label key={i.id} className={cn('cursor-pointer select-none inline-flex items-center gap-2 h-10 px-4 rounded-full border text-[14px] transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-accent', on ? 'border-honey bg-honey text-ink' : 'border-fg/15 text-fg/70 hover:border-fg/35')}>
+                            <input type="checkbox" className="sr-only" checked={on} onChange={() => toggle(i.id)} />
+                            {on && <Check className="w-3.5 h-3.5" />}
+                            {i.label}
+                          </label>
+                        );
+                      })}
+                    </div>
+                  </fieldset>
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="message" className="text-[13.5px] text-fg/70">
+                      What should we know? <span className="text-fg/35">(optional)</span>
+                    </label>
+                    <textarea id="message" name="message" rows={4} className={cn(field, 'h-auto py-3 resize-none')} placeholder="Where your team loses the most time, what you'd want Bees to take on first…" />
+                  </div>
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
+                    <p id="form-note" className="text-[12.5px] text-fg/40 max-w-[34ch]">
+                      We only use these details to reply to you.
+                    </p>
+                    <Button type="submit" size="lg" disabled={state === 'sending'}>
+                      {state === 'sending' ? 'Sending' : 'Book a demo'}
+                    </Button>
+                  </div>
+                </motion.form>
               )}
-            </div>
-          </Reveal>
-
-          {/* What to expect. TODO(copy): info column headings and lines */}
-          <div className="lg:col-span-5 lg:col-start-1 lg:row-start-2 space-y-4">
-            <Reveal>
-              <div className="rounded-[20px] dk-card p-6 sm:p-7">
-                <h2 className={infoHeading}>What happens in the demo</h2>
-                <ol className="mt-5 space-y-5">
-                  {(
-                    [
-                      ['Thirty minutes, live product', 'Not slides. You see the product running.'],
-                      ['Your report, decoded', "Send a sample lab report in advance and we'll show you the output on your own panel."],
-                      ['The fastest way to launch', 'SDK, White Label or Custom Build: we show you the route that fits what you want built.'],
-                      ['A fixed quote', 'Pricing depends on scope. You get a fixed quote after the call.'],
-                    ] as [string, string][]
-                  ).map(([title, body], i) => (
-                    <li key={title} className="flex items-start gap-4">
-                      <span className="w-8 h-8 shrink-0 rounded-full ring-1 ring-hos-yellow/50 text-hos-yellow text-xs font-mono font-semibold flex items-center justify-center">
-                        <span className="sr-only">Step </span>
-                        {i + 1}
-                      </span>
-                      <span>
-                        <span className="block text-base font-semibold text-white">{title}</span>
-                        <span className="mt-1 block text-sm text-white/60 leading-relaxed">{body}</span>
-                      </span>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </Reveal>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4">
-              <Reveal className="h-full">
-                <div className="h-full rounded-[20px] dk-card p-6">
-                  <h2 className={infoHeading}>What to bring</h2>
-                  <ul className="mt-4 space-y-3">
-                    {['A de-identified sample lab report (PDF)', 'Your patient volume and current app stack', 'Any white-label requirements'].map((t) => (
-                      <li key={t} className="flex items-start gap-3 text-sm text-white/70 leading-relaxed">
-                        <span aria-hidden="true" className="mt-2 w-3 h-[2px] shrink-0 bg-hos-yellow" />
-                        {t}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Reveal>
-
-              <Reveal delay={100} className="h-full">
-                <div className="h-full rounded-[20px] dk-card p-6">
-                  <h2 className={infoHeading}>Who it's for</h2>
-                  <ul className="mt-4 flex flex-wrap gap-1.5">
-                    {['Diagnostic lab networks', 'Longevity and preventive clinics', 'Hospital systems', 'Insurers and payers', 'Digital health platforms'].map((t) => (
-                      <li key={t} className="rounded-full bg-white/[0.05] ring-1 ring-white/10 px-2.5 py-1 text-xs text-white/75">
-                        {t}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="mt-4 text-sm text-white/60 leading-relaxed">Headquartered in Lucknow, India, serving India and the UAE.</p>
-                </div>
-              </Reveal>
-            </div>
-
-            <Reveal>
-              <div className="rounded-[20px] dk-card p-6 sm:p-7 space-y-6">
-                <h2 className={infoHeading}>Built for health data</h2>
-                <InfrastructureGroup />
-                <ul className="space-y-3">
-                  {trustPick(['dpdp', 'no-keys-on-device']).map((item) => (
-                    <li key={item.id} className="flex items-start gap-3">
-                      <ShieldCheck aria-hidden="true" className="w-4 h-4 mt-0.5 shrink-0 text-hos-yellow" />
-                      <span>
-                        <span className="block text-sm font-semibold text-white">{item.name}</span>
-                        <span className="block text-sm text-white/60 leading-relaxed">{item.descriptor}</span>
-                      </span>
-                    </li>
-                  ))}
-                  <li className="flex items-start gap-3">
-                    <Stethoscope aria-hidden="true" className="w-4 h-4 mt-0.5 shrink-0 text-hos-yellow" />
-                    <span>
-                      <span className="block text-sm font-semibold text-white">Reviewed by clinicians</span>
-                      <span className="block text-sm text-white/60 leading-relaxed">Protocol outputs are reviewed by our licensed clinical advisory bench before release to any partner.</span>
-                    </span>
-                  </li>
-                </ul>
-                <Link to="/security" className={`inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-hos-yellow rounded ${focusRing}`}>
-                  Security and compliance
-                  <ArrowRight aria-hidden="true" className="w-4 h-4" />
-                </Link>
-              </div>
-            </Reveal>
-
-            <Reveal>
-              <div className="rounded-[20px] dk-card p-6 flex items-center gap-4">
-                <span className="w-10 h-10 shrink-0 rounded-xl bg-white/[0.04] ring-1 ring-white/10 flex items-center justify-center text-hos-yellow">
-                  <Mail aria-hidden="true" className="w-5 h-5" />
-                </span>
-                <span className="min-w-0">
-                  <span className="block text-sm text-white/60">Prefer email?</span>
-                  <a
-                    href={`mailto:${TRUST_CONTACT}`}
-                    className={`block truncate text-base font-semibold text-white underline underline-offset-4 decoration-hos-yellow decoration-2 hover:decoration-white rounded ${focusRing}`}
-                  >
-                    {TRUST_CONTACT}
-                  </a>
-                </span>
-              </div>
-            </Reveal>
+            </AnimatePresence>
           </div>
-        </Container>
-      </section>
-    </div>
+        </Reveal>
+      </div>
+    </section>
   );
 };
+
+export default DemoPage;

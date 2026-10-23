@@ -1,8 +1,6 @@
 // Shared lead submission used by every enquiry form on the site.
 // Sends to Formspree (primary) and FormSubmit (backup), and keeps a local copy.
 
-export const CALENDAR_URL = 'https://calendar.app.google/cysR8LF2gMtuneNs9';
-
 const DEFAULT_FORMSPREE = 'https://formspree.io/f/xbdnezwz';
 const FORMSUBMIT = 'https://formsubmit.co/ajax/contact@nostaviahealth.com';
 

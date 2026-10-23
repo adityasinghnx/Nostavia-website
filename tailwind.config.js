@@ -1,80 +1,70 @@
 /** @type {import('tailwindcss').Config} */
+/* Theme-aware colours read CSS variables set per section by data-theme="ink" | "paper" (see index.css). */
+const v = (name) => `rgb(var(--${name}) / <alpha-value>)`;
+
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
-        page: '#FFFFFF',
-        surface: {
-          DEFAULT: '#F8F9FA',
-          raised: '#FFFFFF',
-          dark: '#000000',
-        },
-        line: {
-          DEFAULT: '#E5E7EB',
-          bright: '#D1D5DB',
-          dark: '#1F2937',
-        },
-        brand: {
-          purple: '#DFB4FF',
-          periwinkle: '#D1C4FF',
-          ice: '#B8DBFF',
-          cyan: '#92D0EA',
-          teal: '#69C3D3',
-          DEFAULT: '#69C3D3',
-        },
-        blue: {
-          DEFAULT: '#69C3D3',
-          dim: '#92D0EA',
-          wash: '#EFF6FF',
-        },
-        optimal: '#059669',
-        'in-range': '#64748B',
-        /* Human OS reference palette. hos-yellow is for fills and rules only, never text on white. */
-        /* Dark theme surfaces (dark-redesign). Text uses white with opacity; accent is hos.yellow. */
+        bg: v('bg'),
+        fg: v('fg'),
+        surface: v('surface'),
+        accent: v('accent'),
         ink: {
-          DEFAULT: '#07080A',
-          950: '#07080A',
-          900: '#0C0D10',
-          850: '#101115',
-          800: '#15171C',
-          700: '#1D2027',
-          600: '#2A2E37',
+          DEFAULT: '#0B0A08',
+          950: '#0B0A08',
+          900: '#100E0C',
+          850: '#151310',
+          800: '#1B1814',
+          700: '#26221D',
+          600: '#37322B',
         },
-        hos: {
-          black: '#0A0A0B',
-          navy: '#121A31',
-          yellow: '#F5D97B',
-          amber: '#8A6511',
-          hairline: '#E6E3DA',
-          card: '#F6F5F1',
-          cream: '#FDF6E1',
-          mist: '#F4F5F7',
-          grey: '#57534E',
+        bone: {
+          DEFAULT: '#F2EDE3',
+          50: '#FAF8F3',
+          100: '#F2EDE3',
+          200: '#E7E0D2',
+          300: '#D3CABA',
         },
-        outlier: '#D97706',
-        text: {
-          DEFAULT: '#0F172A',
-          muted: '#475569',
-          faint: '#94A3B8',
-          dark: '#000000',
+        honey: {
+          DEFAULT: '#F2D27A',
+          200: '#FAEBC2',
+          300: '#F6DE9C',
+          400: '#F2D27A',
+          500: '#E2B758',
+          600: '#B98E35',
+          700: '#8A6511',
+        },
+        signal: {
+          live: '#9FD8A8',
+          wait: '#F2D27A',
+          alert: '#F0A58A',
         },
       },
       fontFamily: {
-        display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-        body: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-        mono: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        sans: ['"Geist Variable"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        serif: ['"Instrument Serif"', 'ui-serif', 'Georgia', 'serif'],
+        mono: ['"Geist Mono Variable"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
-      borderRadius: {
-        control: '6px',
-        card: '12px',
+      maxWidth: {
+        site: '1360px',
       },
-      boxShadow: {
-        card: '0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03)',
-        megamenu: '0 20px 40px -15px rgba(0, 0, 0, 0.08), 0 0 1px 1px rgba(0, 0, 0, 0.05)',
+      transitionTimingFunction: {
+        out: 'cubic-bezier(0.22, 1, 0.36, 1)',
+        inout: 'cubic-bezier(0.65, 0, 0.35, 1)',
+      },
+      keyframes: {
+        marquee: { from: { transform: 'translateX(0)' }, to: { transform: 'translateX(-50%)' } },
+        pulse2: { '0%,100%': { opacity: '1' }, '50%': { opacity: '0.35' } },
+        ping2: { '0%': { transform: 'scale(1)', opacity: '0.7' }, '100%': { transform: 'scale(2.6)', opacity: '0' } },
+        lane: { from: { left: '-3%' }, to: { left: '103%' } },
+        bob: { '0%,100%': { transform: 'translateY(-3px)' }, '50%': { transform: 'translateY(3px)' } },
+      },
+      animation: {
+        marquee: 'marquee 48s linear infinite',
+        pulse2: 'pulse2 2.4s ease-in-out infinite',
+        ping2: 'ping2 2s cubic-bezier(0, 0, 0.2, 1) infinite',
       },
     },
   },
