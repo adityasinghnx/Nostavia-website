@@ -1,22 +1,105 @@
 {
   "redirects": [
-    { "source": "/modules", "destination": "/human-os", "statusCode": 301 },
-    { "source": "/modules/:path*", "destination": "/human-os", "statusCode": 301 },
-    { "source": "/intelligence-modules", "destination": "/human-os", "statusCode": 301 },
-    { "source": "/platform/modules", "destination": "/human-os", "statusCode": 301 },
-    { "source": "/platform", "destination": "/hive", "statusCode": 301 },
-    { "source": "/industries/:path*", "destination": "/customers", "statusCode": 301 },
-    { "source": "/solutions/engineering", "destination": "/studio", "statusCode": 301 },
-    { "source": "/solutions/supplements", "destination": "/studio", "statusCode": 301 },
-    { "source": "/solutions/gravity", "destination": "/developers", "statusCode": 301 },
-    { "source": "/solutions/front-desk", "destination": "/human-os/agent-workforce", "statusCode": 301 },
-    { "source": "/solutions/ai-agents", "destination": "/human-os/agent-workforce", "statusCode": 301 },
-    { "source": "/solutions/voice-agents", "destination": "/human-os/agent-workforce", "statusCode": 301 },
-    { "source": "/solutions/hospitals", "destination": "/customers", "statusCode": 301 },
-    { "source": "/solutions/hospitals-front-door", "destination": "/customers", "statusCode": 301 },
-    { "source": "/solutions/:path*", "destination": "/human-os", "statusCode": 301 },
-    { "source": "/pricing", "destination": "/demo", "statusCode": 301 },
-    { "source": "/clinical", "destination": "/company", "statusCode": 301 }
+    {
+      "source": "/modules",
+      "destination": "/human-os",
+      "statusCode": 301
+    },
+    {
+      "source": "/modules/:path*",
+      "destination": "/human-os",
+      "statusCode": 301
+    },
+    {
+      "source": "/intelligence-modules",
+      "destination": "/human-os",
+      "statusCode": 301
+    },
+    {
+      "source": "/platform/modules",
+      "destination": "/human-os",
+      "statusCode": 301
+    },
+    {
+      "source": "/industries/:path*",
+      "destination": "/customers",
+      "statusCode": 301
+    },
+    {
+      "source": "/solutions/engineering",
+      "destination": "/studio",
+      "statusCode": 301
+    },
+    {
+      "source": "/solutions/supplements",
+      "destination": "/studio",
+      "statusCode": 301
+    },
+    {
+      "source": "/solutions/gravity",
+      "destination": "/developers",
+      "statusCode": 301
+    },
+    {
+      "source": "/solutions/hospitals",
+      "destination": "/customers",
+      "statusCode": 301
+    },
+    {
+      "source": "/solutions/hospitals-front-door",
+      "destination": "/customers",
+      "statusCode": 301
+    },
+    {
+      "source": "/pricing",
+      "destination": "/demo",
+      "statusCode": 301
+    },
+    {
+      "source": "/platform",
+      "destination": "/superintelligence",
+      "statusCode": 301
+    },
+    {
+      "source": "/human-os/:path+",
+      "destination": "/human-os",
+      "statusCode": 301
+    },
+    {
+      "source": "/company",
+      "destination": "/superintelligence",
+      "statusCode": 301
+    },
+    {
+      "source": "/security",
+      "destination": "/superintelligence#private",
+      "statusCode": 301
+    },
+    {
+      "source": "/clinical",
+      "destination": "/superintelligence",
+      "statusCode": 301
+    },
+    {
+      "source": "/solutions/front-desk",
+      "destination": "/hive",
+      "statusCode": 301
+    },
+    {
+      "source": "/solutions/ai-agents",
+      "destination": "/hive",
+      "statusCode": 301
+    },
+    {
+      "source": "/solutions/voice-agents",
+      "destination": "/hive",
+      "statusCode": 301
+    },
+    {
+      "source": "/solutions/:path*",
+      "destination": "/human-os",
+      "statusCode": 301
+    }
   ],
   "rewrites": [
     {

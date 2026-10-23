@@ -43,7 +43,7 @@ interface Mote {
   a: number;
 }
 
-const JOBS = ['Report sent', 'Call answered', 'Re-test booked', 'Brief ready', 'Follow-up sent', 'Plan updated', 'Pickup scheduled'];
+const JOBS = ['Report delivered', 'Call answered', 'Re-test booked', 'Brief ready', 'Portal updated', 'Question answered', 'Pickup scheduled'];
 
 const SQ3 = Math.sqrt(3);
 
@@ -60,12 +60,12 @@ const buildHive = (perEdge: number, fill: number) => {
     const a = (Math.PI / 3) * i;
     centers.push([SQ3 * Math.cos(a), SQ3 * Math.sin(a)]);
   }
-  const homes: { x: number; y: number; kind: 'edge' | 'vertex' | 'fill' }[] = [];
+  const homes: { x: number; y: number; kind: 'edge' | 'vertex' | 'fill' | 'core' }[] = [];
   const seenEdge = new Set<string>();
   const seenVertex = new Set<string>();
   const key = (x: number, y: number) => `${Math.round(x * 100)}:${Math.round(y * 100)}`;
 
-  centers.forEach(([cx, cy]) => {
+  centers.forEach(([cx, cy], cell) => {
     const c = hexCorners(cx, cy);
     for (let i = 0; i < 6; i++) {
       const [x1, y1] = c[i];
@@ -80,11 +80,17 @@ const buildHive = (perEdge: number, fill: number) => {
       seenEdge.add(ek);
       for (let k = 1; k < perEdge; k++) {
         const t = k / perEdge;
-        homes.push({ x: x1 + (x2 - x1) * t, y: y1 + (y2 - y1) * t, kind: 'edge' });
+        homes.push({ x: x1 + (x2 - x1) * t, y: y1 + (y2 - y1) * t, kind: cell === 0 ? 'core' : 'edge' });
       }
     }
   });
 
+  // The centre cell is the intelligence: a denser glow of points inside it
+  for (let i = 0; i < 70; i++) {
+    const a = Math.random() * Math.PI * 2;
+    const r = 0.7 * Math.sqrt(Math.random());
+    homes.push({ x: Math.cos(a) * r, y: Math.sin(a) * r, kind: 'fill' });
+  }
   for (let i = 0; i < fill; i++) {
     const [cx, cy] = centers[Math.floor(Math.random() * centers.length)];
     const a = Math.random() * Math.PI * 2;
@@ -152,8 +158,8 @@ export const HiveSwarm: React.FC<HiveSwarmProps> = ({
       phase: Math.random() * Math.PI * 2,
       orbit: hm.kind === 'fill' ? 0.05 + Math.random() * 0.08 : 0.015 + Math.random() * 0.03,
       spin: (Math.random() < 0.5 ? -1 : 1) * (0.4 + Math.random() * 0.9),
-      size: hm.kind === 'vertex' ? 1.9 : hm.kind === 'edge' ? 1.05 + Math.random() * 0.5 : 0.7 + Math.random() * 0.6,
-      alpha: hm.kind === 'vertex' ? 0.95 : hm.kind === 'edge' ? 0.42 + Math.random() * 0.35 : 0.14 + Math.random() * 0.2,
+      size: hm.kind === 'vertex' ? 1.9 : hm.kind === 'core' ? 1.4 + Math.random() * 0.4 : hm.kind === 'edge' ? 1.05 + Math.random() * 0.5 : 0.7 + Math.random() * 0.6,
+      alpha: hm.kind === 'vertex' ? 0.95 : hm.kind === 'core' ? 0.75 + Math.random() * 0.25 : hm.kind === 'edge' ? 0.42 + Math.random() * 0.35 : 0.14 + Math.random() * 0.2,
       state: 0,
       t: 0,
       dur: 1,
@@ -244,7 +250,8 @@ export const HiveSwarm: React.FC<HiveSwarmProps> = ({
     }
     let jobIndex = 0;
     const showJob = (x: number, y: number) => {
-      if (!jobs || narrow || Math.random() > 0.42) return;
+      // Labels only on wide screens, and only in the clear space above the headline
+      if (!jobs || w < 1100 || y > h * 0.42 || x < w * avoidLeft || Math.random() > 0.5) return;
       if (chips.some((c) => c.busy && Math.hypot(c.x - x, c.y - y) < 150)) return;
       const chip = chips.find((c) => !c.busy);
       if (!chip) return;
@@ -278,8 +285,8 @@ export const HiveSwarm: React.FC<HiveSwarmProps> = ({
       // Launch Bees
       launchClock += dt;
       const working = dots.reduce((n, d) => n + (d.state !== 0 ? 1 : 0), 0);
-      const maxWorking = narrow ? 10 : 26;
-      if (!reduce && launchClock > 0.11 && working < maxWorking) {
+      const maxWorking = narrow ? 7 : 15;
+      if (!reduce && launchClock > 0.16 && working < maxWorking) {
         launchClock = 0;
         const d = dots[Math.floor(Math.random() * dots.length)];
         const dest = d.canWork && d.state === 0 ? pickDestination() : null;

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
 import { nav, CONTACT_EMAIL } from '../../content/site';
-import { HUMAN_OS_PATH, categories, systemPath, systemsIn } from '../../content/human-os';
+import { parts } from '../../content/superintelligence';
 import { useLenis } from '../../lib/smooth-scroll';
 import { cn } from '../../lib/cn';
 import { Arrow, Button } from '../ui/primitives';
@@ -18,45 +18,39 @@ const toneUnder = (bar: HTMLElement | null): Tone => {
   return host?.getAttribute('data-theme') === 'paper' ? 'paper' : 'ink';
 };
 
-const HumanOsMenu: React.FC<{ onNavigate: () => void }> = ({ onNavigate }) => (
+const SuperMenu: React.FC<{ onNavigate: () => void }> = ({ onNavigate }) => (
   <motion.div
     initial={{ opacity: 0, y: -8 }}
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -6, transition: { duration: 0.18 } }}
     transition={{ duration: 0.45, ease: EASE }}
-    className="absolute left-1/2 top-full -translate-x-1/2 pt-3 w-[min(880px,calc(100vw-2rem))]"
+    style={{ x: '-50%' }}
+    className="fixed left-1/2 top-[56px] pt-3 w-[min(880px,calc(100vw-2rem))]"
   >
-    <div data-theme="ink" className="rounded-2xl border border-fg/10 !bg-ink-900/95 backdrop-blur-xl shadow-[0_40px_80px_-30px_rgba(0,0,0,0.8)] p-2 grid grid-cols-[1fr_1.15fr_1.15fr] gap-2">
+    <div data-theme="ink" className="rounded-2xl border border-fg/10 !bg-ink-900/95 backdrop-blur-xl shadow-[0_40px_80px_-30px_rgba(0,0,0,0.8)] p-2 grid grid-cols-[1.1fr_1fr_1fr_1fr] gap-2">
       <Link
-        to={HUMAN_OS_PATH}
+        to="/superintelligence"
         onClick={onNavigate}
-        className="group relative overflow-hidden rounded-xl bg-[radial-gradient(120%_90%_at_0%_0%,rgba(242,210,122,0.16),transparent_60%)] border border-fg/[0.07] p-5 flex flex-col justify-between min-h-[220px]"
+        className="group relative overflow-hidden rounded-xl bg-[radial-gradient(120%_90%_at_0%_0%,rgba(242,210,122,0.16),transparent_60%)] border border-fg/[0.07] p-5 flex flex-col justify-between min-h-[210px]"
       >
         <div>
-          <p className="t-label text-accent">Human OS</p>
-          <p className="mt-3 text-[22px] leading-tight tracking-[-0.02em]">
-            What we've <span className="em">built</span>
-          </p>
-          <p className="mt-2 text-[13.5px] text-fg/55 leading-relaxed">Ready-made modules for your customers and your care team.</p>
+          <p className="t-label text-accent">Nostavia</p>
+          <p className="mt-3 text-[22px] leading-tight tracking-[-0.02em]">Superintelligence</p>
+          <p className="mt-2 text-[13.5px] text-fg/55 leading-relaxed">One intelligence across your whole health business.</p>
         </div>
         <span className="inline-flex items-center gap-2 text-[13.5px] text-fg/80 group-hover:text-accent transition-colors">
-          See every module <Arrow className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+          How it fits together <Arrow className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
         </span>
       </Link>
-      {categories.map((c) => (
-        <div key={c.id} className="p-3">
-          <p className="t-label text-fg/45 px-2 pt-2 pb-3">{c.name}</p>
-          <ul>
-            {systemsIn(c.id).map((s) => (
-              <li key={s.slug}>
-                <Link to={systemPath(s.slug)} onClick={onNavigate} className="group flex flex-col rounded-lg px-2 py-2 hover:bg-fg/[0.05] transition-colors">
-                  <span className="text-[14px] text-fg/90 group-hover:text-fg">{s.name}</span>
-                  <span className="text-[12.5px] text-fg/45 leading-snug">{s.plain}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+      {parts.map((p) => (
+        <Link key={p.id} to={p.to} onClick={onNavigate} className="group rounded-xl p-4 flex flex-col justify-between hover:bg-fg/[0.05] transition-colors">
+          <div>
+            <p className="t-label text-fg/45">{p.verb}</p>
+            <p className="mt-3 text-[17px] tracking-[-0.015em]">{p.name}</p>
+            <p className="mt-2 text-[13px] text-fg/50 leading-snug">{p.headline}</p>
+          </div>
+          <Arrow className="w-3.5 h-3.5 text-fg/30 group-hover:text-accent transition-colors" />
+        </Link>
       ))}
     </div>
   </motion.div>
@@ -140,29 +134,29 @@ export const Nav: React.FC = () => {
           <nav aria-label="Main" className="hidden lg:block absolute left-1/2 -translate-x-1/2">
             <ul className="flex items-center" onMouseLeave={() => setHover(null)}>
               {nav.map((item) => {
-                const isHumanOs = item.to === HUMAN_OS_PATH;
+                const hasMenu = item.to === '/superintelligence';
                 return (
                   <li
                     key={item.to}
                     className="relative"
                     onMouseEnter={() => {
                       setHover(item.to);
-                      setMenu(isHumanOs);
+                      setMenu(hasMenu);
                     }}
-                    onMouseLeave={() => isHumanOs && setMenu(false)}
-                    onFocus={() => setMenu(isHumanOs)}
-                    onBlur={(e) => isHumanOs && !e.currentTarget.contains(e.relatedTarget as Node) && setMenu(false)}
+                    onMouseLeave={() => hasMenu && setMenu(false)}
+                    onFocus={() => setMenu(hasMenu)}
+                    onBlur={(e) => hasMenu && !e.currentTarget.contains(e.relatedTarget as Node) && setMenu(false)}
                   >
                     <NavLink
                       to={item.to}
                       className={({ isActive }) =>
                         cn(
-                          'relative z-[1] flex items-center gap-1.5 px-4 h-9 rounded-full text-[14px] tracking-[-0.005em] transition-colors duration-300',
+                          'relative z-[1] flex items-center gap-1.5 px-3 xl:px-4 h-9 rounded-full text-[14px] tracking-[-0.005em] transition-colors duration-300',
                           isActive || location.pathname.startsWith(item.to) ? 'text-fg' : 'text-fg/65 hover:text-fg',
                         )
                       }
                     >
-                      {item.to === '/hive' && <HiveMark className="w-3.5 h-3.5 text-accent" />}
+                      {hasMenu && <HiveMark className="w-3.5 h-3.5 text-accent" />}
                       {item.label}
                       {location.pathname.startsWith(item.to) && (
                         <span aria-hidden="true" className="absolute left-1/2 -bottom-1 h-[3px] w-[3px] -translate-x-1/2 rounded-full bg-accent" />
@@ -171,7 +165,7 @@ export const Nav: React.FC = () => {
                     {hover === item.to && (
                       <motion.span layoutId="nav-hover" aria-hidden="true" transition={{ type: 'spring', stiffness: 420, damping: 36 }} className="absolute inset-0 rounded-full bg-fg/[0.07]" />
                     )}
-                    <AnimatePresence>{isHumanOs && menu && <HumanOsMenu onNavigate={() => setMenu(false)} />}</AnimatePresence>
+                    <AnimatePresence>{hasMenu && menu && <SuperMenu onNavigate={() => setMenu(false)} />}</AnimatePresence>
                   </li>
                 );
               })}

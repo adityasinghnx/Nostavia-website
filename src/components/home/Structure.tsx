@@ -1,35 +1,39 @@
 import React, { useRef, useState } from 'react';
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'motion/react';
-import { STUDIO } from '../../content/site';
-import { cn } from '../../lib/cn';
+import { parts, promises } from '../../content/superintelligence';
+import { SAFETY_LINE } from '../../content/site';
 import { StructureDiagram, type Focus } from '../hive/StructureDiagram';
-import { Label } from '../ui/primitives';
+import { Label, TextLink } from '../ui/primitives';
 import { EASE, Reveal, SplitHeading } from '../ui/motion';
 
-const steps: { focus: Focus; name: string; title: string; body: string }[] = [
+interface Step {
+  focus: Focus;
+  label: string;
+  title: string;
+  body: string;
+  link?: { to: string; text: string };
+}
+
+const steps: Step[] = [
   {
-    focus: 'hive',
-    name: 'Hive',
-    title: 'One place to work.',
-    body: 'Every Nostavia customer works in Hive. Inside it, AI Bees run everything you have with us, so your team never has to jump between tools.',
+    focus: 'core',
+    label: 'Nostavia Superintelligence',
+    title: 'One intelligence at the centre.',
+    body: 'It understands your health data, does the routine work and builds what you need. Everything we offer is a part of it.',
+    link: { to: '/superintelligence', text: 'About the Superintelligence' },
   },
+  ...parts.map((p) => ({
+    focus: p.id as Focus,
+    label: `${p.verb} · ${p.name}`,
+    title: p.headline,
+    body: p.body,
+    link: { to: p.to, text: `Explore ${p.name}` },
+  })),
   {
-    focus: 'human-os',
-    name: 'Human OS',
-    title: "What we've built.",
-    body: 'Ready-made modules for your customers and for your care team. Pick the ones you need and the Bees run them in Hive.',
-  },
-  {
-    focus: 'studio',
-    name: STUDIO,
-    title: 'What we build for you.',
-    body: 'We listen first, then build what you need from scratch, reusing Human OS where it makes sense. Every build is made to run in Hive.',
-  },
-  {
-    focus: 'all',
-    name: 'Together',
-    title: 'Side by side. Never a chain.',
-    body: 'Human OS and Studio are peers. They can share parts, and they all come together in Hive, run by the same Bees.',
+    focus: 'promises',
+    label: 'Underneath every part',
+    title: 'Three promises, everywhere.',
+    body: `${promises.join('. ')}. It supports your team; clinicians decide.`,
   },
 ];
 
@@ -45,43 +49,43 @@ export const Structure: React.FC = () => {
   const step = steps[active];
 
   return (
-    <section id="structure" data-theme="paper" aria-labelledby="structure-title" className="relative">
+    <section id="structure" data-theme="ink" aria-labelledby="structure-title" className="relative">
       <div className="wrap pt-[clamp(6rem,11vw,10rem)] pb-10 lg:pb-0">
-        <Label index="01">How Nostavia fits together</Label>
-        <SplitHeading id="structure-title" className="t-h1 mt-6 max-w-[16ch]" text="Hive on top. Everything else underneath." />
+        <Label index="02">How it works for you</Label>
+        <SplitHeading id="structure-title" className="t-h1 mt-6 max-w-[15ch]" text="It understands. It works. It builds." />
       </div>
 
       {/* Wide screens: pinned diagram, steps advance with scroll */}
-      <div ref={track} className="relative hidden lg:block h-[340vh]">
+      <div ref={track} className="relative hidden lg:block h-[400vh]">
         <div className="sticky top-0 h-screen flex items-center">
           <div className="wrap grid grid-cols-12 gap-8 items-center">
             <div className="col-span-5 flex gap-8">
               <ol aria-hidden="true" className="flex flex-col gap-2 pt-1.5">
                 {steps.map((s, i) => (
-                  <li key={s.name} className="relative h-12 w-px bg-fg/15 overflow-hidden">
+                  <li key={s.label} className="relative h-10 w-px bg-fg/15 overflow-hidden">
                     <motion.span className="absolute inset-x-0 top-0 bg-accent" initial={false} animate={{ height: i <= active ? '100%' : '0%' }} transition={{ duration: 0.6, ease: EASE }} />
                   </li>
                 ))}
               </ol>
-              <div className="relative min-h-[300px] flex-1">
+              <div className="relative min-h-[340px] flex-1">
                 <AnimatePresence mode="wait">
-                  <motion.div
-                    key={active}
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -16 }}
-                    transition={{ duration: 0.55, ease: EASE }}
-                  >
+                  <motion.div key={active} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.55, ease: EASE }}>
                     <p className="t-label text-accent">
-                      {String(active + 1).padStart(2, '0')} / {step.name}
+                      {String(active + 1).padStart(2, '0')} / {step.label}
                     </p>
                     <h3 className="t-h2 mt-5">{step.title}</h3>
-                    <p className="t-lead mt-6 text-fg/65 max-w-[40ch] text-pretty">{step.body}</p>
+                    <p className="t-lead mt-6 text-fg/65 max-w-[42ch] text-pretty">{step.body}</p>
+                    {step.link && (
+                      <div className="mt-8">
+                        <TextLink to={step.link.to}>{step.link.text}</TextLink>
+                      </div>
+                    )}
                   </motion.div>
                 </AnimatePresence>
               </div>
             </div>
             <div className="col-span-7 pl-6">
+              <p className="t-label text-fg/40 mb-5">Fig. 03 — Nostavia, in one diagram</p>
               <StructureDiagram focus={step.focus} />
             </div>
           </div>
@@ -95,15 +99,24 @@ export const Structure: React.FC = () => {
         </Reveal>
         <ol className="mt-14 flex flex-col">
           {steps.map((s, i) => (
-            <Reveal as="li" key={s.name} className={cn('py-7 border-t border-fg/10')}>
+            <Reveal as="li" key={s.label} className="py-7 border-t border-fg/10">
               <p className="t-label text-accent">
-                {String(i + 1).padStart(2, '0')} / {s.name}
+                {String(i + 1).padStart(2, '0')} / {s.label}
               </p>
               <h3 className="t-h3 mt-4">{s.title}</h3>
               <p className="mt-3 text-fg/65 leading-relaxed">{s.body}</p>
+              {s.link && (
+                <div className="mt-5">
+                  <TextLink to={s.link.to}>{s.link.text}</TextLink>
+                </div>
+              )}
             </Reveal>
           ))}
         </ol>
+      </div>
+
+      <div className="wrap pb-16">
+        <p className="text-[12.5px] text-fg/40 max-w-[70ch]">{SAFETY_LINE}</p>
       </div>
     </section>
   );

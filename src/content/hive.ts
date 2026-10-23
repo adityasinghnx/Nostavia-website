@@ -1,75 +1,69 @@
 /* ─────────────────────────────────────────────────────────────────────────────
- * Hive: sample data for the illustrative product views, and Hive page copy.
- * Everything here is sample data and is captioned as such wherever it renders.
- * Bees are never named. A Bee is described by the work it runs.
+ * Hive: where the Superintelligence works for you. Page copy (B3) and the
+ * sample conversation for the illustrative chat-first workspace.
+ * Sample data only, labelled inside every view. Bees are named by job.
+ * Internal words (coordinator name, approver name, outcome and record names,
+ * starting-team name) never appear here.
  * ──────────────────────────────────────────────────────────────────────────── */
 
-export type Source = 'human-os' | 'studio';
+import type { BeeId } from './bees';
 
-export interface BeeTask {
-  text: string;
-  runs: string;
-  source: Source;
-}
+export const HIVE_SUB =
+  'Hive is one chat-first workspace where AI Bees take on the routine work across your systems, and ask a person before anything important.';
 
-/** Live activity feed in the sample Hive. Module names match Human OS. */
-export const beeTasks: BeeTask[] = [
-  { text: 'Sent 14 lab reports with plain-language summaries', runs: 'Smart Reports', source: 'human-os' },
-  { text: 'Answered a call in Hindi and booked a visit for Thursday', runs: 'AI Voice Agent', source: 'human-os' },
-  { text: 'Found 9 patients due for a re-test and invited them back', runs: 'Re-Test Recall Engine', source: 'human-os' },
-  { text: "Prepared tomorrow's intake briefs, 3 outliers flagged", runs: 'Clinical Intake Briefs', source: 'human-os' },
-  { text: 'Scheduled 6 home sample pickups', runs: 'Home Collection App', source: 'studio' },
-  { text: 'Adjusted a sleep plan after a week of short nights', runs: 'Sleep & Recovery Engine', source: 'human-os' },
-  { text: 'Flagged a drug interaction for a clinician to review', runs: 'Medication Intelligence', source: 'human-os' },
-  { text: 'Synced wearable data and refreshed recovery scores', runs: 'Wearable Telemetry', source: 'human-os' },
-  { text: 'Answered a member question about their HbA1c trend', runs: 'AI Health Companion', source: 'human-os' },
-  { text: 'Updated the weekly population risk report', runs: 'B2B Analytics Dashboard', source: 'human-os' },
-  { text: 'Sent collection-day reminders to tomorrow’s bookings', runs: 'Home Collection App', source: 'studio' },
-  { text: 'Moved a member to the next protocol phase', runs: 'Adaptive Protocols', source: 'human-os' },
+export const BEE_DEFINITION =
+  'A Bee is an AI worker with one job. One delivers reports. One brings patients back for re-tests. One answers patient questions about their reports. You choose the Bees you need, rename them if you like, and add more as you grow.';
+
+export const ways = [
+  { title: 'Talk', body: 'Ask anything about the work.', example: 'How many reports are stuck at client portals today?' },
+  { title: 'Delegate', body: 'Hand a job or a schedule to a Bee.', example: 'Every morning at 7, send me yesterday’s numbers.' },
+  { title: 'Supervise', body: 'Approve important actions, check results and look back at what happened.', example: 'Approve the re-test reminders for today.' },
 ];
 
-export interface Approval {
-  title: string;
-  detail: string;
-  kind: 'Clinical' | 'Message' | 'Plan';
-}
-
-export const approvals: Approval[] = [
-  { title: 'Follow-up plan after discharge', detail: 'Patient 4821 · drafted from the discharge summary', kind: 'Clinical' },
-  { title: 'Interaction flag: metformin + contrast', detail: 'Patient 2207 · needs a clinician', kind: 'Clinical' },
-  { title: 'Protocol change: training load', detail: 'Member 1186 · recovery below range 5 days', kind: 'Plan' },
-  { title: 'Report summary with an outlier', detail: 'Patient 3390 · ferritin, high', kind: 'Message' },
-  { title: 'Re-test invitation wording', detail: '9 patients · lipid panel due', kind: 'Message' },
+export const control = [
+  { title: 'Practice first', body: 'Every Bee rehearses on test or past data before it touches a real patient or system.' },
+  { title: 'Approvals by default', body: 'A new Bee asks before every action, and earns more freedom only while it keeps getting things right.' },
+  { title: 'Every action recorded', body: 'Which Bee did what, who approved it, and when.' },
+  { title: 'Clear lines', body: 'Bees never diagnose, prescribe or set doses.' },
 ];
 
-/** What is running in the sample Hive: Human OS modules and one Studio build, side by side. */
-export const running: { name: string; source: Source }[] = [
-  { name: 'Smart Reports', source: 'human-os' },
-  { name: 'AI Voice Agent', source: 'human-os' },
-  { name: 'Re-Test Recall Engine', source: 'human-os' },
-  { name: 'Clinical Intake Briefs', source: 'human-os' },
-  { name: 'Home Collection App', source: 'studio' },
+export const gettingStarted = [
+  { title: 'Tell Hive about your business', body: 'In a conversation, not a form.' },
+  { title: 'Get a suggested starting team', body: 'Hive proposes the Bees for your work. You adjust it.' },
+  { title: 'Connect your systems', body: 'Your lab system, portals, WhatsApp, email and phone.' },
+  { title: 'Teach it your rules', body: 'Upload your rules and templates.' },
+  { title: 'Rehearse, then go live', body: 'Nothing goes out until you have seen it work.' },
 ];
 
+/* ── Sample conversation for the chat-first workspace ── */
+
+export type ChatTurn =
+  | { kind: 'you'; text: string }
+  | { kind: 'hive'; text: string; actions?: string[]; chip?: string }
+  | { kind: 'approval'; bee: BeeId; title: string; detail: string };
+
+export const chatScript: ChatTurn[] = [
+  { kind: 'you', text: 'How many reports are stuck at client portals today?' },
+  { kind: 'hive', text: '4 reports are waiting at 2 client portals. The reports Bee will retry at 11:00, or it can send them now.', actions: ['Send now', 'Wait'] },
+  { kind: 'you', text: 'Every morning at 7, send me yesterday’s numbers.' },
+  { kind: 'hive', text: 'Done. You’ll get yesterday’s numbers every morning at 7.', chip: 'Daily · 07:00' },
+  { kind: 'approval', bee: 'recall', title: 'Send re-test reminders to 9 patients', detail: 'Lipid panel due · English and Hindi' },
+];
+
+export const activity: { bee: BeeId; text: string }[] = [
+  { bee: 'reports', text: 'Delivered 14 reports to doctors and portals' },
+  { bee: 'questions', text: 'Answered a question about an HbA1c result' },
+  { bee: 'entry', text: 'Copied 6 results into a client portal' },
+  { bee: 'bookings', text: 'Confirmed 5 home collections for tomorrow' },
+  { bee: 'recall', text: 'Drafted re-test reminders, waiting for approval' },
+  { bee: 'reports', text: 'Sent a summary in Hindi to a patient' },
+];
+
+export const approvals: { bee: BeeId; title: string; detail: string }[] = [
+  { bee: 'recall', title: 'Re-test reminders', detail: '9 patients · lipid panel due' },
+  { bee: 'reports', title: 'Report with a flagged value', detail: 'Sent to a clinician first' },
+  { bee: 'entry', title: 'New portal login needed', detail: 'Client portal · needs a new login' },
+];
+
+export const SAMPLE_LABEL = 'Sample data';
 export const SAMPLE_CAPTION = 'Illustrative view. Sample data, not a real customer.';
-
-/* ── Hive page ── */
-
-export const hivePrinciples = [
-  {
-    title: 'One place to work',
-    body: 'Everything you have with Nostavia shows up in Hive: the modules you picked and the builds we made for you. No jumping between tools.',
-  },
-  {
-    title: 'Bees do the work',
-    body: 'Bees run what you have. They send the reports, answer the calls, prepare the briefs and follow up, so your team works on what needs a person.',
-  },
-  {
-    title: 'People decide what matters',
-    body: 'Anything clinical waits for a person. A Bee drafts it, your team approves it.',
-  },
-  {
-    title: 'It grows with you',
-    body: 'Add a module or a new build and it arrives in the same Hive, run by the same Bees.',
-  },
-];

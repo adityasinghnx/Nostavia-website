@@ -1,4 +1,6 @@
-/* Who we work with, by type of health business. Never list customer names here. */
+/* Who we work with, in order of focus. No customer names or logos. */
+
+import type { BeeId } from './bees';
 
 export interface CustomerType {
   id: string;
@@ -6,11 +8,10 @@ export interface CustomerType {
   short: string;
   photo: string;
   headline: string;
-  body: string;
-  /** What Bees take off the team's plate. Plain jobs, no numbers. */
-  beeJobs: string[];
-  /** Human OS module names; must match src/content/human-os.ts. */
-  startsWith: string[];
+  /** What the Superintelligence helps with (B6). */
+  helps: string[];
+  /** Bees most likely in a suggested starting team. */
+  bees: BeeId[];
 }
 
 export const customerTypes: CustomerType[] = [
@@ -19,49 +20,35 @@ export const customerTypes: CustomerType[] = [
     name: 'Diagnostic labs',
     short: 'Labs',
     photo: '/photos/industry-labs.jpg',
-    headline: 'Turn every report into a reason to come back.',
-    body: 'Reports patients can read, sent under your name, and patients brought back when a re-test is due.',
-    beeJobs: ['Decodes and sends reports', 'Invites patients back for re-tests', 'Answers the phone and books visits'],
-    startsWith: ['Smart Reports', 'Correlation Engine', 'Re-Test Recall Engine'],
+    headline: 'Reports patients understand. Patients who come back.',
+    helps: ['Reports patients understand', 'Patients who come back for re-tests', 'Fewer calls asking what a report means', 'Reports delivered to every portal on time'],
+    bees: ['reports', 'recall', 'questions', 'entry'],
   },
   {
     id: 'clinics',
-    name: 'Clinics and longevity centres',
+    name: 'Clinics',
     short: 'Clinics',
     photo: '/photos/industry-clinics.jpg',
-    headline: 'Programmes members stay on.',
-    body: 'Biological age, risk and personal protocols your clinicians can stand behind, with daily guidance between visits.',
-    beeJobs: ['Prepares the member picture before each visit', 'Keeps protocols moving between visits', 'Flags members drifting off plan'],
-    startsWith: ['Biological Age', 'Disease Risk Engine', 'Cardiovascular Intelligence', 'Adaptive Protocols'],
+    headline: 'A real app in your brand, and follow-up that never slips.',
+    helps: ['A real app in your brand', 'Briefs before consultations', 'Follow-up that does not slip'],
+    bees: ['intake', 'bookings', 'recall', 'questions'],
+  },
+  {
+    id: 'apps',
+    name: 'Wellness and health apps',
+    short: 'Health apps',
+    photo: '/photos/industry-wellness.jpg',
+    headline: 'Health intelligence inside your product.',
+    helps: ['Health intelligence inside your product', 'One module at a time, through our API', 'No new app release to add one'],
+    bees: ['questions', 'reports'],
   },
   {
     id: 'hospitals',
-    name: 'Hospitals and health systems',
+    name: 'Hospitals',
     short: 'Hospitals',
     photo: '/photos/industry-hospitals.jpg',
-    headline: 'Time back for clinicians. A front desk that never closes.',
-    body: 'Briefs ready before the consult, medication signals for review, and every inbound call answered.',
-    beeJobs: ['Writes pre-consult briefs', 'Answers calls in local languages', 'Reports on the whole population'],
-    startsWith: ['Clinical Intake Briefs', 'Medication Intelligence', 'AI Voice Agent', 'B2B Analytics Dashboard'],
-  },
-  {
-    id: 'wellness',
-    name: 'Wellness platforms and apps',
-    short: 'Wellness apps',
-    photo: '/photos/industry-wellness.jpg',
-    headline: 'Health AI inside the app you already have.',
-    body: 'Wearables, meals, sleep and performance, decoded and turned into guidance your members act on.',
-    beeJobs: ['Syncs and reads wearable data', 'Turns meals into glucose insight', 'Adjusts plans as the data changes'],
-    startsWith: ['Wearable Telemetry', 'Food Intelligence', 'Sleep & Recovery Engine', 'Performance Intelligence'],
-  },
-  {
-    id: 'insurers',
-    name: 'Insurers and corporate wellness',
-    short: 'Insurers',
-    photo: '/photos/industry-insurers.jpg',
-    headline: 'See risk across your population, early.',
-    body: 'Consented risk signals and clear reporting across every member you cover.',
-    beeJobs: ['Scores metabolic and cardiovascular risk', 'Builds the weekly population report'],
-    startsWith: ['Disease Risk Engine', 'B2B Analytics Dashboard'],
+    headline: 'A front desk that answers, and follow-up after every discharge.',
+    helps: ['Front-desk support', 'Follow-up after discharge', 'Health-check programmes'],
+    bees: ['front-desk', 'bookings', 'intake', 'recall'],
   },
 ];

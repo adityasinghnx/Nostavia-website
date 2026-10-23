@@ -1,131 +1,139 @@
 import React from 'react';
 import { useReducedMotion } from 'motion/react';
-import { STUDIO } from '../../content/site';
+import { parts, promises, type PartId } from '../../content/superintelligence';
 import { cn } from '../../lib/cn';
-import { HiveMark } from '../ui/marks';
 
 /* ─────────────────────────────────────────────────────────────────────────────
- * The one structure diagram: Hive on top, Human OS and Studio side by side
- * underneath, each connected to Hive and never to each other. EHR and LIS are
- * internal and are not drawn. Human OS categories are text, never boxes.
+ * The one structure diagram: Nostavia Superintelligence as the centre cell,
+ * Human OS, Hive and Studio as its three cells, the three promises underneath.
+ * The parts touch the centre, never each other: no chain. EHR and LIS are
+ * internal and not drawn. Human OS's two groups are text only.
  * ──────────────────────────────────────────────────────────────────────────── */
 
-export type Focus = 'hive' | 'human-os' | 'studio' | 'all';
+export type Focus = 'core' | PartId | 'promises' | 'all';
 
-const lit = (focus: Focus, part: Exclude<Focus, 'all'>) => focus === 'all' || focus === part;
+const W = 640;
+const H = 580;
+const R = 104; // centre to corner, flat-top cells
+const r = R * Math.cos(Math.PI / 6);
+const D = 2 * r + 16;
+const C = { x: 320, y: 212 };
 
-const panel = 'absolute rounded-[18px] border transition-[opacity,border-color,background-color,box-shadow] duration-700 ease-out';
-const on = 'border-accent/45 bg-[rgb(var(--accent)/0.06)] opacity-100 shadow-[0_30px_80px_-40px_rgb(var(--accent)/0.55)]';
-const off = 'border-fg/10 bg-surface/40 opacity-[0.38]';
+const at = (deg: number) => ({ x: C.x + D * Math.cos((deg * Math.PI) / 180), y: C.y + D * Math.sin((deg * Math.PI) / 180) });
 
-/* Connector geometry, in the 640 × 600 diagram space */
-const paths = {
-  'human-os': 'M150 352 C150 290 250 290 250 214',
-  studio: 'M490 352 C490 290 390 290 390 214',
+const centres: Record<PartId, { x: number; y: number }> = {
+  'human-os': at(210),
+  hive: at(330),
+  studio: at(90),
 };
 
-/* Bees travel both ways: Hive runs what sits underneath it. */
-const Connector: React.FC<{ d: string; active: boolean; offset?: number }> = ({ d, active, offset = 0 }) => {
+const hex = (cx: number, cy: number, radius = R - 2) =>
+  Array.from({ length: 6 }, (_, i) => {
+    const a = (Math.PI / 3) * i;
+    return `${(cx + radius * Math.cos(a)).toFixed(1)},${(cy + radius * Math.sin(a)).toFixed(1)}`;
+  }).join(' ');
+
+const pct = (p: { x: number; y: number }) => ({ left: `${(p.x / W) * 100}%`, top: `${(p.y / H) * 100}%` });
+
+const Cell: React.FC<{ cx: number; cy: number; on: boolean; dim?: boolean; core?: boolean }> = ({ cx, cy, on, dim, core }) => (
+  <polygon
+    points={hex(cx, cy)}
+    strokeLinejoin="round"
+    strokeWidth={on ? 1.6 : 1.1}
+    className="transition-[fill,stroke,opacity] duration-700 ease-out"
+    style={{
+      fill: core && on ? 'url(#core-glow)' : on ? 'rgb(var(--accent) / 0.07)' : 'rgb(var(--surface) / 0.5)',
+      stroke: on ? 'rgb(var(--accent) / 0.7)' : 'rgb(var(--fg) / 0.14)',
+      opacity: dim ? 0.45 : 1,
+    }}
+  />
+);
+
+export const StructureDiagram: React.FC<{ focus: Focus; className?: string }> = ({ focus, className }) => {
   const reduce = useReducedMotion();
+  const all = focus === 'all';
+  const partOn = (id: PartId) => all || focus === id;
+  const coreOn = all || focus === 'core' || focus === 'promises' || parts.some((p) => p.id === focus);
+  const promisesOn = all || focus === 'promises';
+
   return (
-  <g className={cn('transition-opacity duration-700', active ? 'opacity-100' : 'opacity-25')}>
-    <path d={d} fill="none" stroke="rgb(var(--fg) / 0.16)" strokeWidth="1.25" strokeDasharray="2 5" />
-    <path d={d} fill="none" stroke="rgb(var(--accent))" strokeWidth="1.25" strokeOpacity={active ? 0.55 : 0} className="transition-[stroke-opacity] duration-700" />
-    {[
-      { begin: 0, up: true },
-      { begin: 1.1, up: false },
-      { begin: 1.9, up: true },
-    ].map(({ begin, up }) =>
-      reduce ? null : (
-        <circle key={begin} r="3.2" fill="rgb(var(--accent))" opacity={active ? 1 : 0.5}>
-          <animateMotion dur="2.6s" begin={`${begin + offset}s`} repeatCount="indefinite" path={d} keyPoints={up ? '0;1' : '1;0'} keyTimes="0;1" calcMode="linear" />
-        </circle>
-      ),
-    )}
-  </g>
-  );
-};
+    <div
+      className={cn('relative w-full select-none', className)}
+      style={{ aspectRatio: `${W}/${H}`, containerType: 'inline-size' }}
+      role="img"
+      aria-label="Nostavia Superintelligence at the centre. Around it, three parts: Human OS, how it understands; Hive, how it works; Studio, how it builds for you. Underneath every part, three promises: private by design, people stay in charge, never clinical judgement."
+    >
+      <svg viewBox={`0 0 ${W} ${H}`} className="absolute inset-0 h-full w-full overflow-visible" aria-hidden="true">
+        <defs>
+          <radialGradient id="core-glow" cx="50%" cy="45%" r="60%">
+            <stop offset="0" stopColor="rgb(var(--accent))" stopOpacity="0.3" />
+            <stop offset="1" stopColor="rgb(var(--accent))" stopOpacity="0.04" />
+          </radialGradient>
+        </defs>
 
-const cells = ['Reports', 'Calls', 'Briefs', 'Follow-ups', 'Your build'];
+        {/* Bees moving between the centre and each part */}
+        {parts.map((p, i) => {
+          // Run between the labels: from just outside the centre label to just short of the part's label
+          const c = centres[p.id];
+          const ux = (c.x - C.x) / D;
+          const uy = (c.y - C.y) / D;
+          const from = { x: C.x + ux * r * 0.62, y: C.y + uy * r * 0.62 };
+          const to = { x: C.x + ux * (D - r * 0.85), y: C.y + uy * (D - r * 0.85) };
+          const d = `M${from.x.toFixed(1)} ${from.y.toFixed(1)} L${to.x.toFixed(1)} ${to.y.toFixed(1)}`;
+          const live = partOn(p.id) || focus === 'core';
+          return (
+            <g key={p.id} className={cn('transition-opacity duration-700', live ? 'opacity-100' : 'opacity-30')}>
+              <path d={d} stroke="rgb(var(--fg) / 0.15)" strokeWidth="1" strokeDasharray="2 5" />
+              {!reduce &&
+                [0, 1.2].map((begin, j) => (
+                  <circle key={j} r="3.2" fill="rgb(var(--accent))">
+                    <animateMotion dur="2.4s" begin={`${begin + i * 0.5}s`} repeatCount="indefinite" path={d} keyPoints={j ? '1;0' : '0;1'} keyTimes="0;1" calcMode="linear" />
+                  </circle>
+                ))}
+            </g>
+          );
+        })}
 
-export const StructureDiagram: React.FC<{ focus: Focus; className?: string }> = ({ focus, className }) => (
-  <div className={cn('relative w-full aspect-[640/600] select-none', className)} role="img" aria-label={`Structure: Hive on top. Underneath it, side by side, Human OS (what we've built) and ${STUDIO} (what we build for you), each connected to Hive.`}>
-    <svg viewBox="0 0 640 600" className="absolute inset-0 h-full w-full overflow-visible" aria-hidden="true">
-      <Connector d={paths['human-os']} active={lit(focus, 'human-os') || focus === 'hive'} />
-      <Connector d={paths.studio} active={lit(focus, 'studio') || focus === 'hive'} offset={0.6} />
-    </svg>
-
-    {/* Hive */}
-    <div aria-hidden="true" className={cn(panel, 'left-0 right-0 top-0 h-[35.5%] p-[3.6%] flex flex-col justify-between', lit(focus, 'hive') ? on : off)}>
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="t-label flex items-center gap-2 text-accent">
-            <HiveMark className="w-4 h-4" /> Hive
-          </p>
-          <p className="mt-3 text-[clamp(1.05rem,2.1vw,1.6rem)] leading-[1.1] tracking-[-0.025em]">
-            One place. <span className="em">Your Bees</span> run everything.
-          </p>
-        </div>
-        <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-fg/10 px-2.5 py-1 font-mono text-[10px] tracking-[0.06em] text-fg/55">
-          <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse2" />
-          BEES AT WORK
-        </span>
-      </div>
-      {/* Bees crossing the hive */}
-      <div className="relative h-5 mx-[1%]">
-        <span className="absolute inset-x-0 top-1/2 h-px border-t border-dashed border-fg/15" />
-        {[
-          { d: 7, delay: 0 },
-          { d: 9.5, delay: -3 },
-          { d: 6, delay: -4.5 },
-          { d: 11, delay: -7 },
-        ].map((b, i) => (
-          <span key={i} className="absolute top-1/2 -mt-[3px] animate-[lane_linear_infinite]" style={{ animationDuration: `${b.d}s`, animationDelay: `${b.delay}s`, animationDirection: i % 2 ? 'reverse' : 'normal' }}>
-            <span className="block h-[6px] w-[6px] rounded-full bg-accent shadow-[0_0_10px_rgb(var(--accent)/0.8)] animate-[bob_1.6s_ease-in-out_infinite]" />
-          </span>
+        <Cell cx={C.x} cy={C.y} on={coreOn} core />
+        {parts.map((p) => (
+          <Cell key={p.id} cx={centres[p.id].x} cy={centres[p.id].y} on={partOn(p.id)} dim={!partOn(p.id) && focus !== 'core' && focus !== 'promises'} />
         ))}
+        {/* Inner ring on the centre cell */}
+        <polygon points={hex(C.x, C.y, R - 16)} fill="none" strokeLinejoin="round" style={{ stroke: 'rgb(var(--accent) / 0.25)' }} strokeDasharray="1 6" strokeLinecap="round" />
+      </svg>
+
+      {/* Labels */}
+      <div aria-hidden="true" className="absolute -translate-x-1/2 -translate-y-1/2 text-center w-[26%]" style={pct(C)}>
+        <p className="font-mono uppercase tracking-[0.14em] text-accent text-[max(8px,1.55cqw)]">Nostavia</p>
+        <p className="mt-[0.6cqw] leading-[1.05] tracking-[-0.025em] text-[max(10px,2.9cqw)]">Superintelligence</p>
       </div>
-      <div className="relative flex gap-[1.6%]">
-        {cells.map((c, i) => (
-          <span
-            key={c}
+      {parts.map((p) => (
+        <div
+          key={p.id}
+          aria-hidden="true"
+          className={cn('absolute -translate-x-1/2 -translate-y-1/2 text-center w-[26%] transition-opacity duration-700', partOn(p.id) || focus === 'core' || focus === 'promises' ? 'opacity-100' : 'opacity-45')}
+          style={pct(centres[p.id])}
+        >
+          <p className="font-mono uppercase tracking-[0.14em] text-accent text-[max(8px,1.55cqw)]">{p.name}</p>
+          <p className="mt-[0.6cqw] leading-none tracking-[-0.03em] text-[max(12px,3.4cqw)] em">{p.verb}</p>
+        </div>
+      ))}
+
+      {/* Promises underneath everything */}
+      <ul aria-hidden="true" className="absolute inset-x-[2%] bottom-0 flex gap-[1.5%]">
+        {promises.map((p) => (
+          <li
+            key={p}
             className={cn(
-              'flex-1 truncate rounded-lg border px-[2%] py-[1.4%] text-center text-[clamp(9px,1.25vw,12px)] transition-colors duration-700',
-              i === cells.length - 1 ? 'border-fg/15 text-fg/70' : 'border-accent/25 text-fg/75',
+              'flex-1 flex items-center justify-center gap-[1cqw] rounded-full border px-[1.2cqw] py-[1.6cqw] text-center leading-tight text-[max(9px,1.75cqw)] transition-[border-color,background-color,opacity] duration-700',
+              promisesOn ? 'border-accent/50 bg-[rgb(var(--accent)/0.07)] opacity-100' : 'border-fg/15 opacity-60',
             )}
           >
-            {c}
-          </span>
+            <span className="hidden sm:block h-[0.9cqw] w-[0.9cqw] min-h-[4px] min-w-[4px] shrink-0 rounded-full bg-accent" />
+            {p}
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
-
-    {/* Human OS */}
-    <div aria-hidden="true" className={cn(panel, 'left-0 w-[47%] bottom-0 h-[41%] p-[3.6%] flex flex-col justify-between', lit(focus, 'human-os') ? on : off)}>
-      <div>
-        <p className="t-label text-accent">Human OS</p>
-        <p className="mt-3 text-[clamp(1rem,1.9vw,1.45rem)] leading-[1.1] tracking-[-0.025em]">
-          What we've <span className="em">built</span>
-        </p>
-        <p className="mt-2 text-[clamp(11px,1.3vw,13.5px)] leading-snug text-fg/55">Ready-made modules. Pick the ones you need.</p>
-      </div>
-      <p className="text-[clamp(10px,1.2vw,12.5px)] text-fg/60 leading-snug">
-        For your customers
-        <span className="mx-1.5 text-fg/25">·</span>
-        For your care team
-      </p>
-    </div>
-
-    {/* Studio */}
-    <div aria-hidden="true" className={cn(panel, 'right-0 w-[47%] bottom-0 h-[41%] p-[3.6%] flex flex-col justify-between', lit(focus, 'studio') ? on : off)}>
-      <div>
-        <p className="t-label text-accent">{STUDIO}</p>
-        <p className="mt-3 text-[clamp(1rem,1.9vw,1.45rem)] leading-[1.1] tracking-[-0.025em]">
-          What we build <span className="em">for you</span>
-        </p>
-        <p className="mt-2 text-[clamp(11px,1.3vw,13.5px)] leading-snug text-fg/55">Custom builds, made to run in Hive.</p>
-      </div>
-      <p className="text-[clamp(10px,1.2vw,12.5px)] text-fg/60 leading-snug">Listen · Build · Run in Hive · Stay on</p>
-    </div>
-  </div>
-);
+  );
+};

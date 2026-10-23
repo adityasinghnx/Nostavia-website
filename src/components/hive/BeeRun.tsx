@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'motion/react';
 import { Check, FileText, Pause, Play } from 'lucide-react';
 import { cn } from '../../lib/cn';
-import { BeeGlyph } from '../ui/marks';
+import { BeeAvatar } from './HiveConsole';
 import { EASE } from '../ui/motion';
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -17,7 +17,7 @@ const steps = [
   { verb: 'Check', line: 'One marker is outside the usual range.', log: 'Flagged ferritin, above range' },
   { verb: 'Draft', line: 'It drafts a plain-language summary for the patient.', log: 'Drafted patient summary' },
   { verb: 'Ask', line: 'Because it is clinical, a clinician approves it first.', log: 'Approved by a clinician' },
-  { verb: 'Send', line: 'It goes to the patient under your name.', log: 'Sent to patient as Sample Health Labs' },
+  { verb: 'Send', line: 'It goes to the patient under your name.', log: 'Sent to patient as Sample Lab' },
   { verb: 'Log', line: 'Every step is written down, so you can see what happened.', log: 'Run complete' },
 ];
 
@@ -148,7 +148,7 @@ const Stage: React.FC<{ step: number }> = ({ step }) => {
     return (
       <motion.div key="s5" {...scene} className="h-full flex flex-col items-center justify-center">
         <div className="w-full max-w-[300px] rounded-[22px] border border-white/10 bg-[#0B0A08] p-4">
-          <p className="text-center text-[11px] text-[#F2EDE3]/40">Sample Health Labs</p>
+          <p className="text-center text-[11px] text-[#F2EDE3]/40">Sample Lab</p>
           <motion.div initial={{ opacity: 0, y: 10, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: 0.3, duration: 0.5, ease: EASE }} className="mt-3 rounded-2xl rounded-tl-md bg-white/[0.06] p-3 text-[12.5px] leading-relaxed text-[#F2EDE3]/90">
             {summary}
           </motion.div>
@@ -223,11 +223,14 @@ export const BeeRun: React.FC<{ className?: string }> = ({ className }) => {
 
       <div className="lg:col-span-7 rounded-[18px] border border-white/[0.09] bg-[#100E0C] shadow-[0_50px_100px_-40px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col">
         <div className="flex items-center justify-between border-b border-white/[0.07] px-4 h-11">
-          <span className="flex items-center gap-2 text-[12.5px] text-[#F2EDE3]">
-            <BeeGlyph className="w-4 h-4 text-[#F2D27A]" /> Bee running Smart Reports
+          <span className="flex items-center gap-2.5 text-[12.5px] text-[#F2EDE3]">
+            <BeeAvatar id="reports" size={26} /> A Bee at work · Reports
           </span>
-          <span className="font-mono text-[11px] text-[#F2EDE3]/40 tabular-nums">
-            {String(step + 1).padStart(2, '0')} / {String(steps.length).padStart(2, '0')}
+          <span className="flex items-center gap-3">
+            <span className="rounded-md border border-[#F2D27A]/40 bg-[#F2D27A]/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-[#F2D27A]">Sample data</span>
+            <span className="font-mono text-[11px] text-[#F2EDE3]/40 tabular-nums">
+              {String(step + 1).padStart(2, '0')} / {String(steps.length).padStart(2, '0')}
+            </span>
           </span>
         </div>
         <div className="relative px-6 py-6 h-[340px]">

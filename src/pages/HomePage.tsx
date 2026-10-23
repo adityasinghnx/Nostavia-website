@@ -3,28 +3,24 @@ import { useSeo } from '../lib/useSeo';
 import { ONE_LINER } from '../content/site';
 import { Hero } from '../components/home/Hero';
 import { ConsoleShowcase } from '../components/home/ConsoleShowcase';
-import { LogoStrip } from '../components/home/LogoStrip';
+import { ProblemSection } from '../components/home/ProblemSection';
 import { Structure } from '../components/home/Structure';
-import { HumanOsSection } from '../components/home/HumanOsSection';
-import { StudioSection } from '../components/home/StudioSection';
+import { PrinciplesSection } from '../components/home/PrinciplesSection';
+import { BeesSection } from '../components/home/BeesSection';
 import { CustomersSection } from '../components/home/CustomersSection';
-import { DevelopersSection } from '../components/home/DevelopersSection';
-import { TrustSection } from '../components/home/TrustSection';
 import { FinalCta } from '../components/home/FinalCta';
 
 export const HomePage: React.FC = () => {
-  useSeo({ title: 'Nostavia: one place where AI Bees run your health business', description: ONE_LINER, path: '/' });
+  useSeo({ title: 'Nostavia: healthcare’s superintelligence', description: ONE_LINER, path: '/' });
   return (
     <>
       <Hero />
       <ConsoleShowcase />
-      <LogoStrip />
+      <ProblemSection />
       <Structure />
-      <HumanOsSection />
-      <StudioSection />
+      <PrinciplesSection />
+      <BeesSection />
       <CustomersSection />
-      <DevelopersSection />
-      <TrustSection />
       <FinalCta />
     </>
   );

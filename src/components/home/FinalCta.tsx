@@ -1,5 +1,6 @@
 import React from 'react';
 import { CALENDAR_URL, CONTACT_EMAIL } from '../../content/site';
+import { CLOSING } from '../../content/superintelligence';
 import { HiveSwarm } from '../hive/HiveSwarm';
 import { Button } from '../ui/primitives';
 import { Reveal, SplitHeading } from '../ui/motion';
@@ -7,8 +8,8 @@ import { Magnetic } from '../ui/effects';
 
 /** Closing call to action, shared by every page. */
 export const FinalCta: React.FC<{ title?: string; body?: string }> = ({
-  title = 'Bring your work into *one place.*',
-  body = 'See Hive running the work of a business like yours. Thirty minutes, with the people who build it.',
+  title = CLOSING.title,
+  body = CLOSING.body,
 }) => (
   <section data-theme="ink" aria-labelledby="cta-title" className="relative overflow-hidden border-t border-fg/[0.07]">
     <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(50%_60%_at_50%_100%,rgba(242,210,122,0.12),transparent_70%)]" />

@@ -1,101 +1,72 @@
-# Website structure from the 23 Oct 2026 company structure
+# Website structure: Nostavia Superintelligence
 
-Working brief for the new site on branch `hive-redesign`. Source: *Nostavia — Company Structure (Final, 23 Oct 2026)*.
+Working brief for the new site on branch `hive-redesign`.
+Source: *Nostavia: Company Description and Website Source* (23 Oct 2026), which replaces the Hive-on-top structure note from the same day.
 
-## 1. What changes
+## 1. The story
 
-The current site sells **delivery modes** (Custom Build, White Label, SDK), a **Human OS** catalogue, eight **industry** pages and a dozen **solution** pages with code names (Gravity, Comet, StoryHealth, Atlas…). A buyer has to work out how those pieces fit together.
-
-The new structure has one story with one diagram:
+Nostavia is a healthcare superintelligence. Everything we sell is a part of it.
 
 ```
-                    HIVE
-   One place. Your Bees run everything you have with Nostavia.
-        ┌──────────────────┬──────────────────┐
-     Human OS            Studio          (EHR, LIS: internal, not on the site)
-  What we've built   What we build for you
+                 NOSTAVIA SUPERINTELLIGENCE
+                 one intelligence at the centre
+        ┌────────────────┬────────────────┬────────────────┐
+     Human OS            Hive             Studio
+   Understands          Works             Builds
+ (what it reads)   (Bees do the work)  (what it builds for you)
+        └──────── Private by design · People stay in charge · Never clinical judgement ────────┘
 ```
 
-So the website stops leading with modules and starts leading with **Hive**: the one place the customer works, where Bees do the work. Human OS and Studio are the two ways work gets into Hive. They are peers, never drawn as a chain.
+> Superintelligence is the intelligence. Human OS is what it understands. Hive is where it works. Studio is what it builds for you.
 
-| Current site | New site |
+On the site the diagram is a honeycomb: the Superintelligence is the centre cell, the three parts are the cells around it (touching the centre, never each other), and the three promises sit underneath. EHR and LIS are not drawn.
+
+## 2. What changed from the first version of this branch
+
+| First version (Hive on top) | Now |
 |---|---|
-| "AI health products under your brand", hero about modules | Hero about Hive: one place, Bees do the work |
-| Custom Build | **Studio** |
-| SDK | **Developers** (SDK Portal and docs) |
-| White Label | No line of its own. A branded app is either Human OS modules delivered through the SDK Portal or a Studio build |
-| Human OS: Person ring / Team ring | Human OS: **For your customers** / **For your care team** |
-| "Partner Portal" | **SDK Portal** |
-| Industries (8 pages) | **Customers**: one page, by type of health business |
-| Solutions with code names (12 pages) | Retired. Their substance lives in Human OS modules or Studio. 301 redirects |
-| Pricing (calculator) | Not in the menu. Dropped from this version; pricing is handled in the demo call |
-| Security, Clinical, Company | Footer |
+| Hero: "Your health business, run from one place." | Hero: "Healthcare's superintelligence. Your people stay in charge." (option 1 of 3) |
+| Hive was the top layer | Superintelligence is the centre; Hive is one of three parts |
+| Menu: Hive · Human OS · Studio · Customers · Developers | Menu: Superintelligence · Hive · Human OS · Studio · Customers · Developers |
+| Hive shown as a dashboard | Hive shown as a chat-first workspace (Talk, Delegate, Supervise) |
+| Human OS: 7 systems, module catalogue, Live / In development labels, a page per system | Human OS: five families, two groups in text, no catalogue, no status labels. System pages removed and redirected |
+| Five customer types incl. insurers | Four: labs, clinics, wellness and health apps, hospitals |
+| Client logo strip on | Off until each client gives written permission |
+| Company and Security pages, clinical advisory bench | Removed. About lives in the footer; privacy is a section of the Superintelligence page. The bench is unconfirmed (Product Book conflict 7) |
+| Encryption and "no keys on device" practices | Removed. Privacy is written only as design intent |
 
-## 2. Site map
+## 3. Site map
 
-Menu: **Hive · Human OS · Studio · Customers · Developers** [Book a demo]
-
-| Route | Page | Job |
-|---|---|---|
-| `/` | Home | Explain the structure in one scroll: Hive on top, Human OS and Studio underneath |
-| `/hive` | Hive | What it is like to work in Hive; what Bees do; where humans stay in control |
-| `/human-os` | Human OS | The modules, grouped *for your customers* and *for your care team*; how to get them (SDK Portal) |
-| `/human-os/:system` | System pages | One page per system (Health Decoder, Digital Twin, …) |
-| `/studio` | Studio | How we listen, build, hand over into Hive and stay on |
-| `/customers` | Customers | Who we work with, by type of business, and what each one usually starts with |
-| `/developers` | Developers | SDK Portal, API keys, docs, code |
-| `/company` | Company | Founders, clinical advisory bench, where we are |
-| `/security` | Security | How we handle health data. Practices only, no certifications |
-| `/demo` | Book a demo | Form + calendar |
-
-## 3. Homepage narrative
-
-1. **Hero.** Your health business, run from one place. Hive + Bees in one line. Live Hive window under the fold.
-2. **Client logos.** (See open question 3.)
-3. **The structure.** Scroll-driven diagram: Hive → Human OS → Studio, one step at a time. The "simple way to say it" from section 7 of the structure doc.
-4. **Inside Hive.** What a Bee does in a day: reports out, calls answered, follow-ups sent, anything clinical waiting for a human.
-5. **Human OS.** Two categories, explorable, modules by system.
-6. **Studio.** Listen → build → run in Hive → stay on.
-7. **Customers.** Labs, clinics, hospitals, wellness apps, insurers.
-8. **Developers.** SDK Portal and a code sample.
-9. **How we handle health data.** Practices, no compliance claims.
-10. **Book a demo.**
-
-## 4. Words
-
-| Say outside | Keep inside |
+| Route | Page |
 |---|---|
-| Hive, Bees | Report Bee or any other Bee name (until Anushka confirms) |
-| For your customers / For your care team | Person ring / Team ring |
-| SDK Portal | Partner Portal |
-| What we've built / What we build for you | "feeds into", "layer below", any chain language |
-| We stay on after launch | Retainer |
-| — | EHR, LIS |
+| `/` | Home: hero, Hive workspace, the problem ("your team is the glue"), how it works (pinned diagram), principles, the Bees, who we work with, closing CTA |
+| `/superintelligence` | B2: one intelligence, three parts table, what makes it different, principles (`#private`) |
+| `/hive` | B3: chat-first workspace, Talk / Delegate / Supervise, choose your starting team, you stay in control, a Bee at work, getting started |
+| `/human-os` | B4: two groups, five families, docs and demo buttons |
+| `/studio` | B5: what we build, five steps, promise line |
+| `/customers` | B6: four business types, what it helps with, Bees that usually start |
+| `/developers` | B7: SDK Portal (sign up, keys, docs, usage), illustrative code |
+| `/demo` | B8: Show us where the time goes |
 
-Never on the site: EHR or LIS; ISO, HIPAA, GDPR, SOC 2 or any wording that suggests Nostavia holds a certification; revenue, traction or the module totals (43 / ~20 live) until verified.
+## 4. Bee artwork
 
-## 5. Redirects (added to `vercel.json`)
+Seven Bees from the Nostavia Hive pack are used, each named only by its job: Reports, Re-tests, Patient questions, Bookings, Portal work, Intake briefs, Front desk. Files live in `public/bees/` with job names, so no character name appears even in the page source.
 
-| Old | New |
-|---|---|
-| `/platform` | `/hive` |
-| `/industries/*` | `/customers` |
-| `/solutions/engineering`, `/solutions/supplements` | `/studio` |
-| `/solutions/gravity` | `/developers` |
-| `/solutions/storyhealth` | `/human-os` |
-| `/solutions/front-desk`, `/solutions/ai-agents`, `/solutions/voice-agents` | `/human-os/agent-workforce` |
-| `/solutions/hospitals`, `/solutions/hospitals-front-door` | `/customers` |
-| other `/solutions/*` | `/human-os` |
-| `/pricing` | `/demo` |
-| `/clinical` | `/company` |
+Not used: the crowned Bee (Queen is an internal word), the coordinator, the later-release Bees (claims, procurement, collections, SDK setup, brand, module), and the three scenes (each includes the crowned Bee; the meadow was made with an AI image tool).
 
-## 6. Open questions
+## 5. Guardrails applied
 
-1. **Bees vs "Agent Workforce".** Human OS has a system called Agent Workforce (AI Voice Agent, Chat Agent, Follow-Up Agent…). Next to Bees, buyers will see two kinds of AI worker. Suggest renaming the system (for example *Front Desk*) or presenting those modules as work the Bees run. The new site keeps the current names for now.
-2. **Module statuses.** Live / Next labels come from `src/content/human-os.ts`. The new site shows them per module but never prints totals. One flag (`SHOW_MODULE_STATUS`) hides them until Anushka confirms.
-3. **Client logos.** The guardrail says no customer names in material built from the structure, but the menu has a Customers page and the current logo bar is well liked. The new site keeps the logos behind one flag (`SHOW_CLIENT_LOGOS`). Suggest written OK from each client before launch.
-4. **Compliance lines on the current site.** "DPDP Act 2023 aligned", "ABDM and ABHA ready" and "Built on SOC 2 Type II certified infrastructure" read as compliance claims. The new site drops them and lists practices only.
-5. **App Store / Google Play badges.** We sell to businesses, not the public, so the new site drops the download badges. Privacy, data-deletion and delete-account pages stay in the footer.
-6. **Pricing.** Not in the new menu. Dropped from this version. Decide whether Hive gets public pricing later.
-7. **One-liner and the Studio name** are both drafts for Aditya to approve. Studio is a single constant in `src/content/site.ts`, so a rename touches one line.
-8. **Funding banner** (₹50 Lakh) is left off the new version.
+- Public words only: Superintelligence, Hive, Bees, Human OS, Studio.
+- No status labels, dates, module counts, prices, customer names or logos, certifications, EHR or LIS, comparisons to other AI.
+- Every product view carries "Sample data" inside the image.
+- "Superintelligence" always sits next to a line that clinicians decide.
+
+## 6. Open items
+
+1. **Hero headline** – option 1 used. One constant (`HERO_HEADLINE` in `src/content/site.ts`).
+2. **One-liner and mission** – draft used in meta and footer About.
+3. **Studio name** – one constant (`STUDIO`).
+4. **Demo reply time** – "We will reply within one working day" is the source copy, still [TO CONFIRM].
+5. **SDK Portal links** – no public URL yet; "Get API keys" and "Read the API reference" go to the demo form tagged `interest=developers`.
+6. **Terms page** – not drafted, so it is left out of the footer. Privacy policy stays. The old data-deletion and delete-account pages still exist at their URLs for the app stores.
+7. **Bee job labels on the site** – shown as jobs ("Reports", "Re-tests"), never as names. Confirm this is fine before the trademark check finishes.

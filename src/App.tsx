@@ -8,32 +8,33 @@ import { STUDIO_PATH } from './content/site';
 import { HomePage } from './pages/HomePage';
 import { Intro } from './components/ui/effects';
 
+const SuperintelligencePage = lazy(() => import('./pages/SuperintelligencePage'));
 const HivePage = lazy(() => import('./pages/HivePage'));
 const HumanOsPage = lazy(() => import('./pages/HumanOsPage'));
-const SystemPage = lazy(() => import('./pages/SystemPage'));
 const StudioPage = lazy(() => import('./pages/StudioPage'));
 const CustomersPage = lazy(() => import('./pages/CustomersPage'));
 const DevelopersPage = lazy(() => import('./pages/DevelopersPage'));
-const CompanyPage = lazy(() => import('./pages/CompanyPage'));
-const SecurityPage = lazy(() => import('./pages/SecurityPage'));
 const DemoPage = lazy(() => import('./pages/DemoPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
-/* Old routes from the previous site. Mirrored as 301s in vercel.json. */
+/* Old routes. Mirrored as 301s in vercel.json. */
 const redirects: [string, string][] = [
-  ['/platform', '/hive'],
+  ['/platform', '/superintelligence'],
+  ['/human-os/*', '/human-os'],
+  ['/company', '/superintelligence'],
+  ['/security', '/superintelligence#private'],
   ['/industries/*', '/customers'],
   ['/solutions/engineering', STUDIO_PATH],
   ['/solutions/supplements', STUDIO_PATH],
   ['/solutions/gravity', '/developers'],
-  ['/solutions/front-desk', '/human-os/agent-workforce'],
-  ['/solutions/ai-agents', '/human-os/agent-workforce'],
-  ['/solutions/voice-agents', '/human-os/agent-workforce'],
+  ['/solutions/front-desk', '/hive'],
+  ['/solutions/ai-agents', '/hive'],
+  ['/solutions/voice-agents', '/hive'],
   ['/solutions/hospitals', '/customers'],
   ['/solutions/hospitals-front-door', '/customers'],
   ['/solutions/*', '/human-os'],
   ['/pricing', '/demo'],
-  ['/clinical', '/company'],
+  ['/clinical', '/superintelligence'],
 ];
 
 /** Scrolls to a #hash target once a page has mounted. */
@@ -72,14 +73,12 @@ const Shell: React.FC = () => {
             <Suspense fallback={<div className="min-h-screen" aria-busy="true" />}>
               <Routes location={location}>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/superintelligence" element={<SuperintelligencePage />} />
                 <Route path="/hive" element={<HivePage />} />
                 <Route path="/human-os" element={<HumanOsPage />} />
-                <Route path="/human-os/:slug" element={<SystemPage />} />
                 <Route path={STUDIO_PATH} element={<StudioPage />} />
                 <Route path="/customers" element={<CustomersPage />} />
                 <Route path="/developers" element={<DevelopersPage />} />
-                <Route path="/company" element={<CompanyPage />} />
-                <Route path="/security" element={<SecurityPage />} />
                 <Route path="/demo" element={<DemoPage />} />
                 {redirects.map(([from, to]) => (
                   <Route key={from} path={from} element={<Navigate to={to} replace />} />

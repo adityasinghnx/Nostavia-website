@@ -1,21 +1,20 @@
-/* Studio: what we build for you. Outside wording only; the retainer rule is internal. */
+/* Studio: what the Superintelligence builds for you. Outside wording only. */
 
-export const studioSteps = [
-  { n: '01', title: 'Listen', body: 'We start with your team, your patients and your numbers. Nothing gets built until we understand the work.' },
-  { n: '02', title: 'Build', body: 'Designed and engineered from scratch, using proven Human OS parts where they fit.' },
-  { n: '03', title: 'Run in Hive', body: 'Every build is made to run in Hive, so your Bees run it from the first day.' },
-  { n: '04', title: 'Stay on', body: 'Launch is the start. We stay on to run, improve and extend what we built.' },
-];
+export const STUDIO_SUB = 'When the product you need does not exist yet, we build it with you, in your brand, on the same intelligence.';
 
-export const studioPrinciples = [
-  { title: 'Made to run in Hive', body: 'A build that the Bees cannot run is not finished. It arrives in the same place as everything else you have with us.' },
-  { title: 'Built on proven parts', body: "Where a Human OS module already does the job, we use it. You get something custom without paying to rebuild what exists." },
-  { title: 'A partner after launch', body: 'We stay with the product: watching how it is used, fixing what slows people down and building what comes next.' },
-];
+export const STUDIO_PROMISE = 'Your brand. Your patients. *Our intelligence behind it.*';
 
 export const studioBuilds = [
-  { title: 'Patient and member apps', body: 'Your own app, under your brand, with the Human OS modules you need inside it.' },
-  { title: 'Clinic and lab tools', body: 'Booking, collection, reporting and follow-up tools shaped around how your team already works.' },
-  { title: 'Programme platforms', body: 'Preventive, chronic-care and corporate programmes with enrolment, tracking and reporting.' },
-  { title: 'Internal dashboards', body: 'One view of the numbers your leadership actually runs the business on.' },
+  { title: 'Branded apps', body: 'Apps for your patients and members, under your name.' },
+  { title: 'Doctor portals', body: 'Portals your doctors actually want to open.' },
+  { title: 'Web products', body: 'Web products shaped around how your business works.' },
+  { title: 'Voice assistants', body: 'Voice assistants for your front desk, in your patients’ languages.' },
+];
+
+export const studioSteps = [
+  { n: '01', title: 'We listen', body: 'Before we suggest anything, we learn your business, your problem and what it costs you.' },
+  { n: '02', title: 'We design it with you', body: 'A written scope: what we build, what we reuse, what is out.' },
+  { n: '03', title: 'We build on proven parts', body: 'Faster delivery, fewer surprises.' },
+  { n: '04', title: 'We launch and hand over', body: 'Tested with real users, with guides and access for your team.' },
+  { n: '05', title: 'We stay with you', body: 'A monthly plan for running, support and improvements.' },
 ];
