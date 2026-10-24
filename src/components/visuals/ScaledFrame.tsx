@@ -1,8 +1,8 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import { cn } from '../../lib/cn';
 
-/** Draws its child at a fixed design size and scales it to the container width, like a live screenshot. */
-export const ScaledFrame: React.FC<{ width: number; height: number; label: string; className?: string; children: React.ReactNode }> = ({ width, height, label, className, children }) => {
+/** Draws its child at a fixed design size and scales it to the container width, like a live screenshot. `upscale` lets it grow past design size, for close-ups. */
+export const ScaledFrame: React.FC<{ width: number; height: number; label: string; className?: string; upscale?: boolean; children: React.ReactNode }> = ({ width, height, label, className, upscale, children }) => {
   const outer = useRef<HTMLDivElement>(null);
   const [w, setW] = useState(0);
 
@@ -14,7 +14,7 @@ export const ScaledFrame: React.FC<{ width: number; height: number; label: strin
     return () => ro.disconnect();
   }, []);
 
-  const scale = w ? Math.min(1, w / width) : 1;
+  const scale = w ? (upscale ? w / width : Math.min(1, w / width)) : 1;
 
   return (
     <div ref={outer} className={cn('relative w-full', className)} style={{ height: w ? height * scale : undefined, aspectRatio: w ? undefined : `${width}/${height}` }}>

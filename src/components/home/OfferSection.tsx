@@ -17,6 +17,8 @@ import { BeeAvatar } from '../hive/HiveConsole';
 const [humanOs, studio] = products;
 const [hive, api] = ways;
 
+const FADE = 'linear-gradient(to bottom, #000 55%, transparent 100%)';
+
 const ProductCard: React.FC<{ p: (typeof products)[number]; visual: React.ReactNode; delay?: number }> = ({ p, visual, delay = 0 }) => (
   <Reveal delay={delay} className="h-full">
     <Link to={p.to} className="group relative flex h-full flex-col overflow-hidden rounded-[28px] border border-fg/10 bg-fg/[0.02] transition-colors duration-500 hover:border-fg/20">
@@ -32,9 +34,10 @@ const ProductCard: React.FC<{ p: (typeof products)[number]; visual: React.ReactN
           <Arrow className="transition-transform duration-500 ease-out group-hover:translate-x-1" />
         </span>
       </div>
-      {/* The product, whole, on its own stage */}
-      <div className="relative mx-2.5 mb-2.5 h-[clamp(360px,34vw,480px)] overflow-hidden rounded-[20px] border border-fg/[0.06] bg-[radial-gradient(70%_60%_at_50%_100%,rgba(242,210,122,0.09),transparent_75%),linear-gradient(180deg,rgb(var(--fg)/0.045),rgb(var(--fg)/0.015))]">
-        <div className="absolute inset-0 flex items-center justify-center p-6 md:p-8 [container-type:size] transition-transform duration-700 ease-out group-hover:-translate-y-1.5">{visual}</div>
+      {/* The product, close up: it runs off the card's bottom edge and dissolves into it, with no frame of its own */}
+      <div className="relative h-[clamp(320px,32vw,440px)] overflow-hidden" style={{ maskImage: FADE, WebkitMaskImage: FADE }}>
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(60%_80%_at_50%_100%,rgba(242,210,122,0.08),transparent_70%)]" />
+        {visual}
       </div>
     </Link>
   </Reveal>
@@ -57,8 +60,8 @@ export const OfferSection: React.FC = () => (
         <ProductCard
           p={humanOs}
           visual={
-            <div className="w-[min(100%,440px,95cqh)]">
-              <ReportCard />
+            <div className="absolute left-7 top-1 w-[calc(100%-3.5rem)] md:left-9 md:w-[calc(100%-4.5rem)] origin-top-left transition-transform duration-[1200ms] ease-out group-hover:scale-[1.025]">
+              <ReportCard upscale />
             </div>
           }
         />
@@ -66,7 +69,7 @@ export const OfferSection: React.FC = () => (
           p={studio}
           delay={0.08}
           visual={
-            <div className="h-full aspect-[414/868]">
+            <div className="absolute left-1/2 top-1 w-[min(80%,360px)] -translate-x-1/2 transition-transform duration-[1200ms] ease-out group-hover:-translate-y-3">
               <BrandedApp />
             </div>
           }

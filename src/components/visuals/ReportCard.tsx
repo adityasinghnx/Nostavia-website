@@ -18,8 +18,8 @@ const verdictTone: Record<string, string> = {
   High: 'text-[#F2D27A] border-[#F2D27A]/35',
 };
 
-export const ReportCard: React.FC<{ className?: string }> = ({ className }) => (
-  <ScaledFrame width={520} height={548} className={className} label="Sample Human OS report: biological age, heart risk and four lab markers, each explained in plain language.">
+export const ReportCard: React.FC<{ className?: string; upscale?: boolean }> = ({ className, upscale }) => (
+  <ScaledFrame width={520} height={548} className={className} upscale={upscale} label="Sample Human OS report: biological age, heart risk and four lab markers, each explained in plain language.">
     <div className="h-full w-full rounded-[20px] border border-white/[0.09] bg-[#121010] p-6 font-sans text-left shadow-[0_40px_90px_-40px_rgba(0,0,0,0.9)]">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2.5">
