@@ -22,7 +22,7 @@ export const PrinciplesSection: React.FC<{ index?: string }> = ({ index = '06' }
           <Reveal as="li" key={p.title} delay={i * 0.05} className="grid grid-cols-[3rem_1fr] gap-4 py-10 md:py-12 border-b border-fg/[0.14]">
             <span className="font-mono text-[12px] text-accent pt-3">{String(i + 1).padStart(2, '0')}</span>
             <div>
-              <h3 className="text-[clamp(1.75rem,3.2vw,2.75rem)] leading-[1.02] tracking-[-0.035em]">{p.title}</h3>
+              <h3 className="text-[clamp(1.55rem,2.6vw,2.3rem)] leading-[1.02] tracking-[-0.035em]">{p.title}</h3>
               <p className="mt-4 text-[17px] leading-relaxed text-fg/60 max-w-[44ch]">{p.body}</p>
             </div>
           </Reveal>

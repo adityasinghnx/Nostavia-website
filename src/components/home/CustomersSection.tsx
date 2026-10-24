@@ -11,7 +11,7 @@ import { PhotoBlur } from '../ui/effects';
 
 export const PanelBody: React.FC<{ c: CustomerType }> = ({ c }) => (
   <>
-    <h3 className="text-[clamp(1.5rem,2.4vw,2.25rem)] leading-[1.05] tracking-[-0.03em] text-white max-w-[20ch]">{c.headline}</h3>
+    <h3 className="text-[clamp(1.4rem,2vw,1.9rem)] leading-[1.05] tracking-[-0.03em] text-white max-w-[20ch]">{c.headline}</h3>
     <ul className="mt-5 flex flex-col gap-2">
       {c.helps.map((h) => (
         <li key={h} className="text-[14px] text-white/80">

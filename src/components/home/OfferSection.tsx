@@ -25,10 +25,10 @@ const ProductCard: React.FC<{ p: (typeof products)[number]; visual: React.ReactN
     <Link to={p.to} className="group relative flex h-full flex-col overflow-hidden rounded-[28px] border border-fg/10 bg-fg/[0.02] transition-colors duration-500 hover:border-fg/20">
       <div className="flex flex-1 flex-col p-7 md:p-9">
         <div className="flex items-baseline justify-between gap-6">
-          <h3 className="text-[clamp(2rem,3.4vw,3rem)] leading-none tracking-[-0.035em]">{p.name}</h3>
+          <h3 className="text-[clamp(1.8rem,2.8vw,2.5rem)] leading-none tracking-[-0.035em]">{p.name}</h3>
           <span className="t-label text-fg/40">{p.tag}</span>
         </div>
-        <p className="mt-6 text-[clamp(1.1rem,1.4vw,1.3rem)] leading-snug tracking-[-0.015em] text-fg/85 max-w-[30ch]">{p.headline}</p>
+        <p className="mt-6 text-[clamp(1.05rem,1.25vw,1.18rem)] leading-snug tracking-[-0.015em] text-fg/85 max-w-[30ch]">{p.headline}</p>
         <p className="mt-3 text-[15px] leading-relaxed text-fg/50 max-w-[48ch]">{p.body}</p>
         <span className="mt-6 inline-flex items-center gap-2 text-[14.5px] text-fg/70 transition-colors duration-300 group-hover:text-accent">
           Explore {p.name}
@@ -86,7 +86,7 @@ export const OfferSection: React.FC = () => (
               <p className="t-label text-accent flex items-center gap-2">
                 <HiveMark className="w-4 h-4" /> How you use them
               </p>
-              <h3 className="mt-5 text-[clamp(2rem,3.4vw,3rem)] leading-none tracking-[-0.035em]">{hive.headline}</h3>
+              <h3 className="mt-5 text-[clamp(1.8rem,2.8vw,2.5rem)] leading-none tracking-[-0.035em]">{hive.headline}</h3>
               <p className="mt-4 text-[15.5px] leading-relaxed text-fg/60 max-w-[44ch]">{hive.body}</p>
             </div>
             <div className="lg:col-span-5 flex items-center lg:justify-end gap-4">

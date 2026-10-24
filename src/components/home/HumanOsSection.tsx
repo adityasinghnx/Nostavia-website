@@ -80,7 +80,7 @@ export const HumanOsSection: React.FC = () => {
                   <Link to={`${HUMAN_OS_PATH}#${f.id}`} onFocus={() => setActiveId(f.id)} className="group grid grid-cols-[3rem_1fr_auto] items-baseline gap-x-4 py-7 md:py-8">
                     <span className={cn('font-mono text-[12px] transition-colors duration-500', isActive ? 'text-accent' : 'text-fg/35')}>{f.number}</span>
                     <span>
-                      <span className={cn('block text-[clamp(1.6rem,3vw,2.6rem)] leading-[1.05] tracking-[-0.03em] transition-colors duration-500', isActive ? 'text-fg' : 'text-fg/45')}>{f.name}</span>
+                      <span className={cn('block text-[clamp(1.45rem,2.5vw,2.15rem)] leading-[1.05] tracking-[-0.03em] transition-colors duration-500', isActive ? 'text-fg' : 'text-fg/45')}>{f.name}</span>
                       <span className="mt-2 block text-[15px] text-fg/50 max-w-[48ch]">{f.does}</span>
                     </span>
                     <Arrow className={cn('w-5 h-5 transition-all duration-500 ease-out', isActive ? 'text-accent translate-x-0 opacity-100' : '-translate-x-2 opacity-0')} />

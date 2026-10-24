@@ -37,7 +37,7 @@ export const Hero: React.FC = () => {
           trigger="mount"
           delay={0.25 + INTRO_DELAY}
           stagger={0.06}
-          className="max-w-[10em] text-[clamp(1.9rem,8vw,6.75rem)] leading-[0.95] tracking-[-0.045em] font-[480]"
+          className="max-w-[10em] text-[clamp(1.9rem,6.8vw,5.6rem)] leading-[0.95] tracking-[-0.045em] font-[480]"
           text={HERO_HEADLINE}
         />
 

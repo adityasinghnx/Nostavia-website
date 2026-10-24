@@ -14,7 +14,7 @@ export const Footer: React.FC = () => (
     <div className="wrap">
       <div className="grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-12">
         <div className="col-span-2 md:col-span-5 flex flex-col gap-6">
-          <p className="text-[clamp(1.5rem,2.4vw,2rem)] leading-[1.1] tracking-[-0.03em] max-w-[18ch]">
+          <p className="text-[clamp(1.4rem,2vw,1.75rem)] leading-[1.1] tracking-[-0.03em] max-w-[18ch]">
             Health AI, ready-made or <span className="em text-accent">built for you.</span>
           </p>
           <p className="text-[15px] leading-relaxed text-fg/55 max-w-[46ch]">{ABOUT}</p>
