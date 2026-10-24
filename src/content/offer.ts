@@ -3,7 +3,7 @@
  * Human OS can also be used inside your own app through the API.
  * ──────────────────────────────────────────────────────────────────────────── */
 
-import { STUDIO, STUDIO_PATH } from './site';
+import { FLAGS, STUDIO, STUDIO_PATH } from './site';
 
 export const products = [
   {
@@ -51,7 +51,7 @@ export const problems = {
     'AI tools your privacy rules will not allow.',
   ],
   /** Labels for the "glue" illustration. Generic system types, no vendor names. */
-  systems: ['Lab system', 'Client portals', 'WhatsApp', 'Email', 'Phone', 'Insurer portals', 'Spreadsheets', 'Hospital software', 'Billing', 'Booking calendar'],
+  systems: ['Lab system', 'Client portals', 'WhatsApp', 'Email', 'Phone', 'Insurer portals', 'Spreadsheets', 'Hospital software', 'Billing', 'Booking appointments'],
 };
 
 export const principles = [
@@ -63,5 +63,5 @@ export const principles = [
 
 export const CLOSING = {
   title: 'Tell us where your team loses *the most time.*',
-  body: 'We will show you what Human OS, a Studio build and your Bees would do about it.',
+  body: FLAGS.SHOW_HIVE ? 'We will show you what Human OS, a Studio build and your Bees would do about it.' : 'We will show you what Human OS and a Studio build would do about it.',
 };

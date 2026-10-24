@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { Nav } from './components/layout/Nav';
 import { Footer } from './components/layout/Footer';
 import { SmoothScroll, scrollToTop, useLenis } from './lib/smooth-scroll';
-import { STUDIO_PATH } from './content/site';
+import { FLAGS, STUDIO_PATH } from './content/site';
 import { HomePage } from './pages/HomePage';
 import { Intro } from './components/ui/effects';
 
@@ -17,6 +17,9 @@ const DemoPage = lazy(() => import('./pages/DemoPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 /* Old routes. Mirrored as 301s in vercel.json. */
+/* While Hive is hidden, its page and old links lead home. */
+const HIVE = FLAGS.SHOW_HIVE ? '/hive' : '/';
+
 const redirects: [string, string][] = [
   ['/superintelligence', '/'],
   ['/platform', '/'],
@@ -27,9 +30,9 @@ const redirects: [string, string][] = [
   ['/solutions/engineering', STUDIO_PATH],
   ['/solutions/supplements', STUDIO_PATH],
   ['/solutions/gravity', '/developers'],
-  ['/solutions/front-desk', '/hive'],
-  ['/solutions/ai-agents', '/hive'],
-  ['/solutions/voice-agents', '/hive'],
+  ['/solutions/front-desk', HIVE],
+  ['/solutions/ai-agents', HIVE],
+  ['/solutions/voice-agents', HIVE],
   ['/solutions/hospitals', '/customers'],
   ['/solutions/hospitals-front-door', '/customers'],
   ['/solutions/*', '/human-os'],
@@ -73,7 +76,7 @@ const Shell: React.FC = () => {
             <Suspense fallback={<div className="min-h-screen" aria-busy="true" />}>
               <Routes location={location}>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/hive" element={<HivePage />} />
+                <Route path="/hive" element={FLAGS.SHOW_HIVE ? <HivePage /> : <Navigate to="/" replace />} />
                 <Route path="/human-os" element={<HumanOsPage />} />
                 <Route path={STUDIO_PATH} element={<StudioPage />} />
                 <Route path="/customers" element={<CustomersPage />} />

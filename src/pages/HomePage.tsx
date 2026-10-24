@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSeo } from '../lib/useSeo';
-import { ONE_LINER } from '../content/site';
+import { FLAGS, ONE_LINER } from '../content/site';
 import { Hero } from '../components/home/Hero';
 import { OfferSection } from '../components/home/OfferSection';
 import { ProblemSection } from '../components/home/ProblemSection';
@@ -20,7 +20,7 @@ export const HomePage: React.FC = () => {
       <ProblemSection />
       <HumanOsSection />
       <StudioSection />
-      <HiveSection />
+      {FLAGS.SHOW_HIVE && <HiveSection />}
       <PrinciplesSection />
       <CustomersSection />
       <FinalCta />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { products, ways } from '../../content/offer';
+import { FLAGS } from '../../content/site';
 import { bees } from '../../content/bees';
 import { Arrow, Label } from '../ui/primitives';
 import { Reveal, SplitHeading } from '../ui/motion';
@@ -49,10 +50,10 @@ export const OfferSection: React.FC = () => (
       <div className="grid lg:grid-cols-12 gap-8 items-end mb-12 md:mb-16">
         <div className="lg:col-span-8">
           <Label index="01">What we offer</Label>
-          <SplitHeading id="offer-title" className="t-h1 mt-6 max-w-[14ch]" text="Two products. One place to run them." />
+          <SplitHeading id="offer-title" className="t-h1 mt-6 max-w-[14ch]" text={FLAGS.SHOW_HIVE ? 'Two products. One place to run them.' : 'Two products. Ready-made or built for you.'} />
         </div>
         <Reveal className="lg:col-span-4">
-          <p className="text-[16px] leading-relaxed text-fg/60">Start with what is ready, have us build what is not, and run all of it the same way.</p>
+          <p className="text-[16px] leading-relaxed text-fg/60">{FLAGS.SHOW_HIVE ? 'Start with what is ready, have us build what is not, and run all of it the same way.' : 'Start with what is ready, and have us build what is not.'}</p>
         </Reveal>
       </div>
 
@@ -77,6 +78,7 @@ export const OfferSection: React.FC = () => (
       </div>
 
       {/* How you use them */}
+      {FLAGS.SHOW_HIVE && (
       <Reveal delay={0.1} className="mt-4">
         <Link to={hive.to} className="group relative block overflow-hidden rounded-[28px] border border-accent/25 bg-[radial-gradient(70%_120%_at_0%_0%,rgba(242,210,122,0.12),transparent_60%)] p-7 md:p-9 transition-colors duration-500 hover:border-accent/50">
           <div className="grid lg:grid-cols-12 gap-8 items-center">
@@ -98,6 +100,7 @@ export const OfferSection: React.FC = () => (
           </div>
         </Link>
       </Reveal>
+      )}
 
       <Reveal delay={0.15} className="mt-6">
         <Link to={api.to} className="group inline-flex flex-wrap items-center gap-x-3 gap-y-1 text-[15px] text-fg/60 hover:text-fg transition-colors">

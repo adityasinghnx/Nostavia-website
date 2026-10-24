@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
-import { HERO_HEADLINE, HERO_SUB, STUDIO } from '../../content/site';
+import { FLAGS, HERO_HEADLINE, HERO_SUB, STUDIO } from '../../content/site';
 import { HiveSwarm } from '../hive/HiveSwarm';
 import { Button } from '../ui/primitives';
 import { EASE, SplitHeading } from '../ui/motion';
@@ -10,7 +10,7 @@ const index = [
   { name: 'Human OS', line: 'Ready-made', href: '#human-os' },
   { name: STUDIO, line: 'Built for you', href: '#studio' },
   { name: 'Hive', line: 'How you run it', href: '#hive' },
-];
+].filter((p) => FLAGS.SHOW_HIVE || p.name !== 'Hive');
 
 export const Hero: React.FC = () => {
   const ref = useRef<HTMLElement>(null);
@@ -68,7 +68,7 @@ export const Hero: React.FC = () => {
         </div>
       </motion.div>
 
-      {/* The three parts, as an index */}
+      {/* The parts, as an index */}
       <motion.nav
         aria-label="On this page"
         initial={reduce ? false : { opacity: 0 }}
@@ -76,7 +76,7 @@ export const Hero: React.FC = () => {
         transition={{ duration: 1.2, delay: 1.3 + INTRO_DELAY }}
         className="relative border-t border-fg/[0.08]"
       >
-        <ol className="wrap grid grid-cols-3">
+        <ol className={`wrap grid ${index.length === 3 ? 'grid-cols-3' : 'grid-cols-2'}`}>
           {index.map((p, i) => (
             <li key={p.name} className={i > 0 ? 'border-l border-fg/[0.08]' : ''}>
               <a href={p.href} className={`group flex flex-col md:flex-row md:items-center gap-1 md:gap-4 py-4 md:py-5 transition-colors ${i > 0 ? 'pl-3 md:pl-5' : ''}`}>

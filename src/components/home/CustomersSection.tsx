@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { customerTypes, type CustomerType } from '../../content/customers';
 import { getBee } from '../../content/bees';
+import { FLAGS } from '../../content/site';
 import { cn } from '../../lib/cn';
 import { Label, TextLink } from '../ui/primitives';
 import { EASE, Reveal, SplitHeading } from '../ui/motion';
@@ -18,15 +19,19 @@ export const PanelBody: React.FC<{ c: CustomerType }> = ({ c }) => (
         </li>
       ))}
     </ul>
-    <p className="mt-6 t-label text-white/45">Bees that usually start</p>
-    <ul className="mt-3 flex flex-wrap gap-2">
-      {c.bees.map((id) => (
-        <li key={id} className="inline-flex items-center gap-2 rounded-full bg-black/35 backdrop-blur pl-1 pr-3 py-1 text-[12.5px] text-white/85">
-          <BeeAvatar id={id} size={24} />
-          {getBee(id).job}
-        </li>
-      ))}
-    </ul>
+    {FLAGS.SHOW_HIVE && (
+      <>
+        <p className="mt-6 t-label text-white/45">Bees that usually start</p>
+        <ul className="mt-3 flex flex-wrap gap-2">
+          {c.bees.map((id) => (
+            <li key={id} className="inline-flex items-center gap-2 rounded-full bg-black/35 backdrop-blur pl-1 pr-3 py-1 text-[12.5px] text-white/85">
+              <BeeAvatar id={id} size={24} />
+              {getBee(id).job}
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
   </>
 );
 

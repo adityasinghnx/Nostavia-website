@@ -3,6 +3,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { useSeo } from '../lib/useSeo';
 import { customerTypes, type CustomerType } from '../content/customers';
 import { getBee } from '../content/bees';
+import { FLAGS } from '../content/site';
 import { PageHero } from '../components/page/PageKit';
 import { FinalCta } from '../components/home/FinalCta';
 import { LogoStrip } from '../components/home/LogoStrip';
@@ -34,7 +35,7 @@ const TypeSection: React.FC<{ c: CustomerType; i: number }> = ({ c, i }) => {
             <h2 id={`${c.id}-title`} className="t-h2 mt-6 max-w-[18ch]">
               {c.headline}
             </h2>
-            <div className="mt-10 grid sm:grid-cols-2 gap-8 border-t border-fg/[0.12] pt-8">
+            <div className={cn('mt-10 grid gap-8 border-t border-fg/[0.12] pt-8', FLAGS.SHOW_HIVE && 'sm:grid-cols-2')}>
               <div>
                 <p className="t-label text-fg/45">What it helps with</p>
                 <ul className="mt-4 flex flex-col gap-3">
@@ -45,17 +46,19 @@ const TypeSection: React.FC<{ c: CustomerType; i: number }> = ({ c, i }) => {
                   ))}
                 </ul>
               </div>
-              <div>
-                <p className="t-label text-fg/45">Bees that usually start</p>
-                <ul className="mt-4 flex flex-col gap-2.5">
-                  {c.bees.map((id) => (
-                    <li key={id} className="flex items-center gap-3 text-[15px] text-fg/80">
-                      <BeeAvatar id={id} size={30} />
-                      {getBee(id).job}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {FLAGS.SHOW_HIVE && (
+                <div>
+                  <p className="t-label text-fg/45">Bees that usually start</p>
+                  <ul className="mt-4 flex flex-col gap-2.5">
+                    {c.bees.map((id) => (
+                      <li key={id} className="flex items-center gap-3 text-[15px] text-fg/80">
+                        <BeeAvatar id={id} size={30} />
+                        {getBee(id).job}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </Reveal>
         </div>
@@ -67,7 +70,7 @@ const TypeSection: React.FC<{ c: CustomerType; i: number }> = ({ c, i }) => {
 const CustomersPage: React.FC = () => {
   useSeo({
     title: 'Customers: labs, clinics, health apps and hospitals | Nostavia',
-    description: 'What Human OS, Studio and Hive help diagnostic labs, clinics, wellness and health apps, and hospitals with.',
+    description: FLAGS.SHOW_HIVE ? 'What Human OS, Studio and Hive help diagnostic labs, clinics, wellness and health apps, and hospitals with.' : 'What Human OS and Studio help diagnostic labs, clinics, wellness and health apps, and hospitals with.',
     path: '/customers',
   });
 
@@ -76,7 +79,7 @@ const CustomersPage: React.FC = () => {
       <PageHero
         label="Customers"
         title="Built for the businesses that keep people healthy."
-        intro="Four kinds of health business, the same products. Here is what we help each with, and the Bees that usually start the work in Hive."
+        intro={FLAGS.SHOW_HIVE ? 'Four kinds of health business, the same products. Here is what we help each with, and the Bees that usually start the work in Hive.' : 'Four kinds of health business, the same products. Here is what we help each with.'}
         aside={
           <nav aria-label="Jump to" className="flex flex-col border-t border-fg/10">
             {customerTypes.map((c, i) => (

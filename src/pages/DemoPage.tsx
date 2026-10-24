@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { Check } from 'lucide-react';
 import { useSeo } from '../lib/useSeo';
 import { newRefId, submitLead } from '../lib/leads';
-import { CALENDAR_URL, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_HREF } from '../content/site';
+import { CALENDAR_URL, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_HREF, FLAGS } from '../content/site';
 import { Button, Label } from '../components/ui/primitives';
 import { EASE, Reveal, SplitHeading } from '../components/ui/motion';
 import { cn } from '../lib/cn';
@@ -13,7 +13,7 @@ const types = ['Lab', 'Clinic', 'Health app', 'Hospital', 'Other'];
 
 const expect = [
   { title: 'We listen', body: 'Your business, your problem, and what it costs you.' },
-  { title: 'We show you', body: 'Human OS, Studio and Hive on work like yours, with sample data.' },
+  { title: 'We show you', body: FLAGS.SHOW_HIVE ? 'Human OS, Studio and Hive on work like yours, with sample data.' : 'Human OS and Studio on work like yours, with sample data.' },
   { title: 'You get a plan', body: 'What it would take on first, and how your people stay in charge.' },
 ];
 
@@ -32,7 +32,7 @@ const required = [
 const DemoPage: React.FC = () => {
   useSeo({
     title: 'Book a demo | Nostavia',
-    description: 'Show us where the time goes. We will show you what Human OS, a Studio build and your Bees would do about it.',
+    description: FLAGS.SHOW_HIVE ? 'Show us where the time goes. We will show you what Human OS, a Studio build and your Bees would do about it.' : 'Show us where the time goes. We will show you what Human OS and a Studio build would do about it.',
     path: '/demo',
   });
 
@@ -72,7 +72,7 @@ const DemoPage: React.FC = () => {
           <Label>Book a demo</Label>
           <SplitHeading id="page-title" as="h1" trigger="mount" delay={0.1} className="t-h1 mt-7 max-w-[11ch]" text="Show us where *the time goes.*" />
           <Reveal delay={0.4}>
-            <p className="mt-8 t-lead text-fg/60 max-w-[40ch]">Tell us where your team loses the most time. We will show you what Human OS, a Studio build and your Bees would do about it.</p>
+            <p className="mt-8 t-lead text-fg/60 max-w-[40ch]">Tell us where your team loses the most time. We will show you what Human OS{FLAGS.SHOW_HIVE ? ', a Studio build and your Bees' : ' and a Studio build'} would do about it.</p>
             <ol className="mt-12 border-t border-fg/10">
               {expect.map((x, i) => (
                 <li key={x.title} className="grid grid-cols-[2.25rem_1fr] gap-3 py-5 border-b border-fg/10">

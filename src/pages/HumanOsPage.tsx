@@ -12,7 +12,11 @@ import { Reveal } from '../components/ui/motion';
 import { HiveMark } from '../components/ui/marks';
 import { cn } from '../lib/cn';
 
-const usageIcons = [<HiveMark key="h" className="h-6 w-6" />, <Code2 key="c" className="h-6 w-6" strokeWidth={1.4} />, <Smartphone key="s" className="h-6 w-6" strokeWidth={1.4} />];
+const usageIcons: Record<string, React.ReactNode> = {
+  hive: <HiveMark className="h-6 w-6" />,
+  api: <Code2 className="h-6 w-6" strokeWidth={1.4} />,
+  studio: <Smartphone className="h-6 w-6" strokeWidth={1.4} />,
+};
 
 const HumanOsPage: React.FC = () => {
   useSeo({
@@ -98,15 +102,15 @@ const HumanOsPage: React.FC = () => {
 
       <Section theme="paper" labelledBy="usage-title">
         <div className="wrap">
-          <Label>Three ways to use it</Label>
+          <Label>{FLAGS.SHOW_HIVE ? 'Three ways to use it' : 'Two ways to use it'}</Label>
           <h2 id="usage-title" className="t-h1 mt-6 max-w-[21ch] text-balance">
-            Run it in Hive, build it in, or have us build around it.
+            {FLAGS.SHOW_HIVE ? 'Run it in Hive, build it in, or have us build around it.' : 'Build it into your app, or have us build around it.'}
           </h2>
-          <ul className="mt-14 grid md:grid-cols-3 gap-3">
+          <ul className={cn('mt-14 grid gap-3', usage.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2')}>
             {usage.map((u, i) => (
               <Reveal as="li" key={u.title} delay={i * 0.06}>
                 <Link to={u.to} className="group flex h-full min-h-[260px] flex-col justify-between rounded-[24px] border border-fg/[0.12] bg-surface/60 p-7 md:p-8 hover:border-accent/50 transition-colors">
-                  <span className="text-accent">{usageIcons[i]}</span>
+                  <span className="text-accent">{usageIcons[u.id]}</span>
                   <span>
                     <span className="flex items-center justify-between gap-4 text-[clamp(1.4rem,2vw,1.75rem)] tracking-[-0.025em]">
                       {u.title}

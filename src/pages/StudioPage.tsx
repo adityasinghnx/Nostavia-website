@@ -1,7 +1,7 @@
 import React from 'react';
 import { Mic, LayoutDashboard, Globe, Smartphone } from 'lucide-react';
 import { useSeo } from '../lib/useSeo';
-import { STUDIO, STUDIO_PATH } from '../content/site';
+import { FLAGS, STUDIO, STUDIO_PATH } from '../content/site';
 import { STUDIO_PROMISE, STUDIO_SUB, studioBuilds } from '../content/studio';
 import { PageHero, SectionHead } from '../components/page/PageKit';
 import { StudioSteps } from '../components/page/StudioSteps';
@@ -83,7 +83,7 @@ const StudioPage: React.FC = () => {
         </div>
       </Section>
 
-      <FinalCta title="Tell us what you *need built.*" body="Bring the problem, not a spec. We will come back with how we would build it, what we would reuse, and how your Bees would run it." />
+      <FinalCta title="Tell us what you *need built.*" body={FLAGS.SHOW_HIVE ? 'Bring the problem, not a spec. We will come back with how we would build it, what we would reuse, and how your Bees would run it.' : 'Bring the problem, not a spec. We will come back with how we would build it and what we would reuse.'} />
     </>
   );
 };

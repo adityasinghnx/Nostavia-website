@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSeo } from '../lib/useSeo';
-import { nav } from '../content/site';
+import { FLAGS, nav } from '../content/site';
 import { HiveSwarm } from '../components/hive/HiveSwarm';
 import { Button, TextLink } from '../components/ui/primitives';
 import { SplitHeading } from '../components/ui/motion';
@@ -14,7 +14,7 @@ const NotFoundPage: React.FC = () => {
       <div className="wrap relative pb-20 pt-[45vh] md:pt-40">
         <p className="t-label text-accent">404</p>
         <SplitHeading id="page-title" as="h1" trigger="mount" className="t-display mt-6 max-w-[10ch]" text="This cell is *empty.*" />
-        <p className="mt-8 t-lead text-fg/60 max-w-[40ch]">The page you were looking for has moved or never existed. Every Bee is accounted for, though.</p>
+        <p className="mt-8 t-lead text-fg/60 max-w-[40ch]">The page you were looking for has moved or never existed.{FLAGS.SHOW_HIVE && ' Every Bee is accounted for, though.'}</p>
         <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
           <Button to="/" size="lg">
             Back to home

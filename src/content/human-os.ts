@@ -5,6 +5,8 @@
  * is also still to be confirmed.
  * ──────────────────────────────────────────────────────────────────────────── */
 
+import { FLAGS } from './site';
+
 export const HUMAN_OS_PATH = '/human-os';
 
 export type GroupId = 'customers' | 'team';
@@ -106,9 +108,9 @@ export const familiesIn = (group: GroupId) => families.filter((f) => f.groups.in
 
 export const HUMAN_OS_SUB = 'Ready-made health AI modules you switch on through our API. Add one without a new app release.';
 
-/** Three ways to use Human OS. */
+/** Ways to use Human OS. Hive stays out while FLAGS.SHOW_HIVE is off. */
 export const usage = [
-  { title: 'In Hive', body: 'Your Bees run the modules for your team, in one chat-first workspace.', to: '/hive' },
-  { title: 'In your own app', body: 'Call any module through our API. Keys and docs in the SDK Portal.', to: '/developers' },
-  { title: 'In a Studio build', body: 'A product we build for you, with the modules you need inside it.', to: '/studio' },
-];
+  { id: 'hive', title: 'In Hive', body: 'Your Bees run the modules for your team, in one chat-first workspace.', to: '/hive' },
+  { id: 'api', title: 'In your own app', body: 'Call any module through our API. Keys and docs in the SDK Portal.', to: '/developers' },
+  { id: 'studio', title: 'In a Studio build', body: 'A product we build for you, with the modules you need inside it.', to: '/studio' },
+].filter((u) => FLAGS.SHOW_HIVE || u.id !== 'hive');

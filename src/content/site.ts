@@ -16,22 +16,26 @@ export const SITE_ORIGIN = 'https://nostaviahealth.com';
 export const STUDIO = 'Studio';
 export const STUDIO_PATH = '/studio';
 
-/** Draft one-liner, awaiting approval. */
-export const ONE_LINER =
-  'Nostavia makes health AI for labs, clinics, hospitals and health apps: ready-made modules in Human OS, products built for you by Studio, and Hive, where AI Bees run the routine work while your people stay in charge.';
-
-/** Hero headline, set by Aditya on 24 Oct 2026. "Superintelligence" appears here only, never as a product or menu item. */
-export const HERO_HEADLINE = 'Healthcare’s superintelligence, ready-made or *built for you.*';
-
-export const HERO_SUB =
-  'Human OS gives you ready-made health AI modules. Studio builds the apps, portals and voice assistants you need, in your brand. In Hive, AI Bees run the routine work while your people stay in charge.';
-
 export const FLAGS = {
   /** No customer names or logos until each customer gives written permission. */
   SHOW_CLIENT_LOGOS: false,
   /** Module names inside each Human OS family. Anushka to confirm which modules can be shown; off leaves families only. */
   SHOW_MODULE_NAMES: true,
+  /** Hive and its Bees, kept but not revealed yet (owner, 24 Oct 2026). Off hides the menu item, page, home sections and every mention. */
+  SHOW_HIVE: false,
 };
+
+/** Draft one-liner, awaiting approval. */
+export const ONE_LINER = FLAGS.SHOW_HIVE
+  ? 'Nostavia makes health AI for labs, clinics, hospitals and health apps: ready-made modules in Human OS, products built for you by Studio, and Hive, where AI Bees run the routine work while your people stay in charge.'
+  : 'Nostavia makes health AI for labs, clinics, hospitals and health apps: ready-made modules in Human OS, and products built for you by Studio.';
+
+/** Hero headline, set by Aditya on 24 Oct 2026. "Superintelligence" appears here only, never as a product or menu item. */
+export const HERO_HEADLINE = 'Healthcare’s superintelligence, ready-made or *built for you.*';
+
+export const HERO_SUB = FLAGS.SHOW_HIVE
+  ? 'Human OS gives you ready-made health AI modules. Studio builds the apps, portals and voice assistants you need, in your brand. In Hive, AI Bees run the routine work while your people stay in charge.'
+  : 'Human OS gives you ready-made health AI modules. Studio builds the apps, portals and voice assistants you need, in your brand. Your people stay in charge.';
 
 export const nav = [
   { label: 'Human OS', to: '/human-os' },
@@ -39,11 +43,11 @@ export const nav = [
   { label: 'Hive', to: '/hive' },
   { label: 'Customers', to: '/customers' },
   { label: 'Developers', to: '/developers' },
-];
+].filter((l) => FLAGS.SHOW_HIVE || l.to !== '/hive');
 
 export const CONTACT_EMAIL = 'contact@nostaviahealth.com';
-export const CONTACT_PHONE = '+91 95983 20558';
-export const CONTACT_PHONE_HREF = 'tel:+919598320558';
+export const CONTACT_PHONE = '+91 95983 20559';
+export const CONTACT_PHONE_HREF = 'tel:+919598320559';
 export const CALENDAR_URL = 'https://calendar.app.google/cysR8LF2gMtuneNs9';
 export const LINKEDIN_URL = 'https://lnkd.in/p/dBqTFF95';
 
@@ -52,8 +56,9 @@ export const company = {
   hq: 'Lucknow, India',
 };
 
-export const ABOUT =
-  'Nostavia Technologies Pvt. Ltd. makes health AI for health businesses: ready-made modules in Human OS, products built for you by Studio, and Hive, where AI Bees run the routine work while your people stay in charge. Founded by Aditya Singh (CEO) and Anushka Gupta (CTO).';
+export const ABOUT = FLAGS.SHOW_HIVE
+  ? 'Nostavia Technologies Pvt. Ltd. makes health AI for health businesses: ready-made modules in Human OS, products built for you by Studio, and Hive, where AI Bees run the routine work while your people stay in charge.'
+  : 'Nostavia Technologies Pvt. Ltd. makes health AI for health businesses: ready-made modules in Human OS, and products built for you by Studio, while your people stay in charge.';
 
 /** Safety line used under any section that describes what Nostavia does. */
 export const SAFETY_LINE = 'Nostavia supports your team’s work. It does not make clinical decisions; clinicians do.';
