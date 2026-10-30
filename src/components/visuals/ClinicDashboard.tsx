@@ -229,8 +229,8 @@ const NextVisit: React.FC<{ brand: Brand }> = ({ brand }) => {
           <ArrowUpRight className="h-4 w-4" strokeWidth={1.8} />
         </RoundButton>
       </div>
-      <div className="mx-auto mt-1">
-        <Dial hi={t.hi} value={0.44}>
+      <div className="mx-auto -mt-1">
+        <Dial hi={t.hi} value={0.44} size={128}>
           <p className="text-[30px] font-light leading-none tracking-[-0.04em] tabular-nums">10:30</p>
           <p className="mt-1 text-[11px] text-[#1D1D1F]/55">in 12 min</p>
         </Dial>

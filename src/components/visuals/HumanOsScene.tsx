@@ -136,9 +136,10 @@ const modules = [
 
 /* The modules switched on for this lab: a dark card on a stack of two, like the dashboard's briefs. */
 const ModulesCard: React.FC = () => (
-  <div className="relative h-full w-full pt-3 text-left font-sans">
-    <span className="absolute inset-x-6 top-0 h-6 rounded-t-[22px] bg-[#3A3A3C]" />
-    <span className="absolute inset-x-3 top-1.5 h-6 rounded-t-[24px] bg-[#2A2A2C]" />
+  <div className="relative h-full w-full pt-[18px] text-left font-sans">
+    {/* Two cards behind, lighter and narrower, so the stack reads as a stack */}
+    <span className="absolute inset-x-7 top-0 h-10 rounded-[20px] bg-[#8A8A8E]" />
+    <span className="absolute inset-x-3.5 top-[9px] h-10 rounded-[22px] bg-[#5A5A5E]" />
     <div className="relative h-full rounded-[24px] bg-[#1D1D1F] px-5 pb-3 pt-4 text-white shadow-[0_40px_70px_-30px_rgba(0,0,0,0.9)]">
       <div className="flex items-baseline justify-between">
         <p className="text-[16px] tracking-[-0.01em]">Modules</p>
@@ -179,17 +180,17 @@ export const HumanOsScene: React.FC<{ className?: string }> = ({ className }) =>
     className={className}
     label="Sample Human OS output for a lab: a report with 26 of 28 results in a healthy range and an HbA1c trend, biological age on a dial, and the modules switched on."
   >
-    <Layer x={30} y={40} w={330} h={470}>
+    <Layer x={30} y={56} w={330} h={470}>
       <Report />
     </Layer>
 
-    <PlaneShadow x={380} y={34} w={250} h={240} />
-    <Layer x={394} y={22} z={110} w={224} h={232} drift={7.5}>
+    <PlaneShadow x={380} y={66} w={250} h={240} />
+    <Layer x={394} y={54} z={110} w={224} h={232} drift={7.5}>
       <AgeCard />
     </Layer>
 
-    <PlaneShadow x={338} y={312} w={300} h={240} />
-    <Layer x={350} y={296} z={170} w={276} h={252} drift={9}>
+    <PlaneShadow x={338} y={330} w={300} h={240} />
+    <Layer x={350} y={314} z={170} w={276} h={252} drift={9}>
       <ModulesCard />
     </Layer>
   </Scene>

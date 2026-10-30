@@ -62,7 +62,7 @@ export const OfferSection: React.FC = () => (
       <div className="grid md:grid-cols-2 gap-4">
         <ProductCard
           p={humanOs}
-          visual={<HumanOsScene className="absolute inset-x-0 top-1" />}
+          visual={<HumanOsScene className="absolute inset-x-0 top-6" />}
         />
         <ProductCard
           p={studio}

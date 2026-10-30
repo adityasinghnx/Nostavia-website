@@ -58,13 +58,13 @@ export const VoiceCard: React.FC<{ light?: boolean; accent?: string }> = ({ ligh
   const reduce = useReducedMotion();
   return (
     <div className={cn('flex h-full w-full items-center gap-3.5 px-4 text-left', light ? 'rounded-[22px] bg-white shadow-[0_40px_70px_-30px_rgba(0,0,0,0.55),0_10px_24px_-14px_rgba(0,0,0,0.35)]' : cn(darkCard, 'rounded-[22px]'))}>
-      <span className="relative grid h-11 w-11 shrink-0 place-items-center rounded-full" style={{ background: accent }}>
-        <span className="absolute inset-0 rounded-full animate-ping2" style={{ background: accent, opacity: 0.35 }} />
+      {/* A soft halo that stays inside the card, rather than a ping ring that spills out of it */}
+      <span className="relative grid h-11 w-11 shrink-0 place-items-center rounded-full" style={{ background: accent, boxShadow: `0 0 0 5px ${accent}26` }}>
         <Mic className="relative h-[18px] w-[18px] text-[#13110E]" strokeWidth={2} />
       </span>
       <div className="min-w-0 flex-1">
         <p className={cn('whitespace-nowrap text-[13px]', light ? 'text-[#15130F]' : 'text-[#F2EDE3]')}>Voice assistant</p>
-        <p className={cn('mt-0.5 truncate text-[11.5px]', light ? 'text-[#15130F]/50' : 'text-white/45')}>Booking Thursday, 10:30</p>
+        <p className={cn('mt-0.5 truncate text-[11.5px]', light ? 'text-[#15130F]/50' : 'text-white/45')}>Booking Thu, 10:30</p>
       </div>
       <span className="flex h-8 items-center gap-[3px]">
         {BARS.map((b, i) => (
