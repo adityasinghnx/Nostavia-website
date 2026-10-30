@@ -16,7 +16,7 @@ export const PageHero: React.FC<{
   theme?: 'ink' | 'paper';
   display?: boolean;
 }> = ({ label, title, intro, actions, aside, children, theme = 'ink', display }) => (
-  <section data-theme={theme} aria-labelledby="page-title" className="relative isolate overflow-hidden pt-36 md:pt-44 pb-[clamp(4rem,8vw,7rem)]">
+  <section data-theme={theme} aria-labelledby="page-title" className="relative isolate overflow-clip pt-36 md:pt-44 pb-[clamp(4rem,8vw,7rem)]">
     <CodeField variant="feature" />
     {theme === 'ink' && <div aria-hidden="true" className="absolute inset-x-0 top-0 h-[600px] bg-[radial-gradient(60%_80%_at_20%_0%,rgba(242,210,122,0.08),transparent_70%)]" />}
     <div className="wrap relative">

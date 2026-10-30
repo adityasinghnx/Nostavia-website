@@ -6,8 +6,8 @@ import { bees } from '../../content/bees';
 import { Arrow, Label } from '../ui/primitives';
 import { Reveal, SplitHeading } from '../ui/motion';
 import { HiveMark } from '../ui/marks';
-import { ReportCard } from '../visuals/ReportCard';
-import { BrandedApp } from '../visuals/BrandedApp';
+import { HumanOsScene } from '../visuals/HumanOsScene';
+import { StudioScene } from '../visuals/StudioScene';
 import { BeeAvatar } from '../hive/HiveConsole';
 import { CodeField } from '../ui/CodeField';
 
@@ -19,7 +19,7 @@ import { CodeField } from '../ui/CodeField';
 const [humanOs, studio] = products;
 const [hive, api] = ways;
 
-const FADE = 'linear-gradient(to bottom, #000 55%, transparent 100%)';
+const FADE = 'linear-gradient(to bottom, #000 68%, transparent 100%)';
 
 const ProductCard: React.FC<{ p: (typeof products)[number]; visual: React.ReactNode; delay?: number }> = ({ p, visual, delay = 0 }) => (
   <Reveal delay={delay} className="h-full">
@@ -36,9 +36,9 @@ const ProductCard: React.FC<{ p: (typeof products)[number]; visual: React.ReactN
           <Arrow className="transition-transform duration-500 ease-out group-hover:translate-x-1" />
         </span>
       </div>
-      {/* The product, close up: it runs off the card's bottom edge and dissolves into it, with no frame of its own */}
-      <div className="relative h-[clamp(320px,32vw,440px)] overflow-hidden" style={{ maskImage: FADE, WebkitMaskImage: FADE }}>
-        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(60%_80%_at_50%_100%,rgba(242,210,122,0.08),transparent_70%)]" />
+      {/* The product on a tilted stage: it runs off the card's bottom edge and dissolves into it */}
+      <div className="relative h-[clamp(280px,36vw,480px)] overflow-hidden" style={{ maskImage: FADE, WebkitMaskImage: FADE }}>
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(55%_70%_at_55%_45%,rgba(242,210,122,0.09),transparent_70%)]" />
         {visual}
       </div>
     </Link>
@@ -62,20 +62,12 @@ export const OfferSection: React.FC = () => (
       <div className="grid md:grid-cols-2 gap-4">
         <ProductCard
           p={humanOs}
-          visual={
-            <div className="absolute left-7 top-1 w-[calc(100%-3.5rem)] md:left-9 md:w-[calc(100%-4.5rem)] origin-top-left transition-transform duration-[1200ms] ease-out group-hover:scale-[1.025]">
-              <ReportCard upscale />
-            </div>
-          }
+          visual={<HumanOsScene className="absolute inset-x-0 top-1" />}
         />
         <ProductCard
           p={studio}
           delay={0.08}
-          visual={
-            <div className="absolute left-1/2 top-1 w-[min(80%,360px)] -translate-x-1/2 transition-transform duration-[1200ms] ease-out group-hover:-translate-y-3">
-              <BrandedApp />
-            </div>
-          }
+          visual={<StudioScene className="absolute inset-x-0 top-1" />}
         />
       </div>
 
