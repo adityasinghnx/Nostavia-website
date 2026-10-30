@@ -22,16 +22,19 @@ const TONES: Record<string, { hi: string; wash: string }> = {
 };
 const tonesOf = (b: Brand) => TONES[b.id] ?? TONES.clinic;
 
+/** The default highlight, for pieces shown outside a brand. */
+export const DASH_HI = TONES.clinic.hi;
+
 /** Large light type: the brand's serif where it has one, else a thin sans. */
 const light = (b: Brand) => (b.serif ? 'font-serif font-normal tracking-[-0.01em]' : 'font-sans font-light tracking-[-0.035em]');
 
-const Card: React.FC<{ className?: string; style?: React.CSSProperties; children: React.ReactNode }> = ({ className, style, children }) => (
+export const Card: React.FC<{ className?: string; style?: React.CSSProperties; children: React.ReactNode }> = ({ className, style, children }) => (
   <div className={cn('relative overflow-hidden rounded-[28px] border border-white/80 bg-white/[0.62] shadow-[0_1px_2px_rgba(29,29,31,0.04),0_18px_40px_-28px_rgba(29,29,31,0.25)]', className)} style={style}>
     {children}
   </div>
 );
 
-const RoundButton: React.FC<{ dark?: boolean; className?: string; children: React.ReactNode }> = ({ dark, className, children }) => (
+export const RoundButton: React.FC<{ dark?: boolean; className?: string; children: React.ReactNode }> = ({ dark, className, children }) => (
   <span className={cn('grid h-[38px] w-[38px] place-items-center rounded-full', dark ? 'bg-[#1D1D1F] text-white' : 'border border-[#1D1D1F]/[0.08] bg-white text-[#1D1D1F]', className)}>{children}</span>
 );
 
@@ -193,11 +196,28 @@ const VisitsChart: React.FC<{ brand: Brand }> = ({ brand }) => {
   );
 };
 
+/** A dial: ticks round the left half, the highlight arc from the top round the right, a reading in the middle. */
+export const Dial: React.FC<{ hi: string; value: number; size?: number; children: React.ReactNode }> = ({ hi, value, size = 150, children }) => {
+  const R = 62;
+  const c = 2 * Math.PI * R;
+  return (
+    <div className="relative grid place-items-center" style={{ width: size, height: size }}>
+      <svg viewBox="-75 -75 150 150" className="absolute inset-0 h-full w-full">
+        {Array.from({ length: 29 }, (_, i) => {
+          const a = Math.PI / 2 + ((i + 1) / 30) * Math.PI;
+          const r2 = i % 5 === 4 ? 55 : 59;
+          return <line key={i} x1={Math.cos(a) * 67} y1={Math.sin(a) * 67} x2={Math.cos(a) * r2} y2={Math.sin(a) * r2} stroke="rgba(29,29,31,0.55)" strokeWidth="1.4" strokeLinecap="round" />;
+        })}
+        <circle r={R} fill="none" stroke={hi} strokeWidth="13" strokeLinecap="round" strokeDasharray={`${c * value} ${c}`} transform="rotate(-86)" />
+      </svg>
+      <div className="text-center">{children}</div>
+    </div>
+  );
+};
+
 /* The next consultation as a dial: ticks for the hour, the highlight for how much of the brief is read. */
 const NextVisit: React.FC<{ brand: Brand }> = ({ brand }) => {
   const t = tonesOf(brand);
-  const R = 62;
-  const c = 2 * Math.PI * R;
   return (
     <Card className="flex h-full flex-col p-5">
       <div className="flex items-start justify-between">
@@ -209,19 +229,11 @@ const NextVisit: React.FC<{ brand: Brand }> = ({ brand }) => {
           <ArrowUpRight className="h-4 w-4" strokeWidth={1.8} />
         </RoundButton>
       </div>
-      <div className="relative mx-auto mt-1 grid h-[150px] w-[150px] place-items-center">
-        <svg viewBox="-75 -75 150 150" className="absolute inset-0 h-full w-full">
-          {Array.from({ length: 29 }, (_, i) => {
-            const a = Math.PI / 2 + ((i + 1) / 30) * Math.PI;
-            const r2 = i % 5 === 4 ? 55 : 59;
-            return <line key={i} x1={Math.cos(a) * 67} y1={Math.sin(a) * 67} x2={Math.cos(a) * r2} y2={Math.sin(a) * r2} stroke="rgba(29,29,31,0.55)" strokeWidth="1.4" strokeLinecap="round" />;
-          })}
-          <circle r={R} fill="none" stroke={t.hi} strokeWidth="13" strokeLinecap="round" strokeDasharray={`${c * 0.44} ${c}`} transform="rotate(-86)" />
-        </svg>
-        <div className="text-center">
+      <div className="mx-auto mt-1">
+        <Dial hi={t.hi} value={0.44}>
           <p className="text-[30px] font-light leading-none tracking-[-0.04em] tabular-nums">10:30</p>
           <p className="mt-1 text-[11px] text-[#1D1D1F]/55">in 12 min</p>
-        </div>
+        </Dial>
       </div>
       <div className="mt-auto flex items-center justify-between">
         <span className="flex gap-2">
