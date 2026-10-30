@@ -9,6 +9,7 @@ import { HiveMark } from '../ui/marks';
 import { ReportCard } from '../visuals/ReportCard';
 import { BrandedApp } from '../visuals/BrandedApp';
 import { BeeAvatar } from '../hive/HiveConsole';
+import { CodeField } from '../ui/CodeField';
 
 /* ─────────────────────────────────────────────────────────────────────────────
  * The positioning in one screen: two products side by side, and underneath,
@@ -45,7 +46,8 @@ const ProductCard: React.FC<{ p: (typeof products)[number]; visual: React.ReactN
 );
 
 export const OfferSection: React.FC = () => (
-  <section id="offer" data-theme="ink" aria-labelledby="offer-title" className="relative py-[clamp(6rem,11vw,10rem)]">
+  <section id="offer" data-theme="ink" aria-labelledby="offer-title" className="relative isolate py-[clamp(6rem,11vw,10rem)]">
+    <CodeField />
     <div className="wrap">
       <div className="grid lg:grid-cols-12 gap-8 items-end mb-12 md:mb-16">
         <div className="lg:col-span-8">

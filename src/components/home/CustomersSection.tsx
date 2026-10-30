@@ -8,6 +8,7 @@ import { Label, TextLink } from '../ui/primitives';
 import { EASE, Reveal, SplitHeading } from '../ui/motion';
 import { BeeAvatar } from '../hive/HiveConsole';
 import { PhotoBlur } from '../ui/effects';
+import { CodeField } from '../ui/CodeField';
 
 export const PanelBody: React.FC<{ c: CustomerType }> = ({ c }) => (
   <>
@@ -39,7 +40,8 @@ export const CustomersSection: React.FC = () => {
   const [active, setActive] = useState(0);
 
   return (
-    <section id="customers" data-theme="ink" aria-labelledby="customers-title" className="relative py-[clamp(6rem,11vw,10.5rem)] overflow-hidden">
+    <section id="customers" data-theme="ink" aria-labelledby="customers-title" className="relative isolate py-[clamp(6rem,11vw,10.5rem)] overflow-hidden">
+      <CodeField />
       <div className="wrap">
         <div className="grid lg:grid-cols-12 gap-10 items-end">
           <div className="lg:col-span-8">

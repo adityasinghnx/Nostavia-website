@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '../../lib/cn';
+import { CodeField } from './CodeField';
 
 /* ── Arrow used across buttons and links ── */
 
@@ -103,8 +104,9 @@ export const Section: React.FC<{
     id={id}
     data-theme={theme}
     aria-labelledby={labelledBy}
-    className={cn('relative', tight ? 'py-[clamp(4.5rem,8vw,7rem)]' : 'py-[clamp(6rem,11vw,10.5rem)]', className)}
+    className={cn('relative isolate', tight ? 'py-[clamp(4.5rem,8vw,7rem)]' : 'py-[clamp(6rem,11vw,10.5rem)]', className)}
   >
+    <CodeField />
     {children}
   </section>
 );

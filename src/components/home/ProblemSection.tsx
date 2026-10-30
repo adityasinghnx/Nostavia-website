@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from 'motion/react';
 import { problems } from '../../content/offer';
 import { Label } from '../ui/primitives';
 import { Reveal, SplitHeading } from '../ui/motion';
+import { CodeField } from '../ui/CodeField';
 
 /* ─────────────────────────────────────────────────────────────────────────────
  * "Your team is the glue": every system wired through one small circle of
@@ -79,7 +80,8 @@ const Glue: React.FC = () => {
 };
 
 export const ProblemSection: React.FC = () => (
-  <section id="problem" data-theme="paper" aria-labelledby="problem-title" className="relative py-[clamp(6rem,11vw,10.5rem)] overflow-hidden">
+  <section id="problem" data-theme="paper" aria-labelledby="problem-title" className="relative isolate py-[clamp(6rem,11vw,10.5rem)] overflow-hidden">
+    <CodeField />
     <div className="wrap grid lg:grid-cols-12 gap-14 lg:gap-10 items-center">
       <div className="lg:col-span-5">
         <Label index="02">The problem</Label>

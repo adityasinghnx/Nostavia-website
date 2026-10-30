@@ -6,9 +6,11 @@ import { Button, Label, TextLink } from '../ui/primitives';
 import { Reveal, SplitHeading } from '../ui/motion';
 import { StudioShowcase } from '../visuals/StudioShowcase';
 import { StudioSteps } from '../page/StudioSteps';
+import { CodeField } from '../ui/CodeField';
 
 export const StudioSection: React.FC = () => (
-  <section id="studio" data-theme="paper" aria-labelledby="studio-title" className="relative py-[clamp(6rem,11vw,10.5rem)] overflow-hidden">
+  <section id="studio" data-theme="paper" aria-labelledby="studio-title" className="relative isolate py-[clamp(6rem,11vw,10.5rem)] overflow-hidden">
+    <CodeField />
     <div className="wrap">
       <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-end">
         <div className="lg:col-span-8">

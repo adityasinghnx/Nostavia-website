@@ -6,6 +6,7 @@ import { FLAGS } from '../../content/site';
 import { cn } from '../../lib/cn';
 import { Arrow, Label, TextLink } from '../ui/primitives';
 import { EASE, Reveal, SplitHeading } from '../ui/motion';
+import { CodeField } from '../ui/CodeField';
 
 export const GroupSwitch: React.FC<{ value: GroupId; onChange: (id: GroupId) => void; id: string }> = ({ value, onChange, id }) => (
   <div role="tablist" aria-label="Human OS groups" className="inline-flex rounded-full border border-fg/10 p-1 bg-fg/[0.02]">
@@ -53,7 +54,8 @@ export const HumanOsSection: React.FC = () => {
   };
 
   return (
-    <section id="human-os" data-theme="ink" aria-labelledby="hos-title" className="relative py-[clamp(6rem,11vw,10.5rem)]">
+    <section id="human-os" data-theme="ink" aria-labelledby="hos-title" className="relative isolate py-[clamp(6rem,11vw,10.5rem)]">
+      <CodeField />
       <div className="wrap">
         <div className="grid lg:grid-cols-12 gap-10 items-end">
           <div className="lg:col-span-7">

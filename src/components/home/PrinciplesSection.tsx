@@ -3,10 +3,12 @@ import { principles } from '../../content/offer';
 import { SAFETY_LINE } from '../../content/site';
 import { Label } from '../ui/primitives';
 import { Reveal, SplitHeading } from '../ui/motion';
+import { CodeField } from '../ui/CodeField';
 
 /* Principles as an editorial list: a pinned heading on the left, four statements set large on the right. */
 export const PrinciplesSection: React.FC<{ index?: string }> = ({ index = '06' }) => (
-  <section id="principles" data-theme="paper" aria-labelledby="principles-title" className="relative py-[clamp(6rem,11vw,10.5rem)]">
+  <section id="principles" data-theme="paper" aria-labelledby="principles-title" className="relative isolate py-[clamp(6rem,11vw,10.5rem)]">
+    <CodeField />
     <div className="wrap grid lg:grid-cols-12 gap-12 lg:gap-10">
       <div className="lg:col-span-5">
         <div className="lg:sticky lg:top-32">

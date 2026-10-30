@@ -4,12 +4,14 @@ import { FLAGS, nav } from '../content/site';
 import { HiveSwarm } from '../components/hive/HiveSwarm';
 import { Button, TextLink } from '../components/ui/primitives';
 import { SplitHeading } from '../components/ui/motion';
+import { CodeField } from '../components/ui/CodeField';
 
 const NotFoundPage: React.FC = () => {
   useSeo({ title: 'Page not found | Nostavia', description: 'This page does not exist.', path: '/404' });
 
   return (
-    <section data-theme="ink" aria-labelledby="page-title" className="relative min-h-[100svh] overflow-hidden flex items-end">
+    <section data-theme="ink" aria-labelledby="page-title" className="relative isolate min-h-[100svh] overflow-hidden flex items-end">
+      <CodeField variant="feature" />
       <HiveSwarm anchor={{ x: 0.72, y: 0.42 }} mobileAnchor={{ x: 0.5, y: 0.3 }} scale={0.12} />
       <div className="wrap relative pb-20 pt-[45vh] md:pt-40">
         <p className="t-label text-accent">404</p>

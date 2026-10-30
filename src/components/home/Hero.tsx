@@ -5,6 +5,7 @@ import { HiveSwarm } from '../hive/HiveSwarm';
 import { Button } from '../ui/primitives';
 import { EASE, SplitHeading } from '../ui/motion';
 import { INTRO_DELAY, Magnetic } from '../ui/effects';
+import { CodeField } from '../ui/CodeField';
 
 const index = [
   { name: 'Human OS', line: 'Ready-made', href: '#human-os' },
@@ -21,7 +22,8 @@ export const Hero: React.FC = () => {
   const copyY = useTransform(scrollYProgress, [0, 1], ['0%', '-12%']);
 
   return (
-    <section ref={ref} data-theme="ink" aria-labelledby="hero-title" className="relative min-h-[100svh] overflow-hidden flex flex-col">
+    <section ref={ref} data-theme="ink" aria-labelledby="hero-title" className="relative isolate min-h-[100svh] overflow-hidden flex flex-col">
+      <CodeField variant="feature" />
       {/* Warm light behind the hive */}
       <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(55%_55%_at_78%_36%,rgba(242,210,122,0.11),transparent_70%)] max-md:bg-[radial-gradient(80%_45%_at_50%_24%,rgba(242,210,122,0.10),transparent_70%)]" />
       <div aria-hidden="true" className="absolute inset-0 grid-lines opacity-60 mask-fade-b" />

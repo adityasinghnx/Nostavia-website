@@ -8,6 +8,7 @@ import { CALENDAR_URL, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_HREF, FLAGS }
 import { Button, Label } from '../components/ui/primitives';
 import { EASE, Reveal, SplitHeading } from '../components/ui/motion';
 import { cn } from '../lib/cn';
+import { CodeField } from '../components/ui/CodeField';
 
 const types = ['Lab', 'Clinic', 'Health app', 'Hospital', 'Other'];
 
@@ -65,7 +66,8 @@ const DemoPage: React.FC = () => {
   };
 
   return (
-    <section data-theme="ink" aria-labelledby="page-title" className="relative overflow-hidden pt-36 md:pt-44 pb-[clamp(5rem,10vw,9rem)]">
+    <section data-theme="ink" aria-labelledby="page-title" className="relative isolate overflow-hidden pt-36 md:pt-44 pb-[clamp(5rem,10vw,9rem)]">
+      <CodeField variant="feature" />
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-[700px] bg-[radial-gradient(50%_70%_at_15%_0%,rgba(242,210,122,0.09),transparent_70%)]" />
       <div className="wrap relative grid lg:grid-cols-12 gap-14 lg:gap-10">
         <div className="lg:col-span-5">

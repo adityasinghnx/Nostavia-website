@@ -5,13 +5,15 @@ import { HiveSwarm } from '../hive/HiveSwarm';
 import { Button } from '../ui/primitives';
 import { Reveal, SplitHeading } from '../ui/motion';
 import { Magnetic } from '../ui/effects';
+import { CodeField } from '../ui/CodeField';
 
 /** Closing call to action, shared by every page. */
 export const FinalCta: React.FC<{ title?: string; body?: string }> = ({
   title = CLOSING.title,
   body = CLOSING.body,
 }) => (
-  <section data-theme="ink" aria-labelledby="cta-title" className="relative overflow-hidden border-t border-fg/[0.07]">
+  <section data-theme="ink" aria-labelledby="cta-title" className="relative isolate overflow-hidden border-t border-fg/[0.07]">
+    <CodeField />
     <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(50%_60%_at_50%_100%,rgba(242,210,122,0.12),transparent_70%)]" />
     <div className="absolute inset-0 opacity-70">
       <HiveSwarm anchor={{ x: 0.5, y: 0.98 }} mobileAnchor={{ x: 0.5, y: 0.98 }} scale={0.2} />

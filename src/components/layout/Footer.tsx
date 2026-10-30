@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ABOUT, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_HREF, LINKEDIN_URL, company, nav } from '../../content/site';
 import { Arrow } from '../ui/primitives';
 import { LocalTime } from '../ui/LocalTime';
+import { CodeField } from '../ui/CodeField';
 
 const linkClass = 'group inline-flex items-center gap-1.5 text-[14.5px] text-fg/60 hover:text-fg transition-colors duration-300';
 
@@ -10,7 +11,8 @@ const linkClass = 'group inline-flex items-center gap-1.5 text-[14.5px] text-fg/
 const legal = [{ label: 'Privacy policy', href: '/privacy-policy.html' }];
 
 export const Footer: React.FC = () => (
-  <footer data-theme="ink" className="relative overflow-hidden border-t border-fg/[0.07] pt-20 sm:pt-28">
+  <footer data-theme="ink" className="relative isolate overflow-hidden border-t border-fg/[0.07] pt-20 sm:pt-28">
+    <CodeField variant="feature" />
     <div className="wrap">
       <div className="grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-12">
         <div className="col-span-2 md:col-span-5 flex flex-col gap-6">
@@ -69,9 +71,10 @@ export const Footer: React.FC = () => (
       </div>
     </div>
 
-    {/* Oversized wordmark, cropped by the page edge */}
+    {/* Oversized wordmark, cropped by the page edge. The cursor's code field is cut around it (data-code-mask). */}
     <div aria-hidden="true" className="relative mt-20 sm:mt-28 wrap">
       <div
+        data-code-mask="/logo.png"
         className="w-full aspect-[5253/1381] translate-y-[22%]"
         style={{
           background: 'linear-gradient(180deg, rgba(242,210,122,0.22) 0%, rgba(242,237,227,0.05) 55%, rgba(242,237,227,0) 85%)',

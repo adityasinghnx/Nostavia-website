@@ -11,6 +11,7 @@ import { FinalCta } from '../components/home/FinalCta';
 import { Button, Label, Section } from '../components/ui/primitives';
 import { Reveal, SplitHeading } from '../components/ui/motion';
 import { cn } from '../lib/cn';
+import { CodeField } from '../components/ui/CodeField';
 
 /* The Bees, all together: a full-bleed group shot with a slow parallax. */
 const MeadowBanner: React.FC = () => {
@@ -20,7 +21,8 @@ const MeadowBanner: React.FC = () => {
   const y = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
 
   return (
-    <section ref={ref} data-theme="ink" aria-labelledby="meet-title" className="relative overflow-hidden">
+    <section ref={ref} data-theme="ink" aria-labelledby="meet-title" className="relative isolate overflow-hidden">
+      <CodeField variant="feature" />
       <div className="relative h-[72vh] min-h-[420px] overflow-hidden">
         <motion.picture className="absolute inset-0 block" style={reduce ? undefined : { y, scale: 1.14 }}>
           <source media="(max-width: 768px)" srcSet="/bees/meadow-sm.webp" />

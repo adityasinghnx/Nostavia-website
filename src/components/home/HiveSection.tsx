@@ -8,6 +8,7 @@ import { BeeStage } from './BeeStage';
 import { Label, TextLink } from '../ui/primitives';
 import { Reveal, SplitHeading } from '../ui/motion';
 import { HiveMark } from '../ui/marks';
+import { CodeField } from '../ui/CodeField';
 
 /* Hive on the homepage: how you run Human OS and your Studio builds. The workspace, the Bees, and the three ways of working. */
 
@@ -20,7 +21,8 @@ export const HiveSection: React.FC = () => {
   const y = useTransform(scrollYProgress, [0, 1], [50, 0]);
 
   return (
-    <section id="hive" data-theme="ink" aria-labelledby="hive-title" className="relative py-[clamp(6rem,11vw,10.5rem)] overflow-hidden">
+    <section id="hive" data-theme="ink" aria-labelledby="hive-title" className="relative isolate py-[clamp(6rem,11vw,10.5rem)] overflow-hidden">
+      <CodeField />
       <div aria-hidden="true" className="absolute left-1/2 top-[16%] -translate-x-1/2 w-[1200px] max-w-[160vw] h-[700px] bg-[radial-gradient(closest-side,rgba(242,210,122,0.11),transparent)]" />
       <div className="wrap relative">
         <div className="grid lg:grid-cols-12 gap-10 items-end">

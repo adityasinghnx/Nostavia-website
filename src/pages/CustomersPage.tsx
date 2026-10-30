@@ -12,6 +12,7 @@ import { Arrow, Label } from '../components/ui/primitives';
 import { Reveal } from '../components/ui/motion';
 import { BlurIn } from '../components/ui/effects';
 import { cn } from '../lib/cn';
+import { CodeField } from '../components/ui/CodeField';
 
 const TypeSection: React.FC<{ c: CustomerType; i: number }> = ({ c, i }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -21,7 +22,8 @@ const TypeSection: React.FC<{ c: CustomerType; i: number }> = ({ c, i }) => {
   const flip = i % 2 === 1;
 
   return (
-    <section id={c.id} data-theme={i % 2 ? 'paper' : 'ink'} aria-labelledby={`${c.id}-title`} className="py-[clamp(5rem,9vw,8.5rem)] scroll-mt-20">
+    <section id={c.id} data-theme={i % 2 ? 'paper' : 'ink'} aria-labelledby={`${c.id}-title`} className="relative isolate py-[clamp(5rem,9vw,8.5rem)] scroll-mt-20">
+      <CodeField />
       <div className="wrap grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <BlurIn className={cn('lg:col-span-6', flip && 'lg:order-2')}>
           <div ref={ref} className="relative overflow-hidden rounded-[20px] aspect-[5/4]">
