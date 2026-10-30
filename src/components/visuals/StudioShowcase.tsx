@@ -83,7 +83,7 @@ interface FlowLayout {
 const ROW = { s: 0.52, gap: 40, y: 128 };
 const rowX0 = (STAGE.w - (GEL_SCREENS.length * PHONE.w * ROW.s + (GEL_SCREENS.length - 1) * ROW.gap)) / 2;
 const WIDE: FlowLayout = {
-  closed: { x: 244, y: 226, z: 140, s: 0.56 },
+  closed: { x: 150, y: 226, z: 140, s: 0.56 },
   open: (i) => {
     const k = i - 2;
     return { x: rowX0 + i * (PHONE.w * ROW.s + ROW.gap), y: ROW.y, z: 140 - i * 4, s: ROW.s, ry: -k * 8, lift: Math.abs(k) * 28 };
@@ -238,8 +238,8 @@ export const StudioShowcase: React.FC<{ className?: string }> = ({ className }) 
         >
           <Surface />
 
-          <PlaneShadow x={430} y={90} w={920} h={560} strength={0.45} away={open} />
-          <Layer x={460} y={66} w={DASH.w} h={DASH.h} scale={PORTAL_SCALE} away={open}>
+          <PlaneShadow x={336} y={90} w={920} h={560} strength={0.45} away={open} />
+          <Layer x={366} y={66} w={DASH.w} h={DASH.h} scale={PORTAL_SCALE} away={open}>
             <Crossfade id={brand.id}>
               <ClinicDashboard brand={brand} />
               <span className="pointer-events-none absolute inset-0">
@@ -248,19 +248,19 @@ export const StudioShowcase: React.FC<{ className?: string }> = ({ className }) 
             </Crossfade>
           </Layer>
 
-          <Layer x={1080} y={30} z={230} w={262} h={102} drift={7} away={open}>
+          <Layer x={986} y={30} z={230} w={262} h={102} drift={7} away={open}>
             <Crossfade id={brand.id}>
               <BriefToast brand={brand} light />
             </Crossfade>
           </Layer>
 
-          <Layer x={1116} y={470} z={210} w={206} h={200} drift={9} away={open}>
+          <Layer x={1036} y={470} z={210} w={206} h={200} drift={9} away={open}>
             <Crossfade id={brand.id}>
               <BrandKit brand={brand} light />
             </Crossfade>
           </Layer>
 
-          <Layer x={680} y={630} z={250} w={272} h={74} drift={6.5} away={open}>
+          <Layer x={586} y={630} z={250} w={272} h={74} drift={6.5} away={open}>
             <Crossfade id={brand.id}>
               <VoiceCard light accent={brand.color} />
             </Crossfade>
