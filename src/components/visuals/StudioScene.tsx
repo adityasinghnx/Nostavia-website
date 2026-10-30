@@ -58,9 +58,12 @@ export const VoiceCard: React.FC<{ light?: boolean; accent?: string }> = ({ ligh
   const reduce = useReducedMotion();
   return (
     <div className={cn('flex h-full w-full items-center gap-3.5 px-4 text-left', light ? 'rounded-[22px] bg-white shadow-[0_40px_70px_-30px_rgba(0,0,0,0.55),0_10px_24px_-14px_rgba(0,0,0,0.35)]' : cn(darkCard, 'rounded-[22px]'))}>
-      {/* A soft halo that stays inside the card, rather than a ping ring that spills out of it */}
-      <span className="relative grid h-11 w-11 shrink-0 place-items-center rounded-full" style={{ background: accent, boxShadow: `0 0 0 5px ${accent}26` }}>
-        <Mic className="relative h-[18px] w-[18px] text-[#13110E]" strokeWidth={2} />
+      {/* Light: a white round button and ink waveform, like the clinic dashboard. Dark: the brand's glow, in a soft halo that stays inside the card. */}
+      <span
+        className={cn('relative grid h-11 w-11 shrink-0 place-items-center rounded-full', light && 'border border-[#1D1D1F]/[0.08] bg-white shadow-[0_6px_14px_-6px_rgba(29,29,31,0.35)]')}
+        style={light ? undefined : { background: accent, boxShadow: `0 0 0 5px ${accent}26` }}
+      >
+        <Mic className={cn('relative h-[18px] w-[18px]', light ? 'text-[#1D1D1F]' : 'text-[#13110E]')} strokeWidth={1.8} />
       </span>
       <div className="min-w-0 flex-1">
         <p className={cn('whitespace-nowrap text-[13px]', light ? 'text-[#15130F]' : 'text-[#F2EDE3]')}>Voice assistant</p>
@@ -71,7 +74,7 @@ export const VoiceCard: React.FC<{ light?: boolean; accent?: string }> = ({ ligh
           <motion.span
             key={i}
             className="w-[3px] rounded-full"
-            style={{ height: `${b * 100}%`, background: accent, opacity: 0.5 + b * 0.5 }}
+            style={{ height: `${b * 100}%`, background: light ? '#1D1D1F' : accent, opacity: 0.5 + b * 0.5 }}
             animate={reduce ? undefined : { scaleY: [1, 0.45 + ((i * 7) % 5) / 10, 1] }}
             transition={{ duration: 2.4 + (i % 4) * 0.35, repeat: Infinity, ease: 'easeInOut', delay: i * 0.08 }}
           />
