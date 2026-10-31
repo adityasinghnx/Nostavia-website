@@ -18,7 +18,7 @@ export const STUDIO_PATH = '/studio';
 
 export const FLAGS = {
   /** No customer names or logos until each customer gives written permission. */
-  SHOW_CLIENT_LOGOS: false,
+  SHOW_CLIENT_LOGOS: true,
   /** Module names inside each Human OS family. Anushka to confirm which modules can be shown; off leaves families only. */
   SHOW_MODULE_NAMES: true,
   /** Hive and its Bees, kept but not revealed yet (owner, 24 Oct 2026). Off hides the menu item, page, home sections and every mention. */
