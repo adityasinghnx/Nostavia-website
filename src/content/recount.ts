@@ -24,10 +24,73 @@ export const recountLinks = [
   { label: 'Support', to: RECOUNT_SUPPORT_PATH },
 ];
 
-export const recountSteps = [
-  { title: 'Tap to record.', body: 'One button on the home screen. It names the recording after the meeting you’re in.' },
-  { title: 'Tap the screen to mark a moment.', body: 'A ★ bookmark lands in the transcript so you can find it later.' },
-  { title: 'Press and hold to stop.', body: 'A pocket tap can’t end your meeting.' },
+/** Cropped screens in public/recount, named by file. */
+export type RecountScreen = 'record' | 'languages' | 'speakers' | 'copy-for-ai' | 'highlights';
+
+/** The walkthrough: one step per screen, in the order you use the app. */
+export const recountStory: { screen: RecountScreen; label: string; title: string; body: string; how: string[] }[] = [
+  {
+    screen: 'record',
+    label: 'Record',
+    title: 'Tap once and put it down.',
+    body: 'One button starts recording and names it after the meeting in your calendar. The transcript writes itself as people talk.',
+    how: ['Tap to record', 'Tap anywhere to mark a moment ★', 'Press and hold to stop'],
+  },
+  {
+    screen: 'languages',
+    label: 'Read',
+    title: 'In the language it was spoken.',
+    body: 'Hindi and English in the same sentence, written the way you’d text it, or in Devanagari. Bengali, Tamil, Telugu, Marathi and more.',
+    how: ['Pick Hinglish, Hindi or English (India)', 'Tap any line to hear it'],
+  },
+  {
+    screen: 'speakers',
+    label: 'Name',
+    title: 'Name a voice once.',
+    body: 'Recount splits the transcript by speaker. Name someone and, if you turn it on, Recount knows them next time. Voices stay on your iPhone.',
+    how: ['Tap a speaker to name them', 'Confirm with Yes, it’s Neha'],
+  },
+  {
+    screen: 'highlights',
+    label: 'Find',
+    title: 'Promises, dates and money, found.',
+    body: 'Who promised what, by when, and for how much, with the moment it was said. Plus talk time for each person.',
+    how: ['Open Highlights', 'Tap any item to jump to it'],
+  },
+  {
+    screen: 'copy-for-ai',
+    label: 'Use',
+    title: 'Into the AI you already use.',
+    body: 'Pick what you want, minutes, a follow-up email or your promises, and one tap copies a ready prompt with the transcript. Paste it into Claude, ChatGPT or Gemini.',
+    how: ['Tap Copy for AI', 'Pick one of nine prompts', 'Paste into your AI'],
+  },
+];
+
+/** Consultations: where Recount meets the rest of Nostavia. Wording to be checked by legal before launch. */
+export const recountConsult = [
+  {
+    label: 'Before',
+    title: 'Human OS prepares the brief.',
+    body: 'In clinics that use Nostavia, Human OS turns reports and history into a one-page brief before every consultation.',
+  },
+  {
+    label: 'During',
+    title: 'Recount writes it down.',
+    body: 'With the patient’s consent, tap record and put your iPhone on the desk. Recount files it as a consultation, named after the appointment, and keeps it on your iPhone.',
+  },
+  {
+    label: 'After',
+    title: 'Your AI does the rest.',
+    body: 'Copy for AI hands the transcript and a ready prompt to the AI you choose: a clean summary, a follow-up message, or the same words tidied and translated for the patient.',
+  },
+];
+
+/** Smaller things worth knowing, after the walkthrough. */
+export const recountMore = [
+  { title: 'Leave it running.', body: 'Pause When Quiet stops saving audio when the room goes quiet and starts again the moment anyone speaks.' },
+  { title: 'Learns your words.', body: 'Add the names and terms you use. Tap an underlined word to fix it, and Recount remembers next time.' },
+  { title: 'Never loses a recording.', body: 'Audio is saved in 10-second pieces, so if the app closes you lose seconds, not the meeting.' },
+  { title: 'Start from anywhere.', body: 'The Lock Screen, Dynamic Island, Action Button, Control Center, Siri, and Apple Watch, which records on its own when your iPhone is out of reach.' },
 ];
 
 export const recountPrivacy = [
@@ -37,16 +100,8 @@ export const recountPrivacy = [
   'Protected while your iPhone is locked',
 ];
 
-export const recountFeatures = [
-  { title: 'Knows who said what.', body: 'Speakers labelled after each recording, and voices remembered if you turn it on.' },
-  { title: 'Leave it running.', body: 'Pause When Quiet skips the silence and wakes the moment anyone speaks.' },
-  { title: 'Learns your words.', body: 'Names and terms you add are spelled right; tap an underlined word to fix it once and for all.' },
-  { title: 'Highlights.', body: 'Promises, requests, dates, ₹ amounts and talk time per speaker.' },
-  { title: 'Copy for AI.', body: 'Minutes, follow-up emails or tasks in Claude, ChatGPT or Gemini, with one tap.' },
-  { title: 'Never loses a meeting.', body: 'Saved in 10-second pieces, so a crash costs seconds, not the meeting.' },
-];
-
 export const recountFaq = [
+  { q: 'Can I record consultations?', a: 'Yes, with the patient’s consent. Recount files them as consultations and keeps them on your iPhone. It writes down what was said; it never diagnoses or gives medical advice.' },
   { q: 'Does it need the internet?', a: 'Only once, to download the speech model for your language (about a minute on Wi-Fi). After that, everything works offline.' },
   { q: 'Can it record phone calls?', a: 'No. iOS doesn’t let any app record calls. Recount pauses when a call comes in and resumes afterwards.' },
   { q: 'Which iPhones does it work on?', a: 'iPhones running iOS 26 that support Apple’s on-device speech models. Indian languages need iOS 27. Smart fixes need Apple Intelligence.' },
