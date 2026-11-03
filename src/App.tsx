@@ -15,6 +15,9 @@ const CustomersPage = lazy(() => import('./pages/CustomersPage'));
 const DevelopersPage = lazy(() => import('./pages/DevelopersPage'));
 const DemoPage = lazy(() => import('./pages/DemoPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+/* Recount: reachable by URL only. Not in the nav, footer or sitemap. */
+const RecountPage = lazy(() => import('./pages/RecountPage'));
+const RecountDocPage = lazy(() => import('./pages/RecountDocPage'));
 
 /* Old routes. Mirrored as 301s in vercel.json. */
 /* While Hive is hidden, its page and old links lead home. */
@@ -82,6 +85,10 @@ const Shell: React.FC = () => {
                 <Route path="/customers" element={<CustomersPage />} />
                 <Route path="/developers" element={<DevelopersPage />} />
                 <Route path="/demo" element={<DemoPage />} />
+                <Route path="/recount" element={<RecountPage />} />
+                <Route path="/recount/privacy" element={<RecountDocPage kind="privacy" />} />
+                <Route path="/recount/terms" element={<RecountDocPage kind="terms" />} />
+                <Route path="/recount/support" element={<RecountDocPage kind="support" />} />
                 {redirects.map(([from, to]) => (
                   <Route key={from} path={from} element={<Navigate to={to} replace />} />
                 ))}
