@@ -103,7 +103,10 @@ const PhotoHero: React.FC<{ founder: Founder; reduce: boolean | null }> = ({ fou
 
   return (
     <section className="relative -mx-5 sm:mx-0 sm:mt-3 sm:overflow-hidden sm:rounded-[32px] sm:ring-1 sm:ring-fg/[0.08]">
-      <div className="relative h-[min(80svh,560px)] min-h-[440px] w-full overflow-hidden bg-ink-850">
+      <div
+        className={cn('relative w-full overflow-hidden bg-ink-850', !photo.aspect && 'h-[min(80svh,560px)] min-h-[440px]')}
+        style={photo.aspect ? { aspectRatio: String(photo.aspect) } : undefined}
+      >
         <motion.div
           className="absolute inset-0"
           initial={reduce ? false : { scale: 1.08, opacity: 0 }}

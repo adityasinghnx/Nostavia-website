@@ -44,6 +44,8 @@ export interface Founder {
     contact?: string;
     /** CSS object-position, to keep the face in frame. */
     focus?: string;
+    /** Width ÷ height. Set it for small or square photos so the header follows the photo instead of cropping and enlarging it. */
+    aspect?: number;
   };
   /** Phone as shown, and as dialled (E.164, e.g. '+919598320559'). */
   phone?: { display: string; e164: string };
@@ -101,7 +103,7 @@ export const founders: Founder[] = [
     city: 'Noida',
     country: 'India',
     bio: 'Building health AI for labs, clinics, hospitals and health apps at Nostavia.', // TODO: Anushka's own words
-    photo: { src: '/founders/anushka.jpg', webp: '/founders/anushka.webp', contact: '/founders/anushka-contact.jpg', focus: '50% 30%' },
+    photo: { src: '/founders/anushka.jpg', webp: '/founders/anushka.webp', contact: '/founders/anushka-contact.jpg', focus: '50% 20%', aspect: 0.86 }, // 400×400 source; a larger original would look sharper
     phone: { display: '+91 93361 92919', e164: '+919336192919' },
     whatsapp: true,
     email: 'anushka@nostaviahealth.com',
