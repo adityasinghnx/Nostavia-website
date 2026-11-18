@@ -103,7 +103,7 @@ export const founders: Founder[] = [
     city: 'Noida',
     country: 'India',
     bio: 'Building health AI for labs, clinics, hospitals and health apps at Nostavia.', // TODO: Anushka's own words
-    photo: { src: '/founders/anushka.jpg', webp: '/founders/anushka.webp', contact: '/founders/anushka-contact.jpg', focus: '50% 20%', aspect: 0.86 }, // 400×400 source; a larger original would look sharper
+    photo: { src: '/founders/anushka.jpg', webp: '/founders/anushka.webp', contact: '/founders/anushka-contact.jpg', focus: '50% 30%' },
     phone: { display: '+91 93361 92919', e164: '+919336192919' },
     whatsapp: true,
     email: 'anushka@nostaviahealth.com',
