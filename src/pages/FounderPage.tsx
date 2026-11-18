@@ -118,7 +118,9 @@ const PhotoHero: React.FC<{ founder: Founder; reduce: boolean | null }> = ({ fou
           ))}
         </motion.div>
         {/* Shade: top for the buttons, bottom melting into the page */}
-        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-ink/70 to-transparent" />
+        {/* Phones: start from the browser's dark status bar and melt into the photo, so there is no seam */}
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-48 bg-[linear-gradient(to_bottom,#0B0A08_0%,rgba(11,10,8,0.82)_14%,rgba(11,10,8,0.45)_42%,rgba(11,10,8,0.12)_72%,transparent_100%)] sm:hidden" />
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 hidden h-32 bg-gradient-to-b from-ink/70 to-transparent sm:block" />
         <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-[62%] bg-gradient-to-t from-ink via-ink/75 to-transparent" />
       </div>
 
