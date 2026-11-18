@@ -98,7 +98,7 @@ export const founders: Founder[] = [
     slug: 'anushka',
     firstName: 'Anushka',
     lastName: 'Gupta',
-    role: 'Founder & CTO',
+    role: 'Founder & COO',
     org: 'Nostavia Health',
     city: 'Noida',
     country: 'India',
