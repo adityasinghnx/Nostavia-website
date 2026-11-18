@@ -5,6 +5,7 @@ import { Nav } from './components/layout/Nav';
 import { Footer } from './components/layout/Footer';
 import { SmoothScroll, scrollToTop, useLenis } from './lib/smooth-scroll';
 import { FLAGS, STUDIO_PATH } from './content/site';
+import { founderBySlug } from './content/founders';
 import { HomePage } from './pages/HomePage';
 import { Intro } from './components/ui/effects';
 
@@ -18,6 +19,8 @@ const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 /* Recount: reachable by URL only. Not in the nav, footer or sitemap. */
 const RecountPage = lazy(() => import('./pages/RecountPage'));
 const RecountDocPage = lazy(() => import('./pages/RecountDocPage'));
+/* Founder link pages (/aditya, /anushka): URL or QR only, and outside the site shell (no nav or footer). */
+const FounderPage = lazy(() => import('./pages/FounderPage'));
 
 /* Old routes. Mirrored as 301s in vercel.json. */
 /* While Hive is hidden, its page and old links lead home. */
@@ -105,10 +108,24 @@ const Shell: React.FC = () => {
   );
 };
 
-const App: React.FC = () => (
-  <SmoothScroll>
-    <Shell />
-  </SmoothScroll>
-);
+const App: React.FC = () => {
+  const { pathname } = useLocation();
+  /* Forgiving match: /Aditya and /aditya/ work too. */
+  const founder = founderBySlug(pathname.replace(/^\/+|\/+$/g, '').toLowerCase());
+
+  if (founder) {
+    return (
+      <Suspense fallback={<div className="min-h-screen bg-ink" aria-busy="true" />}>
+        <FounderPage key={founder.slug} founder={founder} />
+      </Suspense>
+    );
+  }
+
+  return (
+    <SmoothScroll>
+      <Shell />
+    </SmoothScroll>
+  );
+};
 
 export default App;
