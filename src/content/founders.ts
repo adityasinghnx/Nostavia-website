@@ -77,7 +77,7 @@ export const founders: Founder[] = [
     slug: 'aditya',
     firstName: 'Aditya',
     lastName: 'Singh',
-    role: 'Founder',
+    role: 'Founder & CEO',
     org: 'Nostavia Health',
     city: 'Noida',
     country: 'India',
@@ -98,7 +98,7 @@ export const founders: Founder[] = [
     slug: 'anushka',
     firstName: 'Anushka',
     lastName: 'Gupta',
-    role: 'Co-founder', // TODO(confirm): title
+    role: 'Founder & CTO',
     org: 'Nostavia Health',
     city: 'Noida',
     country: 'India',
@@ -120,7 +120,9 @@ export const founderBySlug = (slug: string) => founders.find((f) => f.slug === s
 
 export const fullName = (f: Founder) => [f.firstName, f.lastName].filter(Boolean).join(' ');
 export const initials = (f: Founder) => [f.firstName, f.lastName].filter(Boolean).map((n) => n[0]).join('').toUpperCase();
-export const founderUrl = (f: Founder) => `${SITE_ORIGIN}/${f.slug}`;
+/** Short domain for founder links: printed on the visiting cards and encoded in every QR. Serves the same site. */
+export const FOUNDER_ORIGIN = 'https://nostavia.si';
+export const founderUrl = (f: Founder) => `${FOUNDER_ORIGIN}/${f.slug}`;
 export const vcardPath = (f: Founder) => `/${f.slug}.vcf`;
 export const whatsappHref = (f: Founder) => (f.phone ? `https://wa.me/${f.phone.e164.replace(/\D/g, '')}` : undefined);
 export const absolute = (href: string) => (href.startsWith('/') ? `${SITE_ORIGIN}${href}` : href);
