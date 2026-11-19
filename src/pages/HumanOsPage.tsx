@@ -7,6 +7,7 @@ import { FLAGS, SAFETY_LINE } from '../content/site';
 import { PageHero, SectionHead } from '../components/page/PageKit';
 import { FinalCta } from '../components/home/FinalCta';
 import { ReportCard } from '../components/visuals/ReportCard';
+import { WearableEngine } from '../components/visuals/WearableEngine';
 import { Arrow, Button, Label, Section } from '../components/ui/primitives';
 import { Reveal } from '../components/ui/motion';
 import { HiveMark } from '../components/ui/marks';
@@ -84,7 +85,9 @@ const HumanOsPage: React.FC = () => {
                   </p>
                 </div>
               </div>
-              {FLAGS.SHOW_MODULE_NAMES && (
+              {f.id === 'devices' ? (
+                <WearableEngine moduleName={f.modules[0]?.name} />
+              ) : FLAGS.SHOW_MODULE_NAMES && (
                 <ul className="lg:col-span-8 grid sm:grid-cols-2 gap-3">
                   {f.modules.map((m, i) => (
                     <Reveal as="li" key={m.name} delay={(i % 2) * 0.05} className="group rounded-2xl border border-fg/10 bg-[linear-gradient(180deg,rgb(var(--fg)/0.03),transparent)] p-6 min-h-[150px] flex flex-col justify-between gap-6 hover:border-fg/25 transition-colors">

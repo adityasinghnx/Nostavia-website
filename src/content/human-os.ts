@@ -84,7 +84,7 @@ export const families: Family[] = [
     id: 'devices',
     number: '04',
     name: 'Devices',
-    does: 'Brings in and cleans data from wearables.',
+    does: 'Brings in data from rings, watches and phones, and turns it into one clean, continuous record.',
     groups: ['customers'],
     modules: [{ name: 'Wearable Telemetry', body: 'Brings wearable data into one clean format, with sleep, recovery and activity summaries.' }],
   },
@@ -114,3 +114,33 @@ export const usage = [
   { id: 'api', title: 'In your own app', body: 'Call any module through our API. Keys and docs in the SDK Portal.', to: '/developers' },
   { id: 'studio', title: 'In a Studio build', body: 'A product we build for you, with the modules you need inside it.', to: '/studio' },
 ].filter((u) => FLAGS.SHOW_HIVE || u.id !== 'hive');
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Normalisation Engine, shown inside the Devices family (Wearable Telemetry).
+ * Customer-safe facts only, from the engine's Complete Guide (Part 1). The
+ * guide itself is internal: never put keys, cloud account details, licence
+ * terms, client names, brand names or its "Honest limits" on the site.
+ * ──────────────────────────────────────────────────────────────────────────── */
+
+export const wearableEngine = {
+  name: 'Normalisation Engine',
+  title: 'One clean record from every ring, watch and phone.',
+  body: 'Every brand measures the body a little differently, and devices change over time. Stitch the data together and you get jumps that look like changes in health but are really changes in the device. The engine turns it into one continuous series per signal.',
+  signals: ['Heart rate variability', 'Resting heart rate', 'Sleep', 'Steps', 'Temperature', 'Cycle entries'],
+  handles: [
+    { problem: 'A member replaces their ring, and the new one reads higher', answer: 'Spots the device change, aligns the new ring to the old one’s scale and marks the nights while it calibrates.' },
+    { problem: 'A firmware update shifts a reading', answer: 'Corrects it only when a second device confirms the shift. Otherwise it flags it and never invents a correction.' },
+    { problem: 'The same data arrives twice', answer: 'Uses one copy and marks the other, so nothing is counted twice.' },
+    { problem: 'Travel across time zones, or a clock change', answer: 'Dates every night to the day the person woke up, in local time, and flags the travel days.' },
+    { problem: 'The device was not worn', answer: 'The day still gets a row, with an empty value and the reason.' },
+    { problem: 'A brand corrects old data, or it arrives late', answer: 'Adds a new revision, overwrites nothing and tells your systems.' },
+    { problem: 'Junk entries in period-tracking apps', answer: 'Keeps and flags them. Nothing is dropped silently.' },
+  ],
+  facts: [
+    { title: 'Runs in your own cloud', body: 'A sealed, signed program your cloud starts each night and when new data arrives. It runs for a few minutes, then stops.' },
+    { title: 'Health data stays with you', body: 'Member data never leaves your cloud and never reaches Nostavia. The engine has no internet access at all.' },
+    { title: 'Every value can be traced', body: 'Each value says how far it can be trusted and links back to the exact raw record it came from.' },
+    { title: 'Written back to your storage', body: 'Clean tables, change events and full lineage, in one record format your team can build on.' },
+  ],
+  scope: 'It produces measurements only. It does not diagnose, predict cycle phase or fertility, or set personal baselines.',
+};
