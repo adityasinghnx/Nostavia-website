@@ -43,6 +43,7 @@ export const nav = [
   { label: 'Hive', to: '/hive' },
   { label: 'Customers', to: '/customers' },
   { label: 'Developers', to: '/developers' },
+  { label: 'Company', to: '/about' },
 ].filter((l) => FLAGS.SHOW_HIVE || l.to !== '/hive');
 
 export const CONTACT_EMAIL = 'contact@nostaviahealth.com';

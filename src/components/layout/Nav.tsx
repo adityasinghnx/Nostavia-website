@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
 import { nav, CONTACT_EMAIL, FLAGS } from '../../content/site';
 import { families, HUMAN_OS_PATH } from '../../content/human-os';
+import { ABOUT_PATH, companyMenu } from '../../content/company';
 import { useLenis } from '../../lib/smooth-scroll';
 import { cn } from '../../lib/cn';
 import { Arrow, Button } from '../ui/primitives';
@@ -61,6 +62,31 @@ const HumanOsMenu: React.FC<{ onNavigate: () => void }> = ({ onNavigate }) => (
   </motion.div>
 );
 
+const CompanyMenu: React.FC<{ onNavigate: () => void }> = ({ onNavigate }) => (
+  <motion.div
+    initial={{ opacity: 0, y: -8 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -6, transition: { duration: 0.18 } }}
+    transition={{ duration: 0.45, ease: EASE }}
+    style={{ x: '-50%' }}
+    className="absolute left-1/2 top-full pt-3 w-[300px]"
+  >
+    <ul data-theme="ink" className="rounded-2xl border border-fg/10 !bg-ink-900/95 backdrop-blur-xl shadow-[0_40px_80px_-30px_rgba(0,0,0,0.8)] p-2">
+      {companyMenu.map((m) => (
+        <li key={m.to}>
+          <Link to={m.to} onClick={onNavigate} className="group flex flex-col rounded-lg px-4 py-3 hover:bg-fg/[0.05] transition-colors">
+            <span className="text-[14px] text-fg/90 group-hover:text-fg">{m.label}</span>
+            <span className="mt-0.5 text-[12.5px] text-fg/45 leading-snug">{m.line}</span>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </motion.div>
+);
+
+const MENUS: Record<string, 'human-os' | 'company'> = { [HUMAN_OS_PATH]: 'human-os', [ABOUT_PATH]: 'company' };
+const COMPANY_PATHS = ['/about', '/careers', '/trust'];
+
 export const Nav: React.FC = () => {
   const location = useLocation();
   const lenis = useLenis();
@@ -69,7 +95,7 @@ export const Nav: React.FC = () => {
   const [hidden, setHidden] = useState(false);
   const [tone, setTone] = useState<Tone>('ink');
   const [open, setOpen] = useState(false);
-  const [menu, setMenu] = useState(false);
+  const [menu, setMenu] = useState<'human-os' | 'company' | null>(null);
   const [hover, setHover] = useState<string | null>(null);
 
   useEffect(() => {
@@ -101,7 +127,7 @@ export const Nav: React.FC = () => {
 
   useEffect(() => {
     setOpen(false);
-    setMenu(false);
+    setMenu(null);
     setHidden(false);
   }, [location.pathname]);
 
@@ -139,38 +165,43 @@ export const Nav: React.FC = () => {
           <nav aria-label="Main" className="hidden lg:block absolute left-1/2 -translate-x-1/2">
             <ul className="flex items-center" onMouseLeave={() => setHover(null)}>
               {nav.map((item) => {
-                const hasMenu = item.to === HUMAN_OS_PATH;
+                const itemMenu = MENUS[item.to] ?? null;
+                const hasMenu = itemMenu !== null;
+                const active = item.to === ABOUT_PATH ? COMPANY_PATHS.some((p) => location.pathname.startsWith(p)) : location.pathname.startsWith(item.to);
                 return (
                   <li
                     key={item.to}
                     className="relative"
                     onMouseEnter={() => {
                       setHover(item.to);
-                      setMenu(hasMenu);
+                      setMenu(itemMenu);
                     }}
-                    onMouseLeave={() => hasMenu && setMenu(false)}
-                    onFocus={() => setMenu(hasMenu)}
-                    onBlur={(e) => hasMenu && !e.currentTarget.contains(e.relatedTarget as Node) && setMenu(false)}
+                    onMouseLeave={() => hasMenu && setMenu(null)}
+                    onFocus={() => setMenu(itemMenu)}
+                    onBlur={(e) => hasMenu && !e.currentTarget.contains(e.relatedTarget as Node) && setMenu(null)}
                   >
                     <NavLink
                       to={item.to}
                       className={({ isActive }) =>
                         cn(
                           'relative z-[1] flex items-center gap-1.5 px-3 xl:px-4 h-9 rounded-full text-[14px] tracking-[-0.005em] transition-colors duration-300',
-                          isActive || location.pathname.startsWith(item.to) ? 'text-fg' : 'text-fg/65 hover:text-fg',
+                          isActive || active ? 'text-fg' : 'text-fg/65 hover:text-fg',
                         )
                       }
                     >
                       {item.to === '/hive' && <HiveMark className="w-3.5 h-3.5 text-accent" />}
                       {item.label}
-                      {location.pathname.startsWith(item.to) && (
+                      {active && (
                         <span aria-hidden="true" className="absolute left-1/2 -bottom-1 h-[3px] w-[3px] -translate-x-1/2 rounded-full bg-accent" />
                       )}
                     </NavLink>
                     {hover === item.to && (
                       <motion.span layoutId="nav-hover" aria-hidden="true" transition={{ type: 'spring', stiffness: 420, damping: 36 }} className="absolute inset-0 rounded-full bg-fg/[0.07]" />
                     )}
-                    <AnimatePresence>{hasMenu && menu && <HumanOsMenu onNavigate={() => setMenu(false)} />}</AnimatePresence>
+                    <AnimatePresence>
+                      {menu === 'human-os' && itemMenu === 'human-os' && <HumanOsMenu onNavigate={() => setMenu(null)} />}
+                      {menu === 'company' && itemMenu === 'company' && <CompanyMenu onNavigate={() => setMenu(null)} />}
+                    </AnimatePresence>
                   </li>
                 );
               })}

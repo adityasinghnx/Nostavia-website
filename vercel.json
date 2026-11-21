@@ -72,7 +72,7 @@
     },
     {
       "source": "/company",
-      "destination": "/",
+      "destination": "/about",
       "statusCode": 301
     },
     {

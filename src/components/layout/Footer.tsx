@@ -39,7 +39,7 @@ export const Footer: React.FC = () => (
         <nav aria-label="Product" className="md:col-span-2 md:col-start-7">
           <p className="t-label text-fg/40 mb-5">Product</p>
           <ul className="flex flex-col gap-3">
-            {nav.map((l) => (
+            {nav.filter((l) => l.to !== '/about').map((l) => (
               <li key={l.to}>
                 <Link to={l.to} className={linkClass}>
                   {l.label}
@@ -52,6 +52,16 @@ export const Footer: React.FC = () => (
         <nav aria-label="Company" className="md:col-span-2">
           <p className="t-label text-fg/40 mb-5">Company</p>
           <ul className="flex flex-col gap-3">
+            <li>
+              <Link to="/about" className={linkClass}>
+                About
+              </Link>
+            </li>
+            <li>
+              <Link to="/careers" className={linkClass}>
+                Careers
+              </Link>
+            </li>
             <li>
               <Link to="/demo?interest=sales" className={linkClass}>
                 Contact sales
