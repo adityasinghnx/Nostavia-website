@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
-import { Check } from 'lucide-react';
+import { Check, ChevronDown } from 'lucide-react';
 import { useSeo } from '../lib/useSeo';
 import { newRefId, submitLead } from '../lib/leads';
 import { CALENDAR_URL, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_HREF, FLAGS } from '../content/site';
@@ -10,7 +10,9 @@ import { EASE, Reveal, SplitHeading } from '../components/ui/motion';
 import { cn } from '../lib/cn';
 import { CodeField } from '../components/ui/CodeField';
 
-const types = ['Lab', 'Clinic', 'Health app', 'Hospital', 'Other'];
+const types = ['Lab', 'Clinic', 'Health app', 'Hospital', 'Insurer', 'Other'];
+const regions = ['India', 'UAE and GCC', 'Europe and UK', 'USA and Canada', 'Australia and New Zealand', 'Elsewhere'];
+const sizes = ['1–50 people', '51–500', '501–5,000', '5,000+'];
 
 const expect = [
   { title: 'We listen', body: 'Your business, your problem, and what it costs you.' },
@@ -20,6 +22,8 @@ const expect = [
 
 /* Reply time is still to be confirmed by Aditya; this line is the copy from the website source. */
 const THANKS = 'Thank you. We will reply within one working day.';
+
+const selectField = 'appearance-none pr-10 [&>option]:bg-[#1a1a1a]';
 
 const field =
   'w-full h-12 rounded-xl border border-fg/15 bg-fg/[0.03] px-4 text-[15px] text-fg placeholder:text-fg/30 transition-colors focus:outline-none focus:border-accent/70 aria-[invalid=true]:border-signal-alert/70';
@@ -31,14 +35,15 @@ const required = [
 ] as const;
 
 const DemoPage: React.FC = () => {
+  const [params] = useSearchParams();
+  const interest = params.get('interest') ?? '';
+  const sales = interest === 'sales';
   useSeo({
-    title: 'Book a demo | Nostavia',
+    title: sales ? 'Contact sales | Nostavia' : 'Book a demo | Nostavia',
     description: FLAGS.SHOW_HIVE ? 'Show us where the time goes. We will show you what Human OS, a Studio build and your Bees would do about it.' : 'Show us where the time goes. We will show you what Human OS and a Studio build would do about it.',
     path: '/demo',
   });
 
-  const [params] = useSearchParams();
-  const interest = params.get('interest') ?? '';
   const [type, setType] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [state, setState] = useState<'idle' | 'sending' | 'done'>('idle');
@@ -47,7 +52,7 @@ const DemoPage: React.FC = () => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    const values = Object.fromEntries(['name', 'email', 'organisation', 'country', 'neverGetsTo'].map((k) => [k, String(data.get(k) ?? '').trim()]));
+    const values = Object.fromEntries(['name', 'email', 'organisation', 'region', 'size', 'country', 'neverGetsTo'].map((k) => [k, String(data.get(k) ?? '').trim()]));
     const next: Record<string, string> = {};
     required.forEach((f) => {
       const ok = f.id === 'email' ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email) : !!values[f.id];
@@ -60,7 +65,7 @@ const DemoPage: React.FC = () => {
     }
     const id = newRefId();
     setState('sending');
-    await submitLead(`Demo request ${id}: ${values.organisation}`, { ref: id, ...values, type, interest, source: 'Website demo page' });
+    await submitLead(`${sales ? 'Sales enquiry' : 'Demo request'} ${id}: ${values.organisation}`, { ref: id, ...values, type, interest, source: sales ? 'Website contact sales' : 'Website demo page' });
     setRef(id);
     setState('done');
   };
@@ -71,10 +76,14 @@ const DemoPage: React.FC = () => {
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-[700px] bg-[radial-gradient(50%_70%_at_15%_0%,rgba(242,210,122,0.09),transparent_70%)]" />
       <div className="wrap relative grid lg:grid-cols-12 gap-14 lg:gap-10">
         <div className="lg:col-span-5">
-          <Label>Book a demo</Label>
-          <SplitHeading id="page-title" as="h1" trigger="mount" delay={0.1} className="t-h1 mt-7 max-w-[11ch]" text="Show us where *the time goes.*" />
+          <Label>{sales ? 'Contact sales' : 'Book a demo'}</Label>
+          <SplitHeading key={interest} id="page-title" as="h1" trigger="mount" delay={0.1} className="t-h1 mt-7 max-w-[11ch]" text={sales ? 'Talk to *our team.*' : 'Show us where *the time goes.*'} />
           <Reveal delay={0.4}>
-            <p className="mt-8 t-lead text-fg/60 max-w-[40ch]">Tell us where your team loses the most time. We will show you what Human OS{FLAGS.SHOW_HIVE ? ', a Studio build and your Bees' : ' and a Studio build'} would do about it.</p>
+            <p className="mt-8 t-lead text-fg/60 max-w-[40ch]">
+              {sales
+                ? 'Rolling out across sites, regions or a whole network? Tell us about your organisation and the right person on our team will reply.'
+                : `Tell us where your team loses the most time. We will show you what Human OS${FLAGS.SHOW_HIVE ? ', a Studio build and your Bees' : ' and a Studio build'} would do about it.`}
+            </p>
             <ol className="mt-12 border-t border-fg/10">
               {expect.map((x, i) => (
                 <li key={x.title} className="grid grid-cols-[2.25rem_1fr] gap-3 py-5 border-b border-fg/10">
@@ -152,6 +161,44 @@ const DemoPage: React.FC = () => {
                       })}
                     </div>
                   </fieldset>
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="region" className="text-[13.5px] text-fg/70">
+                        Region
+                      </label>
+                      <div className="relative">
+                        <select id="region" name="region" defaultValue="" className={cn(field, selectField)}>
+                          <option value="" disabled>
+                            Choose a region
+                          </option>
+                          {regions.map((o) => (
+                            <option key={o} value={o}>
+                              {o}
+                            </option>
+                          ))}
+                        </select>
+                        <ChevronDown aria-hidden="true" className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-fg/40" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="size" className="text-[13.5px] text-fg/70">
+                        Organisation size
+                      </label>
+                      <div className="relative">
+                        <select id="size" name="size" defaultValue="" className={cn(field, selectField)}>
+                          <option value="" disabled>
+                            Choose a size
+                          </option>
+                          {sizes.map((o) => (
+                            <option key={o} value={o}>
+                              {o}
+                            </option>
+                          ))}
+                        </select>
+                        <ChevronDown aria-hidden="true" className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-fg/40" />
+                      </div>
+                    </div>
+                  </div>
                   <div className="flex flex-col gap-2">
                     <label htmlFor="country" className="text-[13.5px] text-fg/70">
                       Country
@@ -169,7 +216,7 @@ const DemoPage: React.FC = () => {
                       We only use these details to reply to you.
                     </p>
                     <Button type="submit" size="lg" disabled={state === 'sending'}>
-                      {state === 'sending' ? 'Sending' : 'Book a demo'}
+                      {state === 'sending' ? 'Sending' : sales ? 'Contact sales' : 'Book a demo'}
                     </Button>
                   </div>
                 </motion.form>

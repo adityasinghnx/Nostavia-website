@@ -2,7 +2,7 @@ import React from 'react';
 import { useSeo } from '../lib/useSeo';
 import { FLAGS, ONE_LINER } from '../content/site';
 import { Hero } from '../components/home/Hero';
-import { LogoStrip } from '../components/home/LogoStrip';
+import { TrustBar } from '../components/home/TrustBar';
 import { OfferSection } from '../components/home/OfferSection';
 import { ProblemSection } from '../components/home/ProblemSection';
 import { HumanOsSection } from '../components/home/HumanOsSection';
@@ -17,7 +17,7 @@ export const HomePage: React.FC = () => {
   return (
     <>
       <Hero />
-      <LogoStrip />
+      <TrustBar />
       <OfferSection />
       <ProblemSection />
       <HumanOsSection />

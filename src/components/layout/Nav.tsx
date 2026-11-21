@@ -178,6 +178,9 @@ export const Nav: React.FC = () => {
           </nav>
 
           <div className="flex items-center gap-2 relative z-[2]">
+            <Link to="/demo?interest=sales" className="hidden xl:inline-flex items-center h-9 px-3 rounded-full text-[14px] text-fg/65 hover:text-fg transition-colors duration-300">
+              Contact sales
+            </Link>
             <Button to="/demo" size="sm" className="hidden sm:inline-flex">
               Book a demo
             </Button>
@@ -229,6 +232,9 @@ export const Nav: React.FC = () => {
               <Button to="/demo" size="lg" className="w-full">
                 Book a demo
               </Button>
+              <Link to="/demo?interest=sales" className="text-center text-[15px] text-fg/75">
+                Contact sales
+              </Link>
               <a href={`mailto:${CONTACT_EMAIL}`} className="text-center text-sm text-fg/55">
                 {CONTACT_EMAIL}
               </a>

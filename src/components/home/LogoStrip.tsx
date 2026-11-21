@@ -2,18 +2,20 @@ import React from 'react';
 import { clientLogos, FLAGS } from '../../content/site';
 import { CodeField } from '../ui/CodeField';
 
-/** Client marks on a slow loop. Hidden entirely when the flag is off. */
+/** Client marks (written permission only) on a slow loop. Hidden when the flag is off or no mark is permitted. */
 export const LogoStrip: React.FC = () => {
-  if (!FLAGS.SHOW_CLIENT_LOGOS) return null;
-  const track = [...clientLogos, ...clientLogos];
+  if (!FLAGS.SHOW_CLIENT_LOGOS || clientLogos.length === 0) return null;
+  // A loop only reads well with enough marks; fewer sit still in a row.
+  const loop = clientLogos.length >= 5;
+  const track = loop ? [...clientLogos, ...clientLogos] : clientLogos;
 
   return (
     <section data-theme="ink" aria-label="Health businesses we work with" className="relative isolate border-y border-fg/[0.07] py-10">
       <CodeField />
       <div className="wrap flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
         <p className="shrink-0 t-label text-fg/40 md:max-w-[15ch] md:leading-[1.5]">Working with health businesses</p>
-        <div className="relative flex-1 overflow-hidden mask-fade-x">
-          <ul className="flex w-max items-center gap-16 sm:gap-24 animate-marquee hover:[animation-play-state:paused]">
+        <div className={loop ? 'relative flex-1 overflow-hidden mask-fade-x' : 'relative flex-1'}>
+          <ul className={loop ? 'flex w-max items-center gap-16 sm:gap-24 animate-marquee hover:[animation-play-state:paused]' : 'flex flex-wrap items-center gap-12 sm:gap-16'}>
             {track.map((logo, i) => (
               <li key={i} className="shrink-0 flex items-center h-12" aria-hidden={i >= clientLogos.length ? true : undefined}>
                 <img

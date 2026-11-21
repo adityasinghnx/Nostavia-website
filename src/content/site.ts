@@ -17,7 +17,7 @@ export const STUDIO = 'Studio';
 export const STUDIO_PATH = '/studio';
 
 export const FLAGS = {
-  /** No customer names or logos until each customer gives written permission. */
+  /** Client logo strip. Only logos marked `permitted` (written permission) ever show. */
   SHOW_CLIENT_LOGOS: true,
   /** Module names inside each Human OS family. Anushka to confirm which modules can be shown; off leaves families only. */
   SHOW_MODULE_NAMES: true,
@@ -56,6 +56,28 @@ export const company = {
   hq: 'Lucknow, India',
 };
 
+/**
+ * Regions we serve (Aditya, 21 Nov 2026). Shown as live clocks in the footer.
+ * These are regions served, not offices: add a city or office only once it exists.
+ */
+export const REGIONS = [
+  { name: 'India', tz: 'Asia/Kolkata', zone: 'IST' },
+  { name: 'UAE', tz: 'Asia/Dubai', zone: 'GST' },
+  { name: 'Europe', tz: 'Europe/London', zone: 'GMT' },
+  { name: 'USA', tz: 'America/New_York', zone: 'ET' },
+  { name: 'Australia', tz: 'Australia/Sydney', zone: 'AET' },
+] as const;
+
+export const REGIONS_LINE = 'Serving health businesses across India, the UAE, Europe, the USA and Australia.';
+
+/** Programmes Nostavia is a member of (company description, July 2026). Names only, set as type: no partner logos without each programme's brand approval. */
+export const programmes = [
+  { org: 'Google', programme: 'for Startups' },
+  { org: 'NVIDIA', programme: 'Inception' },
+  { org: 'Microsoft', programme: 'for Startups' },
+  { org: 'ElevenLabs', programme: 'Grants' },
+];
+
 export const ABOUT = FLAGS.SHOW_HIVE
   ? 'Nostavia Technologies Pvt. Ltd. makes health AI for health businesses: ready-made modules in Human OS, products built for you by Studio, and Hive, where AI Bees run the routine work while your people stay in charge.'
   : 'Nostavia Technologies Pvt. Ltd. makes health AI for health businesses: ready-made modules in Human OS, and products built for you by Studio, while your people stay in charge.';
@@ -63,15 +85,20 @@ export const ABOUT = FLAGS.SHOW_HIVE
 /** Safety line used under any section that describes what Nostavia does. */
 export const SAFETY_LINE = 'Nostavia supports your team’s work. It does not make clinical decisions; clinicians do.';
 
-/* Kept for when written permission exists. Hidden while FLAGS.SHOW_CLIENT_LOGOS is false. */
-export const clientLogos = [
-  { name: '360 ATHLETIX', src: '/client_logos/X logo black.png 1.png', h: 34 },
-  { name: 'ClinicX', src: '/client_logos/clinicx_clean.png', h: 30 },
-  { name: 'Kiosk Health', src: '/client_logos/kiosk_health_clean.png', h: 34 },
-  { name: 'Live 360', src: '/client_logos/snksn-removebg-preview 1.png', h: 38 },
-  { name: 'Atmaram Healthcare', src: '/client_logos/atmaram_healthcare.png', h: 34 },
-  { name: 'Aging Tachometer', src: '/client_logos/aging_tachometer.png', h: 24 },
+/*
+ * Client marks. Only those with `permitted: true` (written logo permission on file) are shown.
+ * Live360 granted logo rights (company description, July 2026). Set the others to true as permission arrives.
+ */
+const allClientLogos = [
+  { name: '360 ATHLETIX', src: '/client_logos/X logo black.png 1.png', h: 34, permitted: false },
+  { name: 'ClinicX', src: '/client_logos/clinicx_clean.png', h: 30, permitted: false },
+  { name: 'Kiosk Health', src: '/client_logos/kiosk_health_clean.png', h: 34, permitted: false },
+  { name: 'Live 360', src: '/client_logos/snksn-removebg-preview 1.png', h: 38, permitted: true },
+  { name: 'Atmaram Healthcare', src: '/client_logos/atmaram_healthcare.png', h: 34, permitted: false },
+  { name: 'Aging Tachometer', src: '/client_logos/aging_tachometer.png', h: 24, permitted: false },
   // TODO(name): confirm the client's name for this mark's alt text
-  { name: 'Client logo', src: '/client_logos/z_dna_mark.png', h: 38 },
-  { name: 'ETLAWM', src: '/client_logos/Screenshot_2025-11-06_at_6.15.42_PM-removebg-preview 1.png', h: 26 },
+  { name: 'Client logo', src: '/client_logos/z_dna_mark.png', h: 38, permitted: false },
+  { name: 'ETLAWM', src: '/client_logos/Screenshot_2025-11-06_at_6.15.42_PM-removebg-preview 1.png', h: 26, permitted: false },
 ];
+
+export const clientLogos = allClientLogos.filter((l) => l.permitted);
