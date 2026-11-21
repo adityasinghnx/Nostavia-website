@@ -17,7 +17,7 @@ export const STUDIO = 'Studio';
 export const STUDIO_PATH = '/studio';
 
 export const FLAGS = {
-  /** Client logo strip. Only logos marked `permitted` (written permission) ever show. */
+  /** Client logo strip under the hero. The owner wants these shown (21 Nov 2026). */
   SHOW_CLIENT_LOGOS: true,
   /** Module names inside each Human OS family. Anushka to confirm which modules can be shown; off leaves families only. */
   SHOW_MODULE_NAMES: true,
@@ -86,19 +86,18 @@ export const ABOUT = FLAGS.SHOW_HIVE
 export const SAFETY_LINE = 'Nostavia supports your team’s work. It does not make clinical decisions; clinicians do.';
 
 /*
- * Client marks. Only those with `permitted: true` (written logo permission on file) are shown.
- * Live360 granted logo rights (company description, July 2026). Set the others to true as permission arrives.
+ * Client marks shown in the strip under the hero. Set `permitted: false` to hide one.
  */
 const allClientLogos = [
-  { name: '360 ATHLETIX', src: '/client_logos/X logo black.png 1.png', h: 34, permitted: false },
-  { name: 'ClinicX', src: '/client_logos/clinicx_clean.png', h: 30, permitted: false },
-  { name: 'Kiosk Health', src: '/client_logos/kiosk_health_clean.png', h: 34, permitted: false },
+  { name: '360 ATHLETIX', src: '/client_logos/X logo black.png 1.png', h: 34, permitted: true },
+  { name: 'ClinicX', src: '/client_logos/clinicx_clean.png', h: 30, permitted: true },
+  { name: 'Kiosk Health', src: '/client_logos/kiosk_health_clean.png', h: 34, permitted: true },
   { name: 'Live 360', src: '/client_logos/snksn-removebg-preview 1.png', h: 38, permitted: true },
-  { name: 'Atmaram Healthcare', src: '/client_logos/atmaram_healthcare.png', h: 34, permitted: false },
-  { name: 'Aging Tachometer', src: '/client_logos/aging_tachometer.png', h: 24, permitted: false },
+  { name: 'Atmaram Healthcare', src: '/client_logos/atmaram_healthcare.png', h: 34, permitted: true },
+  { name: 'Aging Tachometer', src: '/client_logos/aging_tachometer.png', h: 24, permitted: true },
   // TODO(name): confirm the client's name for this mark's alt text
-  { name: 'Client logo', src: '/client_logos/z_dna_mark.png', h: 38, permitted: false },
-  { name: 'ETLAWM', src: '/client_logos/Screenshot_2025-11-06_at_6.15.42_PM-removebg-preview 1.png', h: 26, permitted: false },
+  { name: 'Client logo', src: '/client_logos/z_dna_mark.png', h: 38, permitted: true },
+  { name: 'ETLAWM', src: '/client_logos/Screenshot_2025-11-06_at_6.15.42_PM-removebg-preview 1.png', h: 26, permitted: true },
 ];
 
 export const clientLogos = allClientLogos.filter((l) => l.permitted);
