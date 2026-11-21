@@ -77,12 +77,12 @@
     },
     {
       "source": "/security",
-      "destination": "/#principles",
+      "destination": "/trust",
       "statusCode": 301
     },
     {
       "source": "/clinical",
-      "destination": "/",
+      "destination": "/trust#clinical",
       "statusCode": 301
     },
     {

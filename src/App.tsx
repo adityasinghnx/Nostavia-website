@@ -15,6 +15,7 @@ const StudioPage = lazy(() => import('./pages/StudioPage'));
 const CustomersPage = lazy(() => import('./pages/CustomersPage'));
 const DevelopersPage = lazy(() => import('./pages/DevelopersPage'));
 const DemoPage = lazy(() => import('./pages/DemoPage'));
+const TrustPage = lazy(() => import('./pages/TrustPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 /* Recount: reachable by URL only. Not in the nav, footer or sitemap. */
 const RecountPage = lazy(() => import('./pages/RecountPage'));
@@ -31,7 +32,7 @@ const redirects: [string, string][] = [
   ['/platform', '/'],
   ['/human-os/*', '/human-os'],
   ['/company', '/'],
-  ['/security', '/#principles'],
+  ['/security', '/trust'],
   ['/industries/*', '/customers'],
   ['/solutions/engineering', STUDIO_PATH],
   ['/solutions/supplements', STUDIO_PATH],
@@ -43,7 +44,7 @@ const redirects: [string, string][] = [
   ['/solutions/hospitals-front-door', '/customers'],
   ['/solutions/*', '/human-os'],
   ['/pricing', '/demo'],
-  ['/clinical', '/'],
+  ['/clinical', '/trust#clinical'],
 ];
 
 /** Scrolls to a #hash target once a page has mounted. */
@@ -88,6 +89,7 @@ const Shell: React.FC = () => {
                 <Route path="/customers" element={<CustomersPage />} />
                 <Route path="/developers" element={<DevelopersPage />} />
                 <Route path="/demo" element={<DemoPage />} />
+                <Route path="/trust" element={<TrustPage />} />
                 <Route path="/recount" element={<RecountPage />} />
                 <Route path="/recount/privacy" element={<RecountDocPage kind="privacy" />} />
                 <Route path="/recount/terms" element={<RecountDocPage kind="terms" />} />

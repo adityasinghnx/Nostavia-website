@@ -9,6 +9,7 @@ const linkClass = 'group inline-flex items-center gap-1.5 text-[14.5px] text-fg/
 
 /* Trust and legal links. Only pages that exist; Terms, DPA and subprocessors are added once drafted. */
 const trust = [
+  { label: 'Trust Center', href: '/trust' },
   { label: 'Privacy policy', href: '/privacy-policy.html' },
   { label: 'Data deletion', href: '/data-deletion.html' },
   { label: 'Responsible disclosure', href: '/.well-known/security.txt' },
@@ -76,9 +77,15 @@ export const Footer: React.FC = () => (
           <ul className="flex flex-col gap-3">
             {trust.map((l) => (
               <li key={l.href}>
-                <a href={l.href} className={linkClass}>
-                  {l.label}
-                </a>
+                {l.href === '/trust' ? (
+                  <Link to={l.href} className={linkClass}>
+                    {l.label}
+                  </Link>
+                ) : (
+                  <a href={l.href} className={linkClass}>
+                    {l.label}
+                  </a>
+                )}
               </li>
             ))}
           </ul>

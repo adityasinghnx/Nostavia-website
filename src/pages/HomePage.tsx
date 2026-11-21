@@ -9,6 +9,7 @@ import { HumanOsSection } from '../components/home/HumanOsSection';
 import { StudioSection } from '../components/home/StudioSection';
 import { HiveSection } from '../components/home/HiveSection';
 import { PrinciplesSection } from '../components/home/PrinciplesSection';
+import { TrustSection } from '../components/home/TrustSection';
 import { CustomersSection } from '../components/home/CustomersSection';
 import { FinalCta } from '../components/home/FinalCta';
 
@@ -24,6 +25,7 @@ export const HomePage: React.FC = () => {
       <StudioSection />
       {FLAGS.SHOW_HIVE && <HiveSection />}
       <PrinciplesSection />
+      <TrustSection />
       <CustomersSection />
       <FinalCta />
     </>

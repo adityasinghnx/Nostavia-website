@@ -45,7 +45,7 @@ export const CustomersSection: React.FC = () => {
       <div className="wrap">
         <div className="grid lg:grid-cols-12 gap-10 items-end">
           <div className="lg:col-span-8">
-            <Label index="07">Who we work with</Label>
+            <Label index="08">Who we work with</Label>
             <SplitHeading id="customers-title" className="t-h1 mt-6" text="Built for the businesses that keep people healthy." />
           </div>
           <Reveal className="lg:col-span-4 flex flex-col gap-6">
