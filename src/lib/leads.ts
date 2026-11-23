@@ -29,11 +29,13 @@ export async function submitLead(
 
   const headers = { 'Content-Type': 'application/json', Accept: 'application/json' };
 
+  // keepalive lets a request finish even if the page navigates away (e.g. to the calendar).
   await Promise.all([
-    fetch(formspreeEndpoint, { method: 'POST', headers, body: JSON.stringify(payload) }).catch(() => null),
+    fetch(formspreeEndpoint, { method: 'POST', headers, keepalive: true, body: JSON.stringify(payload) }).catch(() => null),
     fetch(FORMSUBMIT, {
       method: 'POST',
       headers,
+      keepalive: true,
       body: JSON.stringify({ _subject: subject, _template: 'table', _captcha: 'false', ...payload }),
     }).catch(() => null),
   ]);

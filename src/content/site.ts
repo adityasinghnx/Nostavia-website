@@ -49,7 +49,7 @@ export const nav = [
 export const CONTACT_EMAIL = 'contact@nostaviahealth.com';
 export const CONTACT_PHONE = '+91 95983 20559';
 export const CONTACT_PHONE_HREF = 'tel:+919598320559';
-export const CALENDAR_URL = 'https://calendar.app.google/cysR8LF2gMtuneNs9';
+export const CALENDAR_URL = 'https://calendar.app.google/np2snENvPSkgY28j6';
 export const LINKEDIN_URL = 'https://lnkd.in/p/dBqTFF95';
 
 export const company = {

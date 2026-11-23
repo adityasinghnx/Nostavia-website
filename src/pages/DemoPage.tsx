@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { Check, ChevronDown } from 'lucide-react';
 import { useSeo } from '../lib/useSeo';
 import { newRefId, submitLead } from '../lib/leads';
-import { CALENDAR_URL, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_HREF, FLAGS } from '../content/site';
+import { CALENDAR_URL, CONTACT_EMAIL, FLAGS } from '../content/site';
 import { Button, Label } from '../components/ui/primitives';
 import { EASE, Reveal, SplitHeading } from '../components/ui/motion';
 import { cn } from '../lib/cn';
@@ -65,9 +65,14 @@ const DemoPage: React.FC = () => {
     }
     const id = newRefId();
     setState('sending');
-    await submitLead(`${sales ? 'Sales enquiry' : 'Demo request'} ${id}: ${values.organisation}`, { ref: id, ...values, type, interest, source: sales ? 'Website contact sales' : 'Website demo page' });
+    // The requests use keepalive, so they finish even after we leave for the calendar.
+    // Wait at most ~1.2s for them so a slow form service never holds the visitor up.
+    const sent = submitLead(`${sales ? 'Sales enquiry' : 'Demo request'} ${id}: ${values.organisation}`, { ref: id, ...values, type, interest, source: sales ? 'Website contact sales' : 'Website demo page' });
+    await Promise.race([sent, new Promise((r) => setTimeout(r, 1200))]);
     setRef(id);
     setState('done');
+    // A demo request goes straight on to booking a time. Same tab, so no pop-up blocker can stop it.
+    if (!sales) setTimeout(() => window.location.assign(CALENDAR_URL), 900);
   };
 
   return (
@@ -96,11 +101,7 @@ const DemoPage: React.FC = () => {
               ))}
             </ol>
             <p className="mt-8 text-[14.5px] text-fg/55 leading-relaxed">
-              Prefer to talk now? Call{' '}
-              <a href={CONTACT_PHONE_HREF} className="text-fg underline decoration-fg/30 underline-offset-4 hover:decoration-accent">
-                {CONTACT_PHONE}
-              </a>{' '}
-              or{' '}
+              Already know what you need? Skip the form and{' '}
               <a href={CALENDAR_URL} target="_blank" rel="noopener noreferrer" className="text-fg underline decoration-fg/30 underline-offset-4 hover:decoration-accent">
                 pick a time<span className="sr-only"> (opens in a new tab)</span>
               </a>
@@ -117,17 +118,31 @@ const DemoPage: React.FC = () => {
                   <span className="grid h-12 w-12 place-items-center rounded-full bg-honey text-ink">
                     <Check className="w-5 h-5" />
                   </span>
-                  <h2 className="t-h2">{THANKS}</h2>
+                  <h2 className="t-h2">{sales ? THANKS : 'Thank you. Now pick a time.'}</h2>
                   <p className="text-fg/60">
-                    Your reference is <span className="font-mono text-fg">{ref}</span>. Anything urgent:{' '}
-                    <a href={`mailto:${CONTACT_EMAIL}`} className="text-fg underline decoration-fg/30 underline-offset-4">
-                      {CONTACT_EMAIL}
-                    </a>
-                    .
+                    {sales ? (
+                      <>
+                        Your reference is <span className="font-mono text-fg">{ref}</span>. Anything urgent:{' '}
+                        <a href={`mailto:${CONTACT_EMAIL}`} className="text-fg underline decoration-fg/30 underline-offset-4">
+                          {CONTACT_EMAIL}
+                        </a>
+                        .
+                      </>
+                    ) : (
+                      <>
+                        Your reference is <span className="font-mono text-fg">{ref}</span>. Taking you to our calendar now.
+                      </>
+                    )}
                   </p>
-                  <Button href={CALENDAR_URL} variant="secondary">
-                    Pick a time now
-                  </Button>
+                  {sales ? (
+                    <Button href={CALENDAR_URL} variant="secondary">
+                      Pick a time now
+                    </Button>
+                  ) : (
+                    <a href={CALENDAR_URL} className="text-[14.5px] text-fg/55 underline decoration-fg/30 underline-offset-4 hover:decoration-accent">
+                      Not moving? Open the calendar
+                    </a>
+                  )}
                 </motion.div>
               ) : (
                 <motion.form key="form" noValidate onSubmit={onSubmit} exit={{ opacity: 0, y: -10 }} className="flex flex-col gap-5" aria-describedby="form-note">
