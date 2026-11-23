@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { Check, ChevronDown } from 'lucide-react';
 import { useSeo } from '../lib/useSeo';
 import { newRefId, submitLead } from '../lib/leads';
-import { CALENDAR_URL, CONTACT_EMAIL, FLAGS } from '../content/site';
+import { CALENDAR_URL, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_HREF, FLAGS } from '../content/site';
 import { Button, Label } from '../components/ui/primitives';
 import { EASE, Reveal, SplitHeading } from '../components/ui/motion';
 import { cn } from '../lib/cn';
@@ -52,7 +52,7 @@ const DemoPage: React.FC = () => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    const values = Object.fromEntries(['name', 'email', 'organisation', 'region', 'size', 'country', 'neverGetsTo'].map((k) => [k, String(data.get(k) ?? '').trim()]));
+    const values = Object.fromEntries(['name', 'email', 'organisation', 'region', 'size', 'phone', 'country', 'neverGetsTo'].map((k) => [k, String(data.get(k) ?? '').trim()]));
     const next: Record<string, string> = {};
     required.forEach((f) => {
       const ok = f.id === 'email' ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email) : !!values[f.id];
@@ -101,7 +101,11 @@ const DemoPage: React.FC = () => {
               ))}
             </ol>
             <p className="mt-8 text-[14.5px] text-fg/55 leading-relaxed">
-              Already know what you need? Skip the form and{' '}
+              Prefer to talk now? Call{' '}
+              <a href={CONTACT_PHONE_HREF} className="text-fg underline decoration-fg/30 underline-offset-4 hover:decoration-accent">
+                {CONTACT_PHONE}
+              </a>{' '}
+              or{' '}
               <a href={CALENDAR_URL} target="_blank" rel="noopener noreferrer" className="text-fg underline decoration-fg/30 underline-offset-4 hover:decoration-accent">
                 pick a time<span className="sr-only"> (opens in a new tab)</span>
               </a>
@@ -214,11 +218,19 @@ const DemoPage: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="country" className="text-[13.5px] text-fg/70">
-                      Country
-                    </label>
-                    <input id="country" name="country" type="text" autoComplete="country-name" className={field} />
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="phone" className="text-[13.5px] text-fg/70">
+                        Phone <span className="text-fg/40">(optional)</span>
+                      </label>
+                      <input id="phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" className={field} />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="country" className="text-[13.5px] text-fg/70">
+                        Country
+                      </label>
+                      <input id="country" name="country" type="text" autoComplete="country-name" className={field} />
+                    </div>
                   </div>
                   <div className="flex flex-col gap-2">
                     <label htmlFor="neverGetsTo" className="text-[13.5px] text-fg/70">
