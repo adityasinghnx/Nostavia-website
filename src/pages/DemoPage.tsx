@@ -58,6 +58,7 @@ const DemoPage: React.FC = () => {
       const ok = f.id === 'email' ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email) : !!values[f.id];
       if (!ok) next[f.id] = f.error;
     });
+    if (values.phone.replace(/\D/g, '').length < 7) next.phone = 'Please add a phone number we can reach you on.';
     setErrors(next);
     if (Object.keys(next).length) {
       document.getElementById(Object.keys(next)[0])?.focus();
@@ -221,9 +222,14 @@ const DemoPage: React.FC = () => {
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div className="flex flex-col gap-2">
                       <label htmlFor="phone" className="text-[13.5px] text-fg/70">
-                        Phone <span className="text-fg/40">(optional)</span>
+                        Phone
                       </label>
-                      <input id="phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" className={field} />
+                      <input id="phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" aria-required="true" aria-invalid={!!errors.phone} aria-describedby={errors.phone ? 'phone-error' : undefined} className={field} />
+                      {errors.phone && (
+                        <p id="phone-error" className="text-[12.5px] text-signal-alert">
+                          {errors.phone}
+                        </p>
+                      )}
                     </div>
                     <div className="flex flex-col gap-2">
                       <label htmlFor="country" className="text-[13.5px] text-fg/70">
